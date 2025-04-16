@@ -1,1 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
 
+        header {
+            background-color: #ffffff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007BFF;
+            border: 2px solid #007BFF;
+            padding: 3px;
+            border-radius: 10px;
+        }
+
+        .copyright-icon {
+            font-size: 0.6em;
+            color: #007BFF;
+            margin: 0 10px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #007BFF;
+            width: 100%;
+            margin: 1.6px 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 13px;
+            margin: 0 5px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .share-button {
+            background-color: #ffffff;
+            border: 1px solid #007BFF;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 5px;
+            color: #007BFF;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .share-button:hover {
+            background-color: #e9f5ff;
+        }
+
+        .category-select, .country-select {
+            width: 100%;
+            padding: 5px;
+            margin: 4px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            border-top: 3px solid #007BFF;
+        }
+
+        .dashboard {
+            max-width: 800px;
+            margin: auto;
+            padding: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            overflow: auto;
+            max-height: 700px;
+            overflow-y: scroll;
+        }
+
+        .card {
+            background: white;
+            padding: 6px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: inherit;
+            border: 1px solid #007BFF;
+            transition: background 0.3s;
+        }
+
+        .small-card { height: 50px; }
+        .card:hover {
+            transform: translateY(-2px);
+            background: #e9f5ff;
+        }
+
+        .title { color: #666; font-size: 0.8rem; margin-bottom: 9px; }
+        .value { font-size: 1rem; font-weight: bold; color: #007BFF; }
+
+        @media (max-width: 500px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .title { font-size: 0.6rem; }
+            .value { font-size: 0.8rem; }
+        }
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 34% auto; 
+            padding: 14px;
+            border: 2px solid #007BFF; 
+            border-radius: 40px; 
+            width: 80%; 
+            max-width: 290px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .close {
+            color: red; 
+            font-size: 20px; 
+            font-weight: bold;
+            display: block; 
+            text-align: center; 
+            margin-bottom: 10px; 
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: darkred; 
+        }
+
+        .modal p {
+            color: #333; 
+            font-size: 0.8em; 
+            text-align: center; 
+        }
+
+        .support-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 12px; 
+            cursor: pointer;
+            font-size: 0.8em; 
+            margin-top: 10px; 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s;
+        }
+
+        .support-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        const firebaseConfig = {
+  apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+  authDomain: "genz-abb36.firebaseapp.com",
+  databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+  projectId: "genz-abb36",
+  storageBucket: "genz-abb36.firebasestorage.app",
+  messagingSenderId: "405021535683",
+  appId: "1:405021535683:web:ee5a28fde27f5558046176",
+  measurementId: "G-XZNQND2J00"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth();
+
+        let allData = {}; // Store global data
+
+        function fetchData() {
+            const birthdatesRef = ref(db, 'birthdates');
+            onValue(birthdatesRef, (snapshot) => {
+                allData = snapshot.val() || {}; // Store data in a global variable
+                console.log(allData); // Display retrieved data
+                updateCountries(); // Update available countries
+                updateCards(); // Update cards with data
+            });
+        }
+
+        function updateCountries() {
+            const countrySelect = document.getElementById('countrySelect');
+            const countries = new Set();
+
+            // Get unique countries from data
+            Object.keys(allData).forEach(userId => {
+                const userData = allData[userId];
+                countries.add(userData.country); // Make sure 'country' is a property of userData
+            });
+
+            // Fill country selector
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countrySelect.appendChild(option);
+            });
+        }
+
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            let age = today.getFullYear() - birth.getFullYear();
+            const monthDiff = today.getMonth() - birth.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function updateCards() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = ''; // Clear current content
+
+            const selectedCountry = document.getElementById('countrySelect').value;
+            const selectedCategory = document.getElementById('categorySelect').value;
+
+            if (Object.keys(allData).length === 0) {
+                grid.innerHTML = '<p>No data found.</p>';
+                return;
+            }
+
+            const counts = {};
+
+            // Count by category
+            Object.keys(allData).forEach(userId => {
+                const userData = allData[userId];
+                if (userData.country === selectedCountry || selectedCountry === '') {
+                    let key;
+                    if (selectedCategory === 'daily') {
+                        key = new Date(userData.date).toLocaleDateString('en-US', { weekday: 'long' });
+                    } else if (selectedCategory === 'monthly') {
+                        key = new Date(userData.date).toLocaleDateString('en-US', { month: 'long' });
+                    } else if (selectedCategory === 'yearly') {
+                        key = new Date(userData.date).getFullYear();
+                    } else if (selectedCategory === 'gender') {
+                        key = userData.gender; // For 'gender' category
+                    } else if (selectedCategory === 'age') {
+                        key = calculateAge(userData.date); // Calculate age
+                    } else if (selectedCategory === 'population') {
+                        key = userData.country; // For population, use country
+                    }
+
+                    counts[key] = (counts[key] || 0) + 1;
+                }
+            });
+
+            // Display cards
+            Object.keys(counts).forEach(key => {
+                const card = document.createElement('div');
+                card.className = 'card small-card';
+                card.innerHTML = `<div class="title">${key}</div><div class="value">${counts[key]}</div>`;
+                grid.appendChild(card);
+            });
+
+            // If no data found
+            if (grid.innerHTML === '') {
+                grid.innerHTML = '<p>No data found.</p>';
+            }
+        }
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const categorySelect = document.getElementById('categorySelect');
+            const countrySelect = document.getElementById('countrySelect');
+
+            countrySelect.addEventListener('change', debounce(updateCards, 300));
+            categorySelect.addEventListener('change', debounce(updateCards, 300));
+            fetchData(); // Load data on startup
+
+            // Open support modal
+            document.getElementById('supportBtn').onclick = function() {
+                document.getElementById('supportModal').style.display = 'block';
+            };
+
+            // Open FAQ modal
+            document.getElementById('faqBtn').onclick = function() {
+                document.getElementById('faqModal').style.display = 'block';
+            };
+
+            // Close modal
+            document.querySelectorAll('.close').forEach(closeButton => {
+                closeButton.onclick = function() {
+                    this.closest('.modal').style.display = 'none';
+                };
+            });
+
+            // Close modal by clicking outside
+            window.onclick = function(event) {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            };
+
+            // Open PayPal link
+            document.getElementById('paypalBtn').onclick = function() {
+                window.location.href = 'https://www.paypal.com/donate/?hosted_button_id=ATEVL4JGUQWGY';
+            };
+
+            // Change support button color every second
+            const supportButton = document.getElementById('supportBtn');
+            let isGreenSupport = false;
+
+            setInterval(() => {
+                isGreenSupport = !isGreenSupport; // Toggle color
+                supportButton.style.backgroundColor = isGreenSupport ? 'green' : '#007BFF'; // Change color
+            }, 700);
+
+            // Change PayPal button color every second
+            const paypalButton = document.getElementById('paypalBtn');
+            let isGreenPaypal = false;
+
+            setInterval(() => {
+                isGreenPaypal = !isGreenPaypal; // Toggle color
+                paypalButton.style.backgroundColor = isGreenPaypal ? 'green' : '#007BFF'; // Change color
+            }, 10000);
+        });
+    </script>
+</head>
+<body>
+
+<header>
+    <a href="index.html" style="text-decoration: none;">
+        <h1 translate="no">G-Z</h1>
+    </a>
+    <div class="copyright-icon">©️</div>
+    <a href="Share.html">
+        <button class="share-button" aria-label="Share">
+            <i class="fas fa-share-alt"></i>
+        </button>
+    </a>
+</header>
+
+<div class="divider"></div>
+
+<div class="button-container">
+    <button id="faqBtn" class="button" aria-label="Frequently Asked Questions">
+        <i class="fas fa-question-circle" style="margin-right: 2px;"></i> Questions
+    </button>
+    <button id="supportBtn" class="button" aria-label="Support" translate="no">
+        <i class="fas fa-hand-holding-heart" style="margin-right: 5px;"></i> Support
+    </button>
+</div>
+
+<div class="divider"></div>
+
+<div class="dashboard">
+    <select class="country-select" aria-label="Select a country" id="countrySelect">
+        <option value="">All countries</option>
+        <!-- Country options will be added dynamically -->
+    </select>
+
+    <select class="category-select" aria-label="Select a category" id="categorySelect">
+        <option value="daily">Births by day</option>
+        <option value="monthly">Births by month</option>
+        <option value="yearly">Births by year</option>
+        <option value="gender">Gender</option>
+        <option value="age">Ages</option>
+        <option value="population">Population</option>
+    </select>
+
+    <div class="grid" id="grid">
+        <!-- Cards will be generated here -->
+    </div>
+</div>
+
+<!-- Support Modal -->
+<div id="supportModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Thank you for supporting G-Z! Every contribution counts. With your help, we can continue to develop this exciting project, create innovative analyses, and provide free statistics to a worldwide audience.</p>
+        <button id="paypalBtn" class="support-button">Support now</button>
+    </div>
+</div>
+
+<!-- Frequently Asked Questions Modal -->
+<div id="faqModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        Statistics are automatically updated with each submission in the tables.
+    </div>
+</div>
+
+</body>
+</html>
