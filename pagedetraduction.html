@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5; /* Light background color */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+            font-family: 'Roboto', Arial, sans-serif; /* Use a similar font */
+        }
+        header {
+            background-color: #ffffff; /* White background */
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+            max-width: 1200px; /* Limite la largeur du conteneur */
+            margin: 0 auto; /* Centre le conteneur */
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.3em; /* Adjusted font size */
+            font-family: 'Billabong', cursive;
+            color: #007BFF; /* Blue color */
+        }
+        .logo-genz {
+            border: 1.5px solid #007BFF; /* Blue border */
+            padding: 3px 6px; /* Reduced padding */
+            display: inline-block;
+            border-radius: 7px;
+            white-space: nowrap;
+        }
+        .divider {
+            height: 1px;
+            background-color: #007BFF; /* Blue border */
+            width: 100%;
+            margin-top: 0; /* Remove top margin */
+        }
+        .divider-text {
+            text-align: center;
+            color: #333; /* Text color */
+            font-size: 0.9em;
+            margin: 10px 0; 
+        }
+        footer {
+            text-align: center;
+            color: #333; /* Text color */
+            margin: 20px 0;
+            font-size: 0.8em;
+        }
+        
+        /* Style pour le label Translate en haut */
+        .translate-label {
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            padding: 2px 8px;
+            font-size: 0.9em;
+            color: #333;
+            background-color: #ffffff;
+            margin-left: auto;
+        }
+        
+        /* Style pour les liens de langue */
+        .language-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            max-width: 1000px;
+            margin: 15px auto;
+            padding: 0 10px;
+        }
+        
+        .language-link {
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            color: #333;
+            text-decoration: none;
+            background-color: #ffffff;
+            display: inline-block;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .language-link:hover {
+            background-color: #007BFF;
+            color: #ffffff;
+        }
+        
+        /* Pour assurer la responsivité sur les petits écrans */
+        @media (max-width: 768px) {
+            .language-container {
+                gap: 5px;
+            }
+            .language-link {
+                padding: 2px 4px;
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
 
+<header>
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+        <h1 class="logo-genz" translate="no">GZ</h1>
+    </a>
+    <div class="translate-label">Translate</div>
+</header>
+
+<div class="divider"></div>
+<div class="divider-text">Page de traduction</div>
+<div class="divider"></div>
+
+<div class="language-container">
+    <a href="gzlanguage/french" class="language-link">Français</a>
+    <a href="gzlanguage/espagnol" class="language-link">Español</a>
+    <a href="gzlanguage/allemand" class="language-link">Deutsch</a>
+    <a href="gzlanguage/italien" class="language-link">Italiano</a>
+    <a href="gzlanguage/portuguais" class="language-link">Português</a>
+    <a href="gzlanguage/nerlandais" class="language-link">Nederlands</a>
+    <a href="gzlanguage/russe" class="language-link">Русский</a>
+    <a href="gzlanguage/chinois" class="language-link">中文</a>
+    <a href="gzlanguage/japanois" class="language-link">日本語</a>
+    <a href="gzlanguage/coreen" class="language-link">한국어</a>
+    <a href="gzlanguage/arabe" class="language-link">العربية</a>
+    <a href="gzlanguage/indien" class="language-link">हिन्दी</a>
+    <a href="gzlanguage/turc" class="language-link">Türkçe</a>
+    <a href="gzlanguage/polonais" class="language-link">Polski</a>
+    <a href="gzlanguage/swedois" class="language-link">Svenska</a>
+    <a href="gzlanguage/danois" class="language-link">Dansk</a>
+    <a href="gzlanguage/norvegien" class="language-link">Norsk</a>
+    <a href="gzlanguage/thai" class="language-link">ไทย</a>
+    <a href="gzlanguage/vietnamien" class="language-link">Tiếng Việt</a>
+</div>
+
+<footer>
+    <p></p> <!-- Suppression de la section copyright -->
+</footer>
+
+</body>
+</html>
