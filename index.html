@@ -1,1 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GZ</title>
+     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            position: relative;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+        }
+        .divider {
+            height: 1px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .button#statisticsButton {
+            border-bottom: 1px solid lawngreen;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .footer-title {
+            text-align: center;
+            color: black;
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+        .date-input, .country-select, .submit-button {
+            display: block;
+            width: 330px;
+            margin: 19px auto;
+            padding: 5px;
+            border: 1px solid #007bff;
+            border-radius: 11px;
+            background-color: white;
+            color: black;
+            font-size: 1em;
+        }
+        .submit-button {
+            padding: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: gray;
+            color: white;
+        }
+        .reset-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.0em;
+            display: none;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .rectangle {
+            width: 330px;
+            min-height: 30px;
+            background-color: #e7f3ff;
+            margin: 10px auto;
+            border-radius: 40px;
+            border: 1px solid #007bff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+            text-align: center;
+        }
+        .text-line {
+            font-size: 0.8em;
+            color: #0056b3;
+            margin: 5px 0;
+        }
+        .text-line.bold {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .link {
+            color: white;
+            text-decoration: none;
+            background-color: #007bff;
+            border-radius: 5px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+        .link:hover {
+            background-color: #0056b3;
+        }
+        .share-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.3em;
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 4px;
+            background-color: white;
+        }
+        footer {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+        }
+        .logo {
+            color: #007bff;
+            font-size: 1.6em;
+            margin-right: 10px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(0, 119, 190, 0.1);
+            transition: background-color 0.3s;
+        }
+        .logo:hover {
+            background-color: #007bff;
+            color: white;
+        }
 
+        /* Styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 29% auto;
+            padding: 18px;
+            border: 1px solid #007bff;
+            border-radius: 60px;
+            width: 180px;
+            font-size: 0.3px
+            max-width: 70%;
+            text-align: center;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            font-size: 1.8em;
+            font-family: 'Billabong', cursive;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: 120px;
+            margin: 4px;
+        }
+        .close-button:hover {
+            background-color: #0056b3;
+        }
+        .gender-category {
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 2px;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+  <header>
+    <h1 translate="no">G-Z</h1>
+    <div>
+      <a href="translationpage.html">
+        <i class="fas fa-language share-icon"></i> <!-- Translation icon -->
+      </a>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="button-container">
+    <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
+    <a class="button" href="Statistics.html" id="statisticsButton">
+      <i class="fas fa-chart-bar"></i> Discover</a>
+    <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
+    <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
+    <a class="button" href="Privacy.html"><i class="fas fa-file-contract"></i>Privacy</a>
+  </div>
+
+  <script>
+    const button = document.getElementById('statisticsButton');
+
+    let colors = ['lawngreen', 'white'];
+    let index = 0;
+
+    setInterval(() => {
+      button.style.borderBottom = `4px solid ${colors[index]}`;
+      index = (index + 1) % colors.length; // Cycle through colors
+    }, 400); // Change color every second
+  </script>
+
+  <div class="divider"></div>
+
+  <div class="notification">
+    <span class="notification-text">Let's discover together the secrets of our generations.</span>
+    <div class="new-message-badge"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="footer-title">
+    Join us to discover the secrets of our generation in just a few clicks!
+  </div>
+
+  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
+  <select class="country-select" id="countrySelect">
+    <option value="" disabled selected>Select your country of birth</option>
+  </select>
+  <p style="text-align: center; color: black; font-size: 0.7em; margin-top: 5px; text-decoration: underline; text-decoration-color: rgb(0, 123, 191);">
+    By submitting, you accept our terms of use.
+  </p>
+  <button class="submit-button" type="submit">Submit</button>
+
+  <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
+
+  <div class="divider"></div>
+
+  <div class="rectangle">
+    <div class="text-line bold" style="font-size: 1em; color: #0056b3;">How does it work?</div>
+    <div class="text-line"> Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discover" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics. </div>
+  </div>
+
+  <div class="text-line" style="text-align: center; color: black;">
+    <span style="color: #007bff;">_____</span> Don't miss anything <span style="color: #007bff;">_____</span>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo-container">
+        <a href="https://www.facebook.com/share/15nGTcCb4i/.html" target="_blank" class="logo">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/GZWRD?t=g7yvHCDW2-xPLaTTgea-YA&s=09.html" target="_blank" class="logo">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://t.me/WorldGZ" target="_blank" class="logo">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+      <div class="copyright">
+        ©️ 2025 G-Z
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="genderModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">Your gender?</div>
+      
+      <div class="gender-category">Binary genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Man">Man</button>
+        <button class="close-button gender-option" value="Woman">Woman</button>
+      </div>
+      
+      <div class="gender-category">Non-binary genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Non-binary">Non-binary</button>
+        <button class="close-button gender-option" value="Genderqueer">Genderqueer</button>
+        <button class="close-button gender-option" value="Genderfluid">Genderfluid</button>
+        <button class="close-button gender-option" value="Agender">Agender</button>
+      </div>
+      
+      <div class="gender-category">Other gender identities</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Transgender">Transgender</button>
+        <button class="close-button gender-option" value="Two-Spirit">Two-Spirit</button>
+        <button class="close-button gender-option" value="Bigender">Bigender</button>
+        <button class="close-button gender-option" value="Androgyne">Androgyne</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getDatabase, ref, push, remove } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+  authDomain: "genz-abb36.firebaseapp.com",
+  databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+  projectId: "genz-abb36",
+  storageBucket: "genz-abb36.firebasestorage.app",
+  messagingSenderId: "405021535683",
+  appId: "1:405021535683:web:ee5a28fde27f5558046176",
+  measurementId: "G-XZNQND2J00"
+};
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    // Anonymous authentication
+    signInAnonymously(auth)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("User connected: ", user.uid);
+      })
+      .catch((error) => {
+        console.error("Error during anonymous connection: ", error);
+      });
+
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute('max', today);
+
+    // Load the list of countries
+    fetch('https://restcountries.com/v3.1/all')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network error: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        const countrySelect = document.getElementById('countrySelect');
+        data.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country.name.common;
+          option.textContent = country.name.common;
+          countrySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error loading countries:', error));
+
+    let lastSubmittedId = null;
+
+    document.querySelector('.submit-button').addEventListener('click', function() {
+      const birthdate = document.getElementById('birthdate').value;
+      const country = document.getElementById('countrySelect').value;
+
+      if (birthdate && country) {
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.textContent = "Please wait...";
+        submitButton.style.backgroundColor = 'orange';
+
+        document.getElementById('genderModal').style.display = 'block';
+      } else {
+        alert("Please enter a date of birth and select a country!");
+      }
+    });
+
+    // Add event listeners to all gender option buttons
+    document.querySelectorAll('.gender-option').forEach(button => {
+      button.addEventListener('click', function() {
+        submitData(this.value);
+      });
+    });
+
+    function submitData(gender) {
+      const birthdate = document.getElementById('birthdate').value;
+      const country = document.getElementById('countrySelect').value;
+      const submitButton = document.querySelector('.submit-button');
+
+      const newEntryRef = push(ref(database, 'birthdates'), {
+        date: birthdate,
+        country: country,
+        gender: gender
+      });
+
+      lastSubmittedId = newEntryRef.key;
+
+      newEntryRef.then(() => {
+        submitButton.style.backgroundColor = 'green';
+        submitButton.textContent = "Submitted";
+        submitButton.disabled = true;
+        document.getElementById('resetButton').style.display = "block";
+        document.getElementById('genderModal').style.display = 'none';
+      }).catch((error) => {
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = "Error";
+        console.error("Error during submission: ", error);
+      });
+    }
+
+    document.getElementById('resetButton').addEventListener('click', function() {
+      if (lastSubmittedId) {
+        remove(ref(database, `birthdates/${lastSubmittedId}`))
+          .then(() => {
+            document.getElementById('birthdate').value = '';
+            document.getElementById('countrySelect').value = '';
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.textContent = "Submit";
+            submitButton.style.backgroundColor = '#007bff';
+            submitButton.disabled = false;
+            document.getElementById('resetButton').style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error resetting data: ", error);
+          });
+      }
+    });
+
+    // Close the modal by clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('genderModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = "Error";
+      }
+    };
+  </script>
+</body>
+</html>
