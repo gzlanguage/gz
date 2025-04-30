@@ -403,6 +403,30 @@
             margin-left: 10px;
             cursor: pointer;
         }
+        
+        /* Style for close cross in modals */
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #007bff;
+            background-color: white;
+            border: 1px solid #007bff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .modal-close:hover {
+            background-color: #007bff;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -531,7 +555,8 @@
   <!-- Games Modal -->
   <div id="gamesModal" class="modal">
     <div class="games-modal-content">
-      <div class="billabong-title" style="color: #0056b3;"><strong>Games</strong></div>
+      <div class="modal-close" id="closeGamesModal"><i class="fas fa-times"></i></div>
+      <div class="billabong-title" style="color: #0056b3; margin-top: 15px;"><strong>Games</strong></div>
       <div class="text-line">
         The games are not ready to start yet. Communities have not reached sufficient numbers. As soon as enough people join, the games will begin. In the meantime, you can invite more people to help communities get ready!
       </div>
@@ -542,7 +567,8 @@
   <!-- Community Modal -->
   <div id="communityModal" class="modal">
     <div class="community-modal-content">
-      <div class="billabong-title" style="color: #0056b3;"><strong>Your Birthday Community</strong></div>
+      <div class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></div>
+      <div class="billabong-title" style="color: #0056b3; margin-top: 15px;"><strong>Your Birthday Community</strong></div>
       
       <div id="communityNotLoggedIn" style="display: block;">
         <div class="text-line">
@@ -1291,6 +1317,15 @@
     document.getElementById('gamesButton').addEventListener('click', function() {
       const gamesModal = document.getElementById('gamesModal');
       gamesModal.style.display = 'block';
+    });
+
+    // Close modal with X buttons
+    document.getElementById('closeGamesModal').addEventListener('click', function() {
+      document.getElementById('gamesModal').style.display = 'none';
+    });
+
+    document.getElementById('closeCommunityModal').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'none';
     });
 
     // Redirect to share page from invite button
