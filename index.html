@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GZ</title>
-     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -192,12 +192,12 @@
             padding: 18px;
             border: 1px solid #007bff;
             border-radius: 60px;
-            width: 180px;
-            font-size: 0.3px
+            width: 280px;
             max-width: 70%;
             text-align: center;
             max-height: 60vh;
             overflow-y: auto;
+            position: relative;
         }
         .modal-header {
             font-size: 1.8em;
@@ -232,10 +232,176 @@
         .gender-category {
             font-weight: bold;
             color: #007bff;
-            margin-top: 2px;
+            margin-top: 16px;
             margin-bottom: 5px;
             text-align: center;
             width: 100%;
+            font-size: 1em;
+        }
+
+        /* New style for the games modal */
+        .games-modal-content {
+            background-color: #e7f3ff;
+            margin: 20% auto;
+            padding: 15px;
+            border: 1px solid #007bff;
+            border-radius: 40px;
+            width: 315px;
+            max-width: 80%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .invite-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        /* Style for the community modal */
+        .community-modal-content {
+            background-color: #e7f3ff;
+            margin: 20% auto;
+            padding: 13px;
+            border: 1px solid #007bff;
+            border-radius: 40px;
+            width: 315px;
+            max-width: 80%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .birthday-channels {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            text-align: center;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .birthday-channel {
+            background-color: white;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            padding: 5px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        
+        .birthday-channel.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Style for months in the community modal */
+        .month-section {
+            margin-top: 15px;
+            text-align: left;
+        }
+        
+        .month-title {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 8px;
+            font-size: 1em;
+            text-align: center;
+        }
+        
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .day-item {
+            background-color: white;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 4px;
+            font-size: 0.8em;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .day-item:hover {
+            background-color: #e7f3ff;
+        }
+        
+        .day-item.current {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .join-button {
+            background-color: #0d8a2a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            display: block;
+            width: 50%;
+            margin: 15px auto 5px auto;
+        }
+        
+        .join-button:hover {
+            background-color: #06751e;
+        }
+        
+        .user-date-info {
+            font-weight: bold;
+            margin: 10px 0;
+            color: #0056b3;
+            font-size: 1.1em;
+        }
+        
+        /* Styles for Billabong titles */
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.7em;
+            margin-bottom: 10px;
+        }
+        
+        /* Style for disabled fields */
+        .disabled-field {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        /* Style for cookie message */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(102, 108, 114, 0.9);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1001;
+            display: none;
+        }
+        
+        .cookie-banner button {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -244,8 +410,8 @@
   <header>
     <h1 translate="no">G-Z</h1>
     <div>
-      <a href="pagedetraduction.html">
-        <i class="fas fa-language share-icon"></i> <!-- Translation icon -->
+      <a href="Partage.html">
+        <i class="fas fa-share share-icon"></i> <!-- Share icon -->
       </a>
     </div>
   </header>
@@ -256,25 +422,22 @@
     <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
     <a class="button" href="Statistiques.html" id="statisticsButton">
       <i class="fas fa-chart-bar"></i> Discover</a>
+    <a class="button" href="#" id="communityButton"><i class="fas fa-users"></i>Community</a>
+    <a class="button" href="#" id="gamesButton"><i class="fas fa-gamepad"></i>Games</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
     <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
   </div>
-
   <script>
     const button = document.getElementById('statisticsButton');
-
     let colors = ['lawngreen', 'white'];
     let index = 0;
-
     setInterval(() => {
       button.style.borderBottom = `4px solid ${colors[index]}`;
       index = (index + 1) % colors.length; // Cycle through colors
-    }, 400); // Change color every second
+    }, 400); // Change color every 400ms
   </script>
-
   <div class="divider"></div>
-
   <div class="notification">
     <span class="notification-text">Let's discover together the secrets of our generations.</span>
     <div class="new-message-badge"></div>
@@ -330,10 +493,16 @@
     </div>
   </footer>
 
-  <!-- Modal -->
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <span>We use cookies to enhance your experience. By continuing to use this site, you agree to our use of cookies.</span>
+    <button id="acceptCookies">Accept</button>
+  </div>
+
+  <!-- Gender Modal -->
   <div id="genderModal" class="modal">
     <div class="modal-content">
-      <div class="modal-header">Your gender?</div>
+      <div class="billabong-title"><strong>Your gender?</strong></div>
       
       <div class="gender-category">Binary genders</div>
       <div class="modal-footer">
@@ -359,26 +528,504 @@
     </div>
   </div>
 
+  <!-- Games Modal -->
+  <div id="gamesModal" class="modal">
+    <div class="games-modal-content">
+      <div class="billabong-title" style="color: #0056b3;"><strong>Games</strong></div>
+      <div class="text-line">
+        The games are not ready to start yet. Communities have not reached sufficient numbers. As soon as enough people join, the games will begin. In the meantime, you can invite more people to help communities get ready!
+      </div>
+      <button class="invite-button" id="inviteButton">Invite</button>
+    </div>
+  </div>
+
+  <!-- Community Modal -->
+  <div id="communityModal" class="modal">
+    <div class="community-modal-content">
+      <div class="billabong-title" style="color: #0056b3;"><strong>Your Birthday Community</strong></div>
+      
+      <div id="communityNotLoggedIn" style="display: block;">
+        <div class="text-line">
+          Please submit your birth information first to join your birthday community.
+        </div>
+      </div>
+      
+      <div id="communityLoggedIn" style="display: none;">
+        <div class="user-date-info" id="userDateInfo"></div>
+        <div class="text-line">
+          Click the button below to join your birthday community:
+        </div>
+        <button class="join-button" id="joinButton">Join</button>
+      </div>
+      
+      <div id="allBirthdayChannels" style="display: none; max-height: 400px; overflow-y: auto;">
+        <!-- Months and days will be generated here -->
+      </div>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getDatabase, ref, push, remove } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getDatabase, ref, push, remove, get } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
+    // Firebase configuration - needed for database connection
     const firebaseConfig = {
-  apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
-  authDomain: "genz-abb36.firebaseapp.com",
-  databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
-  projectId: "genz-abb36",
-  storageBucket: "genz-abb36.firebasestorage.app",
-  messagingSenderId: "405021535683",
-  appId: "1:405021535683:web:ee5a28fde27f5558046176",
-  measurementId: "G-XZNQND2J00"
-};
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const auth = getAuth(app);
+    
+    // Variables to store user information
+    let userBirthdate = null;
+    let userCountry = null;
+    let userGender = null;
+    let dataSubmitted = false;
+    let userBirthdayDay = null;
+    let userBirthdayMonth = null;
+    let lastSubmittedId = null;
 
-    // Anonymous authentication
+    // Structure for Telegram links by date
+    // Format: telegramLinks["MM-DD"] = "telegram_link"
+    const telegramLinks = {
+      // January
+      "01-01": "https://t.me/gzonline1",
+      "01-02": "https://t.me/gzonline2",
+      "01-03": "https://t.me/gzonline3",
+      "01-04": "https://t.me/gzonline4",
+      "01-05": "https://t.me/gzonline5",
+      "01-06": "https://t.me/gzonline6",
+      "01-07": "https://t.me/gzonline7",
+      "01-08": "https://t.me/gzonline8",
+      "01-09": "https://t.me/gzonline9",
+      "01-10": "https://t.me/gzonline10",
+      "01-11": "https://t.me/gzonline11",
+      "01-12": "https://t.me/gzonline12",
+      "01-13": "https://t.me/gzonline13",
+      "01-14": "https://t.me/gzonline14",
+      "01-15": "https://t.me/gzonline15",
+      "01-16": "https://t.me/gzonline16",
+      "01-17": "https://t.me/gzonline17",
+      "01-18": "https://t.me/gzonline18",
+      "01-19": "https://t.me/gzonline19",
+      "01-20": "https://t.me/gzonline20",
+      "01-21": "https://t.me/gzonline21",
+      "01-22": "https://t.me/gzonline22",
+      "01-23": "https://t.me/gzonline23",
+      "01-24": "https://t.me/gzonline24",
+      "01-25": "https://t.me/gzonline25",
+      "01-26": "https://t.me/gzonline26",
+      "01-27": "https://t.me/gzonline27",
+      "01-28": "https://t.me/gzonline28",
+      "01-29": "https://t.me/gzonline29",
+      "01-30": "https://t.me/gzonline30",
+      "01-31": "https://t.me/gzonline31",
+      
+      // February
+      "02-01": "https://t.me/gzonline32",
+      "02-02": "https://t.me/gzonline33",
+      "02-03": "https://t.me/gzonline34",
+      "02-04": "https://t.me/gzonline35",
+      "02-05": "https://t.me/gzonline36",
+      "02-06": "https://t.me/gzonline37",
+      "02-07": "https://t.me/gzonline38",
+      "02-08": "https://t.me/gzonline39",
+      "02-09": "https://t.me/gzonline40",
+      "02-10": "https://t.me/gzonline41",
+      "02-11": "https://t.me/gzonline42",
+      "02-12": "https://t.me/gzonline43",
+      "02-13": "https://t.me/gzonline44",
+      "02-14": "https://t.me/gzonline45",
+      "02-15": "https://t.me/gzonline46",
+      "02-16": "https://t.me/gzonline47",
+      "02-17": "https://t.me/gzonline48",
+      "02-18": "https://t.me/gzonline49",
+      "02-19": "https://t.me/gzonline50",
+      "02-20": "https://t.me/gzonline51",
+      "02-21": "https://t.me/gzonline52",
+      "02-22": "https://t.me/gzonline53",
+      "02-23": "https://t.me/gzonline54",
+      "02-24": "https://t.me/gzonline55",
+      "02-25": "https://t.me/gzonline56",
+      "02-26": "https://t.me/gzonline57",
+      "02-27": "https://t.me/gzonline58",
+      "02-28": "https://t.me/gzonline59",
+      "02-29": "https://t.me/gzonline60",
+      
+      // March
+      "03-01": "https://t.me/gzonline61",
+      "03-02": "https://t.me/gzonline62",
+      "03-03": "https://t.me/gzonline63",
+      "03-04": "https://t.me/gzonline64",
+      "03-05": "https://t.me/gzonline65",
+      "03-06": "https://t.me/gzonline66",
+      "03-07": "https://t.me/gzonline67",
+      "03-08": "https://t.me/gzonline68",
+      "03-09": "https://t.me/gzonline69",
+      "03-10": "https://t.me/gzonline70",
+      "03-11": "https://t.me/gzonline71",
+      "03-12": "https://t.me/gzonline72",
+      "03-13": "https://t.me/gzonline73",
+      "03-14": "https://t.me/gzonline74",
+      "03-15": "https://t.me/gzonline75",
+      "03-16": "https://t.me/gzonline76",
+      "03-17": "https://t.me/gzonline77",
+      "03-18": "https://t.me/gzonline78",
+      "03-19": "https://t.me/gzonline79",
+      "03-20": "https://t.me/gzonline80",
+      "03-21": "https://t.me/gzonline81",
+      "03-22": "https://t.me/gzonline82",
+      "03-23": "https://t.me/gzonline83",
+      "03-24": "https://t.me/gzonline84",
+      "03-25": "https://t.me/gzonline85",
+      "03-26": "https://t.me/gzonline86",
+      "03-27": "https://t.me/gzonline87",
+      "03-28": "https://t.me/gzonline88",
+      "03-29": "https://t.me/gzonline89",
+      "03-30": "https://t.me/gzonline90",
+      "03-31": "https://t.me/gzonline91",
+      
+      // April
+      "04-01": "https://t.me/gzonline92",
+      "04-02": "https://t.me/gzonline93",
+      "04-03": "https://t.me/gzonline94",
+      "04-04": "https://t.me/gzonline95",
+      "04-05": "https://t.me/gzonline96",
+      "04-06": "https://t.me/gzonline97",
+      "04-07": "https://t.me/gzonline98",
+      "04-08": "https://t.me/gzonline99",
+      "04-09": "https://t.me/gzonline100",
+      "04-10": "https://t.me/gzonline101",
+      "04-11": "https://t.me/gzonline102",
+      "04-12": "https://t.me/gzonline103",
+      "04-13": "https://t.me/gzonline104",
+      "04-14": "https://t.me/gzonline105",
+      "04-15": "https://t.me/gzonline106",
+      "04-16": "https://t.me/gzonline107",
+      "04-17": "https://t.me/gzonline108",
+      "04-18": "https://t.me/gzonline109",
+      "04-19": "https://t.me/gzonline110",
+      "04-20": "https://t.me/gzonline111",
+      "04-21": "https://t.me/gzonline112",
+      "04-22": "https://t.me/gzonline113",
+      "04-23": "https://t.me/gzonline114",
+      "04-24": "https://t.me/gzonline115",
+      "04-25": "https://t.me/gzonline116",
+      "04-26": "https://t.me/gzonline117",
+      "04-27": "https://t.me/gzonline118",
+      "04-28": "https://t.me/gzonline119",
+      "04-29": "https://t.me/gzonline120",
+      "04-30": "https://t.me/gzonline121",
+      
+      // May
+      "05-01": "https://t.me/gzonline122",
+      "05-02": "https://t.me/gzonline123",
+      "05-03": "https://t.me/gzonline124",
+      "05-04": "https://t.me/gzonline125",
+      "05-05": "https://t.me/gzonline126",
+      "05-06": "https://t.me/gzonline127",
+      "05-07": "https://t.me/gzonline128",
+      "05-08": "https://t.me/gzonline129",
+      "05-09": "https://t.me/gzonline130",
+      "05-10": "https://t.me/gzonline131",
+      "05-11": "https://t.me/gzonline132",
+      "05-12": "https://t.me/gzonline133",
+      "05-13": "https://t.me/gzonline134",
+      "05-14": "https://t.me/gzonline135",
+      "05-15": "https://t.me/gzonline136",
+      "05-16": "https://t.me/gzonline137",
+      "05-17": "https://t.me/gzonline138",
+      "05-18": "https://t.me/gzonline139",
+      "05-19": "https://t.me/gzonline140",
+      "05-20": "https://t.me/gzonline141",
+      "05-21": "https://t.me/gzonline142",
+      "05-22": "https://t.me/gzonline143",
+      "05-23": "https://t.me/gzonline144",
+      "05-24": "https://t.me/gzonline145",
+      "05-25": "https://t.me/gzonline146",
+      "05-26": "https://t.me/gzonline147",
+      "05-27": "https://t.me/gzonline148",
+      "05-28": "https://t.me/gzonline149",
+      "05-29": "https://t.me/gzonline150",
+      "05-30": "https://t.me/gzonline151",
+      "05-31": "https://t.me/gzonline152",
+      
+      // June
+      "06-01": "https://t.me/gzonline153",
+      "06-02": "https://t.me/gzonline154",
+      "06-03": "https://t.me/gzonline155",
+      "06-04": "https://t.me/gzonline156",
+      "06-05": "https://t.me/gzonline157",
+      "06-06": "https://t.me/gzonline158",
+      "06-07": "https://t.me/gzonline159",
+      "06-08": "https://t.me/gzonline160",
+      "06-09": "https://t.me/gzonline161",
+      "06-10": "https://t.me/gzonline162",
+      "06-11": "https://t.me/gzonline163",
+      "06-12": "https://t.me/gzonline164",
+      "06-13": "https://t.me/gzonline165",
+      "06-14": "https://t.me/gzonline166",
+      "06-15": "https://t.me/gzonline167",
+      "06-16": "https://t.me/gzonline168",
+      "06-17": "https://t.me/gzonline169",
+      "06-18": "https://t.me/gzonline170",
+      "06-19": "https://t.me/gzonline171",
+      "06-20": "https://t.me/gzonline172",
+      "06-21": "https://t.me/gzonline173",
+      "06-22": "https://t.me/gzonline174",
+      "06-23": "https://t.me/gzonline175",
+      "06-24": "https://t.me/gzonline176",
+      "06-25": "https://t.me/gzonline177",
+      "06-26": "https://t.me/gzonline178",
+      "06-27": "https://t.me/gzonline179",
+      "06-28": "https://t.me/gzonline180",
+      "06-29": "https://t.me/gzonline181",
+      "06-30": "https://t.me/gzonline182",
+      
+      // July
+      "07-01": "https://t.me/gzonline183",
+      "07-02": "https://t.me/gzonline184",
+      "07-03": "https://t.me/gzonline185",
+      "07-04": "https://t.me/gzonline186",
+      "07-05": "https://t.me/gzonline187",
+      "07-06": "https://t.me/gzonline188",
+      "07-07": "https://t.me/gzonline189",
+      "07-08": "https://t.me/gzonline190",
+      "07-09": "https://t.me/gzonline191",
+      "07-10": "https://t.me/gzonline192",
+      "07-11": "https://t.me/gzonline193",
+      "07-12": "https://t.me/gzonline194",
+      "07-13": "https://t.me/gzonline195",
+      "07-14": "https://t.me/gzonline196",
+      "07-15": "https://t.me/gzonline197",
+      "07-16": "https://t.me/gzonline198",
+      "07-17": "https://t.me/gzonline199",
+      "07-18": "https://t.me/gzonline200",
+      "07-19": "https://t.me/gzonline201",
+      "07-20": "https://t.me/gzonline202",
+      "07-21": "https://t.me/gzonline203",
+      "07-22": "https://t.me/gzonline204",
+      "07-23": "https://t.me/gzonline205",
+      "07-24": "https://t.me/gzonline206",
+      "07-25": "https://t.me/gzonline207",
+      "07-26": "https://t.me/gzonline208",
+      "07-27": "https://t.me/gzonline209",
+      "07-28": "https://t.me/gzonline210",
+      "07-29": "https://t.me/gzonline211",
+      "07-30": "https://t.me/gzonline212",
+      "07-31": "https://t.me/gzonline213",
+      
+      // August
+      "08-01": "https://t.me/gzonline214",
+      "08-02": "https://t.me/gzonline215",
+      "08-03": "https://t.me/gzonline216",
+      "08-04": "https://t.me/gzonline217",
+      "08-05": "https://t.me/gzonline218",
+      "08-06": "https://t.me/gzonline219",
+      "08-07": "https://t.me/gzonline220",
+      "08-08": "https://t.me/gzonline221",
+      "08-09": "https://t.me/gzonline222",
+      "08-10": "https://t.me/gzonline223",
+      "08-11": "https://t.me/gzonline224",
+      "08-12": "https://t.me/gzonline225",
+      "08-13": "https://t.me/gzonline226",
+      "08-14": "https://t.me/gzonline227",
+      "08-15": "https://t.me/gzonline228",
+      "08-16": "https://t.me/gzonline229",
+      "08-17": "https://t.me/gzonline230",
+      "08-18": "https://t.me/gzonline231",
+      "08-19": "https://t.me/gzonline232",
+      "08-20": "https://t.me/gzonline233",
+      "08-21": "https://t.me/gzonline234",
+      "08-22": "https://t.me/gzonline235",
+      "08-23": "https://t.me/gzonline236",
+      "08-24": "https://t.me/gzonline237",
+      "08-25": "https://t.me/gzonline238",
+      "08-26": "https://t.me/gzonline239",
+      "08-27": "https://t.me/gzonline240",
+      "08-28": "https://t.me/gzonline241",
+      "08-29": "https://t.me/gzonline242",
+      "08-30": "https://t.me/gzonline243",
+      "08-31": "https://t.me/gzonline244",
+      
+      // September
+      "09-01": "https://t.me/gzonline245",
+      "09-02": "https://t.me/gzonline246",
+      "09-03": "https://t.me/gzonline247",
+      "09-04": "https://t.me/gzonline248",
+      "09-05": "https://t.me/gzonline249",
+      "09-06": "https://t.me/gzonline250",
+      "09-07": "https://t.me/gzonline251",
+      "09-08": "https://t.me/gzonline252",
+      "09-09": "https://t.me/gzonline253",
+      "09-10": "https://t.me/gzonline254",
+      "09-11": "https://t.me/gzonline255",
+      "09-12": "https://t.me/gzonline256",
+      "09-13": "https://t.me/gzonline257",
+      "09-14": "https://t.me/gzonline258",
+      "09-15": "https://t.me/gzonline259",
+      "09-16": "https://t.me/gzonline260",
+      "09-17": "https://t.me/gzonline261",
+      "09-18": "https://t.me/gzonline262",
+      "09-19": "https://t.me/gzonline263",
+      "09-20": "https://t.me/gzonline264",
+      "09-21": "https://t.me/gzonline265",
+      "09-22": "https://t.me/gzonline266",
+      "09-23": "https://t.me/gzonline267",
+      "09-24": "https://t.me/gzonline268",
+      "09-25": "https://t.me/gzonline269",
+      "09-26": "https://t.me/gzonline270",
+      "09-27": "https://t.me/gzonline271",
+      "09-28": "https://t.me/gzonline272",
+      "09-29": "https://t.me/gzonline273",
+      "09-30": "https://t.me/gzonline274",
+      
+      // October
+      "10-01": "https://t.me/gzonline275",
+      "10-02": "https://t.me/gzonline276",
+      "10-03": "https://t.me/gzonline277",
+      "10-04": "https://t.me/gzonline278",
+      "10-05": "https://t.me/gzonline279",
+      "10-06": "https://t.me/gzonline280",
+      "10-07": "https://t.me/gzonline281",
+      "10-08": "https://t.me/gzonline282",
+      "10-09": "https://t.me/gzonline283",
+      "10-10": "https://t.me/gzonline284",
+      "10-11": "https://t.me/gzonline285",
+      "10-12": "https://t.me/gzonline286",
+      "10-13": "https://t.me/gzonline287",
+      "10-14": "https://t.me/gzonline288",
+      "10-15": "https://t.me/gzonline289",
+      "10-16": "https://t.me/gzonline290",
+      "10-17": "https://t.me/gzonline291",
+      "10-18": "https://t.me/gzonline292",
+      "10-19": "https://t.me/gzonline293",
+      "10-20": "https://t.me/gzonline294",
+      "10-21": "https://t.me/gzonline295",
+      "10-22": "https://t.me/gzonline296",
+      "10-23": "https://t.me/gzonline297",
+      "10-24": "https://t.me/gzonline298",
+      "10-25": "https://t.me/gzonline299",
+      "10-26": "https://t.me/gzonline300",
+      "10-27": "https://t.me/gzonline301",
+      "10-28": "https://t.me/gzonline302",
+      "10-29": "https://t.me/gzonline303",
+      "10-30": "https://t.me/gzonline304",
+      "10-31": "https://t.me/gzonline305",
+      
+      // November
+      "11-01": "https://t.me/gzonline306",
+      "11-02": "https://t.me/gzonline307",
+      "11-03": "https://t.me/gzonline308",
+      "11-04": "https://t.me/gzonline309",
+      "11-05": "https://t.me/gzonline310",
+      "11-06": "https://t.me/gzonline311",
+      "11-07": "https://t.me/gzonline312",
+      "11-08": "https://t.me/gzonline313",
+      "11-09": "https://t.me/gzonline314",
+      "11-10": "https://t.me/gzonline315",
+      "11-11": "https://t.me/gzonline316",
+      "11-12": "https://t.me/gzonline317",
+      "11-13": "https://t.me/gzonline318",
+      "11-14": "https://t.me/gzonline319",
+      "11-15": "https://t.me/gzonline320",
+      "11-16": "https://t.me/gzonline321",
+      "11-17": "https://t.me/gzonline322",
+      "11-18": "https://t.me/gzonline323",
+      "11-19": "https://t.me/gzonline324",
+      "11-20": "https://t.me/gzonline325",
+      "11-21": "https://t.me/gzonline326",
+      "11-22": "https://t.me/gzonline327",
+      "11-23": "https://t.me/gzonline328",
+      "11-24": "https://t.me/gzonline329",
+      "11-25": "https://t.me/gzonline330",
+      "11-26": "https://t.me/gzonline331",
+      "11-27": "https://t.me/gzonline332",
+      "11-28": "https://t.me/gzonline333",
+      "11-29": "https://t.me/gzonline334",
+      "11-30": "https://t.me/gzonline335",
+      
+      // December
+      "12-01": "https://t.me/gzonline336",
+      "12-02": "https://t.me/gzonline337",
+      "12-03": "https://t.me/gzonline338",
+      "12-04": "https://t.me/gzonline339",
+      "12-05": "https://t.me/gzonline340",
+      "12-06": "https://t.me/gzonline341",
+      "12-07": "https://t.me/gzonline342",
+      "12-08": "https://t.me/gzonline343",
+      "12-09": "https://t.me/gzonline344",
+      "12-10": "https://t.me/gzonline345",
+      "12-11": "https://t.me/gzonline346",
+      "12-12": "https://t.me/gzonline347",
+      "12-13": "https://t.me/gzonline348",
+      "12-14": "https://t.me/gzonline349",
+      "12-15": "https://t.me/gzonline350",
+      "12-16": "https://t.me/gzonline351",
+      "12-17": "https://t.me/gzonline352",
+      "12-18": "https://t.me/gzonline353",
+      "12-19": "https://t.me/gzonline354",
+      "12-20": "https://t.me/gzonline355",
+      "12-21": "https://t.me/gzonline356",
+      "12-22": "https://t.me/gzonline357",
+      "12-23": "https://t.me/gzonline358",
+      "12-24": "https://t.me/gzonline359",
+      "12-25": "https://t.me/gzonline360",
+      "12-26": "https://t.me/gzonline361",
+      "12-27": "https://t.me/gzonline362",
+      "12-28": "https://t.me/gzonline363",
+      "12-29": "https://t.me/gzonline364",
+      "12-30": "https://t.me/gzonline365",
+      "12-31": "https://t.me/gzonline366"
+    };
+
+    // Month names in English
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    
+    // Days in each month (0-indexed)
+    const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    // Cookie management functions
+    function setCookie(name, value, days) {
+      // Set a cookie with specified expiration
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      // Get a cookie by name
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function eraseCookie(name) {
+      // Delete a cookie by setting negative expiration
+      document.cookie = name + '=; Max-Age=-99999999; path=/';
+    }
+
+    // Authenticate anonymously with Firebase
     signInAnonymously(auth)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -388,10 +1035,11 @@
         console.error("Error during anonymous connection: ", error);
       });
 
+    // Set max date for birthdate to today
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("birthdate").setAttribute('max', today);
 
-    // Load the list of countries
+    // Load countries from REST API
     fetch('https://restcountries.com/v3.1/all')
       .then(response => {
         if (!response.ok) {
@@ -400,78 +1048,202 @@
         return response.json();
       })
       .then(data => {
+        // Sort countries alphabetically
         data.sort((a, b) => a.name.common.localeCompare(b.name.common));
         const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        // Add each country to the dropdown
         data.forEach(country => {
           const option = document.createElement('option');
           option.value = country.name.common;
           option.textContent = country.name.common;
           countrySelect.appendChild(option);
         });
+        
+        // Load user data from cookie after loading countries
+        loadUserDataFromCookie();
       })
       .catch(error => console.error('Error loading countries:', error));
 
-    let lastSubmittedId = null;
+    // Cookie banner handler
+    document.getElementById('acceptCookies').addEventListener('click', function() {
+      // Store cookie consent for 1 year
+      setCookie('cookiesAccepted', 'true', 365);
+      document.getElementById('cookieBanner').style.display = 'none';
+    });
 
+    // Check if cookies are accepted
+    function checkCookieConsent() {
+      const cookiesAccepted = getCookie('cookiesAccepted');
+      if (!cookiesAccepted) {
+        document.getElementById('cookieBanner').style.display = 'block';
+      }
+    }
+
+    // Save user data to cookie
+    function saveUserDataToCookie() {
+      if (userBirthdate && userCountry && userGender) {
+        const userData = {
+          birthdate: userBirthdate,
+          country: userCountry,
+          gender: userGender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          dataSubmitted: true,
+          lastSubmittedId: lastSubmittedId
+        };
+        setCookie('userData', JSON.stringify(userData), 365);
+      }
+    }
+
+    // Load user data from cookie
+    function loadUserDataFromCookie() {
+      const userDataCookie = getCookie('userData');
+      if (userDataCookie) {
+        try {
+          // Parse stored data
+          const userData = JSON.parse(userDataCookie);
+          userBirthdate = userData.birthdate;
+          userCountry = userData.country;
+          userGender = userData.gender;
+          userBirthdayDay = userData.birthdayDay;
+          userBirthdayMonth = userData.birthdayMonth;
+          dataSubmitted = userData.dataSubmitted;
+          lastSubmittedId = userData.lastSubmittedId;
+          
+          // Update UI with loaded data
+          if (dataSubmitted) {
+            document.getElementById('birthdate').value = userBirthdate;
+            document.getElementById('countrySelect').value = userCountry;
+            
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.textContent = "Submitted";
+            submitButton.style.backgroundColor = 'green';
+            submitButton.disabled = true;
+            
+            document.getElementById('resetButton').style.display = "block";
+            
+            // Disable form fields
+            document.getElementById('birthdate').classList.add('disabled-field');
+            document.getElementById('countrySelect').classList.add('disabled-field');
+          }
+        } catch (error) {
+          console.error("Error parsing user data from cookie:", error);
+        }
+      }
+    }
+
+    // Submit button click handler
     document.querySelector('.submit-button').addEventListener('click', function() {
       const birthdate = document.getElementById('birthdate').value;
       const country = document.getElementById('countrySelect').value;
 
       if (birthdate && country) {
+        // Store user input
+        userBirthdate = birthdate;
+        userCountry = country;
+        
+        // Extract day and month from birthdate
+        const birthdateObj = new Date(birthdate);
+        userBirthdayDay = birthdateObj.getDate();
+        userBirthdayMonth = birthdateObj.getMonth() + 1; // Months are 0-indexed
+        
+        // Update UI to show loading state
         const submitButton = document.querySelector('.submit-button');
         submitButton.textContent = "Please wait...";
         submitButton.style.backgroundColor = 'orange';
 
+        // Disable form fields during submission
+        document.getElementById('birthdate').classList.add('disabled-field');
+        document.getElementById('countrySelect').classList.add('disabled-field');
+
+        // Show gender selection modal
         document.getElementById('genderModal').style.display = 'block';
       } else {
         alert("Please enter a date of birth and select a country!");
       }
     });
 
-    // Add event listeners to all gender option buttons
+    // Gender option buttons click handlers
     document.querySelectorAll('.gender-option').forEach(button => {
       button.addEventListener('click', function() {
+        userGender = this.value;
         submitData(this.value);
       });
     });
 
+    // Submit data to Firebase
     function submitData(gender) {
-      const birthdate = document.getElementById('birthdate').value;
-      const country = document.getElementById('countrySelect').value;
+      const birthdate = userBirthdate;
+      const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
+      // Create a new database entry
       const newEntryRef = push(ref(database, 'birthdates'), {
         date: birthdate,
         country: country,
-        gender: gender
+        gender: gender,
+        birthdayDay: userBirthdayDay,
+        birthdayMonth: userBirthdayMonth
       });
 
-      lastSubmittedId = newEntryRef.key;
-
       newEntryRef.then(() => {
+        // Store the ID for potential reset
+        lastSubmittedId = newEntryRef.key;
+        
+        // Update UI for successful submission
         submitButton.style.backgroundColor = 'green';
         submitButton.textContent = "Submitted";
         submitButton.disabled = true;
         document.getElementById('resetButton').style.display = "block";
         document.getElementById('genderModal').style.display = 'none';
+        dataSubmitted = true;
+        
+        // Save to cookie for persistence
+        saveUserDataToCookie();
       }).catch((error) => {
+        // Handle submission error
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
         console.error("Error during submission: ", error);
+        
+        // Re-enable form fields on error
+        document.getElementById('birthdate').classList.remove('disabled-field');
+        document.getElementById('countrySelect').classList.remove('disabled-field');
       });
     }
 
+    // Reset button handler
     document.getElementById('resetButton').addEventListener('click', function() {
       if (lastSubmittedId) {
+        // Remove data from Firebase
         remove(ref(database, `birthdates/${lastSubmittedId}`))
           .then(() => {
+            // Reset form and UI
             document.getElementById('birthdate').value = '';
             document.getElementById('countrySelect').value = '';
             const submitButton = document.querySelector('.submit-button');
             submitButton.textContent = "Submit";
-            submitButton.style.backgroundColor = '#007bff';
+            submitButton.style.backgroundColor = 'gray';
             submitButton.disabled = false;
             document.getElementById('resetButton').style.display = "none";
+            
+            // Reset all user variables
+            dataSubmitted = false;
+            userBirthdate = null;
+            userCountry = null;
+            userGender = null;
+            userBirthdayDay = null;
+            userBirthdayMonth = null;
+            lastSubmittedId = null;
+            
+            // Re-enable form fields
+            document.getElementById('birthdate').classList.remove('disabled-field');
+            document.getElementById('countrySelect').classList.remove('disabled-field');
+            
+            // Remove saved cookie
+            eraseCookie('userData');
           })
           .catch((error) => {
             console.error("Error resetting data: ", error);
@@ -479,16 +1251,81 @@
       }
     });
 
-    // Close the modal by clicking outside
+    // Community button handler
+    document.getElementById('communityButton').addEventListener('click', function() {
+      const communityModal = document.getElementById('communityModal');
+      
+      if (!dataSubmitted) {
+        // User hasn't submitted data yet
+        document.getElementById('communityNotLoggedIn').style.display = 'block';
+        document.getElementById('communityLoggedIn').style.display = 'none';
+      } else {
+        // User has submitted data, show their community
+        document.getElementById('communityNotLoggedIn').style.display = 'none';
+        document.getElementById('communityLoggedIn').style.display = 'block';
+        
+        // Update date information
+        const userDateInfo = document.getElementById('userDateInfo');
+        userDateInfo.textContent = `Your birthday: ${userBirthdayDay}/${userBirthdayMonth}`;
+        
+        // Set up join button handler
+        document.getElementById('joinButton').onclick = function() {
+          // Format date to get Telegram link key
+          const monthStr = userBirthdayMonth.toString().padStart(2, '0');
+          const dayStr = userBirthdayDay.toString().padStart(2, '0');
+          const dateKey = `${monthStr}-${dayStr}`;
+          
+          // Open the corresponding link
+          if (telegramLinks[dateKey]) {
+            window.open(telegramLinks[dateKey], '_blank');
+          } else {
+            alert("No community link available for your birthday yet. Please try again later.");
+          }
+        };
+      }
+      
+      communityModal.style.display = 'block';
+    });
+
+    // Games button handler
+    document.getElementById('gamesButton').addEventListener('click', function() {
+      const gamesModal = document.getElementById('gamesModal');
+      gamesModal.style.display = 'block';
+    });
+
+    // Redirect to share page from invite button
+    document.getElementById('inviteButton').addEventListener('click', function() {
+      window.location.href = 'Partage.html';
+    });
+
+    // Close modal when clicking outside
     window.onclick = function(event) {
-      const modal = document.getElementById('genderModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
+      const genderModal = document.getElementById('genderModal');
+      const gamesModal = document.getElementById('gamesModal');
+      const communityModal = document.getElementById('communityModal');
+      
+      if (event.target == genderModal) {
+        genderModal.style.display = "none";
         const submitButton = document.querySelector('.submit-button');
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
+        
+        // Re-enable fields if user closes modal without choosing
+        document.getElementById('birthdate').classList.remove('disabled-field');
+        document.getElementById('countrySelect').classList.remove('disabled-field');
+      }
+      
+      if (event.target == gamesModal) {
+        gamesModal.style.display = "none";
+      }
+      
+      if (event.target == communityModal) {
+        communityModal.style.display = "none";
       }
     };
+    
+    // Check and display cookie banner on load
+    checkCookieConsent();
   </script>
 </body>
 </html>
