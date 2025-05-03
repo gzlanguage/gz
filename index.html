@@ -341,24 +341,6 @@
             color: white;
         }
         
-        .join-button {
-            background-color: #0d8a2a;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
-            margin-top: 15px;
-            cursor: pointer;
-            font-size: 0.9em;
-            display: block;
-            width: 50%;
-            margin: 15px auto 5px auto;
-        }
-        
-        .join-button:hover {
-            background-color: #06751e;
-        }
-        
         .user-date-info {
             font-weight: bold;
             margin: 10px 0;
@@ -378,30 +360,6 @@
         .disabled-field {
             opacity: 0.7;
             pointer-events: none;
-        }
-        
-        /* Style for cookie message */
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(135, 141, 146, 0.9);
-            color: #007bff;
-            padding: 10px;
-            text-align: center;
-            z-index: 1001;
-            display: none;
-        }
-        
-        .cookie-banner button {
-            background-color: #007bff;
-            color: #007bff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin-left: 10px;
-            cursor: pointer;
         }
         
         /* Style for close cross in modals */
@@ -426,6 +384,118 @@
         .modal-close:hover {
             background-color: #007bff;
             color: white;
+        }
+        
+        /* Styles for vote buttons - MODIFIED */
+        .vote-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .vote-option {
+            width: 60px;
+            height: 25px;
+            padding: 3px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .vote-yes {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #3d8b40;
+        }
+        
+        .vote-no {
+            background-color: #F44336;
+            color: white;
+            border: 1px solid #d32f2f;
+        }
+        
+        .vote-yes:hover {
+            background-color: #3d8b40;
+            transform: scale(1.05);
+        }
+        
+        .vote-no:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+        
+        .vote-count {
+            position: absolute;
+            top: -10px;
+            right: -8px;
+            background-color: white;
+            color: #333;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            border: 1px solid currentColor;
+        }
+        
+        .vote-disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .vote-status {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-style: italic;
+            display: none;
+        }
+        
+        .telegram-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #0088cc;
+            color: white;
+            border-radius: 5px;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        
+        .telegram-link:hover {
+            background-color: #006699;
+        }
+        
+        .telegram-link i {
+            margin-right: 5px;
+        }
+        
+        .game-info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.85em;
+            color: #333;
+        }
+        
+        .game-title {
+            font-weight: bold;
+            color: #0056b3;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -517,12 +587,6 @@
     </div>
   </footer>
 
-  <!-- Cookie Banner -->
-  <div class="cookie-banner" id="cookieBanner">
-    <span>We use cookies to enhance your experience. By continuing to use this site, you agree to our use of cookies.</span>
-    <button id="acceptCookies">Accept</button>
-  </div>
-
   <!-- Gender Modal -->
   <div id="genderModal" class="modal">
     <div class="modal-content">
@@ -560,6 +624,10 @@
       <div class="text-line">
         The games are not ready to start yet. Communities have not reached sufficient numbers. As soon as enough people join, the games will begin. In the meantime, you can invite more people to help communities get ready!
       </div>
+      <div class="game-info">
+        <div class="game-title">Coming Soon: Kahoot Quiz Competition</div>
+        <p>Connect with your birthday community and compete in exciting interactive quizzes!</p>
+      </div>
       <button class="invite-button" id="inviteButton">Invite</button>
     </div>
   </div>
@@ -568,7 +636,7 @@
   <div id="communityModal" class="modal">
     <div class="community-modal-content">
       <div class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></div>
-      <div class="billabong-title" style="color: #0056b3; margin-top: 15px;"><strong>Your Birthday Community</strong></div>
+      <div class="billabong-title" style="color: #0056b3; margin-top: 15px;"><strong>Birthday Community</strong></div>
       
       <div id="communityNotLoggedIn" style="display: block;">
         <div class="text-line">
@@ -579,9 +647,33 @@
       <div id="communityLoggedIn" style="display: none;">
         <div class="user-date-info" id="userDateInfo"></div>
         <div class="text-line">
-          Click the button below to join your birthday community:
+          The Birthday Community is a unique space where people born on the same day and month (regardless of the year) are brought together in a dedicated group. They can connect, share experiences, and discover fascinating things they have in common.
+          We also organize fun quiz competitions between different birthday dates using Kahoot, to entertain members and strengthen the group spirit!
         </div>
-        <button class="join-button" id="joinButton">Join</button>
+        
+        <div class="text-line" style="margin-top: 10px; font-weight: bold;">
+          Do you think this Birthday Community is a good idea?
+        </div>
+        
+        <div class="vote-container">
+          <div class="vote-option vote-yes" id="voteYes">
+            <span>Yes</span>
+            <span class="vote-count" id="yesCount">0</span>
+          </div>
+          <div class="vote-option vote-no" id="voteNo">
+            <span>No</span>
+            <span class="vote-count" id="noCount">0</span>
+          </div>
+        </div>
+        
+        <div class="vote-status" id="voteStatus">Your vote has been recorded and cannot be changed.</div>
+        
+        <div id="telegramLinkContainer" style="margin-top: 20px; display: none;">
+          <div class="text-line" style="font-weight: bold;">Join your birthday Telegram group:</div>
+          <a href="#" class="telegram-link" id="telegramLink" target="_blank">
+            <i class="fab fa-telegram-plane"></i> Join Now
+          </a>
+        </div>
       </div>
       
       <div id="allBirthdayChannels" style="display: none; max-height: 400px; overflow-y: auto;">
@@ -592,7 +684,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getDatabase, ref, push, remove, get } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getDatabase, ref, push, remove, get, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
     // Firebase configuration - needed for database connection
@@ -618,6 +710,15 @@
     let userBirthdayDay = null;
     let userBirthdayMonth = null;
     let lastSubmittedId = null;
+    let hasVoted = false;
+    let userVoteChoice = null;
+    let userUid = null;
+    
+    // NEW: Global vote counts for fallback when Firebase fails
+    let globalVoteCounts = {
+      yes: 0,
+      no: 0
+    };
 
     // Structure for Telegram links by date
     // Format: telegramLinks["MM-DD"] = "telegram_link"
@@ -1051,15 +1152,203 @@
       document.cookie = name + '=; Max-Age=-99999999; path=/';
     }
 
+    // NEW: LocalStorage methods for vote storage as fallback
+    function saveVoteToLocalStorage(choice) {
+      if (userUid) {
+        try {
+          // Save user's vote
+          localStorage.setItem(`user_vote_${userUid}`, JSON.stringify({
+            choice: choice,
+            timestamp: Date.now()
+          }));
+          
+          // Update global counts
+          const votes = JSON.parse(localStorage.getItem('community_votes') || '{"yes":0,"no":0}');
+          votes[choice]++;
+          localStorage.setItem('community_votes', JSON.stringify(votes));
+          
+          return true;
+        } catch (e) {
+          console.error("Error saving vote to localStorage:", e);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    function getVoteFromLocalStorage() {
+      if (userUid) {
+        try {
+          const voteData = localStorage.getItem(`user_vote_${userUid}`);
+          return voteData ? JSON.parse(voteData) : null;
+        } catch (e) {
+          console.error("Error retrieving vote from localStorage:", e);
+          return null;
+        }
+      }
+      return null;
+    }
+
+    function getVoteCountsFromLocalStorage() {
+      try {
+        const counts = localStorage.getItem('community_votes');
+        return counts ? JSON.parse(counts) : { yes: 0, no: 0 };
+      } catch (e) {
+        console.error("Error retrieving vote counts from localStorage:", e);
+        return { yes: 0, no: 0 };
+      }
+    }
+
+    // Check for cookie acceptance
+    function checkCookieConsent() {
+      const cookiesAccepted = getCookie('cookiesAccepted');
+      if (!cookiesAccepted) {
+        // Automatically set cookie accepted
+        setCookie('cookiesAccepted', 'true', 365);
+      }
+    }
+
     // Authenticate anonymously with Firebase
     signInAnonymously(auth)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("User connected: ", user.uid);
+        userUid = user.uid;
+        console.log("User connected: ", userUid);
+        
+        // After authentication, check if user has already voted
+        checkUserVoteStatus();
+        
+        // Try to create a votes node if it doesn't exist
+        try {
+          const votesRef = ref(database, 'community_votes');
+          get(votesRef).then((snapshot) => {
+            if (!snapshot.exists()) {
+              set(votesRef, {
+                yes: 0,
+                no: 0
+              }).catch(error => {
+                console.warn("Could not create votes node:", error);
+                // That's okay, we'll use localStorage if needed
+              });
+            }
+          }).catch(error => {
+            console.warn("Could not check votes node:", error);
+            // That's okay, we'll use localStorage
+          });
+          
+          // Set up real-time listener for vote counts
+          setupVoteCountsListener();
+        } catch (error) {
+          console.warn("Firebase initialization issue:", error);
+          // Load vote counts from localStorage as fallback
+          loadVoteCountsFromLocalStorage();
+        }
       })
       .catch((error) => {
         console.error("Error during anonymous connection: ", error);
+        // Load from localStorage as fallback
+        loadVoteCountsFromLocalStorage();
       });
+      
+    // Check if user has already voted - with localStorage fallback
+    function checkUserVoteStatus() {
+      if (userUid) {
+        // First try Firebase
+        try {
+          const userVotesRef = ref(database, `user_votes/${userUid}`);
+          onValue(userVotesRef, (snapshot) => {
+            const voteData = snapshot.val();
+            if (voteData) {
+              // User has voted before in Firebase
+              hasVoted = true;
+              userVoteChoice = voteData.choice;
+              
+              // Update UI to reflect vote status
+              updateVoteUIAfterVoting();
+              
+              // Save vote status to cookie
+              saveUserDataToCookie();
+              
+              // Show telegram link if applicable
+              if (dataSubmitted) {
+                showTelegramLink();
+              }
+            } else {
+              // Check localStorage as fallback
+              checkLocalStorageVotes();
+            }
+          }, (error) => {
+            console.warn("Firebase vote check error:", error);
+            // Check localStorage as fallback
+            checkLocalStorageVotes();
+          });
+        } catch (error) {
+          console.warn("Firebase vote check exception:", error);
+          // Check localStorage as fallback
+          checkLocalStorageVotes();
+        }
+      }
+    }
+    
+    function checkLocalStorageVotes() {
+      const localVote = getVoteFromLocalStorage();
+      if (localVote) {
+        hasVoted = true;
+        userVoteChoice = localVote.choice;
+        
+        // Update UI to reflect vote status
+        updateVoteUIAfterVoting();
+        
+        // Save vote status to cookie
+        saveUserDataToCookie();
+        
+        // Show telegram link if applicable
+        if (dataSubmitted) {
+          showTelegramLink();
+        }
+      }
+    }
+    
+    function updateVoteUIAfterVoting() {
+      document.getElementById('voteYes').classList.add('vote-disabled');
+      document.getElementById('voteNo').classList.add('vote-disabled');
+      document.getElementById('voteStatus').style.display = 'block';
+    }
+    
+    // Setup real-time listener for vote counts with localStorage fallback
+    function setupVoteCountsListener() {
+      try {
+        const votesRef = ref(database, 'community_votes');
+        
+        // This listener will run every time the data at votesRef changes
+        onValue(votesRef, (snapshot) => {
+          const data = snapshot.val() || { yes: 0, no: 0 };
+          
+          // Update vote count displays
+          document.getElementById('yesCount').textContent = data.yes || 0;
+          document.getElementById('noCount').textContent = data.no || 0;
+          
+          // Store in global variable for potential fallback
+          globalVoteCounts = data;
+        }, (error) => {
+          console.warn("Firebase vote counts error:", error);
+          // Use localStorage as fallback
+          loadVoteCountsFromLocalStorage();
+        });
+      } catch (error) {
+        console.warn("Firebase vote counts setup error:", error);
+        // Use localStorage as fallback
+        loadVoteCountsFromLocalStorage();
+      }
+    }
+    
+    // Load vote counts from localStorage
+    function loadVoteCountsFromLocalStorage() {
+      const counts = getVoteCountsFromLocalStorage();
+      document.getElementById('yesCount').textContent = counts.yes || 0;
+      document.getElementById('noCount').textContent = counts.no || 0;
+      globalVoteCounts = counts;
+    }
 
     // Set max date for birthdate to today
     const today = new Date().toISOString().split("T")[0];
@@ -1090,22 +1379,28 @@
         // Load user data from cookie after loading countries
         loadUserDataFromCookie();
       })
-      .catch(error => console.error('Error loading countries:', error));
-
-    // Cookie banner handler
-    document.getElementById('acceptCookies').addEventListener('click', function() {
-      // Store cookie consent for 1 year
-      setCookie('cookiesAccepted', 'true', 365);
-      document.getElementById('cookieBanner').style.display = 'none';
-    });
-
-    // Check if cookies are accepted
-    function checkCookieConsent() {
-      const cookiesAccepted = getCookie('cookiesAccepted');
-      if (!cookiesAccepted) {
-        document.getElementById('cookieBanner').style.display = 'block';
-      }
-    }
+      .catch(error => {
+        console.error('Error loading countries:', error);
+        // Fallback with a basic list of common countries
+        const commonCountries = [
+          "United States", "United Kingdom", "Canada", "Australia", 
+          "France", "Germany", "Italy", "Spain", "Japan", "China", 
+          "India", "Brazil", "Mexico", "Russia", "South Africa"
+        ];
+        
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        commonCountries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+        
+        // Load user data from cookie
+        loadUserDataFromCookie();
+      });
 
     // Save user data to cookie
     function saveUserDataToCookie() {
@@ -1117,7 +1412,9 @@
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
           dataSubmitted: true,
-          lastSubmittedId: lastSubmittedId
+          lastSubmittedId: lastSubmittedId,
+          hasVoted: hasVoted,
+          userVoteChoice: userVoteChoice
         };
         setCookie('userData', JSON.stringify(userData), 365);
       }
@@ -1137,6 +1434,8 @@
           userBirthdayMonth = userData.birthdayMonth;
           dataSubmitted = userData.dataSubmitted;
           lastSubmittedId = userData.lastSubmittedId;
+          hasVoted = userData.hasVoted || false;
+          userVoteChoice = userData.userVoteChoice || null;
           
           // Update UI with loaded data
           if (dataSubmitted) {
@@ -1171,9 +1470,10 @@
         userCountry = country;
         
         // Extract day and month from birthdate
-        const birthdateObj = new Date(birthdate);
-        userBirthdayDay = birthdateObj.getDate();
-        userBirthdayMonth = birthdateObj.getMonth() + 1; // Months are 0-indexed
+        // Corrected: Create date object without timezone conversion
+        const birthdateParts = birthdate.split('-');
+        userBirthdayDay = parseInt(birthdateParts[2]);
+        userBirthdayMonth = parseInt(birthdateParts[1]);
         
         // Update UI to show loading state
         const submitButton = document.querySelector('.submit-button');
@@ -1199,25 +1499,79 @@
       });
     });
 
-    // Submit data to Firebase
+    // Submit data to Firebase with localStorage fallback
     function submitData(gender) {
       const birthdate = userBirthdate;
       const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
-      // Create a new database entry
-      const newEntryRef = push(ref(database, 'birthdates'), {
-        date: birthdate,
-        country: country,
-        gender: gender,
-        birthdayDay: userBirthdayDay,
-        birthdayMonth: userBirthdayMonth
-      });
+      // First try to submit to Firebase
+      try {
+        // Create a new database entry
+        push(ref(database, 'birthdates'), {
+          date: birthdate,
+          country: country,
+          gender: gender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          uid: userUid,
+          timestamp: Date.now()
+        }).then((newEntryRef) => {
+          // Store the ID for potential reset
+          lastSubmittedId = newEntryRef.key;
+          
+          // Update UI for successful submission
+          finishSubmission(true);
+        }).catch((error) => {
+          console.warn("Firebase submission error:", error);
+          // Fall back to localStorage
+          submitToLocalStorage(gender);
+        });
+      } catch (error) {
+        console.warn("Firebase submission exception:", error);
+        // Fall back to localStorage
+        submitToLocalStorage(gender);
+      }
+    }
 
-      newEntryRef.then(() => {
-        // Store the ID for potential reset
-        lastSubmittedId = newEntryRef.key;
+    // Fallback submission to localStorage
+    function submitToLocalStorage(gender) {
+      try {
+        // Generate a pseudo-random ID
+        const randomId = Date.now().toString(36) + Math.random().toString(36).substring(2);
         
+        // Store data in localStorage
+        const data = {
+          date: userBirthdate,
+          country: userCountry,
+          gender: gender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          uid: userUid || randomId,
+          timestamp: Date.now()
+        };
+        
+        // Create or append to submissions array
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        submissions.push(data);
+        localStorage.setItem('submissions', JSON.stringify(submissions));
+        
+        // Store ID for reset functionality
+        lastSubmittedId = "local_" + randomId;
+        
+        // Update UI
+        finishSubmission(true);
+      } catch (error) {
+        console.error("localStorage submission error:", error);
+        finishSubmission(false);
+      }
+    }
+
+    // Complete the submission process and update UI
+    function finishSubmission(success) {
+      const submitButton = document.querySelector('.submit-button');
+      
+      if (success) {
         // Update UI for successful submission
         submitButton.style.backgroundColor = 'green';
         submitButton.textContent = "Submitted";
@@ -1228,54 +1582,110 @@
         
         // Save to cookie for persistence
         saveUserDataToCookie();
-      }).catch((error) => {
+        
+        // Check if user has already voted
+        checkUserVoteStatus();
+      } else {
         // Handle submission error
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
-        console.error("Error during submission: ", error);
+        console.error("Error during submission");
         
         // Re-enable form fields on error
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
-      });
+      }
     }
 
-    // Reset button handler
+    // Reset button handler with localStorage fallback
     document.getElementById('resetButton').addEventListener('click', function() {
       if (lastSubmittedId) {
-        // Remove data from Firebase
-        remove(ref(database, `birthdates/${lastSubmittedId}`))
-          .then(() => {
-            // Reset form and UI
-            document.getElementById('birthdate').value = '';
-            document.getElementById('countrySelect').value = '';
-            const submitButton = document.querySelector('.submit-button');
-            submitButton.textContent = "Submit";
-            submitButton.style.backgroundColor = 'gray';
-            submitButton.disabled = false;
-            document.getElementById('resetButton').style.display = "none";
-            
-            // Reset all user variables
-            dataSubmitted = false;
-            userBirthdate = null;
-            userCountry = null;
-            userGender = null;
-            userBirthdayDay = null;
-            userBirthdayMonth = null;
-            lastSubmittedId = null;
-            
-            // Re-enable form fields
-            document.getElementById('birthdate').classList.remove('disabled-field');
-            document.getElementById('countrySelect').classList.remove('disabled-field');
-            
-            // Remove saved cookie
-            eraseCookie('userData');
-          })
-          .catch((error) => {
-            console.error("Error resetting data: ", error);
-          });
+        let resetSuccess = false;
+        
+        // Check if it's a Firebase ID or localStorage ID
+        if (lastSubmittedId.startsWith('local_')) {
+          // Reset from localStorage
+          try {
+            const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+            const filteredSubmissions = submissions.filter(sub => 
+              !sub.uid || sub.uid !== userUid
+            );
+            localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
+            resetSuccess = true;
+          } catch (error) {
+            console.error("Error resetting localStorage data:", error);
+          }
+        } else {
+          // Try to remove from Firebase
+          try {
+            remove(ref(database, `birthdates/${lastSubmittedId}`))
+              .then(() => {
+                resetSuccess = true;
+                finishReset();
+              })
+              .catch((error) => {
+                console.warn("Firebase reset error:", error);
+                // Try localStorage as fallback
+                resetLocalStorageData();
+              });
+              
+            return; // Wait for the async operation
+          } catch (error) {
+            console.warn("Firebase reset exception:", error);
+            // Try localStorage as fallback
+            resetLocalStorageData();
+          }
+        }
+        
+        if (resetSuccess) {
+          finishReset();
+        }
       }
     });
+    
+    // Fallback reset for localStorage
+    function resetLocalStorageData() {
+      try {
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        const filteredSubmissions = submissions.filter(sub => 
+          !sub.uid || sub.uid !== userUid
+        );
+        localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
+        finishReset();
+      } catch (error) {
+        console.error("Error resetting localStorage data:", error);
+      }
+    }
+    
+    // Complete the reset process
+    function finishReset() {
+      // Reset form and UI
+      document.getElementById('birthdate').value = '';
+      document.getElementById('countrySelect').value = '';
+      const submitButton = document.querySelector('.submit-button');
+      submitButton.textContent = "Submit";
+      submitButton.style.backgroundColor = 'gray';
+      submitButton.disabled = false;
+      document.getElementById('resetButton').style.display = "none";
+      
+      // Reset all user variables
+      dataSubmitted = false;
+      userBirthdate = null;
+      userCountry = null;
+      userGender = null;
+      userBirthdayDay = null;
+      userBirthdayMonth = null;
+      lastSubmittedId = null;
+      
+      // Note: We don't reset hasVoted and userVoteChoice here
+      
+      // Re-enable form fields
+      document.getElementById('birthdate').classList.remove('disabled-field');
+      document.getElementById('countrySelect').classList.remove('disabled-field');
+      
+      // Remove saved cookie
+      eraseCookie('userData');
+    }
 
     // Community button handler
     document.getElementById('communityButton').addEventListener('click', function() {
@@ -1292,26 +1702,149 @@
         
         // Update date information
         const userDateInfo = document.getElementById('userDateInfo');
-        userDateInfo.textContent = `Your birthday: ${userBirthdayDay}/${userBirthdayMonth}`;
+        const monthName = monthNames[userBirthdayMonth - 1];
+        userDateInfo.textContent = `Your birthday: ${monthName} ${userBirthdayDay}`;
         
-        // Set up join button handler
-        document.getElementById('joinButton').onclick = function() {
-          // Format date to get Telegram link key
-          const monthStr = userBirthdayMonth.toString().padStart(2, '0');
-          const dayStr = userBirthdayDay.toString().padStart(2, '0');
-          const dateKey = `${monthStr}-${dayStr}`;
+        // Check if user has already voted
+        if (hasVoted) {
+          document.getElementById('voteYes').classList.add('vote-disabled');
+          document.getElementById('voteNo').classList.add('vote-disabled');
+          document.getElementById('voteStatus').style.display = 'block';
           
-          // Open the corresponding link
-          if (telegramLinks[dateKey]) {
-            window.open(telegramLinks[dateKey], '_blank');
-          } else {
-            alert("No community link available for your birthday yet. Please try again later.");
-          }
-        };
+          // Show Telegram link container after voting
+          showTelegramLink();
+        }
       }
       
       communityModal.style.display = 'block';
     });
+    
+    // Show Telegram link for the user's birthday
+    function showTelegramLink() {
+      // Format month and day for telegramLinks key
+      const month = userBirthdayMonth.toString().padStart(2, '0');
+      const day = userBirthdayDay.toString().padStart(2, '0');
+      const dateKey = `${month}-${day}`;
+      
+      if (telegramLinks[dateKey]) {
+        document.getElementById('telegramLinkContainer').style.display = 'block';
+        document.getElementById('telegramLink').href = telegramLinks[dateKey];
+      }
+    }
+    
+    // Vote handlers - Hybrid approach with Firebase & localStorage
+    document.getElementById('voteYes').addEventListener('click', function() {
+      if (!hasVoted && dataSubmitted) {
+        // Disable vote buttons immediately to prevent double-clicks
+        document.getElementById('voteYes').classList.add('vote-disabled');
+        document.getElementById('voteNo').classList.add('vote-disabled');
+        document.getElementById('voteStatus').style.display = 'block';
+        
+        processVote('yes');
+      }
+    });
+    
+    document.getElementById('voteNo').addEventListener('click', function() {
+      if (!hasVoted && dataSubmitted) {
+        // Disable vote buttons immediately to prevent double-clicks
+        document.getElementById('voteYes').classList.add('vote-disabled');
+        document.getElementById('voteNo').classList.add('vote-disabled');
+        document.getElementById('voteStatus').style.display = 'block';
+        
+        processVote('no');
+      }
+    });
+    
+    // Process vote with hybrid approach
+    function processVote(choice) {
+      let voteProcessed = false;
+      
+      // First try Firebase
+      if (userUid) {
+        try {
+          // Get current vote counts to ensure accurate update
+          get(ref(database, 'community_votes')).then((snapshot) => {
+            const data = snapshot.val() || { yes: 0, no: 0 };
+            
+            // Prepare updates in a transaction
+            const updates = {};
+            updates['community_votes/' + choice] = (data[choice] || 0) + 1;
+            updates[`user_votes/${userUid}`] = {
+              choice: choice,
+              timestamp: Date.now()
+            };
+            
+            // Apply all updates in a single transaction
+            update(ref(database), updates)
+              .then(() => {
+                finishVote(choice, true);
+              })
+              .catch(error => {
+                console.warn("Error recording vote in Firebase:", error);
+                // Try localStorage fallback
+                if (saveVoteToLocalStorage(choice)) {
+                  finishVote(choice, true);
+                } else {
+                  // Both Firebase and localStorage failed
+                  resetVoteUI();
+                }
+              });
+          }).catch(error => {
+            console.warn("Error getting current votes from Firebase:", error);
+            // Try localStorage fallback
+            if (saveVoteToLocalStorage(choice)) {
+              finishVote(choice, true);
+            } else {
+              // Both Firebase and localStorage failed
+              resetVoteUI();
+            }
+          });
+        } catch (error) {
+          console.warn("Firebase vote exception:", error);
+          // Try localStorage fallback
+          if (saveVoteToLocalStorage(choice)) {
+            finishVote(choice, true);
+          } else {
+            // Both Firebase and localStorage failed
+            resetVoteUI();
+          }
+        }
+      } else {
+        // No userUid, try localStorage
+        if (saveVoteToLocalStorage(choice)) {
+          finishVote(choice, true);
+        } else {
+          // localStorage failed
+          resetVoteUI();
+        }
+      }
+    }
+    
+    // Complete the voting process and update UI
+    function finishVote(choice, success) {
+      if (success) {
+        // Update local state
+        hasVoted = true;
+        userVoteChoice = choice;
+        saveUserDataToCookie();
+        
+        // Update counts in the UI if needed
+        loadVoteCountsFromLocalStorage();
+        
+        // Show Telegram link
+        showTelegramLink();
+      } else {
+        // Reset UI in case of failure
+        resetVoteUI();
+      }
+    }
+    
+    // Reset vote UI if vote fails
+    function resetVoteUI() {
+      document.getElementById('voteYes').classList.remove('vote-disabled');
+      document.getElementById('voteNo').classList.remove('vote-disabled');
+      document.getElementById('voteStatus').style.display = 'none';
+    }
 
     // Games button handler
     document.getElementById('gamesButton').addEventListener('click', function() {
@@ -1359,6 +1892,7 @@
       }
     };
 
+    // Run on page load
     checkCookieConsent();
   </script>
 </body>
