@@ -386,82 +386,6 @@
             color: white;
         }
         
-        /* Styles for vote buttons - MODIFIED */
-        .vote-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-            width: 100%;
-        }
-        
-        .vote-option {
-            width: 60px;
-            height: 25px;
-            padding: 3px 0;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8em;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .vote-yes {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #3d8b40;
-        }
-        
-        .vote-no {
-            background-color: #F44336;
-            color: white;
-            border: 1px solid #d32f2f;
-        }
-        
-        .vote-yes:hover {
-            background-color: #3d8b40;
-            transform: scale(1.05);
-        }
-        
-        .vote-no:hover {
-            background-color: #d32f2f;
-            transform: scale(1.05);
-        }
-        
-        .vote-count {
-            position: absolute;
-            top: -10px;
-            right: -8px;
-            background-color: white;
-            color: #333;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7em;
-            border: 1px solid currentColor;
-        }
-        
-        .vote-disabled {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        
-        .vote-status {
-            margin-top: 15px;
-            font-size: 0.8em;
-            color: #0056b3;
-            font-style: italic;
-            display: none;
-        }
-        
         .telegram-link {
             display: inline-block;
             margin-top: 20px;
@@ -651,23 +575,6 @@
           We also organize fun quiz competitions between different birthday dates using Kahoot, to entertain members and strengthen the group spirit!
         </div>
         
-        <div class="text-line" style="margin-top: 10px; font-weight: bold;">
-          Do you think this Birthday Community is a good idea?
-        </div>
-        
-        <div class="vote-container">
-          <div class="vote-option vote-yes" id="voteYes">
-            <span>Yes</span>
-            <span class="vote-count" id="yesCount">0</span>
-          </div>
-          <div class="vote-option vote-no" id="voteNo">
-            <span>No</span>
-            <span class="vote-count" id="noCount">0</span>
-          </div>
-        </div>
-        
-        <div class="vote-status" id="voteStatus">Your vote has been recorded and cannot be changed.</div>
-        
         <div id="telegramLinkContainer" style="margin-top: 20px; display: none;">
           <div class="text-line" style="font-weight: bold;">Join your birthday Telegram group:</div>
           <a href="#" class="telegram-link" id="telegramLink" target="_blank">
@@ -710,15 +617,7 @@
     let userBirthdayDay = null;
     let userBirthdayMonth = null;
     let lastSubmittedId = null;
-    let hasVoted = false;
-    let userVoteChoice = null;
     let userUid = null;
-    
-    // NEW: Global vote counts for fallback when Firebase fails
-    let globalVoteCounts = {
-      yes: 0,
-      no: 0
-    };
 
     // Structure for Telegram links by date
     // Format: telegramLinks["MM-DD"] = "telegram_link"
@@ -1047,7 +946,7 @@
       "10-29": "https://t.me/gzonline303",
       "10-30": "https://t.me/gzonline304",
       "10-31": "https://t.me/gzonline305",
-      
+
       // November
       "11-01": "https://t.me/gzonline306",
       "11-02": "https://t.me/gzonline307",
@@ -1112,6 +1011,7 @@
       "12-29": "https://t.me/gzonline364",
       "12-30": "https://t.me/gzonline365",
       "12-31": "https://t.me/gzonline366"
+     
     };
 
     // Month names in English
@@ -1152,53 +1052,6 @@
       document.cookie = name + '=; Max-Age=-99999999; path=/';
     }
 
-    // NEW: LocalStorage methods for vote storage as fallback
-    function saveVoteToLocalStorage(choice) {
-      if (userUid) {
-        try {
-          // Save user's vote
-          localStorage.setItem(`user_vote_${userUid}`, JSON.stringify({
-            choice: choice,
-            timestamp: Date.now()
-          }));
-          
-          // Update global counts
-          const votes = JSON.parse(localStorage.getItem('community_votes') || '{"yes":0,"no":0}');
-          votes[choice]++;
-          localStorage.setItem('community_votes', JSON.stringify(votes));
-          
-          return true;
-        } catch (e) {
-          console.error("Error saving vote to localStorage:", e);
-          return false;
-        }
-      }
-      return false;
-    }
-
-    function getVoteFromLocalStorage() {
-      if (userUid) {
-        try {
-          const voteData = localStorage.getItem(`user_vote_${userUid}`);
-          return voteData ? JSON.parse(voteData) : null;
-        } catch (e) {
-          console.error("Error retrieving vote from localStorage:", e);
-          return null;
-        }
-      }
-      return null;
-    }
-
-    function getVoteCountsFromLocalStorage() {
-      try {
-        const counts = localStorage.getItem('community_votes');
-        return counts ? JSON.parse(counts) : { yes: 0, no: 0 };
-      } catch (e) {
-        console.error("Error retrieving vote counts from localStorage:", e);
-        return { yes: 0, no: 0 };
-      }
-    }
-
     // Check for cookie acceptance
     function checkCookieConsent() {
       const cookiesAccepted = getCookie('cookiesAccepted');
@@ -1214,141 +1067,13 @@
         const user = userCredential.user;
         userUid = user.uid;
         console.log("User connected: ", userUid);
-        
-        // After authentication, check if user has already voted
-        checkUserVoteStatus();
-        
-        // Try to create a votes node if it doesn't exist
-        try {
-          const votesRef = ref(database, 'community_votes');
-          get(votesRef).then((snapshot) => {
-            if (!snapshot.exists()) {
-              set(votesRef, {
-                yes: 0,
-                no: 0
-              }).catch(error => {
-                console.warn("Could not create votes node:", error);
-                // That's okay, we'll use localStorage if needed
-              });
-            }
-          }).catch(error => {
-            console.warn("Could not check votes node:", error);
-            // That's okay, we'll use localStorage
-          });
-          
-          // Set up real-time listener for vote counts
-          setupVoteCountsListener();
-        } catch (error) {
-          console.warn("Firebase initialization issue:", error);
-          // Load vote counts from localStorage as fallback
-          loadVoteCountsFromLocalStorage();
-        }
       })
       .catch((error) => {
         console.error("Error during anonymous connection: ", error);
-        // Load from localStorage as fallback
-        loadVoteCountsFromLocalStorage();
+        
+        // Generate a pseudo-random ID as fallback
+        userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
       });
-      
-    // Check if user has already voted - with localStorage fallback
-    function checkUserVoteStatus() {
-      if (userUid) {
-        // First try Firebase
-        try {
-          const userVotesRef = ref(database, `user_votes/${userUid}`);
-          onValue(userVotesRef, (snapshot) => {
-            const voteData = snapshot.val();
-            if (voteData) {
-              // User has voted before in Firebase
-              hasVoted = true;
-              userVoteChoice = voteData.choice;
-              
-              // Update UI to reflect vote status
-              updateVoteUIAfterVoting();
-              
-              // Save vote status to cookie
-              saveUserDataToCookie();
-              
-              // Show telegram link if applicable
-              if (dataSubmitted) {
-                showTelegramLink();
-              }
-            } else {
-              // Check localStorage as fallback
-              checkLocalStorageVotes();
-            }
-          }, (error) => {
-            console.warn("Firebase vote check error:", error);
-            // Check localStorage as fallback
-            checkLocalStorageVotes();
-          });
-        } catch (error) {
-          console.warn("Firebase vote check exception:", error);
-          // Check localStorage as fallback
-          checkLocalStorageVotes();
-        }
-      }
-    }
-    
-    function checkLocalStorageVotes() {
-      const localVote = getVoteFromLocalStorage();
-      if (localVote) {
-        hasVoted = true;
-        userVoteChoice = localVote.choice;
-        
-        // Update UI to reflect vote status
-        updateVoteUIAfterVoting();
-        
-        // Save vote status to cookie
-        saveUserDataToCookie();
-        
-        // Show telegram link if applicable
-        if (dataSubmitted) {
-          showTelegramLink();
-        }
-      }
-    }
-    
-    function updateVoteUIAfterVoting() {
-      document.getElementById('voteYes').classList.add('vote-disabled');
-      document.getElementById('voteNo').classList.add('vote-disabled');
-      document.getElementById('voteStatus').style.display = 'block';
-    }
-    
-    // Setup real-time listener for vote counts with localStorage fallback
-    function setupVoteCountsListener() {
-      try {
-        const votesRef = ref(database, 'community_votes');
-        
-        // This listener will run every time the data at votesRef changes
-        onValue(votesRef, (snapshot) => {
-          const data = snapshot.val() || { yes: 0, no: 0 };
-          
-          // Update vote count displays
-          document.getElementById('yesCount').textContent = data.yes || 0;
-          document.getElementById('noCount').textContent = data.no || 0;
-          
-          // Store in global variable for potential fallback
-          globalVoteCounts = data;
-        }, (error) => {
-          console.warn("Firebase vote counts error:", error);
-          // Use localStorage as fallback
-          loadVoteCountsFromLocalStorage();
-        });
-      } catch (error) {
-        console.warn("Firebase vote counts setup error:", error);
-        // Use localStorage as fallback
-        loadVoteCountsFromLocalStorage();
-      }
-    }
-    
-    // Load vote counts from localStorage
-    function loadVoteCountsFromLocalStorage() {
-      const counts = getVoteCountsFromLocalStorage();
-      document.getElementById('yesCount').textContent = counts.yes || 0;
-      document.getElementById('noCount').textContent = counts.no || 0;
-      globalVoteCounts = counts;
-    }
 
     // Set max date for birthdate to today
     const today = new Date().toISOString().split("T")[0];
@@ -1412,9 +1137,7 @@
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
           dataSubmitted: true,
-          lastSubmittedId: lastSubmittedId,
-          hasVoted: hasVoted,
-          userVoteChoice: userVoteChoice
+          lastSubmittedId: lastSubmittedId
         };
         setCookie('userData', JSON.stringify(userData), 365);
       }
@@ -1434,8 +1157,6 @@
           userBirthdayMonth = userData.birthdayMonth;
           dataSubmitted = userData.dataSubmitted;
           lastSubmittedId = userData.lastSubmittedId;
-          hasVoted = userData.hasVoted || false;
-          userVoteChoice = userData.userVoteChoice || null;
           
           // Update UI with loaded data
           if (dataSubmitted) {
@@ -1470,7 +1191,6 @@
         userCountry = country;
         
         // Extract day and month from birthdate
-        // Corrected: Create date object without timezone conversion
         const birthdateParts = birthdate.split('-');
         userBirthdayDay = parseInt(birthdateParts[2]);
         userBirthdayMonth = parseInt(birthdateParts[1]);
@@ -1505,36 +1225,43 @@
       const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
-      // First try to submit to Firebase
-      try {
-        // Create a new database entry
-        push(ref(database, 'birthdates'), {
-          date: birthdate,
-          country: country,
-          gender: gender,
-          birthdayDay: userBirthdayDay,
-          birthdayMonth: userBirthdayMonth,
-          uid: userUid,
-          timestamp: Date.now()
-        }).then((newEntryRef) => {
-          // Store the ID for potential reset
-          lastSubmittedId = newEntryRef.key;
-          
-          // Update UI for successful submission
-          finishSubmission(true);
-        }).catch((error) => {
-          console.warn("Firebase submission error:", error);
-          // Fall back to localStorage
-          submitToLocalStorage(gender);
-        });
-      } catch (error) {
-        console.warn("Firebase submission exception:", error);
-        // Fall back to localStorage
-        submitToLocalStorage(gender);
+      // Always submit to localStorage first as a reliable backup
+      const localSuccess = submitToLocalStorage(gender);
+      
+      // Then try to submit to Firebase if localStorage succeeded
+      if (localSuccess) {
+        try {
+          // Create a new database entry
+          push(ref(database, 'birthdates'), {
+            date: birthdate,
+            country: country,
+            gender: gender,
+            birthdayDay: userBirthdayDay,
+            birthdayMonth: userBirthdayMonth,
+            uid: userUid,
+            timestamp: Date.now()
+          }).then((newEntryRef) => {
+            // Store the ID for potential reset
+            lastSubmittedId = newEntryRef.key;
+            console.log("Data successfully submitted to Firebase:", lastSubmittedId);
+          }).catch((error) => {
+            console.warn("Firebase submission error:", error);
+            // Already submitted to localStorage, so we continue
+          });
+        } catch (error) {
+          console.warn("Firebase submission exception:", error);
+          // Already submitted to localStorage, so we continue
+        }
+        
+        // Update UI since localStorage submission succeeded
+        finishSubmission(true);
+      } else {
+        // Both Firebase and localStorage failed
+        finishSubmission(false);
       }
     }
 
-    // Fallback submission to localStorage
+    // Submit to localStorage - more reliable than Firebase with permission issues
     function submitToLocalStorage(gender) {
       try {
         // Generate a pseudo-random ID
@@ -1557,13 +1284,12 @@
         localStorage.setItem('submissions', JSON.stringify(submissions));
         
         // Store ID for reset functionality
-        lastSubmittedId = "local_" + randomId;
+        lastSubmittedId = lastSubmittedId || "local_" + randomId;
         
-        // Update UI
-        finishSubmission(true);
+        return true;
       } catch (error) {
         console.error("localStorage submission error:", error);
-        finishSubmission(false);
+        return false;
       }
     }
 
@@ -1582,9 +1308,6 @@
         
         // Save to cookie for persistence
         saveUserDataToCookie();
-        
-        // Check if user has already voted
-        checkUserVoteStatus();
       } else {
         // Handle submission error
         submitButton.style.backgroundColor = 'red';
@@ -1597,53 +1320,33 @@
       }
     }
 
-    // Reset button handler with localStorage fallback
+    // Reset button handler
     document.getElementById('resetButton').addEventListener('click', function() {
-      if (lastSubmittedId) {
-        let resetSuccess = false;
-        
-        // Check if it's a Firebase ID or localStorage ID
-        if (lastSubmittedId.startsWith('local_')) {
-          // Reset from localStorage
-          try {
-            const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
-            const filteredSubmissions = submissions.filter(sub => 
-              !sub.uid || sub.uid !== userUid
-            );
-            localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
-            resetSuccess = true;
-          } catch (error) {
-            console.error("Error resetting localStorage data:", error);
-          }
-        } else {
-          // Try to remove from Firebase
-          try {
-            remove(ref(database, `birthdates/${lastSubmittedId}`))
-              .then(() => {
-                resetSuccess = true;
-                finishReset();
-              })
-              .catch((error) => {
-                console.warn("Firebase reset error:", error);
-                // Try localStorage as fallback
-                resetLocalStorageData();
-              });
-              
-            return; // Wait for the async operation
-          } catch (error) {
-            console.warn("Firebase reset exception:", error);
-            // Try localStorage as fallback
-            resetLocalStorageData();
-          }
-        }
-        
-        if (resetSuccess) {
-          finishReset();
+      // Always reset localStorage first
+      resetLocalStorageData();
+      
+      // Then try to reset Firebase if it's a Firebase ID
+      if (lastSubmittedId && !lastSubmittedId.startsWith('local_')) {
+        try {
+          remove(ref(database, `birthdates/${lastSubmittedId}`))
+            .then(() => {
+              console.log("Firebase data successfully reset");
+            })
+            .catch((error) => {
+              console.warn("Firebase reset error:", error);
+              // Already reset localStorage, so we continue
+            });
+        } catch (error) {
+          console.warn("Firebase reset exception:", error);
+          // Already reset localStorage, so we continue
         }
       }
+      
+      // Complete the reset process
+      finishReset();
     });
     
-    // Fallback reset for localStorage
+    // Reset localStorage data
     function resetLocalStorageData() {
       try {
         const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
@@ -1651,9 +1354,10 @@
           !sub.uid || sub.uid !== userUid
         );
         localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
-        finishReset();
+        return true;
       } catch (error) {
         console.error("Error resetting localStorage data:", error);
+        return false;
       }
     }
     
@@ -1676,8 +1380,6 @@
       userBirthdayDay = null;
       userBirthdayMonth = null;
       lastSubmittedId = null;
-      
-      // Note: We don't reset hasVoted and userVoteChoice here
       
       // Re-enable form fields
       document.getElementById('birthdate').classList.remove('disabled-field');
@@ -1705,15 +1407,8 @@
         const monthName = monthNames[userBirthdayMonth - 1];
         userDateInfo.textContent = `Your birthday: ${monthName} ${userBirthdayDay}`;
         
-        // Check if user has already voted
-        if (hasVoted) {
-          document.getElementById('voteYes').classList.add('vote-disabled');
-          document.getElementById('voteNo').classList.add('vote-disabled');
-          document.getElementById('voteStatus').style.display = 'block';
-          
-          // Show Telegram link container after voting
-          showTelegramLink();
-        }
+        // Show Telegram link directly after submitting data
+        showTelegramLink();
       }
       
       communityModal.style.display = 'block';
@@ -1730,120 +1425,6 @@
         document.getElementById('telegramLinkContainer').style.display = 'block';
         document.getElementById('telegramLink').href = telegramLinks[dateKey];
       }
-    }
-    
-    // Vote handlers - Hybrid approach with Firebase & localStorage
-    document.getElementById('voteYes').addEventListener('click', function() {
-      if (!hasVoted && dataSubmitted) {
-        // Disable vote buttons immediately to prevent double-clicks
-        document.getElementById('voteYes').classList.add('vote-disabled');
-        document.getElementById('voteNo').classList.add('vote-disabled');
-        document.getElementById('voteStatus').style.display = 'block';
-        
-        processVote('yes');
-      }
-    });
-    
-    document.getElementById('voteNo').addEventListener('click', function() {
-      if (!hasVoted && dataSubmitted) {
-        // Disable vote buttons immediately to prevent double-clicks
-        document.getElementById('voteYes').classList.add('vote-disabled');
-        document.getElementById('voteNo').classList.add('vote-disabled');
-        document.getElementById('voteStatus').style.display = 'block';
-        
-        processVote('no');
-      }
-    });
-    
-    // Process vote with hybrid approach
-    function processVote(choice) {
-      let voteProcessed = false;
-      
-      // First try Firebase
-      if (userUid) {
-        try {
-          // Get current vote counts to ensure accurate update
-          get(ref(database, 'community_votes')).then((snapshot) => {
-            const data = snapshot.val() || { yes: 0, no: 0 };
-            
-            // Prepare updates in a transaction
-            const updates = {};
-            updates['community_votes/' + choice] = (data[choice] || 0) + 1;
-            updates[`user_votes/${userUid}`] = {
-              choice: choice,
-              timestamp: Date.now()
-            };
-            
-            // Apply all updates in a single transaction
-            update(ref(database), updates)
-              .then(() => {
-                finishVote(choice, true);
-              })
-              .catch(error => {
-                console.warn("Error recording vote in Firebase:", error);
-                // Try localStorage fallback
-                if (saveVoteToLocalStorage(choice)) {
-                  finishVote(choice, true);
-                } else {
-                  // Both Firebase and localStorage failed
-                  resetVoteUI();
-                }
-              });
-          }).catch(error => {
-            console.warn("Error getting current votes from Firebase:", error);
-            // Try localStorage fallback
-            if (saveVoteToLocalStorage(choice)) {
-              finishVote(choice, true);
-            } else {
-              // Both Firebase and localStorage failed
-              resetVoteUI();
-            }
-          });
-        } catch (error) {
-          console.warn("Firebase vote exception:", error);
-          // Try localStorage fallback
-          if (saveVoteToLocalStorage(choice)) {
-            finishVote(choice, true);
-          } else {
-            // Both Firebase and localStorage failed
-            resetVoteUI();
-          }
-        }
-      } else {
-        // No userUid, try localStorage
-        if (saveVoteToLocalStorage(choice)) {
-          finishVote(choice, true);
-        } else {
-          // localStorage failed
-          resetVoteUI();
-        }
-      }
-    }
-    
-    // Complete the voting process and update UI
-    function finishVote(choice, success) {
-      if (success) {
-        // Update local state
-        hasVoted = true;
-        userVoteChoice = choice;
-        saveUserDataToCookie();
-        
-        // Update counts in the UI if needed
-        loadVoteCountsFromLocalStorage();
-        
-        // Show Telegram link
-        showTelegramLink();
-      } else {
-        // Reset UI in case of failure
-        resetVoteUI();
-      }
-    }
-    
-    // Reset vote UI if vote fails
-    function resetVoteUI() {
-      document.getElementById('voteYes').classList.remove('vote-disabled');
-      document.getElementById('voteNo').classList.remove('vote-disabled');
-      document.getElementById('voteStatus').style.display = 'none';
     }
 
     // Games button handler
