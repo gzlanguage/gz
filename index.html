@@ -314,31 +314,16 @@
             text-align: center;
         }
         
-        .days-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .day-item {
-            background-color: white;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-            padding: 4px;
-            font-size: 0.8em;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .day-item:hover {
-            background-color: #e7f3ff;
-        }
-        
-        .day-item.current {
+        .user-birthday-highlight {
+            display: inline-block;
             background-color: #007bff;
             color: white;
+            border-radius: 5px;
+            padding: 5px 12px;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
         }
         
         .user-date-info {
@@ -570,6 +555,11 @@
       
       <div id="communityLoggedIn" style="display: none;">
         <div class="user-date-info" id="userDateInfo"></div>
+        
+        <div class="user-birthday-highlight" id="userBirthdayButton">
+          <i class="fas fa-birthday-cake"></i> <span id="userBirthdayText"></span>
+        </div>
+        
         <div class="text-line">
           The Birthday Community is a unique space where people born on the same day and month (regardless of the year) are brought together in a dedicated group. They can connect, share experiences, and discover fascinating things they have in common.
           We also organize fun quiz competitions between different birthday dates using Kahoot, to entertain members and strengthen the group spirit!
@@ -581,10 +571,6 @@
             <i class="fab fa-discord"></i> Join Now
           </a>
         </div>
-      </div>
-      
-      <div id="allBirthdayChannels" style="display: none; max-height: 400px; overflow-y: auto;">
-        <!-- Months and days will be generated here -->
       </div>
     </div>
   </div>
@@ -627,9 +613,6 @@
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
-    
-    // Days in each month (0-indexed)
-    const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     // Cookie management functions
     function setCookie(name, value, days) {
@@ -1005,7 +988,6 @@
         // User hasn't submitted data yet
         document.getElementById('communityNotLoggedIn').style.display = 'block';
         document.getElementById('communityLoggedIn').style.display = 'none';
-        document.getElementById('allBirthdayChannels').style.display = 'none';
       } else {
         // User has submitted data, show their community
         document.getElementById('communityNotLoggedIn').style.display = 'none';
@@ -1015,66 +997,22 @@
         const userDateInfo = document.getElementById('userDateInfo');
         const monthName = monthNames[userBirthdayMonth - 1];
         const formattedDay = userBirthdayDay.toString().padStart(2, '0');
-        userDateInfo.textContent = `Your birthday: ${monthName} - ${formattedDay}`;
+        
+        // Set user birthday info
+        document.getElementById('userBirthdayText').textContent = `${monthName} - ${formattedDay}`;
         
         // Show Discord link
         document.getElementById('discordLinkContainer').style.display = 'block';
         document.getElementById('discordLink').href = discordServerLink;
-        
-        // Generate month/day sections
-        generateBirthdayChannels();
       }
       
       communityModal.style.display = 'block';
     });
     
-    // Generate birthday channels organized by month and day
-    function generateBirthdayChannels() {
-      const container = document.getElementById('allBirthdayChannels');
-      container.style.display = 'block';
-      container.innerHTML = '';
-      
-      // Create sections for each month
-      for (let i = 0; i < 12; i++) {
-        const monthSection = document.createElement('div');
-        monthSection.className = 'month-section';
-        
-        // Month title
-        const monthTitle = document.createElement('div');
-        monthTitle.className = 'month-title';
-        monthTitle.textContent = monthNames[i];
-        monthSection.appendChild(monthTitle);
-        
-        // Days grid
-        const daysGrid = document.createElement('div');
-        daysGrid.className = 'days-grid';
-        
-        // Add days for this month
-        for (let day = 1; day <= daysInMonth[i]; day++) {
-          const dayItem = document.createElement('div');
-          dayItem.className = 'day-item';
-          
-          // Format day with leading zero
-          const formattedDay = day.toString().padStart(2, '0');
-          dayItem.textContent = formattedDay;
-          
-          // Highlight current user's birthday
-          if (i + 1 === userBirthdayMonth && day === userBirthdayDay) {
-            dayItem.classList.add('current');
-          }
-          
-          // Add click event to navigate to Discord
-          dayItem.addEventListener('click', function() {
-            window.open(discordServerLink, '_blank');
-          });
-          
-          daysGrid.appendChild(dayItem);
-        }
-        
-        monthSection.appendChild(daysGrid);
-        container.appendChild(monthSection);
-      }
-    }
+    // User birthday button handler - redirect to Discord
+    document.getElementById('userBirthdayButton').addEventListener('click', function() {
+      window.open(discordServerLink, '_blank');
+    });
 
     // Games button handler
     document.getElementById('gamesButton').addEventListener('click', function() {
