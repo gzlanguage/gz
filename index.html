@@ -386,10 +386,10 @@
             color: white;
         }
         
-        .telegram-link {
+        .discord-link {
             display: inline-block;
             margin-top: 20px;
-            background-color: #0088cc;
+            background-color: #5865F2;
             color: white;
             border-radius: 5px;
             padding: 8px 15px;
@@ -399,11 +399,11 @@
             transition: background-color 0.3s;
         }
         
-        .telegram-link:hover {
-            background-color: #006699;
+        .discord-link:hover {
+            background-color: #4752C4;
         }
         
-        .telegram-link i {
+        .discord-link i {
             margin-right: 5px;
         }
         
@@ -501,8 +501,8 @@
         <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://t.me/WorldGZ" target="_blank" class="logo">
-          <i class="fab fa-telegram-plane"></i>
+        <a href="https://discord.gg/P8VdSWQm" target="_blank" class="logo">
+          <i class="fab fa-discord"></i>
         </a>
       </div>
       <div class="copyright">
@@ -575,10 +575,10 @@
           We also organize fun quiz competitions between different birthday dates using Kahoot, to entertain members and strengthen the group spirit!
         </div>
         
-        <div id="telegramLinkContainer" style="margin-top: 20px; display: none;">
-          <div class="text-line" style="font-weight: bold;">Join your birthday Telegram group:</div>
-          <a href="#" class="telegram-link" id="telegramLink" target="_blank">
-            <i class="fab fa-telegram-plane"></i> Join Now
+        <div id="discordLinkContainer" style="margin-top: 20px; display: none;">
+          <div class="text-line" style="font-weight: bold;">Join G-Z's Discord server:</div>
+          <a href="https://discord.gg/P8VdSWQm" class="discord-link" id="discordLink" target="_blank">
+            <i class="fab fa-discord"></i> Join Now
           </a>
         </div>
       </div>
@@ -619,400 +619,8 @@
     let lastSubmittedId = null;
     let userUid = null;
 
-    // Structure for Telegram links by date
-    // Format: telegramLinks["MM-DD"] = "telegram_link"
-    const telegramLinks = {
-      // January
-      "01-01": "https://t.me/gzonline1",
-      "01-02": "https://t.me/gzonline2",
-      "01-03": "https://t.me/gzonline3",
-      "01-04": "https://t.me/gzonline4",
-      "01-05": "https://t.me/gzonline5",
-      "01-06": "https://t.me/gzonline6",
-      "01-07": "https://t.me/gzonline7",
-      "01-08": "https://t.me/gzonline8",
-      "01-09": "https://t.me/gzonline9",
-      "01-10": "https://t.me/gzonline10",
-      "01-11": "https://t.me/gzonline11",
-      "01-12": "https://t.me/gzonline12",
-      "01-13": "https://t.me/gzonline13",
-      "01-14": "https://t.me/gzonline14",
-      "01-15": "https://t.me/gzonline15",
-      "01-16": "https://t.me/gzonline16",
-      "01-17": "https://t.me/gzonline17",
-      "01-18": "https://t.me/gzonline18",
-      "01-19": "https://t.me/gzonline19",
-      "01-20": "https://t.me/gzonline20",
-      "01-21": "https://t.me/gzonline21",
-      "01-22": "https://t.me/gzonline22",
-      "01-23": "https://t.me/gzonline23",
-      "01-24": "https://t.me/gzonline24",
-      "01-25": "https://t.me/gzonline25",
-      "01-26": "https://t.me/gzonline26",
-      "01-27": "https://t.me/gzonline27",
-      "01-28": "https://t.me/gzonline28",
-      "01-29": "https://t.me/gzonline29",
-      "01-30": "https://t.me/gzonline30",
-      "01-31": "https://t.me/gzonline31",
-      
-      // February
-      "02-01": "https://t.me/gzonline32",
-      "02-02": "https://t.me/gzonline33",
-      "02-03": "https://t.me/gzonline34",
-      "02-04": "https://t.me/gzonline35",
-      "02-05": "https://t.me/gzonline36",
-      "02-06": "https://t.me/gzonline37",
-      "02-07": "https://t.me/gzonline38",
-      "02-08": "https://t.me/gzonline39",
-      "02-09": "https://t.me/gzonline40",
-      "02-10": "https://t.me/gzonline41",
-      "02-11": "https://t.me/gzonline42",
-      "02-12": "https://t.me/gzonline43",
-      "02-13": "https://t.me/gzonline44",
-      "02-14": "https://t.me/gzonline45",
-      "02-15": "https://t.me/gzonline46",
-      "02-16": "https://t.me/gzonline47",
-      "02-17": "https://t.me/gzonline48",
-      "02-18": "https://t.me/gzonline49",
-      "02-19": "https://t.me/gzonline50",
-      "02-20": "https://t.me/gzonline51",
-      "02-21": "https://t.me/gzonline52",
-      "02-22": "https://t.me/gzonline53",
-      "02-23": "https://t.me/gzonline54",
-      "02-24": "https://t.me/gzonline55",
-      "02-25": "https://t.me/gzonline56",
-      "02-26": "https://t.me/gzonline57",
-      "02-27": "https://t.me/gzonline58",
-      "02-28": "https://t.me/gzonline59",
-      "02-29": "https://t.me/gzonline60",
-      
-      // March
-      "03-01": "https://t.me/gzonline61",
-      "03-02": "https://t.me/gzonline62",
-      "03-03": "https://t.me/gzonline63",
-      "03-04": "https://t.me/gzonline64",
-      "03-05": "https://t.me/gzonline65",
-      "03-06": "https://t.me/gzonline66",
-      "03-07": "https://t.me/gzonline67",
-      "03-08": "https://t.me/gzonline68",
-      "03-09": "https://t.me/gzonline69",
-      "03-10": "https://t.me/gzonline70",
-      "03-11": "https://t.me/gzonline71",
-      "03-12": "https://t.me/gzonline72",
-      "03-13": "https://t.me/gzonline73",
-      "03-14": "https://t.me/gzonline74",
-      "03-15": "https://t.me/gzonline75",
-      "03-16": "https://t.me/gzonline76",
-      "03-17": "https://t.me/gzonline77",
-      "03-18": "https://t.me/gzonline78",
-      "03-19": "https://t.me/gzonline79",
-      "03-20": "https://t.me/gzonline80",
-      "03-21": "https://t.me/gzonline81",
-      "03-22": "https://t.me/gzonline82",
-      "03-23": "https://t.me/gzonline83",
-      "03-24": "https://t.me/gzonline84",
-      "03-25": "https://t.me/gzonline85",
-      "03-26": "https://t.me/gzonline86",
-      "03-27": "https://t.me/gzonline87",
-      "03-28": "https://t.me/gzonline88",
-      "03-29": "https://t.me/gzonline89",
-      "03-30": "https://t.me/gzonline90",
-      "03-31": "https://t.me/gzonline91",
-      
-      // April
-      "04-01": "https://t.me/gzonline92",
-      "04-02": "https://t.me/gzonline93",
-      "04-03": "https://t.me/gzonline94",
-      "04-04": "https://t.me/gzonline95",
-      "04-05": "https://t.me/gzonline96",
-      "04-06": "https://t.me/gzonline97",
-      "04-07": "https://t.me/gzonline98",
-      "04-08": "https://t.me/gzonline99",
-      "04-09": "https://t.me/gzonline100",
-      "04-10": "https://t.me/gzonline101",
-      "04-11": "https://t.me/gzonline102",
-      "04-12": "https://t.me/gzonline103",
-      "04-13": "https://t.me/gzonline104",
-      "04-14": "https://t.me/gzonline105",
-      "04-15": "https://t.me/gzonline106",
-      "04-16": "https://t.me/gzonline107",
-      "04-17": "https://t.me/gzonline108",
-      "04-18": "https://t.me/gzonline109",
-      "04-19": "https://t.me/gzonline110",
-      "04-20": "https://t.me/gzonline111",
-      "04-21": "https://t.me/gzonline112",
-      "04-22": "https://t.me/gzonline113",
-      "04-23": "https://t.me/gzonline114",
-      "04-24": "https://t.me/gzonline115",
-      "04-25": "https://t.me/gzonline116",
-      "04-26": "https://t.me/gzonline117",
-      "04-27": "https://t.me/gzonline118",
-      "04-28": "https://t.me/gzonline119",
-      "04-29": "https://t.me/gzonline120",
-      "04-30": "https://t.me/gzonline121",
-      
-      // May
-      "05-01": "https://t.me/gzonline122",
-      "05-02": "https://t.me/gzonline123",
-      "05-03": "https://t.me/gzonline124",
-      "05-04": "https://t.me/gzonline125",
-      "05-05": "https://t.me/gzonline126",
-      "05-06": "https://t.me/gzonline127",
-      "05-07": "https://t.me/gzonline128",
-      "05-08": "https://t.me/gzonline129",
-      "05-09": "https://t.me/gzonline130",
-      "05-10": "https://t.me/gzonline131",
-      "05-11": "https://t.me/gzonline132",
-      "05-12": "https://t.me/gzonline133",
-      "05-13": "https://t.me/gzonline134",
-      "05-14": "https://t.me/gzonline135",
-      "05-15": "https://t.me/gzonline136",
-      "05-16": "https://t.me/gzonline137",
-      "05-17": "https://t.me/gzonline138",
-      "05-18": "https://t.me/gzonline139",
-      "05-19": "https://t.me/gzonline140",
-      "05-20": "https://t.me/gzonline141",
-      "05-21": "https://t.me/gzonline142",
-      "05-22": "https://t.me/gzonline143",
-      "05-23": "https://t.me/gzonline144",
-      "05-24": "https://t.me/gzonline145",
-      "05-25": "https://t.me/gzonline146",
-      "05-26": "https://t.me/gzonline147",
-      "05-27": "https://t.me/gzonline148",
-      "05-28": "https://t.me/gzonline149",
-      "05-29": "https://t.me/gzonline150",
-      "05-30": "https://t.me/gzonline151",
-      "05-31": "https://t.me/gzonline152",
-      
-      // June
-      "06-01": "https://t.me/gzonline153",
-      "06-02": "https://t.me/gzonline154",
-      "06-03": "https://t.me/gzonline155",
-      "06-04": "https://t.me/gzonline156",
-      "06-05": "https://t.me/gzonline157",
-      "06-06": "https://t.me/gzonline158",
-      "06-07": "https://t.me/gzonline159",
-      "06-08": "https://t.me/gzonline160",
-      "06-09": "https://t.me/gzonline161",
-      "06-10": "https://t.me/gzonline162",
-      "06-11": "https://t.me/gzonline163",
-      "06-12": "https://t.me/gzonline164",
-      "06-13": "https://t.me/gzonline165",
-      "06-14": "https://t.me/gzonline166",
-      "06-15": "https://t.me/gzonline167",
-      "06-16": "https://t.me/gzonline168",
-      "06-17": "https://t.me/gzonline169",
-      "06-18": "https://t.me/gzonline170",
-      "06-19": "https://t.me/gzonline171",
-      "06-20": "https://t.me/gzonline172",
-      "06-21": "https://t.me/gzonline173",
-      "06-22": "https://t.me/gzonline174",
-      "06-23": "https://t.me/gzonline175",
-      "06-24": "https://t.me/gzonline176",
-      "06-25": "https://t.me/gzonline177",
-      "06-26": "https://t.me/gzonline178",
-      "06-27": "https://t.me/gzonline179",
-      "06-28": "https://t.me/gzonline180",
-      "06-29": "https://t.me/gzonline181",
-      "06-30": "https://t.me/gzonline182",
-      
-      // July
-      "07-01": "https://t.me/gzonline183",
-      "07-02": "https://t.me/gzonline184",
-      "07-03": "https://t.me/gzonline185",
-      "07-04": "https://t.me/gzonline186",
-      "07-05": "https://t.me/gzonline187",
-      "07-06": "https://t.me/gzonline188",
-      "07-07": "https://t.me/gzonline189",
-      "07-08": "https://t.me/gzonline190",
-      "07-09": "https://t.me/gzonline191",
-      "07-10": "https://t.me/gzonline192",
-      "07-11": "https://t.me/gzonline193",
-      "07-12": "https://t.me/gzonline194",
-      "07-13": "https://t.me/gzonline195",
-      "07-14": "https://t.me/gzonline196",
-      "07-15": "https://t.me/gzonline197",
-      "07-16": "https://t.me/gzonline198",
-      "07-17": "https://t.me/gzonline199",
-      "07-18": "https://t.me/gzonline200",
-      "07-19": "https://t.me/gzonline201",
-      "07-20": "https://t.me/gzonline202",
-      "07-21": "https://t.me/gzonline203",
-      "07-22": "https://t.me/gzonline204",
-      "07-23": "https://t.me/gzonline205",
-      "07-24": "https://t.me/gzonline206",
-      "07-25": "https://t.me/gzonline207",
-      "07-26": "https://t.me/gzonline208",
-      "07-27": "https://t.me/gzonline209",
-      "07-28": "https://t.me/gzonline210",
-      "07-29": "https://t.me/gzonline211",
-      "07-30": "https://t.me/gzonline212",
-      "07-31": "https://t.me/gzonline213",
-      
-      // August
-      "08-01": "https://t.me/gzonline214",
-      "08-02": "https://t.me/gzonline215",
-      "08-03": "https://t.me/gzonline216",
-      "08-04": "https://t.me/gzonline217",
-      "08-05": "https://t.me/gzonline218",
-      "08-06": "https://t.me/gzonline219",
-      "08-07": "https://t.me/gzonline220",
-      "08-08": "https://t.me/gzonline221",
-      "08-09": "https://t.me/gzonline222",
-      "08-10": "https://t.me/gzonline223",
-      "08-11": "https://t.me/gzonline224",
-      "08-12": "https://t.me/gzonline225",
-      "08-13": "https://t.me/gzonline226",
-      "08-14": "https://t.me/gzonline227",
-      "08-15": "https://t.me/gzonline228",
-      "08-16": "https://t.me/gzonline229",
-      "08-17": "https://t.me/gzonline230",
-      "08-18": "https://t.me/gzonline231",
-      "08-19": "https://t.me/gzonline232",
-      "08-20": "https://t.me/gzonline233",
-      "08-21": "https://t.me/gzonline234",
-      "08-22": "https://t.me/gzonline235",
-      "08-23": "https://t.me/gzonline236",
-      "08-24": "https://t.me/gzonline237",
-      "08-25": "https://t.me/gzonline238",
-      "08-26": "https://t.me/gzonline239",
-      "08-27": "https://t.me/gzonline240",
-      "08-28": "https://t.me/gzonline241",
-      "08-29": "https://t.me/gzonline242",
-      "08-30": "https://t.me/gzonline243",
-      "08-31": "https://t.me/gzonline244",
-      
-      // September
-      "09-01": "https://t.me/gzonline245",
-      "09-02": "https://t.me/gzonline246",
-      "09-03": "https://t.me/gzonline247",
-      "09-04": "https://t.me/gzonline248",
-      "09-05": "https://t.me/gzonline249",
-      "09-06": "https://t.me/gzonline250",
-      "09-07": "https://t.me/gzonline251",
-      "09-08": "https://t.me/gzonline252",
-      "09-09": "https://t.me/gzonline253",
-      "09-10": "https://t.me/gzonline254",
-      "09-11": "https://t.me/gzonline255",
-      "09-12": "https://t.me/gzonline256",
-      "09-13": "https://t.me/gzonline257",
-      "09-14": "https://t.me/gzonline258",
-      "09-15": "https://t.me/gzonline259",
-      "09-16": "https://t.me/gzonline260",
-      "09-17": "https://t.me/gzonline261",
-      "09-18": "https://t.me/gzonline262",
-      "09-19": "https://t.me/gzonline263",
-      "09-20": "https://t.me/gzonline264",
-      "09-21": "https://t.me/gzonline265",
-      "09-22": "https://t.me/gzonline266",
-      "09-23": "https://t.me/gzonline267",
-      "09-24": "https://t.me/gzonline268",
-      "09-25": "https://t.me/gzonline269",
-      "09-26": "https://t.me/gzonline270",
-      "09-27": "https://t.me/gzonline271",
-      "09-28": "https://t.me/gzonline272",
-      "09-29": "https://t.me/gzonline273",
-      "09-30": "https://t.me/gzonline274",
-      
-      // October
-      "10-01": "https://t.me/gzonline275",
-      "10-02": "https://t.me/gzonline276",
-      "10-03": "https://t.me/gzonline277",
-      "10-04": "https://t.me/gzonline278",
-      "10-05": "https://t.me/gzonline279",
-      "10-06": "https://t.me/gzonline280",
-      "10-07": "https://t.me/gzonline281",
-      "10-08": "https://t.me/gzonline282",
-      "10-09": "https://t.me/gzonline283",
-      "10-10": "https://t.me/gzonline284",
-      "10-11": "https://t.me/gzonline285",
-      "10-12": "https://t.me/gzonline286",
-      "10-13": "https://t.me/gzonline287",
-      "10-14": "https://t.me/gzonline288",
-      "10-15": "https://t.me/gzonline289",
-      "10-16": "https://t.me/gzonline290",
-      "10-17": "https://t.me/gzonline291",
-      "10-18": "https://t.me/gzonline292",
-      "10-19": "https://t.me/gzonline293",
-      "10-20": "https://t.me/gzonline294",
-      "10-21": "https://t.me/gzonline295",
-      "10-22": "https://t.me/gzonline296",
-      "10-23": "https://t.me/gzonline297",
-      "10-24": "https://t.me/gzonline298",
-      "10-25": "https://t.me/gzonline299",
-      "10-26": "https://t.me/gzonline300",
-      "10-27": "https://t.me/gzonline301",
-      "10-28": "https://t.me/gzonline302",
-      "10-29": "https://t.me/gzonline303",
-      "10-30": "https://t.me/gzonline304",
-      "10-31": "https://t.me/gzonline305",
-
-      // November
-      "11-01": "https://t.me/gzonline306",
-      "11-02": "https://t.me/gzonline307",
-      "11-03": "https://t.me/gzonline308",
-      "11-04": "https://t.me/gzonline309",
-      "11-05": "https://t.me/gzonline310",
-      "11-06": "https://t.me/gzonline311",
-      "11-07": "https://t.me/gzonline312",
-      "11-08": "https://t.me/gzonline313",
-      "11-09": "https://t.me/gzonline314",
-      "11-10": "https://t.me/gzonline315",
-      "11-11": "https://t.me/gzonline316",
-      "11-12": "https://t.me/gzonline317",
-      "11-13": "https://t.me/gzonline318",
-      "11-14": "https://t.me/gzonline319",
-      "11-15": "https://t.me/gzonline320",
-      "11-16": "https://t.me/gzonline321",
-      "11-17": "https://t.me/gzonline322",
-      "11-18": "https://t.me/gzonline323",
-      "11-19": "https://t.me/gzonline324",
-      "11-20": "https://t.me/gzonline325",
-      "11-21": "https://t.me/gzonline326",
-      "11-22": "https://t.me/gzonline327",
-      "11-23": "https://t.me/gzonline328",
-      "11-24": "https://t.me/gzonline329",
-      "11-25": "https://t.me/gzonline330",
-      "11-26": "https://t.me/gzonline331",
-      "11-27": "https://t.me/gzonline332",
-      "11-28": "https://t.me/gzonline333",
-      "11-29": "https://t.me/gzonline334",
-      "11-30": "https://t.me/gzonline335",
-      
-      // December
-      "12-01": "https://t.me/gzonline336",
-      "12-02": "https://t.me/gzonline337",
-      "12-03": "https://t.me/gzonline338",
-      "12-04": "https://t.me/gzonline339",
-      "12-05": "https://t.me/gzonline340",
-      "12-06": "https://t.me/gzonline341",
-      "12-07": "https://t.me/gzonline342",
-      "12-08": "https://t.me/gzonline343",
-      "12-09": "https://t.me/gzonline344",
-      "12-10": "https://t.me/gzonline345",
-      "12-11": "https://t.me/gzonline346",
-      "12-12": "https://t.me/gzonline347",
-      "12-13": "https://t.me/gzonline348",
-      "12-14": "https://t.me/gzonline349",
-      "12-15": "https://t.me/gzonline350",
-      "12-16": "https://t.me/gzonline351",
-      "12-17": "https://t.me/gzonline352",
-      "12-18": "https://t.me/gzonline353",
-      "12-19": "https://t.me/gzonline354",
-      "12-20": "https://t.me/gzonline355",
-      "12-21": "https://t.me/gzonline356",
-      "12-22": "https://t.me/gzonline357",
-      "12-23": "https://t.me/gzonline358",
-      "12-24": "https://t.me/gzonline359",
-      "12-25": "https://t.me/gzonline360",
-      "12-26": "https://t.me/gzonline361",
-      "12-27": "https://t.me/gzonline362",
-      "12-28": "https://t.me/gzonline363",
-      "12-29": "https://t.me/gzonline364",
-      "12-30": "https://t.me/gzonline365",
-      "12-31": "https://t.me/gzonline366"
-     
-    };
+    // Discord server link
+    const discordServerLink = "https://discord.gg/P8VdSWQm";
 
     // Month names in English
     const monthNames = [
@@ -1397,6 +1005,7 @@
         // User hasn't submitted data yet
         document.getElementById('communityNotLoggedIn').style.display = 'block';
         document.getElementById('communityLoggedIn').style.display = 'none';
+        document.getElementById('allBirthdayChannels').style.display = 'none';
       } else {
         // User has submitted data, show their community
         document.getElementById('communityNotLoggedIn').style.display = 'none';
@@ -1405,25 +1014,65 @@
         // Update date information
         const userDateInfo = document.getElementById('userDateInfo');
         const monthName = monthNames[userBirthdayMonth - 1];
-        userDateInfo.textContent = `Your birthday: ${monthName} ${userBirthdayDay}`;
+        const formattedDay = userBirthdayDay.toString().padStart(2, '0');
+        userDateInfo.textContent = `Your birthday: ${monthName} - ${formattedDay}`;
         
-        // Show Telegram link directly after submitting data
-        showTelegramLink();
+        // Show Discord link
+        document.getElementById('discordLinkContainer').style.display = 'block';
+        document.getElementById('discordLink').href = discordServerLink;
+        
+        // Generate month/day sections
+        generateBirthdayChannels();
       }
       
       communityModal.style.display = 'block';
     });
     
-    // Show Telegram link for the user's birthday
-    function showTelegramLink() {
-      // Format month and day for telegramLinks key
-      const month = userBirthdayMonth.toString().padStart(2, '0');
-      const day = userBirthdayDay.toString().padStart(2, '0');
-      const dateKey = `${month}-${day}`;
+    // Generate birthday channels organized by month and day
+    function generateBirthdayChannels() {
+      const container = document.getElementById('allBirthdayChannels');
+      container.style.display = 'block';
+      container.innerHTML = '';
       
-      if (telegramLinks[dateKey]) {
-        document.getElementById('telegramLinkContainer').style.display = 'block';
-        document.getElementById('telegramLink').href = telegramLinks[dateKey];
+      // Create sections for each month
+      for (let i = 0; i < 12; i++) {
+        const monthSection = document.createElement('div');
+        monthSection.className = 'month-section';
+        
+        // Month title
+        const monthTitle = document.createElement('div');
+        monthTitle.className = 'month-title';
+        monthTitle.textContent = monthNames[i];
+        monthSection.appendChild(monthTitle);
+        
+        // Days grid
+        const daysGrid = document.createElement('div');
+        daysGrid.className = 'days-grid';
+        
+        // Add days for this month
+        for (let day = 1; day <= daysInMonth[i]; day++) {
+          const dayItem = document.createElement('div');
+          dayItem.className = 'day-item';
+          
+          // Format day with leading zero
+          const formattedDay = day.toString().padStart(2, '0');
+          dayItem.textContent = formattedDay;
+          
+          // Highlight current user's birthday
+          if (i + 1 === userBirthdayMonth && day === userBirthdayDay) {
+            dayItem.classList.add('current');
+          }
+          
+          // Add click event to navigate to Discord
+          dayItem.addEventListener('click', function() {
+            window.open(discordServerLink, '_blank');
+          });
+          
+          daysGrid.appendChild(dayItem);
+        }
+        
+        monthSection.appendChild(daysGrid);
+        container.appendChild(monthSection);
       }
     }
 
