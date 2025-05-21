@@ -239,108 +239,6 @@
             font-size: 1em;
         }
 
-        /* New style for the games modal */
-        .games-modal-content {
-            background-color: #e7f3ff;
-            margin: 20% auto;
-            padding: 15px;
-            border: 1px solid #007bff;
-            border-radius: 40px;
-            width: 315px;
-            max-width: 80%;
-            text-align: center;
-            position: relative;
-        }
-        
-        .invite-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 15px;
-            margin-top: 15px;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-        
-        /* Style for the community modal */
-        .community-modal-content {
-            background-color: #e7f3ff;
-            margin: 20% auto;
-            padding: 13px;
-            border: 1px solid #007bff;
-            border-radius: 40px;
-            width: 315px;
-            max-width: 80%;
-            text-align: center;
-            position: relative;
-        }
-        
-        .birthday-channels {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            text-align: center;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .birthday-channel {
-            background-color: white;
-            border: 1px solid #007bff;
-            border-radius: 8px;
-            padding: 5px;
-            font-size: 0.8em;
-            cursor: pointer;
-        }
-        
-        .birthday-channel.active {
-            background-color: #007bff;
-            color: white;
-        }
-
-        /* Style for months in the community modal */
-        .month-section {
-            margin-top: 15px;
-            text-align: left;
-        }
-        
-        .month-title {
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 8px;
-            font-size: 1em;
-            text-align: center;
-        }
-        
-        .user-birthday-highlight {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            padding: 5px 12px;
-            margin: 10px 0;
-            font-weight: bold;
-            font-size: 1.1em;
-            cursor: pointer;
-        }
-        
-        .user-date-info {
-            font-weight: bold;
-            margin: 10px 0;
-            color: #0056b3;
-            font-size: 1.1em;
-        }
-        
-        /* Styles for Billabong titles */
-        .billabong-title {
-            font-family: 'Billabong', cursive;
-            color: #007bff;
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-        
         /* Style for disabled fields */
         .disabled-field {
             opacity: 0.7;
@@ -355,7 +253,7 @@
             transform: translateX(-50%);
             color: #ff0800;
             background-color: white;
-            border: 1px solid #007bff;
+            border: 1px solid #ff69b4;
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -371,40 +269,51 @@
             color: white;
         }
         
-        .discord-link {
+        /* Style for flower button animation */
+        @keyframes flowerRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .flower-icon {
             display: inline-block;
-            margin-top: 20px;
-            background-color: #5865F2;
+            animation: flowerRotate 2s infinite ease-in-out;
+            color: #ff69b4;
+        }
+        
+        /* Join button style */
+        .join-button {
+            display: block;
+            width: 160px;
+            margin: 20px auto 10px;
+            padding: 10px 15px;
+            background-color: #ff69b4;
             color: white;
-            border-radius: 5px;
-            padding: 8px 15px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9em;
-            transition: background-color 0.3s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
-        .discord-link:hover {
-            background-color: #4752C4;
+        .join-button:hover {
+            background-color: #e04c96;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         }
         
-        .discord-link i {
-            margin-right: 5px;
-        }
-        
-        .game-info {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: rgba(0, 123, 255, 0.1);
-            border-radius: 8px;
-            font-size: 0.85em;
-            color: #333;
-        }
-        
-        .game-title {
-            font-weight: bold;
-            color: #0056b3;
-            margin-bottom: 5px;
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #ff69b4;
         }
     </style>
 </head>
@@ -425,8 +334,7 @@
     <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
     <a class="button" href="Statistiques.html" id="statisticsButton">
       <i class="fas fa-chart-bar"></i> Discover</a>
-    <a class="button" href="#" id="communityButton"><i class="fas fa-users"></i>Community</a>
-    <a class="button" href="#" id="gamesButton"><i class="fas fa-gamepad"></i>Games</a>
+    <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
     <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
@@ -486,6 +394,9 @@
         <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
           <i class="fab fa-instagram"></i>
         </a>
+        <a href="https://t.me/gzworld" target="_blank" class="logo">
+          <i class="fab fa-telegram"></i>
+        </a>
         <a href="https://discord.gg/P8VdSWQm" target="_blank" class="logo">
           <i class="fab fa-discord"></i>
         </a>
@@ -525,52 +436,22 @@
     </div>
   </div>
 
-  <!-- Games Modal -->
-  <div id="gamesModal" class="modal">
-    <div class="games-modal-content">
-      <div class="modal-close" id="closeGamesModal"><i class="fas fa-times"></i></div>
-      <div class="billabong-title" style="color: #0056b3; margin-top: 15px;"><strong>Games</strong></div>
+  <!-- Flower Modal -->
+  <div id="flowerModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></div>
+      <div class="billabong-title"><strong>Flower of Life</strong></div>
       <div class="text-line">
-        The games are not ready to start yet. Communities have not reached sufficient numbers. As soon as enough people join, the games will begin. In the meantime, you can invite more people to help communities get ready!
+        Behind every data point, there's a real person with their unique story. Flower celebrates this humanity by offering you the chance to meet someone randomly or through birth connections — same day, same month, or age group.
       </div>
-      <div class="game-info">
-        <div class="game-title">Coming Soon: Kahoot Quiz Competition</div>
-        <p>Connect with your birthday community and compete in exciting interactive quizzes!</p>
+      <div style="margin: 15px auto; font-size: 3em; color: #ff69b4;">
+        <i class="fas fa-spa"></i>
       </div>
-      <button class="invite-button" id="inviteButton">Invite</button>
-    </div>
-  </div>
-
-  <!-- Community Modal -->
-  <div id="communityModal" class="modal">
-    <div class="community-modal-content">
-      <div class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></div>
-      <div class="billabong-title" style="color: #0056b3; margin-top: 15px;"><strong>Birthday Community</strong></div>
-      
-      <div id="communityNotLoggedIn" style="display: block;">
-        <div class="text-line">
-          Please submit your birth information first to join your birthday community.
-        </div>
+      <div>
+        <a href="Flower.html" class="join-button">Join</a>
       </div>
-      
-      <div id="communityLoggedIn" style="display: none;">
-        <div class="user-date-info" id="userDateInfo"></div>
-        
-        <div class="user-birthday-highlight" id="userBirthdayButton">
-          <i class="fas fa-birthday-cake"></i> <span id="userBirthdayText"></span>
-        </div>
-        
-        <div class="text-line">
-          The Birthday Community is a unique space where people born on the same day and month (regardless of the year) are brought together in a dedicated group. They can connect, share experiences, and discover fascinating things they have in common.
-          We also organize fun quiz competitions between different birthday dates using Kahoot, to entertain members and strengthen the group spirit!
-        </div>
-        
-        <div id="discordLinkContainer" style="margin-top: 20px; display: none;">
-          <div class="text-line" style="font-weight: bold;">Join G-Z's Discord server:</div>
-          <a href="https://discord.gg/P8VdSWQm" class="discord-link" id="discordLink" target="_blank">
-            <i class="fab fa-discord"></i> Join Now
-          </a>
-        </div>
+      <div class="text-line" style="margin-top: 5px">
+        Spin the wheel of destiny, exchange contacts, and perhaps discover an unexpected connection.
       </div>
     </div>
   </div>
@@ -604,9 +485,6 @@
     let userBirthdayMonth = null;
     let lastSubmittedId = null;
     let userUid = null;
-
-    // Discord server link
-    const discordServerLink = "https://discord.gg/P8VdSWQm";
 
     // Month names in English
     const monthNames = [
@@ -980,65 +858,21 @@
       eraseCookie('userData');
     }
 
-    // Community button handler
-    document.getElementById('communityButton').addEventListener('click', function() {
-      const communityModal = document.getElementById('communityModal');
-      
-      if (!dataSubmitted) {
-        // User hasn't submitted data yet
-        document.getElementById('communityNotLoggedIn').style.display = 'block';
-        document.getElementById('communityLoggedIn').style.display = 'none';
-      } else {
-        // User has submitted data, show their community
-        document.getElementById('communityNotLoggedIn').style.display = 'none';
-        document.getElementById('communityLoggedIn').style.display = 'block';
-        
-        // Update date information
-        const userDateInfo = document.getElementById('userDateInfo');
-        const monthName = monthNames[userBirthdayMonth - 1];
-        const formattedDay = userBirthdayDay.toString().padStart(2, '0');
-        
-        // Set user birthday info
-        document.getElementById('userBirthdayText').textContent = `${monthName} - ${formattedDay}`;
-        
-        // Show Discord link
-        document.getElementById('discordLinkContainer').style.display = 'block';
-        document.getElementById('discordLink').href = discordServerLink;
-      }
-      
-      communityModal.style.display = 'block';
-    });
-    
-    // User birthday button handler - redirect to Discord
-    document.getElementById('userBirthdayButton').addEventListener('click', function() {
-      window.open(discordServerLink, '_blank');
+    // Flower button handler
+    document.getElementById('flowerButton').addEventListener('click', function() {
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.style.display = 'block';
     });
 
-    // Games button handler
-    document.getElementById('gamesButton').addEventListener('click', function() {
-      const gamesModal = document.getElementById('gamesModal');
-      gamesModal.style.display = 'block';
-    });
-
-    // Close modal with X buttons
-    document.getElementById('closeGamesModal').addEventListener('click', function() {
-      document.getElementById('gamesModal').style.display = 'none';
-    });
-
-    document.getElementById('closeCommunityModal').addEventListener('click', function() {
-      document.getElementById('communityModal').style.display = 'none';
-    });
-
-    // Redirect to share page from invite button
-    document.getElementById('inviteButton').addEventListener('click', function() {
-      window.location.href = 'Partage.html';
+    // Close flower modal
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      document.getElementById('flowerModal').style.display = 'none';
     });
 
     // Close modal when clicking outside
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
-      const gamesModal = document.getElementById('gamesModal');
-      const communityModal = document.getElementById('communityModal');
+      const flowerModal = document.getElementById('flowerModal');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -1051,12 +885,8 @@
         document.getElementById('countrySelect').classList.remove('disabled-field');
       }
       
-      if (event.target == gamesModal) {
-        gamesModal.style.display = "none";
-      }
-      
-      if (event.target == communityModal) {
-        communityModal.style.display = "none";
+      if (event.target == flowerModal) {
+        flowerModal.style.display = "none";
       }
     };
 
