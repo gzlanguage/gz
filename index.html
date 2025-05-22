@@ -284,36 +284,33 @@
             color: #ff69b4;
         }
         
-        /* Join button style */
-        .join-button {
-            display: block;
-            width: 160px;
-            margin: 20px auto 10px;
-            padding: 10px 15px;
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-        
-        .join-button:hover {
-            background-color: #e04c96;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-        }
-        
         .billabong-title {
             font-family: 'Billabong', cursive;
             font-size: 1.8em;
             margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        /* Monthly motivation styles */
+        .monthly-motivation {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            background-color: #fff9fb;
+            font-style: italic;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .month-name {
+            display: block;
+            font-weight: bold;
             color: #ff69b4;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -441,17 +438,12 @@
     <div class="modal-content">
       <div class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></div>
       <div class="billabong-title"><strong>Flower of Life</strong></div>
-      <div class="text-line">
-        Behind every data point, there's a real person with their unique story. Flower celebrates this humanity by offering you the chance to meet someone randomly or through birth connections — same day, same month, or age group.
-      </div>
+      
+      <!-- Monthly motivation will be inserted here -->
+      <div class="monthly-motivation" id="monthlyMotivation"></div>
+      
       <div style="margin: 15px auto; font-size: 3em; color: #ff69b4;">
         <i class="fas fa-spa"></i>
-      </div>
-      <div>
-        <a href="Flower.html" class="join-button">Join</a>
-      </div>
-      <div class="text-line" style="margin-top: 5px">
-        Spin the wheel of destiny, exchange contacts, and perhaps discover an unexpected connection.
       </div>
     </div>
   </div>
@@ -486,11 +478,83 @@
     let lastSubmittedId = null;
     let userUid = null;
 
+    // Monthly motivational messages in English
+    const monthlyMotivations = {
+      1: {
+        name: "JANUARY",
+        message: "You have everything you need to start well. January is the month of strong decisions."
+      },
+      2: {
+        name: "FEBRUARY",
+        message: "It's the small repeated actions that build great victories. Continue slowly but surely."
+      },
+      3: {
+        name: "MARCH",
+        message: "What you plant now, you will harvest tomorrow. Stay true to your vision."
+      },
+      4: {
+        name: "APRIL",
+        message: "April blooms, just like your silent efforts. Never doubt your growth."
+      },
+      5: {
+        name: "MAY",
+        message: "Trust yourself. You are closer to your goal than you think."
+      },
+      6: {
+        name: "JUNE",
+        message: "Moving forward also means taking care of yourself. Be proud of your pace."
+      },
+      7: {
+        name: "JULY",
+        message: "Fruits come with patience. Your work deserves success."
+      },
+      8: {
+        name: "AUGUST",
+        message: "Look at everything you've already accomplished. Every step counts."
+      },
+      9: {
+        name: "SEPTEMBER",
+        message: "Stay focused. What you do today builds your future."
+      },
+      10: {
+        name: "OCTOBER",
+        message: "Dare to dream bigger. You are ready for the next level."
+      },
+      11: {
+        name: "NOVEMBER",
+        message: "This month rewards the quiet, the constant, the patient. You are one of them."
+      },
+      12: {
+        name: "DECEMBER",
+        message: "Celebrate your journey, even if imperfect. You have grown, and this is just the beginning."
+      }
+    };
+
     // Month names in English
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
+
+    // Function to update monthly motivation in the flower modal based on birth month
+    function updateMotivationByBirthMonth() {
+      if (!userBirthdayMonth) return;
+      
+      const motivationElement = document.getElementById('monthlyMotivation');
+      const motivation = monthlyMotivations[userBirthdayMonth];
+      
+      if (motivation) {
+        motivationElement.innerHTML = `
+          <span class="month-name">${motivation.name}</span>
+          ${motivation.message}
+        `;
+      } else {
+        motivationElement.innerHTML = `
+          <span class="month-name">YOUR JOURNEY</span>
+          Your birth month holds special power. Embrace your unique path.
+        `;
+      }
+    }
 
     // Cookie management functions
     function setCookie(name, value, days) {
@@ -858,8 +922,21 @@
       eraseCookie('userData');
     }
 
-    // Flower button handler
+    // Flower button handler - show motivation based on user's birth month
     document.getElementById('flowerButton').addEventListener('click', function() {
+      if (userBirthdayMonth) {
+        // User has submitted data, show motivation based on birth month
+        updateMotivationByBirthMonth();
+      } else {
+        // User hasn't submitted data yet, show generic message
+        const motivationElement = document.getElementById('monthlyMotivation');
+        motivationElement.innerHTML = `
+          <span class="month-name">DISCOVER YOUR FLOWER</span>
+          Submit your date of birth to see your personalized monthly motivation.
+        `;
+      }
+      
+      // Show the flower modal
       const flowerModal = document.getElementById('flowerModal');
       flowerModal.style.display = 'block';
     });
