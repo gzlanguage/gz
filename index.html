@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -137,24 +137,14 @@
         .link:hover {
             background-color: #0056b3;
         }
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
         .share-icon {
             color: #007bff;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 1.3em;
             border: 1px solid #007bff;
             border-radius: 7px;
             padding: 4px;
             background-color: white;
-            transition: all 0.2s ease;
-        }
-        .share-icon:hover {
-            background-color: #e7f3ff;
-            transform: scale(1.05);
         }
         footer {
             background-color: white;
@@ -198,7 +188,7 @@
         }
         .modal-content {
             background-color: white;
-            margin: 25% auto;
+            margin: 29% auto;
             padding: 18px;
             border: 1px solid #007bff;
             border-radius: 60px;
@@ -258,8 +248,9 @@
         /* Style for close cross in modals */
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
             color: #ff0800;
             background-color: white;
             border: 1px solid #ff69b4;
@@ -298,7 +289,6 @@
             font-size: 1.8em;
             margin-bottom: 10px;
             color: #007bff;
-            margin-top: 20px;
         }
 
         /* Monthly motivation styles */
@@ -322,29 +312,15 @@
             margin-bottom: 5px;
             text-transform: uppercase;
         }
-
-        /* Message d'erreur pour l'accès aux statistiques */
-        .stats-message {
-            color: #dc3545;
-            font-size: 0.9em;
-            text-align: center;
-            margin: 10px auto;
-            max-width: 300px;
-            display: none;
-            padding: 10px;
-            background-color: #f8d7da;
-            border-radius: 10px;
-            border: 1px solid #f5c6cb;
-        }
     </style>
 </head>
 <body>
 
   <header>
     <h1 translate="no">G-Z</h1>
-    <div class="header-icons">
+    <div>
       <a href="Partage.html">
-        <i class="fas fa-share share-icon"></i>
+        <i class="fas fa-share share-icon"></i> <!-- Share icon -->
       </a>
     </div>
   </header>
@@ -360,12 +336,6 @@
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
     <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
   </div>
-  
-  <!-- Message pour l'accès aux statistiques -->
-  <div class="stats-message" id="statsMessage">
-    Please submit your information first to access statistics.
-  </div>
-  
   <script>
     const button = document.getElementById('statisticsButton');
     let colors = ['lawngreen', 'white'];
@@ -377,14 +347,14 @@
   </script>
   <div class="divider"></div>
   <div class="notification">
-    <span class="notification-text">Together, let's discover how we belong to this world.</span>
+    <span class="notification-text">Let's discover together the secrets of our generations.</span>
     <div class="new-message-badge"></div>
   </div>
 
   <div class="divider"></div>
 
   <div class="footer-title">
-    Join us and uncover the secrets of past, present, and future generations in just a few clicks.
+    Join us to discover the secrets of our generation in just a few clicks!
   </div>
 
   <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
@@ -477,7 +447,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getDatabase, ref, push, remove, get, set, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getDatabase, ref, push, remove, get, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
     // Firebase configuration - needed for database connection
     const firebaseConfig = {
@@ -492,6 +463,7 @@
     };
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
+    const auth = getAuth(app);
     
     // Variables to store user information
     let userBirthdate = null;
@@ -501,7 +473,7 @@
     let userBirthdayDay = null;
     let userBirthdayMonth = null;
     let lastSubmittedId = null;
-    let userUid = generateUid();
+    let userUid = null;
 
     // Monthly motivational messages in English
     const monthlyMotivations = {
@@ -555,54 +527,11 @@
       }
     };
 
-    // Generate a unique ID for the user
-    function generateUid() {
-      // Check if UID exists in cookies
-      const storedUid = getCookie('userUid');
-      if (storedUid) {
-        console.log("Using existing UID from cookie:", storedUid);
-        return storedUid;
-      }
-      
-      // Generate a new UID
-      const timestamp = new Date().getTime();
-      const randomPart = Math.floor(Math.random() * 1000000);
-      const newUid = `user_${timestamp}_${randomPart}`;
-      
-      // Store in cookie (valid for 1 year)
-      setCookie('userUid', newUid, 365);
-      console.log("Generated new UID:", newUid);
-      return newUid;
-    }
-
-    // Cookie helper functions
-    function setCookie(name, value, days) {
-      const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      const expires = "; expires=" + date.toUTCString();
-      document.cookie = name + "=" + value + expires + "; path=/";
-    }
-
-    function getCookie(name) {
-      const nameEQ = name + "=";
-      const ca = document.cookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-      }
-      return null;
-    }
-
-    // Set max date for birthdate to today
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("birthdate").setAttribute('max', today);
-
-    // Load user data on page load
-    window.onload = function() {
-      loadUserData();
-      loadCountries();
-    };
+    // Month names in English
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
 
     // Function to update monthly motivation in the flower modal based on birth month
     function updateMotivationByBirthMonth() {
@@ -624,205 +553,160 @@
       }
     }
 
-    // Load user data from database or localStorage
-    function loadUserData() {
-      // First check Firebase if we have user data
-      const userDataRef = ref(database, `userData/${userUid}`);
-      get(userDataRef).then((snapshot) => {
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
-          
-          // Load user submission data
-          userBirthdate = userData.birthdate || null;
-          userCountry = userData.country || null;
-          userGender = userData.gender || null;
-          userBirthdayDay = userData.birthdayDay || null;
-          userBirthdayMonth = userData.birthdayMonth || null;
-          lastSubmittedId = userData.lastSubmittedId || null;
-          dataSubmitted = !!userData.birthdate && !!userData.country && !!userData.gender;
-          
-          // Update UI with loaded data
-          updateUIWithUserData();
-          console.log("User data loaded from Firebase");
-        } else {
-          console.log("No user data found in Firebase, checking localStorage");
-          loadUserDataFromLocalStorage();
-        }
-      }).catch((error) => {
-        console.error("Error loading user data from Firebase:", error);
-        loadUserDataFromLocalStorage();
+    // Cookie management functions
+    function setCookie(name, value, days) {
+      // Set a cookie with specified expiration
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      // Get a cookie by name
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function eraseCookie(name) {
+      // Delete a cookie by setting negative expiration
+      document.cookie = name + '=; Max-Age=-99999999; path=/';
+    }
+
+    // Check for cookie acceptance
+    function checkCookieConsent() {
+      const cookiesAccepted = getCookie('cookiesAccepted');
+      if (!cookiesAccepted) {
+        // Automatically set cookie accepted
+        setCookie('cookiesAccepted', 'true', 365);
+      }
+    }
+
+    // Authenticate anonymously with Firebase
+    signInAnonymously(auth)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        userUid = user.uid;
+        console.log("User connected: ", userUid);
+      })
+      .catch((error) => {
+        console.error("Error during anonymous connection: ", error);
+        
+        // Generate a pseudo-random ID as fallback
+        userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
       });
-    }
 
-    // Load user data from localStorage as fallback
-    function loadUserDataFromLocalStorage() {
-      try {
-        const localUserData = localStorage.getItem('userData');
-        if (localUserData) {
-          const userData = JSON.parse(localUserData);
-          
-          // Load user data
-          userBirthdate = userData.birthdate || null;
-          userCountry = userData.country || null;
-          userGender = userData.gender || null;
-          userBirthdayDay = userData.birthdayDay || null;
-          userBirthdayMonth = userData.birthdayMonth || null;
-          lastSubmittedId = userData.lastSubmittedId || null;
-          dataSubmitted = !!userData.birthdate && !!userData.country && !!userData.gender;
-          
-          // Update UI with loaded data
-          updateUIWithUserData();
-          console.log("User data loaded from localStorage");
-          
-          // Sync this data to Firebase
-          saveUserDataToFirebase();
-        } else {
-          console.log("No user data found in localStorage");
-        }
-      } catch (error) {
-        console.error("Error loading user data from localStorage:", error);
-      }
-    }
-
-    // Update UI with user data
-    function updateUIWithUserData() {
-      if (userBirthdate && userCountry && userGender) {
-        // Set form fields
-        document.getElementById('birthdate').value = userBirthdate;
-        
-        // We need to make sure the countries are loaded before setting the value
-        loadCountries().then(() => {
-          document.getElementById('countrySelect').value = userCountry;
-          
-          // Update UI state
-          const submitButton = document.querySelector('.submit-button');
-          submitButton.textContent = "Submitted";
-          submitButton.style.backgroundColor = 'green';
-          submitButton.disabled = true;
-          
-          document.getElementById('resetButton').style.display = "block";
-          
-          // Disable form fields
-          document.getElementById('birthdate').classList.add('disabled-field');
-          document.getElementById('countrySelect').classList.add('disabled-field');
-        });
-        
-        // Enable statistics access
-        document.getElementById('statisticsButton').addEventListener('click', function(e) {
-          window.location.href = "Statistiques.html";
-        });
-        
-        // Hide stats message if it's showing
-        document.getElementById('statsMessage').style.display = 'none';
-      } else {
-        // Add event listener for statistics button to show warning
-        document.getElementById('statisticsButton').addEventListener('click', function(e) {
-          e.preventDefault();
-          document.getElementById('statsMessage').style.display = 'block';
-          setTimeout(() => {
-            document.getElementById('statsMessage').style.display = 'none';
-          }, 3000);
-        });
-      }
-    }
+    // Set max date for birthdate to today
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute('max', today);
 
     // Load countries from REST API
-    function loadCountries() {
-      return new Promise((resolve, reject) => {
-        fetch('https://restcountries.com/v3.1/all')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network error: ' + response.status);
-            }
-            return response.json();
-          })
-          .then(data => {
-            // Sort countries alphabetically
-            data.sort((a, b) => a.name.common.localeCompare(b.name.common));
-            const countrySelect = document.getElementById('countrySelect');
-            countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
-            
-            // Add each country to the dropdown
-            data.forEach(country => {
-              const option = document.createElement('option');
-              option.value = country.name.common;
-              option.textContent = country.name.common;
-              countrySelect.appendChild(option);
-            });
-            
-            resolve();
-          })
-          .catch(error => {
-            console.error('Error loading countries:', error);
-            // Fallback with a basic list of common countries
-            const commonCountries = [
-              "United States", "United Kingdom", "Canada", "Australia", 
-              "France", "Germany", "Italy", "Spain", "Japan", "China", 
-              "India", "Brazil", "Mexico", "Russia", "South Africa"
-            ];
-            
-            const countrySelect = document.getElementById('countrySelect');
-            countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
-            
-            commonCountries.forEach(country => {
-              const option = document.createElement('option');
-              option.value = country;
-              option.textContent = country;
-              countrySelect.appendChild(option);
-            });
-            
-            resolve();
-          });
+    fetch('https://restcountries.com/v3.1/all')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network error: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Sort countries alphabetically
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        // Add each country to the dropdown
+        data.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country.name.common;
+          option.textContent = country.name.common;
+          countrySelect.appendChild(option);
+        });
+        
+        // Load user data from cookie after loading countries
+        loadUserDataFromCookie();
+      })
+      .catch(error => {
+        console.error('Error loading countries:', error);
+        // Fallback with a basic list of common countries
+        const commonCountries = [
+          "United States", "United Kingdom", "Canada", "Australia", 
+          "France", "Germany", "Italy", "Spain", "Japan", "China", 
+          "India", "Brazil", "Mexico", "Russia", "South Africa"
+        ];
+        
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        commonCountries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+        
+        // Load user data from cookie
+        loadUserDataFromCookie();
       });
-    }
 
-    // Save user data to Firebase
-    function saveUserDataToFirebase() {
-      try {
-        // Save user data to Firebase
+    // Save user data to cookie
+    function saveUserDataToCookie() {
+      if (userBirthdate && userCountry && userGender) {
         const userData = {
           birthdate: userBirthdate,
           country: userCountry,
           gender: userGender,
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
-          lastSubmittedId: lastSubmittedId,
-          timestamp: Date.now()
+          dataSubmitted: true,
+          lastSubmittedId: lastSubmittedId
         };
-        
-        set(ref(database, `userData/${userUid}`), userData)
-          .then(() => {
-            console.log("User data successfully saved to Firebase");
-            return true;
-          })
-          .catch((error) => {
-            console.error("Error saving user data to Firebase:", error);
-            return false;
-          });
-      } catch (error) {
-        console.error("Exception saving user data to Firebase:", error);
-        return false;
+        setCookie('userData', JSON.stringify(userData), 365);
       }
     }
 
-    // Save user data to localStorage
-    function saveUserDataToLocalStorage() {
-      try {
-        const userData = {
-          birthdate: userBirthdate,
-          country: userCountry,
-          gender: userGender,
-          birthdayDay: userBirthdayDay,
-          birthdayMonth: userBirthdayMonth,
-          lastSubmittedId: lastSubmittedId,
-          timestamp: Date.now()
-        };
-        
-        localStorage.setItem('userData', JSON.stringify(userData));
-        return true;
-      } catch (error) {
-        console.error("Error saving user data to localStorage:", error);
-        return false;
+    // Load user data from cookie
+    function loadUserDataFromCookie() {
+      const userDataCookie = getCookie('userData');
+      if (userDataCookie) {
+        try {
+          // Parse stored data
+          const userData = JSON.parse(userDataCookie);
+          userBirthdate = userData.birthdate;
+          userCountry = userData.country;
+          userGender = userData.gender;
+          userBirthdayDay = userData.birthdayDay;
+          userBirthdayMonth = userData.birthdayMonth;
+          dataSubmitted = userData.dataSubmitted;
+          lastSubmittedId = userData.lastSubmittedId;
+          
+          // Update UI with loaded data
+          if (dataSubmitted) {
+            document.getElementById('birthdate').value = userBirthdate;
+            document.getElementById('countrySelect').value = userCountry;
+            
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.textContent = "Submitted";
+            submitButton.style.backgroundColor = 'green';
+            submitButton.disabled = true;
+            
+            document.getElementById('resetButton').style.display = "block";
+            
+            // Disable form fields
+            document.getElementById('birthdate').classList.add('disabled-field');
+            document.getElementById('countrySelect').classList.add('disabled-field');
+          }
+        } catch (error) {
+          console.error("Error parsing user data from cookie:", error);
+        }
       }
     }
 
@@ -865,51 +749,77 @@
       });
     });
 
-    // Submit data to database
+    // Submit data to Firebase with localStorage fallback
     function submitData(gender) {
       const birthdate = userBirthdate;
       const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
-      // Update user gender
-      userGender = gender;
-      dataSubmitted = true;
+      // Always submit to localStorage first as a reliable backup
+      const localSuccess = submitToLocalStorage(gender);
       
-      // Store data in localStorage as reliable backup
-      const localSuccess = saveUserDataToLocalStorage();
-      
-      try {
-        // Save user profile data
-        saveUserDataToFirebase();
+      // Then try to submit to Firebase if localStorage succeeded
+      if (localSuccess) {
+        try {
+          // Create a new database entry
+          push(ref(database, 'birthdates'), {
+            date: birthdate,
+            country: country,
+            gender: gender,
+            birthdayDay: userBirthdayDay,
+            birthdayMonth: userBirthdayMonth,
+            uid: userUid,
+            timestamp: Date.now()
+          }).then((newEntryRef) => {
+            // Store the ID for potential reset
+            lastSubmittedId = newEntryRef.key;
+            console.log("Data successfully submitted to Firebase:", lastSubmittedId);
+          }).catch((error) => {
+            console.warn("Firebase submission error:", error);
+            // Already submitted to localStorage, so we continue
+          });
+        } catch (error) {
+          console.warn("Firebase submission exception:", error);
+          // Already submitted to localStorage, so we continue
+        }
         
-        // Also create a new submission entry for statistics
-        push(ref(database, 'birthdates'), {
-          date: birthdate,
-          country: country,
+        // Update UI since localStorage submission succeeded
+        finishSubmission(true);
+      } else {
+        // Both Firebase and localStorage failed
+        finishSubmission(false);
+      }
+    }
+
+    // Submit to localStorage - more reliable than Firebase with permission issues
+    function submitToLocalStorage(gender) {
+      try {
+        // Generate a pseudo-random ID
+        const randomId = Date.now().toString(36) + Math.random().toString(36).substring(2);
+        
+        // Store data in localStorage
+        const data = {
+          date: userBirthdate,
+          country: userCountry,
           gender: gender,
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
-          uid: userUid,
+          uid: userUid || randomId,
           timestamp: Date.now()
-        }).then((newEntryRef) => {
-          // Store the ID for potential reset
-          lastSubmittedId = newEntryRef.key;
-          console.log("Submission successfully added to Firebase:", lastSubmittedId);
-          
-          // Update localStorage with submission ID
-          saveUserDataToLocalStorage();
-        }).catch((error) => {
-          console.warn("Firebase submission error:", error);
-        });
+        };
+        
+        // Create or append to submissions array
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        submissions.push(data);
+        localStorage.setItem('submissions', JSON.stringify(submissions));
+        
+        // Store ID for reset functionality
+        lastSubmittedId = lastSubmittedId || "local_" + randomId;
+        
+        return true;
       } catch (error) {
-        console.warn("Firebase submission exception:", error);
-      }
-      
-      // Complete the submission process
-      if (localSuccess) {
-        finishSubmission(true);
-      } else {
-        finishSubmission(false);
+        console.error("localStorage submission error:", error);
+        return false;
       }
     }
 
@@ -924,19 +834,10 @@
         submitButton.disabled = true;
         document.getElementById('resetButton').style.display = "block";
         document.getElementById('genderModal').style.display = 'none';
+        dataSubmitted = true;
         
-        // Update stats button to enable access
-        document.getElementById('statisticsButton').removeEventListener('click', function(e) {
-          e.preventDefault();
-          document.getElementById('statsMessage').style.display = 'block';
-        });
-        
-        document.getElementById('statisticsButton').addEventListener('click', function() {
-          window.location.href = "Statistiques.html";
-        });
-        
-        // Hide stats message if it's showing
-        document.getElementById('statsMessage').style.display = 'none';
+        // Save to cookie for persistence
+        saveUserDataToCookie();
       } else {
         // Handle submission error
         submitButton.style.backgroundColor = 'red';
@@ -951,24 +852,44 @@
 
     // Reset button handler
     document.getElementById('resetButton').addEventListener('click', function() {
-      if (lastSubmittedId) {
-        // Remove the submission from Firebase if we have the ID
+      // Always reset localStorage first
+      resetLocalStorageData();
+      
+      // Then try to reset Firebase if it's a Firebase ID
+      if (lastSubmittedId && !lastSubmittedId.startsWith('local_')) {
         try {
           remove(ref(database, `birthdates/${lastSubmittedId}`))
             .then(() => {
-              console.log("Firebase submission data removed");
+              console.log("Firebase data successfully reset");
             })
             .catch((error) => {
-              console.warn("Error removing Firebase submission:", error);
+              console.warn("Firebase reset error:", error);
+              // Already reset localStorage, so we continue
             });
         } catch (error) {
-          console.warn("Exception removing Firebase submission:", error);
+          console.warn("Firebase reset exception:", error);
+          // Already reset localStorage, so we continue
         }
       }
       
       // Complete the reset process
       finishReset();
     });
+    
+    // Reset localStorage data
+    function resetLocalStorageData() {
+      try {
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        const filteredSubmissions = submissions.filter(sub => 
+          !sub.uid || sub.uid !== userUid
+        );
+        localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
+        return true;
+      } catch (error) {
+        console.error("Error resetting localStorage data:", error);
+        return false;
+      }
+    }
     
     // Complete the reset process
     function finishReset() {
@@ -994,32 +915,8 @@
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
       
-      // Clear localStorage
-      localStorage.removeItem('userData');
-      
-      // Remove data from Firebase
-      try {
-        remove(ref(database, `userData/${userUid}`))
-          .then(() => {
-            console.log("User data removed from Firebase");
-          })
-          .catch((error) => {
-            console.warn("Error removing user data from Firebase:", error);
-          });
-      } catch (error) {
-        console.warn("Exception removing user data from Firebase:", error);
-      }
-      
-      // Update stats button to disable access
-      document.getElementById('statisticsButton').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('statsMessage').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('statsMessage').style.display = 'none';
-        }, 3000);
-      });
-      
-      console.log("Reset complete");
+      // Remove saved cookie
+      eraseCookie('userData');
     }
 
     // Flower button handler - show motivation based on user's birth month
@@ -1066,6 +963,9 @@
         flowerModal.style.display = "none";
       }
     };
+
+    // Run on page load
+    checkCookieConsent();
   </script>
 </body>
 </html>
