@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            position: relative;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+        }
+        .divider {
+            height: 1px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .button#statisticsButton {
+            border-bottom: 1px solid lawngreen;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .footer-title {
+            text-align: center;
+            color: black;
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+        .date-input, .country-select, .submit-button {
+            display: block;
+            width: 330px;
+            margin: 19px auto;
+            padding: 5px;
+            border: 1px solid #007bff;
+            border-radius: 11px;
+            background-color: white;
+            color: black;
+            font-size: 1em;
+        }
+        .submit-button {
+            padding: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: gray;
+            color: white;
+        }
+        .reset-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.0em;
+            display: none;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .rectangle {
+            width: 330px;
+            min-height: 30px;
+            background-color: #e7f3ff;
+            margin: 10px auto;
+            border-radius: 40px;
+            border: 1px solid #007bff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+            text-align: center;
+        }
+        .text-line {
+            font-size: 0.8em;
+            color: #0056b3;
+            margin: 5px 0;
+        }
+        .text-line.bold {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .link {
+            color: white;
+            text-decoration: none;
+            background-color: #007bff;
+            border-radius: 5px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+        .link:hover {
+            background-color: #0056b3;
+        }
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 4px; /* Réduit l'espace entre les icônes */
+        }
+        .share-icon, .profile-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.2em; /* Légèrement réduit */
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 4px;
+            background-color: white;
+            transition: all 0.2s ease;
+        }
+        .share-icon:hover, .profile-icon:hover {
+            background-color: #e7f3ff;
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+        }
+        .logo {
+            color: #007bff;
+            font-size: 1.6em;
+            margin-right: 10px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(0, 119, 190, 0.1);
+            transition: background-color 0.3s;
+        }
+        .logo:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 25% auto; /* Réduit l'espace */
+            padding: 18px;
+            border: 1px solid #007bff;
+            border-radius: 60px; /* Très arrondi comme celui de flower */
+            width: 280px;
+            max-width: 70%;
+            text-align: center;
+            max-height: 60vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-header {
+            font-size: 1.8em;
+            font-family: 'Billabong', cursive;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: 120px;
+            margin: 4px;
+        }
+        .close-button:hover {
+            background-color: #0056b3;
+        }
+        .gender-category {
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 16px;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        /* Style for disabled fields */
+        .disabled-field {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        /* Style for close cross in modals */
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #ff0800;
+            background-color: white;
+            border: 1px solid #ff69b4;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .modal-close:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        /* Style for flower button animation */
+        @keyframes flowerRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .flower-icon {
+            display: inline-block;
+            animation: flowerRotate 2s infinite ease-in-out;
+            color: #ff69b4;
+        }
+        
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        /* Monthly motivation styles */
+        .monthly-motivation {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            background-color: #fff9fb;
+            font-style: italic;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .month-name {
+            display: block;
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Profile modal styles - REDESIGNED */
+        .profile-modal .modal-content {
+            border-radius: 60px; /* Plus arrondi comme flower */
+            max-width: 85%;
+            width: 290px;
+            padding: 24px 18px;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+        }
+
+        .profile-option {
+            background-color: #f8f9fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 14px;
+            margin: 12px 0;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .profile-option:hover {
+            background-color: #e7f3ff;
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+
+        .profile-option i {
+            margin-right: 12px;
+            color: #007bff;
+            font-size: 1.5em;
+            width: 24px;
+            text-align: center;
+        }
+
+        .profile-option span {
+            font-size: 0.95em;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .profile-title {
+            font-size: 1.6em;
+            margin-bottom: 18px;
+            color: #007bff;
+            font-weight: bold;
+            font-family: 'Billabong', cursive;
+        }
+
+        /* Delete account modal styles */
+        .delete-account-modal .modal-content {
+            border-color: #dc3545;
+            border-radius: 60px; /* Plus arrondi comme flower */
+            padding: 20px;
+        }
+
+        .delete-account-title {
+            color: #dc3545;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .delete-account-warning {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            text-align: left;
+            background-color: #fff8f8;
+            padding: 12px;
+            border-radius: 15px;
+            border: 1px solid #ffcdd2;
+        }
+
+        .password-input {
+            width: 90%;
+            padding: 10px;
+            margin: 15px auto;
+            border: 1px solid #ced4da;
+            border-radius: 9px;
+            background-color: #f8f9fa;
+            transition: border-color 0.2s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #dc3545;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+        }
+
+        .danger-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .danger-button:hover {
+            background-color: #c82333;
+        }
+
+        .cancel-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .cancel-button:hover {
+            background-color: #5a6268;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Message d'erreur pour l'accès aux statistiques */
+        .stats-message {
+            color: #dc3545;
+            font-size: 0.9em;
+            text-align: center;
+            margin: 10px auto;
+            max-width: 300px;
+            display: none;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 10px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+  <header>
+    <h1 translate="no">G-Z</h1>
+    <div class="header-icons">
+      <i class="fas fa-user profile-icon" id="profileIcon"></i>
+      <a href="Partage.html">
+        <i class="fas fa-share share-icon"></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="button-container">
+    <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
+    <a class="button" href="Statistiques.html" id="statisticsButton">
+      <i class="fas fa-chart-bar"></i> Discover</a>
+    <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
+    <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
+    <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
+    <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
+  </div>
+  
+  <!-- Message pour l'accès aux statistiques -->
+  <div class="stats-message" id="statsMessage">
+    Please submit your information first to access statistics.
+  </div>
+  
+  <script>
+    const button = document.getElementById('statisticsButton');
+    let colors = ['lawngreen', 'white'];
+    let index = 0;
+    setInterval(() => {
+      button.style.borderBottom = `4px solid ${colors[index]}`;
+      index = (index + 1) % colors.length; // Cycle through colors
+    }, 400); // Change color every 400ms
+  </script>
+  <div class="divider"></div>
+  <div class="notification">
+    <span class="notification-text">Together, let's discover how we belong to this world.</span>
+    <div class="new-message-badge"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="footer-title">
+    Join us and uncover the secrets of past, present, and future generations in just a few clicks.
+  </div>
+
+  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
+  <select class="country-select" id="countrySelect">
+    <option value="" disabled selected>Select your country of birth</option>
+  </select>
+  <p style="text-align: center; color: black; font-size: 0.7em; margin-top: 5px; text-decoration: underline; text-decoration-color: rgb(0, 123, 191);">
+    By submitting, you accept our terms of use.
+  </p>
+  <button class="submit-button" type="submit">Submit</button>
+
+  <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
+
+  <div class="divider"></div>
+
+  <div class="rectangle">
+    <div class="text-line bold" style="font-size: 1em; color: #0056b3;">How does it work?</div>
+    <div class="text-line"> Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discover" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics. </div>
+  </div>
+
+  <div class="text-line" style="text-align: center; color: black;">
+    <span style="color: #007bff;">_____</span> Don't miss anything <span style="color: #007bff;">_____</span>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo-container">
+        <a href="https://www.facebook.com/share/15nGTcCb4i/.html" target="_blank" class="logo">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/GZWRD?t=g7yvHCDW2-xPLaTTgea-YA&s=09.html" target="_blank" class="logo">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://discord.gg/P8VdSWQm" target="_blank" class="logo">
+          <i class="fab fa-discord"></i>
+        </a>
+      </div>
+      <div class="copyright">
+        ©️ 2025 G-Z
+      </div>
+    </div>
+  </footer>
+
+  <!-- Gender Modal -->
+  <div id="genderModal" class="modal">
+    <div class="modal-content">
+      <div class="billabong-title"><strong>Your gender?</strong></div>
+      
+      <div class="gender-category">Binary genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Man">Man</button>
+        <button class="close-button gender-option" value="Woman">Woman</button>
+      </div>
+      
+      <div class="gender-category">Non-binary genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Non-binary">Non-binary</button>
+        <button class="close-button gender-option" value="Genderqueer">Genderqueer</button>
+        <button class="close-button gender-option" value="Genderfluid">Genderfluid</button>
+        <button class="close-button gender-option" value="Agender">Agender</button>
+      </div>
+      
+      <div class="gender-category">Other gender identities</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Transgender">Transgender</button>
+        <button class="close-button gender-option" value="Two-Spirit">Two-Spirit</button>
+        <button class="close-button gender-option" value="Bigender">Bigender</button>
+        <button class="close-button gender-option" value="Androgyne">Androgyne</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flower Modal -->
+  <div id="flowerModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></div>
+      <div class="billabong-title"><strong>Flower of Life</strong></div>
+      
+      <!-- Monthly motivation will be inserted here -->
+      <div class="monthly-motivation" id="monthlyMotivation"></div>
+      
+      <div style="margin: 15px auto; font-size: 3em; color: #ff69b4;">
+        <i class="fas fa-spa"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal - REDESIGNED -->
+  <div id="profileModal" class="modal profile-modal">
+    <div class="modal-content">
+      <div class="modal-close" id="closeProfileModal"><i class="fas fa-times"></i></div>
+      <div class="profile-title">Account</div>
+      
+      <div class="profile-option" id="logoutOption">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </div>
+      
+      <div class="profile-option" id="deleteAccountOption" style="color: #dc3545; border-color: #ffcccc; background-color: #fff5f5;">
+        <i class="fas fa-user-slash" style="color: #dc3545;"></i>
+        <span style="color: #dc3545;">Delete Account</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Modal - REDESIGNED -->
+  <div id="deleteAccountModal" class="modal delete-account-modal">
+    <div class="modal-content">
+      <div class="delete-account-title">Delete Account</div>
+      
+      <div class="delete-account-warning">
+        Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.
+      </div>
+      
+      <input type="password" class="password-input" id="deleteAccountPassword" placeholder="Enter your password to confirm" />
+      
+      <div class="button-group">
+        <button class="cancel-button" id="cancelDeleteAccount">Cancel</button>
+        <button class="danger-button" id="confirmDeleteAccount">Delete Account</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getDatabase, ref, push, remove, get, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { 
+      getAuth, 
+      signInAnonymously, 
+      onAuthStateChanged, 
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      deleteUser,
+      EmailAuthProvider,
+      reauthenticateWithCredential
+    } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
+    // Firebase configuration - needed for database connection
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+    
+    // Variables to store user information
+    let userBirthdate = null;
+    let userCountry = null;
+    let userGender = null;
+    let dataSubmitted = false;
+    let userBirthdayDay = null;
+    let userBirthdayMonth = null;
+    let lastSubmittedId = null;
+    let userUid = null;
+    let isAuthenticated = false;
+    let userEmail = null;
+
+    // Monthly motivational messages in English
+    const monthlyMotivations = {
+      1: {
+        name: "JANUARY",
+        message: "You have everything you need to start well. January is the month of strong decisions."
+      },
+      2: {
+        name: "FEBRUARY",
+        message: "It's the small repeated actions that build great victories. Continue slowly but surely."
+      },
+      3: {
+        name: "MARCH",
+        message: "What you plant now, you will harvest tomorrow. Stay true to your vision."
+      },
+      4: {
+        name: "APRIL",
+        message: "April blooms, just like your silent efforts. Never doubt your growth."
+      },
+      5: {
+        name: "MAY",
+        message: "Trust yourself. You are closer to your goal than you think."
+      },
+      6: {
+        name: "JUNE",
+        message: "Moving forward also means taking care of yourself. Be proud of your pace."
+      },
+      7: {
+        name: "JULY",
+        message: "Fruits come with patience. Your work deserves success."
+      },
+      8: {
+        name: "AUGUST",
+        message: "Look at everything you've already accomplished. Every step counts."
+      },
+      9: {
+        name: "SEPTEMBER",
+        message: "Stay focused. What you do today builds your future."
+      },
+      10: {
+        name: "OCTOBER",
+        message: "Dare to dream bigger. You are ready for the next level."
+      },
+      11: {
+        name: "NOVEMBER",
+        message: "This month rewards the quiet, the constant, the patient. You are one of them."
+      },
+      12: {
+        name: "DECEMBER",
+        message: "Celebrate your journey, even if imperfect. You have grown, and this is just the beginning."
+      }
+    };
+
+    // Month names in English
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    // Function to update monthly motivation in the flower modal based on birth month
+    function updateMotivationByBirthMonth() {
+      if (!userBirthdayMonth) return;
+      
+      const motivationElement = document.getElementById('monthlyMotivation');
+      const motivation = monthlyMotivations[userBirthdayMonth];
+      
+      if (motivation) {
+        motivationElement.innerHTML = `
+          <span class="month-name">${motivation.name}</span>
+          ${motivation.message}
+        `;
+      } else {
+        motivationElement.innerHTML = `
+          <span class="month-name">YOUR JOURNEY</span>
+          Your birth month holds special power. Embrace your unique path.
+        `;
+      }
+    }
+
+    // Set max date for birthdate to today
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute('max', today);
+
+    // Authentication state listener
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        userUid = user.uid;
+        isAuthenticated = true;
+        userEmail = user.email;
+        console.log("User authenticated:", userUid);
+        
+        // Load user data from Firebase
+        loadUserDataFromFirebase(userUid);
+      } else {
+        // User is signed out, redirect to index.html
+        window.location.href = "index.html";
+      }
+    });
+
+    // Load user data from Firebase
+    function loadUserDataFromFirebase(uid) {
+      if (!uid) return;
+      
+      const userDataRef = ref(database, `userData/${uid}`);
+      get(userDataRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          
+          // Load user submission data
+          userBirthdate = userData.birthdate || null;
+          userCountry = userData.country || null;
+          userGender = userData.gender || null;
+          userBirthdayDay = userData.birthdayDay || null;
+          userBirthdayMonth = userData.birthdayMonth || null;
+          lastSubmittedId = userData.lastSubmittedId || null;
+          dataSubmitted = !!userData.birthdate && !!userData.country && !!userData.gender;
+          
+          // Update UI with loaded data
+          updateUIWithUserData();
+          console.log("User data loaded from Firebase");
+        } else {
+          console.log("No user data found in Firebase, checking localStorage");
+          loadUserDataFromLocalStorage();
+        }
+      }).catch((error) => {
+        console.error("Error loading user data from Firebase:", error);
+        loadUserDataFromLocalStorage();
+      });
+    }
+
+    // Load user data from localStorage as fallback
+    function loadUserDataFromLocalStorage() {
+      try {
+        const localUserData = localStorage.getItem('userData');
+        if (localUserData) {
+          const userData = JSON.parse(localUserData);
+          
+          // Load user data
+          userBirthdate = userData.birthdate || null;
+          userCountry = userData.country || null;
+          userGender = userData.gender || null;
+          userBirthdayDay = userData.birthdayDay || null;
+          userBirthdayMonth = userData.birthdayMonth || null;
+          lastSubmittedId = userData.lastSubmittedId || null;
+          dataSubmitted = !!userData.birthdate && !!userData.country && !!userData.gender;
+          
+          // Update UI with loaded data
+          updateUIWithUserData();
+          console.log("User data loaded from localStorage");
+          
+          // If user is authenticated, sync this data to Firebase
+          if (isAuthenticated && userUid) {
+            saveUserDataToFirebase();
+          }
+        } else {
+          console.log("No user data found in localStorage");
+          // Load countries
+          loadCountries();
+        }
+      } catch (error) {
+        console.error("Error loading user data from localStorage:", error);
+        // Load countries
+        loadCountries();
+      }
+    }
+
+    // Update UI with user data
+    function updateUIWithUserData() {
+      if (userBirthdate && userCountry && userGender) {
+        // Set form fields
+        document.getElementById('birthdate').value = userBirthdate;
+        
+        // We need to make sure the countries are loaded before setting the value
+        loadCountries().then(() => {
+          document.getElementById('countrySelect').value = userCountry;
+          
+          // Update UI state
+          const submitButton = document.querySelector('.submit-button');
+          submitButton.textContent = "Submitted";
+          submitButton.style.backgroundColor = 'green';
+          submitButton.disabled = true;
+          
+          document.getElementById('resetButton').style.display = "block";
+          
+          // Disable form fields
+          document.getElementById('birthdate').classList.add('disabled-field');
+          document.getElementById('countrySelect').classList.add('disabled-field');
+        });
+        
+        // Enable statistics access
+        document.getElementById('statisticsButton').addEventListener('click', function(e) {
+          window.location.href = "Statistiques.html";
+        });
+        
+        // Hide stats message if it's showing
+        document.getElementById('statsMessage').style.display = 'none';
+      } else {
+        // Load countries if we need to display the form
+        loadCountries();
+        
+        // Add event listener for statistics button to show warning
+        document.getElementById('statisticsButton').addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('statsMessage').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('statsMessage').style.display = 'none';
+          }, 3000);
+        });
+      }
+    }
+
+    // Load countries from REST API
+    function loadCountries() {
+      return new Promise((resolve, reject) => {
+        fetch('https://restcountries.com/v3.1/all')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network error: ' + response.status);
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Sort countries alphabetically
+            data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+            const countrySelect = document.getElementById('countrySelect');
+            countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+            
+            // Add each country to the dropdown
+            data.forEach(country => {
+              const option = document.createElement('option');
+              option.value = country.name.common;
+              option.textContent = country.name.common;
+              countrySelect.appendChild(option);
+            });
+            
+            resolve();
+          })
+          .catch(error => {
+            console.error('Error loading countries:', error);
+            // Fallback with a basic list of common countries
+            const commonCountries = [
+              "United States", "United Kingdom", "Canada", "Australia", 
+              "France", "Germany", "Italy", "Spain", "Japan", "China", 
+              "India", "Brazil", "Mexico", "Russia", "South Africa"
+            ];
+            
+            const countrySelect = document.getElementById('countrySelect');
+            countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+            
+            commonCountries.forEach(country => {
+              const option = document.createElement('option');
+              option.value = country;
+              option.textContent = country;
+              countrySelect.appendChild(option);
+            });
+            
+            resolve();
+          });
+      });
+    }
+
+    // Save user data to Firebase
+    function saveUserDataToFirebase() {
+      if (!isAuthenticated || !userUid) {
+        console.log("Cannot save to Firebase: User not authenticated");
+        return false;
+      }
+      
+      try {
+        // Save user data to Firebase
+        const userData = {
+          birthdate: userBirthdate,
+          country: userCountry,
+          gender: userGender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          lastSubmittedId: lastSubmittedId,
+          email: userEmail,
+          timestamp: Date.now()
+        };
+        
+        set(ref(database, `userData/${userUid}`), userData)
+          .then(() => {
+            console.log("User data successfully saved to Firebase");
+            return true;
+          })
+          .catch((error) => {
+            console.error("Error saving user data to Firebase:", error);
+            return false;
+          });
+      } catch (error) {
+        console.error("Exception saving user data to Firebase:", error);
+        return false;
+      }
+    }
+
+    // Save user data to localStorage
+    function saveUserDataToLocalStorage() {
+      try {
+        const userData = {
+          birthdate: userBirthdate,
+          country: userCountry,
+          gender: userGender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          lastSubmittedId: lastSubmittedId,
+          email: userEmail,
+          timestamp: Date.now()
+        };
+        
+        localStorage.setItem('userData', JSON.stringify(userData));
+        return true;
+      } catch (error) {
+        console.error("Error saving user data to localStorage:", error);
+        return false;
+      }
+    }
+
+    // Submit button click handler
+    document.querySelector('.submit-button').addEventListener('click', function() {
+      const birthdate = document.getElementById('birthdate').value;
+      const country = document.getElementById('countrySelect').value;
+
+      if (birthdate && country) {
+        // Store user input
+        userBirthdate = birthdate;
+        userCountry = country;
+        
+        // Extract day and month from birthdate
+        const birthdateParts = birthdate.split('-');
+        userBirthdayDay = parseInt(birthdateParts[2]);
+        userBirthdayMonth = parseInt(birthdateParts[1]);
+        
+        // Update UI to show loading state
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.textContent = "Please wait...";
+        submitButton.style.backgroundColor = 'orange';
+
+        // Disable form fields during submission
+        document.getElementById('birthdate').classList.add('disabled-field');
+        document.getElementById('countrySelect').classList.add('disabled-field');
+
+        // Show gender selection modal
+        document.getElementById('genderModal').style.display = 'block';
+      } else {
+        alert("Please enter a date of birth and select a country!");
+      }
+    });
+
+    // Gender option buttons click handlers
+    document.querySelectorAll('.gender-option').forEach(button => {
+      button.addEventListener('click', function() {
+        userGender = this.value;
+        submitData(this.value);
+      });
+    });
+
+    // Submit data to database
+    function submitData(gender) {
+      const birthdate = userBirthdate;
+      const country = userCountry;
+      const submitButton = document.querySelector('.submit-button');
+
+      // Update user gender
+      userGender = gender;
+      dataSubmitted = true;
+      
+      // Store data in localStorage as reliable backup
+      const localSuccess = saveUserDataToLocalStorage();
+      
+      // If authenticated, store the data in Firebase database
+      if (isAuthenticated && userUid) {
+        try {
+          // Save user profile data
+          saveUserDataToFirebase();
+          
+          // Also create a new submission entry for statistics
+          push(ref(database, 'birthdates'), {
+            date: birthdate,
+            country: country,
+            gender: gender,
+            birthdayDay: userBirthdayDay,
+            birthdayMonth: userBirthdayMonth,
+            uid: userUid,
+            timestamp: Date.now()
+          }).then((newEntryRef) => {
+            // Store the ID for potential reset
+            lastSubmittedId = newEntryRef.key;
+            console.log("Submission successfully added to Firebase:", lastSubmittedId);
+            
+            // Update the user profile with the submission ID
+            update(ref(database, `userData/${userUid}`), {
+              lastSubmittedId: lastSubmittedId
+            });
+            
+            // Also update localStorage
+            saveUserDataToLocalStorage();
+          }).catch((error) => {
+            console.warn("Firebase submission error:", error);
+          });
+        } catch (error) {
+          console.warn("Firebase submission exception:", error);
+        }
+      } else {
+        console.log("User not authenticated, data saved only to localStorage");
+      }
+      
+      // Complete the submission process
+      if (localSuccess) {
+        finishSubmission(true);
+      } else {
+        finishSubmission(false);
+      }
+    }
+
+    // Complete the submission process and update UI
+    function finishSubmission(success) {
+      const submitButton = document.querySelector('.submit-button');
+      
+      if (success) {
+        // Update UI for successful submission
+        submitButton.style.backgroundColor = 'green';
+        submitButton.textContent = "Submitted";
+        submitButton.disabled = true;
+        document.getElementById('resetButton').style.display = "block";
+        document.getElementById('genderModal').style.display = 'none';
+        
+        // Update stats button to enable access
+        document.getElementById('statisticsButton').removeEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('statsMessage').style.display = 'block';
+        });
+        
+        document.getElementById('statisticsButton').addEventListener('click', function() {
+          window.location.href = "Statistiques.html";
+        });
+        
+        // Hide stats message if it's showing
+        document.getElementById('statsMessage').style.display = 'none';
+      } else {
+        // Handle submission error
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = "Error";
+        console.error("Error during submission");
+        
+        // Re-enable form fields on error
+        document.getElementById('birthdate').classList.remove('disabled-field');
+        document.getElementById('countrySelect').classList.remove('disabled-field');
+      }
+    }
+
+    // Reset button handler
+    document.getElementById('resetButton').addEventListener('click', function() {
+      if (isAuthenticated && userUid && lastSubmittedId) {
+        // Remove the submission from Firebase if authenticated
+        try {
+          remove(ref(database, `birthdates/${lastSubmittedId}`))
+            .then(() => {
+              console.log("Firebase submission data removed");
+              
+              // Update user profile to reflect the reset
+              update(ref(database, `userData/${userUid}`), {
+                lastSubmittedId: null,
+                birthdate: null,
+                country: null,
+                gender: null,
+                birthdayDay: null,
+                birthdayMonth: null
+              }).then(() => {
+                console.log("User profile updated after reset");
+              });
+            })
+            .catch((error) => {
+              console.warn("Error removing Firebase submission:", error);
+            });
+        } catch (error) {
+          console.warn("Exception removing Firebase submission:", error);
+        }
+      }
+      
+      // Complete the reset process
+      finishReset();
+    });
+    
+    // Complete the reset process
+    function finishReset() {
+      // Reset form and UI
+      document.getElementById('birthdate').value = '';
+      document.getElementById('countrySelect').value = '';
+      const submitButton = document.querySelector('.submit-button');
+      submitButton.textContent = "Submit";
+      submitButton.style.backgroundColor = 'gray';
+      submitButton.disabled = false;
+      document.getElementById('resetButton').style.display = "none";
+      
+      // Reset all user variables
+      dataSubmitted = false;
+      userBirthdate = null;
+      userCountry = null;
+      userGender = null;
+      userBirthdayDay = null;
+      userBirthdayMonth = null;
+      lastSubmittedId = null;
+      
+      // Re-enable form fields
+      document.getElementById('birthdate').classList.remove('disabled-field');
+      document.getElementById('countrySelect').classList.remove('disabled-field');
+      
+      // Clear localStorage
+      localStorage.removeItem('userData');
+      
+      // Update stats button to disable access
+      document.getElementById('statisticsButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('statsMessage').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('statsMessage').style.display = 'none';
+        }, 3000);
+      });
+      
+      console.log("Reset complete");
+    }
+
+    // Flower button handler - show motivation based on user's birth month
+    document.getElementById('flowerButton').addEventListener('click', function() {
+      if (userBirthdayMonth) {
+        // User has submitted data, show motivation based on birth month
+        updateMotivationByBirthMonth();
+      } else {
+        // User hasn't submitted data yet, show generic message
+        const motivationElement = document.getElementById('monthlyMotivation');
+        motivationElement.innerHTML = `
+          <span class="month-name">DISCOVER YOUR FLOWER</span>
+          Submit your date of birth to see your personalized monthly motivation.
+        `;
+      }
+      
+      // Show the flower modal
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.style.display = 'block';
+    });
+
+    // Close flower modal
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      document.getElementById('flowerModal').style.display = 'none';
+    });
+
+    // Profile icon click handler
+    document.getElementById('profileIcon').addEventListener('click', function() {
+      document.getElementById('profileModal').style.display = 'block';
+    });
+
+    // Close profile modal
+    document.getElementById('closeProfileModal').addEventListener('click', function() {
+      document.getElementById('profileModal').style.display = 'none';
+    });
+
+    // Delete account option click handler
+    document.getElementById('deleteAccountOption').addEventListener('click', function() {
+      document.getElementById('profileModal').style.display = 'none';
+      document.getElementById('deleteAccountModal').style.display = 'block';
+    });
+
+    // Cancel delete account button
+    document.getElementById('cancelDeleteAccount').addEventListener('click', function() {
+      document.getElementById('deleteAccountModal').style.display = 'none';
+    });
+
+    // Confirm delete account button
+    document.getElementById('confirmDeleteAccount').addEventListener('click', function() {
+      const password = document.getElementById('deleteAccountPassword').value;
+      
+      if (!password) {
+        alert("Please enter your password to confirm account deletion");
+        return;
+      }
+      
+      // Change the button to show loading state
+      const deleteButton = document.getElementById('confirmDeleteAccount');
+      const originalText = deleteButton.textContent;
+      deleteButton.innerHTML = '<div class="loading-spinner"></div>';
+      deleteButton.disabled = true;
+      
+      // Get the current user
+      const user = auth.currentUser;
+      
+      if (user && user.email) {
+        // Re-authenticate the user before deletion
+        const credential = EmailAuthProvider.credential(user.email, password);
+        
+        reauthenticateWithCredential(user, credential)
+          .then(() => {
+            // Delete all user data from database
+            if (userUid) {
+              // Delete all submissions
+              if (lastSubmittedId) {
+                remove(ref(database, `birthdates/${lastSubmittedId}`))
+                  .catch(error => console.error("Error removing submission:", error));
+              }
+              
+              // Delete user profile data
+              remove(ref(database, `userData/${userUid}`))
+                .catch(error => console.error("Error removing user data:", error));
+            }
+            
+            // Delete the user account
+            return deleteUser(user);
+          })
+          .then(() => {
+            // Clear local storage
+            localStorage.removeItem('userData');
+            alert("Your account has been successfully deleted.");
+            
+            // Redirect to the homepage
+            window.location.href = "index.html";
+          })
+          .catch((error) => {
+            // Reset the button
+            deleteButton.textContent = originalText;
+            deleteButton.disabled = false;
+            
+            // Show error
+            if (error.code === 'auth/wrong-password') {
+              alert("Incorrect password. Please try again.");
+            } else {
+              alert("Error deleting account: " + error.message);
+              console.error("Account deletion error:", error);
+            }
+          });
+      } else {
+        // Reset the button
+        deleteButton.textContent = originalText;
+        deleteButton.disabled = false;
+        
+        alert("You must be logged in with an email account to delete your account.");
+      }
+    });
+
+    // Logout option click handler
+    document.getElementById('logoutOption').addEventListener('click', function() {
+      signOut(auth).then(() => {
+        // Clear local storage
+        localStorage.removeItem('userData');
+        alert("You have been logged out successfully.");
+        
+        // Redirect to the homepage
+        window.location.href = "index.html";
+      }).catch((error) => {
+        console.error("Error signing out:", error);
+        alert("Error signing out. Please try again.");
+      });
+    });
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const genderModal = document.getElementById('genderModal');
+      const flowerModal = document.getElementById('flowerModal');
+      const profileModal = document.getElementById('profileModal');
+      const deleteAccountModal = document.getElementById('deleteAccountModal');
+      
+      if (event.target == genderModal) {
+        genderModal.style.display = "none";
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = "Error";
+        
+        // Re-enable fields if user closes modal without choosing
+        document.getElementById('birthdate').classList.remove('disabled-field');
+        document.getElementById('countrySelect').classList.remove('disabled-field');
+      }
+      
+      if (event.target == flowerModal) {
+        flowerModal.style.display = "none";
+      }
+      
+      if (event.target == profileModal) {
+        profileModal.style.display = "none";
+      }
+      
+      if (event.target == deleteAccountModal) {
+        deleteAccountModal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>
