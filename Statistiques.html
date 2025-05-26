@@ -146,7 +146,7 @@
         .modal {
             display: none; 
             position: fixed; 
-            z-index: 1; 
+            z-index: 10; 
             left: 0;
             top: 0;
             width: 100%; 
@@ -157,12 +157,12 @@
 
         .modal-content {
             background-color: #fff;
-            margin: 34% auto; 
-            padding: 14px;
+            margin: 45% auto; /* Moved modals down */
+            padding: 12px;
             border: 2px solid #007BFF; 
-            border-radius: 40px; 
-            width: 80%; 
-            max-width: 290px; 
+            border-radius: 20px; 
+            width: 75%; 
+            max-width: 250px; /* Reduced size */
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
@@ -172,7 +172,7 @@
             font-weight: bold;
             display: block; 
             text-align: center; 
-            margin-bottom: 10px; 
+            margin-bottom: 5px; 
             cursor: pointer;
         }
 
@@ -184,6 +184,7 @@
             color: #333; 
             font-size: 0.8em; 
             text-align: center; 
+            margin: 5px 0;
         }
 
         .support-button {
@@ -191,10 +192,10 @@
             color: white;
             border: none;
             border-radius: 10px;
-            padding: 8px 12px; 
+            padding: 7px 10px; 
             cursor: pointer;
             font-size: 0.8em; 
-            margin-top: 10px; 
+            margin-top: 8px; 
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -204,188 +205,83 @@
         .support-button:hover {
             background-color: #0056b3;
         }
+        
+        /* Access Code Modal Styles */
+        #accessCodeModal {
+            display: block;
+            z-index: 100;
+        }
+        
+        #accessCodeModal .modal-content {
+            border-radius: 20px;
+            text-align: center;
+            padding: 15px;
+            max-width: 260px;
+            margin: 45% auto;
+        }
+        
+        #accessCodeModal h3 {
+            color: #007BFF;
+            font-family: 'Billabong', cursive;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        
+        .access-description {
+            color: #555;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .access-input {
+            width: 75%;
+            padding: 8px;
+            margin: 5px auto;
+            border: 2px solid #007BFF;
+            border-radius: 15px;
+            font-size: 0.9em;
+            text-align: center;
+            display: block;
+        }
+        
+        .verify-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 12px;
+            font-size: 0.9em;
+            cursor: pointer;
+            margin: 10px auto;
+            display: block;
+            width: 60%;
+            transition: background-color 0.3s;
+        }
+        
+        .verify-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .access-link {
+            color: #007BFF;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        
+        .access-link:hover {
+            color: #0056b3;
+        }
+        
+        #forgotConfirmModal .modal-content {
+            border-radius: 20px;
+            padding: 12px;
+            max-width: 250px;
+        }
     </style>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-        const firebaseConfig = {
-  apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
-  authDomain: "genz-abb36.firebaseapp.com",
-  databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
-  projectId: "genz-abb36",
-  storageBucket: "genz-abb36.firebasestorage.app",
-  messagingSenderId: "405021535683",
-  appId: "1:405021535683:web:ee5a28fde27f5558046176",
-  measurementId: "G-XZNQND2J00"
-};
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const auth = getAuth();
-
-        let allData = {}; // Store global data
-
-        function fetchData() {
-            const birthdatesRef = ref(db, 'birthdates');
-            onValue(birthdatesRef, (snapshot) => {
-                allData = snapshot.val() || {}; // Store data in a global variable
-                console.log(allData); // Display retrieved data
-                updateCountries(); // Update available countries
-                updateCards(); // Update cards with data
-            });
-        }
-
-        function updateCountries() {
-            const countrySelect = document.getElementById('countrySelect');
-            const countries = new Set();
-
-            // Get unique countries from data
-            Object.keys(allData).forEach(userId => {
-                const userData = allData[userId];
-                countries.add(userData.country); // Make sure 'country' is a property of userData
-            });
-
-            // Fill country selector
-            countries.forEach(country => {
-                const option = document.createElement('option');
-                option.value = country;
-                option.textContent = country;
-                countrySelect.appendChild(option);
-            });
-        }
-
-        function calculateAge(birthDate) {
-            const today = new Date();
-            const birth = new Date(birthDate);
-            let age = today.getFullYear() - birth.getFullYear();
-            const monthDiff = today.getMonth() - birth.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-                age--;
-            }
-            return age;
-        }
-
-        function updateCards() {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = ''; // Clear current content
-
-            const selectedCountry = document.getElementById('countrySelect').value;
-            const selectedCategory = document.getElementById('categorySelect').value;
-
-            if (Object.keys(allData).length === 0) {
-                grid.innerHTML = '<p>No data found.</p>';
-                return;
-            }
-
-            const counts = {};
-
-            // Count by category
-            Object.keys(allData).forEach(userId => {
-                const userData = allData[userId];
-                if (userData.country === selectedCountry || selectedCountry === '') {
-                    let key;
-                    if (selectedCategory === 'daily') {
-                        key = new Date(userData.date).toLocaleDateString('en-US', { weekday: 'long' });
-                    } else if (selectedCategory === 'monthly') {
-                        key = new Date(userData.date).toLocaleDateString('en-US', { month: 'long' });
-                    } else if (selectedCategory === 'yearly') {
-                        key = new Date(userData.date).getFullYear();
-                    } else if (selectedCategory === 'gender') {
-                        key = userData.gender; // For 'gender' category
-                    } else if (selectedCategory === 'age') {
-                        key = calculateAge(userData.date); // Calculate age
-                    } else if (selectedCategory === 'population') {
-                        key = userData.country; // For population, use country
-                    }
-
-                    counts[key] = (counts[key] || 0) + 1;
-                }
-            });
-
-            // Display cards
-            Object.keys(counts).forEach(key => {
-                const card = document.createElement('div');
-                card.className = 'card small-card';
-                card.innerHTML = `<div class="title">${key}</div><div class="value">${counts[key]}</div>`;
-                grid.appendChild(card);
-            });
-
-            // If no data found
-            if (grid.innerHTML === '') {
-                grid.innerHTML = '<p>No data found.</p>';
-            }
-        }
-
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function(...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const categorySelect = document.getElementById('categorySelect');
-            const countrySelect = document.getElementById('countrySelect');
-
-            countrySelect.addEventListener('change', debounce(updateCards, 300));
-            categorySelect.addEventListener('change', debounce(updateCards, 300));
-            fetchData(); // Load data on startup
-
-            // Open support modal
-            document.getElementById('supportBtn').onclick = function() {
-                document.getElementById('supportModal').style.display = 'block';
-            };
-
-            // Open FAQ modal
-            document.getElementById('faqBtn').onclick = function() {
-                document.getElementById('faqModal').style.display = 'block';
-            };
-
-            // Close modal
-            document.querySelectorAll('.close').forEach(closeButton => {
-                closeButton.onclick = function() {
-                    this.closest('.modal').style.display = 'none';
-                };
-            });
-
-            // Close modal by clicking outside
-            window.onclick = function(event) {
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    if (event.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            };
-
-            // Open PayPal link
-            document.getElementById('paypalBtn').onclick = function() {
-                window.location.href = 'https://www.paypal.com/donate/?hosted_button_id=ATEVL4JGUQWGY';
-            };
-
-            // Change support button color every second
-            const supportButton = document.getElementById('supportBtn');
-            let isGreenSupport = false;
-
-            setInterval(() => {
-                isGreenSupport = !isGreenSupport; // Toggle color
-                supportButton.style.backgroundColor = isGreenSupport ? 'green' : '#007BFF'; // Change color
-            }, 700);
-
-            // Change PayPal button color every second
-            const paypalButton = document.getElementById('paypalBtn');
-            let isGreenPaypal = false;
-
-            setInterval(() => {
-                isGreenPaypal = !isGreenPaypal; // Toggle color
-                paypalButton.style.backgroundColor = isGreenPaypal ? 'green' : '#007BFF'; // Change color
-            }, 10000);
-        });
-    </script>
 </head>
 <body>
 
@@ -434,11 +330,26 @@
     </div>
 </div>
 
+<!-- Access Code Modal -->
+<div id="accessCodeModal" class="modal">
+    <div class="modal-content">
+        <h3>Access Code</h3>
+        <p class="access-description">
+            Enter your 6-character code to view stats.
+        </p>
+        <input type="text" id="accessCodeInput" class="access-input" placeholder="Enter code" maxlength="6">
+        <button id="verifyButton" class="verify-button">Verify</button>
+        <div style="margin-top: 5px;">
+            <a href="index.html" id="getAccessLink" class="access-link">Get access code</a>
+        </div>
+    </div>
+</div>
+
 <!-- Support Modal -->
 <div id="supportModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Thank you for supporting G-Z! Every contribution counts. With your help, we can continue to develop this exciting project, create innovative analyses, and provide free statistics to a worldwide audience.</p>
+        <p>Support G-Z to help us develop this project and provide free statistics worldwide.</p>
         <button id="paypalBtn" class="support-button">Support now</button>
     </div>
 </div>
@@ -447,9 +358,237 @@
 <div id="faqModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        Statistics are automatically updated with each submission in the tables.
+        <p>Stats update automatically with each new submission.</p>
     </div>
 </div>
 
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth();
+
+    let allData = {}; // Store global data
+
+    function fetchData() {
+        const birthdatesRef = ref(db, 'birthdates');
+        onValue(birthdatesRef, (snapshot) => {
+            allData = snapshot.val() || {}; // Store data in a global variable
+            console.log(allData); // Display retrieved data
+            updateCountries(); // Update available countries
+            updateCards(); // Update cards with data
+        });
+    }
+
+    function updateCountries() {
+        const countrySelect = document.getElementById('countrySelect');
+        const countries = new Set();
+
+        // Get unique countries from data
+        Object.keys(allData).forEach(userId => {
+            const userData = allData[userId];
+            countries.add(userData.country); // Make sure 'country' is a property of userData
+        });
+
+        // Fill country selector
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country;
+            option.textContent = country;
+            countrySelect.appendChild(option);
+        });
+    }
+
+    function calculateAge(birthDate) {
+        const today = new Date();
+        const birth = new Date(birthDate);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    function updateCards() {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = ''; // Clear current content
+
+        const selectedCountry = document.getElementById('countrySelect').value;
+        const selectedCategory = document.getElementById('categorySelect').value;
+
+        if (Object.keys(allData).length === 0) {
+            grid.innerHTML = '<p>No data found.</p>';
+            return;
+        }
+
+        const counts = {};
+
+        // Count by category
+        Object.keys(allData).forEach(userId => {
+            const userData = allData[userId];
+            if (userData.country === selectedCountry || selectedCountry === '') {
+                let key;
+                if (selectedCategory === 'daily') {
+                    key = new Date(userData.date).toLocaleDateString('en-US', { weekday: 'long' });
+                } else if (selectedCategory === 'monthly') {
+                    key = new Date(userData.date).toLocaleDateString('en-US', { month: 'long' });
+                } else if (selectedCategory === 'yearly') {
+                    key = new Date(userData.date).getFullYear();
+                } else if (selectedCategory === 'gender') {
+                    key = userData.gender; // For 'gender' category
+                } else if (selectedCategory === 'age') {
+                    key = calculateAge(userData.date); // Calculate age
+                } else if (selectedCategory === 'population') {
+                    key = userData.country; // For population, use country
+                }
+
+                counts[key] = (counts[key] || 0) + 1;
+            }
+        });
+
+        // Display cards
+        Object.keys(counts).forEach(key => {
+            const card = document.createElement('div');
+            card.className = 'card small-card';
+            card.innerHTML = `<div class="title">${key}</div><div class="value">${counts[key]}</div>`;
+            grid.appendChild(card);
+        });
+
+        // If no data found
+        if (grid.innerHTML === '') {
+            grid.innerHTML = '<p>No data found.</p>';
+        }
+    }
+    
+    // Access code verification function
+    async function verifyAccessCode(code) {
+        if (!code || code.length !== 6) {
+            alert("Please enter a valid 6-character access code.");
+            return false;
+        }
+        
+        try {
+            // Check if code exists in database
+            const usersRef = ref(db, 'birthdates');
+            const snapshot = await get(usersRef);
+            const data = snapshot.val();
+            
+            if (!data) return false;
+            
+            // Check if access code matches any user
+            for (const userId in data) {
+                if (data[userId].accessCode === code) {
+                    // Code found, grant access
+                    document.getElementById('accessCodeModal').style.display = 'none';
+                    return true;
+                }
+            }
+            
+            // No matching code found
+            alert("Invalid access code.");
+            return false;
+        } catch (error) {
+            console.error("Error verifying access code:", error);
+            alert("An error occurred while verifying your access code. Please try again.");
+            return false;
+        }
+    }
+
+    // Debounce function
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // DOM Content Loaded Event Handler
+    window.addEventListener('DOMContentLoaded', () => {
+        const categorySelect = document.getElementById('categorySelect');
+        const countrySelect = document.getElementById('countrySelect');
+        const supportBtn = document.getElementById('supportBtn');
+        const faqBtn = document.getElementById('faqBtn');
+        const supportModal = document.getElementById('supportModal');
+        const faqModal = document.getElementById('faqModal');
+        const paypalBtn = document.getElementById('paypalBtn');
+
+        // Event listeners for select elements
+        countrySelect.addEventListener('change', debounce(updateCards, 300));
+        categorySelect.addEventListener('change', debounce(updateCards, 300));
+        
+        // Event listener for Support button
+        supportBtn.addEventListener('click', function() {
+            supportModal.style.display = 'block';
+        });
+        
+        // Event listener for FAQ button
+        faqBtn.addEventListener('click', function() {
+            faqModal.style.display = 'block';
+        });
+        
+        // Event listener for PayPal button
+        paypalBtn.addEventListener('click', function() {
+            window.location.href = 'https://www.paypal.com/donate/?hosted_button_id=ATEVL4JGUQWGY';
+        });
+        
+        // Close buttons for modals
+        document.querySelectorAll('.close').forEach(function(closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal') && event.target.id !== 'accessCodeModal') {
+                event.target.style.display = 'none';
+            }
+        });
+        
+        // Access code verification
+        document.getElementById('verifyButton').addEventListener('click', async () => {
+            const accessCode = document.getElementById('accessCodeInput').value;
+            const isValid = await verifyAccessCode(accessCode);
+            
+            if (isValid) {
+                fetchData(); // Load data after successful verification
+            }
+        });
+        
+        // Get access code link
+        document.getElementById('getAccessLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        });
+        
+        // Change support button color every 700ms
+        setInterval(() => {
+            supportBtn.style.backgroundColor = 
+                supportBtn.style.backgroundColor === 'green' ? '#007BFF' : 'green';
+        }, 700);
+
+        // Change PayPal button color every 10 seconds
+        setInterval(() => {
+            paypalBtn.style.backgroundColor = 
+                paypalBtn.style.backgroundColor === 'green' ? '#007BFF' : 'green';
+        }, 10000);
+    });
+</script>
 </body>
 </html>
