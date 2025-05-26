@@ -248,7 +248,7 @@
         /* Style for close cross in modals */
         .modal-close {
             position: absolute;
-            top: 6px;
+            top: 2px;
             left: 50%;
             transform: translateX(-50%);
             color: #ff0800;
@@ -311,6 +311,52 @@
             font-size: 1.1em;
             margin-bottom: 5px;
             text-transform: uppercase;
+        }
+
+        /* Access code styles */
+        .access-code {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+            letter-spacing: 2px;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            border: 1px dashed #007bff;
+            display: inline-block;
+        }
+        
+        .copy-icon {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        
+        .code-message {
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .copy-confirmation {
+            color: green;
+            font-size: 0.8em;
+            visibility: hidden;
+            margin-top: 5px;
+        }
+        
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
         }
     </style>
 </head>
@@ -446,6 +492,32 @@
       </div>
     </div>
   </div>
+  
+  <!-- Access Code Modal -->
+  <div id="accessCodeModal" class="modal">
+    <div class="modal-content">
+      <div class="billabong-title"><strong>Your Access Code</strong></div>
+      
+      <div class="code-message">
+        Please save this unique 9-digit code. You will need it to access the statistics page:
+      </div>
+      
+      <div class="access-code-container">
+        <span class="access-code" id="accessCodeDisplay"></span>
+        <i class="fas fa-copy copy-icon" id="copyCodeButton" title="Copy to clipboard"></i>
+        <div class="copy-confirmation" id="copyConfirmation">Copied!</div>
+      </div>
+      
+      <div class="code-message" style="margin-top: 20px;">
+        <strong>Important:</strong> Please copy or write down this code and keep it in a safe place. 
+        You will need this code to access the Discover page.
+      </div>
+      
+      <div class="modal-footer" style="margin-top: 20px;">
+        <button class="close-button" id="confirmCodeButton">I've saved</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
@@ -476,6 +548,7 @@
     let userBirthdayMonth = null;
     let lastSubmittedId = null;
     let userUid = null;
+    let userAccessCode = null;
 
     // Monthly motivational messages in English
     const monthlyMotivations = {
@@ -534,6 +607,16 @@
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
+
+    // Function to generate a random 9-digit code
+    function generateAccessCode() {
+      let code = '';
+      for (let i = 0; i < 9; i++) {
+        // Generate digits from 1-9 (avoiding 0)
+        code += Math.floor(Math.random() * 9) + 1;
+      }
+      return code;
+    }
 
     // Function to update monthly motivation in the flower modal based on birth month
     function updateMotivationByBirthMonth() {
@@ -669,7 +752,8 @@
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
           dataSubmitted: true,
-          lastSubmittedId: lastSubmittedId
+          lastSubmittedId: lastSubmittedId,
+          accessCode: userAccessCode
         };
         setCookie('userData', JSON.stringify(userData), 365);
       }
@@ -689,6 +773,7 @@
           userBirthdayMonth = userData.birthdayMonth;
           dataSubmitted = userData.dataSubmitted;
           lastSubmittedId = userData.lastSubmittedId;
+          userAccessCode = userData.accessCode;
           
           // Update UI with loaded data
           if (dataSubmitted) {
@@ -747,6 +832,11 @@
     document.querySelectorAll('.gender-option').forEach(button => {
       button.addEventListener('click', function() {
         userGender = this.value;
+        
+        // Generate a unique access code
+        userAccessCode = generateAccessCode();
+        
+        // Submit data
         submitData(this.value);
       });
     });
@@ -771,6 +861,7 @@
             birthdayDay: userBirthdayDay,
             birthdayMonth: userBirthdayMonth,
             uid: userUid,
+            accessCode: userAccessCode,
             timestamp: Date.now()
           }).then((newEntryRef) => {
             // Store the ID for potential reset
@@ -807,6 +898,7 @@
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
           uid: userUid || randomId,
+          accessCode: userAccessCode,
           timestamp: Date.now()
         };
         
@@ -830,12 +922,18 @@
       const submitButton = document.querySelector('.submit-button');
       
       if (success) {
+        // Close gender modal
+        document.getElementById('genderModal').style.display = 'none';
+        
+        // Display the access code in the modal
+        document.getElementById('accessCodeDisplay').textContent = userAccessCode;
+        document.getElementById('accessCodeModal').style.display = 'block';
+        
         // Update UI for successful submission
         submitButton.style.backgroundColor = 'green';
         submitButton.textContent = "Submitted";
         submitButton.disabled = true;
         document.getElementById('resetButton').style.display = "block";
-        document.getElementById('genderModal').style.display = 'none';
         dataSubmitted = true;
         
         // Save to cookie for persistence
@@ -912,6 +1010,7 @@
       userBirthdayDay = null;
       userBirthdayMonth = null;
       lastSubmittedId = null;
+      userAccessCode = null;
       
       // Re-enable form fields
       document.getElementById('birthdate').classList.remove('disabled-field');
@@ -945,10 +1044,66 @@
       document.getElementById('flowerModal').style.display = 'none';
     });
 
+    // Confirm code button in access code modal
+    document.getElementById('confirmCodeButton').addEventListener('click', function() {
+      document.getElementById('accessCodeModal').style.display = 'none';
+    });
+
+    // Copy access code to clipboard
+    document.getElementById('copyCodeButton').addEventListener('click', function() {
+      const codeText = document.getElementById('accessCodeDisplay').textContent;
+      
+      // Use modern clipboard API
+      navigator.clipboard.writeText(codeText).then(function() {
+        // Show copy confirmation
+        const copyConfirmation = document.getElementById('copyConfirmation');
+        copyConfirmation.style.visibility = 'visible';
+        copyConfirmation.classList.add('blink');
+        
+        // Hide after 2 seconds
+        setTimeout(function() {
+          copyConfirmation.style.visibility = 'hidden';
+          copyConfirmation.classList.remove('blink');
+        }, 2000);
+      }).catch(function(err) {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText;
+        textArea.style.position = 'fixed';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          const successful = document.execCommand('copy');
+          
+          if (successful) {
+            // Show copy confirmation
+            const copyConfirmation = document.getElementById('copyConfirmation');
+            copyConfirmation.style.visibility = 'visible';
+            copyConfirmation.classList.add('blink');
+            
+            // Hide after 2 seconds
+            setTimeout(function() {
+              copyConfirmation.style.visibility = 'hidden';
+              copyConfirmation.classList.remove('blink');
+            }, 2000);
+          } else {
+            console.error('Failed to copy code');
+          }
+        } catch (err) {
+          console.error('Error in copying text: ', err);
+        }
+        
+        document.body.removeChild(textArea);
+      });
+    });
+
     // Close modal when clicking outside
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
+      const accessCodeModal = document.getElementById('accessCodeModal');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -963,6 +1118,10 @@
       
       if (event.target == flowerModal) {
         flowerModal.style.display = "none";
+      }
+      
+      if (event.target == accessCodeModal) {
+        accessCodeModal.style.display = "none";
       }
     };
 
