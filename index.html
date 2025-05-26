@@ -219,7 +219,7 @@
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             padding: 8px 10px;
             cursor: pointer;
             font-size: 0.9em;
@@ -358,16 +358,47 @@
                 visibility: hidden;
             }
         }
+        
+        /* Access code container in header */
+        .access-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f7ff;
+            border: 1px solid #007bff;
+            border-radius: 12px;
+            padding: 4px 8px;
+        }
+        
+        .access-code-title {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.0em;
+            margin: 0;
+        }
+        
+        .access-code-value {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        
+        .access-code-indicator {
+            color: #777;
+            font-size: 0.8em;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
   <header>
     <h1 translate="no">G-Z</h1>
-    <div>
-      <a href="Partage.html">
-        <i class="fas fa-share share-icon"></i> <!-- Share icon -->
-      </a>
+    <div class="access-code-container" id="accessCodeContainer">
+      <div class="access-code-title">Access Code</div>
+      <div class="access-code-indicator" id="accessCodeIndicator">Submit your data to get your code</div>
+      <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
     </div>
   </header>
 
@@ -499,7 +530,7 @@
       <div class="billabong-title"><strong>Your Access Code</strong></div>
       
       <div class="code-message">
-        Please save this unique 9-digit code. You will need it to access the statistics page:
+        Please save this unique 6-character code. You will need it to access the Discover page:
       </div>
       
       <div class="access-code-container">
@@ -608,12 +639,13 @@
       "July", "August", "September", "October", "November", "December"
     ];
 
-    // Function to generate a random 9-digit code
+    // Function to generate a random 6-character alphanumeric code
     function generateAccessCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       let code = '';
-      for (let i = 0; i < 9; i++) {
-        // Generate digits from 1-9 (avoiding 0)
-        code += Math.floor(Math.random() * 9) + 1;
+      for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
       }
       return code;
     }
@@ -759,6 +791,18 @@
       }
     }
 
+    // Update the header access code display
+    function updateHeaderAccessCode() {
+      if (userAccessCode) {
+        document.getElementById('accessCodeIndicator').style.display = 'none';
+        document.getElementById('headerAccessCode').style.display = 'block';
+        document.getElementById('headerAccessCode').textContent = userAccessCode;
+      } else {
+        document.getElementById('accessCodeIndicator').style.display = 'block';
+        document.getElementById('headerAccessCode').style.display = 'none';
+      }
+    }
+
     // Load user data from cookie
     function loadUserDataFromCookie() {
       const userDataCookie = getCookie('userData');
@@ -790,6 +834,9 @@
             // Disable form fields
             document.getElementById('birthdate').classList.add('disabled-field');
             document.getElementById('countrySelect').classList.add('disabled-field');
+            
+            // Update the header access code
+            updateHeaderAccessCode();
           }
         } catch (error) {
           console.error("Error parsing user data from cookie:", error);
@@ -833,7 +880,7 @@
       button.addEventListener('click', function() {
         userGender = this.value;
         
-        // Generate a unique access code
+        // Generate a unique alphanumeric access code (6 characters)
         userAccessCode = generateAccessCode();
         
         // Submit data
@@ -929,6 +976,9 @@
         document.getElementById('accessCodeDisplay').textContent = userAccessCode;
         document.getElementById('accessCodeModal').style.display = 'block';
         
+        // Update header access code display
+        updateHeaderAccessCode();
+        
         // Update UI for successful submission
         submitButton.style.backgroundColor = 'green';
         submitButton.textContent = "Submitted";
@@ -1001,6 +1051,10 @@
       submitButton.style.backgroundColor = 'gray';
       submitButton.disabled = false;
       document.getElementById('resetButton').style.display = "none";
+      
+      // Reset access code in header
+      document.getElementById('accessCodeIndicator').style.display = 'block';
+      document.getElementById('headerAccessCode').style.display = 'none';
       
       // Reset all user variables
       dataSubmitted = false;
