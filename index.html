@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -174,7 +174,6 @@
             color: white;
         }
 
-        /* Styles for the modal */
         .modal {
             display: none;
             position: fixed;
@@ -239,13 +238,11 @@
             font-size: 1em;
         }
 
-        /* Style for disabled fields */
         .disabled-field {
             opacity: 0.7;
             pointer-events: none;
         }
         
-        /* Style for close cross in modals */
         .modal-close {
             position: absolute;
             top: 2px;
@@ -269,7 +266,6 @@
             color: white;
         }
         
-        /* Style for flower button animation */
         @keyframes flowerRotate {
             0% { transform: rotate(0deg); }
             25% { transform: rotate(15deg); }
@@ -291,7 +287,6 @@
             color: #007bff;
         }
 
-        /* Monthly motivation styles */
         .monthly-motivation {
             margin: 15px 0;
             padding: 10px;
@@ -313,7 +308,6 @@
             text-transform: uppercase;
         }
 
-        /* Access code styles */
         .access-code {
             font-size: 1.5em;
             font-weight: bold;
@@ -359,7 +353,6 @@
             }
         }
         
-        /* Access code container in header */
         .access-code-container {
             display: flex;
             flex-direction: column;
@@ -419,8 +412,8 @@
     let index = 0;
     setInterval(() => {
       button.style.borderBottom = `4px solid ${colors[index]}`;
-      index = (index + 1) % colors.length; // Cycle through colors
-    }, 400); // Change color every 400ms
+      index = (index + 1) % colors.length;
+    }, 400);
   </script>
   <div class="divider"></div>
   <div class="notification">
@@ -480,7 +473,6 @@
     </div>
   </footer>
 
-  <!-- Gender Modal -->
   <div id="genderModal" class="modal">
     <div class="modal-content">
       <div class="billabong-title"><strong>Your gender?</strong></div>
@@ -509,13 +501,11 @@
     </div>
   </div>
 
-  <!-- Flower Modal -->
   <div id="flowerModal" class="modal">
     <div class="modal-content">
       <div class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></div>
       <div class="billabong-title"><strong>Flower of Life</strong></div>
       
-      <!-- Monthly motivation will be inserted here -->
       <div class="monthly-motivation" id="monthlyMotivation"></div>
       
       <div style="margin: 15px auto; font-size: 3em; color: #ff69b4;">
@@ -524,7 +514,6 @@
     </div>
   </div>
   
-  <!-- Access Code Modal -->
   <div id="accessCodeModal" class="modal">
     <div class="modal-content">
       <div class="billabong-title"><strong>Your Access Code</strong></div>
@@ -555,7 +544,6 @@
     import { getDatabase, ref, push, remove, get, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-    // Firebase configuration - needed for database connection
     const firebaseConfig = {
       apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
       authDomain: "genz-abb36.firebaseapp.com",
@@ -570,7 +558,6 @@
     const database = getDatabase(app);
     const auth = getAuth(app);
     
-    // Variables to store user information
     let userBirthdate = null;
     let userCountry = null;
     let userGender = null;
@@ -581,7 +568,6 @@
     let userUid = null;
     let userAccessCode = null;
 
-    // Monthly motivational messages in English
     const monthlyMotivations = {
       1: {
         name: "JANUARY",
@@ -633,13 +619,11 @@
       }
     };
 
-    // Month names in English
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
 
-    // Function to generate a random 6-character alphanumeric code
     function generateAccessCode() {
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       let code = '';
@@ -650,7 +634,6 @@
       return code;
     }
 
-    // Function to update monthly motivation in the flower modal based on birth month
     function updateMotivationByBirthMonth() {
       if (!userBirthdayMonth) return;
       
@@ -670,9 +653,7 @@
       }
     }
 
-    // Cookie management functions
     function setCookie(name, value, days) {
-      // Set a cookie with specified expiration
       let expires = "";
       if (days) {
         const date = new Date();
@@ -683,7 +664,6 @@
     }
 
     function getCookie(name) {
-      // Get a cookie by name
       const nameEQ = name + "=";
       const ca = document.cookie.split(';');
       for (let i = 0; i < ca.length; i++) {
@@ -695,20 +675,16 @@
     }
 
     function eraseCookie(name) {
-      // Delete a cookie by setting negative expiration
       document.cookie = name + '=; Max-Age=-99999999; path=/';
     }
 
-    // Check for cookie acceptance
     function checkCookieConsent() {
       const cookiesAccepted = getCookie('cookiesAccepted');
       if (!cookiesAccepted) {
-        // Automatically set cookie accepted
         setCookie('cookiesAccepted', 'true', 365);
       }
     }
 
-    // Authenticate anonymously with Firebase
     signInAnonymously(auth)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -718,15 +694,12 @@
       .catch((error) => {
         console.error("Error during anonymous connection: ", error);
         
-        // Generate a pseudo-random ID as fallback
         userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
       });
 
-    // Set max date for birthdate to today
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("birthdate").setAttribute('max', today);
 
-    // Load countries from REST API
     fetch('https://restcountries.com/v3.1/all')
       .then(response => {
         if (!response.ok) {
@@ -735,12 +708,10 @@
         return response.json();
       })
       .then(data => {
-        // Sort countries alphabetically
         data.sort((a, b) => a.name.common.localeCompare(b.name.common));
         const countrySelect = document.getElementById('countrySelect');
         countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
         
-        // Add each country to the dropdown
         data.forEach(country => {
           const option = document.createElement('option');
           option.value = country.name.common;
@@ -748,12 +719,10 @@
           countrySelect.appendChild(option);
         });
         
-        // Load user data from cookie after loading countries
         loadUserDataFromCookie();
       })
       .catch(error => {
         console.error('Error loading countries:', error);
-        // Fallback with a basic list of common countries
         const commonCountries = [
           "United States", "United Kingdom", "Canada", "Australia", 
           "France", "Germany", "Italy", "Spain", "Japan", "China", 
@@ -770,11 +739,9 @@
           countrySelect.appendChild(option);
         });
         
-        // Load user data from cookie
         loadUserDataFromCookie();
       });
 
-    // Save user data to cookie
     function saveUserDataToCookie() {
       if (userBirthdate && userCountry && userGender) {
         const userData = {
@@ -791,7 +758,6 @@
       }
     }
 
-    // Update the header access code display
     function updateHeaderAccessCode() {
       if (userAccessCode) {
         document.getElementById('accessCodeIndicator').style.display = 'none';
@@ -803,12 +769,10 @@
       }
     }
 
-    // Load user data from cookie
     function loadUserDataFromCookie() {
       const userDataCookie = getCookie('userData');
       if (userDataCookie) {
         try {
-          // Parse stored data
           const userData = JSON.parse(userDataCookie);
           userBirthdate = userData.birthdate;
           userCountry = userData.country;
@@ -819,7 +783,6 @@
           lastSubmittedId = userData.lastSubmittedId;
           userAccessCode = userData.accessCode;
           
-          // Update UI with loaded data
           if (dataSubmitted) {
             document.getElementById('birthdate').value = userBirthdate;
             document.getElementById('countrySelect').value = userCountry;
@@ -831,11 +794,9 @@
             
             document.getElementById('resetButton').style.display = "block";
             
-            // Disable form fields
             document.getElementById('birthdate').classList.add('disabled-field');
             document.getElementById('countrySelect').classList.add('disabled-field');
             
-            // Update the header access code
             updateHeaderAccessCode();
           }
         } catch (error) {
@@ -844,63 +805,50 @@
       }
     }
 
-    // Submit button click handler
     document.querySelector('.submit-button').addEventListener('click', function() {
       const birthdate = document.getElementById('birthdate').value;
       const country = document.getElementById('countrySelect').value;
 
       if (birthdate && country) {
-        // Store user input
         userBirthdate = birthdate;
         userCountry = country;
         
-        // Extract day and month from birthdate
         const birthdateParts = birthdate.split('-');
         userBirthdayDay = parseInt(birthdateParts[2]);
         userBirthdayMonth = parseInt(birthdateParts[1]);
         
-        // Update UI to show loading state
         const submitButton = document.querySelector('.submit-button');
         submitButton.textContent = "Please wait...";
         submitButton.style.backgroundColor = 'orange';
 
-        // Disable form fields during submission
         document.getElementById('birthdate').classList.add('disabled-field');
         document.getElementById('countrySelect').classList.add('disabled-field');
 
-        // Show gender selection modal
         document.getElementById('genderModal').style.display = 'block';
       } else {
         alert("Please enter a date of birth and select a country!");
       }
     });
 
-    // Gender option buttons click handlers
     document.querySelectorAll('.gender-option').forEach(button => {
       button.addEventListener('click', function() {
         userGender = this.value;
         
-        // Generate a unique alphanumeric access code (6 characters)
         userAccessCode = generateAccessCode();
         
-        // Submit data
         submitData(this.value);
       });
     });
 
-    // Submit data to Firebase with localStorage fallback
     function submitData(gender) {
       const birthdate = userBirthdate;
       const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
-      // Always submit to localStorage first as a reliable backup
       const localSuccess = submitToLocalStorage(gender);
       
-      // Then try to submit to Firebase if localStorage succeeded
       if (localSuccess) {
         try {
-          // Create a new database entry
           push(ref(database, 'birthdates'), {
             date: birthdate,
             country: country,
@@ -911,33 +859,25 @@
             accessCode: userAccessCode,
             timestamp: Date.now()
           }).then((newEntryRef) => {
-            // Store the ID for potential reset
             lastSubmittedId = newEntryRef.key;
             console.log("Data successfully submitted to Firebase:", lastSubmittedId);
           }).catch((error) => {
             console.warn("Firebase submission error:", error);
-            // Already submitted to localStorage, so we continue
           });
         } catch (error) {
           console.warn("Firebase submission exception:", error);
-          // Already submitted to localStorage, so we continue
         }
         
-        // Update UI since localStorage submission succeeded
         finishSubmission(true);
       } else {
-        // Both Firebase and localStorage failed
         finishSubmission(false);
       }
     }
 
-    // Submit to localStorage - more reliable than Firebase with permission issues
     function submitToLocalStorage(gender) {
       try {
-        // Generate a pseudo-random ID
         const randomId = Date.now().toString(36) + Math.random().toString(36).substring(2);
         
-        // Store data in localStorage
         const data = {
           date: userBirthdate,
           country: userCountry,
@@ -949,12 +889,10 @@
           timestamp: Date.now()
         };
         
-        // Create or append to submissions array
         const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
         submissions.push(data);
         localStorage.setItem('submissions', JSON.stringify(submissions));
         
-        // Store ID for reset functionality
         lastSubmittedId = lastSubmittedId || "local_" + randomId;
         
         return true;
@@ -964,48 +902,37 @@
       }
     }
 
-    // Complete the submission process and update UI
     function finishSubmission(success) {
       const submitButton = document.querySelector('.submit-button');
       
       if (success) {
-        // Close gender modal
         document.getElementById('genderModal').style.display = 'none';
         
-        // Display the access code in the modal
         document.getElementById('accessCodeDisplay').textContent = userAccessCode;
         document.getElementById('accessCodeModal').style.display = 'block';
         
-        // Update header access code display
         updateHeaderAccessCode();
         
-        // Update UI for successful submission
         submitButton.style.backgroundColor = 'green';
         submitButton.textContent = "Submitted";
         submitButton.disabled = true;
         document.getElementById('resetButton').style.display = "block";
         dataSubmitted = true;
         
-        // Save to cookie for persistence
         saveUserDataToCookie();
       } else {
-        // Handle submission error
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
         console.error("Error during submission");
         
-        // Re-enable form fields on error
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
       }
     }
 
-    // Reset button handler
     document.getElementById('resetButton').addEventListener('click', function() {
-      // Always reset localStorage first
       resetLocalStorageData();
       
-      // Then try to reset Firebase if it's a Firebase ID
       if (lastSubmittedId && !lastSubmittedId.startsWith('local_')) {
         try {
           remove(ref(database, `birthdates/${lastSubmittedId}`))
@@ -1014,19 +941,15 @@
             })
             .catch((error) => {
               console.warn("Firebase reset error:", error);
-              // Already reset localStorage, so we continue
             });
         } catch (error) {
           console.warn("Firebase reset exception:", error);
-          // Already reset localStorage, so we continue
         }
       }
       
-      // Complete the reset process
       finishReset();
     });
     
-    // Reset localStorage data
     function resetLocalStorageData() {
       try {
         const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
@@ -1041,9 +964,7 @@
       }
     }
     
-    // Complete the reset process
     function finishReset() {
-      // Reset form and UI
       document.getElementById('birthdate').value = '';
       document.getElementById('countrySelect').value = '';
       const submitButton = document.querySelector('.submit-button');
@@ -1052,11 +973,9 @@
       submitButton.disabled = false;
       document.getElementById('resetButton').style.display = "none";
       
-      // Reset access code in header
       document.getElementById('accessCodeIndicator').style.display = 'block';
       document.getElementById('headerAccessCode').style.display = 'none';
       
-      // Reset all user variables
       dataSubmitted = false;
       userBirthdate = null;
       userCountry = null;
@@ -1066,21 +985,16 @@
       lastSubmittedId = null;
       userAccessCode = null;
       
-      // Re-enable form fields
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
       
-      // Remove saved cookie
       eraseCookie('userData');
     }
 
-    // Flower button handler - show motivation based on user's birth month
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (userBirthdayMonth) {
-        // User has submitted data, show motivation based on birth month
         updateMotivationByBirthMonth();
       } else {
-        // User hasn't submitted data yet, show generic message
         const motivationElement = document.getElementById('monthlyMotivation');
         motivationElement.innerHTML = `
           <span class="month-name">DISCOVER YOUR FLOWER</span>
@@ -1088,39 +1002,31 @@
         `;
       }
       
-      // Show the flower modal
       const flowerModal = document.getElementById('flowerModal');
       flowerModal.style.display = 'block';
     });
 
-    // Close flower modal
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
       document.getElementById('flowerModal').style.display = 'none';
     });
 
-    // Confirm code button in access code modal
     document.getElementById('confirmCodeButton').addEventListener('click', function() {
       document.getElementById('accessCodeModal').style.display = 'none';
     });
 
-    // Copy access code to clipboard
     document.getElementById('copyCodeButton').addEventListener('click', function() {
       const codeText = document.getElementById('accessCodeDisplay').textContent;
       
-      // Use modern clipboard API
       navigator.clipboard.writeText(codeText).then(function() {
-        // Show copy confirmation
         const copyConfirmation = document.getElementById('copyConfirmation');
         copyConfirmation.style.visibility = 'visible';
         copyConfirmation.classList.add('blink');
         
-        // Hide after 2 seconds
         setTimeout(function() {
           copyConfirmation.style.visibility = 'hidden';
           copyConfirmation.classList.remove('blink');
         }, 2000);
       }).catch(function(err) {
-        // Fallback for browsers that don't support clipboard API
         const textArea = document.createElement('textarea');
         textArea.value = codeText;
         textArea.style.position = 'fixed';
@@ -1132,12 +1038,10 @@
           const successful = document.execCommand('copy');
           
           if (successful) {
-            // Show copy confirmation
             const copyConfirmation = document.getElementById('copyConfirmation');
             copyConfirmation.style.visibility = 'visible';
             copyConfirmation.classList.add('blink');
             
-            // Hide after 2 seconds
             setTimeout(function() {
               copyConfirmation.style.visibility = 'hidden';
               copyConfirmation.classList.remove('blink');
@@ -1153,7 +1057,6 @@
       });
     });
 
-    // Close modal when clicking outside
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
@@ -1165,7 +1068,6 @@
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
         
-        // Re-enable fields if user closes modal without choosing
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
       }
@@ -1179,7 +1081,6 @@
       }
     };
 
-    // Run on page load
     checkCookieConsent();
   </script>
 </body>
