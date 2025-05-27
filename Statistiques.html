@@ -157,12 +157,12 @@
 
         .modal-content {
             background-color: #fff;
-            margin: 45% auto; /* Moved modals down */
+            margin: 45% auto; 
             padding: 12px;
             border: 2px solid #007BFF; 
             border-radius: 20px; 
             width: 75%; 
-            max-width: 250px; /* Reduced size */
+            max-width: 250px; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
@@ -206,7 +206,6 @@
             background-color: #0056b3;
         }
         
-        /* Access Code Modal Styles */
         #accessCodeModal {
             display: block;
             z-index: 100;
@@ -313,7 +312,6 @@
 <div class="dashboard">
     <select class="country-select" aria-label="Select a country" id="countrySelect">
         <option value="">All countries</option>
-        <!-- Country options will be added dynamically -->
     </select>
 
     <select class="category-select" aria-label="Select a category" id="categorySelect">
@@ -326,11 +324,9 @@
     </select>
 
     <div class="grid" id="grid">
-        <!-- Cards will be generated here -->
     </div>
 </div>
 
-<!-- Access Code Modal -->
 <div id="accessCodeModal" class="modal">
     <div class="modal-content">
         <h3>Access Code</h3>
@@ -345,7 +341,6 @@
     </div>
 </div>
 
-<!-- Support Modal -->
 <div id="supportModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -354,7 +349,6 @@
     </div>
 </div>
 
-<!-- Frequently Asked Questions Modal -->
 <div id="faqModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -382,15 +376,15 @@
     const db = getDatabase(app);
     const auth = getAuth();
 
-    let allData = {}; // Store global data
+    let allData = {};
 
     function fetchData() {
         const birthdatesRef = ref(db, 'birthdates');
         onValue(birthdatesRef, (snapshot) => {
-            allData = snapshot.val() || {}; // Store data in a global variable
-            console.log(allData); // Display retrieved data
-            updateCountries(); // Update available countries
-            updateCards(); // Update cards with data
+            allData = snapshot.val() || {};
+            console.log(allData);
+            updateCountries();
+            updateCards();
         });
     }
 
@@ -398,13 +392,11 @@
         const countrySelect = document.getElementById('countrySelect');
         const countries = new Set();
 
-        // Get unique countries from data
         Object.keys(allData).forEach(userId => {
             const userData = allData[userId];
-            countries.add(userData.country); // Make sure 'country' is a property of userData
+            countries.add(userData.country);
         });
 
-        // Fill country selector
         countries.forEach(country => {
             const option = document.createElement('option');
             option.value = country;
@@ -426,7 +418,7 @@
 
     function updateCards() {
         const grid = document.getElementById('grid');
-        grid.innerHTML = ''; // Clear current content
+        grid.innerHTML = '';
 
         const selectedCountry = document.getElementById('countrySelect').value;
         const selectedCategory = document.getElementById('categorySelect').value;
@@ -438,7 +430,6 @@
 
         const counts = {};
 
-        // Count by category
         Object.keys(allData).forEach(userId => {
             const userData = allData[userId];
             if (userData.country === selectedCountry || selectedCountry === '') {
@@ -450,18 +441,17 @@
                 } else if (selectedCategory === 'yearly') {
                     key = new Date(userData.date).getFullYear();
                 } else if (selectedCategory === 'gender') {
-                    key = userData.gender; // For 'gender' category
+                    key = userData.gender;
                 } else if (selectedCategory === 'age') {
-                    key = calculateAge(userData.date); // Calculate age
+                    key = calculateAge(userData.date);
                 } else if (selectedCategory === 'population') {
-                    key = userData.country; // For population, use country
+                    key = userData.country;
                 }
 
                 counts[key] = (counts[key] || 0) + 1;
             }
         });
 
-        // Display cards
         Object.keys(counts).forEach(key => {
             const card = document.createElement('div');
             card.className = 'card small-card';
@@ -469,13 +459,11 @@
             grid.appendChild(card);
         });
 
-        // If no data found
         if (grid.innerHTML === '') {
             grid.innerHTML = '<p>No data found.</p>';
         }
     }
     
-    // Access code verification function
     async function verifyAccessCode(code) {
         if (!code || code.length !== 6) {
             alert("Please enter a valid 6-character access code.");
@@ -483,23 +471,19 @@
         }
         
         try {
-            // Check if code exists in database
             const usersRef = ref(db, 'birthdates');
             const snapshot = await get(usersRef);
             const data = snapshot.val();
             
             if (!data) return false;
             
-            // Check if access code matches any user
             for (const userId in data) {
                 if (data[userId].accessCode === code) {
-                    // Code found, grant access
                     document.getElementById('accessCodeModal').style.display = 'none';
                     return true;
                 }
             }
             
-            // No matching code found
             alert("Invalid access code.");
             return false;
         } catch (error) {
@@ -509,7 +493,6 @@
         }
     }
 
-    // Debounce function
     function debounce(func, wait) {
         let timeout;
         return function(...args) {
@@ -518,7 +501,6 @@
         };
     }
 
-    // DOM Content Loaded Event Handler
     window.addEventListener('DOMContentLoaded', () => {
         const categorySelect = document.getElementById('categorySelect');
         const countrySelect = document.getElementById('countrySelect');
@@ -528,62 +510,52 @@
         const faqModal = document.getElementById('faqModal');
         const paypalBtn = document.getElementById('paypalBtn');
 
-        // Event listeners for select elements
         countrySelect.addEventListener('change', debounce(updateCards, 300));
         categorySelect.addEventListener('change', debounce(updateCards, 300));
         
-        // Event listener for Support button
         supportBtn.addEventListener('click', function() {
             supportModal.style.display = 'block';
         });
         
-        // Event listener for FAQ button
         faqBtn.addEventListener('click', function() {
             faqModal.style.display = 'block';
         });
         
-        // Event listener for PayPal button
         paypalBtn.addEventListener('click', function() {
             window.location.href = 'https://www.paypal.com/donate/?hosted_button_id=ATEVL4JGUQWGY';
         });
         
-        // Close buttons for modals
         document.querySelectorAll('.close').forEach(function(closeBtn) {
             closeBtn.addEventListener('click', function() {
                 this.closest('.modal').style.display = 'none';
             });
         });
         
-        // Close modal when clicking outside
         window.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal') && event.target.id !== 'accessCodeModal') {
                 event.target.style.display = 'none';
             }
         });
         
-        // Access code verification
         document.getElementById('verifyButton').addEventListener('click', async () => {
             const accessCode = document.getElementById('accessCodeInput').value;
             const isValid = await verifyAccessCode(accessCode);
             
             if (isValid) {
-                fetchData(); // Load data after successful verification
+                fetchData();
             }
         });
         
-        // Get access code link
         document.getElementById('getAccessLink').addEventListener('click', (e) => {
             e.preventDefault();
             window.location.href = 'index.html';
         });
         
-        // Change support button color every 700ms
         setInterval(() => {
             supportBtn.style.backgroundColor = 
                 supportBtn.style.backgroundColor === 'green' ? '#007BFF' : 'green';
         }, 700);
 
-        // Change PayPal button color every 10 seconds
         setInterval(() => {
             paypalBtn.style.backgroundColor = 
                 paypalBtn.style.backgroundColor === 'green' ? '#007BFF' : 'green';
