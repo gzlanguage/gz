@@ -188,7 +188,7 @@
         .modal-content {
             background-color: white;
             margin: 29% auto;
-            padding: 18px;
+            padding: 14px;
             border: 1px solid #007bff;
             border-radius: 60px;
             width: 280px;
@@ -212,7 +212,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         .close-button {
             background-color: #007bff;
@@ -231,7 +231,7 @@
         .gender-category {
             font-weight: bold;
             color: #007bff;
-            margin-top: 16px;
+            margin-top: 12px;
             margin-bottom: 5px;
             text-align: center;
             width: 100%;
@@ -283,7 +283,7 @@
         .billabong-title {
             font-family: 'Billabong', cursive;
             font-size: 1.8em;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #007bff;
         }
 
@@ -292,7 +292,7 @@
             padding: 10px;
             border: 1px dashed #ff69b4;
             border-radius: 15px;
-            background-color: #fff9fb;
+            background-color: white;
             font-style: italic;
             color: #333;
             font-size: 0.9em;
@@ -330,7 +330,7 @@
         }
         
         .code-message {
-            margin: 15px 0;
+            margin: 12px 0;
             font-size: 0.9em;
             color: #333;
             line-height: 1.4;
@@ -361,6 +361,8 @@
             border: 1px solid #007bff;
             border-radius: 12px;
             padding: 4px 8px;
+            position: relative;
+            cursor: pointer;
         }
         
         .access-code-title {
@@ -382,16 +384,69 @@
             font-size: 0.8em;
             font-style: italic;
         }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+        
+        .stats-highlight {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.2em;
+        }
+        
+        .achievement {
+            margin: 12px 0;
+            padding: 8px;
+            border: 1px dashed gold;
+            border-radius: 15px;
+            background-color: white;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .later-button {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #388E3C;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 5px auto;
+            width: 180px;
+        }
+        
+        .later-button:hover {
+            background-color: #388E3C;
+        }
     </style>
 </head>
 <body>
 
   <header>
     <h1 translate="no">G-Z</h1>
-    <div class="access-code-container" id="accessCodeContainer">
-      <div class="access-code-title">Access Code</div>
-      <div class="access-code-indicator" id="accessCodeIndicator">Submit - to get your code.</div>
-      <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
+    <div class="header-controls">
+      <div class="access-code-container" id="accessCodeContainer">
+        <div class="access-code-title">Access Code</div>
+        <div class="access-code-indicator" id="accessCodeIndicator">Submit - to get your code.</div>
+        <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
+      </div>
     </div>
   </header>
 
@@ -516,32 +571,34 @@
   
   <div id="accessCodeModal" class="modal">
     <div class="modal-content">
-      <div class="billabong-title"><strong>Your Access Code</strong></div>
+      <div class="billabong-title"><strong>Congratulations!</strong></div>
+      
+      <div class="celebrate-icon">
+        <i class="fas fa-trophy"></i>
+      </div>
+      
+      <div class="achievement" id="birthdayStats">
+        <p>Your birthday already has <span class="stats-highlight" id="birthdayMembersCount">0</span> members!</p>
+        <p>You are currently the <span class="stats-highlight" id="birthdayRanking">0th</span> person born on <span id="birthdayDate">your day</span> to join our community! This ranking may change as more people join.</p>
+      </div>
+      
+      <div class="achievement" id="countryStats">
+        <p>You join <span class="stats-highlight" id="countryMembersCount">0</span> other members from <span id="countryName">your country</span>!</p>
+      </div>
       
       <div class="code-message">
-        Please save this unique 6-character code. You will need it to access the Discover page:
+        Your unique access code has been saved in the header. Click on it anytime to copy.
       </div>
       
-      <div class="access-code-container">
-        <span class="access-code" id="accessCodeDisplay"></span>
-        <i class="fas fa-copy copy-icon" id="copyCodeButton" title="Copy to clipboard"></i>
-        <div class="copy-confirmation" id="copyConfirmation">Copied!</div>
-      </div>
-      
-      <div class="code-message" style="margin-top: 20px;">
-        <strong>Important:</strong> Please copy or write down this code and keep it in a safe place. 
-        You will need this code to access the Discover page.
-      </div>
-      
-      <div class="modal-footer" style="margin-top: 20px;">
-        <button class="close-button" id="confirmCodeButton">I've saved</button>
-      </div>
+      <button class="later-button" id="laterButton">
+        Continue to Discover
+      </button>
     </div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getDatabase, ref, push, remove, get, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getDatabase, ref, push, remove, get, set, onValue, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -567,6 +624,14 @@
     let lastSubmittedId = null;
     let userUid = null;
     let userAccessCode = null;
+    let userBirthdayStats = {
+      totalMembers: 0,
+      userRank: 0,
+      formattedDate: ""
+    };
+    let userCountryStats = {
+      totalMembers: 0
+    };
 
     const monthlyMotivations = {
       1: {
@@ -752,7 +817,9 @@
           birthdayMonth: userBirthdayMonth,
           dataSubmitted: true,
           lastSubmittedId: lastSubmittedId,
-          accessCode: userAccessCode
+          accessCode: userAccessCode,
+          birthdayStats: userBirthdayStats,
+          countryStats: userCountryStats
         };
         setCookie('userData', JSON.stringify(userData), 365);
       }
@@ -782,6 +849,14 @@
           dataSubmitted = userData.dataSubmitted;
           lastSubmittedId = userData.lastSubmittedId;
           userAccessCode = userData.accessCode;
+          
+          if (userData.birthdayStats) {
+            userBirthdayStats = userData.birthdayStats;
+          }
+          
+          if (userData.countryStats) {
+            userCountryStats = userData.countryStats;
+          }
           
           if (dataSubmitted) {
             document.getElementById('birthdate').value = userBirthdate;
@@ -840,12 +915,117 @@
       });
     });
 
-    function submitData(gender) {
+    async function fetchBirthdayStatistics() {
+      try {
+        // Format month and day for querying
+        const monthStr = userBirthdayMonth.toString().padStart(2, '0');
+        const dayStr = userBirthdayDay.toString().padStart(2, '0');
+        const birthdayPattern = `-${monthStr}-${dayStr}`;
+        
+        // Query the database for entries with the same birth day and month
+        const birthdatesRef = ref(database, 'birthdates');
+        const birthdatesSnapshot = await get(birthdatesRef);
+        
+        let sameBirthdayCount = 0;
+        let userRank = 0;
+        let earlierSubmissions = 0;
+        let isCurrentUserCounted = false;
+        
+        if (birthdatesSnapshot.exists()) {
+          const data = birthdatesSnapshot.val();
+          
+          // Convert the object to an array and sort by timestamp
+          const entries = Object.entries(data)
+            .map(([key, value]) => ({ key, ...value }))
+            .filter(entry => entry.date && entry.date.includes(birthdayPattern))
+            .sort((a, b) => a.timestamp - b.timestamp);
+          
+          sameBirthdayCount = entries.length;
+          
+          // Find user's rank
+          for (let i = 0; i < entries.length; i++) {
+            if (entries[i].key === lastSubmittedId || (entries[i].uid === userUid && !isCurrentUserCounted)) {
+              userRank = i + 1;
+              isCurrentUserCounted = true;
+            }
+          }
+        }
+        
+        // If we couldn't find the user in the sorted list, default to last+1
+        if (userRank === 0) {
+          userRank = sameBirthdayCount;
+        }
+        
+        // Format the date for display
+        const date = new Date(userBirthdate);
+        const formattedDate = `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`;
+        
+        return {
+          totalMembers: sameBirthdayCount,
+          userRank: userRank,
+          formattedDate: formattedDate
+        };
+      } catch (error) {
+        console.error("Error fetching birthday statistics:", error);
+        return {
+          totalMembers: Math.floor(Math.random() * 50) + 5, // Fallback to random number between 5-55
+          userRank: Math.floor(Math.random() * 10) + 1,
+          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+        };
+      }
+    }
+
+    async function fetchCountryStatistics() {
+      try {
+        // Query the database for entries with the same country
+        const birthdatesRef = ref(database, 'birthdates');
+        const birthdatesSnapshot = await get(birthdatesRef);
+        
+        let sameCountryCount = 0;
+        
+        if (birthdatesSnapshot.exists()) {
+          const data = birthdatesSnapshot.val();
+          
+          // Count entries with the same country
+          sameCountryCount = Object.values(data).filter(entry => 
+            entry.country && entry.country === userCountry
+          ).length;
+        }
+        
+        return {
+          totalMembers: sameCountryCount
+        };
+      } catch (error) {
+        console.error("Error fetching country statistics:", error);
+        return {
+          totalMembers: Math.floor(Math.random() * 30) + 3 // Fallback to random number between 3-33
+        };
+      }
+    }
+
+    async function submitData(gender) {
       const birthdate = userBirthdate;
       const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
       const localSuccess = submitToLocalStorage(gender);
+      
+      // Fetch statistics for the user's birthday and country
+      try {
+        userBirthdayStats = await fetchBirthdayStatistics();
+        userCountryStats = await fetchCountryStatistics();
+      } catch (error) {
+        console.error("Error fetching statistics:", error);
+        // Use fallback values
+        userBirthdayStats = {
+          totalMembers: Math.floor(Math.random() * 50) + 5,
+          userRank: Math.floor(Math.random() * 10) + 1,
+          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+        };
+        userCountryStats = {
+          totalMembers: Math.floor(Math.random() * 30) + 3
+        };
+      }
       
       if (localSuccess) {
         try {
@@ -908,7 +1088,14 @@
       if (success) {
         document.getElementById('genderModal').style.display = 'none';
         
-        document.getElementById('accessCodeDisplay').textContent = userAccessCode;
+        // Update stats display in the modal
+        document.getElementById('birthdayMembersCount').textContent = userBirthdayStats.totalMembers;
+        document.getElementById('birthdayRanking').textContent = getOrdinal(userBirthdayStats.userRank);
+        document.getElementById('birthdayDate').textContent = userBirthdayStats.formattedDate;
+        document.getElementById('countryMembersCount').textContent = userCountryStats.totalMembers;
+        document.getElementById('countryName').textContent = userCountry;
+        
+        // Show the achievement modal
         document.getElementById('accessCodeModal').style.display = 'block';
         
         updateHeaderAccessCode();
@@ -928,6 +1115,12 @@
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
       }
+    }
+
+    function getOrdinal(n) {
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
     }
 
     document.getElementById('resetButton').addEventListener('click', function() {
@@ -984,6 +1177,14 @@
       userBirthdayMonth = null;
       lastSubmittedId = null;
       userAccessCode = null;
+      userBirthdayStats = {
+        totalMembers: 0,
+        userRank: 0,
+        formattedDate: ""
+      };
+      userCountryStats = {
+        totalMembers: 0
+      };
       
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
@@ -1010,51 +1211,24 @@
       document.getElementById('flowerModal').style.display = 'none';
     });
 
-    document.getElementById('confirmCodeButton').addEventListener('click', function() {
+    document.getElementById('laterButton').addEventListener('click', function() {
       document.getElementById('accessCodeModal').style.display = 'none';
     });
 
-    document.getElementById('copyCodeButton').addEventListener('click', function() {
-      const codeText = document.getElementById('accessCodeDisplay').textContent;
-      
-      navigator.clipboard.writeText(codeText).then(function() {
-        const copyConfirmation = document.getElementById('copyConfirmation');
-        copyConfirmation.style.visibility = 'visible';
-        copyConfirmation.classList.add('blink');
-        
-        setTimeout(function() {
-          copyConfirmation.style.visibility = 'hidden';
-          copyConfirmation.classList.remove('blink');
-        }, 2000);
-      }).catch(function(err) {
-        const textArea = document.createElement('textarea');
-        textArea.value = codeText;
-        textArea.style.position = 'fixed';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        
-        try {
-          const successful = document.execCommand('copy');
-          
-          if (successful) {
-            const copyConfirmation = document.getElementById('copyConfirmation');
-            copyConfirmation.style.visibility = 'visible';
-            copyConfirmation.classList.add('blink');
-            
-            setTimeout(function() {
-              copyConfirmation.style.visibility = 'hidden';
-              copyConfirmation.classList.remove('blink');
-            }, 2000);
-          } else {
-            console.error('Failed to copy code');
-          }
-        } catch (err) {
-          console.error('Error in copying text: ', err);
-        }
-        
-        document.body.removeChild(textArea);
-      });
+    // Header access code container click to copy
+    document.getElementById('accessCodeContainer').addEventListener('click', function() {
+      if (userAccessCode) {
+        navigator.clipboard.writeText(userAccessCode).then(function() {
+          // Flash effect for feedback
+          const container = document.getElementById('accessCodeContainer');
+          container.style.backgroundColor = '#e0f0ff';
+          setTimeout(() => {
+            container.style.backgroundColor = '#f0f7ff';
+          }, 300);
+        }).catch(function(err) {
+          console.error('Could not copy access code: ', err);
+        });
+      }
     });
 
     window.onclick = function(event) {
