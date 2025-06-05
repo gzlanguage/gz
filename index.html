@@ -243,29 +243,6 @@
             pointer-events: none;
         }
         
-        .modal-close {
-            position: absolute;
-            top: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ff0800;
-            background-color: white;
-            border: 1px solid #ff69b4;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        
-        .modal-close:hover {
-            background-color: #007bff;
-            color: white;
-        }
-        
         @keyframes flowerRotate {
             0% { transform: rotate(0deg); }
             25% { transform: rotate(15deg); }
@@ -435,6 +412,77 @@
         .later-button:hover {
             background-color: #388E3C;
         }
+
+        .join-description {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #333;
+            text-align: left;
+        }
+
+        .join-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .join-section {
+            margin: 5px 0;
+            padding: 6px;
+            border: 1px dashed #007bff;
+            border-radius: 15px;
+            background-color: #f0f7ff;
+        }
+
+        .join-section-title {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+        .discord-button {
+            display: inline-block;
+            background-color: #5865F2;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 15px;
+            margin: 3px auto;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .discord-button:hover {
+            background-color: #4752C4;
+        }
+
+        .discord-icon {
+            margin-right: 8px;
+        }
+
+        .group-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 10px auto;
+            border-radius: 10px;
+            border: 1px solid #007bff;
+        }
+        
+        /* Modification pour le modal flower */
+        #flowerModal .modal-content {
+            margin: 40% auto; /* Descend le modal plus bas */
+            padding: 10px; /* Réduit l'espace à l'intérieur */
+            max-width: 85%; /* Augmente légèrement la largeur */
+        }
+        
+        #flowerModal .monthly-motivation {
+            margin: 10px 0; /* Réduit les marges */
+        }
     </style>
 </head>
 <body>
@@ -456,7 +504,7 @@
     <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
     <a class="button" href="Statistiques.html" id="statisticsButton">
       <i class="fas fa-chart-bar"></i> Discover</a>
-    <a class="button" href="gz-discord.html"><i class="fab fa-discord"></i>Join</a>
+    <a class="button" href="#" id="joinButton"><i class="fab fa-discord"></i>Join</a>
     <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
@@ -559,13 +607,41 @@
 
   <div id="flowerModal" class="modal">
     <div class="modal-content">
-      <div class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></div>
       <div class="billabong-title"><strong>Flower of Life</strong></div>
       
       <div class="monthly-motivation" id="monthlyMotivation"></div>
       
-      <div style="margin: 15px auto; font-size: 3em; color: #ff69b4;">
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;">
         <i class="fas fa-spa"></i>
+      </div>
+    </div>
+  </div>
+  
+  <div id="joinModal" class="modal">
+    <div class="modal-content">
+      <div class="billabong-title"><strong>G-Z Community</strong></div>
+      
+      <div class="join-description">
+        <div class="join-section">
+          <div class="join-section-title">Birthday Connections</div>
+          <p style="margin: 2px 0;">Discover people born on the same day as you. A space where you'll meet your birthday twins and form unique connections based on shared birth dates.</p>
+        </div>
+        
+        <div class="join-section">
+          <div class="join-section-title">Team Spirit</div>
+          <p style="margin: 2px 0;">Each birth date represents a group in our community. You'll join forces with your birthday twins to compete in exciting team challenges against other birth date groups.</p>
+        </div>
+        
+        <div class="join-section">
+          <div class="join-section-title">More Than Fun</div>
+          <p style="margin: 2px 0;">Beyond entertainment, G-Z offers educational content, community events, and the chance to win prizes in our group competitions.</p>
+        </div>
+      </div>
+      
+      <div style="margin: 5px auto; text-align: center;">
+        <a href="https://discord.gg/GzReBm48XK" target="_blank" class="discord-button">
+          <i class="fab fa-discord discord-icon"></i>Join G-Z on Discord
+        </a>
       </div>
     </div>
   </div>
@@ -1208,8 +1284,9 @@
       flowerModal.style.display = 'block';
     });
 
-    document.getElementById('closeFlowerModal').addEventListener('click', function() {
-      document.getElementById('flowerModal').style.display = 'none';
+    document.getElementById('joinButton').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('joinModal').style.display = 'block';
     });
 
     document.getElementById('laterButton').addEventListener('click', function() {
@@ -1236,6 +1313,7 @@
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
       const accessCodeModal = document.getElementById('accessCodeModal');
+      const joinModal = document.getElementById('joinModal');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -1253,6 +1331,10 @@
       
       if (event.target == accessCodeModal) {
         accessCodeModal.style.display = "none";
+      }
+      
+      if (event.target == joinModal) {
+        joinModal.style.display = "none";
       }
     };
 
