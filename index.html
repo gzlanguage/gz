@@ -839,8 +839,40 @@
         userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
       });
 
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("birthdate").setAttribute('max', today);
+    // Définir la date maximale comme aujourd'hui
+    const today = new Date();
+    const todayString = today.toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute('max', todayString);
+
+    // Fonction pour vérifier si la date est dans le futur
+    function isFutureDate(dateString) {
+      const selectedDate = new Date(dateString);
+      selectedDate.setHours(0, 0, 0, 0); // Réinitialiser les heures pour comparer uniquement les dates
+      
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+      
+      return selectedDate > currentDate;
+    }
+
+    // Ajouter un événement pour vérifier la date à chaque changement
+    document.getElementById("birthdate").addEventListener('change', function(e) {
+      if (isFutureDate(this.value)) {
+        alert("You cannot select a future date for your date of birth");
+        this.value = ""; // Réinitialiser la valeur
+      }
+    });
+
+    // Ajouter un événement pour vérifier la date avant la soumission
+    document.querySelector('.submit-button').addEventListener('click', function(e) {
+      const birthdate = document.getElementById('birthdate').value;
+      if (isFutureDate(birthdate)) {
+        e.preventDefault();
+        alert("You cannot select a future date for your date of birth");
+        document.getElementById('birthdate').value = "";
+        return false;
+      }
+    });
 
     fetch('https://restcountries.com/v3.1/all')
       .then(response => {
@@ -962,6 +994,13 @@
       const country = document.getElementById('countrySelect').value;
 
       if (birthdate && country) {
+        // Vérification supplémentaire pour les dates futures
+        if (isFutureDate(birthdate)) {
+          alert("You cannot select a future date for your date of birth");
+          document.getElementById('birthdate').value = "";
+          return;
+        }
+        
         userBirthdate = birthdate;
         userCountry = country;
         
