@@ -1240,24 +1240,61 @@
     }
 
     document.getElementById('resetButton').addEventListener('click', function() {
-      resetLocalStorageData();
-      
-      if (lastSubmittedId && !lastSubmittedId.startsWith('local_')) {
+      // Afficher une confirmation avant de supprimer
+      if (confirm("Are you sure you want to reset your data? This will delete your information from our database.")) {
+        resetLocalStorageData();
+        
+        // Fonction pour vérifier et supprimer les données de la base de données Firebase
+        deleteFromFirebase().then(() => {
+          finishReset();
+        }).catch(error => {
+          console.error("Error during reset process:", error);
+          alert("There was a problem resetting your data. Please try again later.");
+        });
+      }
+    });
+    
+    // Nouvelle fonction pour supprimer les données de Firebase
+    async function deleteFromFirebase() {
+      if (!lastSubmittedId) {
+        // Si nous n'avons pas d'ID stocké, essayons de trouver les entrées par UID
         try {
-          remove(ref(database, `birthdates/${lastSubmittedId}`))
-            .then(() => {
-              console.log("Firebase data successfully reset");
-            })
-            .catch((error) => {
-              console.warn("Firebase reset error:", error);
-            });
+          if (userUid) {
+            const birthdatesRef = ref(database, 'birthdates');
+            const birthdatesSnapshot = await get(birthdatesRef);
+            
+            if (birthdatesSnapshot.exists()) {
+              const data = birthdatesSnapshot.val();
+              
+              // Rechercher toutes les entrées avec le même UID
+              for (const [key, value] of Object.entries(data)) {
+                if (value.uid === userUid) {
+                  console.log(`Found entry with matching UID: ${key}`);
+                  
+                  // Supprimer cette entrée
+                  await remove(ref(database, `birthdates/${key}`));
+                  console.log(`Deleted entry: ${key}`);
+                }
+              }
+            }
+          }
         } catch (error) {
-          console.warn("Firebase reset exception:", error);
+          console.error("Error searching for user data in Firebase:", error);
+          throw error;
+        }
+      } else if (!lastSubmittedId.startsWith('local_')) {
+        // Si nous avons un ID Firebase valide, supprimer directement l'entrée
+        try {
+          await remove(ref(database, `birthdates/${lastSubmittedId}`));
+          console.log("Firebase data successfully deleted:", lastSubmittedId);
+        } catch (error) {
+          console.error("Error deleting from Firebase:", error);
+          throw error;
         }
       }
       
-      finishReset();
-    });
+      return true;
+    }
     
     function resetLocalStorageData() {
       try {
@@ -1306,6 +1343,8 @@
       document.getElementById('countrySelect').classList.remove('disabled-field');
       
       eraseCookie('userData');
+      
+      alert("Your data has been successfully reset.");
     }
 
     document.getElementById('flowerButton').addEventListener('click', function() {
