@@ -483,6 +483,29 @@
         #flowerModal .monthly-motivation {
             margin: 10px 0; /* Réduit les marges */
         }
+        
+        /* Style pour les croix de fermeture des modals */
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -579,6 +602,7 @@
 
   <div id="genderModal" class="modal">
     <div class="modal-content">
+      <button class="modal-close" id="closeGenderModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>Your gender?</strong></div>
       
       <div class="gender-category">Binary genders</div>
@@ -607,6 +631,7 @@
 
   <div id="flowerModal" class="modal">
     <div class="modal-content">
+      <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>Flower of Life</strong></div>
       
       <div class="monthly-motivation" id="monthlyMotivation"></div>
@@ -619,6 +644,7 @@
   
   <div id="joinModal" class="modal">
     <div class="modal-content">
+      <button class="modal-close" id="closeJoinModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>G-Z Community</strong></div>
       
       <div class="join-description">
@@ -648,6 +674,7 @@
   
   <div id="accessCodeModal" class="modal">
     <div class="modal-content">
+      <button class="modal-close" id="closeAccessCodeModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>Congratulations!</strong></div>
       
       <div class="celebrate-icon">
@@ -1408,6 +1435,31 @@
           console.error('Could not copy access code: ', err);
         });
       }
+    });
+    
+    // Gestion des boutons de fermeture pour chaque modal
+    document.getElementById('closeGenderModal').addEventListener('click', function() {
+      document.getElementById('genderModal').style.display = 'none';
+      
+      // Réinitialiser l'état du formulaire si l'utilisateur ferme le modal sans choisir
+      const submitButton = document.querySelector('.submit-button');
+      submitButton.style.backgroundColor = 'gray';
+      submitButton.textContent = "Submit";
+      
+      document.getElementById('birthdate').classList.remove('disabled-field');
+      document.getElementById('countrySelect').classList.remove('disabled-field');
+    });
+    
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      document.getElementById('flowerModal').style.display = 'none';
+    });
+    
+    document.getElementById('closeJoinModal').addEventListener('click', function() {
+      document.getElementById('joinModal').style.display = 'none';
+    });
+    
+    document.getElementById('closeAccessCodeModal').addEventListener('click', function() {
+      document.getElementById('accessCodeModal').style.display = 'none';
     });
 
     window.onclick = function(event) {
