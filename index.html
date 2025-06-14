@@ -285,6 +285,14 @@
             text-transform: uppercase;
         }
 
+        .your-flower {
+            display: block;
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
         .access-code {
             font-size: 1.5em;
             font-weight: bold;
@@ -490,7 +498,7 @@
             top: 10px;
             right: 20px;
             color: #ff0000;
-            font-size: 18px;
+            font-size: 13px;
             cursor: pointer;
             background-color: transparent;
             border: none;
@@ -527,7 +535,7 @@
     <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
     <a class="button" href="Statistiques.html" id="statisticsButton">
       <i class="fas fa-chart-bar"></i> Discovery</a>
-    <a class="button" href="#" id="joinButton"><i class="fab fa-discord"></i>Join</a>
+    <a class="button" href="Birthday.html" id="birthdayButton"><i class="fas fa-birthday-cake"></i>Birthday</a>
     <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
@@ -641,64 +649,6 @@
       </div>
     </div>
   </div>
-  
-  <div id="joinModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeJoinModal"><i class="fas fa-times"></i></button>
-      <div class="billabong-title"><strong>G-Z Community</strong></div>
-      
-      <div class="join-description">
-        <div class="join-section">
-          <div class="join-section-title">Birthday Connections</div>
-          <p style="margin: 2px 0;">Discover people born on the same day as you. A space where you'll meet your birthday twins and form unique connections based on shared birth dates.</p>
-        </div>
-        
-        <div class="join-section">
-          <div class="join-section-title">Team Spirit</div>
-          <p style="margin: 2px 0;">Each birth date represents a group in our community. You'll join forces with your birthday twins to compete in exciting team challenges against other birth date groups.</p>
-        </div>
-        
-        <div class="join-section">
-          <div class="join-section-title">More Than Fun</div>
-          <p style="margin: 2px 0;">Beyond entertainment, G-Z offers educational content, community events, and the chance to win prizes in our group competitions.</p>
-        </div>
-      </div>
-      
-      <div style="margin: 5px auto; text-align: center;">
-        <a href="https://discord.gg/GzReBm48XK" target="_blank" class="discord-button">
-          <i class="fab fa-discord discord-icon"></i>Join G-Z on Discord
-        </a>
-      </div>
-    </div>
-  </div>
-  
-  <div id="accessCodeModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeAccessCodeModal"><i class="fas fa-times"></i></button>
-      <div class="billabong-title"><strong>Congratulations!</strong></div>
-      
-      <div class="celebrate-icon">
-        <i class="fas fa-trophy"></i>
-      </div>
-      
-      <div class="achievement" id="birthdayStats">
-        <p>Your birthday already has <span class="stats-highlight" id="birthdayMembersCount">0</span> members!</p>
-        <p>You are currently the <span class="stats-highlight" id="birthdayRanking">0th</span> person born on <span id="birthdayDate">your day</span> to join our community! This ranking may change as more people join.</p>
-      </div>
-      
-      <div class="achievement" id="countryStats">
-        <p>You join <span class="stats-highlight" id="countryMembersCount">0</span> other members from <span id="countryName">your country</span>!</p>
-      </div>
-      
-      <div class="code-message">
-        Your unique access code has been saved in the header. Click on it anytime to copy.
-      </div>
-      
-      <button class="later-button" id="laterButton">
-        Continue to Discovery
-      </button>
-    </div>
-  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
@@ -737,139 +687,433 @@
       totalMembers: 0
     };
 
-    // Motivations spécifiques pour chaque mois
-    const monthlyMotivations = {
+    // Motivations spécifiques pour chaque jour de chaque mois
+    const dailyMotivations = {
       1: { // Janvier
         name: "JANUARY",
-        ranges: [
-          { range: [1, 5], message: "Early January births bring remarkable determination. Your discipline helps you pursue goals when others give up. This year, channel your natural structure-building skills to create something lasting." },
-          { range: [6, 10], message: "Mid-early January child, you blend ambition with practicality. Your ability to see long-term consequences guides your decisions wisely. Trust your instincts when planning your next big move." },
-          { range: [11, 15], message: "Mid-January births carry innate leadership energy. People naturally look to you in challenging times. Your composed strength becomes a lighthouse for those feeling lost." },
-          { range: [16, 20], message: "Your mid-late January birth gives you rare perseverance. What others see as obstacles, you view as character-building stepping stones. This resilience is your superpower." },
-          { range: [21, 25], message: "Late January births bring innovative thinking with practical application. You see possibilities others miss while knowing how to bring them into reality. Time to create something new." },
-          { range: [26, 31], message: "Born in January's final days, you possess both independence and community spirit. Your ability to stand apart while still connecting deeply with others creates unique bridges between worlds." }
-        ]
+        days: {
+          1: "Your January 1st birth brings exceptional leadership abilities. Your fresh year energy creates powerful beginnings for yourself and others.",
+          2: "Born on January 2nd, you possess remarkable determination and follow-through. What you start, you complete with excellence.",
+          3: "January 3rd births carry analytical precision with creative innovation. You solve problems others find impossible.",
+          4: "Your January 4th birth gives you steady determination and practical wisdom. Your patient building creates lasting foundations.",
+          5: "Born on January 5th, you blend ambition with disciplined effort. Your structured approach brings consistent achievement.",
+          6: "January 6th births bring nurturing responsibility. You care deeply while maintaining healthy boundaries.",
+          7: "Your January 7th birth gifts you with philosophical insight and analytical precision. You see patterns others miss.",
+          8: "Born on January 8th, you possess both executive leadership and detailed organization. You build systems that last.",
+          9: "January 9th births carry humanitarian vision with practical application. Your compassion creates real-world change.",
+          10: "Your January 10th birth combines ambition with integrity. Your ethical leadership inspires trust and loyalty.",
+          11: "Born on January 11th, you blend visionary thinking with practical execution. Your ideas transform into tangible realities.",
+          12: "January 12th births bring methodical progress and patient persistence. You accomplish goals through consistent effort.",
+          13: "Your January 13th birth gives you innovative thinking with careful planning. You create new paths with thoughtful consideration.",
+          14: "Born on January 14th, you possess determined focus and calculated strategy. Your deliberate approach brings reliable results.",
+          15: "January 15th births carry both creative vision and disciplined execution. Your balanced approach creates sustainable success.",
+          16: "Your January 16th birth blends leadership with collaborative skill. You guide others while valuing their input.",
+          17: "Born on January 17th, you combine revolutionary thinking with practical application. Your innovations actually work in the real world.",
+          18: "January 18th births bring analytical precision with intuitive flashes. Your balanced mind creates comprehensive solutions.",
+          19: "Your January 19th birth gives you visionary perspective with meticulous attention to detail. You see both forest and trees.",
+          20: "Born on January 20th, you blend progressive thinking with traditional wisdom. You bridge worlds that others see as separate.",
+          21: "January 21st births carry humanitarian vision with technological innovation. You use new tools to solve age-old problems.",
+          22: "Your January 22nd birth combines inventive thinking with methodical execution. Your innovations have staying power.",
+          23: "Born on January 23rd, you possess both intellectual depth and social intelligence. You understand complex ideas and communicate them clearly.",
+          24: "January 24th births bring determined focus with strategic vision. You see several moves ahead in life's complex game.",
+          25: "Your January 25th birth gives you revolutionary thinking with practical application. You transform ideals into tangible improvements.",
+          26: "Born on January 26th, you blend nonconformist thinking with disciplined execution. Your unique approach creates lasting results.",
+          27: "January 27th births carry intellectual brilliance with compassionate understanding. Your mind serves your heart's wisdom.",
+          28: "Your January 28th birth combines humanitarian vision with methodical execution. You improve the world through careful planning.",
+          29: "Born on January 29th, you possess both innovative thinking and practical wisdom. Your balanced approach creates sustainable change.",
+          30: "January 30th births bring visionary perspective with detailed implementation. You see possibilities and make them real.",
+          31: "Your January 31st birth gives you independent thinking with collaborative skill. You maintain your unique perspective while working well with others."
+        }
       },
       2: { // Février
         name: "FEBRUARY",
-        ranges: [
-          { range: [1, 5], message: "Early February children embody visionary thinking. You naturally see future possibilities that remain invisible to others. Trust those intuitive flashes of insight coming to you now." },
-          { range: [6, 10], message: "Mid-early February births carry a humanitarian spirit. Your natural empathy extends beyond personal connections to larger social concerns. Your compassion creates genuine change." },
-          { range: [11, 15], message: "Mid-February births blend idealism with practicality beautifully. You dream big while building solid foundations. This rare combination helps manifest your visions in tangible ways." },
-          { range: [16, 20], message: "Your mid-late February birth gives you emotional intelligence and intuitive wisdom. You understand nuances of human behavior that others miss completely. This gift serves as your compass." },
-          { range: [21, 25], message: "Late February births bring progressive thinking and avant-garde perspectives. You're comfortable challenging outdated systems and proposing fresh alternatives. Your innovative spirit is needed now." },
-          { range: [26, 29], message: "Born in February's rarest days, you possess uncommon perception and adaptability. Like the leap year that sometimes contains your birth date, you bring extra magic to ordinary situations." }
-        ]
+        days: {
+          1: "Your February 1st birth brings innovative vision with humanitarian purpose. You see possibilities for positive change that others miss.",
+          2: "Born on February 2nd, you possess intuitive wisdom with practical application. Your insights create tangible improvements.",
+          3: "February 3rd births carry creative communication skills. Your words and ideas build bridges between different worlds.",
+          4: "Your February 4th birth gives you revolutionary thinking with methodical implementation. You transform radical ideas into workable solutions.",
+          5: "Born on February 5th, you blend visionary perspective with analytical precision. Your balanced approach creates lasting innovation.",
+          6: "February 6th births bring humanitarian compassion with practical skills. Your caring nature creates real-world improvements.",
+          7: "Your February 7th birth gifts you with philosophical depth and inventive thinking. You see beneath surface appearances to deeper patterns.",
+          8: "Born on February 8th, you possess both idealistic vision and organizational skill. You build structures that serve higher purposes.",
+          9: "February 9th births carry diplomatic intelligence with unwavering principles. You navigate social complexities while maintaining your values.",
+          10: "Your February 10th birth combines visionary thinking with social awareness. Your innovations consider human impact and emotional needs.",
+          11: "Born on February 11th, you blend revolutionary ideas with collaborative skills. You inspire collective action toward shared ideals.",
+          12: "February 12th births bring humanitarian vision with persuasive communication. Your words inspire others to join your causes.",
+          13: "Your February 13th birth gives you intuitive understanding of human nature. You see beyond appearances to people's authentic selves.",
+          14: "Born on February 14th, you possess natural empathy and emotional intelligence. Your heart-centered wisdom creates healing connections.",
+          15: "February 15th births carry both visionary thinking and practical organization. Your balanced approach transforms possibilities into realities.",
+          16: "Your February 16th birth blends spiritual insight with analytical thinking. You integrate intuition and logic beautifully.",
+          17: "Born on February 17th, you combine innovative thinking with humanitarian values. Your creative solutions serve the greater good.",
+          18: "February 18th births bring visionary perspective with emotional sensitivity. You see future possibilities while understanding present feelings.",
+          19: "Your February 19th birth gives you intuitive wisdom with expressive creativity. You communicate deep truths through compelling forms.",
+          20: "Born on February 20th, you blend compassionate understanding with boundary-setting clarity. Your kindness includes healthy self-care.",
+          21: "February 21st births carry idealistic vision with practical skill. You transform dreams into achievable goals through methodical effort.",
+          22: "Your February 22nd birth combines intuitive perception with analytical precision. You integrate feeling and thinking into balanced wisdom.",
+          23: "Born on February 23rd, you possess both artistic sensitivity and intellectual clarity. Your creative expressions contain profound insights.",
+          24: "February 24th births bring visionary thinking with emotional intelligence. You see possibilities while understanding human needs.",
+          25: "Your February 25th birth gives you progressive ideas with persuasive communication. You articulate new visions in compelling ways.",
+          26: "Born on February 26th, you blend humanitarian compassion with innovative thinking. Your creative solutions address genuine human needs.",
+          27: "February 27th births carry intuitive wisdom with practical application. Your insights manifest as tangible improvements in daily life.",
+          28: "Your February 28th birth combines idealistic vision with disciplined effort. You work steadily toward meaningful goals with patience.",
+          29: "Born on February 29th, you possess extraordinary perspective and adaptability. Like your rare birth date, you bring unique magic to ordinary situations."
+        }
       },
       3: { // Mars
         name: "MARCH",
-        ranges: [
-          { range: [1, 5], message: "Early March births carry pioneering energy and courage. You naturally lead the way into uncharted territory, inspiring others to follow. This boldness serves you especially well during times of uncertainty." },
-          { range: [6, 10], message: "Mid-early March children blend intuition with action. You sense the right path forward and move decisively. Trust your inner knowing - it rarely steers you wrong." },
-          { range: [11, 15], message: "Mid-March births bring compassionate leadership. You inspire others not through force but through genuine understanding and connection. Your gentle strength moves mountains." },
-          { range: [16, 20], message: "Your mid-late March birth gives you creative problem-solving abilities. Where others see dead ends, you find hidden doorways. This imaginative thinking is your special gift to the world." },
-          { range: [21, 25], message: "Late March births carry powerful initiating energy. You excel at starting projects and inspiring fresh beginnings. Your enthusiasm ignites passion in those around you." },
-          { range: [26, 31], message: "Born in March's final days, you possess dynamic energy paired with thoughtful strategy. This combination allows you to make bold moves without recklessness - a rare and valuable balance." }
-        ]
+        days: {
+          1: "Your March 1st birth brings pioneering energy and courageous leadership. You naturally take initiative when others hesitate.",
+          2: "Born on March 2nd, you possess intuitive wisdom with expressive creativity. Your imaginative ideas have practical applications.",
+          3: "March 3rd births carry communicative brilliance and innovative thinking. Your words inspire fresh perspectives in others.",
+          4: "Your March 4th birth gives you determined persistence and methodical progress. You build lasting foundations with patient effort.",
+          5: "Born on March 5th, you blend adventurous spirit with adaptable thinking. You thrive amid change and uncertainty.",
+          6: "March 6th births bring compassionate understanding with creative problem-solving. Your empathy generates innovative solutions.",
+          7: "Your March 7th birth gifts you with analytical precision and intuitive flashes. Your balanced thinking creates comprehensive insights.",
+          8: "Born on March 8th, you possess both authoritative leadership and empathetic understanding. You guide others with compassionate strength.",
+          9: "March 9th births carry humanitarian vision with sacrificial generosity. Your selfless actions create meaningful improvements.",
+          10: "Your March 10th birth combines intuitive understanding with expressive creativity. You transform insights into compelling art forms.",
+          11: "Born on March 11th, you blend visionary thinking with inspirational communication. Your words awaken possibilities in others.",
+          12: "March 12th births bring compassionate sensitivity with boundary-setting clarity. Your empathy includes healthy self-protection.",
+          13: "Your March 13th birth gives you intuitive perception with practical application. You transform subtle insights into tangible solutions.",
+          14: "Born on March 14th, you possess analytical brilliance with creative innovation. Your logical mind generates original solutions.",
+          15: "March 15th births carry both courageous leadership and diplomatic skill. You advance boldly while maintaining harmonious relationships.",
+          16: "Your March 16th birth blends intuitive wisdom with persuasive communication. You articulate subtle truths in accessible ways.",
+          17: "Born on March 17th, you combine resilient determination with charismatic expression. Your inspiring presence motivates positive action.",
+          18: "March 18th births bring emotional sensitivity with boundary-setting clarity. Your compassion includes healthy self-care.",
+          19: "Your March 19th birth gives you intuitive understanding with practical application. Your insights create tangible improvements.",
+          20: "Born on March 20th, you blend visionary perspective with emotional intelligence. You see possibilities while honoring feelings.",
+          21: "March 21st births carry pioneering energy with confident leadership. Your assertive action creates new pathways for others.",
+          22: "Your March 22nd birth combines practical organization with intuitive guidance. You build structures aligned with deeper wisdom.",
+          23: "Born on March 23rd, you possess both intellectual clarity and emotional understanding. Your balanced perspective creates comprehensive solutions.",
+          24: "March 24th births bring determined focus with innovative thinking. You persist creatively when facing obstacles.",
+          25: "Your March 25th birth gives you pioneering courage with strategic planning. You take calculated risks that create new possibilities.",
+          26: "Born on March 26th, you blend visionary thinking with detailed implementation. You transform dreams into realities through careful planning.",
+          27: "March 27th births carry intuitive wisdom with confident expression. You communicate subtle insights with compelling clarity.",
+          28: "Your March 28th birth combines analytical precision with intuitive understanding. Your balanced thinking creates comprehensive solutions.",
+          29: "Born on March 29th, you possess both courageous leadership and diplomatic skill. You advance boldly while maintaining harmonious relationships.",
+          30: "March 30th births bring visionary perception with practical application. You transform possibilities into tangible realities.",
+          31: "Your March 31st birth gives you determined independence and intuitive wisdom. You forge your own path guided by inner knowing."
+        }
       },
       4: { // Avril
         name: "APRIL",
-        ranges: [
-          { range: [1, 5], message: "Early April births bring determined energy and natural leadership. You possess the rare ability to take charge without dominating. People follow your lead because they sense your authentic strength." },
-          { range: [6, 10], message: "Mid-early April children blend passion with practicality. Your fiery enthusiasm is grounded in real-world wisdom, making your ideas both exciting and achievable. This balance is your superpower." },
-          { range: [11, 15], message: "Mid-April births carry strategic brilliance. You see several moves ahead in life's complex game, anticipating obstacles before they arise. Trust your forward-thinking mind." },
-          { range: [16, 20], message: "Your mid-late April birth gives you tenacious energy wrapped in charm. You persist through challenges with a grace that inspires others. This resilient optimism carries you through any storm." },
-          { range: [21, 25], message: "Late April births bring steady determination with flashes of inspiration. Like the spring season itself, you blend dependable growth with surprising bursts of beauty. Your path unfolds with perfect timing." },
-          { range: [26, 30], message: "Born in April's final days, you possess both strength and sensitivity in equal measure. This rare combination allows you to pursue goals forcefully while remaining attuned to others' needs." }
-        ]
+        days: {
+          1: "Your April 1st birth brings pioneering originality and playful innovation. You approach life with refreshing spontaneity.",
+          2: "Born on April 2nd, you possess diplomatic skill with unwavering determination. You navigate challenges with graceful persistence.",
+          3: "April 3rd births carry creative expression with analytical precision. Your innovative ideas are structured and implementable.",
+          4: "Your April 4th birth gives you methodical organization and determined focus. You build lasting foundations through patient effort.",
+          5: "Born on April 5th, you blend adventurous spirit with quick adaptability. You thrive amid change and unexpected developments.",
+          6: "April 6th births bring nurturing responsibility with aesthetic appreciation. You create harmonious environments that support growth.",
+          7: "Your April 7th birth gifts you with analytical thinking and philosophical depth. You seek fundamental truths beneath surface appearances.",
+          8: "Born on April 8th, you possess executive leadership with practical organization. Your authority is backed by competence and skill.",
+          9: "April 9th births carry humanitarian compassion with selfless generosity. Your service creates meaningful improvements for others.",
+          10: "Your April 10th birth combines independent thinking with determined action. You forge your own path with unwavering resolve.",
+          11: "Born on April 11th, you blend visionary intuition with practical innovation. You see possibilities and make them real.",
+          12: "April 12th births bring methodical organization with creative problem-solving. Your structured approach yields innovative solutions.",
+          13: "Your April 13th birth gives you independent thinking with determined execution. You pursue your unique vision with tireless effort.",
+          14: "Born on April 14th, you possess practical wisdom with innovative thinking. Your creative solutions are grounded in reality.",
+          15: "April 15th births carry both determined focus and adaptable flexibility. You maintain your course while adjusting to changing circumstances.",
+          16: "Your April 16th birth blends independent thinking with collaborative skill. You maintain your unique perspective while working well with others.",
+          17: "Born on April 17th, you combine analytical precision with intuitive flashes. Your balanced approach creates comprehensive solutions.",
+          18: "April 18th births bring methodical organization with determined persistence. You accomplish goals through consistent, focused effort.",
+          19: "Your April 19th birth gives you pioneering courage with strategic planning. You take bold action guided by careful consideration.",
+          20: "Born on April 20th, you blend determined independence with practical skill. Your self-reliance creates tangible achievements.",
+          21: "April 21st births carry leadership energy with diplomatic sensitivity. You guide others while maintaining harmonious relationships.",
+          22: "Your April 22nd birth combines practical organization with innovative thinking. Your creative solutions have real-world applicability.",
+          23: "Born on April 23rd, you possess both courageous determination and strategic thinking. You advance boldly with calculated precision.",
+          24: "April 24th births bring practical skill with reliable consistency. Your dependable efforts create cumulative success over time.",
+          25: "Your April 25th birth gives you determined persistence with adaptable thinking. You maintain your course while adjusting to changing circumstances.",
+          26: "Born on April 26th, you blend executive leadership with diplomatic sensitivity. Your authority is balanced with genuine care for others.",
+          27: "April 27th births carry intellectual brilliance with practical application. Your analytical thinking creates tangible improvements.",
+          28: "Your April 28th birth combines determined ambition with methodical organization. You achieve goals through structured, persistent effort.",
+          29: "Born on April 29th, you possess both executive presence and diplomatic skill. You lead with authority balanced by genuine consideration.",
+          30: "April 30th births bring determined focus with adaptable flexibility. You maintain your course while responding intelligently to change."
+        }
       },
       5: { // Mai
         name: "MAY",
-        ranges: [
-          { range: [1, 5], message: "Early May births bring grounded determination and practical magic. You transform abstract ideas into tangible realities through patient, consistent effort. Your persistence creates lasting beauty." },
-          { range: [6, 10], message: "Mid-early May children blend sensory awareness with intellectual clarity. You notice subtle details others miss while seeing the bigger picture. This rare combination gives you unique creative vision." },
-          { range: [11, 15], message: "Mid-May births carry natural diplomatic skills. You find common ground between opposing viewpoints with remarkable ease. Your harmonizing presence heals divisions in any group." },
-          { range: [16, 20], message: "Your mid-late May birth gives you steady determination with flashes of brilliant insight. Like a lightning bolt illuminating solid earth, you combine stability with inspiration uniquely." },
-          { range: [21, 25], message: "Late May births bring adaptable intelligence and quick understanding. You process new information rapidly and adjust your course accordingly. This mental agility is your special advantage." },
-          { range: [26, 31], message: "Born in May's final days, you possess both practical wisdom and visionary thinking. You build solid foundations while keeping your eyes on distant horizons - a powerful combination for creating lasting change." }
-        ]
+        days: {
+          1: "Your May 1st birth brings determined persistence with practical skill. Your patient building creates lasting achievements.",
+          2: "Born on May 2nd, you possess nurturing sensitivity with boundary-setting clarity. Your care includes healthy self-protection.",
+          3: "May 3rd births carry creative expression with persuasive communication. Your words and ideas inspire positive action in others.",
+          4: "Your May 4th birth gives you methodical organization and determined focus. You build reliable structures through consistent effort.",
+          5: "Born on May 5th, you blend adventurous spirit with sensory awareness. You experience life fully through all your senses.",
+          6: "May 6th births bring aesthetic appreciation with practical application. You transform beauty into functional forms.",
+          7: "Your May 7th birth gifts you with analytical precision and intuitive perception. Your balanced thinking creates comprehensive solutions.",
+          8: "Born on May 8th, you possess both material mastery and spiritual awareness. You build tangible success aligned with deeper values.",
+          9: "May 9th births carry humanitarian compassion with nurturing sensitivity. Your empathetic care creates healing connections.",
+          10: "Your May 10th birth combines determined persistence with sensory enjoyment. You work diligently while appreciating life's pleasures.",
+          11: "Born on May 11th, you blend innovative thinking with practical application. Your creative ideas have real-world functionality.",
+          12: "May 12th births bring reliable consistency with nurturing care. Your dependable presence creates security for others.",
+          13: "Your May 13th birth gives you adaptable thinking with sensory awareness. You respond intelligently to changing circumstances.",
+          14: "Born on May 14th, you possess practical wisdom with aesthetic appreciation. You create beauty that serves functional purposes.",
+          15: "May 15th births carry both determined persistence and diplomatic skill. You accomplish goals while maintaining harmonious relationships.",
+          16: "Your May 16th birth blends sensory enjoyment with analytical thinking. You appreciate tangible pleasures with thoughtful discernment.",
+          17: "Born on May 17th, you combine verbal brilliance with practical application. Your articulate expression creates tangible results.",
+          18: "May 18th births bring methodical organization with aesthetic appreciation. You create beautiful systems that function efficiently.",
+          19: "Your May 19th birth gives you determined focus with adaptable thinking. You maintain your course while adjusting to changing circumstances.",
+          20: "Born on May 20th, you blend practical skill with intuitive wisdom. Your hands-on abilities are guided by deeper knowing.",
+          21: "May 21st births carry intellectual agility with communicative brilliance. Your quick mind generates compelling expressions.",
+          22: "Your May 22nd birth combines practical organization with people-centered awareness. You build systems that serve human needs.",
+          23: "Born on May 23rd, you possess both intellectual curiosity and verbal eloquence. Your fascinating ideas find articulate expression.",
+          24: "May 24th births bring adaptable thinking with diplomatic skill. You navigate changing circumstances with social intelligence.",
+          25: "Your May 25th birth gives you intellectual versatility with communicative brilliance. Your diverse ideas find eloquent expression.",
+          26: "Born on May 26th, you blend nurturing sensitivity with analytical thinking. Your care is informed by thoughtful understanding.",
+          27: "May 27th births carry intellectual curiosity with communicative skill. Your fascinating ideas are clearly articulated.",
+          28: "Your May 28th birth combines adaptable thinking with practical application. You adjust intelligently to changing circumstances.",
+          29: "Born on May 29th, you possess both intellectual agility and communicative brilliance. Your quick mind generates articulate expression.",
+          30: "May 30th births bring mental versatility with diplomatic skill. You navigate complex ideas with social intelligence.",
+          31: "Your May 31st birth gives you intellectual curiosity with determined focus. Your fascination with ideas generates persistent exploration."
+        }
       },
       6: { // Juin
         name: "JUNE",
-        ranges: [
-          { range: [1, 5], message: "Early June births bring remarkable communication skills and mental flexibility. Your thoughts move like quicksilver, connecting ideas others see as unrelated. This versatile thinking creates innovative solutions." },
-          { range: [6, 10], message: "Mid-early June children blend curiosity with empathy. You seek understanding while genuinely caring about others' experiences. This combination makes you both a brilliant learner and compassionate friend." },
-          { range: [11, 15], message: "Mid-June births carry natural diplomatic abilities. You express difficult truths with such grace that others can actually hear them. Your words build bridges rather than walls." },
-          { range: [16, 20], message: "Your mid-late June birth gives you analytical precision with intuitive flashes. You gather detailed information methodically, then suddenly see the perfect pattern. Trust these moments of clarity." },
-          { range: [21, 25], message: "Late June births bring emotional intelligence with practical application. You understand complex feelings while knowing how to navigate them productively. This wisdom creates harmony in challenging situations." },
-          { range: [26, 30], message: "Born in June's final days, you possess both nurturing energy and protective strength. Like the summer that begins with your birth, you bring warmth that helps others flourish and grow." }
-        ]
+        days: {
+          1: "Your June 1st birth brings communicative brilliance and intellectual versatility. You express complex ideas with remarkable clarity.",
+          2: "Born on June 2nd, you possess diplomatic skill with emotional intelligence. You navigate social complexities with genuine sensitivity.",
+          3: "June 3rd births carry expressive creativity with intellectual curiosity. Your fascinating ideas find compelling expression.",
+          4: "Your June 4th birth gives you analytical precision and communicative clarity. You articulate complex ideas in accessible ways.",
+          5: "Born on June 5th, you blend intellectual versatility with adaptable responsiveness. You adjust intelligently to changing circumstances.",
+          6: "June 6th births bring nurturing sensitivity with harmonizing skill. You create environments where diverse elements work together beautifully.",
+          7: "Your June 7th birth gifts you with analytical thinking and philosophical depth. You seek fundamental truths beneath surface appearances.",
+          8: "Born on June 8th, you possess both practical organization and communicative skill. Your structured thinking finds clear expression.",
+          9: "June 9th births carry humanitarian compassion with emotional intelligence. Your empathetic understanding creates healing connections.",
+          10: "Your June 10th birth combines intellectual versatility with diplomatic skill. You navigate complex ideas with social intelligence.",
+          11: "Born on June 11th, you blend innovative thinking with persuasive communication. Your original ideas find compelling expression.",
+          12: "June 12th births bring adaptable responsiveness with emotional intelligence. You navigate changing feelings with genuine sensitivity.",
+          13: "Your June 13th birth gives you intellectual curiosity with communicative brilliance. Your fascinating ideas are clearly articulated.",
+          14: "Born on June 14th, you possess practical wisdom with emotional intelligence. Your sensible solutions honor feelings and relationships.",
+          15: "June 15th births carry both intellectual versatility and emotional sensitivity. Your comprehensive understanding includes both thoughts and feelings.",
+          16: "Your June 16th birth blends analytical thinking with intuitive perception. You integrate logic and instinct into balanced wisdom.",
+          17: "Born on June 17th, you combine intellectual curiosity with adaptable responsiveness. Your quick mind adjusts intelligently to new information.",
+          18: "June 18th births bring emotional intelligence with boundary-setting clarity. Your sensitivity includes healthy self-protection.",
+          19: "Your June 19th birth gives you intellectual versatility with emotional awareness. You understand both concepts and feelings with clarity.",
+          20: "Born on June 20th, you blend intuitive perception with analytical thinking. You integrate feeling and thinking into comprehensive understanding.",
+          21: "June 21st births carry intellectual brilliance with emotional intelligence. Your mental agility is balanced with interpersonal sensitivity.",
+          22: "Your June 22nd birth combines nurturing sensitivity with protective strength. You create safe environments where growth flourishes.",
+          23: "Born on June 23rd, you possess both intellectual curiosity and emotional intelligence. Your comprehensive understanding includes mind and heart.",
+          24: "June 24th births bring nurturing sensitivity with boundary-setting clarity. Your care includes healthy self-protection.",
+          25: "Your June 25th birth gives you intellectual versatility with emotional depth. Your quick mind is balanced with genuine feeling.",
+          26: "Born on June 26th, you blend nurturing sensitivity with protective strength. You create safe environments that support growth.",
+          27: "June 27th births carry intellectual curiosity with intuitive perception. You seek understanding through both thinking and feeling.",
+          28: "Your June 28th birth combines emotional sensitivity with protective strength. Your care includes healthy boundaries and self-protection.",
+          29: "Born on June 29th, you possess both emotional intelligence and intellectual versatility. You understand feelings and ideas with balanced clarity.",
+          30: "June 30th births bring emotional sensitivity with protective strength. Your nurturing care creates security for yourself and others."
+        }
       },
       7: { // Juillet
         name: "JULY",
-        ranges: [
-          { range: [1, 5], message: "Early July births bring intuitive understanding and protective instincts. You create safe harbors for those you care about during turbulent times. Your nurturing strength is a precious gift." },
-          { range: [6, 10], message: "Mid-early July children blend emotional depth with creative expression. Your feelings run deep, and you transform them into art, words, or actions that touch others profoundly." },
-          { range: [11, 15], message: "Mid-July births carry tenacious loyalty and surprising strength. Your gentle exterior conceals an unshakable core that stands firm when everything else seems unstable." },
-          { range: [16, 20], message: "Your mid-late July birth gives you nurturing wisdom with clear boundaries. You care deeply while maintaining healthy limits - a powerful combination that creates genuine support without depletion." },
-          { range: [21, 25], message: "Late July births bring charismatic leadership with emotional authenticity. You inspire others not by hiding vulnerabilities but by integrating them into your strength. This wholeness draws people to you." },
-          { range: [26, 31], message: "Born in July's final days, you possess both fiery passion and tender care. Like the summer heat that nurtures growing things, your intensity creates beauty and abundance around you." }
-        ]
+        days: {
+          1: "Your July 1st birth brings nurturing leadership and protective strength. You create secure environments where others can flourish.",
+          2: "Born on July 2nd, you possess emotional sensitivity with nurturing care. Your empathetic understanding creates healing connections.",
+          3: "July 3rd births carry creative intuition with emotional intelligence. Your artistic expression contains profound emotional truth.",
+          4: "Your July 4th birth gives you independent spirit and protective strength. You forge your own path while creating security for loved ones.",
+          5: "Born on July 5th, you blend creative expression with emotional depth. Your artistic work contains authentic feeling and genuine insight.",
+          6: "July 6th births bring nurturing sensitivity with practical care. Your emotional understanding generates tangible support.",
+          7: "Your July 7th birth gifts you with intuitive perception and imaginative vision. You see possibilities beyond conventional thinking.",
+          8: "Born on July 8th, you possess both emotional depth and protective strength. Your powerful feelings fuel your determined protection of loved ones.",
+          9: "July 9th births carry intuitive sensitivity with nurturing care. Your empathetic understanding creates healing connections.",
+          10: "Your July 10th birth combines emotional depth with intuitive wisdom. Your powerful feelings contain genuine insight.",
+          11: "Born on July 11th, you blend creative intuition with emotional intelligence. Your artistic expression reveals profound emotional truth.",
+          12: "July 12th births bring nurturing sensitivity with protective strength. You create secure environments where others can flourish.",
+          13: "Your July 13th birth gives you emotional depth with intuitive perception. Your powerful feelings contain genuine insight.",
+          14: "Born on July 14th, you possess protective strength with nurturing sensitivity. You defend loved ones while providing genuine care.",
+          15: "July 15th births carry both emotional depth and intuitive wisdom. Your powerful feelings guide your understanding of deeper truths.",
+          16: "Your July 16th birth blends protective strength with nurturing sensitivity. You create security while providing genuine care.",
+          17: "Born on July 17th, you combine intuitive perception with emotional intelligence. Your insights arise from authentic feeling.",
+          18: "July 18th births bring protective strength with nurturing sensitivity. You defend loved ones while providing genuine care.",
+          19: "Your July 19th birth gives you emotional depth with intuitive wisdom. Your authentic feelings contain profound insights.",
+          20: "Born on July 20th, you blend intuitive perception with emotional intelligence. Your insights arise from genuine feeling.",
+          21: "July 21st births carry protective leadership with nurturing sensitivity. You guide others while providing genuine care.",
+          22: "Your July 22nd birth combines emotional depth with intuitive wisdom. Your authentic feelings contain profound insights.",
+          23: "Born on July 23rd, you possess both creative intuition and emotional intelligence. Your artistic expression reveals profound emotional truth.",
+          24: "July 24th births bring protective strength with nurturing sensitivity. You create secure environments while providing genuine care.",
+          25: "Your July 25th birth gives you creative intuition with emotional intelligence. Your artistic expression contains authentic feeling.",
+          26: "Born on July 26th, you blend nurturing leadership with protective strength. You guide others while creating security.",
+          27: "July 27th births carry intuitive perception with emotional depth. Your insights arise from authentic feeling.",
+          28: "Your July 28th birth combines protective strength with nurturing sensitivity. You defend loved ones while providing genuine care.",
+          29: "Born on July 29th, you possess both intuitive perception and emotional intelligence. Your insights arise from authentic feeling.",
+          30: "July 30th births bring creative intuition with emotional depth. Your artistic expression reveals profound emotional truth.",
+          31: "Your July 31st birth gives you protective leadership with emotional intelligence. You guide others with genuine understanding."
+        }
       },
       8: { // Août
         name: "AUGUST",
-        ranges: [
-          { range: [1, 5], message: "Early August births bring natural leadership and radiant confidence. Like the summer sun at its peak, your presence illuminates rooms and inspires others to shine their own light more brightly." },
-          { range: [6, 10], message: "Mid-early August children blend generosity with discernment. You give freely while wisely recognizing where your gifts will create the most positive impact. This balanced approach multiplies your influence." },
-          { range: [11, 15], message: "Mid-August births carry organizational genius with creative flair. You bring order to chaos without sacrificing the spontaneity that makes life vibrant. This rare combination produces magnificent results." },
-          { range: [16, 20], message: "Your mid-late August birth gives you dramatic presence with authentic emotion. You express yourself powerfully while remaining genuinely connected to your truth. This integrity magnifies your impact." },
-          { range: [21, 25], message: "Late August births bring analytical precision with warm encouragement. You see exactly what needs improvement while providing the supportive environment necessary for growth." },
-          { range: [26, 31], message: "Born in August's final days, you possess both practical wisdom and charismatic expression. Your advice resonates because it combines solid sense with compelling delivery - a powerful gift for inspiring change." }
-        ]
+        days: {
+          1: "Your August 1st birth brings charismatic leadership and creative confidence. Your natural authority inspires others to follow your vision.",
+          2: "Born on August 2nd, you possess generous warmth with dignified boundaries. Your giving nature includes healthy self-respect.",
+          3: "August 3rd births carry creative expression with confident communication. Your artistic vision finds compelling expression.",
+          4: "Your August 4th birth gives you organizational skill and determined focus. You build lasting structures through methodical effort.",
+          5: "Born on August 5th, you blend creative passion with playful enjoyment. Your artistic expression contains authentic joy.",
+          6: "August 6th births bring nurturing leadership with practical organization. You guide others while creating reliable structures.",
+          7: "Your August 7th birth gifts you with analytical precision and creative vision. Your detailed thinking generates innovative solutions.",
+          8: "Born on August 8th, you possess both executive authority and abundant generosity. Your powerful leadership creates prosperity for many.",
+          9: "August 9th births carry humanitarian compassion with dignified strength. Your service to others maintains healthy self-respect.",
+          10: "Your August 10th birth combines creative vision with practical organization. Your artistic inspirations find tangible form.",
+          11: "Born on August 11th, you blend charismatic presence with innovative thinking. Your magnetic personality attracts support for your original ideas.",
+          12: "August 12th births bring practical organization with creative flair. Your methodical approach includes imaginative elements.",
+          13: "Your August 13th birth gives you creative expression with dignified presence. Your artistic work carries a sense of authority.",
+          14: "Born on August 14th, you possess generous warmth with practical skill. Your giving nature creates tangible benefits for others.",
+          15: "August 15th births carry both charismatic presence and nurturing sensitivity. Your powerful personality includes genuine care for others.",
+          16: "Your August 16th birth blends creative vision with analytical precision. Your artistic inspirations are developed with careful attention to detail.",
+          17: "Born on August 17th, you combine innovative thinking with methodical organization. Your original ideas find practical implementation.",
+          18: "August 18th births bring organizational skill with creative vision. You build structures that serve artistic purposes.",
+          19: "Your August 19th birth gives you charismatic presence with diplomatic skill. Your powerful personality includes sensitivity to others.",
+          20: "Born on August 20th, you blend creative vision with practical organization. Your artistic inspirations find tangible form.",
+          21: "August 21st births carry charismatic leadership with humanitarian vision. Your powerful presence serves compassionate purposes.",
+          22: "Your August 22nd birth combines dignified authority with creative expression. Your natural leadership includes artistic vision.",
+          23: "Born on August 23rd, you possess both creative vision and analytical precision. Your artistic inspirations are developed with careful attention to detail.",
+          24: "August 24th births bring practical organization with creative flair. Your methodical approach includes imaginative elements.",
+          25: "Your August 25th birth gives you charismatic presence with analytical precision. Your powerful personality is backed by careful thinking.",
+          26: "Born on August 26th, you blend practical organization with humanitarian vision. You build structures that serve compassionate purposes.",
+          27: "August 27th births carry analytical precision with creative vision. Your detailed thinking generates innovative solutions.",
+          28: "Your August 28th birth combines practical organization with generous warmth. Your methodical approach creates abundance for many.",
+          29: "Born on August 29th, you possess both charismatic presence and diplomatic skill. Your powerful personality includes sensitivity to others.",
+          30: "August 30th births bring creative vision with analytical precision. Your artistic inspirations are developed with careful attention to detail.",
+          31: "Your August 31st birth gives you charismatic leadership with innovative thinking. Your powerful presence promotes original ideas."
+        }
       },
       9: { // Septembre
         name: "SEPTEMBER",
-        ranges: [
-          { range: [1, 5], message: "Early September births bring methodical excellence and attention to detail. You create systems that function beautifully while noticing nuances others miss completely. This precision is your unique strength." },
-          { range: [6, 10], message: "Mid-early September children blend analytical thinking with aesthetic sensitivity. You appreciate fine distinctions in both logical structures and sensory experiences. This combination creates discerning wisdom." },
-          { range: [11, 15], message: "Mid-September births carry problem-solving abilities that seem almost magical. You break complex challenges into manageable pieces, finding elegant solutions that others overlook." },
-          { range: [16, 20], message: "Your mid-late September birth gives you balanced judgment with practical application. You weigh options thoroughly, then implement your decisions with efficient skill. This process creates reliable results." },
-          { range: [21, 25], message: "Late September births bring harmonizing energy and diplomatic skill. You find the balanced center between opposing forces, creating cooperation where conflict seemed inevitable." },
-          { range: [26, 30], message: "Born in September's final days, you possess both critical thinking and empathetic understanding. This rare combination allows you to improve situations while honoring the people involved - true wisdom in action." }
-        ]
+        days: {
+          1: "Your September 1st birth brings analytical precision and methodical organization. Your detailed thinking creates practical improvements.",
+          2: "Born on September 2nd, you possess diplomatic skill with analytical thinking. You navigate relationships with thoughtful intelligence.",
+          3: "September 3rd births carry creative expression with practical application. Your artistic ideas have functional value.",
+          4: "Your September 4th birth gives you methodical organization and determined focus. You build reliable structures through patient effort.",
+          5: "Born on September 5th, you blend analytical thinking with adaptable versatility. Your detailed mind adjusts quickly to new information.",
+          6: "September 6th births bring nurturing service with practical skill. Your care for others creates tangible improvements in their lives.",
+          7: "Your September 7th birth gifts you with analytical precision and philosophical depth. You seek fundamental patterns beneath surface details.",
+          8: "Born on September 8th, you possess both executive organization and analytical precision. Your leadership is backed by careful thinking.",
+          9: "September 9th births carry humanitarian service with selfless dedication. Your compassionate work creates meaningful improvements.",
+          10: "Your September 10th birth combines analytical thinking with practical application. Your detailed mind generates useful solutions.",
+          11: "Born on September 11th, you blend intuitive perception with analytical precision. You integrate instinct and logic into balanced wisdom.",
+          12: "September 12th births bring methodical organization with service orientation. You create systems that genuinely help others.",
+          13: "Your September 13th birth gives you analytical thinking with creative problem-solving. Your detailed mind generates innovative solutions.",
+          14: "Born on September 14th, you possess practical wisdom with meticulous attention to detail. Your careful thinking creates reliable results.",
+          15: "September 15th births carry both analytical precision and diplomatic skill. Your detailed thinking includes consideration of relationships.",
+          16: "Your September 16th birth blends methodical organization with creative problem-solving. Your structured approach yields innovative solutions.",
+          17: "Born on September 17th, you combine analytical thinking with intuitive perception. You integrate logic and instinct into balanced wisdom.",
+          18: "September 18th births bring practical organization with service orientation. You create systems that genuinely help others.",
+          19: "Your September 19th birth gives you analytical precision with adaptable versatility. Your detailed mind adjusts quickly to new information.",
+          20: "Born on September 20th, you blend diplomatic skill with analytical thinking. You navigate relationships with thoughtful intelligence.",
+          21: "September 21st births carry analytical precision with aesthetic appreciation. Your detailed thinking includes sensitivity to beauty and harmony.",
+          22: "Your September 22nd birth combines practical organization with diplomatic skill. You build structures while maintaining harmonious relationships.",
+          23: "Born on September 23rd, you possess both analytical precision and aesthetic appreciation. Your detailed thinking includes sensitivity to beauty.",
+          24: "September 24th births bring practical organization with service orientation. You create systems that genuinely help others.",
+          25: "Your September 25th birth gives you analytical thinking with diplomatic skill. You navigate complex situations with social intelligence.",
+          26: "Born on September 26th, you blend service orientation with analytical thinking. Your desire to help others is supported by careful analysis.",
+          27: "September 27th births carry diplomatic skill with balanced judgment. You weigh options thoroughly with consideration for relationships.",
+          28: "Your September 28th birth combines practical organization with analytical precision. Your structured approach is backed by careful thinking.",
+          29: "Born on September 29th, you possess both diplomatic skill and balanced judgment. You navigate relationships while weighing options thoroughly.",
+          30: "September 30th births bring analytical thinking with diplomatic skill. You navigate complex situations with thoughtful intelligence."
+        }
       },
       10: { // Octobre
         name: "OCTOBER",
-        ranges: [
-          { range: [1, 5], message: "Early October births bring diplomatic skill with unwavering principles. You navigate social complexities gracefully while maintaining your inner compass. This integrity wrapped in charm creates trustworthy leadership." },
-          { range: [6, 10], message: "Mid-early October children blend justice-seeking with aesthetic appreciation. You strive for fairness while creating beauty in your environment. This combination elevates both your surroundings and relationships." },
-          { range: [11, 15], message: "Mid-October births carry strategic vision with emotional intelligence. You plan several moves ahead while remaining attuned to the human element. This balanced approach creates sustainable success." },
-          { range: [16, 20], message: "Your mid-late October birth gives you transformative power and regenerative abilities. You thrive through changes that overwhelm others, emerging stronger after challenges. This resilience is your superpower." },
-          { range: [21, 25], message: "Late October births bring penetrating insight with compassionate understanding. You see beneath surface appearances to hidden truths, yet hold this knowledge with kindness rather than judgment." },
-          { range: [26, 31], message: "Born in October's final days, you possess both mysterious depth and practical resourcefulness. Like the autumn season itself, you combine harvest wisdom with preparation for deeper transformations ahead." }
-        ]
+        days: {
+          1: "Your October 1st birth brings diplomatic leadership and balanced judgment. You guide others with thoughtful consideration.",
+          2: "Born on October 2nd, you possess harmonizing skill with analytical thinking. You create cooperation through thoughtful understanding.",
+          3: "October 3rd births carry creative expression with social intelligence. Your artistic work includes sophisticated understanding of relationships.",
+          4: "Your October 4th birth gives you determined organization and balanced judgment. You build structures guided by thoughtful consideration.",
+          5: "Born on October 5th, you blend adaptable thinking with diplomatic skill. You adjust intelligently to changing social dynamics.",
+          6: "October 6th births bring aesthetic harmony with practical application. You create beauty that serves functional purposes.",
+          7: "Your October 7th birth gifts you with analytical precision and intuitive perception. You integrate logic and instinct into balanced wisdom.",
+          8: "Born on October 8th, you possess both executive authority and diplomatic skill. Your leadership includes thoughtful consideration of relationships.",
+          9: "October 9th births carry humanitarian vision with harmonizing skill. Your compassionate work creates cooperation across differences.",
+          10: "Your October 10th birth combines balanced judgment with diplomatic skill. You weigh options thoroughly with consideration for relationships.",
+          11: "Born on October 11th, you blend intuitive perception with analytical precision. You integrate instinct and logic into balanced wisdom.",
+          12: "October 12th births bring aesthetic harmony with practical application. You create beauty that serves functional purposes.",
+          13: "Your October 13th birth gives you perceptive insight with transformative power. You see beneath surface appearances to hidden dynamics.",
+          14: "Born on October 14th, you possess balanced judgment with determined focus. You weigh options thoroughly then proceed with unwavering resolve.",
+          15: "October 15th births carry both diplomatic skill and analytical precision. Your social intelligence is supported by careful thinking.",
+          16: "Your October 16th birth blends transformative vision with aesthetic appreciation. You create beautiful change through careful rebalancing.",
+          17: "Born on October 17th, you combine intuitive perception with strategic thinking. Your insights inform your carefully planned actions.",
+          18: "October 18th births bring balanced judgment with determined focus. You weigh options thoroughly then proceed with unwavering resolve.",
+          19: "Your October 19th birth gives you transformative vision with diplomatic skill. You create positive change while maintaining harmonious relationships.",
+          20: "Born on October 20th, you blend balanced judgment with intuitive perception. You weigh options with both logical and instinctive wisdom.",
+          21: "October 21st births carry diplomatic leadership with transformative vision. You guide others through positive change with graceful skill.",
+          22: "Your October 22nd birth combines aesthetic harmony with balanced judgment. You create beauty through thoughtful rebalancing.",
+          23: "Born on October 23rd, you possess both perceptive insight and transformative power. You see beneath surface appearances to create meaningful change.",
+          24: "October 24th births bring determined focus with transformative vision. You pursue meaningful change with unwavering resolve.",
+          25: "Your October 25th birth gives you transformative vision with strategic thinking. You create positive change through carefully planned action.",
+          26: "Born on October 26th, you blend perceptive insight with diplomatic skill. You see beneath surface appearances while maintaining harmonious relationships.",
+          27: "October 27th births carry transformative vision with intuitive perception. Your insights guide meaningful change.",
+          28: "Your October 28th birth combines determined focus with transformative power. You pursue meaningful change with unwavering resolve.",
+          29: "Born on October 29th, you possess both perceptive insight and transformative power. You see beneath surface appearances to create meaningful change.",
+          30: "October 30th births bring transformative vision with balanced judgment. You create positive change through thoughtful consideration.",
+          31: "Your October 31st birth gives you transformative power with perceptive insight. You create meaningful change through deep understanding."
+        }
       },
       11: { // Novembre
         name: "NOVEMBER",
-        ranges: [
-          { range: [1, 5], message: "Early November births bring penetrating insight with transformative power. You see through surface illusions to core truths, using this clarity to create profound positive change in yourself and others." },
-          { range: [6, 10], message: "Mid-early November children blend passionate intensity with emotional courage. You dive into life's depths where others merely wade in the shallows. This bravery reveals treasures others never discover." },
-          { range: [11, 15], message: "Mid-November births carry regenerative abilities and phoenix energy. You transform difficulties into opportunities, repeatedly rising from challenges with greater wisdom and strength." },
-          { range: [16, 20], message: "Your mid-late November birth gives you investigative intelligence with intuitive flashes. You gather information methodically, then suddenly perceive the hidden pattern. Trust these moments of revelation." },
-          { range: [21, 25], message: "Late November births bring expansive vision with practical application. You see possibilities beyond conventional horizons while knowing how to manifest them in the real world." },
-          { range: [26, 30], message: "Born in November's final days, you possess both philosophical depth and playful spirit. This rare combination allows you to explore life's profound questions without becoming heavy or overly serious." }
-        ]
+        days: {
+          1: "Your November 1st birth brings transformative vision and emotional intensity. You create profound change through passionate commitment.",
+          2: "Born on November 2nd, you possess emotional depth with perceptive insight. Your powerful feelings contain genuine understanding.",
+          3: "November 3rd births carry creative expression with transformative power. Your artistic work creates meaningful change in others.",
+          4: "Your November 4th birth gives you determined focus and transformative vision. You pursue meaningful change with unwavering resolve.",
+          5: "Born on November 5th, you blend adaptable thinking with transformative power. You adjust intelligently to create positive change.",
+          6: "November 6th births bring nurturing support with transformative vision. Your care for others creates meaningful improvements in their lives.",
+          7: "Your November 7th birth gifts you with analytical precision and intuitive depth. You integrate detailed thinking with profound insight.",
+          8: "Born on November 8th, you possess both executive power and transformative vision. Your leadership creates meaningful change on large scales.",
+          9: "November 9th births carry humanitarian compassion with transformative power. Your service creates profound positive change for others.",
+          10: "Your November 10th birth combines emotional intensity with transformative vision. Your passionate feelings fuel meaningful change.",
+          11: "Born on November 11th, you blend intuitive perception with transformative power. Your insights create profound positive change.",
+          12: "November 12th births bring determined focus with emotional depth. You pursue goals with powerful emotional commitment.",
+          13: "Your November 13th birth gives you transformative vision with perceptive insight. You create meaningful change through deep understanding.",
+          14: "Born on November 14th, you possess emotional intensity with transformative power. Your passionate feelings create profound change.",
+          15: "November 15th births carry both transformative vision and emotional depth. Your commitment to meaningful change is fueled by powerful feelings.",
+          16: "Your November 16th birth blends transformative power with determined focus. You create profound change through unwavering resolve.",
+          17: "Born on November 17th, you combine intuitive perception with emotional intensity. Your insights arise from powerful, authentic feelings.",
+          18: "November 18th births bring determined focus with transformative vision. You pursue meaningful change with unwavering resolve.",
+          19: "Your November 19th birth gives you transformative power with philosophical depth. You create meaningful change guided by fundamental principles.",
+          20: "Born on November 20th, you blend perceptive insight with transformative vision. You see beneath surface appearances to create meaningful change.",
+          21: "November 21st births carry transformative power with intuitive perception. Your insights create profound positive change.",
+          22: "Your November 22nd birth combines visionary thinking with transformative power. Your expansive ideas create meaningful change.",
+          23: "Born on November 23rd, you possess both transformative vision and philosophical depth. Your commitment to meaningful change is guided by fundamental principles.",
+          24: "November 24th births bring transformative power with expansive thinking. You create meaningful change through broad perspective.",
+          25: "Your November 25th birth gives you transformative vision with optimistic spirit. You create positive change through enthusiastic action.",
+          26: "Born on November 26th, you blend philosophical depth with transformative power. Your understanding of fundamental principles creates meaningful change.",
+          27: "November 27th births carry intuitive perception with transformative vision. Your insights guide meaningful change.",
+          28: "Your November 28th birth combines expansive thinking with transformative power. Your broad perspective creates meaningful change.",
+          29: "Born on November 29th, you possess both optimistic spirit and transformative vision. Your enthusiastic action creates positive change.",
+          30: "November 30th births bring transformative power with philosophical depth. You create meaningful change guided by fundamental principles."
+        }
       },
       12: { // Décembre
         name: "DECEMBER",
-        ranges: [
-          { range: [1, 5], message: "Early December births bring adventurous spirit with philosophical wisdom. You explore new territories physically and intellectually, finding meaning in diverse experiences. Your open-minded approach reveals hidden connections." },
-          { range: [6, 10], message: "Mid-early December children blend optimistic vision with honest assessment. You see magnificent possibilities while remaining grounded in reality. This balanced perspective creates achievable dreams." },
-          { range: [11, 15], message: "Mid-December births carry inspirational energy that lifts others' spirits. Your natural enthusiasm ignites hope in those feeling discouraged. This gift of positive motivation is especially valuable during challenging times." },
-          { range: [16, 20], message: "Your mid-late December birth gives you focused determination with strategic thinking. You set ambitious goals and systematically accomplish them through persistent, intelligent effort. This disciplined approach brings impressive results." },
-          { range: [21, 25], message: "Late December births bring visionary thinking with practical action. You transform abstract concepts into tangible realities through methodical implementation. Your ideas actually materialize in the world." },
-          { range: [26, 31], message: "Born in December's final days, you possess both reflective wisdom and forward vision. Standing at the year's threshold, you naturally understand endings and beginnings, helping others navigate transitions with grace." }
-        ]
+        days: {
+          1: "Your December 1st birth brings philosophical wisdom and adventurous spirit. You explore life's meaning through diverse experiences.",
+          2: "Born on December 2nd, you possess diplomatic skill with expansive vision. You navigate relationships with broad perspective.",
+          3: "December 3rd births carry expressive communication with philosophical depth. You articulate profound ideas with compelling clarity.",
+          4: "Your December 4th birth gives you determined focus and practical organization. You build lasting structures through methodical effort.",
+          5: "Born on December 5th, you blend adventurous spirit with philosophical wisdom. You seek meaningful truth through diverse experiences.",
+          6: "December 6th births bring nurturing responsibility with optimistic vision. Your care for others is infused with positive enthusiasm.",
+          7: "Your December 7th birth gifts you with analytical precision and philosophical depth. You examine fundamental principles with careful thinking.",
+          8: "Born on December 8th, you possess both executive organization and expansive vision. Your leadership creates ambitious, positive results.",
+          9: "December 9th births carry humanitarian compassion with philosophical wisdom. Your service to others arises from profound understanding.",
+          10: "Your December 10th birth combines optimistic vision with determined focus. Your positive perspective fuels unwavering resolve.",
+          11: "Born on December 11th, you blend visionary thinking with intuitive perception. Your expansive ideas are guided by deeper knowing.",
+          12: "December 12th births bring practical organization with philosophical depth. You build structures aligned with fundamental principles.",
+          13: "Your December 13th birth gives you philosophical wisdom with intuitive perception. Your understanding of fundamental principles is guided by deeper knowing.",
+          14: "Born on December 14th, you possess determined focus with expansive vision. You pursue ambitious goals with unwavering resolve.",
+          15: "December 15th births carry both philosophical depth and optimistic spirit. Your profound understanding is expressed with positive enthusiasm.",
+          16: "Your December 16th birth blends determined focus with philosophical wisdom. You pursue meaningful goals with unwavering resolve.",
+          17: "Born on December 17th, you combine visionary thinking with practical organization. Your expansive ideas find structured implementation.",
+          18: "December 18th births bring determined focus with philosophical depth. You pursue meaningful goals with unwavering resolve.",
+          19: "Your December 19th birth gives you visionary thinking with practical organization. Your expansive ideas find structured implementation.",
+          20: "Born on December 20th, you blend ambitious determination with philosophical depth. You pursue meaningful achievement with unwavering resolve.",
+          21: "December 21st births carry visionary leadership with philosophical wisdom. You guide others toward meaningful achievement.",
+          22: "Your December 22nd birth combines practical organization with visionary thinking. Your structured approach serves expansive goals.",
+          23: "Born on December 23rd, you possess both philosophical wisdom and intuitive perception. Your understanding of fundamental principles is guided by deeper knowing.",
+          24: "December 24th births bring nurturing sensitivity with philosophical depth. Your care for others arises from profound understanding.",
+          25: "Your December 25th birth gives you generous spirit with philosophical wisdom. Your giving nature arises from profound understanding.",
+          26: "Born on December 26th, you blend practical organization with visionary thinking. Your structured approach serves expansive goals.",
+          27: "December 27th births carry philosophical wisdom with determined focus. Your understanding of fundamental principles guides your unwavering resolve.",
+          28: "Your December 28th birth combines practical organization with philosophical depth. You build structures aligned with fundamental principles.",
+          29: "Born on December 29th, you possess both visionary thinking and practical organization. Your expansive ideas find structured implementation.",
+          30: "December 30th births bring philosophical wisdom with determined focus. Your understanding of fundamental principles guides your unwavering resolve.",
+          31: "Your December 31st birth gives you visionary thinking with transformative power. Your expansive ideas create meaningful change."
+        }
       }
     };
 
@@ -888,31 +1132,20 @@
       return code;
     }
 
-    function updateMotivationByBirthMonth() {
+    function updateMotivationByBirthday() {
       if (!userBirthdayMonth || !userBirthdayDay) return;
       
       const motivationElement = document.getElementById('monthlyMotivation');
-      const monthData = monthlyMotivations[userBirthdayMonth];
+      const monthData = dailyMotivations[userBirthdayMonth];
       
-      if (monthData) {
-        // Trouver la bonne tranche de jours
-        let message = "Your birth month holds special power. Embrace your unique path.";
-        
-        for (const rangeData of monthData.ranges) {
-          const [min, max] = rangeData.range;
-          if (userBirthdayDay >= min && userBirthdayDay <= max) {
-            message = rangeData.message;
-            break;
-          }
-        }
-        
+      if (monthData && monthData.days[userBirthdayDay]) {
         motivationElement.innerHTML = `
-          <span class="month-name">${monthData.name} (${userBirthdayDay})</span>
-          ${message}
+          <span class="your-flower">Your Flower - ${monthData.name} (${userBirthdayDay})</span>
+          ${monthData.days[userBirthdayDay]}
         `;
       } else {
         motivationElement.innerHTML = `
-          <span class="month-name">YOUR JOURNEY</span>
+          <span class="your-flower">YOUR FLOWER</span>
           Submit your date of birth to see your personalized motivation.
         `;
       }
@@ -1350,16 +1583,6 @@
       if (success) {
         document.getElementById('genderModal').style.display = 'none';
         
-        // Update stats display in the modal
-        document.getElementById('birthdayMembersCount').textContent = userBirthdayStats.totalMembers;
-        document.getElementById('birthdayRanking').textContent = getOrdinal(userBirthdayStats.userRank);
-        document.getElementById('birthdayDate').textContent = userBirthdayStats.formattedDate;
-        document.getElementById('countryMembersCount').textContent = userCountryStats.totalMembers;
-        document.getElementById('countryName').textContent = userCountry;
-        
-        // Show the achievement modal
-        document.getElementById('accessCodeModal').style.display = 'block';
-        
         updateHeaderAccessCode();
         
         submitButton.style.backgroundColor = 'green';
@@ -1495,26 +1718,17 @@
 
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (userBirthdayMonth && userBirthdayDay) {
-        updateMotivationByBirthMonth();
+        updateMotivationByBirthday();
       } else {
         const motivationElement = document.getElementById('monthlyMotivation');
         motivationElement.innerHTML = `
-          <span class="month-name">DISCOVER YOUR FLOWER</span>
+          <span class="your-flower">YOUR FLOWER</span>
           Submit your date of birth to see your personalized motivation.
         `;
       }
       
       const flowerModal = document.getElementById('flowerModal');
       flowerModal.style.display = 'block';
-    });
-
-    document.getElementById('joinButton').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('joinModal').style.display = 'block';
-    });
-
-    document.getElementById('laterButton').addEventListener('click', function() {
-      document.getElementById('accessCodeModal').style.display = 'none';
     });
 
     // Header access code container click to copy
@@ -1549,20 +1763,10 @@
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
       document.getElementById('flowerModal').style.display = 'none';
     });
-    
-    document.getElementById('closeJoinModal').addEventListener('click', function() {
-      document.getElementById('joinModal').style.display = 'none';
-    });
-    
-    document.getElementById('closeAccessCodeModal').addEventListener('click', function() {
-      document.getElementById('accessCodeModal').style.display = 'none';
-    });
 
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
-      const accessCodeModal = document.getElementById('accessCodeModal');
-      const joinModal = document.getElementById('joinModal');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -1576,14 +1780,6 @@
       
       if (event.target == flowerModal) {
         flowerModal.style.display = "none";
-      }
-      
-      if (event.target == accessCodeModal) {
-        accessCodeModal.style.display = "none";
-      }
-      
-      if (event.target == joinModal) {
-        joinModal.style.display = "none";
       }
     };
 
