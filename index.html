@@ -737,54 +737,139 @@
       totalMembers: 0
     };
 
+    // Motivations spécifiques pour chaque mois
     const monthlyMotivations = {
-      1: {
+      1: { // Janvier
         name: "JANUARY",
-        message: "You have everything you need to start well. January is the month of strong decisions."
+        ranges: [
+          { range: [1, 5], message: "Early January births bring remarkable determination. Your discipline helps you pursue goals when others give up. This year, channel your natural structure-building skills to create something lasting." },
+          { range: [6, 10], message: "Mid-early January child, you blend ambition with practicality. Your ability to see long-term consequences guides your decisions wisely. Trust your instincts when planning your next big move." },
+          { range: [11, 15], message: "Mid-January births carry innate leadership energy. People naturally look to you in challenging times. Your composed strength becomes a lighthouse for those feeling lost." },
+          { range: [16, 20], message: "Your mid-late January birth gives you rare perseverance. What others see as obstacles, you view as character-building stepping stones. This resilience is your superpower." },
+          { range: [21, 25], message: "Late January births bring innovative thinking with practical application. You see possibilities others miss while knowing how to bring them into reality. Time to create something new." },
+          { range: [26, 31], message: "Born in January's final days, you possess both independence and community spirit. Your ability to stand apart while still connecting deeply with others creates unique bridges between worlds." }
+        ]
       },
-      2: {
+      2: { // Février
         name: "FEBRUARY",
-        message: "It's the small repeated actions that build great victories. Continue slowly but surely."
+        ranges: [
+          { range: [1, 5], message: "Early February children embody visionary thinking. You naturally see future possibilities that remain invisible to others. Trust those intuitive flashes of insight coming to you now." },
+          { range: [6, 10], message: "Mid-early February births carry a humanitarian spirit. Your natural empathy extends beyond personal connections to larger social concerns. Your compassion creates genuine change." },
+          { range: [11, 15], message: "Mid-February births blend idealism with practicality beautifully. You dream big while building solid foundations. This rare combination helps manifest your visions in tangible ways." },
+          { range: [16, 20], message: "Your mid-late February birth gives you emotional intelligence and intuitive wisdom. You understand nuances of human behavior that others miss completely. This gift serves as your compass." },
+          { range: [21, 25], message: "Late February births bring progressive thinking and avant-garde perspectives. You're comfortable challenging outdated systems and proposing fresh alternatives. Your innovative spirit is needed now." },
+          { range: [26, 29], message: "Born in February's rarest days, you possess uncommon perception and adaptability. Like the leap year that sometimes contains your birth date, you bring extra magic to ordinary situations." }
+        ]
       },
-      3: {
+      3: { // Mars
         name: "MARCH",
-        message: "What you plant now, you will harvest tomorrow. Stay true to your vision."
+        ranges: [
+          { range: [1, 5], message: "Early March births carry pioneering energy and courage. You naturally lead the way into uncharted territory, inspiring others to follow. This boldness serves you especially well during times of uncertainty." },
+          { range: [6, 10], message: "Mid-early March children blend intuition with action. You sense the right path forward and move decisively. Trust your inner knowing - it rarely steers you wrong." },
+          { range: [11, 15], message: "Mid-March births bring compassionate leadership. You inspire others not through force but through genuine understanding and connection. Your gentle strength moves mountains." },
+          { range: [16, 20], message: "Your mid-late March birth gives you creative problem-solving abilities. Where others see dead ends, you find hidden doorways. This imaginative thinking is your special gift to the world." },
+          { range: [21, 25], message: "Late March births carry powerful initiating energy. You excel at starting projects and inspiring fresh beginnings. Your enthusiasm ignites passion in those around you." },
+          { range: [26, 31], message: "Born in March's final days, you possess dynamic energy paired with thoughtful strategy. This combination allows you to make bold moves without recklessness - a rare and valuable balance." }
+        ]
       },
-      4: {
+      4: { // Avril
         name: "APRIL",
-        message: "April blooms, just like your silent efforts. Never doubt your growth."
+        ranges: [
+          { range: [1, 5], message: "Early April births bring determined energy and natural leadership. You possess the rare ability to take charge without dominating. People follow your lead because they sense your authentic strength." },
+          { range: [6, 10], message: "Mid-early April children blend passion with practicality. Your fiery enthusiasm is grounded in real-world wisdom, making your ideas both exciting and achievable. This balance is your superpower." },
+          { range: [11, 15], message: "Mid-April births carry strategic brilliance. You see several moves ahead in life's complex game, anticipating obstacles before they arise. Trust your forward-thinking mind." },
+          { range: [16, 20], message: "Your mid-late April birth gives you tenacious energy wrapped in charm. You persist through challenges with a grace that inspires others. This resilient optimism carries you through any storm." },
+          { range: [21, 25], message: "Late April births bring steady determination with flashes of inspiration. Like the spring season itself, you blend dependable growth with surprising bursts of beauty. Your path unfolds with perfect timing." },
+          { range: [26, 30], message: "Born in April's final days, you possess both strength and sensitivity in equal measure. This rare combination allows you to pursue goals forcefully while remaining attuned to others' needs." }
+        ]
       },
-      5: {
+      5: { // Mai
         name: "MAY",
-        message: "Trust yourself. You are closer to your goal than you think."
+        ranges: [
+          { range: [1, 5], message: "Early May births bring grounded determination and practical magic. You transform abstract ideas into tangible realities through patient, consistent effort. Your persistence creates lasting beauty." },
+          { range: [6, 10], message: "Mid-early May children blend sensory awareness with intellectual clarity. You notice subtle details others miss while seeing the bigger picture. This rare combination gives you unique creative vision." },
+          { range: [11, 15], message: "Mid-May births carry natural diplomatic skills. You find common ground between opposing viewpoints with remarkable ease. Your harmonizing presence heals divisions in any group." },
+          { range: [16, 20], message: "Your mid-late May birth gives you steady determination with flashes of brilliant insight. Like a lightning bolt illuminating solid earth, you combine stability with inspiration uniquely." },
+          { range: [21, 25], message: "Late May births bring adaptable intelligence and quick understanding. You process new information rapidly and adjust your course accordingly. This mental agility is your special advantage." },
+          { range: [26, 31], message: "Born in May's final days, you possess both practical wisdom and visionary thinking. You build solid foundations while keeping your eyes on distant horizons - a powerful combination for creating lasting change." }
+        ]
       },
-      6: {
+      6: { // Juin
         name: "JUNE",
-        message: "Moving forward also means taking care of yourself. Be proud of your pace."
+        ranges: [
+          { range: [1, 5], message: "Early June births bring remarkable communication skills and mental flexibility. Your thoughts move like quicksilver, connecting ideas others see as unrelated. This versatile thinking creates innovative solutions." },
+          { range: [6, 10], message: "Mid-early June children blend curiosity with empathy. You seek understanding while genuinely caring about others' experiences. This combination makes you both a brilliant learner and compassionate friend." },
+          { range: [11, 15], message: "Mid-June births carry natural diplomatic abilities. You express difficult truths with such grace that others can actually hear them. Your words build bridges rather than walls." },
+          { range: [16, 20], message: "Your mid-late June birth gives you analytical precision with intuitive flashes. You gather detailed information methodically, then suddenly see the perfect pattern. Trust these moments of clarity." },
+          { range: [21, 25], message: "Late June births bring emotional intelligence with practical application. You understand complex feelings while knowing how to navigate them productively. This wisdom creates harmony in challenging situations." },
+          { range: [26, 30], message: "Born in June's final days, you possess both nurturing energy and protective strength. Like the summer that begins with your birth, you bring warmth that helps others flourish and grow." }
+        ]
       },
-      7: {
+      7: { // Juillet
         name: "JULY",
-        message: "Fruits come with patience. Your work deserves success."
+        ranges: [
+          { range: [1, 5], message: "Early July births bring intuitive understanding and protective instincts. You create safe harbors for those you care about during turbulent times. Your nurturing strength is a precious gift." },
+          { range: [6, 10], message: "Mid-early July children blend emotional depth with creative expression. Your feelings run deep, and you transform them into art, words, or actions that touch others profoundly." },
+          { range: [11, 15], message: "Mid-July births carry tenacious loyalty and surprising strength. Your gentle exterior conceals an unshakable core that stands firm when everything else seems unstable." },
+          { range: [16, 20], message: "Your mid-late July birth gives you nurturing wisdom with clear boundaries. You care deeply while maintaining healthy limits - a powerful combination that creates genuine support without depletion." },
+          { range: [21, 25], message: "Late July births bring charismatic leadership with emotional authenticity. You inspire others not by hiding vulnerabilities but by integrating them into your strength. This wholeness draws people to you." },
+          { range: [26, 31], message: "Born in July's final days, you possess both fiery passion and tender care. Like the summer heat that nurtures growing things, your intensity creates beauty and abundance around you." }
+        ]
       },
-      8: {
+      8: { // Août
         name: "AUGUST",
-        message: "Look at everything you've already accomplished. Every step counts."
+        ranges: [
+          { range: [1, 5], message: "Early August births bring natural leadership and radiant confidence. Like the summer sun at its peak, your presence illuminates rooms and inspires others to shine their own light more brightly." },
+          { range: [6, 10], message: "Mid-early August children blend generosity with discernment. You give freely while wisely recognizing where your gifts will create the most positive impact. This balanced approach multiplies your influence." },
+          { range: [11, 15], message: "Mid-August births carry organizational genius with creative flair. You bring order to chaos without sacrificing the spontaneity that makes life vibrant. This rare combination produces magnificent results." },
+          { range: [16, 20], message: "Your mid-late August birth gives you dramatic presence with authentic emotion. You express yourself powerfully while remaining genuinely connected to your truth. This integrity magnifies your impact." },
+          { range: [21, 25], message: "Late August births bring analytical precision with warm encouragement. You see exactly what needs improvement while providing the supportive environment necessary for growth." },
+          { range: [26, 31], message: "Born in August's final days, you possess both practical wisdom and charismatic expression. Your advice resonates because it combines solid sense with compelling delivery - a powerful gift for inspiring change." }
+        ]
       },
-      9: {
+      9: { // Septembre
         name: "SEPTEMBER",
-        message: "Stay focused. What you do today builds your future."
+        ranges: [
+          { range: [1, 5], message: "Early September births bring methodical excellence and attention to detail. You create systems that function beautifully while noticing nuances others miss completely. This precision is your unique strength." },
+          { range: [6, 10], message: "Mid-early September children blend analytical thinking with aesthetic sensitivity. You appreciate fine distinctions in both logical structures and sensory experiences. This combination creates discerning wisdom." },
+          { range: [11, 15], message: "Mid-September births carry problem-solving abilities that seem almost magical. You break complex challenges into manageable pieces, finding elegant solutions that others overlook." },
+          { range: [16, 20], message: "Your mid-late September birth gives you balanced judgment with practical application. You weigh options thoroughly, then implement your decisions with efficient skill. This process creates reliable results." },
+          { range: [21, 25], message: "Late September births bring harmonizing energy and diplomatic skill. You find the balanced center between opposing forces, creating cooperation where conflict seemed inevitable." },
+          { range: [26, 30], message: "Born in September's final days, you possess both critical thinking and empathetic understanding. This rare combination allows you to improve situations while honoring the people involved - true wisdom in action." }
+        ]
       },
-      10: {
+      10: { // Octobre
         name: "OCTOBER",
-        message: "Dare to dream bigger. You are ready for the next level."
+        ranges: [
+          { range: [1, 5], message: "Early October births bring diplomatic skill with unwavering principles. You navigate social complexities gracefully while maintaining your inner compass. This integrity wrapped in charm creates trustworthy leadership." },
+          { range: [6, 10], message: "Mid-early October children blend justice-seeking with aesthetic appreciation. You strive for fairness while creating beauty in your environment. This combination elevates both your surroundings and relationships." },
+          { range: [11, 15], message: "Mid-October births carry strategic vision with emotional intelligence. You plan several moves ahead while remaining attuned to the human element. This balanced approach creates sustainable success." },
+          { range: [16, 20], message: "Your mid-late October birth gives you transformative power and regenerative abilities. You thrive through changes that overwhelm others, emerging stronger after challenges. This resilience is your superpower." },
+          { range: [21, 25], message: "Late October births bring penetrating insight with compassionate understanding. You see beneath surface appearances to hidden truths, yet hold this knowledge with kindness rather than judgment." },
+          { range: [26, 31], message: "Born in October's final days, you possess both mysterious depth and practical resourcefulness. Like the autumn season itself, you combine harvest wisdom with preparation for deeper transformations ahead." }
+        ]
       },
-      11: {
+      11: { // Novembre
         name: "NOVEMBER",
-        message: "This month rewards the quiet, the constant, the patient. You are one of them."
+        ranges: [
+          { range: [1, 5], message: "Early November births bring penetrating insight with transformative power. You see through surface illusions to core truths, using this clarity to create profound positive change in yourself and others." },
+          { range: [6, 10], message: "Mid-early November children blend passionate intensity with emotional courage. You dive into life's depths where others merely wade in the shallows. This bravery reveals treasures others never discover." },
+          { range: [11, 15], message: "Mid-November births carry regenerative abilities and phoenix energy. You transform difficulties into opportunities, repeatedly rising from challenges with greater wisdom and strength." },
+          { range: [16, 20], message: "Your mid-late November birth gives you investigative intelligence with intuitive flashes. You gather information methodically, then suddenly perceive the hidden pattern. Trust these moments of revelation." },
+          { range: [21, 25], message: "Late November births bring expansive vision with practical application. You see possibilities beyond conventional horizons while knowing how to manifest them in the real world." },
+          { range: [26, 30], message: "Born in November's final days, you possess both philosophical depth and playful spirit. This rare combination allows you to explore life's profound questions without becoming heavy or overly serious." }
+        ]
       },
-      12: {
+      12: { // Décembre
         name: "DECEMBER",
-        message: "Celebrate your journey, even if imperfect. You have grown, and this is just the beginning."
+        ranges: [
+          { range: [1, 5], message: "Early December births bring adventurous spirit with philosophical wisdom. You explore new territories physically and intellectually, finding meaning in diverse experiences. Your open-minded approach reveals hidden connections." },
+          { range: [6, 10], message: "Mid-early December children blend optimistic vision with honest assessment. You see magnificent possibilities while remaining grounded in reality. This balanced perspective creates achievable dreams." },
+          { range: [11, 15], message: "Mid-December births carry inspirational energy that lifts others' spirits. Your natural enthusiasm ignites hope in those feeling discouraged. This gift of positive motivation is especially valuable during challenging times." },
+          { range: [16, 20], message: "Your mid-late December birth gives you focused determination with strategic thinking. You set ambitious goals and systematically accomplish them through persistent, intelligent effort. This disciplined approach brings impressive results." },
+          { range: [21, 25], message: "Late December births bring visionary thinking with practical action. You transform abstract concepts into tangible realities through methodical implementation. Your ideas actually materialize in the world." },
+          { range: [26, 31], message: "Born in December's final days, you possess both reflective wisdom and forward vision. Standing at the year's threshold, you naturally understand endings and beginnings, helping others navigate transitions with grace." }
+        ]
       }
     };
 
@@ -804,20 +889,31 @@
     }
 
     function updateMotivationByBirthMonth() {
-      if (!userBirthdayMonth) return;
+      if (!userBirthdayMonth || !userBirthdayDay) return;
       
       const motivationElement = document.getElementById('monthlyMotivation');
-      const motivation = monthlyMotivations[userBirthdayMonth];
+      const monthData = monthlyMotivations[userBirthdayMonth];
       
-      if (motivation) {
+      if (monthData) {
+        // Trouver la bonne tranche de jours
+        let message = "Your birth month holds special power. Embrace your unique path.";
+        
+        for (const rangeData of monthData.ranges) {
+          const [min, max] = rangeData.range;
+          if (userBirthdayDay >= min && userBirthdayDay <= max) {
+            message = rangeData.message;
+            break;
+          }
+        }
+        
         motivationElement.innerHTML = `
-          <span class="month-name">${motivation.name}</span>
-          ${motivation.message}
+          <span class="month-name">${monthData.name} (${userBirthdayDay})</span>
+          ${message}
         `;
       } else {
         motivationElement.innerHTML = `
           <span class="month-name">YOUR JOURNEY</span>
-          Your birth month holds special power. Embrace your unique path.
+          Submit your date of birth to see your personalized motivation.
         `;
       }
     }
@@ -1398,13 +1494,13 @@
     }
 
     document.getElementById('flowerButton').addEventListener('click', function() {
-      if (userBirthdayMonth) {
+      if (userBirthdayMonth && userBirthdayDay) {
         updateMotivationByBirthMonth();
       } else {
         const motivationElement = document.getElementById('monthlyMotivation');
         motivationElement.innerHTML = `
           <span class="month-name">DISCOVER YOUR FLOWER</span>
-          Submit your date of birth to see your personalized monthly motivation.
+          Submit your date of birth to see your personalized motivation.
         `;
       }
       
