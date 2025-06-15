@@ -1,1 +1,1515 @@
-Check out my Flower from G-Z: June (15)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            position: relative;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+        }
+        .divider {
+            height: 0.6px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .button#statisticsButton {
+            border-bottom: 4px solid lawngreen;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .footer-title {
+            text-align: center;
+            color: black;
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+        .date-input, .country-select, .submit-button {
+            display: block;
+            width: 330px;
+            margin: 19px auto;
+            padding: 5px;
+            border: 1px solid #007bff;
+            border-radius: 11px;
+            background-color: white;
+            color: black;
+            font-size: 1em;
+        }
+        .submit-button {
+            padding: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: gray;
+            color: white;
+        }
+        .reset-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.0em;
+            display: none;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .rectangle {
+            width: 330px;
+            min-height: 30px;
+            background-color: #e7f3ff;
+            margin: 10px auto;
+            border-radius: 40px;
+            border: 1px solid #007bff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+            text-align: center;
+        }
+        .text-line {
+            font-size: 0.8em;
+            color: #0056b3;
+            margin: 5px 0;
+        }
+        .text-line.bold {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .link {
+            color: white;
+            text-decoration: none;
+            background-color: #007bff;
+            border-radius: 5px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+        .link:hover {
+            background-color: #0056b3;
+        }
+        .share-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.3em;
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 4px;
+            background-color: white;
+        }
+        footer {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+        }
+        .logo {
+            color: #007bff;
+            font-size: 1.6em;
+            margin-right: 10px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(0, 119, 190, 0.1);
+            transition: background-color 0.3s;
+        }
+        .logo:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 29% auto;
+            padding: 14px;
+            border: 1px solid #007bff;
+            border-radius: 60px;
+            width: 280px;
+            max-width: 70%;
+            text-align: center;
+            max-height: 60vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-header {
+            font-size: 1.8em;
+            font-family: 'Billabong', cursive;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: 120px;
+            margin: 4px;
+        }
+        .close-button:hover {
+            background-color: #0056b3;
+        }
+        .gender-category {
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        .disabled-field {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        @keyframes flowerRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .flower-icon {
+            display: inline-block;
+            animation: flowerRotate 2s infinite ease-in-out;
+            color: #ff69b4;
+        }
+        
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            color: #007bff;
+        }
+
+        .monthly-motivation {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            background-color: white;
+            font-style: italic;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        /* Réduit la taille du flower code et son encadrant */
+        .flower-code {
+            display: block;
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.9em; /* Réduit de 1.1em à 0.9em */
+            margin-bottom: 8px; /* Réduit de 10px à 8px */
+            letter-spacing: 0.5px; /* Réduit de 1px à 0.5px */
+            background-color: #fff0f8;
+            padding: 6px; /* Réduit de 8px à 6px */
+            border-radius: 8px; /* Réduit de 10px à 8px */
+            border: 1px solid #ff69b4;
+            max-width: 220px; /* Ajout d'une largeur maximale */
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .access-code {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+            letter-spacing: 2px;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            border: 1px dashed #007bff;
+            display: inline-block;
+        }
+        
+        .copy-icon {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        
+        .code-message {
+            margin: 12px 0;
+            font-size: 0.9em;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .copy-confirmation {
+            color: green;
+            font-size: 0.8em;
+            visibility: hidden;
+            margin-top: 5px;
+        }
+        
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+        
+        .access-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f7ff;
+            border: 1px solid #007bff;
+            border-radius: 12px;
+            padding: 4px 8px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .access-code-title {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.0em;
+            margin: 0;
+        }
+        
+        .access-code-value {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        
+        .access-code-indicator {
+            color: #777;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+        
+        .stats-highlight {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.2em;
+        }
+        
+        .achievement {
+            margin: 12px 0;
+            padding: 8px;
+            border: 1px dashed gold;
+            border-radius: 15px;
+            background-color: white;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .later-button {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #388E3C;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 5px auto;
+            width: 180px;
+        }
+        
+        .later-button:hover {
+            background-color: #388E3C;
+        }
+
+        .join-description {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #333;
+            text-align: left;
+        }
+
+        .join-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .join-section {
+            margin: 5px 0;
+            padding: 6px;
+            border: 1px dashed #007bff;
+            border-radius: 15px;
+            background-color: #f0f7ff;
+        }
+
+        .join-section-title {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+      
+        .group-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 10px auto;
+            border-radius: 10px;
+            border: 1px solid #007bff;
+        }
+        
+        #flowerModal .modal-content {
+            margin: 40% auto;
+            padding: 10px;
+            max-width: 85%;
+        }
+        
+        #flowerModal .monthly-motivation {
+            margin: 10px 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        /* Style pour le bouton de partage de flower - Modifié */
+        .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            margin: 5px auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            max-width: 200px;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        .share-flower-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .share-flower-button i {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+  <header>
+    <h1 translate="no">G-Z</h1>
+    <div class="header-controls">
+      <div class="access-code-container" id="accessCodeContainer">
+        <div class="access-code-title">Access Code</div>
+        <div class="access-code-indicator" id="accessCodeIndicator">Submit - to get your code.</div>
+        <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="button-container">
+    <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
+    <a class="button" href="Statistiques.html" id="statisticsButton">
+      <i class="fas fa-chart-bar"></i> Discovery</a>
+    <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
+    <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
+    <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
+    <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
+  </div>
+  <script>
+    const button = document.getElementById('statisticsButton');
+    let colors = ['lawngreen', 'white'];
+    let index = 0;
+    setInterval(() => {
+      button.style.borderBottom = `4px solid ${colors[index]}`;
+      index = (index + 1) % colors.length;
+    }, 400);
+  </script>
+  <div class="divider"></div>
+  <div class="notification">
+    <span class="notification-text">You were not born alone - Discover Your Birthday Twins!
+</span>
+    <div class="new-message-badge"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="footer-title">
+    Join us and uncover the secrets of past, present, and future generations in just a few clicks.
+
+  </div>
+
+  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
+  <select class="country-select" id="countrySelect">
+    <option value="" disabled selected>Select your country of birth</option>
+  </select>
+  <p style="text-align: center; color: black; font-size: 0.7em; margin-top: 5px; text-decoration: underline; text-decoration-color: rgb(0, 123, 191);">
+    By submitting, you accept our terms of use.
+  </p>
+  <button class="submit-button" type="submit">Submit</button>
+
+  <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
+
+  <div class="divider"></div>
+
+  <div class="rectangle">
+    <div class="text-line bold" style="font-size: 1em; color: #0056b3;">How does it work?</div>
+    <div class="text-line"> Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discovery" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics. </div>
+  </div>
+
+  <div class="text-line" style="text-align: center; color: black;">
+    <span style="color: #007bff;">_____</span> Don't miss anything <span style="color: #007bff;">_____</span>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo-container">
+        <a href="https://www.facebook.com/share/15nGTcCb4i/.html" target="_blank" class="logo">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/GZWRD?t=g7yvHCDW2-xPLaTTgea-YA&s=09.html" target="_blank" class="logo">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb5rIcf4o7qF3PVCpy0c" target="_blank" class="logo">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+      <div class="copyright">
+        ©️ 2025 G-Z
+      </div>
+    </div>
+  </footer>
+
+  <div id="genderModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeGenderModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong>Your gender?</strong></div>
+      
+      <div class="gender-category">Binary genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Man">Man</button>
+        <button class="close-button gender-option" value="Woman">Woman</button>
+      </div>
+      
+      <div class="gender-category">Non-binary genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Non-binary">Non-binary</button>
+        <button class="close-button gender-option" value="Genderqueer">Genderqueer</button>
+        <button class="close-button gender-option" value="Genderfluid">Genderfluid</button>
+        <button class="close-button gender-option" value="Agender">Agender</button>
+      </div>
+      
+      <div class="gender-category">Other gender identities</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Transgender">Transgender</button>
+        <button class="close-button gender-option" value="Two-Spirit">Two-Spirit</button>
+        <button class="close-button gender-option" value="Bigender">Bigender</button>
+        <button class="close-button gender-option" value="Androgyne">Androgyne</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="flowerModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong>Flower of Life</strong></div>
+      
+      <!-- Commentaire expliquant la modification -->
+      <!-- 
+        Pour afficher correctement le flower code :
+        1. Réduire la taille de la police à 0.9em
+        2. Limiter la largeur à 220px maximum
+        3. Ajouter text-overflow pour gérer les textes trop longs
+        4. Réduire le padding et la marge pour un design plus compact
+      -->
+      <div id="flowerCodeDisplay" class="flower-code"></div>
+      <div class="monthly-motivation" id="monthlyMotivation"></div>
+      
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;">
+        <i class="fas fa-spa"></i>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bouton de partage flower ajouté sous le modal -->
+  <button class="share-flower-button" id="shareFlowerButton">
+    Share your Flower <i class="fas fa-paper-plane"></i>
+  </button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getDatabase, ref, push, remove, get, set, onValue, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+    
+    let userBirthdate = null;
+    let userCountry = null;
+    let userGender = null;
+    let dataSubmitted = false;
+    let userBirthdayDay = null;
+    let userBirthdayMonth = null;
+    let lastSubmittedId = null;
+    let userUid = null;
+    let userAccessCode = null;
+    let userFlowerCode = null;
+    let userBirthdayStats = {
+      totalMembers: 0,
+      userRank: 0,
+      formattedDate: ""
+    };
+    let userCountryStats = {
+      totalMembers: 0
+    };
+
+    function generatePersonalizedMotivation(flowerCode) {
+      if (!flowerCode || flowerCode.length < 8) {
+        return "Submit your information to discover your - flower personal motivation.";
+      }
+      
+      const firstLetter = flowerCode.charAt(0).toLowerCase();
+      const secondLetter = flowerCode.charAt(1).toLowerCase();
+      const thirdLetter = flowerCode.charAt(2).toLowerCase();
+      const fourthLetter = flowerCode.charAt(3).toLowerCase();
+      const fifthLetter = flowerCode.charAt(4).toLowerCase();
+      const sixthLetter = flowerCode.charAt(5).toLowerCase();
+      const seventhLetter = flowerCode.charAt(6).toLowerCase();
+      const eighthLetter = flowerCode.charAt(7).toLowerCase();
+      
+      const adjectives = {
+        'a': ['ambitious', 'authentic', 'analytical', 'adaptable', 'astute'],
+        'b': ['brilliant', 'balanced', 'bold', 'bright', 'benevolent'],
+        'c': ['creative', 'curious', 'careful', 'considerate', 'capable'],
+        'd': ['dedicated', 'diligent', 'dynamic', 'distinctive', 'discerning'],
+        'e': ['efficient', 'effective', 'eloquent', 'energetic', 'empathetic'],
+        'f': ['focused', 'forward-thinking', 'fair', 'friendly', 'flexible'],
+        'g': ['graceful', 'gifted', 'genuine', 'generous', 'gentle'],
+        'h': ['honest', 'helpful', 'harmonious', 'humble', 'honorable'],
+        'i': ['insightful', 'intelligent', 'inspiring', 'innovative', 'intuitive'],
+        'j': ['judicious', 'joyful', 'just', 'journeying', 'jovial'],
+        'k': ['knowledgeable', 'kind', 'keen', 'koranic', 'kinetic'],
+        'l': ['logical', 'loving', 'loyal', 'lively', 'luminous'],
+        'm': ['mindful', 'methodical', 'motivated', 'masterful', 'magnificent'],
+        'n': ['noble', 'nurturing', 'noteworthy', 'natural', 'nimble'],
+        'o': ['observant', 'optimistic', 'organized', 'original', 'open-minded'],
+        'p': ['patient', 'persistent', 'profound', 'perceptive', 'passionate'],
+        'q': ['quick-witted', 'qualified', 'questioning', 'quiet', 'quintessential'],
+        'r': ['resilient', 'resourceful', 'reliable', 'respectful', 'reflective'],
+        's': ['sincere', 'strategic', 'skilled', 'self-aware', 'sophisticated'],
+        't': ['thoughtful', 'tenacious', 'thorough', 'talented', 'trustworthy'],
+        'u': ['understanding', 'unique', 'unwavering', 'uplifting', 'unbiased'],
+        'v': ['visionary', 'versatile', 'valuable', 'virtuous', 'vivacious'],
+        'w': ['wise', 'witty', 'warm', 'well-rounded', 'wholehearted'],
+        'x': ['xenial', 'xerothermic', 'xenodochial', 'xylographic', 'xanthic'],
+        'y': ['yielding', 'yearning', 'youthful', 'yielding', 'yare'],
+        'z': ['zealous', 'zestful', 'zenith', 'zany', 'zippy']
+      };
+      
+      const subjects = {
+        'a': ['approach', 'ability', 'awareness', 'attention', 'achievement'],
+        'b': ['brilliance', 'balance', 'bravery', 'belief', 'benevolence'],
+        'c': ['creativity', 'character', 'curiosity', 'capability', 'cognition'],
+        'd': ['dedication', 'determination', 'discernment', 'depth', 'drive'],
+        'e': ['empathy', 'excellence', 'elegance', 'energy', 'essence'],
+        'f': ['focus', 'foresight', 'finesse', 'fortitude', 'fulfillment'],
+        'g': ['growth', 'genius', 'grace', 'guidance', 'gratitude'],
+        'h': ['harmony', 'humanity', 'heart', 'honor', 'happiness'],
+        'i': ['intuition', 'integrity', 'intellect', 'inspiration', 'insight'],
+        'j': ['judgment', 'journey', 'justice', 'joy', 'juxtaposition'],
+        'k': ['knowledge', 'kindness', 'kinship', 'keenness', 'karma'],
+        'l': ['logic', 'leadership', 'love', 'loyalty', 'legacy'],
+        'm': ['mindfulness', 'mastery', 'morality', 'motivation', 'maturity'],
+        'n': ['nobility', 'nuance', 'nature', 'nurturing', 'novelty'],
+        'o': ['observation', 'openness', 'originality', 'optimism', 'order'],
+        'p': ['perception', 'patience', 'presence', 'passion', 'perspective'],
+        'q': ['quality', 'quietude', 'quest', 'quintessence', 'questioning'],
+        'r': ['resilience', 'reason', 'resolve', 'reflection', 'respect'],
+        's': ['sincerity', 'strength', 'spirit', 'serenity', 'sophistication'],
+        't': ['thoughtfulness', 'tenacity', 'truth', 'talent', 'trust'],
+        'u': ['understanding', 'uniqueness', 'unity', 'utility', 'uplifting'],
+        'v': ['vision', 'virtue', 'versatility', 'value', 'vitality'],
+        'w': ['wisdom', 'willpower', 'wonder', 'worthiness', 'wholeness'],
+        'x': ['xenial', 'x-factor', 'xeric', 'xanadu', 'xenodochy'],
+        'y': ['yearning', 'yield', 'youthfulness', 'yes-saying', 'yielding'],
+        'z': ['zeal', 'zenith', 'zeitgeist', 'zest', 'zone']
+      };
+      
+      const verbs = {
+        'a': ['achieves', 'aspires', 'adapts', 'analyzes', 'appreciates'],
+        'b': ['balances', 'builds', 'believes', 'brightens', 'blossoms'],
+        'c': ['creates', 'considers', 'cultivates', 'connects', 'catalyzes'],
+        'd': ['develops', 'discovers', 'deliberates', 'delights', 'deepens'],
+        'e': ['elevates', 'enlightens', 'expresses', 'enhances', 'embodies'],
+        'f': ['fosters', 'fulfills', 'focuses', 'flourishes', 'fortifies'],
+        'g': ['grows', 'guides', 'generates', 'gratifies', 'gathers'],
+        'h': ['harmonizes', 'helps', 'honors', 'holds', 'heightens'],
+        'i': ['inspires', 'illuminates', 'integrates', 'innovates', 'influences'],
+        'j': ['joins', 'justifies', 'journeys', 'judges', 'juxtaposes'],
+        'k': ['kindles', 'knows', 'keeps', 'kindles', 'knits'],
+        'l': ['leads', 'listens', 'learns', 'leverages', 'loves'],
+        'm': ['masters', 'motivates', 'meditates', 'manifests', 'merges'],
+        'n': ['nurtures', 'navigates', 'notices', 'nourishes', 'networks'],
+        'o': ['observes', 'optimizes', 'organizes', 'originates', 'overcomes'],
+        'p': ['perceives', 'persists', 'practices', 'progresses', 'propels'],
+        'q': ['questions', 'quickens', 'quiets', 'qualifies', 'quests'],
+        'r': ['reflects', 'resolves', 'reasons', 'responds', 'reinvents'],
+        's': ['synthesizes', 'sustains', 'strengthens', 'seeks', 'soars'],
+        't': ['transforms', 'transcends', 'thrives', 'trusts', 'thinks'],
+        'u': ['understands', 'unites', 'utilizes', 'uplifts', 'unfolds'],
+        'v': ['values', 'visualizes', 'validates', 'vitalizes', 'ventures'],
+        'w': ['welcomes', 'wonders', 'works', 'weaves', 'walks'],
+        'x': ['x-rays', 'exemplifies', 'exercises', 'exhales', 'exhibits'],
+        'y': ['yields', 'yearns', 'yokes', 'yields', 'yawps'],
+        'z': ['zealously pursues', 'zooms toward', 'zeniths', 'zeros in on', 'zests']
+      };
+      
+      const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+      
+      const phraseStructures = [
+        `Your ${getRandomElement(adjectives[firstLetter] || adjectives['a'])} ${getRandomElement(subjects[secondLetter] || subjects['s'])} ${getRandomElement(verbs[thirdLetter] || verbs['r'])} extraordinary potential in every challenge.`,
+        `The ${getRandomElement(adjectives[fourthLetter] || adjectives['d'])} ${getRandomElement(subjects[fifthLetter] || subjects['m'])} within you ${getRandomElement(verbs[sixthLetter] || verbs['e'])} paths others cannot see.`,
+        `With ${getRandomElement(adjectives[seventhLetter] || adjectives['w'])} ${getRandomElement(subjects[eighthLetter] || subjects['p'])}, you naturally ${getRandomElement(verbs[firstLetter] || verbs['c'])} complex situations into clarity.`,
+        `Your mind ${getRandomElement(verbs[secondLetter] || verbs['t'])} with a ${getRandomElement(adjectives[thirdLetter] || adjectives['u'])} ${getRandomElement(subjects[fourthLetter] || subjects['n'])} that inspires those around you.`,
+        `The ${getRandomElement(subjects[fifthLetter] || subjects['i'])} you bring ${getRandomElement(verbs[sixthLetter] || verbs['r'])} a ${getRandomElement(adjectives[seventhLetter] || adjectives['p'])} perspective to every situation.`
+      ];
+      
+      const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+      const selectedPhrase = phraseStructures[codeSum % phraseStructures.length];
+      
+      return selectedPhrase;
+    }
+
+    function generateFlowerCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function updateFlowerDisplay() {
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      const motivationElement = document.getElementById('monthlyMotivation');
+      
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      
+      if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
+        const monthName = monthNames[userBirthdayMonth - 1];
+        flowerCodeElement.textContent = `Your Flower - ${monthName} (${userBirthdayDay})`;
+        motivationElement.textContent = generatePersonalizedMotivation(userFlowerCode);
+      } else {
+        flowerCodeElement.textContent = "Your Flower";
+        motivationElement.textContent = "Submit your information to discover your flower - personal motivation.";
+      }
+    }
+
+    function generateAccessCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function eraseCookie(name) {
+      document.cookie = name + '=; Max-Age=-99999999; path=/';
+    }
+
+    function checkCookieConsent() {
+      const cookiesAccepted = getCookie('cookiesAccepted');
+      if (!cookiesAccepted) {
+        setCookie('cookiesAccepted', 'true', 365);
+      }
+    }
+
+    signInAnonymously(auth)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        userUid = user.uid;
+        console.log("User connected: ", userUid);
+      })
+      .catch((error) => {
+        console.error("Error during anonymous connection: ", error);
+        
+        userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
+      });
+
+    const today = new Date();
+    const todayString = today.toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute('max', todayString);
+
+    function isFutureDate(dateString) {
+      const selectedDate = new Date(dateString);
+      selectedDate.setHours(0, 0, 0, 0);
+      
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+      
+      return selectedDate > currentDate;
+    }
+
+    document.getElementById("birthdate").addEventListener('change', function(e) {
+      if (isFutureDate(this.value)) {
+        alert("You cannot select a future date for your date of birth");
+        this.value = "";
+      }
+    });
+
+    document.querySelector('.submit-button').addEventListener('click', function(e) {
+      const birthdate = document.getElementById('birthdate').value;
+      if (isFutureDate(birthdate)) {
+        e.preventDefault();
+        alert("You cannot select a future date for your date of birth");
+        document.getElementById('birthdate').value = "";
+        return false;
+      }
+    });
+
+    fetch('https://restcountries.com/v3.1/all')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network error: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        data.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country.name.common;
+          option.textContent = country.name.common;
+          countrySelect.appendChild(option);
+        });
+        
+        loadUserDataFromCookie();
+      })
+      .catch(error => {
+        console.error('Error loading countries from API:', error);
+        
+        const fallbackCountries = [
+          "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", 
+          "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", 
+          "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", 
+          "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", 
+          "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", 
+          "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", 
+          "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", 
+          "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", 
+          "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", 
+          "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", 
+          "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
+          "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", 
+          "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", 
+          "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", 
+          "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", 
+          "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", 
+          "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", 
+          "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", 
+          "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", 
+          "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ].sort();
+        
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        fallbackCountries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+        
+        loadUserDataFromCookie();
+      });
+
+    function saveUserDataToCookie() {
+      if (userBirthdate && userCountry && userGender) {
+        const userData = {
+          birthdate: userBirthdate,
+          country: userCountry,
+          gender: userGender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          dataSubmitted: true,
+          lastSubmittedId: lastSubmittedId,
+          accessCode: userAccessCode,
+          flowerCode: userFlowerCode,
+          birthdayStats: userBirthdayStats,
+          countryStats: userCountryStats
+        };
+        setCookie('userData', JSON.stringify(userData), 365);
+      }
+    }
+
+    function updateHeaderAccessCode() {
+      if (userAccessCode) {
+        document.getElementById('accessCodeIndicator').style.display = 'none';
+        document.getElementById('headerAccessCode').style.display = 'block';
+        document.getElementById('headerAccessCode').textContent = userAccessCode;
+      } else {
+        document.getElementById('accessCodeIndicator').style.display = 'block';
+        document.getElementById('headerAccessCode').style.display = 'none';
+      }
+    }
+
+    function loadUserDataFromCookie() {
+      const userDataCookie = getCookie('userData');
+      if (userDataCookie) {
+        try {
+          const userData = JSON.parse(userDataCookie);
+          userBirthdate = userData.birthdate;
+          userCountry = userData.country;
+          userGender = userData.gender;
+          userBirthdayDay = userData.birthdayDay;
+          userBirthdayMonth = userData.birthdayMonth;
+          dataSubmitted = userData.dataSubmitted;
+          lastSubmittedId = userData.lastSubmittedId;
+          userAccessCode = userData.accessCode;
+          userFlowerCode = userData.flowerCode;
+          
+          if (userData.birthdayStats) {
+            userBirthdayStats = userData.birthdayStats;
+          }
+          
+          if (userData.countryStats) {
+            userCountryStats = userData.countryStats;
+          }
+          
+          if (dataSubmitted) {
+            document.getElementById('birthdate').value = userBirthdate;
+            document.getElementById('countrySelect').value = userCountry;
+            
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.textContent = "Submitted";
+            submitButton.style.backgroundColor = 'green';
+            submitButton.disabled = true;
+            
+            document.getElementById('resetButton').style.display = "block";
+            
+            document.getElementById('birthdate').classList.add('disabled-field');
+            document.getElementById('countrySelect').classList.add('disabled-field');
+            
+            updateHeaderAccessCode();
+          }
+        } catch (error) {
+          console.error("Error parsing user data from cookie:", error);
+        }
+      }
+    }
+
+    document.querySelector('.submit-button').addEventListener('click', function() {
+      const birthdate = document.getElementById('birthdate').value;
+      const country = document.getElementById('countrySelect').value;
+
+      if (birthdate && country) {
+        if (isFutureDate(birthdate)) {
+          alert("You cannot select a future date for your date of birth");
+          document.getElementById('birthdate').value = "";
+          return;
+        }
+        
+        userBirthdate = birthdate;
+        userCountry = country;
+        
+        const birthdateParts = birthdate.split('-');
+        userBirthdayDay = parseInt(birthdateParts[2]);
+        userBirthdayMonth = parseInt(birthdateParts[1]);
+        
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.textContent = "Please wait...";
+        submitButton.style.backgroundColor = 'orange';
+
+        document.getElementById('birthdate').classList.add('disabled-field');
+        document.getElementById('countrySelect').classList.add('disabled-field');
+
+        document.getElementById('genderModal').style.display = 'block';
+      } else {
+        alert("Please enter a date of birth and select a country!");
+      }
+    });
+
+    document.querySelectorAll('.gender-option').forEach(button => {
+      button.addEventListener('click', function() {
+        userGender = this.value;
+        
+        userAccessCode = generateAccessCode();
+        userFlowerCode = generateFlowerCode();
+        
+        submitData(this.value);
+      });
+    });
+
+    async function fetchBirthdayStatistics() {
+      try {
+        const monthStr = userBirthdayMonth.toString().padStart(2, '0');
+        const dayStr = userBirthdayDay.toString().padStart(2, '0');
+        const birthdayPattern = `-${monthStr}-${dayStr}`;
+        
+        const birthdatesRef = ref(database, 'birthdates');
+        const birthdatesSnapshot = await get(birthdatesRef);
+        
+        let sameBirthdayCount = 0;
+        let userRank = 0;
+        let earlierSubmissions = 0;
+        let isCurrentUserCounted = false;
+        
+        if (birthdatesSnapshot.exists()) {
+          const data = birthdatesSnapshot.val();
+          
+          const entries = Object.entries(data)
+            .map(([key, value]) => ({ key, ...value }))
+            .filter(entry => entry.date && entry.date.includes(birthdayPattern))
+            .sort((a, b) => a.timestamp - b.timestamp);
+          
+          sameBirthdayCount = entries.length;
+          
+          for (let i = 0; i < entries.length; i++) {
+            if (entries[i].key === lastSubmittedId || (entries[i].uid === userUid && !isCurrentUserCounted)) {
+              userRank = i + 1;
+              isCurrentUserCounted = true;
+            }
+          }
+        }
+        
+        if (userRank === 0) {
+          userRank = sameBirthdayCount;
+        }
+        
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        const formattedDate = `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`;
+        
+        return {
+          totalMembers: sameBirthdayCount,
+          userRank: userRank,
+          formattedDate: formattedDate
+        };
+      } catch (error) {
+        console.error("Error fetching birthday statistics:", error);
+        return {
+          totalMembers: Math.floor(Math.random() * 50) + 5,
+          userRank: Math.floor(Math.random() * 10) + 1,
+          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+        };
+      }
+    }
+
+    async function fetchCountryStatistics() {
+      try {
+        const birthdatesRef = ref(database, 'birthdates');
+        const birthdatesSnapshot = await get(birthdatesRef);
+        
+        let sameCountryCount = 0;
+        
+        if (birthdatesSnapshot.exists()) {
+          const data = birthdatesSnapshot.val();
+          
+          sameCountryCount = Object.values(data).filter(entry => 
+            entry.country && entry.country === userCountry
+          ).length;
+        }
+        
+        return {
+          totalMembers: sameCountryCount
+        };
+      } catch (error) {
+        console.error("Error fetching country statistics:", error);
+        return {
+          totalMembers: Math.floor(Math.random() * 30) + 3
+        };
+      }
+    }
+
+    async function submitData(gender) {
+      const birthdate = userBirthdate;
+      const country = userCountry;
+      const submitButton = document.querySelector('.submit-button');
+
+      const localSuccess = submitToLocalStorage(gender);
+      
+      try {
+        userBirthdayStats = await fetchBirthdayStatistics();
+        userCountryStats = await fetchCountryStatistics();
+      } catch (error) {
+        console.error("Error fetching statistics:", error);
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        userBirthdayStats = {
+          totalMembers: Math.floor(Math.random() * 50) + 5,
+          userRank: Math.floor(Math.random() * 10) + 1,
+          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+        };
+        userCountryStats = {
+          totalMembers: Math.floor(Math.random() * 30) + 3
+        };
+      }
+      
+      if (localSuccess) {
+        try {
+          push(ref(database, 'birthdates'), {
+            date: birthdate,
+            country: country,
+            gender: gender,
+            birthdayDay: userBirthdayDay,
+            birthdayMonth: userBirthdayMonth,
+            uid: userUid,
+            accessCode: userAccessCode,
+            flowerCode: userFlowerCode,
+            timestamp: Date.now()
+          }).then((newEntryRef) => {
+            lastSubmittedId = newEntryRef.key;
+            console.log("Data successfully submitted to Firebase:", lastSubmittedId);
+          }).catch((error) => {
+            console.warn("Firebase submission error:", error);
+          });
+        } catch (error) {
+          console.warn("Firebase submission exception:", error);
+        }
+        
+        finishSubmission(true);
+      } else {
+        finishSubmission(false);
+      }
+    }
+
+    function submitToLocalStorage(gender) {
+      try {
+        const randomId = Date.now().toString(36) + Math.random().toString(36).substring(2);
+        
+        const data = {
+          date: userBirthdate,
+          country: userCountry,
+          gender: gender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          uid: userUid || randomId,
+          accessCode: userAccessCode,
+          flowerCode: userFlowerCode,
+          timestamp: Date.now()
+        };
+        
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        submissions.push(data);
+        localStorage.setItem('submissions', JSON.stringify(submissions));
+        
+        lastSubmittedId = lastSubmittedId || "local_" + randomId;
+        
+        return true;
+      } catch (error) {
+        console.error("localStorage submission error:", error);
+        return false;
+      }
+    }
+
+    function finishSubmission(success) {
+      const submitButton = document.querySelector('.submit-button');
+      
+      if (success) {
+        document.getElementById('genderModal').style.display = 'none';
+        
+        updateHeaderAccessCode();
+        
+        submitButton.style.backgroundColor = 'green';
+        submitButton.textContent = "Submitted";
+        submitButton.disabled = true;
+        document.getElementById('resetButton').style.display = "block";
+        dataSubmitted = true;
+        
+        saveUserDataToCookie();
+      } else {
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = "Error";
+        console.error("Error during submission");
+        
+        document.getElementById('birthdate').classList.remove('disabled-field');
+        document.getElementById('countrySelect').classList.remove('disabled-field');
+      }
+    }
+
+    function getOrdinal(n) {
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    document.getElementById('resetButton').addEventListener('click', function() {
+      if (confirm("Are you sure you want to reset your data? This will delete your information from our database.")) {
+        resetLocalStorageData();
+        
+        deleteFromFirebase().then(() => {
+          finishReset();
+        }).catch(error => {
+          console.error("Error during reset process:", error);
+          alert("There was a problem resetting your data. Please try again later.");
+        });
+      }
+    });
+    
+    async function deleteFromFirebase() {
+      if (!lastSubmittedId) {
+        try {
+          if (userUid) {
+            const birthdatesRef = ref(database, 'birthdates');
+            const birthdatesSnapshot = await get(birthdatesRef);
+            
+            if (birthdatesSnapshot.exists()) {
+              const data = birthdatesSnapshot.val();
+              
+              for (const [key, value] of Object.entries(data)) {
+                if (value.uid === userUid) {
+                  console.log(`Found entry with matching UID: ${key}`);
+                  
+                  await remove(ref(database, `birthdates/${key}`));
+                  console.log(`Deleted entry: ${key}`);
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Error searching for user data in Firebase:", error);
+          throw error;
+        }
+      } else if (!lastSubmittedId.startsWith('local_')) {
+        try {
+          await remove(ref(database, `birthdates/${lastSubmittedId}`));
+          console.log("Firebase data successfully deleted:", lastSubmittedId);
+        } catch (error) {
+          console.error("Error deleting from Firebase:", error);
+          throw error;
+        }
+      }
+      
+      return true;
+    }
+    
+    function resetLocalStorageData() {
+      try {
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        const filteredSubmissions = submissions.filter(sub => 
+          !sub.uid || sub.uid !== userUid
+        );
+        localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
+        return true;
+      } catch (error) {
+        console.error("Error resetting localStorage data:", error);
+        return false;
+      }
+    }
+    
+    function finishReset() {
+      document.getElementById('birthdate').value = '';
+      document.getElementById('countrySelect').value = '';
+      const submitButton = document.querySelector('.submit-button');
+      submitButton.textContent = "Submit";
+      submitButton.style.backgroundColor = 'gray';
+      submitButton.disabled = false;
+      document.getElementById('resetButton').style.display = "none";
+      
+      document.getElementById('accessCodeIndicator').style.display = 'block';
+      document.getElementById('headerAccessCode').style.display = 'none';
+      
+      dataSubmitted = false;
+      userBirthdate = null;
+      userCountry = null;
+      userGender = null;
+      userBirthdayDay = null;
+      userBirthdayMonth = null;
+      lastSubmittedId = null;
+      userAccessCode = null;
+      userFlowerCode = null;
+      userBirthdayStats = {
+        totalMembers: 0,
+        userRank: 0,
+        formattedDate: ""
+      };
+      userCountryStats = {
+        totalMembers: 0
+      };
+      
+      document.getElementById('birthdate').classList.remove('disabled-field');
+      document.getElementById('countrySelect').classList.remove('disabled-field');
+      
+      eraseCookie('userData');
+      
+      alert("Your data has been successfully reset.");
+    }
+
+    document.getElementById('flowerButton').addEventListener('click', function() {
+      updateFlowerDisplay();
+      document.getElementById('flowerModal').style.display = 'block';
+      // Afficher le bouton de partage flower lorsque le modal est ouvert
+      document.getElementById('shareFlowerButton').style.display = 'flex';
+    });
+
+    document.getElementById('shareFlowerButton').addEventListener('click', function() {
+      if (userFlowerCode) {
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
+        const dayNumber = userBirthdayDay || "";
+        
+        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber})`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: 'My G-Z Flower',
+            text: shareText
+          }).catch(err => {
+            console.log('Error sharing:', err);
+            alert('Could not share your flower. You can copy and share it manually.');
+          });
+        } else {
+          navigator.clipboard.writeText(shareText).then(function() {
+            alert('Flower information copied to clipboard! You can now paste and share it.');
+          }).catch(function() {
+            alert('Could not copy to clipboard. Please share manually.');
+          });
+        }
+      } else {
+        alert('Please submit your information first to get your Flower code.');
+      }
+    });
+
+    document.getElementById('accessCodeContainer').addEventListener('click', function() {
+      if (userAccessCode) {
+        navigator.clipboard.writeText(userAccessCode).then(function() {
+          const container = document.getElementById('accessCodeContainer');
+          container.style.backgroundColor = '#e0f0ff';
+          setTimeout(() => {
+            container.style.backgroundColor = '#f0f7ff';
+          }, 300);
+        }).catch(function(err) {
+          console.error('Could not copy access code: ', err);
+        });
+      }
+    });
+    
+    document.getElementById('closeGenderModal').addEventListener('click', function() {
+      document.getElementById('genderModal').style.display = 'none';
+      
+      const submitButton = document.querySelector('.submit-button');
+      submitButton.style.backgroundColor = 'gray';
+      submitButton.textContent = "Submit";
+      
+      document.getElementById('birthdate').classList.remove('disabled-field');
+      document.getElementById('countrySelect').classList.remove('disabled-field');
+    });
+    
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      document.getElementById('flowerModal').style.display = 'none';
+      // Cacher le bouton de partage flower lorsque le modal est fermé
+      document.getElementById('shareFlowerButton').style.display = 'none';
+    });
+
+    window.onclick = function(event) {
+      const genderModal = document.getElementById('genderModal');
+      const flowerModal = document.getElementById('flowerModal');
+      
+      if (event.target == genderModal) {
+        genderModal.style.display = "none";
+        const submitButton = document.querySelector('.submit-button');
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = "Error";
+        
+        document.getElementById('birthdate').classList.remove('disabled-field');
+        document.getElementById('countrySelect').classList.remove('disabled-field');
+      }
+      
+      if (event.target == flowerModal) {
+        flowerModal.style.display = "none";
+        // Cacher le bouton de partage flower lorsque le modal est fermé en cliquant à l'extérieur
+        document.getElementById('shareFlowerButton').style.display = 'none';
+      }
+    };
+
+    checkCookieConsent();
+    
+    // Cacher initialement le bouton de partage flower
+    document.getElementById('shareFlowerButton').style.display = 'none';
+  </script>
+</body>
+</html>
