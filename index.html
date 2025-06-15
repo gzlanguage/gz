@@ -495,7 +495,7 @@
             background-color: rgba(255, 0, 0, 0.1);
         }
         
-        /* Style pour le bouton de partage de flower - Modifié */
+        /* Style modifié pour le bouton de partage de flower */
         .share-flower-button {
             background-color: #007bff;
             color: white;
@@ -503,13 +503,13 @@
             border-radius: 25px;
             padding: 8px 16px;
             font-size: 0.9em;
-            margin: 5px auto;
+            margin: -250px auto 30px auto; /* Position rapprochée du modal */
             display: none;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: background-color 0.3s;
-            max-width: 200px;
+            max-width: 190px;
             position: relative;
             z-index: 1001;
         }
@@ -665,9 +665,9 @@
     </div>
   </div>
   
-  <!-- Bouton de partage flower ajouté sous le modal -->
+  <!-- Bouton de partage flower modifié pour être plus proche du modal -->
   <button class="share-flower-button" id="shareFlowerButton">
-    Share your Flower <i class="fas fa-paper-plane"></i>
+    Share my Flower <i class="fas fa-paper-plane"></i>
   </button>
 
   <script type="module">
@@ -846,10 +846,10 @@
       
       if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
         const monthName = monthNames[userBirthdayMonth - 1];
-        flowerCodeElement.textContent = `Your Flower - ${monthName} (${userBirthdayDay})`;
+        flowerCodeElement.textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
         motivationElement.textContent = generatePersonalizedMotivation(userFlowerCode);
       } else {
-        flowerCodeElement.textContent = "Your Flower";
+        flowerCodeElement.textContent = "My Flower";
         motivationElement.textContent = "Submit your information to discover your flower - personal motivation.";
       }
     }
