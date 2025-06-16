@@ -31,6 +31,7 @@
             border: 2px solid #007bff;
             padding: 4px;
             border-radius: 12px;
+            font-weight: bold;
         }
         .divider {
             height: 0.6px;
@@ -495,15 +496,15 @@
             background-color: rgba(255, 0, 0, 0.1);
         }
         
-        /* Style modifié pour le bouton de partage de flower */
+        /* Style pour le bouton de partage de flower */
         .share-flower-button {
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 14px;
             padding: 8px 16px;
             font-size: 0.9em;
-            margin: -290px auto 30px auto; /* Position rapprochée du modal */
+            margin: -300px auto 30px auto;
             display: none;
             align-items: center;
             justify-content: center;
@@ -512,6 +513,7 @@
             max-width: 190px;
             position: relative;
             z-index: 1001;
+            border: 1px solid #0056b3;
         }
         
         .share-flower-button:hover {
@@ -520,6 +522,158 @@
         
         .share-flower-button i {
             margin-left: 8px;
+        }
+        
+        /* Styles pour l'image capturée */
+        #capturedFlower {
+            position: fixed;
+            z-index: 1003;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .captured-image-container {
+            position: relative;
+            max-width: 85%;
+            max-height: 60vh;
+            margin-bottom: 15px;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        
+        .share-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 10px auto;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .share-message i {
+            margin-left: 8px;
+            color: #007bff;
+        }
+        
+        .share-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .capture-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .capture-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+        
+        .capture-button i {
+            margin-right: 5px;
+        }
+        
+        .close-capture {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        /* Fleur container pour la capture */
+        #flowerCaptureContainer {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: -9999px;
+            background-color: white;
+            border: 2px solid #007bff;
+            border-radius: 25px;
+            padding: 20px;
+            width: 260px; /* Réduit de 300px à 260px */
+        }
+        
+        .capture-flower-header {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.8em; /* Réduit de 2em à 1.8em */
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .capture-flower-code {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.1em; /* Réduit de 1.2em à 1.1em */
+            background-color: #fff0f8;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ff69b4;
+            margin: 10px auto;
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        .capture-flower-motivation {
+            font-style: italic;
+            color: #333;
+            font-size: 0.95em; /* Réduit de 1em à 0.95em */
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .capture-flower-icon {
+            text-align: center;
+            font-size: 2.8em; /* Réduit de 3em à 2.8em */
+            color: #ff69b4;
+            margin: 10px 0;
+        }
+        
+        .gz-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 15px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 5px;
+            width: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -665,14 +819,6 @@
       <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>Flower of Life</strong></div>
       
-      <!-- Commentaire expliquant la modification -->
-      <!-- 
-        Pour afficher correctement le flower code :
-        1. Réduire la taille de la police à 0.9em
-        2. Limiter la largeur à 220px maximum
-        3. Ajouter text-overflow pour gérer les textes trop longs
-        4. Réduire le padding et la marge pour un design plus compact
-      -->
       <div id="flowerCodeDisplay" class="flower-code"></div>
       <div class="monthly-motivation" id="monthlyMotivation"></div>
       
@@ -682,10 +828,46 @@
     </div>
   </div>
   
-  <!-- Bouton de partage flower modifié pour être plus proche du modal -->
+  <!-- Bouton de partage flower simplifié -->
   <button class="share-flower-button" id="shareFlowerButton">
     Share my Flower <i class="fas fa-paper-plane"></i>
   </button>
+  
+  <!-- Container pour l'image capturée -->
+  <div id="capturedFlower">
+    <div class="captured-image-container">
+      <img id="capturedImage" class="captured-image" src="" alt="Captured Flower">
+    </div>
+    
+    <div class="share-message">
+      Perfect for sharing in your Stories
+    </div>
+    
+    <div class="capture-controls">
+      <button class="capture-button" id="shareCapture">
+        <i class="fas fa-paper-plane"></i> Share
+      </button>
+      
+      <button class="capture-button close-capture" id="closeCapture">
+        <i class="fas fa-times"></i> Close
+      </button>
+    </div>
+  </div>
+  
+  <!-- Container pour la capture de fleur (invisible) -->
+  <div id="flowerCaptureContainer">
+    <div class="capture-flower-header">Flower of Life</div>
+    
+    <div id="captureFlowerCode" class="capture-flower-code"></div>
+    
+    <div id="captureFlowerMotivation" class="capture-flower-motivation"></div>
+    
+    <div class="capture-flower-icon">
+      <i class="fas fa-spa"></i>
+    </div>
+    
+    <div class="gz-logo">G-Z</div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
@@ -865,9 +1047,16 @@
         const monthName = monthNames[userBirthdayMonth - 1];
         flowerCodeElement.textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
         motivationElement.textContent = generatePersonalizedMotivation(userFlowerCode);
+        
+        // Mettre à jour également le container de capture
+        document.getElementById('captureFlowerCode').textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
+        document.getElementById('captureFlowerMotivation').textContent = generatePersonalizedMotivation(userFlowerCode);
       } else {
         flowerCodeElement.textContent = "My Flower";
         motivationElement.textContent = "Submit your information to discover your flower - personal motivation.";
+        
+        document.getElementById('captureFlowerCode').textContent = "My Flower";
+        document.getElementById('captureFlowerMotivation').textContent = "Submit your information to discover your flower - personal motivation.";
       }
     }
 
@@ -982,25 +1171,33 @@
         console.error('Error loading countries from API:', error);
         
         const fallbackCountries = [
-          "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", 
-          "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", 
-          "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", 
-          "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", 
-          "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", 
-          "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", 
-          "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", 
-          "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", 
-          "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", 
-          "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", 
-          "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
-          "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", 
-          "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", 
-          "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", 
-          "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", 
-          "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", 
-          "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", 
-          "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", 
-          "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", 
+          "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
+          "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", 
+          "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
+          "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
+          "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
+          "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", 
+          "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", 
+          "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
+          "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", 
+          "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
+          "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
+          "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", 
+          "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", 
+          "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", 
+          "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
+          "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", 
+          "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", 
+          "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", 
+          "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", 
+          "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+          "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", 
+          "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", 
+          "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", 
+          "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", 
+          "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
+          "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", 
+          "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", 
           "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ].sort();
         
@@ -1442,6 +1639,85 @@
 
     document.getElementById('shareFlowerButton').addEventListener('click', function() {
       if (userFlowerCode) {
+        // Capturer directement la fleur et l'afficher
+        captureFlower();
+      } else {
+        alert('Please submit your information first to get your Flower code.');
+      }
+    });
+    
+    // Fonction pour la capture et le partage direct de l'image
+    async function captureFlower() {
+      try {
+        // Préparation du container pour la capture
+        const captureContainer = document.getElementById('flowerCaptureContainer');
+        
+        // Chargement dynamique de html2canvas si nécessaire
+        if (typeof html2canvas === 'undefined') {
+          await loadHTML2Canvas();
+        }
+        
+        // Capture à haute résolution
+        const canvas = await html2canvas(captureContainer, {
+          backgroundColor: 'white',
+          scale: 3, // Meilleure qualité
+          logging: false,
+          useCORS: true
+        });
+        
+        // Conversion du canvas en image
+        const imageUrl = canvas.toDataURL('image/png');
+        
+        // Afficher l'image capturée
+        document.getElementById('capturedImage').src = imageUrl;
+        document.getElementById('capturedFlower').style.display = 'flex';
+      } catch (error) {
+        console.error('Error capturing flower:', error);
+        alert('Could not capture your flower. Please try again.');
+      }
+    }
+    
+    // Fonction pour charger html2canvas dynamiquement
+    function loadHTML2Canvas() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    
+    // Gestionnaire pour partager l'image via l'API Web Share native
+    document.getElementById('shareCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      if (navigator.share) {
+        fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
+            navigator.share({
+              title: 'My G-Z Flower',
+              text: 'Perfect for sharing in your Stories',
+              files: [file]
+            }).catch(err => {
+              console.log('Error sharing:', err);
+              fallbackShare();
+            });
+          })
+          .catch(err => {
+            console.log('Error preparing image:', err);
+            fallbackShare();
+          });
+      } else {
+        fallbackShare();
+      }
+    });
+    
+    // Méthode alternative de partage
+    function fallbackShare() {
+      try {
         const monthNames = [
           "January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"
@@ -1449,26 +1725,22 @@
         const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
         const dayNumber = userBirthdayDay || "";
         
-        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber})`;
+        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Perfect for sharing in your Stories!`;
         
-        if (navigator.share) {
-          navigator.share({
-            title: 'My G-Z Flower',
-            text: shareText
-          }).catch(err => {
-            console.log('Error sharing:', err);
-            alert('Could not share your flower. You can copy and share it manually.');
-          });
-        } else {
-          navigator.clipboard.writeText(shareText).then(function() {
-            alert('Flower information copied to clipboard! You can now paste and share it.');
-          }).catch(function() {
-            alert('Could not copy to clipboard. Please share manually.');
-          });
-        }
-      } else {
-        alert('Please submit your information first to get your Flower code.');
+        navigator.clipboard.writeText(shareText).then(function() {
+          alert('Share text copied to clipboard! You can now paste and share it manually with the image.');
+        }).catch(function() {
+          alert('Could not copy to clipboard. Please share manually.');
+        });
+      } catch (error) {
+        console.error('Fallback share error:', error);
+        alert('Please share the image manually.');
       }
+    }
+    
+    // Fermer le modal de capture
+    document.getElementById('closeCapture').addEventListener('click', function() {
+      document.getElementById('capturedFlower').style.display = 'none';
     });
 
     document.getElementById('accessCodeContainer').addEventListener('click', function() {
@@ -1505,6 +1777,7 @@
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
+      const capturedFlower = document.getElementById('capturedFlower');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -1521,12 +1794,22 @@
         // Cacher le bouton de partage flower lorsque le modal est fermé en cliquant à l'extérieur
         document.getElementById('shareFlowerButton').style.display = 'none';
       }
+      
+      if (event.target == capturedFlower) {
+        capturedFlower.style.display = "none";
+      }
     };
 
     checkCookieConsent();
     
     // Cacher initialement le bouton de partage flower
     document.getElementById('shareFlowerButton').style.display = 'none';
+    
+    // Charger html2canvas de manière préventive
+    loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
   </script>
+  
+  <!-- Script html2canvas pour la capture d'écran -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
