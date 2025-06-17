@@ -606,24 +606,24 @@
             color: #333;
         }
         
-        /* Fleur container pour la capture */
+        /* Fleur container pour la capture - CONSIDÉRABLEMENT RÉDUIT */
         #flowerCaptureContainer {
             position: fixed;
             z-index: -1;
             top: 0;
             left: -9999px;
             background-color: white;
-            border: 2px solid #007bff;
-            border-radius: 25px;
-            padding: 20px;
-            width: 260px; /* Réduit de 300px à 260px */
+            border: 1px solid #007bff;
+            border-radius: 15px;
+            padding: 6px;
+            width: 160px; /* Réduit de 260px à 200px */
         }
         
         .capture-flower-header {
             font-family: 'Billabong', cursive;
             color: #007bff;
-            font-size: 1.8em; /* Réduit de 2em à 1.8em */
-            margin-bottom: 10px;
+            font-size: 1.2em; /* Réduit de 1.8em à 1.4em */
+            margin-bottom: 3px; /* Réduit de 10px à 5px */
             text-align: center;
             font-weight: bold;
         }
@@ -631,46 +631,46 @@
         .capture-flower-code {
             font-weight: bold;
             color: #ff69b4;
-            font-size: 1.1em; /* Réduit de 1.2em à 1.1em */
+            font-size: 0.5em; /* Réduit de 1.1em à 0.8em */
             background-color: #fff0f8;
-            padding: 8px;
-            border-radius: 10px;
+            padding: 3px; /* Réduit de 8px à 5px */
+            border-radius: 4px; /* Réduit de 10px à 7px */
             border: 1px solid #ff69b4;
-            margin: 10px auto;
+            margin: 3px auto; /* Réduit de 10px à 5px */
             text-align: center;
-            max-width: 80%;
+            max-width: 90%; /* Augmenté pour assurer que le texte tient */
         }
         
         .capture-flower-motivation {
             font-style: italic;
             color: #333;
-            font-size: 0.95em; /* Réduit de 1em à 0.95em */
-            line-height: 1.4;
+            font-size: 0.65em; /* Réduit de 0.95em à 0.75em */
+            line-height: 1.3;
             background-color: #f9f9f9;
             border: 1px dashed #ff69b4;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px 0;
+            border-radius: 7px; /* Réduit de 15px à 10px */
+            padding: 5px; /* Réduit de 15px à 8px */
+            margin: 6px 0; /* Réduit de 15px à 8px */
             text-align: center;
         }
         
         .capture-flower-icon {
             text-align: center;
-            font-size: 2.8em; /* Réduit de 3em à 2.8em */
+            font-size: 2em; /* Réduit de 2.8em à 2em */
             color: #ff69b4;
-            margin: 10px 0;
+            margin: 5px 0; /* Réduit de 10px à 5px */
         }
         
         .gz-logo {
             font-family: 'Billabong', cursive;
             color: #007bff;
-            font-size: 1.5em;
+            font-size: 1em; /* Réduit de 1.5em à 1.2em */
             text-align: center;
-            margin-top: 15px;
-            border: 2px solid #007bff;
-            border-radius: 12px;
-            padding: 5px;
-            width: 60px;
+            margin-top: 6px; /* Réduit de 15px à 8px */
+            border: 1px solid #007bff; /* Réduit de 2px à 1px */
+            border-radius: 8px; /* Réduit de 12px à 8px */
+            padding: 3px; /* Réduit de 5px à 3px */
+            width: 40px; /* Réduit de 60px à 40px */
             margin-left: auto;
             margin-right: auto;
             font-weight: bold;
@@ -693,12 +693,12 @@
         /* Style pour le texte de partage au bas de l'image capturée */
         .capture-website-url {
             text-align: center;
-            font-size: 0.9em;
+            font-size: 0.5em; /* Réduit de 0.9em à 0.7em */
             color: #007bff;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 5px; /* Réduit de 10px à 5px */
             font-family: Arial, sans-serif;
-            padding: 3px 0;
+            padding: 2px 0; /* Réduit de 3px à 2px */
             border-top: 1px dashed #007bff;
         }
     </style>
@@ -868,7 +868,7 @@
     <!-- Message d'avertissement pour le partage -->
     <div class="share-warning" id="shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
-      Perfect for sharing in your Stories.
+ Perfect for sharing in your Stories, just adjust.
     </div>
     
     <div class="capture-controls">
@@ -882,7 +882,7 @@
     </div>
   </div>
   
-  <!-- Container pour la capture de fleur (invisible) -->
+  <!-- Container pour la capture de fleur (invisible) - CONSIDÉRABLEMENT RÉDUIT -->
   <div id="flowerCaptureContainer">
     <div class="capture-flower-header">Flower of Life</div>
     
@@ -897,7 +897,7 @@
     <div class="gz-logo">G-Z</div>
     
     <!-- Ligne ajoutée pour indiquer le site web -->
-    <div class="capture-website-url">Discover  yours  at  www.g-z.online</div>
+    <div class="capture-website-url">Discover yours at www.g-z.online</div>
   </div>
 
   <script type="module">
@@ -1733,7 +1733,7 @@
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
               title: 'My G-Z Flower',
-              text: 'Discover yours at www.g-z.online',
+              text: 'Discover yours at g-z.online',
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -1759,7 +1759,7 @@
         const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
         const dayNumber = userBirthdayDay || "";
         
-        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at www.g-z.online`;
+        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
           alert('Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.');
