@@ -606,71 +606,74 @@
             color: #333;
         }
         
-        /* Fleur container pour la capture - CONSIDÉRABLEMENT RÉDUIT */
+        /* NOUVEAU: Container de fleur amélioré pour une meilleure qualité d'image */
         #flowerCaptureContainer {
             position: fixed;
             z-index: -1;
             top: 0;
             left: -9999px;
             background-color: white;
-            border: 1px solid #007bff;
-            border-radius: 15px;
-            padding: 6px;
-            width: 160px; /* Réduit de 260px à 200px */
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 15px;
+            width: 300px; /* Augmenté pour une meilleure qualité */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
         .capture-flower-header {
             font-family: 'Billabong', cursive;
             color: #007bff;
-            font-size: 1.2em; /* Réduit de 1.8em à 1.4em */
-            margin-bottom: 3px; /* Réduit de 10px à 5px */
+            font-size: 1.8em;
+            margin-bottom: 8px;
             text-align: center;
             font-weight: bold;
+            text-shadow: 0px 1px 1px rgba(0, 123, 255, 0.2);
         }
         
         .capture-flower-code {
             font-weight: bold;
             color: #ff69b4;
-            font-size: 0.5em; /* Réduit de 1.1em à 0.8em */
+            font-size: 1.1em;
             background-color: #fff0f8;
-            padding: 3px; /* Réduit de 8px à 5px */
-            border-radius: 4px; /* Réduit de 10px à 7px */
+            padding: 8px;
+            border-radius: 10px;
             border: 1px solid #ff69b4;
-            margin: 3px auto; /* Réduit de 10px à 5px */
+            margin: 8px auto;
             text-align: center;
-            max-width: 90%; /* Augmenté pour assurer que le texte tient */
+            max-width: 90%;
+            letter-spacing: 0.5px;
         }
         
         .capture-flower-motivation {
             font-style: italic;
             color: #333;
-            font-size: 0.65em; /* Réduit de 0.95em à 0.75em */
-            line-height: 1.3;
+            font-size: 0.95em;
+            line-height: 1.4;
             background-color: #f9f9f9;
             border: 1px dashed #ff69b4;
-            border-radius: 7px; /* Réduit de 15px à 10px */
-            padding: 5px; /* Réduit de 15px à 8px */
-            margin: 6px 0; /* Réduit de 15px à 8px */
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
             text-align: center;
         }
         
         .capture-flower-icon {
             text-align: center;
-            font-size: 2em; /* Réduit de 2.8em à 2em */
+            font-size: 2.5em;
             color: #ff69b4;
-            margin: 5px 0; /* Réduit de 10px à 5px */
+            margin: 10px 0;
         }
         
         .gz-logo {
             font-family: 'Billabong', cursive;
             color: #007bff;
-            font-size: 1em; /* Réduit de 1.5em à 1.2em */
+            font-size: 1.4em;
             text-align: center;
-            margin-top: 6px; /* Réduit de 15px à 8px */
-            border: 1px solid #007bff; /* Réduit de 2px à 1px */
-            border-radius: 8px; /* Réduit de 12px à 8px */
-            padding: 3px; /* Réduit de 5px à 3px */
-            width: 40px; /* Réduit de 60px à 40px */
+            margin-top: 10px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 4px;
+            width: 50px;
             margin-left: auto;
             margin-right: auto;
             font-weight: bold;
@@ -693,12 +696,12 @@
         /* Style pour le texte de partage au bas de l'image capturée */
         .capture-website-url {
             text-align: center;
-            font-size: 0.5em; /* Réduit de 0.9em à 0.7em */
+            font-size: 0.85em;
             color: #007bff;
             font-weight: bold;
-            margin-top: 5px; /* Réduit de 10px à 5px */
+            margin-top: 8px;
             font-family: Arial, sans-serif;
-            padding: 2px 0; /* Réduit de 3px à 2px */
+            padding: 3px 0;
             border-top: 1px dashed #007bff;
         }
     </style>
@@ -882,7 +885,7 @@
     </div>
   </div>
   
-  <!-- Container pour la capture de fleur (invisible) - CONSIDÉRABLEMENT RÉDUIT -->
+  <!-- Container pour la capture de fleur (invisible) - AMÉLIORÉ -->
   <div id="flowerCaptureContainer">
     <div class="capture-flower-header">Flower of Life</div>
     
@@ -1677,7 +1680,7 @@
       }
     });
     
-    // Fonction pour la capture et le partage direct de l'image
+    // AMÉLIORÉ: Fonction pour la capture et le partage d'image haute qualité
     async function captureFlower() {
       try {
         // Préparation du container pour la capture
@@ -1688,16 +1691,19 @@
           await loadHTML2Canvas();
         }
         
-        // Capture à haute résolution
+        // AMÉLIORÉ: Capture à très haute résolution
         const canvas = await html2canvas(captureContainer, {
           backgroundColor: 'white',
-          scale: 3, // Meilleure qualité
+          scale: 5, // Augmenté de 3 à 5 pour une meilleure qualité
           logging: false,
-          useCORS: true
+          useCORS: true,
+          allowTaint: false,
+          letterRendering: true, // Améliore le rendu du texte
+          imageTimeout: 0 // Pas de timeout pour les images
         });
         
-        // Conversion du canvas en image
-        const imageUrl = canvas.toDataURL('image/png');
+        // Conversion du canvas en image PNG haute qualité
+        const imageUrl = canvas.toDataURL('image/png', 1.0); // Qualité maximale 1.0
         
         // Afficher l'image capturée
         document.getElementById('capturedImage').src = imageUrl;
@@ -1842,7 +1848,7 @@
     // Cacher initialement le message d'avertissement pour le partage
     document.getElementById('shareWarning').style.display = 'none';
     
-    // Charger html2canvas de manière préventive
+    // Précharger html2canvas pour une meilleure performance
     loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
   </script>
   
