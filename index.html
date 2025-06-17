@@ -675,6 +675,32 @@
             margin-right: auto;
             font-weight: bold;
         }
+        
+        /* Message d'avertissement pour le partage */
+        .share-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 0.85em;
+            margin: 5px auto 15px auto;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Style pour le texte de partage au bas de l'image capturée */
+        .capture-website-url {
+            text-align: center;
+            font-size: 0.9em;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            padding: 3px 0;
+            border-top: 1px dashed #007bff;
+        }
     </style>
 </head>
 <body>
@@ -838,9 +864,12 @@
     <div class="captured-image-container">
       <img id="capturedImage" class="captured-image" src="" alt="Captured Flower">
     </div>
-    
-    <div class="share-message">
- Perfect for sharing in your Stories, link: www.g-z.online
+
+    <!-- Message d'avertissement pour le partage -->
+    <div class="share-warning" id="shareWarning">
+      <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+      Perfect for sharing in your Stories.
+      If the link doesn't work directly, please manually type "g-z.online" in your browser.
     </div>
     
     <div class="capture-controls">
@@ -867,6 +896,9 @@
     </div>
     
     <div class="gz-logo">G-Z</div>
+    
+    <!-- Ligne ajoutée pour indiquer le site web -->
+    <div class="capture-website-url">Discover  yours  at  www.g-z.online</div>
   </div>
 
   <script type="module">
@@ -1183,7 +1215,7 @@
           "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
           "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
           "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", 
-          "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", 
+          "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho",
           "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", 
           "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
           "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", 
@@ -1671,6 +1703,9 @@
         // Afficher l'image capturée
         document.getElementById('capturedImage').src = imageUrl;
         document.getElementById('capturedFlower').style.display = 'flex';
+        
+        // Afficher le message d'avertissement pour le partage
+        document.getElementById('shareWarning').style.display = 'block';
       } catch (error) {
         console.error('Error capturing flower:', error);
         alert('Could not capture your flower. Please try again.');
@@ -1699,7 +1734,7 @@
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
               title: 'My G-Z Flower',
-              text: 'Perfect for sharing in your Stories',
+              text: 'Discover yours at www.g-z.online',
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -1725,16 +1760,16 @@
         const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
         const dayNumber = userBirthdayDay || "";
         
-        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Perfect for sharing in your Stories!`;
+        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at www.g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert('Share text copied to clipboard! You can now paste and share it manually with the image.');
+          alert('Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.');
         }).catch(function() {
-          alert('Could not copy to clipboard. Please share manually.');
+          alert('Could not copy to clipboard. Please share manually. Remember to type "g-z.online" in your browser to access the site.');
         });
       } catch (error) {
         console.error('Fallback share error:', error);
-        alert('Please share the image manually.');
+        alert('Please share the image manually. Remember to type "g-z.online" in your browser to access the site.');
       }
     }
     
@@ -1804,6 +1839,9 @@
     
     // Cacher initialement le bouton de partage flower
     document.getElementById('shareFlowerButton').style.display = 'none';
+    
+    // Cacher initialement le message d'avertissement pour le partage
+    document.getElementById('shareWarning').style.display = 'none';
     
     // Charger html2canvas de manière préventive
     loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
