@@ -389,7 +389,7 @@
         const birthdatesRef = ref(db, 'birthdates');
         onValue(birthdatesRef, (snapshot) => {
             allData = snapshot.val() || {};
-            console.log(allData);
+            console.log("Données récupérées:", allData);
             updateCountries();
             updateCards();
         });
@@ -399,9 +399,16 @@
         const countrySelect = document.getElementById('countrySelect');
         const countries = new Set();
 
+        // Vider les options existantes sauf la première
+        while (countrySelect.options.length > 1) {
+            countrySelect.remove(1);
+        }
+
         Object.keys(allData).forEach(userId => {
             const userData = allData[userId];
-            countries.add(userData.country);
+            if (userData && userData.country) {
+                countries.add(userData.country);
+            }
         });
 
         countries.forEach(country => {
@@ -439,6 +446,8 @@
 
         Object.keys(allData).forEach(userId => {
             const userData = allData[userId];
+            if (!userData) return;
+            
             if (userData.country === selectedCountry || selectedCountry === '') {
                 let key;
                 if (selectedCategory === 'daily') {
@@ -448,11 +457,11 @@
                 } else if (selectedCategory === 'yearly') {
                     key = new Date(userData.date).getFullYear();
                 } else if (selectedCategory === 'gender') {
-                    key = userData.gender;
+                    key = userData.gender || 'Unknown';
                 } else if (selectedCategory === 'age') {
                     key = calculateAge(userData.date);
-                } else if (selectedCategory === 'population) {
-                    key = userData.country;
+                } else if (selectedCategory === 'population') {
+                    key = userData.country || 'Unknown';
                 }
 
                 counts[key] = (counts[key] || 0) + 1;
@@ -472,6 +481,8 @@
     }
     
     async function verifyAccessCode(code) {
+        console.log("Vérification du code:", code);
+        
         if (!code || code.length !== 6) {
             alert("Please enter a valid 6-character access code.");
             return false;
@@ -482,16 +493,22 @@
             const snapshot = await get(usersRef);
             const data = snapshot.val();
             
-            if (!data) return false;
+            console.log("Données récupérées pour vérification:", data);
+            
+            if (!data) {
+                alert("No user data found. Please try again later.");
+                return false;
+            }
             
             for (const userId in data) {
-                if (data[userId].accessCode === code) {
+                if (data[userId] && data[userId].accessCode === code) {
+                    console.log("Code valide trouvé!");
                     document.getElementById('accessCodeModal').style.display = 'none';
                     return true;
                 }
             }
             
-            alert("Invalid access code.");
+            alert("Invalid access code. Please check and try again.");
             return false;
         } catch (error) {
             console.error("Error verifying access code:", error);
@@ -523,6 +540,7 @@
         const supportModal = document.getElementById('supportModal');
         const faqModal = document.getElementById('faqModal');
         const paypalBtn = document.getElementById('paypalBtn');
+        const accessCodeInput = document.getElementById('accessCodeInput');
 
         countrySelect.addEventListener('change', debounce(updateCards, 300));
         categorySelect.addEventListener('change', debounce(updateCards, 300));
@@ -551,11 +569,21 @@
             }
         });
         
+        // Permettre la validation par la touche Entrée
+        accessCodeInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('verifyButton').click();
+            }
+        });
+        
         document.getElementById('verifyButton').addEventListener('click', async () => {
-            const accessCode = document.getElementById('accessCodeInput').value;
+            const accessCode = document.getElementById('accessCodeInput').value.trim();
+            console.log("Bouton de vérification cliqué avec le code:", accessCode);
             const isValid = await verifyAccessCode(accessCode);
             
             if (isValid) {
+                console.log("Code validé, chargement des données...");
                 fetchData();
             }
         });
