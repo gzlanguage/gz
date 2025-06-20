@@ -327,7 +327,7 @@
         <option value="yearly">Births by year</option>
         <option value="gender">Gender</option>
         <option value="age">Ages</option>
-        <option value="population">Population</option>
+        <option value="population">Origin</option>
     </select>
 
     <div class="grid" id="grid">
@@ -451,7 +451,7 @@
                     key = userData.gender;
                 } else if (selectedCategory === 'age') {
                     key = calculateAge(userData.date);
-                } else if (selectedCategory === 'population') {
+                } else if (selectedCategory === 'population) {
                     key = userData.country;
                 }
 
