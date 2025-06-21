@@ -992,119 +992,43 @@
 
     function generatePersonalizedMotivation(flowerCode) {
       if (!flowerCode || flowerCode.length < 8) {
-        return "Submit your information to discover your - flower personal motivation.";
+        return "Submit your information to discover your flower motivation.";
       }
       
-      const firstLetter = flowerCode.charAt(0).toLowerCase();
-      const secondLetter = flowerCode.charAt(1).toLowerCase();
-      const thirdLetter = flowerCode.charAt(2).toLowerCase();
-      const fourthLetter = flowerCode.charAt(3).toLowerCase();
-      const fifthLetter = flowerCode.charAt(4).toLowerCase();
-      const sixthLetter = flowerCode.charAt(5).toLowerCase();
-      const seventhLetter = flowerCode.charAt(6).toLowerCase();
-      const eighthLetter = flowerCode.charAt(7).toLowerCase();
-      
-      const adjectives = {
-        'a': ['ambitious', 'authentic', 'analytical', 'adaptable', 'astute'],
-        'b': ['brilliant', 'balanced', 'bold', 'bright', 'benevolent'],
-        'c': ['creative', 'curious', 'careful', 'considerate', 'capable'],
-        'd': ['dedicated', 'diligent', 'dynamic', 'distinctive', 'discerning'],
-        'e': ['efficient', 'effective', 'eloquent', 'energetic', 'empathetic'],
-        'f': ['focused', 'forward-thinking', 'fair', 'friendly', 'flexible'],
-        'g': ['graceful', 'gifted', 'genuine', 'generous', 'gentle'],
-        'h': ['honest', 'helpful', 'harmonious', 'humble', 'honorable'],
-        'i': ['insightful', 'intelligent', 'inspiring', 'innovative', 'intuitive'],
-        'j': ['judicious', 'joyful', 'just', 'journeying', 'jovial'],
-        'k': ['knowledgeable', 'kind', 'keen', 'koranic', 'kinetic'],
-        'l': ['logical', 'loving', 'loyal', 'lively', 'luminous'],
-        'm': ['mindful', 'methodical', 'motivated', 'masterful', 'magnificent'],
-        'n': ['noble', 'nurturing', 'noteworthy', 'natural', 'nimble'],
-        'o': ['observant', 'optimistic', 'organized', 'original', 'open-minded'],
-        'p': ['patient', 'persistent', 'profound', 'perceptive', 'passionate'],
-        'q': ['quick-witted', 'qualified', 'questioning', 'quiet', 'quintessential'],
-        'r': ['resilient', 'resourceful', 'reliable', 'respectful', 'reflective'],
-        's': ['sincere', 'strategic', 'skilled', 'self-aware', 'sophisticated'],
-        't': ['thoughtful', 'tenacious', 'thorough', 'talented', 'trustworthy'],
-        'u': ['understanding', 'unique', 'unwavering', 'uplifting', 'unbiased'],
-        'v': ['visionary', 'versatile', 'valuable', 'virtuous', 'vivacious'],
-        'w': ['wise', 'witty', 'warm', 'well-rounded', 'wholehearted'],
-        'x': ['xenial', 'xerothermic', 'xenodochial', 'xylographic', 'xanthic'],
-        'y': ['yielding', 'yearning', 'youthful', 'yielding', 'yare'],
-        'z': ['zealous', 'zestful', 'zenith', 'zany', 'zippy']
-      };
-      
-      const subjects = {
-        'a': ['approach', 'ability', 'awareness', 'attention', 'achievement'],
-        'b': ['brilliance', 'balance', 'bravery', 'belief', 'benevolence'],
-        'c': ['creativity', 'character', 'curiosity', 'capability', 'cognition'],
-        'd': ['dedication', 'determination', 'discernment', 'depth', 'drive'],
-        'e': ['empathy', 'excellence', 'elegance', 'energy', 'essence'],
-        'f': ['focus', 'foresight', 'finesse', 'fortitude', 'fulfillment'],
-        'g': ['growth', 'genius', 'grace', 'guidance', 'gratitude'],
-        'h': ['harmony', 'humanity', 'heart', 'honor', 'happiness'],
-        'i': ['intuition', 'integrity', 'intellect', 'inspiration', 'insight'],
-        'j': ['judgment', 'journey', 'justice', 'joy', 'juxtaposition'],
-        'k': ['knowledge', 'kindness', 'kinship', 'keenness', 'karma'],
-        'l': ['logic', 'leadership', 'love', 'loyalty', 'legacy'],
-        'm': ['mindfulness', 'mastery', 'morality', 'motivation', 'maturity'],
-        'n': ['nobility', 'nuance', 'nature', 'nurturing', 'novelty'],
-        'o': ['observation', 'openness', 'originality', 'optimism', 'order'],
-        'p': ['perception', 'patience', 'presence', 'passion', 'perspective'],
-        'q': ['quality', 'quietude', 'quest', 'quintessence', 'questioning'],
-        'r': ['resilience', 'reason', 'resolve', 'reflection', 'respect'],
-        's': ['sincerity', 'strength', 'spirit', 'serenity', 'sophistication'],
-        't': ['thoughtfulness', 'tenacity', 'truth', 'talent', 'trust'],
-        'u': ['understanding', 'uniqueness', 'unity', 'utility', 'uplifting'],
-        'v': ['vision', 'virtue', 'versatility', 'value', 'vitality'],
-        'w': ['wisdom', 'willpower', 'wonder', 'worthiness', 'wholeness'],
-        'x': ['xenial', 'x-factor', 'xeric', 'xanadu', 'xenodochy'],
-        'y': ['yearning', 'yield', 'youthfulness', 'yes-saying', 'yielding'],
-        'z': ['zeal', 'zenith', 'zeitgeist', 'zest', 'zone']
-      };
-      
-      const verbs = {
-        'a': ['achieves', 'aspires', 'adapts', 'analyzes', 'appreciates'],
-        'b': ['balances', 'builds', 'believes', 'brightens', 'blossoms'],
-        'c': ['creates', 'considers', 'cultivates', 'connects', 'catalyzes'],
-        'd': ['develops', 'discovers', 'deliberates', 'delights', 'deepens'],
-        'e': ['elevates', 'enlightens', 'expresses', 'enhances', 'embodies'],
-        'f': ['fosters', 'fulfills', 'focuses', 'flourishes', 'fortifies'],
-        'g': ['grows', 'guides', 'generates', 'gratifies', 'gathers'],
-        'h': ['harmonizes', 'helps', 'honors', 'holds', 'heightens'],
-        'i': ['inspires', 'illuminates', 'integrates', 'innovates', 'influences'],
-        'j': ['joins', 'justifies', 'journeys', 'judges', 'juxtaposes'],
-        'k': ['kindles', 'knows', 'keeps', 'kindles', 'knits'],
-        'l': ['leads', 'listens', 'learns', 'leverages', 'loves'],
-        'm': ['masters', 'motivates', 'meditates', 'manifests', 'merges'],
-        'n': ['nurtures', 'navigates', 'notices', 'nourishes', 'networks'],
-        'o': ['observes', 'optimizes', 'organizes', 'originates', 'overcomes'],
-        'p': ['perceives', 'persists', 'practices', 'progresses', 'propels'],
-        'q': ['questions', 'quickens', 'quiets', 'qualifies', 'quests'],
-        'r': ['reflects', 'resolves', 'reasons', 'responds', 'reinvents'],
-        's': ['synthesizes', 'sustains', 'strengthens', 'seeks', 'soars'],
-        't': ['transforms', 'transcends', 'thrives', 'trusts', 'thinks'],
-        'u': ['understands', 'unites', 'utilizes', 'uplifts', 'unfolds'],
-        'v': ['values', 'visualizes', 'validates', 'vitalizes', 'ventures'],
-        'w': ['welcomes', 'wonders', 'works', 'weaves', 'walks'],
-        'x': ['x-rays', 'exemplifies', 'exercises', 'exhales', 'exhibits'],
-        'y': ['yields', 'yearns', 'yokes', 'yields', 'yawps'],
-        'z': ['zealously pursues', 'zooms toward', 'zeniths', 'zeros in on', 'zests']
-      };
-      
-      const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
-      
-      const phraseStructures = [
-        `Your ${getRandomElement(adjectives[firstLetter] || adjectives['a'])} ${getRandomElement(subjects[secondLetter] || subjects['s'])} ${getRandomElement(verbs[thirdLetter] || verbs['r'])} extraordinary potential in every challenge.`,
-        `The ${getRandomElement(adjectives[fourthLetter] || adjectives['d'])} ${getRandomElement(subjects[fifthLetter] || subjects['m'])} within you ${getRandomElement(verbs[sixthLetter] || verbs['e'])} paths others cannot see.`,
-        `With ${getRandomElement(adjectives[seventhLetter] || adjectives['w'])} ${getRandomElement(subjects[eighthLetter] || subjects['p'])}, you naturally ${getRandomElement(verbs[firstLetter] || verbs['c'])} complex situations into clarity.`,
-        `Your mind ${getRandomElement(verbs[secondLetter] || verbs['t'])} with a ${getRandomElement(adjectives[thirdLetter] || adjectives['u'])} ${getRandomElement(subjects[fourthLetter] || subjects['n'])} that inspires those around you.`,
-        `The ${getRandomElement(subjects[fifthLetter] || subjects['i'])} you bring ${getRandomElement(verbs[sixthLetter] || verbs['r'])} a ${getRandomElement(adjectives[seventhLetter] || adjectives['p'])} perspective to every situation.`
+      // Phrases simples par catégorie
+      const positiveTraits = [
+        "Your creativity brings fresh ideas to every challenge.",
+        "Your kindness inspires others around you.",
+        "Your persistence helps you overcome obstacles.",
+        "Your unique perspective solves problems in new ways.",
+        "Your energy brightens the day for everyone you meet.",
+        "Your patience helps you see the bigger picture.",
+        "Your courage allows you to face new challenges.",
+        "Your wisdom guides you through difficult decisions.",
+        "Your optimism helps you find opportunity in any situation.",
+        "Your focus helps you achieve your goals step by step."
       ];
       
-      const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
-      const selectedPhrase = phraseStructures[codeSum % phraseStructures.length];
+      const encouragements = [
+        "Keep sharing your gifts with the world.",
+        "Trust your instincts - they rarely lead you astray.",
+        "Your natural talents are meant to be shared.",
+        "The path ahead may have challenges, but you're ready for them.",
+        "Small steps today lead to big achievements tomorrow.",
+        "Remember to celebrate your progress along the way.",
+        "Your unique journey is worth every step.",
+        "Don't forget to enjoy the process, not just the results.",
+        "Your best days are still ahead of you.",
+        "Your efforts today are building your tomorrow."
+      ];
       
-      return selectedPhrase;
+      // Utiliser les caractères du code pour sélectionner des phrases
+      const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+      const traitIndex = codeSum % positiveTraits.length;
+      const encourageIndex = (codeSum + 3) % encouragements.length;
+      
+      // Combiner une qualité positive avec un encouragement
+      return positiveTraits[traitIndex] + " " + encouragements[encourageIndex];
     }
 
     function generateFlowerCode() {
@@ -1141,10 +1065,10 @@
         document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
       } else {
         flowerCodeElement.textContent = "My Flower";
-        motivationElement.textContent = "Submit your information to discover your flower - personal motivation.";
+        motivationElement.textContent = "Submit your information to discover your flower motivation.";
         
         document.getElementById('captureFlowerCode').textContent = "My Flower";
-        document.getElementById('captureFlowerMotivation').textContent = "Submit your information to discover your flower - personal motivation.";
+        document.getElementById('captureFlowerMotivation').textContent = "Submit your information to discover your flower motivation.";
       }
     }
 
