@@ -94,7 +94,7 @@
             padding: 7px;
             cursor: pointer;
             transition: background-color 0.3s;
-            background-color: gray;
+            background-color: #007bff;
             color: white;
         }
         .reset-icon {
@@ -277,19 +277,18 @@
             line-height: 1.4;
         }
         
-        /* Réduit la taille du flower code et son encadrant */
         .flower-code {
             display: block;
             font-weight: bold;
             color: #ff69b4;
-            font-size: 0.9em; /* Réduit de 1.1em à 0.9em */
-            margin-bottom: 8px; /* Réduit de 10px à 8px */
-            letter-spacing: 0.5px; /* Réduit de 1px à 0.5px */
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
             background-color: #fff0f8;
-            padding: 6px; /* Réduit de 8px à 6px */
-            border-radius: 8px; /* Réduit de 10px à 8px */
+            padding: 6px;
+            border-radius: 8px;
             border: 1px solid #ff69b4;
-            max-width: 220px; /* Ajout d'une largeur maximale */
+            max-width: 220px;
             margin-left: auto;
             margin-right: auto;
             white-space: nowrap;
@@ -496,7 +495,6 @@
             background-color: rgba(255, 0, 0, 0.1);
         }
         
-        /* Style pour le bouton de partage de flower */
         .share-flower-button {
             background-color: #007bff;
             color: white;
@@ -524,7 +522,6 @@
             margin-left: 8px;
         }
         
-        /* Styles pour l'image capturée */
         #capturedFlower {
             position: fixed;
             z-index: 1003;
@@ -606,7 +603,6 @@
             color: #333;
         }
         
-        /* NOUVEAU: Container de fleur amélioré pour une meilleure qualité d'image */
         #flowerCaptureContainer {
             position: fixed;
             z-index: -1;
@@ -616,7 +612,7 @@
             border: 2px solid #007bff;
             border-radius: 20px;
             padding: 15px;
-            width: 300px; /* Augmenté pour une meilleure qualité */
+            width: 300px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
@@ -679,7 +675,6 @@
             font-weight: bold;
         }
         
-        /* Message d'avertissement pour le partage */
         .share-warning {
             background-color: #fff3cd;
             color: #856404;
@@ -693,7 +688,6 @@
             display: none;
         }
         
-        /* Style pour le texte de partage au bas de l'image capturée */
         .capture-website-url {
             text-align: center;
             font-size: 0.85em;
@@ -705,34 +699,12 @@
             border-top: 1px dashed #007bff;
         }
         
-        /* Style pour la case à cocher des conditions d'utilisation */
-        .terms-checkbox-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px auto;
-            width: 330px;
-        }
-        
-        .terms-checkbox {
-            margin-right: 8px;
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-            accent-color: #007bff;
-        }
-        
-        .terms-label {
+        .terms-text {
             font-size: 0.8em;
             color: black;
-            cursor: pointer;
-        }
-        
-        /* Style pour le bouton désactivé */
-        .submit-button:disabled {
-            background-color: gray;
-            cursor: not-allowed;
-            opacity: 0.7;
+            text-align: center;
+            margin: 10px auto;
+            width: 330px;
         }
     </style>
 </head>
@@ -788,13 +760,11 @@
     <option value="" disabled selected>Select your country of birth</option>
   </select>
   
-  <!-- Nouvelle case à cocher pour les conditions d'utilisation -->
-  <div class="terms-checkbox-container">
-    <input type="checkbox" id="termsCheckbox" class="terms-checkbox">
-    <label for="termsCheckbox" class="terms-label">By submitting, you agree to our terms of use.</label>
+  <div class="terms-text">
+    By submitting, you agree to our terms of use.
   </div>
   
-  <button class="submit-button" type="submit" disabled>Submit</button>
+  <button class="submit-button" type="submit">Submit</button>
 
   <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
 
@@ -890,18 +860,15 @@
     </div>
   </div>
   
-  <!-- Bouton de partage flower simplifié -->
   <button class="share-flower-button" id="shareFlowerButton">
     Share my Flower <i class="fas fa-paper-plane"></i>
   </button>
   
-  <!-- Container pour l'image capturée -->
   <div id="capturedFlower">
     <div class="captured-image-container">
       <img id="capturedImage" class="captured-image" src="" alt="Captured Flower">
     </div>
 
-    <!-- Message d'avertissement pour le partage -->
     <div class="share-warning" id="shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
  Perfect for sharing in your Stories, just adjust.
@@ -918,7 +885,6 @@
     </div>
   </div>
   
-  <!-- Container pour la capture de fleur (invisible) - AMÉLIORÉ -->
   <div id="flowerCaptureContainer">
     <div class="capture-flower-header">Flower of Life</div>
     
@@ -932,7 +898,6 @@
     
     <div class="gz-logo">G-Z</div>
     
-    <!-- Ligne ajoutée pour indiquer le site web -->
     <div class="capture-website-url">Discover yours at www.g-z.online</div>
   </div>
 
@@ -973,29 +938,15 @@
     let userCountryStats = {
       totalMembers: 0
     };
-    // Variable pour stocker la motivation actuelle
     let currentMotivation = null;
 
-    // Gérer l'état du bouton Submit en fonction de la case à cocher
-    const termsCheckbox = document.getElementById('termsCheckbox');
     const submitButton = document.querySelector('.submit-button');
-    
-    termsCheckbox.addEventListener('change', function() {
-      submitButton.disabled = !this.checked;
-      
-      if (this.checked) {
-        submitButton.style.backgroundColor = '#007bff';
-      } else {
-        submitButton.style.backgroundColor = 'gray';
-      }
-    });
 
     function generatePersonalizedMotivation(flowerCode) {
       if (!flowerCode || flowerCode.length < 8) {
         return "Submit your information to discover your flower motivation.";
       }
       
-      // Phrases simples par catégorie
       const positiveTraits = [
         "Your creativity brings fresh ideas to every challenge.",
         "Your kindness inspires others around you.",
@@ -1022,12 +973,10 @@
         "Your efforts today are building your tomorrow."
       ];
       
-      // Utiliser les caractères du code pour sélectionner des phrases
       const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
       const traitIndex = codeSum % positiveTraits.length;
       const encourageIndex = (codeSum + 3) % encouragements.length;
       
-      // Combiner une qualité positive avec un encouragement
       return positiveTraits[traitIndex] + " " + encouragements[encourageIndex];
     }
 
@@ -1054,12 +1003,10 @@
         const monthName = monthNames[userBirthdayMonth - 1];
         flowerCodeElement.textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
         
-        // Générer une motivation unique pour cette session et la stocker
         if (!currentMotivation) {
           currentMotivation = generatePersonalizedMotivation(userFlowerCode);
         }
         
-        // Utiliser la même motivation pour l'affichage et la capture
         motivationElement.textContent = currentMotivation;
         document.getElementById('captureFlowerCode').textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
         document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
@@ -1238,7 +1185,7 @@
           lastSubmittedId: lastSubmittedId,
           accessCode: userAccessCode,
           flowerCode: userFlowerCode,
-          motivation: currentMotivation, // Sauvegarder la motivation actuelle
+          motivation: currentMotivation,
           birthdayStats: userBirthdayStats,
           countryStats: userCountryStats
         };
@@ -1271,7 +1218,6 @@
           lastSubmittedId = userData.lastSubmittedId;
           userAccessCode = userData.accessCode;
           userFlowerCode = userData.flowerCode;
-          // Récupérer la motivation sauvegardée
           currentMotivation = userData.motivation;
           
           if (userData.birthdayStats) {
@@ -1295,8 +1241,6 @@
             
             document.getElementById('birthdate').classList.add('disabled-field');
             document.getElementById('countrySelect').classList.add('disabled-field');
-            document.getElementById('termsCheckbox').checked = true;
-            document.getElementById('termsCheckbox').disabled = true;
             
             updateHeaderAccessCode();
           }
@@ -1330,7 +1274,6 @@
 
         document.getElementById('birthdate').classList.add('disabled-field');
         document.getElementById('countrySelect').classList.add('disabled-field');
-        document.getElementById('termsCheckbox').disabled = true;
 
         document.getElementById('genderModal').style.display = 'block';
       } else {
@@ -1344,7 +1287,6 @@
         
         userAccessCode = generateAccessCode();
         userFlowerCode = generateFlowerCode();
-        // Générer la motivation ici et la stocker pour une utilisation cohérente
         currentMotivation = generatePersonalizedMotivation(userFlowerCode);
         
         submitData(this.value);
@@ -1471,7 +1413,7 @@
             uid: userUid,
             accessCode: userAccessCode,
             flowerCode: userFlowerCode,
-            motivation: currentMotivation, // Stocker la motivation dans Firebase
+            motivation: currentMotivation,
             timestamp: Date.now()
           }).then((newEntryRef) => {
             lastSubmittedId = newEntryRef.key;
@@ -1502,7 +1444,7 @@
           uid: userUid || randomId,
           accessCode: userAccessCode,
           flowerCode: userFlowerCode,
-          motivation: currentMotivation, // Stocker la motivation dans localStorage
+          motivation: currentMotivation,
           timestamp: Date.now()
         };
         
@@ -1541,7 +1483,6 @@
         
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
-        document.getElementById('termsCheckbox').disabled = false;
       }
     }
 
@@ -1620,8 +1561,8 @@
       document.getElementById('countrySelect').value = '';
       const submitButton = document.querySelector('.submit-button');
       submitButton.textContent = "Submit";
-      submitButton.style.backgroundColor = 'gray';
-      submitButton.disabled = true;
+      submitButton.style.backgroundColor = '#007bff';
+      submitButton.disabled = false;
       document.getElementById('resetButton').style.display = "none";
       
       document.getElementById('accessCodeIndicator').style.display = 'block';
@@ -1636,7 +1577,7 @@
       lastSubmittedId = null;
       userAccessCode = null;
       userFlowerCode = null;
-      currentMotivation = null; // Réinitialiser la motivation
+      currentMotivation = null;
       userBirthdayStats = {
         totalMembers: 0,
         userRank: 0,
@@ -1648,8 +1589,6 @@
       
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
-      document.getElementById('termsCheckbox').checked = false;
-      document.getElementById('termsCheckbox').disabled = false;
       
       eraseCookie('userData');
       
@@ -1659,49 +1598,40 @@
     document.getElementById('flowerButton').addEventListener('click', function() {
       updateFlowerDisplay();
       document.getElementById('flowerModal').style.display = 'block';
-      // Afficher le bouton de partage flower lorsque le modal est ouvert
       document.getElementById('shareFlowerButton').style.display = 'flex';
     });
 
     document.getElementById('shareFlowerButton').addEventListener('click', function() {
       if (userFlowerCode) {
-        // Capturer directement la fleur et l'afficher
         captureFlower();
       } else {
         alert('Please submit your information first to get your Flower code.');
       }
     });
     
-    // AMÉLIORÉ: Fonction pour la capture et le partage d'image haute qualité
     async function captureFlower() {
       try {
-        // Préparation du container pour la capture
         const captureContainer = document.getElementById('flowerCaptureContainer');
         
-        // Chargement dynamique de html2canvas si nécessaire
         if (typeof html2canvas === 'undefined') {
           await loadHTML2Canvas();
         }
         
-        // AMÉLIORÉ: Capture à très haute résolution
         const canvas = await html2canvas(captureContainer, {
           backgroundColor: 'white',
-          scale: 7, // Augmenté de 3 à 5 pour une meilleure qualité
+          scale: 7,
           logging: false,
           useCORS: true,
           allowTaint: false,
-          letterRendering: true, // Améliore le rendu du texte
-          imageTimeout: 0 // Pas de timeout pour les images
+          letterRendering: true,
+          imageTimeout: 0
         });
         
-        // Conversion du canvas en image PNG haute qualité
-        const imageUrl = canvas.toDataURL('image/png', 1.0); // Qualité maximale 1.0
+        const imageUrl = canvas.toDataURL('image/png', 1.0);
         
-        // Afficher l'image capturée
         document.getElementById('capturedImage').src = imageUrl;
         document.getElementById('capturedFlower').style.display = 'flex';
         
-        // Afficher le message d'avertissement pour le partage
         document.getElementById('shareWarning').style.display = 'block';
       } catch (error) {
         console.error('Error capturing flower:', error);
@@ -1709,7 +1639,6 @@
       }
     }
     
-    // Fonction pour charger html2canvas dynamiquement
     function loadHTML2Canvas() {
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -1720,7 +1649,6 @@
       });
     }
     
-    // Gestionnaire pour partager l'image via l'API Web Share native
     document.getElementById('shareCapture').addEventListener('click', function() {
       const imageUrl = document.getElementById('capturedImage').src;
       
@@ -1747,7 +1675,6 @@
       }
     });
     
-    // Méthode alternative de partage
     function fallbackShare() {
       try {
         const monthNames = [
@@ -1770,7 +1697,6 @@
       }
     }
     
-    // Fermer le modal de capture
     document.getElementById('closeCapture').addEventListener('click', function() {
       document.getElementById('capturedFlower').style.display = 'none';
     });
@@ -1793,17 +1719,15 @@
       document.getElementById('genderModal').style.display = 'none';
       
       const submitButton = document.querySelector('.submit-button');
-      submitButton.style.backgroundColor = 'gray';
+      submitButton.style.backgroundColor = '#007bff';
       submitButton.textContent = "Submit";
       
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
-      document.getElementById('termsCheckbox').disabled = false;
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
       document.getElementById('flowerModal').style.display = 'none';
-      // Cacher le bouton de partage flower lorsque le modal est fermé
       document.getElementById('shareFlowerButton').style.display = 'none';
     });
 
@@ -1820,12 +1744,10 @@
         
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
-        document.getElementById('termsCheckbox').disabled = false;
       }
       
       if (event.target == flowerModal) {
         flowerModal.style.display = "none";
-        // Cacher le bouton de partage flower lorsque le modal est fermé en cliquant à l'extérieur
         document.getElementById('shareFlowerButton').style.display = 'none';
       }
       
@@ -1836,17 +1758,13 @@
 
     checkCookieConsent();
     
-    // Cacher initialement le bouton de partage flower
     document.getElementById('shareFlowerButton').style.display = 'none';
     
-    // Cacher initialement le message d'avertissement pour le partage
     document.getElementById('shareWarning').style.display = 'none';
     
-    // Précharger html2canvas pour une meilleure performance
     loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
   </script>
   
-  <!-- Script html2canvas pour la capture d'écran -->
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
