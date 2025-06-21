@@ -706,6 +706,62 @@
             margin: 10px auto;
             width: 330px;
         }
+
+        /* Modifications du Modal Community */
+        #communityModal .modal-content {
+            margin: 41% auto; /* Réduit l'espace en haut */
+            padding: 15px; /* Réduit le padding */
+            max-width: 85%;
+            max-height: 80vh; /* Augmente la hauteur maximale */
+        }
+        
+        .community-icon {
+            font-size: 1.2em;
+            color: #007bff;
+            margin: 5px 0; /* Réduit les marges */
+        }
+        
+        .join-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 7px 15px;
+            font-size: 1em;
+            margin: 10px auto; /* Réduit les marges */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 170px;
+            transition: background-color 0.3s;
+            text-decoration: none; /* Supprime le soulignement */
+        }
+        
+        .join-button:hover {
+            background-color: #007bff;
+        }
+        
+        .join-button i {
+            margin-right: 8px;
+        }
+        
+        .community-description {
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 10px 0; /* Réduit les marges */
+            text-align: left;
+        }
+        
+        .step-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .billabong-title {
+            margin-bottom: 3px; /* Réduit la marge inférieure */
+        }
     </style>
 </head>
 <body>
@@ -728,6 +784,7 @@
     <a class="button" href="Statistiques.html" id="statisticsButton">
       <i class="fas fa-chart-bar"></i> Discovery</a>
     <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
+    <a class="button" href="#" id="communityButton"><i class="fas fa-users"></i>Community</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
     <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
@@ -857,6 +914,35 @@
       <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;">
         <i class="fas fa-spa"></i>
       </div>
+    </div>
+  </div>
+  
+  <!-- Community Modal avec les modifications -->
+  <div id="communityModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong>G-Z</strong></div>
+      
+      <div class="community-icon">
+        <i class="fas fa-users"></i>
+      </div>
+      
+      <div class="community-description">
+        Join the G-Z Community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.
+      </div>
+      
+      <div class="community-description">
+        <span class="step-highlight">How it works:</span><br>
+        1. Click the "Join G-Z" button below<br>
+        2. Accept the Discord invitation<br>
+        3. Click on the emoji that corresponds to your birth month<br>
+        4. Click "Back" at the top left to see the groups for your month<br>
+        5. Select the group that matches your birth day
+      </div>
+      
+      <a href="https://discord.gg/GzReBm48XK" target="_blank" class="join-button">
+        <i class="fab fa-discord"></i> Join G-Z
+      </a>
     </div>
   </div>
   
@@ -1601,6 +1687,16 @@
       document.getElementById('shareFlowerButton').style.display = 'flex';
     });
 
+    // Add event listener for the new Community button
+    document.getElementById('communityButton').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'block';
+    });
+
+    // Add event listener for the Community modal close button
+    document.getElementById('closeCommunityModal').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'none';
+    });
+
     document.getElementById('shareFlowerButton').addEventListener('click', function() {
       if (userFlowerCode) {
         captureFlower();
@@ -1734,6 +1830,7 @@
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
+      const communityModal = document.getElementById('communityModal');
       const capturedFlower = document.getElementById('capturedFlower');
       
       if (event.target == genderModal) {
@@ -1749,6 +1846,10 @@
       if (event.target == flowerModal) {
         flowerModal.style.display = "none";
         document.getElementById('shareFlowerButton').style.display = 'none';
+      }
+      
+      if (event.target == communityModal) {
+        communityModal.style.display = "none";
       }
       
       if (event.target == capturedFlower) {
