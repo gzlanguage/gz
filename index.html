@@ -973,6 +973,8 @@
     let userCountryStats = {
       totalMembers: 0
     };
+    // Variable pour stocker la motivation actuelle
+    let currentMotivation = null;
 
     // Gérer l'état du bouton Submit en fonction de la case à cocher
     const termsCheckbox = document.getElementById('termsCheckbox');
@@ -1127,11 +1129,16 @@
       if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
         const monthName = monthNames[userBirthdayMonth - 1];
         flowerCodeElement.textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
-        motivationElement.textContent = generatePersonalizedMotivation(userFlowerCode);
         
-        // Mettre à jour également le container de capture
+        // Générer une motivation unique pour cette session et la stocker
+        if (!currentMotivation) {
+          currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        }
+        
+        // Utiliser la même motivation pour l'affichage et la capture
+        motivationElement.textContent = currentMotivation;
         document.getElementById('captureFlowerCode').textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
-        document.getElementById('captureFlowerMotivation').textContent = generatePersonalizedMotivation(userFlowerCode);
+        document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
       } else {
         flowerCodeElement.textContent = "My Flower";
         motivationElement.textContent = "Submit your information to discover your flower - personal motivation.";
@@ -1307,6 +1314,7 @@
           lastSubmittedId: lastSubmittedId,
           accessCode: userAccessCode,
           flowerCode: userFlowerCode,
+          motivation: currentMotivation, // Sauvegarder la motivation actuelle
           birthdayStats: userBirthdayStats,
           countryStats: userCountryStats
         };
@@ -1339,6 +1347,8 @@
           lastSubmittedId = userData.lastSubmittedId;
           userAccessCode = userData.accessCode;
           userFlowerCode = userData.flowerCode;
+          // Récupérer la motivation sauvegardée
+          currentMotivation = userData.motivation;
           
           if (userData.birthdayStats) {
             userBirthdayStats = userData.birthdayStats;
@@ -1410,6 +1420,8 @@
         
         userAccessCode = generateAccessCode();
         userFlowerCode = generateFlowerCode();
+        // Générer la motivation ici et la stocker pour une utilisation cohérente
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
         
         submitData(this.value);
       });
@@ -1535,6 +1547,7 @@
             uid: userUid,
             accessCode: userAccessCode,
             flowerCode: userFlowerCode,
+            motivation: currentMotivation, // Stocker la motivation dans Firebase
             timestamp: Date.now()
           }).then((newEntryRef) => {
             lastSubmittedId = newEntryRef.key;
@@ -1565,6 +1578,7 @@
           uid: userUid || randomId,
           accessCode: userAccessCode,
           flowerCode: userFlowerCode,
+          motivation: currentMotivation, // Stocker la motivation dans localStorage
           timestamp: Date.now()
         };
         
@@ -1698,6 +1712,7 @@
       lastSubmittedId = null;
       userAccessCode = null;
       userFlowerCode = null;
+      currentMotivation = null; // Réinitialiser la motivation
       userBirthdayStats = {
         totalMembers: 0,
         userRank: 0,
