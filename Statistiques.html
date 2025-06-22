@@ -385,6 +385,16 @@
 
     let allData = {};
 
+    // Labels pour les différentes catégories
+    const categoryLabels = {
+        'daily': 'births',
+        'monthly': 'births',
+        'yearly': 'births',
+        'gender': '',
+        'age': 'people',
+        'population': 'people'
+    };
+
     function fetchData() {
         const birthdatesRef = ref(db, 'birthdates');
         onValue(birthdatesRef, (snapshot) => {
@@ -419,14 +429,19 @@
         });
     }
 
+    // Fonction améliorée pour calculer l'âge précis en prenant en compte la date exacte
     function calculateAge(birthDate) {
         const today = new Date();
         const birth = new Date(birthDate);
+        
         let age = today.getFullYear() - birth.getFullYear();
+        
+        // Vérifier si l'anniversaire est déjà passé cette année
         const monthDiff = today.getMonth() - birth.getMonth();
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
             age--;
         }
+        
         return age;
     }
 
@@ -459,7 +474,9 @@
                 } else if (selectedCategory === 'gender') {
                     key = userData.gender || 'Unknown';
                 } else if (selectedCategory === 'age') {
-                    key = calculateAge(userData.date);
+                    // Pour la catégorie âge, on calcule l'âge actuel
+                    const age = calculateAge(userData.date);
+                    key = age;
                 } else if (selectedCategory === 'population') {
                     key = userData.country || 'Unknown';
                 }
@@ -468,10 +485,45 @@
             }
         });
 
-        Object.keys(counts).forEach(key => {
+        // Trier les clés par ordre croissant
+        let sortedKeys;
+        
+        if (selectedCategory === 'daily') {
+            // Jours de la semaine dans l'ordre
+            const daysOrder = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            sortedKeys = Object.keys(counts).sort((a, b) => daysOrder.indexOf(a) - daysOrder.indexOf(b));
+        } else if (selectedCategory === 'monthly') {
+            // Mois dans l'ordre
+            const monthsOrder = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                'July', 'August', 'September', 'October', 'November', 'December'];
+            sortedKeys = Object.keys(counts).sort((a, b) => monthsOrder.indexOf(a) - monthsOrder.indexOf(b));
+        } else if (selectedCategory === 'age' || selectedCategory === 'yearly') {
+            // Trier numériquement pour l'âge et l'année
+            sortedKeys = Object.keys(counts).sort((a, b) => Number(a) - Number(b));
+        } else {
+            // Trier alphabétiquement pour les autres catégories
+            sortedKeys = Object.keys(counts).sort();
+        }
+
+        sortedKeys.forEach(key => {
             const card = document.createElement('div');
             card.className = 'card small-card';
-            card.innerHTML = `<div class="title">${key}</div><div class="value">${counts[key]}</div>`;
+            
+            // Ajouter le label approprié selon la catégorie
+            let displayKey = key;
+            let displayValue = counts[key];
+            
+            // Formater l'affichage selon la catégorie
+            if (selectedCategory === 'age') {
+                displayKey = `${key} years`;
+                displayValue = `${counts[key]} ${categoryLabels[selectedCategory]}`;
+            } else if (selectedCategory === 'daily' || selectedCategory === 'monthly' || selectedCategory === 'yearly') {
+                displayValue = `${counts[key]} ${categoryLabels[selectedCategory]}`;
+            } else if (selectedCategory === 'population') {
+                displayValue = `${counts[key]} ${categoryLabels[selectedCategory]}`;
+            }
+            
+            card.innerHTML = `<div class="title">${displayKey}</div><div class="value">${displayValue}</div>`;
             grid.appendChild(card);
         });
 
@@ -592,6 +644,13 @@
             e.preventDefault();
             window.location.href = 'index.html';
         });
+        
+        // Mettre à jour les statistiques toutes les heures pour refléter les changements d'âge
+        setInterval(() => {
+            if (document.getElementById('categorySelect').value === 'age') {
+                updateCards();
+            }
+        }, 3600000); // 1 heure en millisecondes
         
         setInterval(() => {
             supportBtn.style.backgroundColor = 
