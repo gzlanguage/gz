@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002"> <!-- Profile -->
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -31,9 +31,10 @@
             border: 2px solid #007bff;
             padding: 4px;
             border-radius: 12px;
+            font-weight: bold;
         }
         .divider {
-            height: 1px;
+            height: 0.6px;
             background-color: #007bff;
             width: 100%;
             margin-top: 5px;
@@ -63,7 +64,7 @@
             margin-right: 2px;
         }
         .button#statisticsButton {
-            border-bottom: 1px solid lawngreen;
+            border-bottom: 4px solid lawngreen;
         }
         .notification {
             text-align: center;
@@ -93,7 +94,7 @@
             padding: 7px;
             cursor: pointer;
             transition: background-color 0.3s;
-            background-color: gray;
+            background-color: #007bff;
             color: white;
         }
         .reset-icon {
@@ -137,24 +138,14 @@
         .link:hover {
             background-color: #0056b3;
         }
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 4px; /* Réduit l'espace entre les icônes */
-        }
-        .share-icon, .profile-icon {
+        .share-icon {
             color: #007bff;
             cursor: pointer;
-            font-size: 1.2em; /* Légèrement réduit */
+            font-size: 1.3em;
             border: 1px solid #007bff;
             border-radius: 7px;
             padding: 4px;
             background-color: white;
-            transition: all 0.2s ease;
-        }
-        .share-icon:hover, .profile-icon:hover {
-            background-color: #e7f3ff;
-            transform: scale(1.05);
         }
         footer {
             background-color: white;
@@ -184,7 +175,6 @@
             color: white;
         }
 
-        /* Styles for the modal */
         .modal {
             display: none;
             position: fixed;
@@ -198,10 +188,10 @@
         }
         .modal-content {
             background-color: white;
-            margin: 25% auto; /* Réduit l'espace */
-            padding: 18px;
+            margin: 29% auto;
+            padding: 14px;
             border: 1px solid #007bff;
-            border-radius: 60px; /* Très arrondi comme celui de flower */
+            border-radius: 60px;
             width: 280px;
             max-width: 70%;
             text-align: center;
@@ -223,13 +213,13 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         .close-button {
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             padding: 8px 10px;
             cursor: pointer;
             font-size: 0.9em;
@@ -242,43 +232,18 @@
         .gender-category {
             font-weight: bold;
             color: #007bff;
-            margin-top: 16px;
+            margin-top: 12px;
             margin-bottom: 5px;
             text-align: center;
             width: 100%;
             font-size: 1em;
         }
 
-        /* Style for disabled fields */
         .disabled-field {
             opacity: 0.7;
             pointer-events: none;
         }
         
-        /* Style for close cross in modals */
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            color: #ff0800;
-            background-color: white;
-            border: 1px solid #ff69b4;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        
-        .modal-close:hover {
-            background-color: #007bff;
-            color: white;
-        }
-        
-        /* Style for flower button animation */
         @keyframes flowerRotate {
             0% { transform: rotate(0deg); }
             25% { transform: rotate(15deg); }
@@ -296,191 +261,506 @@
         .billabong-title {
             font-family: 'Billabong', cursive;
             font-size: 1.8em;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #007bff;
-            margin-top: 20px;
         }
 
-        /* Monthly motivation styles */
         .monthly-motivation {
             margin: 15px 0;
             padding: 10px;
             border: 1px dashed #ff69b4;
             border-radius: 15px;
-            background-color: #fff9fb;
+            background-color: white;
             font-style: italic;
             color: #333;
             font-size: 0.9em;
             line-height: 1.4;
         }
         
-        .month-name {
+        .flower-code {
             display: block;
             font-weight: bold;
             color: #ff69b4;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        /* Profile modal styles - REDESIGNED */
-        .profile-modal .modal-content {
-            border-radius: 60px; /* Plus arrondi comme flower */
-            max-width: 85%;
-            width: 290px;
-            padding: 24px 18px;
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-        }
-
-        .profile-option {
-            background-color: #f8f9fa;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 14px;
-            margin: 12px 0;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .profile-option:hover {
-            background-color: #e7f3ff;
-            border-color: #007bff;
-            transform: translateY(-2px);
-        }
-
-        .profile-option i {
-            margin-right: 12px;
-            color: #007bff;
-            font-size: 1.5em;
-            width: 24px;
-            text-align: center;
-        }
-
-        .profile-option span {
-            font-size: 0.95em;
-            font-weight: 500;
-            color: #4a5568;
-        }
-
-        .profile-title {
-            font-size: 1.6em;
-            margin-bottom: 18px;
-            color: #007bff;
-            font-weight: bold;
-            font-family: 'Billabong', cursive;
-        }
-
-        /* Delete account modal styles */
-        .delete-account-modal .modal-content {
-            border-color: #dc3545;
-            border-radius: 60px; /* Plus arrondi comme flower */
-            padding: 20px;
-        }
-
-        .delete-account-title {
-            color: #dc3545;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .delete-account-warning {
-            color: #6c757d;
             font-size: 0.9em;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            text-align: left;
-            background-color: #fff8f8;
-            padding: 12px;
-            border-radius: 15px;
-            border: 1px solid #ffcdd2;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            max-width: 220px;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .password-input {
-            width: 90%;
+        .access-code {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+            letter-spacing: 2px;
+            margin: 15px 0;
             padding: 10px;
-            margin: 15px auto;
-            border: 1px solid #ced4da;
-            border-radius: 9px;
-            background-color: #f8f9fa;
-            transition: border-color 0.2s ease;
-        }
-
-        .password-input:focus {
-            outline: none;
-            border-color: #dc3545;
-            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
-        }
-
-        .danger-button {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-
-        .danger-button:hover {
-            background-color: #c82333;
-        }
-
-        .cancel-button {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-top: 10px;
-            margin-right: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-
-        .cancel-button:hover {
-            background-color: #5a6268;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .loading-spinner {
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            border: 1px dashed #007bff;
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
         
-        /* Message d'erreur pour l'accès aux statistiques */
-        .stats-message {
-            color: #dc3545;
+        .copy-icon {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        
+        .code-message {
+            margin: 12px 0;
             font-size: 0.9em;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .copy-confirmation {
+            color: green;
+            font-size: 0.8em;
+            visibility: hidden;
+            margin-top: 5px;
+        }
+        
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+        
+        .access-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f7ff;
+            border: 1px solid #007bff;
+            border-radius: 12px;
+            padding: 4px 8px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .access-code-title {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.0em;
+            margin: 0;
+        }
+        
+        .access-code-value {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        
+        .access-code-indicator {
+            color: #777;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+        
+        .stats-highlight {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.2em;
+        }
+        
+        .achievement {
+            margin: 12px 0;
+            padding: 8px;
+            border: 1px dashed gold;
+            border-radius: 15px;
+            background-color: white;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .later-button {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #388E3C;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 5px auto;
+            width: 180px;
+        }
+        
+        .later-button:hover {
+            background-color: #388E3C;
+        }
+
+        .join-description {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #333;
+            text-align: left;
+        }
+
+        .join-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .join-section {
+            margin: 5px 0;
+            padding: 6px;
+            border: 1px dashed #007bff;
+            border-radius: 15px;
+            background-color: #f0f7ff;
+        }
+
+        .join-section-title {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+      
+        .group-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 10px auto;
+            border-radius: 10px;
+            border: 1px solid #007bff;
+        }
+        
+        #flowerModal .modal-content {
+            margin: 40% auto;
+            padding: 10px;
+            max-width: 85%;
+        }
+        
+        #flowerModal .monthly-motivation {
+            margin: 10px 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            margin: -300px auto 30px auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            max-width: 190px;
+            position: relative;
+            z-index: 1001;
+            border: 1px solid #0056b3;
+        }
+        
+        .share-flower-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .share-flower-button i {
+            margin-left: 8px;
+        }
+        
+        #capturedFlower {
+            position: fixed;
+            z-index: 1003;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .captured-image-container {
+            position: relative;
+            max-width: 85%;
+            max-height: 60vh;
+            margin-bottom: 15px;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        
+        .share-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 10px auto;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .share-message i {
+            margin-left: 8px;
+            color: #007bff;
+        }
+        
+        .share-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .capture-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .capture-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+        
+        .capture-button i {
+            margin-right: 5px;
+        }
+        
+        .close-capture {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        #flowerCaptureContainer {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: -9999px;
+            background-color: white;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .capture-flower-header {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px rgba(0, 123, 255, 0.2);
+        }
+        
+        .capture-flower-code {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 1.1em;
+            background-color: #fff0f8;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ff69b4;
+            margin: 8px auto;
+            text-align: center;
+            max-width: 90%;
+            letter-spacing: 0.5px;
+        }
+        
+        .capture-flower-motivation {
+            font-style: italic;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px dashed #ff69b4;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+            text-align: center;
+        }
+        
+        .capture-flower-icon {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin: 10px 0;
+        }
+        
+        .gz-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.4em;
+            text-align: center;
+            margin-top: 10px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 4px;
+            width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
+        }
+        
+        .share-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 0.85em;
+            margin: 5px auto 15px auto;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+        }
+        
+        .capture-website-url {
+            text-align: center;
+            font-size: 0.85em;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 8px;
+            font-family: Arial, sans-serif;
+            padding: 3px 0;
+            border-top: 1px dashed #007bff;
+        }
+        
+        .terms-text {
+            font-size: 0.8em;
+            color: black;
             text-align: center;
             margin: 10px auto;
-            max-width: 300px;
-            display: none;
-            padding: 10px;
-            background-color: #f8d7da;
-            border-radius: 10px;
-            border: 1px solid #f5c6cb;
+            width: 330px;
+        }
+
+        /* Modifications du Modal Community */
+        #communityModal .modal-content {
+            margin: 41% auto; /* Réduit l'espace en haut */
+            padding: 15px; /* Réduit le padding */
+            max-width: 85%;
+            max-height: 80vh; /* Augmente la hauteur maximale */
+        }
+        
+        .community-icon {
+            font-size: 1.2em;
+            color: #007bff;
+            margin: 5px 0; /* Réduit les marges */
+        }
+        
+        .join-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 7px 15px;
+            font-size: 1em;
+            margin: 10px auto; /* Réduit les marges */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 170px;
+            transition: background-color 0.3s;
+            text-decoration: none; /* Supprime le soulignement */
+        }
+        
+        .join-button:hover {
+            background-color: #007bff;
+        }
+        
+        .join-button i {
+            margin-right: 8px;
+        }
+        
+        .community-description {
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 10px 0; /* Réduit les marges */
+            text-align: left;
+        }
+        
+        .step-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .billabong-title {
+            margin-bottom: 3px; /* Réduit la marge inférieure */
         }
     </style>
 </head>
@@ -488,11 +768,12 @@
 
   <header>
     <h1 translate="no">G-Z</h1>
-    <div class="header-icons">
-      <i class="fas fa-user profile-icon" id="profileIcon"></i>
-      <a href="Partage.html">
-        <i class="fas fa-share share-icon"></i>
-      </a>
+    <div class="header-controls">
+      <div class="access-code-container" id="accessCodeContainer">
+        <div class="access-code-title">Access Code</div>
+        <div class="access-code-indicator" id="accessCodeIndicator">Submit - to get your code.</div>
+        <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
+      </div>
     </div>
   </header>
 
@@ -501,30 +782,26 @@
   <div class="button-container">
     <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i>FAQ</a>
     <a class="button" href="Statistiques.html" id="statisticsButton">
-      <i class="fas fa-chart-bar"></i> Discover</a>
+      <i class="fas fa-chart-bar"></i> Discovery</a>
     <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
+    <a class="button" href="#" id="communityButton"><i class="fas fa-users"></i>Community</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i>Terms</a>
     <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
   </div>
-  
-  <!-- Message pour l'accès aux statistiques -->
-  <div class="stats-message" id="statsMessage">
-    Please submit your information first to access statistics.
-  </div>
-  
   <script>
     const button = document.getElementById('statisticsButton');
     let colors = ['lawngreen', 'white'];
     let index = 0;
     setInterval(() => {
       button.style.borderBottom = `4px solid ${colors[index]}`;
-      index = (index + 1) % colors.length; // Cycle through colors
-    }, 400); // Change color every 400ms
+      index = (index + 1) % colors.length;
+    }, 400);
   </script>
   <div class="divider"></div>
   <div class="notification">
-    <span class="notification-text">Together, let's discover how we belong to this world.</span>
+    <span class="notification-text">You were not born alone - Discover Your Birthday Twins!
+</span>
     <div class="new-message-badge"></div>
   </div>
 
@@ -532,15 +809,18 @@
 
   <div class="footer-title">
     Join us and uncover the secrets of past, present, and future generations in just a few clicks.
+
   </div>
 
   <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
   <select class="country-select" id="countrySelect">
     <option value="" disabled selected>Select your country of birth</option>
   </select>
-  <p style="text-align: center; color: black; font-size: 0.7em; margin-top: 5px; text-decoration: underline; text-decoration-color: rgb(0, 123, 191);">
-    By submitting, you accept our terms of use.
-  </p>
+  
+  <div class="terms-text">
+    By submitting, you agree to our terms of use.
+  </div>
+  
   <button class="submit-button" type="submit">Submit</button>
 
   <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
@@ -549,7 +829,7 @@
 
   <div class="rectangle">
     <div class="text-line bold" style="font-size: 1em; color: #0056b3;">How does it work?</div>
-    <div class="text-line"> Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discover" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics. </div>
+    <div class="text-line"> Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discovery" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics. </div>
   </div>
 
   <div class="text-line" style="text-align: center; color: black;">
@@ -568,8 +848,8 @@
         <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://discord.gg/P8VdSWQm" target="_blank" class="logo">
-          <i class="fab fa-discord"></i>
+        <a href="https://whatsapp.com/channel/0029Vb5rIcf4o7qF3PVCpy0c" target="_blank" class="logo">
+          <i class="fab fa-whatsapp"></i>
         </a>
       </div>
       <div class="copyright">
@@ -578,9 +858,9 @@
     </div>
   </footer>
 
-  <!-- Gender Modal -->
   <div id="genderModal" class="modal">
     <div class="modal-content">
+      <button class="modal-close" id="closeGenderModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>Your gender?</strong></div>
       
       <div class="gender-category">Binary genders</div>
@@ -595,85 +875,123 @@
         <button class="close-button gender-option" value="Genderqueer">Genderqueer</button>
         <button class="close-button gender-option" value="Genderfluid">Genderfluid</button>
         <button class="close-button gender-option" value="Agender">Agender</button>
+        <button class="close-button gender-option" value="Pangender">Pangender</button>
+        <button class="close-button gender-option" value="Demigender">Demigender</button>
+      </div>
+      
+      <div class="gender-category">Transgender identities</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Trans Man">Trans Man</button>
+        <button class="close-button gender-option" value="Trans Woman">Trans Woman</button>
+        <button class="close-button gender-option" value="Transgender">Transgender</button>
+        <button class="close-button gender-option" value="Transsexual">Transsexual</button>
+      </div>
+      
+      <div class="gender-category">Cultural & spiritual genders</div>
+      <div class="modal-footer">
+        <button class="close-button gender-option" value="Two-Spirit">Two-Spirit</button>
+        <button class="close-button gender-option" value="Hijra">Hijra</button>
+        <button class="close-button gender-option" value="Fa'afafine">Fa'afafine</button>
       </div>
       
       <div class="gender-category">Other gender identities</div>
       <div class="modal-footer">
-        <button class="close-button gender-option" value="Transgender">Transgender</button>
-        <button class="close-button gender-option" value="Two-Spirit">Two-Spirit</button>
         <button class="close-button gender-option" value="Bigender">Bigender</button>
         <button class="close-button gender-option" value="Androgyne">Androgyne</button>
+        <button class="close-button gender-option" value="Neutrois">Neutrois</button>
       </div>
     </div>
   </div>
 
-  <!-- Flower Modal -->
   <div id="flowerModal" class="modal">
     <div class="modal-content">
-      <div class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></div>
+      <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong>Flower of Life</strong></div>
       
-      <!-- Monthly motivation will be inserted here -->
+      <div id="flowerCodeDisplay" class="flower-code"></div>
       <div class="monthly-motivation" id="monthlyMotivation"></div>
       
-      <div style="margin: 15px auto; font-size: 3em; color: #ff69b4;">
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;">
         <i class="fas fa-spa"></i>
       </div>
     </div>
   </div>
-
-  <!-- Profile Modal - REDESIGNED -->
-  <div id="profileModal" class="modal profile-modal">
+  
+  <!-- Community Modal avec les modifications -->
+  <div id="communityModal" class="modal">
     <div class="modal-content">
-      <div class="modal-close" id="closeProfileModal"><i class="fas fa-times"></i></div>
-      <div class="profile-title">Account</div>
+      <button class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong>G-Z</strong></div>
       
-      <div class="profile-option" id="logoutOption">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
+      <div class="community-icon">
+        <i class="fas fa-users"></i>
       </div>
       
-      <div class="profile-option" id="deleteAccountOption" style="color: #dc3545; border-color: #ffcccc; background-color: #fff5f5;">
-        <i class="fas fa-user-slash" style="color: #dc3545;"></i>
-        <span style="color: #dc3545;">Delete Account</span>
+      <div class="community-description">
+        Join the G-Z Community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.
       </div>
+      
+      <div class="community-description">
+        <span class="step-highlight">How it works:</span><br>
+        1. Click the "Join G-Z" button below<br>
+        2. Accept the Discord invitation<br>
+        3. Click on the emoji that corresponds to your birth month<br>
+        4. Click "Back" at the top left to see the groups for your month<br>
+        5. Select the group that matches your birth day
+      </div>
+      
+      <a href="https://discord.gg/GzReBm48XK" target="_blank" class="join-button">
+        <i class="fab fa-discord"></i> Join G-Z
+      </a>
     </div>
   </div>
-
-  <!-- Delete Account Modal - REDESIGNED -->
-  <div id="deleteAccountModal" class="modal delete-account-modal">
-    <div class="modal-content">
-      <div class="delete-account-title">Delete Account</div>
-      
-      <div class="delete-account-warning">
-        Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.
-      </div>
-      
-      <input type="password" class="password-input" id="deleteAccountPassword" placeholder="Enter your password to confirm" />
-      
-      <div class="button-group">
-        <button class="cancel-button" id="cancelDeleteAccount">Cancel</button>
-        <button class="danger-button" id="confirmDeleteAccount">Delete Account</button>
-      </div>
+  
+  <button class="share-flower-button" id="shareFlowerButton">
+    Share my Flower <i class="fas fa-paper-plane"></i>
+  </button>
+  
+  <div id="capturedFlower">
+    <div class="captured-image-container">
+      <img id="capturedImage" class="captured-image" src="" alt="Captured Flower">
     </div>
+
+    <div class="share-warning" id="shareWarning">
+      <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+ Perfect for sharing in your Stories, just adjust.
+    </div>
+    
+    <div class="capture-controls">
+      <button class="capture-button" id="shareCapture">
+        <i class="fas fa-paper-plane"></i> Share
+      </button>
+      
+      <button class="capture-button close-capture" id="closeCapture">
+        <i class="fas fa-times"></i> Close
+      </button>
+    </div>
+  </div>
+  
+  <div id="flowerCaptureContainer">
+    <div class="capture-flower-header">Flower of Life</div>
+    
+    <div id="captureFlowerCode" class="capture-flower-code"></div>
+    
+    <div id="captureFlowerMotivation" class="capture-flower-motivation"></div>
+    
+    <div class="capture-flower-icon">
+      <i class="fas fa-spa"></i>
+    </div>
+    
+    <div class="gz-logo">G-Z</div>
+    
+    <div class="capture-website-url">Discover yours at www.g-z.online</div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getDatabase, ref, push, remove, get, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-    import { 
-      getAuth, 
-      signInAnonymously, 
-      onAuthStateChanged, 
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      signOut,
-      deleteUser,
-      EmailAuthProvider,
-      reauthenticateWithCredential
-    } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+    import { getDatabase, ref, push, remove, get, set, onValue, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-    // Firebase configuration - needed for database connection
     const firebaseConfig = {
       apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
       authDomain: "genz-abb36.firebaseapp.com",
@@ -688,7 +1006,6 @@
     const database = getDatabase(app);
     const auth = getAuth(app);
     
-    // Variables to store user information
     let userBirthdate = null;
     let userCountry = null;
     let userGender = null;
@@ -697,386 +1014,482 @@
     let userBirthdayMonth = null;
     let lastSubmittedId = null;
     let userUid = null;
-    let isAuthenticated = false;
-    let userEmail = null;
-
-    // Monthly motivational messages in English
-    const monthlyMotivations = {
-      1: {
-        name: "JANUARY",
-        message: "You have everything you need to start well. January is the month of strong decisions."
-      },
-      2: {
-        name: "FEBRUARY",
-        message: "It's the small repeated actions that build great victories. Continue slowly but surely."
-      },
-      3: {
-        name: "MARCH",
-        message: "What you plant now, you will harvest tomorrow. Stay true to your vision."
-      },
-      4: {
-        name: "APRIL",
-        message: "April blooms, just like your silent efforts. Never doubt your growth."
-      },
-      5: {
-        name: "MAY",
-        message: "Trust yourself. You are closer to your goal than you think."
-      },
-      6: {
-        name: "JUNE",
-        message: "Moving forward also means taking care of yourself. Be proud of your pace."
-      },
-      7: {
-        name: "JULY",
-        message: "Fruits come with patience. Your work deserves success."
-      },
-      8: {
-        name: "AUGUST",
-        message: "Look at everything you've already accomplished. Every step counts."
-      },
-      9: {
-        name: "SEPTEMBER",
-        message: "Stay focused. What you do today builds your future."
-      },
-      10: {
-        name: "OCTOBER",
-        message: "Dare to dream bigger. You are ready for the next level."
-      },
-      11: {
-        name: "NOVEMBER",
-        message: "This month rewards the quiet, the constant, the patient. You are one of them."
-      },
-      12: {
-        name: "DECEMBER",
-        message: "Celebrate your journey, even if imperfect. You have grown, and this is just the beginning."
-      }
+    let userAccessCode = null;
+    let userFlowerCode = null;
+    let userBirthdayStats = {
+      totalMembers: 0,
+      userRank: 0,
+      formattedDate: ""
     };
+    let userCountryStats = {
+      totalMembers: 0
+    };
+    let currentMotivation = null;
 
-    // Month names in English
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
+    const submitButton = document.querySelector('.submit-button');
 
-    // Function to update monthly motivation in the flower modal based on birth month
-    function updateMotivationByBirthMonth() {
-      if (!userBirthdayMonth) return;
+    function generatePersonalizedMotivation(flowerCode) {
+      if (!flowerCode || flowerCode.length < 8) {
+        return "Submit your information to discover your flower motivation.";
+      }
       
+      const positiveTraits = [
+        "Your creativity brings fresh ideas to every challenge.",
+        "Your kindness inspires others around you.",
+        "Your persistence helps you overcome obstacles.",
+        "Your unique perspective solves problems in new ways.",
+        "Your energy brightens the day for everyone you meet.",
+        "Your patience helps you see the bigger picture.",
+        "Your courage allows you to face new challenges.",
+        "Your wisdom guides you through difficult decisions.",
+        "Your optimism helps you find opportunity in any situation.",
+        "Your focus helps you achieve your goals step by step."
+      ];
+      
+      const encouragements = [
+        "Keep sharing your gifts with the world.",
+        "Trust your instincts - they rarely lead you astray.",
+        "Your natural talents are meant to be shared.",
+        "The path ahead may have challenges, but you're ready for them.",
+        "Small steps today lead to big achievements tomorrow.",
+        "Remember to celebrate your progress along the way.",
+        "Your unique journey is worth every step.",
+        "Don't forget to enjoy the process, not just the results.",
+        "Your best days are still ahead of you.",
+        "Your efforts today are building your tomorrow."
+      ];
+      
+      const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+      const traitIndex = codeSum % positiveTraits.length;
+      const encourageIndex = (codeSum + 3) % encouragements.length;
+      
+      return positiveTraits[traitIndex] + " " + encouragements[encourageIndex];
+    }
+
+    function generateFlowerCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function updateFlowerDisplay() {
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
-      const motivation = monthlyMotivations[userBirthdayMonth];
       
-      if (motivation) {
-        motivationElement.innerHTML = `
-          <span class="month-name">${motivation.name}</span>
-          ${motivation.message}
-        `;
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      
+      if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
+        const monthName = monthNames[userBirthdayMonth - 1];
+        flowerCodeElement.textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
+        
+        if (!currentMotivation) {
+          currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        }
+        
+        motivationElement.textContent = currentMotivation;
+        document.getElementById('captureFlowerCode').textContent = `My Flower - ${monthName} (${userBirthdayDay})`;
+        document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
       } else {
-        motivationElement.innerHTML = `
-          <span class="month-name">YOUR JOURNEY</span>
-          Your birth month holds special power. Embrace your unique path.
-        `;
+        flowerCodeElement.textContent = "My Flower";
+        motivationElement.textContent = "Submit your information to discover your flower motivation.";
+        
+        document.getElementById('captureFlowerCode').textContent = "My Flower";
+        document.getElementById('captureFlowerMotivation').textContent = "Submit your information to discover your flower motivation.";
       }
     }
 
-    // Set max date for birthdate to today
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("birthdate").setAttribute('max', today);
+    function generateAccessCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
 
-    // Authentication state listener
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function eraseCookie(name) {
+      document.cookie = name + '=; Max-Age=-99999999; path=/';
+    }
+
+    function checkCookieConsent() {
+      const cookiesAccepted = getCookie('cookiesAccepted');
+      if (!cookiesAccepted) {
+        setCookie('cookiesAccepted', 'true', 365);
+      }
+    }
+
+    signInAnonymously(auth)
+      .then((userCredential) => {
+        const user = userCredential.user;
         userUid = user.uid;
-        isAuthenticated = true;
-        userEmail = user.email;
-        console.log("User authenticated:", userUid);
+        console.log("User connected: ", userUid);
+      })
+      .catch((error) => {
+        console.error("Error during anonymous connection: ", error);
         
-        // Load user data from Firebase
-        loadUserDataFromFirebase(userUid);
-      } else {
-        // User is signed out, redirect to index.html
-        window.location.href = "index.html";
+        userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
+      });
+
+    const today = new Date();
+    const todayString = today.toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute('max', todayString);
+
+    function isFutureDate(dateString) {
+      const selectedDate = new Date(dateString);
+      selectedDate.setHours(0, 0, 0, 0);
+      
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+      
+      return selectedDate > currentDate;
+    }
+
+    document.getElementById("birthdate").addEventListener('change', function(e) {
+      if (isFutureDate(this.value)) {
+        alert("You cannot select a future date for your date of birth");
+        this.value = "";
       }
     });
 
-    // Load user data from Firebase
-    function loadUserDataFromFirebase(uid) {
-      if (!uid) return;
-      
-      const userDataRef = ref(database, `userData/${uid}`);
-      get(userDataRef).then((snapshot) => {
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
-          
-          // Load user submission data
-          userBirthdate = userData.birthdate || null;
-          userCountry = userData.country || null;
-          userGender = userData.gender || null;
-          userBirthdayDay = userData.birthdayDay || null;
-          userBirthdayMonth = userData.birthdayMonth || null;
-          lastSubmittedId = userData.lastSubmittedId || null;
-          dataSubmitted = !!userData.birthdate && !!userData.country && !!userData.gender;
-          
-          // Update UI with loaded data
-          updateUIWithUserData();
-          console.log("User data loaded from Firebase");
-        } else {
-          console.log("No user data found in Firebase, checking localStorage");
-          loadUserDataFromLocalStorage();
-        }
-      }).catch((error) => {
-        console.error("Error loading user data from Firebase:", error);
-        loadUserDataFromLocalStorage();
-      });
-    }
-
-    // Load user data from localStorage as fallback
-    function loadUserDataFromLocalStorage() {
-      try {
-        const localUserData = localStorage.getItem('userData');
-        if (localUserData) {
-          const userData = JSON.parse(localUserData);
-          
-          // Load user data
-          userBirthdate = userData.birthdate || null;
-          userCountry = userData.country || null;
-          userGender = userData.gender || null;
-          userBirthdayDay = userData.birthdayDay || null;
-          userBirthdayMonth = userData.birthdayMonth || null;
-          lastSubmittedId = userData.lastSubmittedId || null;
-          dataSubmitted = !!userData.birthdate && !!userData.country && !!userData.gender;
-          
-          // Update UI with loaded data
-          updateUIWithUserData();
-          console.log("User data loaded from localStorage");
-          
-          // If user is authenticated, sync this data to Firebase
-          if (isAuthenticated && userUid) {
-            saveUserDataToFirebase();
-          }
-        } else {
-          console.log("No user data found in localStorage");
-          // Load countries
-          loadCountries();
-        }
-      } catch (error) {
-        console.error("Error loading user data from localStorage:", error);
-        // Load countries
-        loadCountries();
+    document.querySelector('.submit-button').addEventListener('click', function(e) {
+      const birthdate = document.getElementById('birthdate').value;
+      if (isFutureDate(birthdate)) {
+        e.preventDefault();
+        alert("You cannot select a future date for your date of birth");
+        document.getElementById('birthdate').value = "";
+        return false;
       }
-    }
+    });
 
-    // Update UI with user data
-    function updateUIWithUserData() {
+    fetch('https://restcountries.com/v3.1/all')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network error: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        data.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country.name.common;
+          option.textContent = country.name.common;
+          countrySelect.appendChild(option);
+        });
+        
+        loadUserDataFromCookie();
+      })
+      .catch(error => {
+        console.error('Error loading countries from API:', error);
+        
+        const fallbackCountries = [
+          "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
+          "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", 
+          "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
+          "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
+          "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
+          "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", 
+          "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", 
+          "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
+          "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", 
+          "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
+          "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
+          "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", 
+          "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho",
+          "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", 
+          "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
+          "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", 
+          "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", 
+          "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", 
+          "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", 
+          "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+          "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", 
+          "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", 
+          "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", 
+          "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", 
+          "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
+          "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", 
+          "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", 
+          "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ].sort();
+        
+        const countrySelect = document.getElementById('countrySelect');
+        countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+        
+        fallbackCountries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+        
+        loadUserDataFromCookie();
+      });
+
+    function saveUserDataToCookie() {
       if (userBirthdate && userCountry && userGender) {
-        // Set form fields
-        document.getElementById('birthdate').value = userBirthdate;
-        
-        // We need to make sure the countries are loaded before setting the value
-        loadCountries().then(() => {
-          document.getElementById('countrySelect').value = userCountry;
-          
-          // Update UI state
-          const submitButton = document.querySelector('.submit-button');
-          submitButton.textContent = "Submitted";
-          submitButton.style.backgroundColor = 'green';
-          submitButton.disabled = true;
-          
-          document.getElementById('resetButton').style.display = "block";
-          
-          // Disable form fields
-          document.getElementById('birthdate').classList.add('disabled-field');
-          document.getElementById('countrySelect').classList.add('disabled-field');
-        });
-        
-        // Enable statistics access
-        document.getElementById('statisticsButton').addEventListener('click', function(e) {
-          window.location.href = "Statistiques.html";
-        });
-        
-        // Hide stats message if it's showing
-        document.getElementById('statsMessage').style.display = 'none';
+        const userData = {
+          birthdate: userBirthdate,
+          country: userCountry,
+          gender: userGender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          dataSubmitted: true,
+          lastSubmittedId: lastSubmittedId,
+          accessCode: userAccessCode,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          birthdayStats: userBirthdayStats,
+          countryStats: userCountryStats
+        };
+        setCookie('userData', JSON.stringify(userData), 365);
+      }
+    }
+
+    function updateHeaderAccessCode() {
+      if (userAccessCode) {
+        document.getElementById('accessCodeIndicator').style.display = 'none';
+        document.getElementById('headerAccessCode').style.display = 'block';
+        document.getElementById('headerAccessCode').textContent = userAccessCode;
       } else {
-        // Load countries if we need to display the form
-        loadCountries();
-        
-        // Add event listener for statistics button to show warning
-        document.getElementById('statisticsButton').addEventListener('click', function(e) {
-          e.preventDefault();
-          document.getElementById('statsMessage').style.display = 'block';
-          setTimeout(() => {
-            document.getElementById('statsMessage').style.display = 'none';
-          }, 3000);
-        });
+        document.getElementById('accessCodeIndicator').style.display = 'block';
+        document.getElementById('headerAccessCode').style.display = 'none';
       }
     }
 
-    // Load countries from REST API
-    function loadCountries() {
-      return new Promise((resolve, reject) => {
-        fetch('https://restcountries.com/v3.1/all')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network error: ' + response.status);
-            }
-            return response.json();
-          })
-          .then(data => {
-            // Sort countries alphabetically
-            data.sort((a, b) => a.name.common.localeCompare(b.name.common));
-            const countrySelect = document.getElementById('countrySelect');
-            countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+    function loadUserDataFromCookie() {
+      const userDataCookie = getCookie('userData');
+      if (userDataCookie) {
+        try {
+          const userData = JSON.parse(userDataCookie);
+          userBirthdate = userData.birthdate;
+          userCountry = userData.country;
+          userGender = userData.gender;
+          userBirthdayDay = userData.birthdayDay;
+          userBirthdayMonth = userData.birthdayMonth;
+          dataSubmitted = userData.dataSubmitted;
+          lastSubmittedId = userData.lastSubmittedId;
+          userAccessCode = userData.accessCode;
+          userFlowerCode = userData.flowerCode;
+          currentMotivation = userData.motivation;
+          
+          if (userData.birthdayStats) {
+            userBirthdayStats = userData.birthdayStats;
+          }
+          
+          if (userData.countryStats) {
+            userCountryStats = userData.countryStats;
+          }
+          
+          if (dataSubmitted) {
+            document.getElementById('birthdate').value = userBirthdate;
+            document.getElementById('countrySelect').value = userCountry;
             
-            // Add each country to the dropdown
-            data.forEach(country => {
-              const option = document.createElement('option');
-              option.value = country.name.common;
-              option.textContent = country.name.common;
-              countrySelect.appendChild(option);
-            });
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.textContent = "Submitted";
+            submitButton.style.backgroundColor = 'green';
+            submitButton.disabled = true;
             
-            resolve();
-          })
-          .catch(error => {
-            console.error('Error loading countries:', error);
-            // Fallback with a basic list of common countries
-            const commonCountries = [
-              "United States", "United Kingdom", "Canada", "Australia", 
-              "France", "Germany", "Italy", "Spain", "Japan", "China", 
-              "India", "Brazil", "Mexico", "Russia", "South Africa"
-            ];
+            document.getElementById('resetButton').style.display = "block";
             
-            const countrySelect = document.getElementById('countrySelect');
-            countrySelect.innerHTML = '<option value="" disabled selected>Select your country of birth</option>';
+            document.getElementById('birthdate').classList.add('disabled-field');
+            document.getElementById('countrySelect').classList.add('disabled-field');
             
-            commonCountries.forEach(country => {
-              const option = document.createElement('option');
-              option.value = country;
-              option.textContent = country;
-              countrySelect.appendChild(option);
-            });
-            
-            resolve();
-          });
-      });
-    }
-
-    // Save user data to Firebase
-    function saveUserDataToFirebase() {
-      if (!isAuthenticated || !userUid) {
-        console.log("Cannot save to Firebase: User not authenticated");
-        return false;
-      }
-      
-      try {
-        // Save user data to Firebase
-        const userData = {
-          birthdate: userBirthdate,
-          country: userCountry,
-          gender: userGender,
-          birthdayDay: userBirthdayDay,
-          birthdayMonth: userBirthdayMonth,
-          lastSubmittedId: lastSubmittedId,
-          email: userEmail,
-          timestamp: Date.now()
-        };
-        
-        set(ref(database, `userData/${userUid}`), userData)
-          .then(() => {
-            console.log("User data successfully saved to Firebase");
-            return true;
-          })
-          .catch((error) => {
-            console.error("Error saving user data to Firebase:", error);
-            return false;
-          });
-      } catch (error) {
-        console.error("Exception saving user data to Firebase:", error);
-        return false;
+            updateHeaderAccessCode();
+          }
+        } catch (error) {
+          console.error("Error parsing user data from cookie:", error);
+        }
       }
     }
 
-    // Save user data to localStorage
-    function saveUserDataToLocalStorage() {
-      try {
-        const userData = {
-          birthdate: userBirthdate,
-          country: userCountry,
-          gender: userGender,
-          birthdayDay: userBirthdayDay,
-          birthdayMonth: userBirthdayMonth,
-          lastSubmittedId: lastSubmittedId,
-          email: userEmail,
-          timestamp: Date.now()
-        };
-        
-        localStorage.setItem('userData', JSON.stringify(userData));
-        return true;
-      } catch (error) {
-        console.error("Error saving user data to localStorage:", error);
-        return false;
-      }
-    }
-
-    // Submit button click handler
     document.querySelector('.submit-button').addEventListener('click', function() {
       const birthdate = document.getElementById('birthdate').value;
       const country = document.getElementById('countrySelect').value;
 
       if (birthdate && country) {
-        // Store user input
+        if (isFutureDate(birthdate)) {
+          alert("You cannot select a future date for your date of birth");
+          document.getElementById('birthdate').value = "";
+          return;
+        }
+        
         userBirthdate = birthdate;
         userCountry = country;
         
-        // Extract day and month from birthdate
         const birthdateParts = birthdate.split('-');
         userBirthdayDay = parseInt(birthdateParts[2]);
         userBirthdayMonth = parseInt(birthdateParts[1]);
         
-        // Update UI to show loading state
         const submitButton = document.querySelector('.submit-button');
         submitButton.textContent = "Please wait...";
         submitButton.style.backgroundColor = 'orange';
 
-        // Disable form fields during submission
         document.getElementById('birthdate').classList.add('disabled-field');
         document.getElementById('countrySelect').classList.add('disabled-field');
 
-        // Show gender selection modal
         document.getElementById('genderModal').style.display = 'block';
       } else {
         alert("Please enter a date of birth and select a country!");
       }
     });
 
-    // Gender option buttons click handlers
     document.querySelectorAll('.gender-option').forEach(button => {
       button.addEventListener('click', function() {
         userGender = this.value;
+        
+        userAccessCode = generateAccessCode();
+        userFlowerCode = generateFlowerCode();
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        
         submitData(this.value);
       });
     });
 
-    // Submit data to database
-    function submitData(gender) {
+    async function fetchBirthdayStatistics() {
+      try {
+        const monthStr = userBirthdayMonth.toString().padStart(2, '0');
+        const dayStr = userBirthdayDay.toString().padStart(2, '0');
+        const birthdayPattern = `-${monthStr}-${dayStr}`;
+        
+        const birthdatesRef = ref(database, 'birthdates');
+        const birthdatesSnapshot = await get(birthdatesRef);
+        
+        let sameBirthdayCount = 0;
+        let userRank = 0;
+        let earlierSubmissions = 0;
+        let isCurrentUserCounted = false;
+        
+        if (birthdatesSnapshot.exists()) {
+          const data = birthdatesSnapshot.val();
+          
+          const entries = Object.entries(data)
+            .map(([key, value]) => ({ key, ...value }))
+            .filter(entry => entry.date && entry.date.includes(birthdayPattern))
+            .sort((a, b) => a.timestamp - b.timestamp);
+          
+          sameBirthdayCount = entries.length;
+          
+          for (let i = 0; i < entries.length; i++) {
+            if (entries[i].key === lastSubmittedId || (entries[i].uid === userUid && !isCurrentUserCounted)) {
+              userRank = i + 1;
+              isCurrentUserCounted = true;
+            }
+          }
+        }
+        
+        if (userRank === 0) {
+          userRank = sameBirthdayCount;
+        }
+        
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        const formattedDate = `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`;
+        
+        return {
+          totalMembers: sameBirthdayCount,
+          userRank: userRank,
+          formattedDate: formattedDate
+        };
+      } catch (error) {
+        console.error("Error fetching birthday statistics:", error);
+        return {
+          totalMembers: Math.floor(Math.random() * 50) + 5,
+          userRank: Math.floor(Math.random() * 10) + 1,
+          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+        };
+      }
+    }
+
+    async function fetchCountryStatistics() {
+      try {
+        const birthdatesRef = ref(database, 'birthdates');
+        const birthdatesSnapshot = await get(birthdatesRef);
+        
+        let sameCountryCount = 0;
+        
+        if (birthdatesSnapshot.exists()) {
+          const data = birthdatesSnapshot.val();
+          
+          sameCountryCount = Object.values(data).filter(entry => 
+            entry.country && entry.country === userCountry
+          ).length;
+        }
+        
+        return {
+          totalMembers: sameCountryCount
+        };
+      } catch (error) {
+        console.error("Error fetching country statistics:", error);
+        return {
+          totalMembers: Math.floor(Math.random() * 30) + 3
+        };
+      }
+    }
+
+    async function submitData(gender) {
       const birthdate = userBirthdate;
       const country = userCountry;
       const submitButton = document.querySelector('.submit-button');
 
-      // Update user gender
-      userGender = gender;
-      dataSubmitted = true;
+      const localSuccess = submitToLocalStorage(gender);
       
-      // Store data in localStorage as reliable backup
-      const localSuccess = saveUserDataToLocalStorage();
+      try {
+        userBirthdayStats = await fetchBirthdayStatistics();
+        userCountryStats = await fetchCountryStatistics();
+      } catch (error) {
+        console.error("Error fetching statistics:", error);
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        userBirthdayStats = {
+          totalMembers: Math.floor(Math.random() * 50) + 5,
+          userRank: Math.floor(Math.random() * 10) + 1,
+          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+        };
+        userCountryStats = {
+          totalMembers: Math.floor(Math.random() * 30) + 3
+        };
+      }
       
-      // If authenticated, store the data in Firebase database
-      if (isAuthenticated && userUid) {
+      if (localSuccess) {
         try {
-          // Save user profile data
-          saveUserDataToFirebase();
-          
-          // Also create a new submission entry for statistics
           push(ref(database, 'birthdates'), {
             date: birthdate,
             country: country,
@@ -1084,118 +1497,163 @@
             birthdayDay: userBirthdayDay,
             birthdayMonth: userBirthdayMonth,
             uid: userUid,
+            accessCode: userAccessCode,
+            flowerCode: userFlowerCode,
+            motivation: currentMotivation,
             timestamp: Date.now()
           }).then((newEntryRef) => {
-            // Store the ID for potential reset
             lastSubmittedId = newEntryRef.key;
-            console.log("Submission successfully added to Firebase:", lastSubmittedId);
-            
-            // Update the user profile with the submission ID
-            update(ref(database, `userData/${userUid}`), {
-              lastSubmittedId: lastSubmittedId
-            });
-            
-            // Also update localStorage
-            saveUserDataToLocalStorage();
+            console.log("Data successfully submitted to Firebase:", lastSubmittedId);
           }).catch((error) => {
             console.warn("Firebase submission error:", error);
           });
         } catch (error) {
           console.warn("Firebase submission exception:", error);
         }
-      } else {
-        console.log("User not authenticated, data saved only to localStorage");
-      }
-      
-      // Complete the submission process
-      if (localSuccess) {
+        
         finishSubmission(true);
       } else {
         finishSubmission(false);
       }
     }
 
-    // Complete the submission process and update UI
+    function submitToLocalStorage(gender) {
+      try {
+        const randomId = Date.now().toString(36) + Math.random().toString(36).substring(2);
+        
+        const data = {
+          date: userBirthdate,
+          country: userCountry,
+          gender: gender,
+          birthdayDay: userBirthdayDay,
+          birthdayMonth: userBirthdayMonth,
+          uid: userUid || randomId,
+          accessCode: userAccessCode,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          timestamp: Date.now()
+        };
+        
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        submissions.push(data);
+        localStorage.setItem('submissions', JSON.stringify(submissions));
+        
+        lastSubmittedId = lastSubmittedId || "local_" + randomId;
+        
+        return true;
+      } catch (error) {
+        console.error("localStorage submission error:", error);
+        return false;
+      }
+    }
+
     function finishSubmission(success) {
       const submitButton = document.querySelector('.submit-button');
       
       if (success) {
-        // Update UI for successful submission
+        document.getElementById('genderModal').style.display = 'none';
+        
+        updateHeaderAccessCode();
+        
         submitButton.style.backgroundColor = 'green';
         submitButton.textContent = "Submitted";
         submitButton.disabled = true;
         document.getElementById('resetButton').style.display = "block";
-        document.getElementById('genderModal').style.display = 'none';
+        dataSubmitted = true;
         
-        // Update stats button to enable access
-        document.getElementById('statisticsButton').removeEventListener('click', function(e) {
-          e.preventDefault();
-          document.getElementById('statsMessage').style.display = 'block';
-        });
-        
-        document.getElementById('statisticsButton').addEventListener('click', function() {
-          window.location.href = "Statistiques.html";
-        });
-        
-        // Hide stats message if it's showing
-        document.getElementById('statsMessage').style.display = 'none';
+        saveUserDataToCookie();
       } else {
-        // Handle submission error
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
         console.error("Error during submission");
         
-        // Re-enable form fields on error
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
       }
     }
 
-    // Reset button handler
+    function getOrdinal(n) {
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
     document.getElementById('resetButton').addEventListener('click', function() {
-      if (isAuthenticated && userUid && lastSubmittedId) {
-        // Remove the submission from Firebase if authenticated
+      if (confirm("Are you sure you want to reset your data? This will delete your information from our database.")) {
+        resetLocalStorageData();
+        
+        deleteFromFirebase().then(() => {
+          finishReset();
+        }).catch(error => {
+          console.error("Error during reset process:", error);
+          alert("There was a problem resetting your data. Please try again later.");
+        });
+      }
+    });
+    
+    async function deleteFromFirebase() {
+      if (!lastSubmittedId) {
         try {
-          remove(ref(database, `birthdates/${lastSubmittedId}`))
-            .then(() => {
-              console.log("Firebase submission data removed");
+          if (userUid) {
+            const birthdatesRef = ref(database, 'birthdates');
+            const birthdatesSnapshot = await get(birthdatesRef);
+            
+            if (birthdatesSnapshot.exists()) {
+              const data = birthdatesSnapshot.val();
               
-              // Update user profile to reflect the reset
-              update(ref(database, `userData/${userUid}`), {
-                lastSubmittedId: null,
-                birthdate: null,
-                country: null,
-                gender: null,
-                birthdayDay: null,
-                birthdayMonth: null
-              }).then(() => {
-                console.log("User profile updated after reset");
-              });
-            })
-            .catch((error) => {
-              console.warn("Error removing Firebase submission:", error);
-            });
+              for (const [key, value] of Object.entries(data)) {
+                if (value.uid === userUid) {
+                  console.log(`Found entry with matching UID: ${key}`);
+                  
+                  await remove(ref(database, `birthdates/${key}`));
+                  console.log(`Deleted entry: ${key}`);
+                }
+              }
+            }
+          }
         } catch (error) {
-          console.warn("Exception removing Firebase submission:", error);
+          console.error("Error searching for user data in Firebase:", error);
+          throw error;
+        }
+      } else if (!lastSubmittedId.startsWith('local_')) {
+        try {
+          await remove(ref(database, `birthdates/${lastSubmittedId}`));
+          console.log("Firebase data successfully deleted:", lastSubmittedId);
+        } catch (error) {
+          console.error("Error deleting from Firebase:", error);
+          throw error;
         }
       }
       
-      // Complete the reset process
-      finishReset();
-    });
+      return true;
+    }
     
-    // Complete the reset process
+    function resetLocalStorageData() {
+      try {
+        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
+        const filteredSubmissions = submissions.filter(sub => 
+          !sub.uid || sub.uid !== userUid
+        );
+        localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
+        return true;
+      } catch (error) {
+        console.error("Error resetting localStorage data:", error);
+        return false;
+      }
+    }
+    
     function finishReset() {
-      // Reset form and UI
       document.getElementById('birthdate').value = '';
       document.getElementById('countrySelect').value = '';
       const submitButton = document.querySelector('.submit-button');
       submitButton.textContent = "Submit";
-      submitButton.style.backgroundColor = 'gray';
+      submitButton.style.backgroundColor = '#007bff';
       submitButton.disabled = false;
       document.getElementById('resetButton').style.display = "none";
       
-      // Reset all user variables
+      document.getElementById('accessCodeIndicator').style.display = 'block';
+      document.getElementById('headerAccessCode').style.display = 'none';
+      
       dataSubmitted = false;
       userBirthdate = null;
       userCountry = null;
@@ -1203,162 +1661,177 @@
       userBirthdayDay = null;
       userBirthdayMonth = null;
       lastSubmittedId = null;
+      userAccessCode = null;
+      userFlowerCode = null;
+      currentMotivation = null;
+      userBirthdayStats = {
+        totalMembers: 0,
+        userRank: 0,
+        formattedDate: ""
+      };
+      userCountryStats = {
+        totalMembers: 0
+      };
       
-      // Re-enable form fields
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
       
-      // Clear localStorage
-      localStorage.removeItem('userData');
+      eraseCookie('userData');
       
-      // Update stats button to disable access
-      document.getElementById('statisticsButton').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('statsMessage').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('statsMessage').style.display = 'none';
-        }, 3000);
-      });
-      
-      console.log("Reset complete");
+      alert("Your data has been successfully reset.");
     }
 
-    // Flower button handler - show motivation based on user's birth month
     document.getElementById('flowerButton').addEventListener('click', function() {
-      if (userBirthdayMonth) {
-        // User has submitted data, show motivation based on birth month
-        updateMotivationByBirthMonth();
+      updateFlowerDisplay();
+      document.getElementById('flowerModal').style.display = 'block';
+      document.getElementById('shareFlowerButton').style.display = 'flex';
+    });
+
+    // Add event listener for the new Community button
+    document.getElementById('communityButton').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'block';
+    });
+
+    // Add event listener for the Community modal close button
+    document.getElementById('closeCommunityModal').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'none';
+    });
+
+    document.getElementById('shareFlowerButton').addEventListener('click', function() {
+      if (userFlowerCode) {
+        captureFlower();
       } else {
-        // User hasn't submitted data yet, show generic message
-        const motivationElement = document.getElementById('monthlyMotivation');
-        motivationElement.innerHTML = `
-          <span class="month-name">DISCOVER YOUR FLOWER</span>
-          Submit your date of birth to see your personalized monthly motivation.
-        `;
+        alert('Please submit your information first to get your Flower code.');
       }
-      
-      // Show the flower modal
-      const flowerModal = document.getElementById('flowerModal');
-      flowerModal.style.display = 'block';
     });
-
-    // Close flower modal
-    document.getElementById('closeFlowerModal').addEventListener('click', function() {
-      document.getElementById('flowerModal').style.display = 'none';
-    });
-
-    // Profile icon click handler
-    document.getElementById('profileIcon').addEventListener('click', function() {
-      document.getElementById('profileModal').style.display = 'block';
-    });
-
-    // Close profile modal
-    document.getElementById('closeProfileModal').addEventListener('click', function() {
-      document.getElementById('profileModal').style.display = 'none';
-    });
-
-    // Delete account option click handler
-    document.getElementById('deleteAccountOption').addEventListener('click', function() {
-      document.getElementById('profileModal').style.display = 'none';
-      document.getElementById('deleteAccountModal').style.display = 'block';
-    });
-
-    // Cancel delete account button
-    document.getElementById('cancelDeleteAccount').addEventListener('click', function() {
-      document.getElementById('deleteAccountModal').style.display = 'none';
-    });
-
-    // Confirm delete account button
-    document.getElementById('confirmDeleteAccount').addEventListener('click', function() {
-      const password = document.getElementById('deleteAccountPassword').value;
-      
-      if (!password) {
-        alert("Please enter your password to confirm account deletion");
-        return;
-      }
-      
-      // Change the button to show loading state
-      const deleteButton = document.getElementById('confirmDeleteAccount');
-      const originalText = deleteButton.textContent;
-      deleteButton.innerHTML = '<div class="loading-spinner"></div>';
-      deleteButton.disabled = true;
-      
-      // Get the current user
-      const user = auth.currentUser;
-      
-      if (user && user.email) {
-        // Re-authenticate the user before deletion
-        const credential = EmailAuthProvider.credential(user.email, password);
+    
+    async function captureFlower() {
+      try {
+        const captureContainer = document.getElementById('flowerCaptureContainer');
         
-        reauthenticateWithCredential(user, credential)
-          .then(() => {
-            // Delete all user data from database
-            if (userUid) {
-              // Delete all submissions
-              if (lastSubmittedId) {
-                remove(ref(database, `birthdates/${lastSubmittedId}`))
-                  .catch(error => console.error("Error removing submission:", error));
-              }
-              
-              // Delete user profile data
-              remove(ref(database, `userData/${userUid}`))
-                .catch(error => console.error("Error removing user data:", error));
-            }
-            
-            // Delete the user account
-            return deleteUser(user);
+        if (typeof html2canvas === 'undefined') {
+          await loadHTML2Canvas();
+        }
+        
+        const canvas = await html2canvas(captureContainer, {
+          backgroundColor: 'white',
+          scale: 7,
+          logging: false,
+          useCORS: true,
+          allowTaint: false,
+          letterRendering: true,
+          imageTimeout: 0
+        });
+        
+        const imageUrl = canvas.toDataURL('image/png', 1.0);
+        
+        document.getElementById('capturedImage').src = imageUrl;
+        document.getElementById('capturedFlower').style.display = 'flex';
+        
+        document.getElementById('shareWarning').style.display = 'block';
+      } catch (error) {
+        console.error('Error capturing flower:', error);
+        alert('Could not capture your flower. Please try again.');
+      }
+    }
+    
+    function loadHTML2Canvas() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    
+    document.getElementById('shareCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      if (navigator.share) {
+        fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
+            navigator.share({
+              title: 'My G-Z Flower',
+              text: 'Discover yours at g-z.online',
+              files: [file]
+            }).catch(err => {
+              console.log('Error sharing:', err);
+              fallbackShare();
+            });
           })
-          .then(() => {
-            // Clear local storage
-            localStorage.removeItem('userData');
-            alert("Your account has been successfully deleted.");
-            
-            // Redirect to the homepage
-            window.location.href = "index.html";
-          })
-          .catch((error) => {
-            // Reset the button
-            deleteButton.textContent = originalText;
-            deleteButton.disabled = false;
-            
-            // Show error
-            if (error.code === 'auth/wrong-password') {
-              alert("Incorrect password. Please try again.");
-            } else {
-              alert("Error deleting account: " + error.message);
-              console.error("Account deletion error:", error);
-            }
+          .catch(err => {
+            console.log('Error preparing image:', err);
+            fallbackShare();
           });
       } else {
-        // Reset the button
-        deleteButton.textContent = originalText;
-        deleteButton.disabled = false;
-        
-        alert("You must be logged in with an email account to delete your account.");
+        fallbackShare();
       }
     });
-
-    // Logout option click handler
-    document.getElementById('logoutOption').addEventListener('click', function() {
-      signOut(auth).then(() => {
-        // Clear local storage
-        localStorage.removeItem('userData');
-        alert("You have been logged out successfully.");
+    
+    function fallbackShare() {
+      try {
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
+        const dayNumber = userBirthdayDay || "";
         
-        // Redirect to the homepage
-        window.location.href = "index.html";
-      }).catch((error) => {
-        console.error("Error signing out:", error);
-        alert("Error signing out. Please try again.");
-      });
+        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at g-z.online`;
+        
+        navigator.clipboard.writeText(shareText).then(function() {
+          alert('Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.');
+        }).catch(function() {
+          alert('Could not copy to clipboard. Please share manually. Remember to type "g-z.online" in your browser to access the site.');
+        });
+      } catch (error) {
+        console.error('Fallback share error:', error);
+        alert('Please share the image manually. Remember to type "g-z.online" in your browser to access the site.');
+      }
+    }
+    
+    document.getElementById('closeCapture').addEventListener('click', function() {
+      document.getElementById('capturedFlower').style.display = 'none';
     });
 
-    // Close modal when clicking outside
+    document.getElementById('accessCodeContainer').addEventListener('click', function() {
+      if (userAccessCode) {
+        navigator.clipboard.writeText(userAccessCode).then(function() {
+          const container = document.getElementById('accessCodeContainer');
+          container.style.backgroundColor = '#e0f0ff';
+          setTimeout(() => {
+            container.style.backgroundColor = '#f0f7ff';
+          }, 300);
+        }).catch(function(err) {
+          console.error('Could not copy access code: ', err);
+        });
+      }
+    });
+    
+    document.getElementById('closeGenderModal').addEventListener('click', function() {
+      document.getElementById('genderModal').style.display = 'none';
+      
+      const submitButton = document.querySelector('.submit-button');
+      submitButton.style.backgroundColor = '#007bff';
+      submitButton.textContent = "Submit";
+      
+      document.getElementById('birthdate').classList.remove('disabled-field');
+      document.getElementById('countrySelect').classList.remove('disabled-field');
+    });
+    
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      document.getElementById('flowerModal').style.display = 'none';
+      document.getElementById('shareFlowerButton').style.display = 'none';
+    });
+
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
-      const profileModal = document.getElementById('profileModal');
-      const deleteAccountModal = document.getElementById('deleteAccountModal');
+      const communityModal = document.getElementById('communityModal');
+      const capturedFlower = document.getElementById('capturedFlower');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -1366,23 +1839,33 @@
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
         
-        // Re-enable fields if user closes modal without choosing
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
       }
       
       if (event.target == flowerModal) {
         flowerModal.style.display = "none";
+        document.getElementById('shareFlowerButton').style.display = 'none';
       }
       
-      if (event.target == profileModal) {
-        profileModal.style.display = "none";
+      if (event.target == communityModal) {
+        communityModal.style.display = "none";
       }
       
-      if (event.target == deleteAccountModal) {
-        deleteAccountModal.style.display = "none";
+      if (event.target == capturedFlower) {
+        capturedFlower.style.display = "none";
       }
     };
+
+    checkCookieConsent();
+    
+    document.getElementById('shareFlowerButton').style.display = 'none';
+    
+    document.getElementById('shareWarning').style.display = 'none';
+    
+    loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
   </script>
+  
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
