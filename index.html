@@ -599,8 +599,8 @@
         }
         
         .close-capture {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #007bff;
+            color: white;
         }
         
         #flowerCaptureContainer {
@@ -705,6 +705,57 @@
             text-align: center;
             margin: 10px auto;
             width: 330px;
+        }
+        
+        /* Styles modifiés pour le modal de monétisation */
+        #monetizeModal .modal-content {
+            margin: 40% auto;
+            padding: 15px;
+            max-width: 80%;
+            border-radius: 30px;
+            width: 250px;
+            height: auto;
+        }
+        
+        .monetize-title {
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: #007bff;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+        
+        .monetize-text {
+            margin: 10px 0;
+            font-size: 0.85em;
+            color: #333;
+        }
+        
+        .monetize-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        
+        .monetize-button {
+            flex: 1;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 0;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .monetize-button.yes {
+            background-color: #007bff;
+        }
+        
+        .monetize-button.no {
+            background-color: #007bff;
         }
     </style>
 </head>
@@ -846,6 +897,18 @@
     </div>
   </div>
 
+  <!-- Modal de monétisation modifié -->
+  <div id="monetizeModal" class="modal">
+    <div class="modal-content">
+      <div class="monetize-title">Your Birthday it's not just a celebration - it's a monetization.</div>
+      <div class="monetize-text">Do you want to monetize it?</div>
+      <div class="monetize-buttons">
+        <button class="monetize-button no" id="monetizeNo">No</button>
+        <button class="monetize-button yes" id="monetizeYes">Yes</button>
+      </div>
+    </div>
+  </div>
+
   <div id="flowerModal" class="modal">
     <div class="modal-content">
       <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
@@ -923,6 +986,7 @@
     let userBirthdate = null;
     let userCountry = null;
     let userGender = null;
+    let userWantsMonetization = null;
     let dataSubmitted = false;
     let userBirthdayDay = null;
     let userBirthdayMonth = null;
@@ -939,6 +1003,7 @@
       totalMembers: 0
     };
     let currentMotivation = null;
+    let tempSelectedGender = null;
 
     const submitButton = document.querySelector('.submit-button');
 
@@ -1236,6 +1301,7 @@
           birthdate: userBirthdate,
           country: userCountry,
           gender: userGender,
+          wantsMonetization: userWantsMonetization,
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
           dataSubmitted: true,
@@ -1269,6 +1335,7 @@
           userBirthdate = userData.birthdate;
           userCountry = userData.country;
           userGender = userData.gender;
+          userWantsMonetization = userData.wantsMonetization;
           userBirthdayDay = userData.birthdayDay;
           userBirthdayMonth = userData.birthdayMonth;
           dataSubmitted = userData.dataSubmitted;
@@ -1340,15 +1407,34 @@
 
     document.querySelectorAll('.gender-option').forEach(button => {
       button.addEventListener('click', function() {
-        userGender = this.value;
-        
-        userAccessCode = generateAccessCode();
-        userFlowerCode = generateFlowerCode();
-        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
-        
-        submitData(this.value);
+        tempSelectedGender = this.value;
+        document.getElementById('genderModal').style.display = 'none';
+        document.getElementById('monetizeModal').style.display = 'block';
       });
     });
+
+    // Monetization modal handlers
+    document.getElementById('monetizeYes').addEventListener('click', function() {
+      userWantsMonetization = true;
+      document.getElementById('monetizeModal').style.display = 'none';
+      proceedWithSubmission(tempSelectedGender);
+    });
+
+    document.getElementById('monetizeNo').addEventListener('click', function() {
+      userWantsMonetization = false;
+      document.getElementById('monetizeModal').style.display = 'none';
+      proceedWithSubmission(tempSelectedGender);
+    });
+
+    function proceedWithSubmission(gender) {
+      userGender = gender;
+      
+      userAccessCode = generateAccessCode();
+      userFlowerCode = generateFlowerCode();
+      currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+      
+      submitData(gender);
+    }
 
     async function fetchBirthdayStatistics() {
       try {
@@ -1465,6 +1551,7 @@
             date: birthdate,
             country: country,
             gender: gender,
+            monetize: userWantsMonetization,
             birthdayDay: userBirthdayDay,
             birthdayMonth: userBirthdayMonth,
             uid: userUid,
@@ -1496,6 +1583,7 @@
           date: userBirthdate,
           country: userCountry,
           gender: gender,
+          monetize: userWantsMonetization,
           birthdayDay: userBirthdayDay,
           birthdayMonth: userBirthdayMonth,
           uid: userUid || randomId,
@@ -1522,8 +1610,6 @@
       const submitButton = document.querySelector('.submit-button');
       
       if (success) {
-        document.getElementById('genderModal').style.display = 'none';
-        
         updateHeaderAccessCode();
         
         submitButton.style.backgroundColor = 'green';
@@ -1629,6 +1715,7 @@
       userBirthdate = null;
       userCountry = null;
       userGender = null;
+      userWantsMonetization = null;
       userBirthdayDay = null;
       userBirthdayMonth = null;
       lastSubmittedId = null;
@@ -1790,6 +1877,7 @@
 
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
+      const monetizeModal = document.getElementById('monetizeModal');
       const flowerModal = document.getElementById('flowerModal');
       const capturedFlower = document.getElementById('capturedFlower');
       
@@ -1801,6 +1889,11 @@
         
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
+      }
+      
+      if (event.target == monetizeModal) {
+        // Do not close monetization modal when clicking outside
+        // This ensures the user makes a choice
       }
       
       if (event.target == flowerModal) {
