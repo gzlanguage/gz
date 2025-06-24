@@ -283,9 +283,31 @@
             padding: 12px;
             max-width: 250px;
         }
+        
+        #welcomeInfoModal .modal-content {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .ok-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 25px;
+            font-size: 0.9em;
+            cursor: pointer;
+            margin: 12px auto 5px auto;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .ok-button:hover {
+            background-color: #0056b3;
+        }
 
         input, select, textarea, button {
-            font-size: 16px; /* Minimum font size to prevent zoom on iOS */
+            font-size: 19px; /* Minimum font size to prevent zoom on iOS */
         }
     </style>
 </head>
@@ -345,6 +367,13 @@
         <div style="margin-top: 5px;">
             <a href="index.html" id="getAccessLink" class="access-link">Get access code</a>
         </div>
+    </div>
+</div>
+
+<div id="welcomeInfoModal" class="modal">
+    <div class="modal-content">
+        <p>The statistics you will see are those present in the database. As the number of people increases, we will get closer to the real figures.</p>
+        <button id="okButton" class="ok-button">OK</button>
     </div>
 </div>
 
@@ -556,6 +585,8 @@
                 if (data[userId] && data[userId].accessCode === code) {
                     console.log("Code valide trouvé!");
                     document.getElementById('accessCodeModal').style.display = 'none';
+                    // Afficher le modal de bienvenue après vérification réussie
+                    document.getElementById('welcomeInfoModal').style.display = 'block';
                     return true;
                 }
             }
@@ -593,6 +624,8 @@
         const faqModal = document.getElementById('faqModal');
         const paypalBtn = document.getElementById('paypalBtn');
         const accessCodeInput = document.getElementById('accessCodeInput');
+        const welcomeInfoModal = document.getElementById('welcomeInfoModal');
+        const okButton = document.getElementById('okButton');
 
         countrySelect.addEventListener('change', debounce(updateCards, 300));
         categorySelect.addEventListener('change', debounce(updateCards, 300));
@@ -616,7 +649,9 @@
         });
         
         window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('modal') && event.target.id !== 'accessCodeModal') {
+            if (event.target.classList.contains('modal') && 
+                event.target.id !== 'accessCodeModal' && 
+                event.target.id !== 'welcomeInfoModal') {
                 event.target.style.display = 'none';
             }
         });
@@ -636,8 +671,14 @@
             
             if (isValid) {
                 console.log("Code validé, chargement des données...");
-                fetchData();
+                // Le modal de bienvenue est déjà affiché dans la fonction verifyAccessCode
             }
+        });
+        
+        // Bouton OK pour fermer le modal de bienvenue et charger les données
+        okButton.addEventListener('click', function() {
+            welcomeInfoModal.style.display = 'none';
+            fetchData(); // Charger les données après la fermeture du modal
         });
         
         document.getElementById('getAccessLink').addEventListener('click', (e) => {
