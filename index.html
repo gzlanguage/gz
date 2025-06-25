@@ -482,13 +482,14 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             transition: background-color 0.2s;
+            z-index: 1002; /* Added higher z-index to ensure visibility */
         }
         
         .modal-close:hover {
@@ -707,7 +708,7 @@
             width: 330px;
         }
         
-        /* Styles modifiés pour le modal de monétisation */
+        /* Styles for the monetization modal */
         #monetizeModal .modal-content {
             margin: 40% auto;
             padding: 15px;
@@ -723,6 +724,7 @@
             color: #007bff;
             font-weight: bold;
             font-family: Arial, sans-serif;
+            margin-top: 20px; /* Added margin-top to push content down from close button */
         }
         
         .monetize-text {
@@ -757,6 +759,63 @@
         .monetize-button.no {
             background-color: #007bff;
         }
+        
+        /* Styles for the new community modal */
+        #communityModal .modal-content {
+            margin: 25% auto;
+            padding: 20px;
+            max-width: 85%;
+            border-radius: 45px;
+        }
+        
+        .community-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #007bff;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 15px; /* Added margin-top for space from close button */
+        }
+        
+        .community-description {
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #333;
+            line-height: 1.5;
+            text-align: left;
+            padding: 0 10px;
+        }
+        
+        .step-highlight {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .join-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 15px auto 5px auto;
+            display: block;
+            width: 150px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .join-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .selected-choice {
+            background-color: #4CAF50 !important;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -779,8 +838,8 @@
     <a class="button" href="Statistiques.html" id="statisticsButton">
       <i class="fas fa-chart-bar"></i> Discovery</a>
     <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i>Flower</a>
-    <a class="button" href="https://discord.gg/GzReBm48XK" target="_blank"><i class="fas fa-users"></i>Community</a>
-    
+    <a class="button" href="#" id="communityButton"><i class="fas fa-users"></i>Community</a>
+    <a class="button" href="#" id="birthdayButton"><i class="fas fa-birthday-cake"></i>Birthday</a>
     <a class="button" href="Contact.html"><i class="fas fa-envelope"></i>Contact</a>
     <a class="button" href="Termsyour.html"><i class="fas fa-file-contract"></i>Terms</a>
     <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i>Privacy</a>
@@ -805,7 +864,6 @@
 
   <div class="footer-title">
     Join us and uncover the secrets of past, present, and future generations in just a few clicks.
-
   </div>
 
   <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
@@ -899,15 +957,40 @@
     </div>
   </div>
 
-  <!-- Modal de monétisation modifié -->
+  <!-- Modified Monetization Modal with added close button -->
   <div id="monetizeModal" class="modal">
     <div class="modal-content">
+      <button class="modal-close" id="closeMonetizeModal"><i class="fas fa-times"></i></button>
       <div class="monetize-title">We're considering introducing a feature that allows you to monetize your birthday.</div>
-      <div class="monetize-text">Would you be interested ?  Your feedback is valuable !</div>
+      <div class="monetize-text">Would you be interested? Your feedback is valuable!</div>
+      <div id="monetizeMessage" style="color: green; margin-top: 10px; display: none; font-weight: bold;"></div>
       <div class="monetize-buttons">
         <button class="monetize-button no" id="monetizeNo">No</button>
         <button class="monetize-button yes" id="monetizeYes">Yes</button>
       </div>
+    </div>
+  </div>
+
+  <!-- New Community Modal -->
+  <div id="communityModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></button>
+      <div class="community-title">Join the G-Z Community</div>
+      
+      <div class="community-description">
+        Join the G-Z Community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.
+      </div>
+      
+      <div class="community-description">
+        <span class="step-highlight">How it works:</span><br>
+        1. Click the "Join G-Z" button below.<br>
+        2. Accept the Discord invitation.<br>
+        3. Go in 'Choose-your-team' Click on the emoji that corresponds to your birth month.<br>
+        4. Click "Back" at the top left to see the groups for your month.<br>
+        5. Select the group that matches your birth day.
+      </div>
+      
+      <a href="https://discord.gg/GzReBm48XK" target="_blank" class="join-button">Join G-Z</a>
     </div>
   </div>
 
@@ -936,7 +1019,7 @@
 
     <div class="share-warning" id="shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
- Perfect for sharing in your Stories, just adjust.
+      Perfect for sharing in your Stories, just adjust.
     </div>
     
     <div class="capture-controls">
@@ -1411,21 +1494,52 @@
       button.addEventListener('click', function() {
         tempSelectedGender = this.value;
         document.getElementById('genderModal').style.display = 'none';
-        document.getElementById('monetizeModal').style.display = 'block';
+        proceedWithSubmission(tempSelectedGender);
       });
     });
 
-    // Monetization modal handlers
+    // Monetization modal handlers with new functionality
     document.getElementById('monetizeYes').addEventListener('click', function() {
       userWantsMonetization = true;
-      document.getElementById('monetizeModal').style.display = 'none';
-      proceedWithSubmission(tempSelectedGender);
+      
+      // Mark the Yes button as selected
+      this.classList.add('selected-choice');
+      document.getElementById('monetizeNo').classList.remove('selected-choice');
+      
+      // Disable both buttons after selection
+      document.getElementById('monetizeYes').disabled = true;
+      document.getElementById('monetizeNo').disabled = true;
+      
+      // Show confirmation message
+      document.getElementById('monetizeMessage').style.display = 'block';
+      document.getElementById('monetizeMessage').textContent = 'Thanks for your feedback! You selected: Yes';
+      
+      // Update cookie
+      saveUserDataToCookie();
     });
 
     document.getElementById('monetizeNo').addEventListener('click', function() {
       userWantsMonetization = false;
+      
+      // Mark the No button as selected
+      this.classList.add('selected-choice');
+      document.getElementById('monetizeYes').classList.remove('selected-choice');
+      
+      // Disable both buttons after selection
+      document.getElementById('monetizeYes').disabled = true;
+      document.getElementById('monetizeNo').disabled = true;
+      
+      // Show confirmation message
+      document.getElementById('monetizeMessage').style.display = 'block';
+      document.getElementById('monetizeMessage').textContent = 'Thanks for your feedback! You selected: No';
+      
+      // Update cookie
+      saveUserDataToCookie();
+    });
+
+    // Add handler for closing monetize modal
+    document.getElementById('closeMonetizeModal').addEventListener('click', function() {
       document.getElementById('monetizeModal').style.display = 'none';
-      proceedWithSubmission(tempSelectedGender);
     });
 
     function proceedWithSubmission(gender) {
@@ -1747,6 +1861,51 @@
       document.getElementById('shareFlowerButton').style.display = 'flex';
     });
 
+    // Birthday button handler - now shows stored preference if already selected
+    document.getElementById('birthdayButton').addEventListener('click', function() {
+      if (dataSubmitted) {
+        // Check if the user has already made a choice and set it appropriately
+        if (userWantsMonetization !== null) {
+          if (userWantsMonetization) {
+            document.getElementById('monetizeYes').classList.add('selected-choice');
+            document.getElementById('monetizeNo').classList.remove('selected-choice');
+          } else {
+            document.getElementById('monetizeNo').classList.add('selected-choice');
+            document.getElementById('monetizeYes').classList.remove('selected-choice');
+          }
+          
+          // Disable buttons if the user has already made a choice
+          document.getElementById('monetizeYes').disabled = true;
+          document.getElementById('monetizeNo').disabled = true;
+          
+          // Show the confirmation message
+          document.getElementById('monetizeMessage').style.display = 'block';
+          document.getElementById('monetizeMessage').textContent = `Thanks for your feedback! You selected: ${userWantsMonetization ? 'Yes' : 'No'}`;
+        } else {
+          // Reset buttons if the user hasn't made a choice yet
+          document.getElementById('monetizeYes').classList.remove('selected-choice');
+          document.getElementById('monetizeNo').classList.remove('selected-choice');
+          document.getElementById('monetizeYes').disabled = false;
+          document.getElementById('monetizeNo').disabled = false;
+          document.getElementById('monetizeMessage').style.display = 'none';
+        }
+        
+        document.getElementById('monetizeModal').style.display = 'block';
+      } else {
+        alert('Please submit your information first to access this feature.');
+      }
+    });
+
+    // Community button handler - opens the community modal
+    document.getElementById('communityButton').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'block';
+    });
+
+    // Close community modal
+    document.getElementById('closeCommunityModal').addEventListener('click', function() {
+      document.getElementById('communityModal').style.display = 'none';
+    });
+
     document.getElementById('shareFlowerButton').addEventListener('click', function() {
       if (userFlowerCode) {
         captureFlower();
@@ -1882,6 +2041,7 @@
       const monetizeModal = document.getElementById('monetizeModal');
       const flowerModal = document.getElementById('flowerModal');
       const capturedFlower = document.getElementById('capturedFlower');
+      const communityModal = document.getElementById('communityModal');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -1894,8 +2054,8 @@
       }
       
       if (event.target == monetizeModal) {
-        // Do not close monetization modal when clicking outside
-        // This ensures the user makes a choice
+        // We'll allow closing by clicking outside now that we have a close button
+        monetizeModal.style.display = "none";
       }
       
       if (event.target == flowerModal) {
@@ -1905,6 +2065,10 @@
       
       if (event.target == capturedFlower) {
         capturedFlower.style.display = "none";
+      }
+      
+      if (event.target == communityModal) {
+        communityModal.style.display = "none";
       }
     };
 
