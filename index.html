@@ -816,6 +816,81 @@
             background-color: #4CAF50 !important;
             pointer-events: none;
         }
+        
+        /* Fireworks animation styles */
+        .pyro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+            display: none;
+        }
+        
+        .pyro > .before, .pyro > .after {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 #fff;
+            animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+        }
+        
+        .pyro > .after {
+            animation-delay: 1.25s, 1.25s, 1.25s;
+            animation-duration: 1.25s, 1.25s, 6.25s;
+        }
+        
+        @keyframes bang {
+            to {
+                box-shadow: -70px -33.66667px #ffaa00, 24px -96.66667px #00ff6a, -65px -36.66667px #ff00d0, -98px -5.66667px #00ffd9, 69px -108.66667px #00a6ff, -94px 15.33333px #ff1e00, 92px -147.66667px #00ff2f, 12px -17.66667px #ff00d0, 11px -34.66667px #ff9d00, 2px -74.66667px #3cff00, 2px -107.66667px #ff0033, 107px -41.66667px #00c4ff, 2px -78.66667px #002bff, 107px -8.66667px #ff0088, -39px -50.66667px #a200ff, 36px -63.66667px #ff4000, -78px -46.66667px #00ffdd, 72px -9.66667px #9500ff, 10px -84.66667px #ff00d0, 27px -26.66667px #4800ff, -10px -16.66667px #d5ff00, 5px -50.66667px #0091ff, -70px 5.33333px #ff002f, 13px -11.66667px #ff4400, 21px -70.66667px #00c4ff, 31px 1.33333px #ff1a00, -83px -33.66667px #ff00d5, 21px -61.66667px #ff006f, 32px -52.66667px #00c4ff, -26px -70.66667px #0051ff, 21px -44.66667px #00ff51, 34px -62.66667px #1e00ff, 61px -45.66667px #ff00bf, 5px -45.66667px #ff0040, -66px -43.66667px #5900ff, 63px -128.66667px #66ff00, 83px -74.66667px #ff0088, 78px -85.66667px #0062ff, -3px -80.66667px #00ff80, 61px -76.66667px #22ff00, -53px -46.66667px #ff001e, -28px -39.66667px #00ff4d, 61px -5.66667px #ff001a, 29px -64.66667px #ff1e00, -1px -32.66667px #0059ff, 54px 14.33333px #ff00d5, 16px -76.66667px #ff0095, 96px -59.66667px #0084ff, 32px -32.66667px #8800ff, 77px -59.66667px #0066ff, 59px -89.66667px #00ff77;
+            }
+        }
+        
+        @keyframes gravity {
+            to {
+                transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes position {
+            0%, 19.9% {
+                margin-top: 10%;
+                margin-left: 40%;
+            }
+            20%, 39.9% {
+                margin-top: 40%;
+                margin-left: 30%;
+            }
+            40%, 59.9% {
+                margin-top: 20%;
+                margin-left: 70%;
+            }
+            60%, 79.9% {
+                margin-top: 30%;
+                margin-left: 20%;
+            }
+            80%, 99.9% {
+                margin-top: 30%;
+                margin-left: 80%;
+            }
+        }
+        
+        .key-message {
+            color: #007bff;
+            font-size: 0.75em;
+            margin-top: 5px;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            font-style: italic;
+        }
+        
+        .key-message.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -957,18 +1032,25 @@
     </div>
   </div>
 
-  <!-- Modified Monetization Modal with added close button -->
+  <!-- Modified Monetization Modal with added close button and fireworks -->
   <div id="monetizeModal" class="modal">
     <div class="modal-content">
       <button class="modal-close" id="closeMonetizeModal"><i class="fas fa-times"></i></button>
       <div class="monetize-title">We're considering introducing a feature that allows you to monetize your birthday.</div>
       <div class="monetize-text">Would you be interested? Your feedback is valuable!</div>
       <div id="monetizeMessage" style="color: green; margin-top: 10px; display: none; font-weight: bold;"></div>
+      <div class="key-message" id="keyMessage">Remember to keep your access code secure. It's your unique identifier!</div>
       <div class="monetize-buttons">
         <button class="monetize-button no" id="monetizeNo">No</button>
         <button class="monetize-button yes" id="monetizeYes">Yes</button>
       </div>
     </div>
+  </div>
+
+  <!-- Fireworks container -->
+  <div class="pyro" id="fireworks">
+    <div class="before"></div>
+    <div class="after"></div>
   </div>
 
   <!-- New Community Modal -->
@@ -1498,7 +1580,7 @@
       });
     });
 
-    // Monetization modal handlers with new functionality
+    // Monetization modal handlers with fireworks functionality
     document.getElementById('monetizeYes').addEventListener('click', function() {
       userWantsMonetization = true;
       
@@ -1513,6 +1595,19 @@
       // Show confirmation message
       document.getElementById('monetizeMessage').style.display = 'block';
       document.getElementById('monetizeMessage').textContent = 'Thanks for your feedback! You selected: Yes';
+      
+      // Show the key message
+      const keyMessage = document.getElementById('keyMessage');
+      keyMessage.classList.add('show');
+      
+      // Display fireworks
+      const fireworks = document.getElementById('fireworks');
+      fireworks.style.display = 'block';
+      
+      // Hide fireworks after 3 seconds
+      setTimeout(() => {
+        fireworks.style.display = 'none';
+      }, 3000);
       
       // Update cookie
       saveUserDataToCookie();
@@ -1540,6 +1635,7 @@
     // Add handler for closing monetize modal
     document.getElementById('closeMonetizeModal').addEventListener('click', function() {
       document.getElementById('monetizeModal').style.display = 'none';
+      document.getElementById('fireworks').style.display = 'none';
     });
 
     function proceedWithSubmission(gender) {
@@ -1864,6 +1960,10 @@
     // Birthday button handler - now shows stored preference if already selected
     document.getElementById('birthdayButton').addEventListener('click', function() {
       if (dataSubmitted) {
+        // Reset the key message and fireworks before showing the modal
+        document.getElementById('keyMessage').classList.remove('show');
+        document.getElementById('fireworks').style.display = 'none';
+        
         // Check if the user has already made a choice and set it appropriately
         if (userWantsMonetization !== null) {
           if (userWantsMonetization) {
@@ -2056,6 +2156,7 @@
       if (event.target == monetizeModal) {
         // We'll allow closing by clicking outside now that we have a close button
         monetizeModal.style.display = "none";
+        document.getElementById('fireworks').style.display = 'none';
       }
       
       if (event.target == flowerModal) {
