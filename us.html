@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+        .logo {
+            margin-left: 10px;
+            font-size: 1.4em;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            font-weight: normal;
+            font-family: Arial, sans-serif;
+        }
+        .user-icon-container {
+            margin-right: 2px;
+            display: flex;
+            align-items: center;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 2px;
+            width: 28px;
+            height: 28px;
+            justify-content: center;
+            background-color: #f0f7ff;
+        }
+        .user-icon {
+            color: #007bff;
+            font-size: 1.5em;
+        }
+        .divider {
+            height: 0.6px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .button.active {
+            background-color: #4CAF50;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .how-it-works-container {
+            text-align: center;
+            margin: 20px auto;
+            width: 310px;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 20px;
+            background-color: #f0f7ff;
+            overflow: hidden;
+        }
+        .section-title {
+            font-size: 1.1em;
+            color: #007bff;
+            margin-bottom: 5px;
+            margin-top: 0;
+        }
+        .description {
+            font-size: 0.9em;
+            color: #0056b3;
+            line-height: 1.2;
+            overflow-y: auto;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 translate="no">G-Z</h1>
+    <div class="user-icon-container">
+        <i class="fas fa-handshake user-icon"></i>
+    </div>
+</header>
+
+<div class="divider"></div>
+
+<div class="button-container">
+    <button class="button active" onclick="changePage('Confession')"><i class="fas fa-microphone"></i>Confession</button>
+    <button class="button" onclick="changePage('Most Stylish')"><i class="fas fa-star"></i>Most Stylish</button>
+    <button class="button" onclick="changePage('Best Looking')"><i class="fas fa-eye"></i>Best Looking</button>
+    <button class="button" onclick="changePage('Best Outfit')"><i class="fas fa-tshirt"></i>Best Outfit</button>
+    <button class="button" onclick="changePage('Style Awards')"><i class="fas fa-award"></i>Style Awards</button>
+    <button class="button" onclick="changePage('Style Talk')"><i class="fas fa-comments"></i>Style Talk</button>
+    <button class="button" onclick="changePage('Open Mic')"><i class="fas fa-microphone"></i>Open Mic</button>
+    <button class="button" onclick="changePage('Live Quiz')"><i class="fas fa-question-circle"></i>Live Quiz</button>
+    <button class="button" onclick="changePage('Collective Story')"><i class="fas fa-book"></i>Collective Story</button>
+    <button class="button" onclick="changePage('Horror Night')"><i class="fas fa-ghost"></i>Horror Night</button>
+    <button class="button" onclick="changePage('Become Moderator')"><i class="fas fa-user-shield"></i>Become Moderator</button>
+</div>
+
+<div class="divider"></div>
+<div class="notification">
+    <span class="notification-text">Members vote with ❤️ reactions. Most hearts wins.</span>
+</div>
+
+<div class="divider"></div>
+
+<div class="how-it-works-container">
+    <h2 class="section-title"> - To know -</h2>
+    <p class="description" id="operationDescription">
+        Click the recorder to submit your confession — weird, funny, deep, or random, like “We laugh but we don’t joke”. Be mindful of what you say. If approved, your confession will be posted anonymously in the Confession channel. Your name will not be revealed, only your birth date, to protect your identity.
+    </p>
+</div>
+
+<script>
+    const descriptions = {
+        'Confession': 'Click the recorder to submit your confession — weird, funny, deep, or random, like “We laugh but we don’t joke”. Be mindful of what you say. If approved, your confession will be posted anonymously in the Confession channel. Your name will not be revealed, only your birth date, to protect your identity.',
+        'Most Stylish': 'Vote for the most stylish member (separate contests for men and women). Post a full-body photo showing off your overall style. Judging is based on originality, consistency, confidence, and the vibe you give off.',
+        'Best Looking': 'Contest based on natural beauty, charm, and charisma. Post your best photo — no filters, no AI, just the real you. Voting is based on natural appearance, presence, and energy. Let your authenticity shine.',
+        'Best Outfit': 'Who’s got the best full outfit? Share your favorite look — top, bottom, shoes, accessories… it all counts. Separate contests for men and women.',
+        'Style Awards': 'Main hub for all style contests. Announcements, rules, submissions, and results are all posted here. Everything about fashion and looks starts in this space.',
+        'Style Talk': 'Chat space for fashion and personal style. Once approved to compete, we’ll ask about your mood and your fashion approach. Here, we discuss trends, style inspiration, and what fashion means to you.',
+        'Open Mic': 'Voice channel for open mic sessions. Members can sing, read, freestyle, or showcase any live talent. Just hop in and share your vibe — no pressure, just good energy and creativity.',
+        'Live Quiz': 'Live quiz events between members. We’re still working on it, but the goal is to host live trivia games on topics like pop culture, movies, fashion, current events, and more. Fun and competition, all in real-time.',
+        'Collective Story': 'Write a story together, one post at a time. Every month, selected members will take turns creating an original story. One starts, another continues, and so on. It’s all about imagination, collaboration, and storytelling.',
+        'Horror Night': 'Voice channel for scary story sessions. Join our special “Horror Night” events to listen to or share chilling stories — from creepy real-life events to horror films, urban legends, or paranormal tales.',
+        'Become Moderator': 'As a moderator, you will help maintain a positive environment, manage discussions, and assist members. To apply, please contact us via email at <a href="mailto:admin@g-z.online">admin@g-z.online</a>. Include your full name, age (minimum 18), country, languages spoken, and Discord username.'
+    };
+
+    function changePage(page) {
+        const descriptionElement = document.getElementById('operationDescription');
+        const buttons = document.querySelectorAll('.button');
+
+        // Change the description
+        descriptionElement.innerHTML = descriptions[page];
+
+        // Update button styles
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+        const activeButton = Array.from(buttons).find(button => button.textContent.includes(page));
+        activeButton.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
