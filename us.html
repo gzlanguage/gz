@@ -120,6 +120,11 @@
             overflow-y: auto;
             margin: 0;
         }
+        .email-link {
+            color: #0056b3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -162,23 +167,35 @@
 <div class="how-it-works-container">
     <h2 class="section-title"> - To know -</h2>
     <p class="description" id="operationDescription">
-        Click the recorder to submit your confession — weird, funny, deep, or random, like “We laugh but we don’t joke”. Be mindful of what you say. If approved, your confession will be posted anonymously in the Confession channel. Your name will not be revealed, only your birth date, to protect your identity.
+        Click the recorder to submit your confession -- whether it's weird, funny, emotional, or completely random, like "We laugh but we don't joke."
+All submissions are reviewed before being published. If approved, your confession will be posted anonymously in the Confession channel.
+Your name will never be revealed. Only your birth date will be displayed to preserve your identity while still connecting you to the community.
     </p>
 </div>
 
 <script>
     const descriptions = {
-        'Confession': 'Click the recorder to submit your confession — weird, funny, deep, or random, like “We laugh but we don’t joke”. Be mindful of what you say. If approved, your confession will be posted anonymously in the Confession channel. Your name will not be revealed, only your birth date, to protect your identity.',
-        'Most Stylish': 'Vote for the most stylish member (separate contests for men and women). Post a full-body photo showing off your overall style. Judging is based on originality, consistency, confidence, and the vibe you give off.',
-        'Best Looking': 'Contest based on natural beauty, charm, and charisma. Post your best photo — no filters, no AI, just the real you. Voting is based on natural appearance, presence, and energy. Let your authenticity shine.',
-        'Best Outfit': 'Who’s got the best full outfit? Share your favorite look — top, bottom, shoes, accessories… it all counts. Separate contests for men and women.',
-        'Style Awards': 'Main hub for all style contests. Announcements, rules, submissions, and results are all posted here. Everything about fashion and looks starts in this space.',
-        'Style Talk': 'Chat space for fashion and personal style. Once approved to compete, we’ll ask about your mood and your fashion approach. Here, we discuss trends, style inspiration, and what fashion means to you.',
-        'Open Mic': 'Voice channel for open mic sessions. Members can sing, read, freestyle, or showcase any live talent. Just hop in and share your vibe — no pressure, just good energy and creativity.',
-        'Live Quiz': 'Live quiz events between members. We’re still working on it, but the goal is to host live trivia games on topics like pop culture, movies, fashion, current events, and more. Fun and competition, all in real-time.',
-        'Collective Story': 'Write a story together, one post at a time. Every month, selected members will take turns creating an original story. One starts, another continues, and so on. It’s all about imagination, collaboration, and storytelling.',
-        'Horror Night': 'Voice channel for scary story sessions. Join our special “Horror Night” events to listen to or share chilling stories — from creepy real-life events to horror films, urban legends, or paranormal tales.',
-        'Become Moderator': 'As a moderator, you will help maintain a positive environment, manage discussions, and assist members. To apply, please contact us via email at <a href="mailto:admin@g-z.online">admin@g-z.online</a>. Include your full name, age (minimum 18), country, languages spoken, and Discord username.'
+        'Confession': 'Click the recorder to submit your confession -- whether it\'s weird, funny, emotional, or completely random, like "We laugh but we don\'t joke."\nAll submissions are reviewed before being published. If approved, your confession will be posted anonymously in the Confession channel.\nYour name will never be revealed. Only your birth date will be displayed to preserve your identity while still connecting you to the community.',
+        
+        'Most Stylish': 'Who has the best personal style in the community?\nThis contest is about showing off your full-body look and your overall vibe. We\'re judging based on:\n\nOriginality of your style\n\nConsistency in your fashion choices\n\nConfidence and presence\n\nThe mood or energy you give off\nSeparate contests for men and women. Bring your best and let your style speak.',
+        
+        'Best Looking': 'This is about natural beauty, authenticity, and charisma.\nPost a clear, unfiltered photo of yourself -- no filters, no AI, no edits.\nJudging is based on:\n\nNatural appearance\n\nFacial harmony and expression\n\nPresence and energy\nLet your real self shine.',
+        
+        'Best Outfit': 'This category is all about the full fit -- your top, bottom, shoes, and accessories all matter.\nPost your cleanest, boldest, or most creative outfit.\nSeparate contests for men and women. One complete look to impress.',
+        
+        'Style Awards': 'This is the central space for everything related to fashion and style competitions.\nYou\'ll find:\n\nOfficial announcements\n\nContest rules\n\nSubmission links\n\nResults and winners\nIf it\'s about style, it starts here.',
+        
+        'Style Talk': 'This is an open discussion space for anything related to fashion and personal style.\nShare your opinions, trends you like or hate, outfits, brand discoveries, or ask for advice.\nWhether you\'re into high fashion or just exploring your own taste, this is the space to speak your mind.',
+        
+        'Open Mic': 'A voice channel dedicated to spontaneous and creative expression.\nJoin to sing, freestyle, read poetry, perform, or simply speak your mind.\nNo pressure, no competition -- just good energy and raw talent from the community.',
+        
+        'Live Quiz': 'We\'re developing live quiz games where members can test their knowledge in real time.\nTopics will include pop culture, movies, fashion, current events, and more.\nIt\'s about fun, learning, and a little friendly competition between members.',
+        
+        'Collective Story': 'Each month, members take turns building an original story -- one post at a time.\nOne person starts, another continues, and so on.\nThe goal is to create a unique narrative together, based on imagination, creativity, and collaboration.\nNo writing experience needed -- just your ideas.',
+        
+        'Horror Night': 'A dedicated voice event for fans of scary stories.\nCome share or listen to chilling tales -- whether they\'re real, fictional, urban legends, or horror movie-inspired.\nPerfect for those who love suspense, mystery, and storytelling in a dark and immersive setting.',
+        
+        'Become Moderator': 'Moderators help us maintain a safe, welcoming, and respectful environment.\nAs a mod, you\'ll assist with managing discussions, supporting members, and keeping the community organized.\nTo apply, email us at <a href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@g-z.online" class="email-link" target="_blank">admin@g-z.online</a> with the following:\n\nFull name\n\nAge (must be 18 or older)\n\nCountry\n\nLanguages you speak\n\nYour Discord username\nWe\'re looking for committed, mature, and active members to help guide the community forward.'
     };
 
     function changePage(page) {
