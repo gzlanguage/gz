@@ -378,19 +378,6 @@
             align-items: center;
         }
         
-        .celebrate-icon {
-            font-size: 2em;
-            color: gold;
-            margin-bottom: 8px;
-            animation: celebrate 2s infinite alternate;
-        }
-        
-        @keyframes celebrate {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1) rotate(5deg); }
-            100% { transform: scale(1) rotate(-5deg); }
-        }
-        
         .stats-highlight {
             font-weight: bold;
             color: #ff69b4;
@@ -722,58 +709,6 @@
             width: 330px;
         }
         
-        /* Styles for the monetization modal */
-        #monetizeModal .modal-content {
-            margin: 40% auto;
-            padding: 15px;
-            max-width: 80%;
-            border-radius: 30px;
-            width: 250px;
-            height: auto;
-        }
-        
-        .monetize-title {
-            font-size: 1em;
-            margin-bottom: 10px;
-            color: #007bff;
-            font-weight: bold;
-            font-family: Arial, sans-serif;
-            margin-top: 20px; /* Added margin-top to push content down from close button */
-        }
-        
-        .monetize-text {
-            margin: 10px 0;
-            font-size: 0.85em;
-            color: #333;
-        }
-        
-        .monetize-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            gap: 10px;
-        }
-        
-        .monetize-button {
-            flex: 1;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            padding: 10px 0;
-            font-size: 1em;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        .monetize-button.yes {
-            background-color: #007bff;
-        }
-        
-        .monetize-button.no {
-            background-color: #007bff;
-        }
-        
         /* Styles for the new community modal */
         #communityModal .modal-content {
             margin: 25% auto;
@@ -831,68 +766,6 @@
             pointer-events: none;
         }
         
-        /* Fireworks animation styles - Enhanced for birthday */
-        .pyro {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10000;
-            display: none;
-        }
-        
-        .pyro > .before, .pyro > .after {
-            position: absolute;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            box-shadow: 0 0 #fff;
-            animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-        }
-        
-        .pyro > .after {
-            animation-delay: 1.25s, 1.25s, 1.25s;
-            animation-duration: 1.25s, 1.25s, 6.25s;
-        }
-        
-        @keyframes bang {
-            to {
-                box-shadow: -70px -33.66667px #ffaa00, 24px -96.66667px #00ff6a, -65px -36.66667px #ff00d0, -98px -5.66667px #00ffd9, 69px -108.66667px #00a6ff, -94px 15.33333px #ff1e00, 92px -147.66667px #00ff2f, 12px -17.66667px #ff00d0, 11px -34.66667px #ff9d00, 2px -74.66667px #3cff00, 2px -107.66667px #ff0033, 107px -41.66667px #00c4ff, 2px -78.66667px #002bff, 107px -8.66667px #ff0088, -39px -50.66667px #a200ff, 36px -63.66667px #ff4000, -78px -46.66667px #00ffdd, 72px -9.66667px #9500ff, 10px -84.66667px #ff00d0, 27px -26.66667px #4800ff, -10px -16.66667px #d5ff00, 5px -50.66667px #0091ff, -70px 5.33333px #ff002f, 13px -11.66667px #ff4400, 21px -70.66667px #00c4ff, 31px 1.33333px #ff1a00, -83px -33.66667px #ff00d5, 21px -61.66667px #ff006f, 32px -52.66667px #00c4ff, -26px -70.66667px #0051ff, 21px -44.66667px #00ff51, 34px -62.66667px #1e00ff, 61px -45.66667px #ff00bf, 5px -45.66667px #ff0040, -66px -43.66667px #5900ff, 63px -128.66667px #66ff00, 83px -74.66667px #ff0088, 78px -85.66667px #0062ff, -3px -80.66667px #00ff80, 61px -76.66667px #22ff00, -53px -46.66667px #ff001e, -28px -39.66667px #00ff4d, 61px -5.66667px #ff001a, 29px -64.66667px #ff1e00, -1px -32.66667px #0059ff, 54px 14.33333px #ff00d5, 16px -76.66667px #ff0095, 96px -59.66667px #0084ff, 32px -32.66667px #8800ff, 77px -59.66667px #0066ff, 59px -89.66667px #00ff77;
-            }
-        }
-        
-        @keyframes gravity {
-            to {
-                transform: translateY(200px);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes position {
-            0%, 19.9% {
-                margin-top: 10%;
-                margin-left: 40%;
-            }
-            20%, 39.9% {
-                margin-top: 40%;
-                margin-left: 30%;
-            }
-            40%, 59.9% {
-                margin-top: 20%;
-                margin-left: 70%;
-            }
-            60%, 79.9% {
-                margin-top: 30%;
-                margin-left: 20%;
-            }
-            80%, 99.9% {
-                margin-top: 30%;
-                margin-left: 80%;
-            }
-        }
-        
         .key-message {
             color: #007bff;
             font-size: 0.75em;
@@ -904,155 +777,6 @@
         
         .key-message.show {
             opacity: 1;
-        }
-        
-        /* Birthday celebration styles */
-        #birthdayCelebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 10001;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .birthday-message {
-            font-family: 'Billabong', cursive;
-            color: white;
-            font-size: 1.7em;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px 0;
-            text-shadow: 0 0 10px gold, 0 0 20px gold, 0 0 30px gold;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .birthday-age {
-            font-size: 1.7em;
-            color: gold;
-            font-weight: bold;
-            margin: 10px 0;
-            text-shadow: 0 0 10px white;
-            animation: rotate 4s infinite;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
-            100% { transform: rotate(-5deg); }
-        }
-        
-        .birthday-close {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid white;
-            border-radius: 30px;
-            padding: 5px 10px;
-            font-size: 1em;
-            margin-top: 40px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .birthday-close:hover {
-            background-color: white;
-            color: #007bff;
-        }
-        
-        .birthday-icons {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        
-        .birthday-icon {
-            position: absolute;
-            font-size: 2em;
-            color: gold;
-            animation: float 15s infinite linear;
-            opacity: 0.8;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-20vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Enhanced fireworks for birthday */
-        .birthday-pyro {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        
-        .birthday-pyro > .before, .birthday-pyro > .after {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            box-shadow: 0 0 #fff;
-            animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-        }
-        
-        .birthday-pyro > .after {
-            animation-delay: 1.25s, 1.25s, 1.25s;
-            animation-duration: 1.25s, 1.25s, 6.25s;
-        }
-        
-        .birthday-pyro > .before {
-            box-shadow: -70px -33.66667px #ffaa00, 24px -96.66667px #00ff6a, -65px -36.66667px #ff00d0, -98px -5.66667px #00ffd9, 69px -108.66667px #00a6ff, -94px 15.33333px #ff1e00, 92px -147.66667px #00ff2f, 12px -17.66667px #ff00d0, 11px -34.66667px #ff9d00, 2px -74.66667px #3cff00, 2px -107.66667px #ff0033, 107px -41.66667px #00c4ff, 2px -78.66667px #002bff, 107px -8.66667px #ff0088, -39px -50.66667px #a200ff, 36px -63.66667px #ff4000, -78px -46.66667px #00ffdd, 72px -9.66667px #9500ff, 10px -84.66667px #ff00d0, 27px -26.66667px #4800ff, -10px -16.66667px #d5ff00, 5px -50.66667px #0091ff, -70px 5.33333px #ff002f, 13px -11.66667px #ff4400, 21px -70.66667px #00c4ff, 31px 1.33333px #ff1a00, -83px -33.66667px #ff00d5, 21px -61.66667px #ff006f, 32px -52.66667px #00c4ff, -26px -70.66667px #0051ff, 21px -44.66667px #00ff51, 34px -62.66667px #1e00ff, 61px -45.66667px #ff00bf, 5px -45.66667px #ff0040, -66px -43.66667px #5900ff, 63px -128.66667px #66ff00, 83px -74.66667px #ff0088, 78px -85.66667px #0062ff, -3px -80.66667px #00ff80, 61px -76.66667px #22ff00, -53px -46.66667px #ff001e, -28px -39.66667px #00ff4d, 61px -5.66667px #ff001a, 29px -64.66667px #ff1e00, -1px -32.66667px #0059ff, 54px 14.33333px #ff00d5, 16px -76.66667px #ff0095, 96px -59.66667px #0084ff, 32px -32.66667px #8800ff, 77px -59.66667px #0066ff, 59px -89.66667px #00ff77;
-        }
-        
-        .birthday-pyro > .after {
-            box-shadow: -70px -33.66667px #ff6600, 24px -96.66667px #ff00d0, -65px -36.66667px #00ff6a, -98px -5.66667px #a200ff, 69px -108.66667px #ff1e00, -94px 15.33333px #00a6ff, 92px -147.66667px #ff00d0, 12px -17.66667px #00ff2f, 11px -34.66667px #a200ff, 2px -74.66667px #ff9d00, 2px -107.66667px #3cff00, 107px -41.66667px #ff0033, 2px -78.66667px #00c4ff, 107px -8.66667px #002bff, -39px -50.66667px #ff0088, 36px -63.66667px #a200ff, -78px -46.66667px #ff4000, 72px -9.66667px #00ffdd, 10px -84.66667px #9500ff, 27px -26.66667px #ff00d0, -10px -16.66667px #4800ff, 5px -50.66667px #d5ff00, -70px 5.33333px #0091ff, 13px -11.66667px #ff002f, 21px -70.66667px #ff4400, 31px 1.33333px #00c4ff, -83px -33.66667px #ff1a00, 21px -61.66667px #ff00d5, 32px -52.66667px #ff006f, -26px -70.66667px #00c4ff, 21px -44.66667px #0051ff, 34px -62.66667px #00ff51, 61px -45.66667px #1e00ff, 5px -45.66667px #ff00bf;
-        }
-        
-        .birthday-confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            animation: confetti-fall 10s linear infinite;
-            z-index: 9998;
-        }
-        
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
         }
     </style>
 </head>
@@ -1270,22 +994,6 @@
     <div class="gz-logo">G-Z</div>
     
     <div class="capture-website-url">Discover yours at www.g-z.online</div>
-  </div>
-
-  <!-- Birthday Celebration Screen -->
-  <div id="birthdayCelebration">
-    <div class="birthday-icons" id="birthdayIcons"></div>
-    
-    <div class="birthday-pyro">
-      <div class="before"></div>
-      <div class="after"></div>
-    </div>
-    
-    <div class="birthday-message">Happy Birthday!</div>
-    <div class="birthday-age" id="birthdayAge">25</div>
-    <div class="birthday-message">Today is your special day!</div>
-    
-    <button class="birthday-close" id="closeBirthdayCelebration">Continue to G-Z</button>
   </div>
 
   <script type="module">
@@ -1572,13 +1280,12 @@
         });
         
         loadUserDataFromCookie();
-        checkForBirthday();
       })
       .catch(error => {
         console.error('Error loading countries from API:', error);
         
         const fallbackCountries = [
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
+            "Afghanistan","Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
           "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", 
           "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
           "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
@@ -1605,7 +1312,7 @@
           "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
           "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", 
           "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", 
-          "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+          "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe", 
         ].sort();
         
         const countrySelect = document.getElementById('countrySelect');
@@ -1619,7 +1326,6 @@
         });
         
         loadUserDataFromCookie();
-        checkForBirthday();
       });
 
     function saveUserDataToCookie() {
@@ -1638,8 +1344,7 @@
           flowerCode: userFlowerCode,
           motivation: currentMotivation,
           birthdayStats: userBirthdayStats,
-          countryStats: userCountryStats,
-          lastBirthdayCelebrated: getCookie('lastBirthdayCelebrated') || ''
+          countryStats: userCountryStats
         };
         setCookie('userData', JSON.stringify(userData), 365);
       }
@@ -1939,9 +1644,6 @@
         dataSubmitted = true;
         
         saveUserDataToCookie();
-        
-        // Check for birthday after submission
-        checkForBirthday();
       } else {
         submitButton.style.backgroundColor = 'red';
         submitButton.textContent = "Error";
@@ -2059,7 +1761,6 @@
       document.getElementById('countrySelect').classList.remove('disabled-field');
       
       eraseCookie('userData');
-      eraseCookie('lastBirthdayCelebrated');
       
       alert("Your data has been successfully reset.");
     }
@@ -2210,90 +1911,11 @@
       document.getElementById('shareFlowerButton').style.display = 'none';
     });
 
-    // Birthday celebration functions
-    function checkForBirthday() {
-      if (!userBirthdayDay || !userBirthdayMonth || !userBirthYear) {
-        return;
-      }
-      
-      const today = new Date();
-      const todayDay = today.getDate();
-      const todayMonth = today.getMonth() + 1;
-      
-      // Check if today is the user's birthday
-      if (todayDay === userBirthdayDay && todayMonth === userBirthdayMonth) {
-        const lastCelebrated = getCookie('lastBirthdayCelebrated') || '';
-        const todayStr = today.toISOString().split('T')[0];
-        
-        // Only show celebration if we haven't celebrated today
-        if (lastCelebrated !== todayStr) {
-          const currentYear = today.getFullYear();
-          const age = currentYear - userBirthYear;
-          
-          showBirthdayCelebration(age);
-          
-          // Set cookie to remember we celebrated today
-          setCookie('lastBirthdayCelebrated', todayStr, 1);
-        }
-      }
-    }
-    
-    function showBirthdayCelebration(age) {
-      // Set the age in the celebration screen
-      document.getElementById('birthdayAge').textContent = `${age} years`;
-      
-      // Create floating birthday icons
-      createBirthdayIcons();
-      
-      // Show the celebration screen
-      document.getElementById('birthdayCelebration').style.display = 'flex';
-    }
-    
-    function createBirthdayIcons() {
-      const iconsContainer = document.getElementById('birthdayIcons');
-      iconsContainer.innerHTML = '';
-      
-      const icons = ['🎂', '🎁', '🎈', '🎉', '🎊', '💐', '✨', '🌟', '⭐'];
-      const colors = ['gold', '#ff69b4', '#00bfff', '#ff4500', '#32cd32', '#ff1493'];
-      
-      for (let i = 0; i < 30; i++) {
-        const icon = document.createElement('div');
-        icon.className = 'birthday-icon';
-        icon.textContent = icons[Math.floor(Math.random() * icons.length)];
-        icon.style.left = `${Math.random() * 100}%`;
-        icon.style.color = colors[Math.floor(Math.random() * colors.length)];
-        icon.style.animationDelay = `${Math.random() * 10}s`;
-        icon.style.animationDuration = `${10 + Math.random() * 20}s`;
-        icon.style.fontSize = `${1 + Math.random() * 2}em`;
-        
-        iconsContainer.appendChild(icon);
-      }
-      
-      // Also create confetti elements
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'birthday-confetti';
-        confetti.style.left = `${Math.random() * 100}%`;
-        confetti.style.width = `${5 + Math.random() * 10}px`;
-        confetti.style.height = `${5 + Math.random() * 10}px`;
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = `${Math.random() * 5}s`;
-        confetti.style.animationDuration = `${5 + Math.random() * 10}s`;
-        
-        iconsContainer.appendChild(confetti);
-      }
-    }
-    
-    document.getElementById('closeBirthdayCelebration').addEventListener('click', function() {
-      document.getElementById('birthdayCelebration').style.display = 'none';
-    });
-
     window.onclick = function(event) {
       const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
       const capturedFlower = document.getElementById('capturedFlower');
       const communityModal = document.getElementById('communityModal');
-      const birthdayCelebration = document.getElementById('birthdayCelebration');
       
       if (event.target == genderModal) {
         genderModal.style.display = "none";
@@ -2317,8 +1939,6 @@
       if (event.target == communityModal) {
         communityModal.style.display = "none";
       }
-      
-      // Don't close birthday celebration when clicking outside
     };
 
     checkCookieConsent();
