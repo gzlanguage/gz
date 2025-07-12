@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -265,7 +265,7 @@
     </a>
     <div class="copyright-icon">©️</div>
     <a href="Partage.html">
-        <button class="share-button" aria-label="Share" data-i18n="[aria-label]header.share">
+        <button class="share-button" aria-label="Share">
             <i class="fas fa-share share-icon"></i>
         </button>
     </a>
@@ -274,28 +274,28 @@
 <div class="divider"></div>
 
 <div class="button-container">
-    <button id="faqBtn" class="button" aria-label="Frequently Asked Questions" data-i18n="[aria-label]buttons.faqAriaLabel">
-        <i class="fas fa-question-circle" style="margin-right: 2px;"></i> <span data-i18n="buttons.faq">FAQ</span>
+    <button id="faqBtn" class="button" aria-label="Frequently Asked Questions">
+        <i class="fas fa-question-circle" style="margin-right: 2px;"></i> FAQ
     </button>
-    <button id="supportBtn" class="button" aria-label="Support" data-i18n="[aria-label]buttons.supportAriaLabel">
-        <i class="fas fa-hand-holding-heart" style="margin-right: 5px;"></i> <span data-i18n="buttons.support">Support</span>
+    <button id="supportBtn" class="button" aria-label="Support" translate="no">
+        <i class="fas fa-hand-holding-heart" style="margin-right: 5px;"></i> Support
     </button>
 </div>
 
 <div class="divider"></div>
 
 <div class="dashboard">
-    <select class="country-select" aria-label="Select a country" id="countrySelect" data-i18n="[aria-label]dashboard.selectCountry">
-        <option value="" data-i18n="dashboard.allCountries">All countries</option>
+    <select class="country-select" aria-label="Select a country" id="countrySelect">
+        <option value="">All countries</option>
     </select>
 
-    <select class="category-select" aria-label="Select a category" id="categorySelect" data-i18n="[aria-label]dashboard.selectCategory">
-        <option value="daily" data-i18n="dashboard.categories.daily">Births by day</option>
-        <option value="monthly" data-i18n="dashboard.categories.monthly">Births by month</option>
-        <option value="yearly" data-i18n="dashboard.categories.yearly">Births by year</option>
-        <option value="gender" data-i18n="dashboard.categories.gender">Gender</option>
-        <option value="age" data-i18n="dashboard.categories.age">Ages</option>
-        <option value="population" data-i18n="dashboard.categories.population">Origin</option>
+    <select class="category-select" aria-label="Select a category" id="categorySelect">
+        <option value="daily">Births by day</option>
+        <option value="monthly">Births by month</option>
+        <option value="yearly">Births by year</option>
+        <option value="gender">Gender</option>
+        <option value="age">Ages</option>
+        <option value="population">Origin</option>
     </select>
 
     <div class="grid" id="grid">
@@ -304,33 +304,27 @@
 
 <div id="statsInfoModal" class="modal">
     <div class="modal-content">
-        <p class="stats-description" data-i18n="modals.statsInfo.description">
+        <p class="stats-description">
             The statistics you'll see are those present in the database. As the number of people increases, we'll get closer to the exact figures.
         </p>
-        <button id="okButton" class="ok-button" data-i18n="modals.statsInfo.okButton">OK</button>
+        <button id="okButton" class="ok-button">OK</button>
     </div>
 </div>
 
 <div id="supportModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p data-i18n="modals.support.description">Support G-Z to help us develop this project.</p>
-        <button id="paypalBtn" class="support-button" data-i18n="modals.support.button">Support now</button>
+        <p>Support G-Z to help us develop this project.</p>
+        <button id="paypalBtn" class="support-button">Support now</button>
     </div>
 </div>
 
 <div id="faqModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p data-i18n="modals.faq.description">Stats update automatically with each new submission.</p>
+        <p>Stats update automatically with each new submission.</p>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/i18next@21.6.16/i18next.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.4.0/i18nextHttpBackend.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
@@ -354,87 +348,15 @@
 
     let allData = {};
 
-    // Labels pour les différentes catégories (seront traduits par i18next)
+    // Labels pour les différentes catégories
     const categoryLabels = {
-        'daily': 'labels.births',
-        'monthly': 'labels.births',
-        'yearly': 'labels.births',
+        'daily': 'births',
+        'monthly': 'births',
+        'yearly': 'births',
         'gender': '',
-        'age': 'labels.people',
-        'population': 'labels.people'
+        'age': 'people',
+        'population': 'people'
     };
-
-    // Configuration de i18next
-    i18next
-        .use(i18nextHttpBackend)
-        .use(i18nextBrowserLanguageDetector)
-        .init({
-            fallbackLng: 'en',
-            debug: false,
-            detection: {
-                order: ['querystring', 'navigator', 'localStorage'],
-                lookupQuerystring: 'lng',
-                caches: ['localStorage']
-            },
-            backend: {
-                loadPath: 'locales/{{lng}}.json'
-            },
-            // Forcer l'URL à afficher ?lng=fr si la langue détectée est le français
-            // Cette partie modifie l'URL après la détection
-            callback: function(err, t) {
-                if (!err) {
-                    const detectedLang = i18next.language;
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const langParam = urlParams.get('lng');
-                    
-                    if (!langParam && detectedLang) {
-                        const newUrl = `${window.location.pathname}?lng=${detectedLang}${window.location.hash}`;
-                        window.history.replaceState(null, '', newUrl);
-                    }
-                }
-            }
-        }, function(err, t) {
-            jqueryI18next.init(i18next, $, { useOptionsAttr: true });
-            $('body').localize();
-            
-            // Traduire les éléments dynamiques
-            updateDynamicTranslations();
-        });
-
-    function updateDynamicTranslations() {
-        // Mettre à jour les traductions des jours et mois
-        window.daysTranslations = {
-            'Sunday': i18next.t('days.sunday'),
-            'Monday': i18next.t('days.monday'),
-            'Tuesday': i18next.t('days.tuesday'),
-            'Wednesday': i18next.t('days.wednesday'),
-            'Thursday': i18next.t('days.thursday'),
-            'Friday': i18next.t('days.friday'),
-            'Saturday': i18next.t('days.saturday')
-        };
-
-        window.monthsTranslations = {
-            'January': i18next.t('months.january'),
-            'February': i18next.t('months.february'),
-            'March': i18next.t('months.march'),
-            'April': i18next.t('months.april'),
-            'May': i18next.t('months.may'),
-            'June': i18next.t('months.june'),
-            'July': i18next.t('months.july'),
-            'August': i18next.t('months.august'),
-            'September': i18next.t('months.september'),
-            'October': i18next.t('months.october'),
-            'November': i18next.t('months.november'),
-            'December': i18next.t('months.december')
-        };
-
-        window.genderTranslations = {
-            'Male': i18next.t('gender.male'),
-            'Female': i18next.t('gender.female'),
-            'Other': i18next.t('gender.other'),
-            'Unknown': i18next.t('gender.unknown')
-        };
-    }
 
     function fetchData() {
         const birthdatesRef = ref(db, 'birthdates');
@@ -494,7 +416,7 @@
         const selectedCategory = document.getElementById('categorySelect').value;
 
         if (Object.keys(allData).length === 0) {
-            grid.innerHTML = `<p>${i18next.t('dashboard.noData')}</p>`;
+            grid.innerHTML = '<p>No data found.</p>';
             return;
         }
 
@@ -554,32 +476,14 @@
             let displayKey = key;
             let displayValue = counts[key];
             
-            // Traduire les clés si nécessaire
-            if (selectedCategory === 'daily' && window.daysTranslations) {
-                displayKey = window.daysTranslations[key] || key;
-            } else if (selectedCategory === 'monthly' && window.monthsTranslations) {
-                displayKey = window.monthsTranslations[key] || key;
-            } else if (selectedCategory === 'gender' && window.genderTranslations) {
-                displayKey = window.genderTranslations[key] || key;
-            }
-            
             // Formater l'affichage selon la catégorie
             if (selectedCategory === 'age') {
-                displayKey = i18next.t('dashboard.displayFormats.age', { age: key });
-                displayValue = i18next.t('dashboard.displayFormats.count', { 
-                    count: counts[key], 
-                    label: i18next.t(categoryLabels[selectedCategory]) 
-                });
+                displayKey = `${key} years`;
+                displayValue = `${counts[key]} ${categoryLabels[selectedCategory]}`;
             } else if (selectedCategory === 'daily' || selectedCategory === 'monthly' || selectedCategory === 'yearly') {
-                displayValue = i18next.t('dashboard.displayFormats.count', { 
-                    count: counts[key], 
-                    label: i18next.t(categoryLabels[selectedCategory]) 
-                });
+                displayValue = `${counts[key]} ${categoryLabels[selectedCategory]}`;
             } else if (selectedCategory === 'population') {
-                displayValue = i18next.t('dashboard.displayFormats.count', { 
-                    count: counts[key], 
-                    label: i18next.t(categoryLabels[selectedCategory]) 
-                });
+                displayValue = `${counts[key]} ${categoryLabels[selectedCategory]}`;
             }
             
             card.innerHTML = `<div class="title">${displayKey}</div><div class="value">${displayValue}</div>`;
@@ -587,7 +491,7 @@
         });
 
         if (grid.innerHTML === '') {
-            grid.innerHTML = `<p>${i18next.t('dashboard.noData')}</p>`;
+            grid.innerHTML = '<p>No data found.</p>';
         }
     }
 
@@ -667,13 +571,6 @@
             paypalBtn.style.backgroundColor = 
                 paypalBtn.style.backgroundColor === 'green' ? '#007BFF' : 'green';
         }, 10000);
-        
-        // Écouter les changements de langue pour mettre à jour les traductions dynamiques
-        i18next.on('languageChanged', function() {
-            $('body').localize();
-            updateDynamicTranslations();
-            updateCards(); // Mettre à jour les cartes avec la nouvelle langue
-        });
     });
 </script>
 </body>
