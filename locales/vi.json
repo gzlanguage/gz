@@ -1,1 +1,155 @@
-jkk
+{
+  "header": {
+    "accessCode": "Mã truy cập",
+    "accessCodeSubmit": "Gửi - để nhận mã của bạn."
+  },
+  "nav": {
+    "faq": "Câu hỏi thường gặp",
+    "discovery": "Khám phá",
+    "flower": "Hoa",
+    "community": "Cộng đồng",
+    "contact": "Liên hệ",
+    "terms": "Điều khoản",
+    "privacy": "Quyền riêng tư"
+  },
+  "notification": {
+    "main": "Bạn không sinh ra một mình - hãy tìm người bạn cùng sinh nhật ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Tham gia cùng chúng tôi và khám phá những bí mật của các thế hệ trong quá khứ, hiện tại và tương lai chỉ với vài cú nhấp chuột."
+  },
+  "form": {
+    "dateLabel": "Chọn ngày sinh của bạn",
+    "countryLabel": "Chọn quốc gia sinh của bạn",
+    "terms": "Bằng cách gửi, bạn đồng ý với các điều khoản sử dụng của chúng tôi.",
+    "submit": "Gửi",
+    "submitted": "Đã gửi",
+    "pleaseWait": "Vui lòng chờ...",
+    "error": "Lỗi"
+  },
+  "howItWorks": {
+    "title": "Cách thức hoạt động?",
+    "description": "Bạn có hai lựa chọn: đầu tiên là một lịch để chọn ngày sinh của bạn, và thứ hai là một trình chọn để chọn quốc gia sinh của bạn. Sau khi bạn thực hiện lựa chọn, hãy nhấp vào \"Gửi\". Sau đó, bạn sẽ được yêu cầu chỉ định giới tính của mình; hãy nhấp vào tùy chọn này để trở thành người đóng góp. Cuối cùng, hãy nhấp vào nút \"Khám Phá\", nút này sẽ nhấp nháy màu xanh lá cây. Bạn sẽ phát hiện ra hai trình chọn mới: điều hướng theo sở thích của bạn để khám phá các thống kê."
+  },
+  "footer": {
+    "dontMiss": "Đừng bỏ lỡ bất cứ điều gì"
+  },
+  "gender": {
+    "title": "Giới tính của bạn?",
+    "binary": "Giới tính nhị phân",
+    "man": "Nam",
+    "woman": "Nữ",
+    "nonBinary": "Giới tính không nhị phân",
+    "nonBinaryOption": "Không nhị phân",
+    "genderqueer": "Giới tính queer",
+    "genderfluid": "Giới tính linh hoạt",
+    "agender": "Không có giới tính",
+    "pangender": "Đại giới",
+    "demigender": "Giới tính nửa",
+    "transgender": "Nhận dạng chuyển giới",
+    "transMan": "Nam chuyển giới",
+    "transWoman": "Nữ chuyển giới",
+    "transgender2": "Chuyển giới",
+    "transsexual": "Chuyển giới tính",
+    "cultural": "Giới tính văn hóa và tinh thần",
+    "twoSpirit": "Hai linh hồn",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Nhận dạng giới tính khác",
+    "bigender": "Hai giới",
+    "androgyne": "Androgyne",
+    "neutrois": "Neutrois"
+  },
+  "community": {
+    "title": "Tham gia cộng đồng G-Z",
+    "description": "Tham gia cộng đồng G-Z và kết nối với những người có cùng ngày sinh với bạn! Thảo luận, tạo đội cho các cuộc thi sắp tới và khám phá những người bạn cùng sinh nhật.",
+    "howItWorks": "Cách thức hoạt động:",
+    "step1": "1. Nhấp vào nút \"Tham gia G-Z\" bên dưới.",
+    "step2": "2. Chấp nhận lời mời Discord.",
+    "step3": "3. Nhấp vào \"Quay lại\" ở góc trên bên trái để xem các nhóm của bạn trong tháng sau 'Chọn đội của bạn'.",
+    "step5": "5. Chọn nhóm tương ứng với ngày sinh của bạn.",
+    "joinButton": "Tham gia G-Z"
+  },
+  "flower": {
+    "title": "Hoa của cuộc sống",
+    "myFlower": "Hoa của tôi",
+    "myFlowerWithDate": "Hoa của tôi - {{month}} ({{day}})",
+    "defaultMotivation": "Gửi thông tin của bạn để khám phá động lực hoa của bạn.",
+    "shareButton": "Chia sẻ hoa của tôi",
+    "shareWarning": "Hoàn hảo để chia sẻ trong các câu chuyện của bạn, chỉ cần điều chỉnh.",
+    "share": "Chia sẻ",
+    "close": "Đóng",
+    "websiteUrl": "Khám phá của bạn tại www.g-z.online",
+    "shareTitle": "Hoa G-Z của tôi",
+    "shareText": "Khám phá của bạn tại g-z.online",
+    "shareMessage": "Xem hoa G-Z của tôi: {{month}} ({{day}}). Khám phá của bạn tại g-z.online",
+    "motivations": {
+      "trait1": "Sự sáng tạo của bạn chiếu sáng những thách thức tối tăm nhất.",
+      "trait2": "Sự tốt bụng của bạn là một món quà hiếm có trong thế giới này.",
+      "trait3": "Sự kiên trì của bạn phá vỡ những rào cản mà người khác không thấy.",
+      "trait4": "Góc nhìn độc đáo của bạn giải quyết những gì có vẻ không thể giải quyết.",
+      "trait5": "Năng lượng của bạn là lây lan và biến đổi.",
+      "trait6": "Sự kiên nhẫn của bạn tiết lộ những gì người khác mất trong sự vội vàng.",
+      "trait7": "Sự can đảm của bạn đối mặt với những nỗi sợ hãi khiến nhiều người tê liệt.",
+      "trait8": "Sự khôn ngoan của bạn dẫn dắt bạn qua mê cung của cuộc sống.",
+      "trait9": "Sự lạc quan của bạn tìm thấy ánh sáng trong những góc tối tăm nhất.",
+      "trait10": "Sự tập trung của bạn biến giấc mơ thành hiện thực.",
+      "trait11": "Sự hào phóng của bạn tạo ra những làn sóng thay đổi.",
+      "trait12": "Sự trung thực của bạn xây dựng những cây cầu vững chắc.",
+      "trait13": "Sự đồng cảm của bạn chữa lành những vết thương vô hình.",
+      "trait14": "Sự đáng tin cậy của bạn làm cho bạn trở thành một điểm tựa cho mọi người.",
+      "trait15": "Sự linh hoạt của bạn biến hỗn loạn thành cơ hội.",
+      "trait16": "Sự quyết tâm của bạn âm thầm di chuyển những ngọn núi.",
+      "trait17": "Sự quan tâm của bạn chạm đến trái tim một cách sâu sắc.",
+      "trait18": "Sự nhiệt tình của bạn thắp sáng đam mê của người khác.",
+      "trait19": "Trí tuệ của bạn nhìn thấy các mẫu trong tiếng ồn.",
+      "trait20": "Sự nhạy cảm của bạn tiết lộ sự thật đằng sau những chiếc mặt nạ.",
+      "trait21": "Sự tưởng tượng của bạn tạo ra những thế giới mới.",
+      "trait22": "Sự tự tin của bạn truyền cảm hứng mà không cần lời nói.",
+      "trait23": "Sự hài hước của bạn chữa lành những gì y học không thể.",
+      "trait24": "Sự bình tĩnh của bạn ổn định những dòng nước hỗn loạn.",
+      "trait25": "Sự tò mò của bạn mở khóa những bí mật của cuộc sống.",
+      "trait26": "Sự đồng cảm của bạn kết hợp những chia rẽ không thể.",
+      "trait27": "Trực giác của bạn nói lên sự thật trước khi logic làm điều đó."
+    },
+    "encouragements": {
+      "e1": "Hãy tin vào tiếng nói bên trong của bạn; hãy biết sự thật của bạn.",
+      "e2": "Ánh sáng của bạn cần thiết chính xác ở nơi bạn đang ở.",
+      "e3": "Ngay cả những bước nhỏ về phía trước cũng thay đổi vận mệnh của bạn.",
+      "e4": "Thế giới cần chính xác những gì chỉ bạn có thể cung cấp.",
+      "e5": "Cuộc hành trình của bạn quan trọng hơn bất kỳ điểm đến nào.",
+      "e6": "Những thách thức tiết lộ sức mạnh ẩn giấu của bạn.",
+      "e7": "Bản thân thật sự của bạn là sức mạnh lớn nhất của bạn.",
+      "e8": "Những hạt giống được gieo hôm nay sẽ trở thành rừng vào ngày mai.",
+      "e9": "Ảnh hưởng của bạn vượt xa những gì bạn sẽ thấy.",
+      "e10": "Khi bóng đổ xuống, ánh sáng bên trong bạn trở nên mạnh mẽ hơn.",
+      "e11": "Những gì thách thức bạn hôm nay sẽ làm cho bạn mạnh mẽ hơn vào ngày mai.",
+      "e12": "Vũ trụ âm thầm ủng hộ những người dám mơ ước.",
+      "e13": "Sự hiện diện của bạn quan trọng hơn những gì bạn nhận ra.",
+      "e14": "Can đảm không phải là không có sợ hãi; mà là tiến lên mặc dù có nó.",
+      "e15": "Giọng nói độc đáo của bạn xứng đáng được nghe.",
+      "e16": "Lửa bên trong bạn sáng hơn những trở ngại trước mắt."
+    },
+    "transitions": {
+      "t1": " Hãy nhớ rằng, ",
+      "t2": " Hãy biết rằng, ",
+      "t3": " Hãy ôm lấy rằng, ",
+      "t4": " Hãy cảm nhận rằng, ",
+      "t5": " Hãy tin rằng, ",
+      "t6": " Hãy tin rằng, ",
+      "t7": " Hãy tôn trọng rằng "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Bạn không thể chọn một ngày trong tương lai làm ngày sinh của mình.",
+    "formIncomplete": "Vui lòng nhập ngày sinh và chọn một quốc gia!",
+    "resetConfirmation": "Bạn có chắc chắn muốn đặt lại dữ liệu của mình không? Điều này sẽ xóa thông tin của bạn khỏi cơ sở dữ liệu của chúng tôi.",
+    "resetError": "Đã xảy ra sự cố khi đặt lại dữ liệu của bạn. Vui lòng thử lại sau.",
+    "resetSuccess": "Dữ liệu của bạn đã được đặt lại thành công.",
+    "flowerSubmitFirst": "Vui lòng gửi thông tin của bạn trước để nhận mã hoa.",
+    "captureError": "Không thể lấy hoa của bạn. Vui lòng thử lại.",
+    "clipboardSuccess": "Văn bản để chia sẻ đã được sao chép vào clipboard! Bây giờ bạn có thể dán thủ công và chia sẻ với hình ảnh. Nếu liên kết không hoạt động trực tiếp, hãy gõ \"g-z.online\" vào trình duyệt của bạn.",
+    "clipboardError": "Không thể sao chép vào clipboard. Vui lòng chia sẻ thủ công. Đừng quên nhập \"g-z.online\" vào trình duyệt của bạn để truy cập trang web.",
+    "shareManually": "Vui lòng chia sẻ hình ảnh thủ công. Đừng quên nhập \"g-z.online\" vào trình duyệt của bạn để truy cập trang web."
+  }
+}
