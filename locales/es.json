@@ -1,8 +1,7 @@
 {
   "header": {
     "accessCode": "Código de acceso",
-    "accessCodeSubmit": "Enviar - para obtener tu código.",
-    "share": "Compartir"
+    "accessCodeSubmit": "Enviar - para obtener tu código."
   },
   "nav": {
     "faq": "FAQ",
@@ -59,11 +58,7 @@
     "other": "Otras identidades de género",
     "bigender": "Bigénero",
     "androgyne": "Andrógino",
-    "neutrois": "Neutrois",
-    "male": "Masculino",
-    "female": "Femenino",
-    "other": "Otro",
-    "unknown": "Desconocido"
+    "neutrois": "Neutrois"
   },
   "community": {
     "title": "Únete a la Comunidad G-Z",
@@ -155,64 +150,6 @@
     "captureError": "No se pudo capturar tu flor. Por favor, inténtalo de nuevo.",
     "clipboardSuccess": "¡Texto para compartir copiado al portapapeles! Ahora puedes pegarlo y compartirlo manualmente con la imagen. Si el enlace no funciona directamente, escribe manualmente \"g-z.online\" en tu navegador.",
     "clipboardError": "No se pudo copiar al portapapeles. Por favor, comparte manualmente. Recuerda escribir \"g-z.online\" en tu navegador para acceder al sitio.",
-    "shareManually": "Por favor, comparte la imagen manualmente. Recuerda escribir \"g-z.online\" en tu navegador pour acceder au site."
-  },
-  "dashboard": {
-    "selectCountry": "Seleccionar un país",
-    "selectCategory": "Seleccionar una categoría",
-    "allCountries": "Todos los países",
-    "noData": "No se encontraron datos.",
-    "categories": {
-      "daily": "Nacimientos por día",
-      "monthly": "Nacimientos por mes",
-      "yearly": "Nacimientos por año",
-      "gender": "Género",
-      "age": "Edades",
-      "population": "Origen"
-    },
-    "displayFormats": {
-      "age": "{{age}} años",
-      "count": "{{count}} {{label}}"
-    }
-  },
-  "modals": {
-    "statsInfo": {
-      "description": "Las estadísticas que verás son las presentes en la base de datos. A medida que aumente el número de personas, nos acercaremos a las cifras exactas.",
-      "okButton": "OK"
-    },
-    "support": {
-      "description": "Apoya a G-Z para ayudarnos a desarrollar este proyecto.",
-      "button": "Apoyar ahora"
-    },
-    "faq": {
-      "description": "Las estadísticas se actualizan automáticamente con cada nueva presentación."
-    }
-  },
-  "labels": {
-    "births": "nacimientos",
-    "people": "personas"
-  },
-  "days": {
-    "sunday": "Domingo",
-    "monday": "Lunes",
-    "tuesday": "Martes",
-    "wednesday": "Miércoles",
-    "thursday": "Jueves",
-    "friday": "Viernes",
-    "saturday": "Sábado"
-  },
-  "months": {
-    "january": "Enero",
-    "february": "Febrero",
-    "march": "Marzo",
-    "april": "Abril",
-    "may": "Mayo",
-    "june": "Junio",
-    "july": "Julio",
-    "august": "Agosto",
-    "september": "Septiembre",
-    "october": "Octubre",
-    "november": "Noviembre",
-    "december": "Diciembre"
+    "shareManually": "Por favor, comparte la imagen manualmente. Recuerda escribir \"g-z.online\" en tu navegador para acceder al sitio."
   }
 }
