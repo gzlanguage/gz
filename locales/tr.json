@@ -1,1 +1,155 @@
-gjk
+{
+  "header": {
+    "accessCode": "Erişim Kodu",
+    "accessCodeSubmit": "Gönder - kodunuzu almak için."
+  },
+  "nav": {
+    "faq": "Sıkça Sorulan Sorular",
+    "discovery": "Keşif",
+    "flower": "Çiçek",
+    "community": "Topluluk",
+    "contact": "İletişim",
+    "terms": "Şartlar",
+    "privacy": "Gizlilik"
+  },
+  "notification": {
+    "main": "Yalnız doğmadınız - doğum gününüzdeki ikizlerinizi bulun ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Bize katılın ve sadece birkaç tıklama ile geçmiş, mevcut ve gelecek nesillerin sırlarını keşfedin."
+  },
+  "form": {
+    "dateLabel": "Doğum tarihinizi seçin",
+    "countryLabel": "Doğduğunuz ülkeyi seçin",
+    "terms": "Göndererek, kullanım koşullarımızı kabul etmiş olursunuz.",
+    "submit": "Gönder",
+    "submitted": "Gönderildi",
+    "pleaseWait": "Lütfen bekleyin...",
+    "error": "Hata"
+  },
+  "howItWorks": {
+    "title": "Nasıl çalışır?",
+    "description": "İki seçeneğiniz var: ilki doğum tarihinizi seçmek için bir takvim, ikincisi doğduğunuz ülkeyi seçmek için bir seçim. Tercihlerinizi tamamladıktan sonra \"Gönder\"e tıklayın. Ardından, cinsiyetinizi belirtmeniz istenecek; bu seçeneği tıklayarak katkıda bulunabilirsiniz. Son olarak, yeşil yanıp sönen \"Keşfet\" butonuna tıklayın. Ardından iki yeni seçim bulacaksınız: İstatistikleri keşfetmek için tercihinize göre gezinin."
+  },
+  "footer": {
+    "dontMiss": "Hiçbir şeyi kaçırmayın"
+  },
+  "gender": {
+    "title": "Cinsiyetiniz nedir?",
+    "binary": "İkili Cinsiyet",
+    "man": "Erkek",
+    "woman": "Kadın",
+    "nonBinary": "İkili Olmayan Cinsiyet",
+    "nonBinaryOption": "İkili Olmayan",
+    "genderqueer": "Cinsiyet Kuir",
+    "genderfluid": "Cinsiyet Akışkan",
+    "agender": "Cinsiyetsiz",
+    "pangender": "Pan Cinsiyet",
+    "demigender": "Demi Cinsiyet",
+    "transgender": "Transgender Kimlikler",
+    "transMan": "Trans Erkek",
+    "transWoman": "Trans Kadın",
+    "transgender2": "Transgender",
+    "transsexual": "Transseksüel",
+    "cultural": "Kültürel ve Ruhsal Cinsiyet",
+    "twoSpirit": "İki Ruh",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Diğer Cinsiyet Kimlikleri",
+    "bigender": "Biyolojik Cinsiyet",
+    "androgyne": "Androjen",
+    "neutrois": "Nütruis"
+  },
+  "community": {
+    "title": "G-Z Topluluğuna Katılın",
+    "description": "G-Z topluluğuna katılın ve doğum gününüzü paylaşan kişilerle bağlantı kurun! Tartışmalara katılın, gelecek yarışmalar için takımlar oluşturun ve doğum gününüzdeki ikizlerinizi bulun.",
+    "howItWorks": "Nasıl çalışır:",
+    "step1": "1. Aşağıdaki \"G-Z’ye Katıl\" butonuna tıklayın.",
+    "step2": "2. Discord davetini kabul edin.",
+    "step3": "3. 'Takımınızı Seçin' bölümünden sonra ayın gruplarını görmek için sol üstteki \"Geri\" butonuna tıklayın.",
+    "step5": "5. Doğum gününüze uygun grubu seçin.",
+    "joinButton": "G-Z’ye Katıl"
+  },
+  "flower": {
+    "title": "Hayatın Çiçeği",
+    "myFlower": "Benim Çiçeğim",
+    "myFlowerWithDate": "Benim Çiçeğim - {{month}} ({{day}})",
+    "defaultMotivation": "Çiçek ilhamınızı keşfetmek için bilgilerinizi gönderin.",
+    "shareButton": "Benim Çiçeğimi Paylaş",
+    "shareWarning": "Hikayelerinizde paylaşmak için mükemmel, sadece ayarlayın.",
+    "share": "Paylaş",
+    "close": "Kapat",
+    "websiteUrl": "www.g-z.online adresinde çiçeğinizi keşfedin",
+    "shareTitle": "Benim G-Z Çiçeğim",
+    "shareText": "g-z.online adresinde çiçeğinizi keşfedin",
+    "shareMessage": "Benim G-Z çiçeğimi görün: {{month}} ({{day}}). g-z.online adresinde çiçeğinizi keşfedin",
+    "motivations": {
+      "trait1": "Yaratıcılığınız en karanlık zorlukları aydınlatır.",
+      "trait2": "Nazikliğiniz bu dünyada nadir bir hediyedir.",
+      "trait3": "Azminiz başkalarının göremediği engelleri aşar.",
+      "trait4": "Eşsiz bakış açınız çözümsüz görünenleri çözer.",
+      "trait5": "Enerjiniz bulaşıcı ve dönüştürücüdür.",
+      "trait6": "Sabır, diğerlerinin acele içinde kaybettiği şeyleri ortaya çıkarır.",
+      "trait7": "Cesaretiniz birçok kişiyi felç eden korkularla yüzleşir.",
+      "trait8": "Bilgeliğiniz yaşamın labirentinde sizi yönlendirir.",
+      "trait9": "İyimserliğiniz en karanlık köşelerde ışık bulur.",
+      "trait10": "Dikkatiniz hayalleri gerçeğe dönüştürür.",
+      "trait11": "Cömertliğiniz değişim dalgaları yaratır.",
+      "trait12": "Dürüstlüğünüz sarsılmaz köprüler inşa eder.",
+      "trait13": "Şefkatiniz görünmeyen yaraları iyileştirir.",
+      "trait14": "Güvenilirliğiniz herkes için bir limandır.",
+      "trait15": "Uyum sağlama yeteneğiniz kaosu fırsata dönüştürür.",
+      "trait16": "Kararlılığınız sessizce dağları yerinden oynatır.",
+      "trait17": "Dikkatiniz kalpleri derinlemesine etkiler.",
+      "trait18": "Heyecanınız diğerlerinin tutkularını ateşler.",
+      "trait19": "Zekânız gürültüdeki kalıpları görür.",
+      "trait20": "Duyarlılığınız maskelerin ardındaki gerçeği açığa çıkarır.",
+      "trait21": "Hayal gücünüz yeni dünyalar yaratır.",
+      "trait22": "Özgüveniniz kelimesiz ilham verir.",
+      "trait23": "Espriniz, tıbbın iyileştiremeyeceği şeyleri iyileştirir.",
+      "trait24": "Sakinliğiniz çalkantılı suları dengeye getirir.",
+      "trait25": "Merakınız yaşamın sırlarını açığa çıkarır.",
+      "trait26": "Empatiniz imkansız bölünmeleri birleştirir.",
+      "trait27": "Sezgileriniz, mantığın söylediğinden önce gerçeği ifade eder."
+    },
+    "encouragements": {
+      "e1": "İç sesinize güvenin; gerçeğinizi bilin.",
+      "e2": "Işığınız tam olarak bulunduğunuz yerde gereklidir.",
+      "e3": "Küçük adımlar bile kaderinizi değiştirebilir.",
+      "e4": "Dünya, yalnızca sizin sağlayabileceğiniz şeye ihtiyaç duyar.",
+      "e5": "Seyahatiniz, herhangi bir hedeften daha önemlidir.",
+      "e6": "Zorluklar, gizli güçlerinizi ortaya çıkarır.",
+      "e7": "Gerçek benliğiniz, en büyük gücünüzdür.",
+      "e8": "Bugün ektiğiniz tohumlar, yarının ormanı olur.",
+      "e9": "Etkiniz, asla göremeyeceğiniz kadar uzanır.",
+      "e10": "Gölgeler düştüğünde, içteki ışığınız daha da güçlenir.",
+      "e11": "Bugün sizi zorlayan şey, yarın sizi daha güçlü kılacaktır.",
+      "e12": "Evren, hayal kurmaya cesaret edenler için komplolar kurar.",
+      "e13": "Varlığınız, fark ettiğinizden daha önemlidir.",
+      "e14": "Cesaret, korkunun yokluğu değildir; yine de ilerlemektir.",
+      "e15": "Eşsiz sesinizin duyulmayı hak ediyor.",
+      "e16": "İçinizdeki ateş, önünüzdeki engellerden daha parlak yanar."
+    },
+    "transitions": {
+      "t1": " Unutmayın, ",
+      "t2": " Bilin ki ",
+      "t3": " Kucaklayın ki ",
+      "t4": " Hissedin ki ",
+      "t5": " Güvenin ki ",
+      "t6": " İnanın ki ",
+      "t7": " Saygı gösterin ki "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Gelecekteki bir tarihi doğum tarihi olarak seçemezsiniz.",
+    "formIncomplete": "Lütfen bir doğum tarihi girin ve bir ülke seçin!",
+    "resetConfirmation": "Verilerinizi sıfırlamak istediğinizden emin misiniz? Bu, verilerinizi veritabanımızdan silecektir.",
+    "resetError": "Verilerinizi sıfırlarken bir sorun oluştu. Lütfen daha sonra tekrar deneyin.",
+    "resetSuccess": "Verileriniz başarıyla sıfırlandı.",
+    "flowerSubmitFirst": "Lütfen önce bilgilerinizi gönderin, böylece çiçek kodunuzu alabilirsiniz.",
+    "captureError": "Çiçeğinizi yakalamak başarısız oldu. Lütfen tekrar deneyin.",
+    "clipboardSuccess": "Paylaşmak için metin panoya kopyalandı! Şimdi manuel olarak yapıştırabilir ve görüntü ile paylaşabilirsiniz. Bağlantı doğrudan çalışmazsa, tarayıcınıza \"g-z.online\" yazın.",
+    "clipboardError": "Panoya kopyalamada başarısız. Lütfen manuel olarak paylaşın. Siteye erişmek için tarayıcınıza \"g-z.online\" yazmayı unutmayın.",
+    "shareManually": "Lütfen resmi manuel olarak paylaşın. Siteye erişmek için tarayıcınıza \"g-z.online\" yazmayı unutmayın."
+  }
+}
