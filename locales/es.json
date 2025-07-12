@@ -1,7 +1,7 @@
 {
-  "accessCode": {
-    "title": "Código de acceso",
-    "submit": "Envíe - para obtener su código."
+  "header": {
+    "accessCode": "Código de acceso",
+    "accessCodeSubmit": "Enviar - para obtener tu código."
   },
   "nav": {
     "faq": "FAQ",
@@ -12,36 +12,44 @@
     "terms": "Términos",
     "privacy": "Privacidad"
   },
-  "notification": "No naciste solo - Descubre a tus gemelos de cumpleaños ¯\\_(ツ)_/¯",
-  "footerTitle": "Únete a nosotros y descubre los secretos de generaciones pasadas, presentes y futuras en solo unos clics.",
-  "dateInput": {
-    "placeholder": "Selecciona tu fecha de nacimiento"
+  "notification": {
+    "main": "No naciste solo - Descubre a tus Gemelos de Cumpleaños ¯\\_(ツ)_/¯"
   },
-  "countrySelect": {
-    "placeholder": "Selecciona tu país de nacimiento"
+  "main": {
+    "title": "Únete a nosotros y descubre los secretos de las generaciones pasadas, presentes y futuras con solo unos clics."
   },
-  "termsText": "Al enviar, aceptas nuestros términos de uso.",
-  "submitButton": "Enviar",
+  "form": {
+    "dateLabel": "Selecciona tu fecha de nacimiento",
+    "countryLabel": "Selecciona tu país de nacimiento",
+    "terms": "Al enviar, aceptas nuestros términos de uso.",
+    "submit": "Enviar",
+    "submitted": "Enviado",
+    "pleaseWait": "Por favor espera...",
+    "error": "Error"
+  },
   "howItWorks": {
     "title": "¿Cómo funciona?",
-    "description": "Tienes dos selectores a tu disposición: el primero es un calendario para elegir tu fecha de nacimiento, y el segundo es un selector para tu país de nacimiento. Una vez que hayas hecho tus selecciones, haz clic en \"Enviar\". Después, se te pedirá que especifiques tu género; haz clic en esta opción para convertirte en contribuyente. Por último, haz clic en el botón \"Descubrimiento\", que parpadea en verde. Entonces descubrirás dos nuevos selectores: navega según tus preferencias para explorar las estadísticas."
+    "description": "Tienes dos selectores disponibles: el primero es un calendario para elegir tu fecha de nacimiento, y el segundo es un selector para tu país de nacimiento. Una vez realizadas tus selecciones, haz clic en \"Enviar\". Después, se te pedirá que especifiques tu género; haz clic en esta opción para convertirte en contribuyente. Finalmente, haz clic en el botón \"Descubrimiento\", que parpadea en verde. Luego descubrirás dos nuevos selectores: navega según tus preferencias para explorar las estadísticas."
   },
-  "dontMiss": "No te pierdas nada",
+  "footer": {
+    "dontMiss": "No te pierdas nada"
+  },
   "gender": {
     "title": "¿Tu género?",
     "binary": "Géneros binarios",
     "man": "Hombre",
     "woman": "Mujer",
-    "nonbinary": "Géneros no binarios",
-    "nonbinaryOption": "No binario",
+    "nonBinary": "Géneros no binarios",
+    "nonBinaryOption": "No binario",
     "genderqueer": "Genderqueer",
-    "genderfluid": "Genderfluid",
+    "genderfluid": "Género fluido",
     "agender": "Agénero",
-    "pangender": "Pangenérico",
+    "pangender": "Pangénero",
     "demigender": "Demigénero",
     "transgender": "Identidades transgénero",
     "transMan": "Hombre trans",
     "transWoman": "Mujer trans",
+    "transgender2": "Transgénero",
     "transsexual": "Transexual",
     "cultural": "Géneros culturales y espirituales",
     "twoSpirit": "Dos espíritus",
@@ -53,102 +61,95 @@
     "neutrois": "Neutrois"
   },
   "community": {
-    "title": "Únete a la comunidad G-Z",
-    "description": "Únete a la comunidad G-Z y conéctate con personas que comparten tu cumpleaños. ¡Chatea, forma equipos para las competiciones venideras y descubre a tus gemelos de cumpleaños!",
-    "howItWorks": "¿Cómo funciona?",
+    "title": "Únete a la Comunidad G-Z",
+    "description": "¡Únete a la Comunidad G-Z y conéctate con personas que comparten tu cumpleaños! Chatea, forma equipos para próximas competiciones y descubre a tus gemelos de cumpleaños.",
+    "howItWorks": "Cómo funciona:",
     "step1": "1. Haz clic en el botón \"Unirse a G-Z\" a continuación.",
     "step2": "2. Acepta la invitación de Discord.",
-    "step3": "3. Haz clic en \"Volver\" en la esquina superior izquierda para ver los grupos de tu mes después de 'Elige-tu-equipo'.",
-    "step4": "5. Selecciona el grupo que corresponde a tu día de nacimiento.",
+    "step3": "3. Haz clic en \"Atrás\" en la parte superior izquierda para ver los grupos de tu mes después de 'Elige-tu-equipo'.",
+    "step5": "5. Selecciona el grupo que coincida con tu día de nacimiento.",
     "joinButton": "Unirse a G-Z"
   },
   "flower": {
-    "title": "Flor de Vida",
+    "title": "Flor de la Vida",
     "myFlower": "Mi Flor",
     "myFlowerWithDate": "Mi Flor - {{month}} ({{day}})",
     "defaultMotivation": "Envía tu información para descubrir tu motivación floral.",
     "shareButton": "Compartir mi Flor",
-    "shareWarning": "Perfecto para compartir en tus Historias, simplemente ajusta.",
+    "shareWarning": "Perfecto para compartir en tus Historias, solo ajusta.",
     "share": "Compartir",
     "close": "Cerrar",
     "websiteUrl": "Descubre la tuya en www.g-z.online",
     "shareTitle": "Mi Flor G-Z",
     "shareText": "Descubre la tuya en g-z.online",
-    "fallbackShareText": "Descubre mi Flor de G-Z: {{month}} ({{day}}). Descubre la tuya en g-z.online",
-    "clipboardSuccess": "Texto de compartir copiado al portapapeles. Ahora puedes pegarlo y compartirlo manualmente con la imagen. Si el enlace no funciona directamente, escribe manualmente \"g-z.online\" en tu navegador.",
-    "clipboardError": "No se pudo copiar al portapapeles. Por favor, comparte manualmente. No olvides escribir \"g-z.online\" en tu navegador para acceder al sitio.",
-    "shareManual": "Por favor, comparte la imagen manualmente. No olvides escribir \"g-z.online\" en tu navegador para acceder al sitio.",
-    "positiveTraits": [
-      "Tu creatividad ilumina los desafíos más oscuros.",
-      "Tu amabilidad es un regalo raro en este mundo.",
-      "Tu perseverancia rompe barreras que otros no pueden ver.",
-      "Tu perspectiva única resuelve lo insoluble.",
-      "Tu energía es contagiosa y transformadora.",
-      "Tu paciencia revela lo que otros pierden en la prisa.",
-      "Tu valentía enfrenta miedos que paralizan a muchos.",
-      "Tu sabiduría te guía a través del laberinto de la vida.",
-      "Tu optimismo encuentra luz en los rincones más oscuros.",
-      "Tu enfoque transforma sueños en realidad.",
-      "Tu generosidad crea ondas de cambio.",
-      "Tu honestidad construye puentes irrompibles.",
-      "Tu compasión sana heridas invisibles.",
-      "Tu confiabilidad te convierte en el ancla de todos.",
-      "Tu adaptabilidad transforma el caos en oportunidad.",
-      "Tu determinación mueve montañas en silencio.",
-      "Tu consideración toca profundamente los corazones.",
-      "Tu entusiasmo enciende las pasiones de los demás.",
-      "Tu inteligencia ve patrones en el ruido.",
-      "Tu sensibilidad revela la verdad detrás de las máscaras.",
-      "Tu imaginación crea nuevos mundos.",
-      "Tu confianza inspira sin palabras.",
-      "Tu humor sana lo que la medicina no puede.",
-      "Tu calma estabiliza las aguas turbulentas.",
-      "Tu curiosidad desbloquea los misterios de la vida.",
-      "Tu empatía cierra brechas imposibles.",
-      "Tu intuición dice la verdad antes que la lógica."
-    ],
-    "encouragements": [
-      "Confía en tu voz interior; ella conoce tu verdad.",
-      "Tu luz es necesaria exactamente donde estás.",
-      "Incluso pequeños pasos hacia adelante cambian tu destino.",
-      "El mundo necesita exactamente lo que solo tú puedes ofrecer.",
-      "Tu viaje cuenta más que cualquier destino.",
-      "Los desafíos revelan tus fuerzas ocultas.",
-      "Tu autenticidad es tu mayor fortaleza.",
-      "Las semillas plantadas hoy se convierten en el bosque de mañana.",
-      "Tu impacto va más allá de lo que jamás verás.",
-      "Cuando las sombras caen, tu luz interior se vuelve más fuerte.",
-      "Lo que te desafía hoy te empodera mañana.",
-      "El universo conspira para quienes se atreven a soñar.",
-      "Tu presencia cuenta más de lo que realizas.",
-      "El coraje no es la ausencia de miedo; es avanzar a pesar de todo.",
-      "Tu voz única merece ser escuchada.",
-      "El fuego en ti arde más fuerte que los obstáculos frente a ti."
-    ],
-    "transitions": [
-      " Recuerda que ",
-      " Sabe que ",
-      " Abraza el hecho de que ",
-      " Siente que ",
-      " Confía en el hecho de que ",
-      " Cree que ",
-      " Honra el hecho de que "
-    ]
+    "shareMessage": "Mira mi Flor de G-Z: {{month}} ({{day}}). Descubre la tuya en g-z.online",
+    "motivations": {
+      "trait1": "Tu creatividad ilumina los desafíos más oscuros.",
+      "trait2": "Tu amabilidad es un regalo raro en este mundo.",
+      "trait3": "Tu persistencia rompe barreras que otros no pueden ver.",
+      "trait4": "Tu perspectiva única resuelve lo irresoluble.",
+      "trait5": "Tu energía es contagiosa y transformadora.",
+      "trait6": "Tu paciencia revela lo que otros pierden en la prisa.",
+      "trait7": "Tu valor enfrenta miedos que paralizan a muchos.",
+      "trait8": "Tu sabiduría te guía a través del laberinto de la vida.",
+      "trait9": "Tu optimismo encuentra luz en los rincones más oscuros.",
+      "trait10": "Tu enfoque transforma sueños en realidad.",
+      "trait11": "Tu generosidad crea ondas de cambio.",
+      "trait12": "Tu honestidad construye puentes inquebrantables.",
+      "trait13": "Tu compasión sana heridas invisibles.",
+      "trait14": "Tu confiabilidad te convierte en el ancla de todos.",
+      "trait15": "Tu adaptabilidad convierte el caos en oportunidad.",
+      "trait16": "Tu determinación mueve montañas silenciosamente.",
+      "trait17": "Tu consideración toca corazones profundamente.",
+      "trait18": "Tu entusiasmo enciende las pasiones de otros.",
+      "trait19": "Tu inteligencia ve patrones en el ruido.",
+      "trait20": "Tu sensibilidad revela la verdad detrás de las máscaras.",
+      "trait21": "Tu imaginación crea nuevos mundos.",
+      "trait22": "Tu confianza inspira sin palabras.",
+      "trait23": "Tu humor sana lo que la medicina no puede.",
+      "trait24": "Tu calma estabiliza aguas turbulentas.",
+      "trait25": "Tu curiosidad desbloquea los misterios de la vida.",
+      "trait26": "Tu empatía une divisiones imposibles.",
+      "trait27": "Tu intuición habla verdad antes que la lógica."
+    },
+    "encouragements": {
+      "e1": "Confía en tu voz interior; conoce tu verdad.",
+      "e2": "Tu luz es necesaria exactamente donde estás.",
+      "e3": "Incluso pequeños pasos adelante cambian tu destino.",
+      "e4": "El mundo necesita exactamente lo que solo tú ofreces.",
+      "e5": "Tu viaje importa más que cualquier destino.",
+      "e6": "Los desafíos revelan tus fortalezas ocultas.",
+      "e7": "Tu auténtico yo es tu mayor poder.",
+      "e8": "Las semillas plantadas hoy se convierten en el bosque del mañana.",
+      "e9": "Tu impacto llega más lejos de lo que jamás verás.",
+      "e10": "Cuando caen las sombras, tu luz interior se vuelve más fuerte.",
+      "e11": "Lo que te desafía hoy te empodera mañana.",
+      "e12": "El universo conspira para aquellos que se atreven a soñar.",
+      "e13": "Tu presencia importa más de lo que te das cuenta.",
+      "e14": "El coraje no es ausencia de miedo; es seguir adelante de todas formas.",
+      "e15": "Tu voz única merece ser escuchada.",
+      "e16": "El fuego dentro de ti arde más brillante que los obstáculos frente a ti."
+    },
+    "transitions": {
+      "t1": " Recuerda, ",
+      "t2": " Sabe que ",
+      "t3": " Abraza que ",
+      "t4": " Siente que ",
+      "t5": " Confía en que ",
+      "t6": " Cree que ",
+      "t7": " Honra que "
+    }
   },
-  "months": [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-  ],
-  "errors": {
-    "futureDateSelected": "No puedes seleccionar una fecha futura para tu fecha de nacimiento.",
-    "missingFields": "¡Por favor, ingresa una fecha de nacimiento y selecciona un país!",
-    "resetError": "Hubo un problema al restablecer tus datos. Por favor, intenta de nuevo más tarde.",
-    "flowerCodeMissing": "Primero, envía tu información para obtener tu código de Flor.",
-    "captureError": "No se pudo capturar tu flor. Por favor, intenta de nuevo."
-  },
-  "pleaseWait": "Por favor espera...",
-  "submittedStatus": "Enviado",
-  "error": "Error",
-  "resetConfirmation": "¿Estás seguro de que quieres restablecer tus datos? Esto eliminará tu información de nuestra base de datos.",
-  "resetSuccess": "Tus datos han sido restablecidos con éxito."
+  "alerts": {
+    "futureDateError": "No puedes seleccionar una fecha futura como fecha de nacimiento",
+    "formIncomplete": "¡Por favor, ingresa una fecha de nacimiento y selecciona un país!",
+    "resetConfirmation": "¿Estás seguro de que quieres restablecer tus datos? Esto eliminará tu información de nuestra base de datos.",
+    "resetError": "Hubo un problema al restablecer tus datos. Por favor, inténtalo de nuevo más tarde.",
+    "resetSuccess": "Tus datos han sido restablecidos con éxito.",
+    "flowerSubmitFirst": "Por favor, envía tu información primero para obtener tu código de Flor.",
+    "captureError": "No se pudo capturar tu flor. Por favor, inténtalo de nuevo.",
+    "clipboardSuccess": "¡Texto para compartir copiado al portapapeles! Ahora puedes pegarlo y compartirlo manualmente con la imagen. Si el enlace no funciona directamente, escribe manualmente \"g-z.online\" en tu navegador.",
+    "clipboardError": "No se pudo copiar al portapapeles. Por favor, comparte manualmente. Recuerda escribir \"g-z.online\" en tu navegador para acceder al sitio.",
+    "shareManually": "Por favor, comparte la imagen manualmente. Recuerda escribir \"g-z.online\" en tu navegador para acceder al sitio."
+  }
 }
