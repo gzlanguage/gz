@@ -1,1 +1,155 @@
-fhj
+{
+  "header": {
+    "accessCode": "Kode Akses",
+    "accessCodeSubmit": "Kirim - untuk mendapatkan kode Anda."
+  },
+  "nav": {
+    "faq": "FAQ",
+    "discovery": "Penemuan",
+    "flower": "Bunga",
+    "community": "Komunitas",
+    "contact": "Kontak",
+    "terms": "Syarat",
+    "privacy": "Privasi"
+  },
+  "notification": {
+    "main": "Anda tidak lahir sendirian - Temukan Kembar Ulang Tahun Anda ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Bergabunglah dengan kami dan temukan rahasia generasi masa lalu, sekarang, dan masa depan dalam beberapa klik."
+  },
+  "form": {
+    "dateLabel": "Pilih tanggal lahir Anda",
+    "countryLabel": "Pilih negara lahir Anda",
+    "terms": "Dengan mengirim, Anda menyetujui syarat penggunaan kami.",
+    "submit": "Kirim",
+    "submitted": "Terkirim",
+    "pleaseWait": "Silakan tunggu...",
+    "error": "Kesalahan"
+  },
+  "howItWorks": {
+    "title": "Bagaimana cara kerjanya?",
+    "description": "Anda memiliki dua pemilih yang tersedia: yang pertama adalah kalender untuk memilih tanggal lahir Anda, dan yang kedua adalah pemilih untuk negara lahir Anda. Setelah pilihan Anda selesai, klik \"Kirim\". Selanjutnya, Anda akan diminta untuk menentukan jenis kelamin Anda; klik opsi ini untuk menjadi kontributor. Akhirnya, klik tombol \"Penemuan\", yang berkedip hijau. Anda akan menemukan dua pemilih baru: navigasikan sesuai preferensi Anda untuk menjelajahi statistik."
+  },
+  "footer": {
+    "dontMiss": "Jangan lewatkan apa pun"
+  },
+  "gender": {
+    "title": "Jenis kelamin Anda?",
+    "binary": "Jenis kelamin biner",
+    "man": "Pria",
+    "woman": "Wanita",
+    "nonBinary": "Jenis kelamin non-biner",
+    "nonBinaryOption": "Non-biner",
+    "genderqueer": "Genderqueer",
+    "genderfluid": "Gender fluid",
+    "agender": "Agender",
+    "pangender": "Pangénder",
+    "demigender": "Demigender",
+    "transgender": "Identitas transgender",
+    "transMan": "Pria transgender",
+    "transWoman": "Wanita transgender",
+    "transgender2": "Transgender",
+    "transsexual": "Transseksual",
+    "cultural": "Jenis kelamin budaya dan spiritual",
+    "twoSpirit": "Dua roh",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Identitas gender lainnya",
+    "bigender": "Bigender",
+    "androgyne": "Androgini",
+    "neutrois": "Neutrois"
+  },
+  "community": {
+    "title": "Bergabunglah dengan Komunitas G-Z",
+    "description": "Bergabunglah dengan Komunitas G-Z dan terhubung dengan orang-orang yang berbagi ulang tahun Anda! Diskusikan, bentuk tim untuk kompetisi mendatang, dan temukan kembar ulang tahun Anda.",
+    "howItWorks": "Bagaimana cara kerjanya:",
+    "step1": "1. Klik tombol \"Bergabung dengan G-Z\" di bawah.",
+    "step2": "2. Terima undangan Discord.",
+    "step3": "3. Klik \"Kembali\" di kiri atas untuk melihat grup bulan Anda setelah 'Pilih-tim-Anda'.",
+    "step5": "5. Pilih grup yang sesuai dengan hari ulang tahun Anda.",
+    "joinButton": "Bergabung dengan G-Z"
+  },
+  "flower": {
+    "title": "Bunga Kehidupan",
+    "myFlower": "Bunga Saya",
+    "myFlowerWithDate": "Bunga Saya - {{month}} ({{day}})",
+    "defaultMotivation": "Kirim informasi Anda untuk menemukan motivasi bunga Anda.",
+    "shareButton": "Bagikan bunga saya",
+    "shareWarning": "Sempurna untuk dibagikan di Cerita Anda, sesuaikan saja.",
+    "share": "Bagikan",
+    "close": "Tutup",
+    "websiteUrl": "Temukan milik Anda di www.g-z.online",
+    "shareTitle": "Bunga Saya G-Z",
+    "shareText": "Temukan milik Anda di g-z.online",
+    "shareMessage": "Lihat bunga saya di G-Z: {{month}} ({{day}}). Temukan milik Anda di g-z.online",
+    "motivations": {
+      "trait1": "Kreativitas Anda menerangi tantangan paling gelap.",
+      "trait2": "Kebaikan Anda adalah hadiah langka di dunia ini.",
+      "trait3": "Ketahanan Anda menghancurkan batasan yang tidak bisa dilihat orang lain.",
+      "trait4": "Perspektif unik Anda menyelesaikan apa yang tampak tidak terpecahkan.",
+      "trait5": "Energi Anda menular dan mengubah.",
+      "trait6": "Kesabaran Anda mengungkapkan apa yang hilang oleh orang lain dalam kepanikan.",
+      "trait7": "Keberanian Anda menghadapi ketakutan yang membuat banyak orang terjebak.",
+      "trait8": "Kebijaksanaan Anda membimbing Anda melalui labirin kehidupan.",
+      "trait9": "Optimisme Anda menemukan cahaya di sudut paling gelap.",
+      "trait10": "Fokus Anda mengubah mimpi menjadi kenyataan.",
+      "trait11": "Kedermawanan Anda menciptakan gelombang perubahan.",
+      "trait12": "Kejujuran Anda membangun jembatan yang tak tergoyahkan.",
+      "trait13": "Belas kasih Anda menyembuhkan luka yang tidak terlihat.",
+      "trait14": "Kepastian Anda menjadikan Anda jangkar bagi semua.",
+      "trait15": "Kemampuan beradaptasi Anda mengubah kekacauan menjadi peluang.",
+      "trait16": "Keteguhan Anda memindahkan gunung secara diam-diam.",
+      "trait17": "Pertimbangan Anda menyentuh hati dengan dalam.",
+      "trait18": "Antusiasme Anda menyulut semangat orang lain.",
+      "trait19": "Kecerdasan Anda melihat pola dalam kebisingan.",
+      "trait20": "Sensitivitas Anda mengungkapkan kebenaran di balik topeng.",
+      "trait21": "Imaginasi Anda menciptakan dunia baru.",
+      "trait22": "Kepercayaan diri Anda menginspirasi tanpa kata.",
+      "trait23": "Humor Anda menyembuhkan apa yang tidak bisa dilakukan obat.",
+      "trait24": "Ketentraman Anda menstabilkan air yang bergolak.",
+      "trait25": "Rasa ingin tahu Anda membuka rahasia kehidupan.",
+      "trait26": "Empati Anda menyatukan perpecahan yang mustahil.",
+      "trait27": "Intuisi Anda berbicara kebenaran sebelum logika melakukannya."
+    },
+    "encouragements": {
+      "e1": "Percayalah pada suara batin Anda; ketahui kebenaran Anda.",
+      "e2": "Cahaya Anda diperlukan tepat di tempat Anda berada.",
+      "e3": "Bahkan langkah kecil ke depan mengubah takdir Anda.",
+      "e4": "Dunia membutuhkan tepat apa yang hanya Anda bisa tawarkan.",
+      "e5": "Perjalanan Anda lebih penting daripada tujuan mana pun.",
+      "e6": "Tantangan mengungkapkan kekuatan tersembunyi Anda.",
+      "e7": "Diri Anda yang otentik adalah kekuatan terbesar Anda.",
+      "e8": "Benih yang ditanam hari ini menjadi hutan besok.",
+      "e9": "Dampak Anda lebih jauh dari yang pernah Anda lihat.",
+      "e10": "Ketika bayangan jatuh, cahaya batin Anda menjadi lebih kuat.",
+      "e11": "Apa yang menantang Anda hari ini akan membuat Anda lebih kuat besok.",
+      "e12": "Semesta berkonspirasi untuk mereka yang berani bermimpi.",
+      "e13": "Kehadiran Anda lebih berarti daripada yang Anda sadari.",
+      "e14": "Keberanian bukanlah ketidakhadiran ketakutan; itu adalah melangkah maju meskipun demikian.",
+      "e15": "Suara unik Anda layak didengar.",
+      "e16": "Api di dalam Anda bersinar lebih terang daripada rintangan yang ada di depan Anda."
+    },
+    "transitions": {
+      "t1": " Ingatlah, ",
+      "t2": " Ketahuilah bahwa ",
+      "t3": " Peluklah bahwa ",
+      "t4": " Rasakan bahwa ",
+      "t5": " Percayalah bahwa ",
+      "t6": " Percayalah bahwa ",
+      "t7": " Hormati bahwa "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Anda tidak dapat memilih tanggal di masa depan sebagai tanggal lahir.",
+    "formIncomplete": "Silakan masukkan tanggal lahir dan pilih negara!",
+    "resetConfirmation": "Apakah Anda yakin ingin mengatur ulang data Anda? Ini akan menghapus informasi Anda dari database kami.",
+    "resetError": "Terjadi masalah saat mengatur ulang data Anda. Silakan coba lagi nanti.",
+    "resetSuccess": "Data Anda telah berhasil direset.",
+    "flowerSubmitFirst": "Silakan kirim informasi Anda terlebih dahulu untuk mendapatkan kode Bunga Anda.",
+    "captureError": "Gagal menangkap bunga Anda. Silakan coba lagi.",
+    "clipboardSuccess": "Teks untuk dibagikan telah disalin ke papan klip! Anda sekarang dapat menempelkannya dan membagikannya secara manual dengan gambar. Jika tautan tidak berfungsi langsung, ketik secara manual \"g-z.online\" di browser Anda.",
+    "clipboardError": "Gagal menyalin ke papan klip. Silakan bagikan secara manual. Jangan lupa untuk menulis \"g-z.online\" di browser Anda untuk mengakses situs.",
+    "shareManually": "Silakan bagikan gambar secara manual. Jangan lupa untuk menulis \"g-z.online\" di browser Anda untuk mengakses situs."
+  }
+}
