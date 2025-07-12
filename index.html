@@ -677,6 +677,19 @@
             font-weight: bold;
         }
         
+        .share-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 0.85em;
+            margin: 5px auto 15px auto;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+        }
+        
         .capture-website-url {
             text-align: center;
             font-size: 0.85em;
@@ -766,50 +779,33 @@
             opacity: 1;
         }
         
-        /* Language selector styles */
-        .language-switcher {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 100;
-            display: none; /* Hidden by default as per requirement */
-        }
-        
-        .language-btn {
-            background-color: transparent;
-            border: 1px solid #007bff;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
+        /* Styles pour le sélecteur de langue */
+        .language-selector {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-left: 5px;
-            cursor: pointer;
-            font-size: 0.8em;
-            color: #007bff;
-            transition: all 0.3s;
+            margin-right: 10px;
         }
         
-        .language-btn:hover, .language-btn.active {
-            background-color: #007bff;
-            color: white;
+        .language-option {
+            cursor: pointer;
+            margin: 0 5px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        
+        .language-option:hover, .language-option.active {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-  <!-- Optional language switcher (hidden by default) -->
-  <div class="language-switcher">
-    <button class="language-btn" data-lng="en">EN</button>
-    <button class="language-btn" data-lng="fr">FR</button>
-  </div>
 
   <header>
     <h1 translate="no">G-Z</h1>
     <div class="header-controls">
       <div class="access-code-container" id="accessCodeContainer">
-        <div class="access-code-title" data-i18n="accessCode.title">Access Code</div>
-        <div class="access-code-indicator" id="accessCodeIndicator" data-i18n="accessCode.indicator">Submit - to get your code.</div>
+        <div class="access-code-title" data-i18n="header.accessCode">Access Code</div>
+        <div class="access-code-indicator" id="accessCodeIndicator" data-i18n="header.accessCodeSubmit">Submit - to get your code.</div>
         <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
       </div>
     </div>
@@ -838,22 +834,22 @@
   </script>
   <div class="divider"></div>
   <div class="notification">
-    <span class="notification-text" data-i18n="notification.birthday">You were not born alone - Discover Your Birthday Twins ¯\_(ツ)_/¯</span>
+    <span class="notification-text" data-i18n="notification.main">You were not born alone - Discover Your Birthday Twins ¯\_(ツ)_/¯</span>
     <div class="new-message-badge"></div>
   </div>
 
   <div class="divider"></div>
 
-  <div class="footer-title" data-i18n="header.slogan">
+  <div class="footer-title" data-i18n="main.title">
     Join us and uncover the secrets of past, present, and future generations in just a few clicks.
   </div>
 
-  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
+  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" data-i18n="[placeholder]form.dateLabel" />
   <select class="country-select" id="countrySelect">
-    <option value="" disabled selected data-i18n="form.countrySelect">Select your country of birth</option>
+    <option value="" disabled selected data-i18n="form.countryLabel">Select your country of birth</option>
   </select>
   
-  <div class="terms-text" data-i18n="form.termsAgreement">
+  <div class="terms-text" data-i18n="form.terms">
     By submitting, you agree to our terms of use.
   </div>
   
@@ -865,7 +861,7 @@
 
   <div class="rectangle">
     <div class="text-line bold" style="font-size: 1em; color: #0056b3;" data-i18n="howItWorks.title">How does it work?</div>
-    <div class="text-line" data-i18n="howItWorks.description"> Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discovery" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics. </div>
+    <div class="text-line" data-i18n="howItWorks.description">Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discovery" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics.</div>
   </div>
 
   <div class="text-line" style="text-align: center; color: black;">
@@ -905,9 +901,9 @@
         <button class="close-button gender-option" value="Woman" data-i18n="gender.woman">Woman</button>
       </div>
       
-      <div class="gender-category" data-i18n="gender.nonbinary">Non-binary genders</div>
+      <div class="gender-category" data-i18n="gender.nonBinary">Non-binary genders</div>
       <div class="modal-footer">
-        <button class="close-button gender-option" value="Non-binary" data-i18n="gender.nonbinaryPerson">Non-binary</button>
+        <button class="close-button gender-option" value="Non-binary" data-i18n="gender.nonBinaryOption">Non-binary</button>
         <button class="close-button gender-option" value="Genderqueer" data-i18n="gender.genderqueer">Genderqueer</button>
         <button class="close-button gender-option" value="Genderfluid" data-i18n="gender.genderfluid">Genderfluid</button>
         <button class="close-button gender-option" value="Agender" data-i18n="gender.agender">Agender</button>
@@ -915,11 +911,11 @@
         <button class="close-button gender-option" value="Demigender" data-i18n="gender.demigender">Demigender</button>
       </div>
       
-      <div class="gender-category" data-i18n="gender.trans">Transgender identities</div>
+      <div class="gender-category" data-i18n="gender.transgender">Transgender identities</div>
       <div class="modal-footer">
         <button class="close-button gender-option" value="Trans Man" data-i18n="gender.transMan">Trans Man</button>
         <button class="close-button gender-option" value="Trans Woman" data-i18n="gender.transWoman">Trans Woman</button>
-        <button class="close-button gender-option" value="Transgender" data-i18n="gender.transgender">Transgender</button>
+        <button class="close-button gender-option" value="Transgender" data-i18n="gender.transgender2">Transgender</button>
         <button class="close-button gender-option" value="Transsexual" data-i18n="gender.transsexual">Transsexual</button>
       </div>
       
@@ -984,9 +980,9 @@
       <img id="capturedImage" class="captured-image" src="" alt="Captured Flower">
     </div>
 
-    <div class="share-warning" id="shareWarning">
+    <div class="share-warning" id="shareWarning" data-i18n="flower.shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
-      <span data-i18n="flower.shareWarning">Perfect for sharing in your Stories, just adjust.</span>
+      Perfect for sharing in your Stories, just adjust.
     </div>
     
     <div class="capture-controls">
@@ -1013,94 +1009,71 @@
     
     <div class="gz-logo">G-Z</div>
     
-    <div class="capture-website-url" data-i18n="flower.websitePromo">Discover yours at www.g-z.online</div>
+    <div class="capture-website-url" data-i18n="flower.websiteUrl">Discover yours at www.g-z.online</div>
   </div>
 
-  <!-- i18next scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.5.0/i18next.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.1.0/i18nextBrowserLanguageDetector.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.2.1/i18nextHttpBackend.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.16/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.4.0/i18nextHttpBackend.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+  
   <script>
-    // Initialize i18next
+    // i18next initialization
     function initI18n() {
-      // Check URL parameters for language
       const urlParams = new URLSearchParams(window.location.search);
-      const lngParam = urlParams.get('lng');
-      
-      // Get language from localStorage or use browser detection
-      const savedLng = localStorage.getItem('language') || (lngParam || navigator.language || navigator.userLanguage || 'en').substring(0, 2);
-      
-      // Save to localStorage and update URL
-      localStorage.setItem('language', savedLng);
-      if (!lngParam && savedLng !== 'en') {
-        const newUrl = window.location.pathname + '?lng=' + savedLng + window.location.hash;
-        window.history.replaceState({}, document.title, newUrl);
-      }
+      const lng = urlParams.get('lng') || localStorage.getItem('i18nextLng') || navigator.language || 'en';
       
       i18next
         .use(i18nextHttpBackend)
         .use(i18nextBrowserLanguageDetector)
         .init({
           fallbackLng: 'en',
-          lng: savedLng,
           debug: false,
-          backend: {
-            loadPath: 'locales/{{lng}}.json'
-          },
+          load: 'languageOnly',
           detection: {
             order: ['querystring', 'localStorage', 'navigator'],
             lookupQuerystring: 'lng',
-            lookupLocalStorage: 'language',
+            lookupLocalStorage: 'i18nextLng',
             caches: ['localStorage']
+          },
+          backend: {
+            loadPath: './locales/{{lng}}.json'
           }
         }, function(err, t) {
+          if (err) return console.error('Error loading translations:', err);
           jqueryI18next.init(i18next, $, { useOptionsAttr: true });
-          updateContent();
+          $('body').localize();
+          
+          // Force URL to include language parameter
+          if (!urlParams.has('lng')) {
+            const newUrl = `${window.location.pathname}?lng=${i18next.language}`;
+            window.history.replaceState({}, document.title, newUrl);
+          }
+          
+          // Save language preference
+          localStorage.setItem('i18nextLng', i18next.language);
         });
-    }
-
-    function updateContent() {
-      $('[data-i18n]').localize();
-      
-      // Update placeholder for date input based on language
-      const dateInput = document.getElementById('birthdate');
-      const placeholderKey = 'form.dateSelect';
-      const translatedPlaceholder = i18next.t(placeholderKey);
-      if (translatedPlaceholder && translatedPlaceholder !== placeholderKey) {
-        dateInput.setAttribute('placeholder', translatedPlaceholder);
-      }
-      
-      // Update document title if needed
-      document.title = i18next.t('document.title', 'G-Z');
-      
-      // Handle any special cases for translated content
-      const submitButton = document.querySelector('.submit-button');
-      if (submitButton && !submitButton.disabled) {
-        submitButton.textContent = i18next.t('form.submit', 'Submit');
-      } else if (submitButton && submitButton.disabled) {
-        submitButton.textContent = i18next.t('form.submitted', 'Submitted');
-      }
-      
-      // Update flower motivations if needed
-      updateFlowerDisplay();
     }
     
-    // Initialize i18n when the document is ready
-    document.addEventListener('DOMContentLoaded', function() {
-      initI18n();
-      
-      // Handle language switcher clicks (if visible)
-      document.querySelectorAll('.language-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const lng = this.getAttribute('data-lng');
-          localStorage.setItem('language', lng);
-          window.location.search = 'lng=' + lng;
-        });
+    // Call initialization when the document is ready
+    document.addEventListener('DOMContentLoaded', initI18n);
+
+    // Handle language change
+    function changeLanguage(lng) {
+      i18next.changeLanguage(lng, (err, t) => {
+        if (err) return console.log('Error changing language:', err);
+        $('body').localize();
+        
+        // Update URL
+        const url = new URL(window.location);
+        url.searchParams.set('lng', lng);
+        window.history.replaceState({}, document.title, url);
+        
+        // Save preference
+        localStorage.setItem('i18nextLng', lng);
       });
-    });
+    }
   </script>
 
   <script type="module">
@@ -1153,62 +1126,62 @@
       }
       
       const positiveTraits = [
-        i18next.t('flower.traits.1', "Your creativity illuminates the darkest challenges."),
-        i18next.t('flower.traits.2', "Your kindness is a rare gift in this world."),
-        i18next.t('flower.traits.3', "Your persistence breaks barriers others cannot see."),
-        i18next.t('flower.traits.4', "Your unique perspective solves the unsolvable."),
-        i18next.t('flower.traits.5', "Your energy is contagious and transformative."),
-        i18next.t('flower.traits.6', "Your patience reveals what others miss in haste."),
-        i18next.t('flower.traits.7', "Your courage faces fears that paralyze many."),
-        i18next.t('flower.traits.8', "Your wisdom guides you through life's maze."),
-        i18next.t('flower.traits.9', "Your optimism finds light in the darkest corners."),
-        i18next.t('flower.traits.10', "Your focus transforms dreams into reality."),
-        i18next.t('flower.traits.11', "Your generosity creates ripples of change."),
-        i18next.t('flower.traits.12', "Your honesty builds unbreakable bridges."),
-        i18next.t('flower.traits.13', "Your compassion heals invisible wounds."),
-        i18next.t('flower.traits.14', "Your reliability makes you everyone's anchor."),
-        i18next.t('flower.traits.15', "Your adaptability turns chaos into opportunity."),
-        i18next.t('flower.traits.16', "Your determination moves mountains silently."),
-        i18next.t('flower.traits.17', "Your thoughtfulness touches hearts deeply."),
-        i18next.t('flower.traits.18', "Your enthusiasm ignites others' passions."),
-        i18next.t('flower.traits.19', "Your intelligence sees patterns in the noise."),
-        i18next.t('flower.traits.20', "Your sensitivity reveals truth behind masks."),
-        i18next.t('flower.traits.21', "Your imagination creates new worlds."),
-        i18next.t('flower.traits.22', "Your confidence inspires without words."),
-        i18next.t('flower.traits.23', "Your humor heals what medicine cannot."),
-        i18next.t('flower.traits.24', "Your calmness steadies stormy waters."),
-        i18next.t('flower.traits.25', "Your curiosity unlocks life's mysteries."),
-        i18next.t('flower.traits.26', "Your empathy bridges impossible divides."),
-        i18next.t('flower.traits.27', "Your intuition speaks truth before logic.")
+        i18next.t('flower.motivations.trait1', "Your creativity illuminates the darkest challenges."),
+        i18next.t('flower.motivations.trait2', "Your kindness is a rare gift in this world."),
+        i18next.t('flower.motivations.trait3', "Your persistence breaks barriers others cannot see."),
+        i18next.t('flower.motivations.trait4', "Your unique perspective solves the unsolvable."),
+        i18next.t('flower.motivations.trait5', "Your energy is contagious and transformative."),
+        i18next.t('flower.motivations.trait6', "Your patience reveals what others miss in haste."),
+        i18next.t('flower.motivations.trait7', "Your courage faces fears that paralyze many."),
+        i18next.t('flower.motivations.trait8', "Your wisdom guides you through life's maze."),
+        i18next.t('flower.motivations.trait9', "Your optimism finds light in the darkest corners."),
+        i18next.t('flower.motivations.trait10', "Your focus transforms dreams into reality."),
+        i18next.t('flower.motivations.trait11', "Your generosity creates ripples of change."),
+        i18next.t('flower.motivations.trait12', "Your honesty builds unbreakable bridges."),
+        i18next.t('flower.motivations.trait13', "Your compassion heals invisible wounds."),
+        i18next.t('flower.motivations.trait14', "Your reliability makes you everyone's anchor."),
+        i18next.t('flower.motivations.trait15', "Your adaptability turns chaos into opportunity."),
+        i18next.t('flower.motivations.trait16', "Your determination moves mountains silently."),
+        i18next.t('flower.motivations.trait17', "Your thoughtfulness touches hearts deeply."),
+        i18next.t('flower.motivations.trait18', "Your enthusiasm ignites others' passions."),
+        i18next.t('flower.motivations.trait19', "Your intelligence sees patterns in the noise."),
+        i18next.t('flower.motivations.trait20', "Your sensitivity reveals truth behind masks."),
+        i18next.t('flower.motivations.trait21', "Your imagination creates new worlds."),
+        i18next.t('flower.motivations.trait22', "Your confidence inspires without words."),
+        i18next.t('flower.motivations.trait23', "Your humor heals what medicine cannot."),
+        i18next.t('flower.motivations.trait24', "Your calmness steadies stormy waters."),
+        i18next.t('flower.motivations.trait25', "Your curiosity unlocks life's mysteries."),
+        i18next.t('flower.motivations.trait26', "Your empathy bridges impossible divides."),
+        i18next.t('flower.motivations.trait27', "Your intuition speaks truth before logic.")
       ];
       
       const encouragements = [
-        i18next.t('flower.encouragements.1', "Trust your inner voice; it knows your truth."),
-        i18next.t('flower.encouragements.2', "Your light is needed exactly where you stand."),
-        i18next.t('flower.encouragements.3', "Even small steps forward change your destiny."),
-        i18next.t('flower.encouragements.4', "The world needs exactly what only you offer."),
-        i18next.t('flower.encouragements.5', "Your journey matters more than any destination."),
-        i18next.t('flower.encouragements.6', "Challenges reveal your hidden strengths."),
-        i18next.t('flower.encouragements.7', "Your authentic self is your greatest power."),
-        i18next.t('flower.encouragements.8', "Seeds planted today become tomorrow's forest."),
-        i18next.t('flower.encouragements.9', "Your impact reaches further than you'll ever see."),
-        i18next.t('flower.encouragements.10', "When shadows fall, your inner light grows stronger."),
-        i18next.t('flower.encouragements.11', "What challenges you today empowers you tomorrow."),
-        i18next.t('flower.encouragements.12', "The universe conspires for those who dare to dream."),
-        i18next.t('flower.encouragements.13', "Your presence matters more than you realize."),
-        i18next.t('flower.encouragements.14', "Courage isn't fearlessness; it's moving forward anyway."),
-        i18next.t('flower.encouragements.15', "Your unique voice deserves to be heard."),
-        i18next.t('flower.encouragements.16', "The fire within you burns brighter than obstacles before you.")
+        i18next.t('flower.encouragements.e1', "Trust your inner voice; it knows your truth."),
+        i18next.t('flower.encouragements.e2', "Your light is needed exactly where you stand."),
+        i18next.t('flower.encouragements.e3', "Even small steps forward change your destiny."),
+        i18next.t('flower.encouragements.e4', "The world needs exactly what only you offer."),
+        i18next.t('flower.encouragements.e5', "Your journey matters more than any destination."),
+        i18next.t('flower.encouragements.e6', "Challenges reveal your hidden strengths."),
+        i18next.t('flower.encouragements.e7', "Your authentic self is your greatest power."),
+        i18next.t('flower.encouragements.e8', "Seeds planted today become tomorrow's forest."),
+        i18next.t('flower.encouragements.e9', "Your impact reaches further than you'll ever see."),
+        i18next.t('flower.encouragements.e10', "When shadows fall, your inner light grows stronger."),
+        i18next.t('flower.encouragements.e11', "What challenges you today empowers you tomorrow."),
+        i18next.t('flower.encouragements.e12', "The universe conspires for those who dare to dream."),
+        i18next.t('flower.encouragements.e13', "Your presence matters more than you realize."),
+        i18next.t('flower.encouragements.e14', "Courage isn't fearlessness; it's moving forward anyway."),
+        i18next.t('flower.encouragements.e15', "Your unique voice deserves to be heard."),
+        i18next.t('flower.encouragements.e16', "The fire within you burns brighter than obstacles before you.")
       ];
       
       const transitions = [
-        i18next.t('flower.transitions.1', " Remember, "),
-        i18next.t('flower.transitions.2', " Know that "),
-        i18next.t('flower.transitions.3', " Embrace that "),
-        i18next.t('flower.transitions.4', " Feel that "),
-        i18next.t('flower.transitions.5', " Trust that "),
-        i18next.t('flower.transitions.6', " Believe that "),
-        i18next.t('flower.transitions.7', " Honor that ")
+        i18next.t('flower.transitions.t1', " Remember, "),
+        i18next.t('flower.transitions.t2', " Know that "),
+        i18next.t('flower.transitions.t3', " Embrace that "),
+        i18next.t('flower.transitions.t4', " Feel that "),
+        i18next.t('flower.transitions.t5', " Trust that "),
+        i18next.t('flower.transitions.t6', " Believe that "),
+        i18next.t('flower.transitions.t7', " Honor that ")
       ];
       
       const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
@@ -1233,22 +1206,18 @@
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
       
-      const monthNames = i18next.t('months', {
-        returnObjects: true,
-        defaultValue: [
-          "January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
-        ]
-      });
+      const monthNames = {
+        en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+      };
+      
+      const currentLang = i18next.language || 'en';
+      const months = monthNames[currentLang] || monthNames.en;
       
       if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
-        const monthName = monthNames[userBirthdayMonth - 1];
-        const flowerText = i18next.t('flower.codeWithDate', {
-          month: monthName,
-          day: userBirthdayDay,
-          defaultValue: `My Flower - ${monthName} (${userBirthdayDay})`
-        });
-        
+        const monthName = months[userBirthdayMonth - 1];
+        const flowerText = i18next.t('flower.myFlowerWithDate', "My Flower - {{month}} ({{day}})", {month: monthName, day: userBirthdayDay});
         flowerCodeElement.textContent = flowerText;
         
         if (!currentMotivation) {
@@ -1363,7 +1332,7 @@
         data.sort((a, b) => a.name.common.localeCompare(b.name.common));
         
         const countrySelect = document.getElementById('countrySelect');
-        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countrySelect', "Select your country of birth")}</option>`;
+        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countryLabel', "Select your country of birth")}</option>`;
         
         data.forEach(country => {
           const option = document.createElement('option');
@@ -1409,7 +1378,7 @@
         ].sort();
         
         const countrySelect = document.getElementById('countrySelect');
-        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countrySelect', "Select your country of birth")}</option>`;
+        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countryLabel', "Select your country of birth")}</option>`;
         
         fallbackCountries.forEach(country => {
           const option = document.createElement('option');
@@ -1522,7 +1491,7 @@
         userBirthdayDay = parseInt(birthdateParts[2]);
         
         const submitButton = document.querySelector('.submit-button');
-        submitButton.textContent = i18next.t('form.processing', "Please wait...");
+        submitButton.textContent = i18next.t('form.pleaseWait', "Please wait...");
         submitButton.style.backgroundColor = 'orange';
 
         document.getElementById('birthdate').classList.add('disabled-field');
@@ -1530,7 +1499,7 @@
 
         document.getElementById('genderModal').style.display = 'block';
       } else {
-        alert(i18next.t('alerts.missingInfo', "Please enter a date of birth and select a country!"));
+        alert(i18next.t('alerts.formIncomplete', "Please enter a date of birth and select a country!"));
       }
     });
 
@@ -1588,14 +1557,16 @@
           userRank = sameBirthdayCount;
         }
         
-        const monthNames = i18next.t('months', {
-          returnObjects: true,
-          defaultValue: [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ]
-        });
-        const formattedDate = `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`;
+        const monthNames = {
+          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        };
+        
+        const currentLang = i18next.language || 'en';
+        const months = monthNames[currentLang] || monthNames.en;
+        
+        const formattedDate = `${months[userBirthdayMonth-1]} ${userBirthdayDay}`;
         
         return {
           totalMembers: sameBirthdayCount,
@@ -1604,17 +1575,20 @@
         };
       } catch (error) {
         console.error("Error fetching birthday statistics:", error);
-        const monthNames = i18next.t('months', {
-          returnObjects: true,
-          defaultValue: [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ]
-        });
+        
+        const monthNames = {
+          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        };
+        
+        const currentLang = i18next.language || 'en';
+        const months = monthNames[currentLang] || monthNames.en;
+        
         return {
           totalMembers: Math.floor(Math.random() * 50) + 5,
           userRank: Math.floor(Math.random() * 10) + 1,
-          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+          formattedDate: `${months[userBirthdayMonth-1]} ${userBirthdayDay}`
         };
       }
     }
@@ -1657,17 +1631,20 @@
         userCountryStats = await fetchCountryStatistics();
       } catch (error) {
         console.error("Error fetching statistics:", error);
-        const monthNames = i18next.t('months', {
-          returnObjects: true,
-          defaultValue: [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ]
-        });
+        
+        const monthNames = {
+          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        };
+        
+        const currentLang = i18next.language || 'en';
+        const months = monthNames[currentLang] || monthNames.en;
+        
         userBirthdayStats = {
           totalMembers: Math.floor(Math.random() * 50) + 5,
           userRank: Math.floor(Math.random() * 10) + 1,
-          formattedDate: `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`
+          formattedDate: `${months[userBirthdayMonth-1]} ${userBirthdayDay}`
         };
         userCountryStats = {
           totalMembers: Math.floor(Math.random() * 30) + 3
@@ -1767,7 +1744,7 @@
     }
 
     document.getElementById('resetButton').addEventListener('click', function() {
-      if (confirm(i18next.t('alerts.confirmReset', "Are you sure you want to reset your data? This will delete your information from our database."))) {
+      if (confirm(i18next.t('alerts.resetConfirmation', "Are you sure you want to reset your data? This will delete your information from our database."))) {
         resetLocalStorageData();
         
         deleteFromFirebase().then(() => {
@@ -1891,7 +1868,7 @@
       if (userFlowerCode) {
         captureFlower();
       } else {
-        alert(i18next.t('alerts.flowerCodeNeeded', 'Please submit your information first to get your Flower code.'));
+        alert(i18next.t('alerts.flowerSubmitFirst', 'Please submit your information first to get your Flower code.'));
       }
     });
     
@@ -1944,8 +1921,8 @@
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: i18next.t('share.title', 'My G-Z Flower'),
-              text: i18next.t('share.text', 'Discover yours at g-z.online'),
+              title: i18next.t('flower.shareTitle', 'My G-Z Flower'),
+              text: i18next.t('flower.shareText', 'Discover yours at g-z.online'),
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -1963,30 +1940,31 @@
     
     function fallbackShare() {
       try {
-        const monthNames = i18next.t('months', {
-          returnObjects: true,
-          defaultValue: [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ]
-        });
-        const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
+        const monthNames = {
+          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        };
+        
+        const currentLang = i18next.language || 'en';
+        const months = monthNames[currentLang] || monthNames.en;
+        
+        const monthName = userBirthdayMonth ? months[userBirthdayMonth - 1] : "";
         const dayNumber = userBirthdayDay || "";
         
-        const shareText = i18next.t('share.fallbackText', {
+        const shareText = i18next.t('flower.shareMessage', "Check out my Flower from G-Z: {{month}} ({{day}}). Discover yours at g-z.online", {
           month: monthName,
-          day: dayNumber,
-          defaultValue: `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at g-z.online`
+          day: dayNumber
         });
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert(i18next.t('alerts.clipboardCopy', 'Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.'));
+          alert(i18next.t('alerts.clipboardSuccess', 'Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.'));
         }).catch(function() {
-          alert(i18next.t('alerts.clipboardFail', 'Could not copy to clipboard. Please share manually. Remember to type "g-z.online" in your browser to access the site.'));
+          alert(i18next.t('alerts.clipboardError', 'Could not copy to clipboard. Please share manually. Remember to type "g-z.online" in your browser to access the site.'));
         });
       } catch (error) {
         console.error('Fallback share error:', error);
-        alert(i18next.t('alerts.shareFallback', 'Please share the image manually. Remember to type "g-z.online" in your browser to access the site.'));
+        alert(i18next.t('alerts.shareManually', 'Please share the image manually. Remember to type "g-z.online" in your browser to access the site.'));
       }
     }
     
@@ -2033,8 +2011,8 @@
       if (event.target == genderModal) {
         genderModal.style.display = "none";
         const submitButton = document.querySelector('.submit-button');
-        submitButton.style.backgroundColor = '#007bff';
-        submitButton.textContent = i18next.t('form.submit', "Submit");
+        submitButton.style.backgroundColor = 'red';
+        submitButton.textContent = i18next.t('form.error', "Error");
         
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
@@ -2061,6 +2039,24 @@
     document.getElementById('shareWarning').style.display = 'none';
     
     loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
+    
+    // Update translations when language changes
+    i18next.on('languageChanged', function() {
+      updateFlowerDisplay();
+      // Re-localize placeholders and other dynamic content
+      document.getElementById('countrySelect').querySelector('option[disabled][selected]').textContent = 
+        i18next.t('form.countryLabel', "Select your country of birth");
+      
+      const submitButton = document.querySelector('.submit-button');
+      if (submitButton.disabled) {
+        submitButton.textContent = i18next.t('form.submitted', "Submitted");
+      } else {
+        submitButton.textContent = i18next.t('form.submit', "Submit");
+      }
+      
+      document.getElementById('accessCodeIndicator').textContent = 
+        i18next.t('header.accessCodeSubmit', "Submit - to get your code.");
+    });
   </script>
   
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
