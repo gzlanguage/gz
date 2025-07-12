@@ -153,3 +153,80 @@
     "shareManually": "Por favor, comparte la imagen manualmente. Recuerda escribir \"g-z.online\" en tu navegador para acceder al sitio."
   }
 }
+
+{
+  "header": {
+    "share": "Compartir"
+  },
+  "buttons": {
+    "faq": "FAQ",
+    "support": "Apoyo",
+    "faqAriaLabel": "Preguntas frecuentes",
+    "supportAriaLabel": "Apoyo al proyecto"
+  },
+  "dashboard": {
+    "selectCountry": "Seleccionar un país",
+    "selectCategory": "Seleccionar una categoría",
+    "allCountries": "Todos los países",
+    "noData": "No se encontraron datos.",
+    "categories": {
+      "daily": "Nacimientos por día",
+      "monthly": "Nacimientos por mes",
+      "yearly": "Nacimientos por año",
+      "gender": "Género",
+      "age": "Edades",
+      "population": "Origen"
+    },
+    "displayFormats": {
+      "age": "{{age}} años",
+      "count": "{{count}} {{label}}"
+    }
+  },
+  "modals": {
+    "statsInfo": {
+      "description": "Las estadísticas que verás son las presentes en la base de datos. A medida que aumente el número de personas, nos acercaremos a las cifras exactas.",
+      "okButton": "OK"
+    },
+    "support": {
+      "description": "Apoya a G-Z para ayudarnos a desarrollar este proyecto.",
+      "button": "Apoyar ahora"
+    },
+    "faq": {
+      "description": "Las estadísticas se actualizan automáticamente con cada nueva presentación."
+    }
+  },
+  "labels": {
+    "births": "nacimientos",
+    "people": "personas"
+  },
+  "days": {
+    "sunday": "Domingo",
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado"
+  },
+  "months": {
+    "january": "Enero",
+    "february": "Febrero",
+    "march": "Marzo",
+    "april": "Abril",
+    "may": "Mayo",
+    "june": "Junio",
+    "july": "Julio",
+    "august": "Agosto",
+    "september": "Septiembre",
+    "october": "Octubre",
+    "november": "Noviembre",
+    "december": "Diciembre"
+  },
+  "gender": {
+    "male": "Masculino",
+    "female": "Femenino",
+    "other": "Otro",
+    "unknown": "Desconocido"
+  }
+}
+
