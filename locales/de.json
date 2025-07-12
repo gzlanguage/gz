@@ -1,1 +1,155 @@
-jhg
+{
+  "header": {
+    "accessCode": "Zugangscode",
+    "accessCodeSubmit": "Absenden - um Ihren Code zu erhalten."
+  },
+  "nav": {
+    "faq": "FAQ",
+    "discovery": "Entdeckung",
+    "flower": "Blume",
+    "community": "Gemeinschaft",
+    "contact": "Kontakt",
+    "terms": "Bedingungen",
+    "privacy": "Datenschutz"
+  },
+  "notification": {
+    "main": "Du bist nicht allein geboren - Entdecke deine Geburtstagstwins ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Schließe dich uns an und entdecke die Geheimnisse vergangener, gegenwärtiger und zukünftiger Generationen mit nur wenigen Klicks."
+  },
+  "form": {
+    "dateLabel": "Wähle dein Geburtsdatum",
+    "countryLabel": "Wähle dein Geburtsland",
+    "terms": "Indem du absendest, stimmst du unseren Nutzungsbedingungen zu.",
+    "submit": "Absenden",
+    "submitted": "Gesendet",
+    "pleaseWait": "Bitte warten...",
+    "error": "Fehler"
+  },
+  "howItWorks": {
+    "title": "Wie funktioniert das?",
+    "description": "Du hast zwei Auswahlmöglichkeiten: Der erste ist ein Kalender, um dein Geburtsdatum auszuwählen, und der zweite ist ein Auswahlfeld für dein Geburtsland. Nachdem du deine Auswahl getroffen hast, klicke auf \"Absenden\". Danach wirst du aufgefordert, dein Geschlecht anzugeben; klicke auf diese Option, um Mitwirkender zu werden. Schließlich klicke auf den \"Entdecken\"-Button, der grün blinkt. Du wirst dann zwei neue Auswahlfelder entdecken: Navigiere nach deinen Vorlieben, um die Statistiken zu erkunden."
+  },
+  "footer": {
+    "dontMiss": "Verpasse nichts"
+  },
+  "gender": {
+    "title": "Dein Geschlecht?",
+    "binary": "Binäre Geschlechter",
+    "man": "Mann",
+    "woman": "Frau",
+    "nonBinary": "Nicht-binäre Geschlechter",
+    "nonBinaryOption": "Nicht-binär",
+    "genderqueer": "Genderqueer",
+    "genderfluid": "Genderfluid",
+    "agender": "Agender",
+    "pangender": "Pangender",
+    "demigender": "Demigender",
+    "transgender": "Transgender-Identitäten",
+    "transMan": "Transmann",
+    "transWoman": "Transfrau",
+    "transgender2": "Transgender",
+    "transsexual": "Transsexuell",
+    "cultural": "Kulturelle und spirituelle Geschlechter",
+    "twoSpirit": "Zwei-Geister",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Andere Geschlechtsidentitäten",
+    "bigender": "Bigender",
+    "androgyne": "Androgyn",
+    "neutrois": "Neutrois"
+  },
+  "community": {
+    "title": "Tritt der G-Z Gemeinschaft bei",
+    "description": "Werde Teil der G-Z Gemeinschaft und verbinde dich mit Menschen, die deinen Geburtstag teilen! Diskutiere, bilde Teams für kommende Wettbewerbe und entdecke deine Geburtstagstwins.",
+    "howItWorks": "Wie es funktioniert:",
+    "step1": "1. Klicke auf den Button \"G-Z beitreten\" unten.",
+    "step2": "2. Akzeptiere die Discord-Einladung.",
+    "step3": "3. Klicke oben links auf \"Zurück\", um die Gruppen deines Monats nach 'Wähle dein Team' zu sehen.",
+    "step5": "5. Wähle die Gruppe, die deinem Geburtstag entspricht.",
+    "joinButton": "G-Z beitreten"
+  },
+  "flower": {
+    "title": "Blume des Lebens",
+    "myFlower": "Meine Blume",
+    "myFlowerWithDate": "Meine Blume - {{month}} ({{day}})",
+    "defaultMotivation": "Sende deine Informationen, um deine Blumenmotivation zu entdecken.",
+    "shareButton": "Meine Blume teilen",
+    "shareWarning": "Perfekt zum Teilen in deinen Stories, einfach anpassen.",
+    "share": "Teilen",
+    "close": "Schließen",
+    "websiteUrl": "Entdecke deine auf www.g-z.online",
+    "shareTitle": "Meine G-Z Blume",
+    "shareText": "Entdecke deine auf g-z.online",
+    "shareMessage": "Schau dir meine G-Z Blume an: {{month}} ({{day}}). Entdecke deine auf g-z.online",
+    "motivations": {
+      "trait1": "Deine Kreativität erhellt die dunkelsten Herausforderungen.",
+      "trait2": "Deine Freundlichkeit ist ein seltener Schatz in dieser Welt.",
+      "trait3": "Dein Durchhaltevermögen durchbricht Barrieren, die andere nicht sehen können.",
+      "trait4": "Deine einzigartige Perspektive löst, was unlösbar scheint.",
+      "trait5": "Deine Energie ist ansteckend und transformierend.",
+      "trait6": "Deine Geduld offenbart, was andere im Eifer verlieren.",
+      "trait7": "Dein Mut stellt sich den Ängsten, die viele lähmen.",
+      "trait8": "Deine Weisheit führt dich durch das Labyrinth des Lebens.",
+      "trait9": "Dein Optimismus findet Licht in den dunkelsten Ecken.",
+      "trait10": "Deine Konzentration verwandelt Träume in Realität.",
+      "trait11": "Deine Großzügigkeit schafft Wellen des Wandels.",
+      "trait12": "Deine Ehrlichkeit baut unerschütterliche Brücken.",
+      "trait13": "Dein Mitgefühl heilt unsichtbare Wunden.",
+      "trait14": "Deine Zuverlässigkeit macht dich zum Anker für alle.",
+      "trait15": "Deine Anpassungsfähigkeit verwandelt Chaos in Chancen.",
+      "trait16": "Deine Entschlossenheit versetzt Berge in Stille.",
+      "trait17": "Deine Rücksichtnahme berührt die Herzen tief.",
+      "trait18": "Dein Enthusiasmus entfacht die Leidenschaften anderer.",
+      "trait19": "Deine Intelligenz sieht Muster im Lärm.",
+      "trait20": "Deine Sensibilität offenbart die Wahrheit hinter den Masken.",
+      "trait21": "Deine Vorstellungskraft schafft neue Welten.",
+      "trait22": "Dein Vertrauen inspiriert ohne Worte.",
+      "trait23": "Dein Humor heilt, was die Medizin nicht kann.",
+      "trait24": "Deine Gelassenheit stabilisiert aufgewühlte Gewässer.",
+      "trait25": "Deine Neugier entschlüsselt die Geheimnisse des Lebens.",
+      "trait26": "Dein Einfühlungsvermögen vereint unmögliche Spaltungen.",
+      "trait27": "Dein Bauchgefühl spricht die Wahrheit, bevor es die Logik tut."
+    },
+    "encouragements": {
+      "e1": "Vertraue deiner inneren Stimme; kenne deine Wahrheit.",
+      "e2": "Dein Licht wird genau dort gebraucht, wo du bist.",
+      "e3": "Selbst kleine Schritte nach vorne verändern dein Schicksal.",
+      "e4": "Die Welt braucht genau das, was nur du anbieten kannst.",
+      "e5": "Deine Reise zählt mehr als jedes Ziel.",
+      "e6": "Herausforderungen offenbaren deine verborgenen Stärken.",
+      "e7": "Dein wahres Ich ist deine größte Kraft.",
+      "e8": "Die heute gepflanzten Samen werden morgen zum Wald.",
+      "e9": "Dein Einfluss reicht weiter, als du jemals sehen wirst.",
+      "e10": "Wenn die Schatten fallen, wird dein inneres Licht stärker.",
+      "e11": "Was dich heute herausfordert, wird dich morgen stärker machen.",
+      "e12": "Das Universum konspiriert für diejenigen, die es wagen zu träumen.",
+      "e13": "Deine Präsenz zählt mehr, als du dir bewusst bist.",
+      "e14": "Mut ist nicht die Abwesenheit von Angst; es ist das Voranschreiten trotzdem.",
+      "e15": "Deine einzigartige Stimme verdient es, gehört zu werden.",
+      "e16": "Das Feuer in dir leuchtet heller als die Hindernisse vor dir."
+    },
+    "transitions": {
+      "t1": " Denk daran, ",
+      "t2": " Wisse, dass ",
+      "t3": " Umarme, dass ",
+      "t4": " Fühle, dass ",
+      "t5": " Vertraue, dass ",
+      "t6": " Glaube, dass ",
+      "t7": " Ehre, dass "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Du kannst kein zukünftiges Datum als Geburtsdatum auswählen.",
+    "formIncomplete": "Bitte gib ein Geburtsdatum ein und wähle ein Land!",
+    "resetConfirmation": "Bist du sicher, dass du deine Daten zurücksetzen möchtest? Dies wird deine Informationen aus unserer Datenbank löschen.",
+    "resetError": "Ein Problem ist beim Zurücksetzen deiner Daten aufgetreten. Bitte versuche es später erneut.",
+    "resetSuccess": "Deine Daten wurden erfolgreich zurückgesetzt.",
+    "flowerSubmitFirst": "Bitte sende zuerst deine Informationen, um deinen Blumen-Code zu erhalten.",
+    "captureError": "Es konnte nicht auf deine Blume zugegriffen werden. Bitte versuche es erneut.",
+    "clipboardSuccess": "Text zum Teilen in die Zwischenablage kopiert! Du kannst es jetzt manuell einfügen und mit dem Bild teilen. Wenn der Link nicht direkt funktioniert, tippe manuell \"g-z.online\" in deinen Browser.",
+    "clipboardError": "Das Kopieren in die Zwischenablage ist fehlgeschlagen. Bitte teile manuell. Vergiss nicht, \"g-z.online\" in deinen Browser einzugeben, um die Website zu besuchen.",
+    "shareManually": "Bitte teile das Bild manuell. Vergiss nicht, \"g-z.online\" in deinen Browser einzugeben, um die Website zu besuchen."
+  }
+}
