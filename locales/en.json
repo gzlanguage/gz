@@ -1,7 +1,7 @@
 {
-  "accessCode": {
-    "title": "Access Code",
-    "submit": "Submit - to get your code."
+  "header": {
+    "accessCode": "Access Code",
+    "accessCodeSubmit": "Submit - to get your code."
   },
   "nav": {
     "faq": "FAQ",
@@ -12,39 +12,47 @@
     "terms": "Terms",
     "privacy": "Privacy"
   },
-  "notification": "You weren't born alone - Discover your birthday twins ¯\\_(ツ)_/¯",
-  "footerTitle": "Join us and uncover the secrets of past, present, and future generations in just a few clicks.",
-  "dateInput": {
-    "placeholder": "Select your birth date"
+  "notification": {
+    "main": "You weren't born alone - Discover your Birthday Twins ¯\\_(ツ)_/¯"
   },
-  "countrySelect": {
-    "placeholder": "Select your country of birth"
+  "main": {
+    "title": "Join us and uncover the secrets of past, present, and future generations with just a few clicks."
   },
-  "termsText": "By submitting, you agree to our terms of use.",
-  "submitButton": "Submit",
+  "form": {
+    "dateLabel": "Select your birth date",
+    "countryLabel": "Select your country of birth",
+    "terms": "By submitting, you accept our terms of use.",
+    "submit": "Submit",
+    "submitted": "Submitted",
+    "pleaseWait": "Please wait...",
+    "error": "Error"
+  },
   "howItWorks": {
     "title": "How does it work?",
-    "description": "Two selectors are at your disposal: the first is a calendar to choose your birth date, and the second is a selector for your country of birth. Once you've made your selections, click 'Submit'. After that, you'll be asked to specify your gender; click on this option to become a contributor. Finally, click the 'Discovery' button, which blinks green. You will then discover two new selectors: navigate according to your preferences to explore the statistics."
+    "description": "You have two selectors available: the first is a calendar to choose your birth date, and the second is a selector for your country of birth. Once you've made your selections, click \"Submit.\" Then you'll be prompted to specify your gender; click this option to become a contributor. Finally, click the \"Discovery\" button that flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics."
   },
-  "dontMiss": "Don't miss out",
+  "footer": {
+    "dontMiss": "Don't miss anything"
+  },
   "gender": {
     "title": "Your gender?",
     "binary": "Binary genders",
     "man": "Man",
     "woman": "Woman",
-    "nonbinary": "Non-binary genders",
-    "nonbinaryOption": "Non-binary",
+    "nonBinary": "Non-binary genders",
+    "nonBinaryOption": "Non-binary",
     "genderqueer": "Genderqueer",
-    "genderfluid": "Genderfluid",
+    "genderfluid": "Gender fluid",
     "agender": "Agender",
     "pangender": "Pangender",
     "demigender": "Demigender",
     "transgender": "Transgender identities",
     "transMan": "Trans man",
     "transWoman": "Trans woman",
+    "transgender2": "Transgender",
     "transsexual": "Transsexual",
-    "cultural": "Cultural & spiritual genders",
-    "twoSpirit": "Two-Spirit",
+    "cultural": "Cultural and spiritual genders",
+    "twoSpirit": "Two spirit",
     "hijra": "Hijra",
     "faafafine": "Fa'afafine",
     "other": "Other gender identities",
@@ -53,102 +61,95 @@
     "neutrois": "Neutrois"
   },
   "community": {
-    "title": "Join the G-Z community",
-    "description": "Join the G-Z community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.",
+    "title": "Join the G-Z Community",
+    "description": "Join the G-Z Community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.",
     "howItWorks": "How it works:",
-    "step1": "1. Click the 'Join G-Z' button below.",
+    "step1": "1. Click the \"Join G-Z\" button below.",
     "step2": "2. Accept the Discord invitation.",
-    "step3": "3. Click 'Back' at the top left to see groups for your month after 'Choose-your-team'.",
-    "step4": "4. Select the group that corresponds to your birth date.",
+    "step3": "3. Click \"Back\" at the top left to see the groups for your month after 'Choose-your-team.'",
+    "step5": "5. Select the group that matches your birth date.",
     "joinButton": "Join G-Z"
   },
   "flower": {
     "title": "Flower of Life",
     "myFlower": "My Flower",
     "myFlowerWithDate": "My Flower - {{month}} ({{day}})",
-    "defaultMotivation": "Submit your information to discover your floral motivation.",
+    "defaultMotivation": "Send your information to discover your floral motivation.",
     "shareButton": "Share my Flower",
-    "shareWarning": "Perfect for sharing in your Stories, just adjust it.",
+    "shareWarning": "Perfect for sharing in your Stories, just adjust.",
     "share": "Share",
     "close": "Close",
     "websiteUrl": "Discover yours at www.g-z.online",
     "shareTitle": "My G-Z Flower",
     "shareText": "Discover yours at g-z.online",
-    "fallbackShareText": "Check out my G-Z Flower: {{month}} ({{day}}). Discover yours at g-z.online",
-    "clipboardSuccess": "Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn't work directly, please type 'g-z.online' manually in your browser.",
-    "clipboardError": "Unable to copy to clipboard. Please share manually. Remember to type 'g-z.online' in your browser to access the site.",
-    "shareManual": "Please share the image manually. Remember to type 'g-z.online' in your browser to access the site.",
-    "positiveTraits": [
-      "Your creativity lights up the darkest challenges.",
-      "Your kindness is a rare gift in this world.",
-      "Your perseverance breaks barriers others can't see.",
-      "Your unique perspective solves the unsolvable.",
-      "Your energy is contagious and transformative.",
-      "Your patience reveals what others miss in haste.",
-      "Your courage faces fears that paralyze many.",
-      "Your wisdom guides you through life's maze.",
-      "Your optimism finds light in the darkest corners.",
-      "Your focus turns dreams into reality.",
-      "Your generosity creates ripples of change.",
-      "Your honesty builds unbreakable bridges.",
-      "Your compassion heals invisible wounds.",
-      "Your reliability makes you the anchor for all.",
-      "Your adaptability turns chaos into opportunity.",
-      "Your determination quietly moves mountains.",
-      "Your thoughtfulness deeply touches hearts.",
-      "Your enthusiasm ignites the passions of others.",
-      "Your intelligence sees patterns in the noise.",
-      "Your sensitivity reveals truth behind masks.",
-      "Your imagination creates new worlds.",
-      "Your confidence inspires without words.",
-      "Your humor heals what medicine cannot.",
-      "Your calm stabilizes turbulent waters.",
-      "Your curiosity unlocks life's mysteries.",
-      "Your empathy bridges impossible gaps.",
-      "Your intuition speaks truth before logic."
-    ],
-    "encouragements": [
-      "Trust your inner voice; it knows your truth.",
-      "Your light is needed exactly where you stand.",
-      "Even small steps forward change your destiny.",
-      "The world needs exactly what only you can offer.",
-      "Your journey matters more than any destination.",
-      "Challenges reveal your hidden strengths.",
-      "Your authenticity is your greatest strength.",
-      "Seeds planted today become tomorrow's forest.",
-      "Your impact goes further than you will ever see.",
-      "When shadows fall, your inner light grows stronger.",
-      "What challenges you today empowers you tomorrow.",
-      "The universe conspires for those who dare to dream.",
-      "Your presence matters more than you realize.",
-      "Courage is not the absence of fear; it's moving forward despite it.",
-      "Your unique voice deserves to be heard.",
-      "The fire within you burns brighter than the obstacles ahead."
-    ],
-    "transitions": [
-      " Remember that ",
-      " Know that ",
-      " Embrace the fact that ",
-      " Feel that ",
-      " Trust that ",
-      " Believe that ",
-      " Honor the fact that "
-    ]
+    "shareMessage": "Check out my G-Z Flower: {{month}} ({{day}}). Discover yours at g-z.online",
+    "motivations": {
+      "trait1": "Your creativity lights up the darkest challenges.",
+      "trait2": "Your kindness is a rare gift in this world.",
+      "trait3": "Your persistence breaks barriers others can't see.",
+      "trait4": "Your unique perspective solves the unsolvable.",
+      "trait5": "Your energy is contagious and transformative.",
+      "trait6": "Your patience reveals what others miss in haste.",
+      "trait7": "Your courage faces fears that paralyze many.",
+      "trait8": "Your wisdom guides you through the labyrinth of life.",
+      "trait9": "Your optimism finds light in the darkest corners.",
+      "trait10": "Your focus transforms dreams into reality.",
+      "trait11": "Your generosity creates waves of change.",
+      "trait12": "Your honesty builds unbreakable bridges.",
+      "trait13": "Your compassion heals invisible wounds.",
+      "trait14": "Your reliability makes you the anchor for all.",
+      "trait15": "Your adaptability turns chaos into opportunity.",
+      "trait16": "Your determination moves mountains silently.",
+      "trait17": "Your consideration deeply touches hearts.",
+      "trait18": "Your enthusiasm ignites the passions of others.",
+      "trait19": "Your intelligence sees patterns in the noise.",
+      "trait20": "Your sensitivity reveals the truth behind masks.",
+      "trait21": "Your imagination creates new worlds.",
+      "trait22": "Your confidence inspires without words.",
+      "trait23": "Your humor heals what medicine cannot.",
+      "trait24": "Your calm stabilizes turbulent waters.",
+      "trait25": "Your curiosity unlocks the mysteries of life.",
+      "trait26": "Your empathy bridges impossible divides.",
+      "trait27": "Your intuition speaks truth before logic does."
+    },
+    "encouragements": {
+      "e1": "Trust your inner voice; know your truth.",
+      "e2": "Your light is needed exactly where you are.",
+      "e3": "Even small steps forward change your destiny.",
+      "e4": "The world needs exactly what only you can offer.",
+      "e5": "Your journey matters more than any destination.",
+      "e6": "Challenges reveal your hidden strengths.",
+      "e7": "Your authentic self is your greatest power.",
+      "e8": "Seeds planted today become tomorrow's forest.",
+      "e9": "Your impact reaches further than you'll ever see.",
+      "e10": "When shadows fall, your inner light grows stronger.",
+      "e11": "What challenges you today empowers you tomorrow.",
+      "e12": "The universe conspires for those who dare to dream.",
+      "e13": "Your presence matters more than you realize.",
+      "e14": "Courage is not the absence of fear; it's moving forward anyway.",
+      "e15": "Your unique voice deserves to be heard.",
+      "e16": "The fire within you burns brighter than the obstacles in front of you."
+    },
+    "transitions": {
+      "t1": " Remember, ",
+      "t2": " Know that ",
+      "t3": " Embrace that ",
+      "t4": " Feel that ",
+      "t5": " Trust that ",
+      "t6": " Believe that ",
+      "t7": " Honor that "
+    }
   },
-  "months": [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ],
-  "errors": {
-    "futureDateSelected": "You cannot select a future date for your birth date",
-    "missingFields": "Please enter a birth date and select a country!",
+  "alerts": {
+    "futureDateError": "You cannot select a future date as your birth date.",
+    "formIncomplete": "Please enter a birth date and select a country!",
+    "resetConfirmation": "Are you sure you want to reset your data? This will remove your information from our database.",
     "resetError": "There was a problem resetting your data. Please try again later.",
-    "flowerCodeMissing": "Please submit your information first to obtain your Flower code.",
-    "captureError": "Unable to capture your flower. Please try again."
-  },
-  "pleaseWait": "Please wait...",
-  "submittedStatus": "Submitted",
-  "error": "Error",
-  "resetConfirmation": "Are you sure you want to reset your data? This will remove your information from our database.",
-  "resetSuccess": "Your data has been successfully reset."
+    "resetSuccess": "Your data has been successfully reset.",
+    "flowerSubmitFirst": "Please submit your information first to get your Flower code.",
+    "captureError": "Could not capture your flower. Please try again.",
+    "clipboardSuccess": "Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn't work directly, type \"g-z.online\" into your browser.",
+    "clipboardError": "Could not copy to clipboard. Please share manually. Remember to type \"g-z.online\" into your browser to access the site.",
+    "shareManually": "Please share the image manually. Remember to type \"g-z.online\" into your browser to access the site."
+  }
 }
