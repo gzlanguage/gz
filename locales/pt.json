@@ -1,1 +1,155 @@
-kkh
+{
+  "header": {
+    "accessCode": "Código de acesso",
+    "accessCodeSubmit": "Enviar - para obter seu código."
+  },
+  "nav": {
+    "faq": "Perguntas frequentes",
+    "discovery": "Descoberta",
+    "flower": "Flor",
+    "community": "Comunidade",
+    "contact": "Contato",
+    "terms": "Termos",
+    "privacy": "Privacidade"
+  },
+  "notification": {
+    "main": "Você não nasceu sozinho - descubra seus gêmeos de aniversário ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Junte-se a nós e descubra os segredos das gerações passadas, presentes e futuras com apenas alguns cliques."
+  },
+  "form": {
+    "dateLabel": "Selecione sua data de nascimento",
+    "countryLabel": "Selecione seu país de nascimento",
+    "terms": "Ao enviar, você concorda com nossos termos de uso.",
+    "submit": "Enviar",
+    "submitted": "Enviado",
+    "pleaseWait": "Por favor, aguarde...",
+    "error": "Erro"
+  },
+  "howItWorks": {
+    "title": "Como funciona?",
+    "description": "Você tem duas opções: a primeira é um calendário para escolher sua data de nascimento, e a segunda é um seletor para seu país de nascimento. Depois de fazer suas escolhas, clique em \"Enviar\". Em seguida, você será solicitado a especificar seu gênero; clique nessa opção para se tornar um contribuinte. Por fim, clique no botão \"Descobrir\", que pisca em verde. Você descobrirá então dois novos seletores: navegue de acordo com suas preferências para explorar as estatísticas."
+  },
+  "footer": {
+    "dontMiss": "Não perca nada"
+  },
+  "gender": {
+    "title": "Seu gênero?",
+    "binary": "Gêneros binários",
+    "man": "Homem",
+    "woman": "Mulher",
+    "nonBinary": "Gêneros não binários",
+    "nonBinaryOption": "Não binário",
+    "genderqueer": "Gênero queer",
+    "genderfluid": "Gênero fluido",
+    "agender": "Agênero",
+    "pangender": "Pangênero",
+    "demigender": "Demigênero",
+    "transgender": "Identidades transgênero",
+    "transMan": "Homem trans",
+    "transWoman": "Mulher trans",
+    "transgender2": "Transgênero",
+    "transsexual": "Transsexual",
+    "cultural": "Gêneros culturais e espirituais",
+    "twoSpirit": "Dois espíritos",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Outras identidades de gênero",
+    "bigender": "Bigênero",
+    "androgyne": "Andrógino",
+    "neutrois": "Neutrois"
+  },
+  "community": {
+    "title": "Junte-se à Comunidade G-Z",
+    "description": "Junte-se à Comunidade G-Z e conecte-se com pessoas que compartilham seu aniversário! Discuta, forme equipes para as próximas competições e descubra seus gêmeos de aniversário.",
+    "howItWorks": "Como funciona:",
+    "step1": "1. Clique no botão \"Junte-se ao G-Z\" abaixo.",
+    "step2": "2. Aceite o convite do Discord.",
+    "step3": "3. Clique em \"Voltar\" no canto superior esquerdo para ver os grupos do seu mês após 'Escolha sua equipe'.",
+    "step5": "5. Selecione o grupo correspondente ao seu dia de aniversário.",
+    "joinButton": "Junte-se ao G-Z"
+  },
+  "flower": {
+    "title": "Flor da Vida",
+    "myFlower": "Minha Flor",
+    "myFlowerWithDate": "Minha Flor - {{month}} ({{day}})",
+    "defaultMotivation": "Envie suas informações para descobrir sua motivação floral.",
+    "shareButton": "Compartilhar minha Flor",
+    "shareWarning": "Perfeito para compartilhar em suas histórias, apenas ajuste.",
+    "share": "Compartilhar",
+    "close": "Fechar",
+    "websiteUrl": "Descubra a sua em www.g-z.online",
+    "shareTitle": "Minha Flor G-Z",
+    "shareText": "Descubra a sua em g-z.online",
+    "shareMessage": "Veja minha Flor G-Z: {{month}} ({{day}}). Descubra a sua em g-z.online",
+    "motivations": {
+      "trait1": "Sua criatividade ilumina os desafios mais sombrios.",
+      "trait2": "Sua bondade é um presente raro neste mundo.",
+      "trait3": "Sua perseverança quebra barreiras que outros não podem ver.",
+      "trait4": "Sua perspectiva única resolve o que parece insolúvel.",
+      "trait5": "Sua energia é contagiante e transformadora.",
+      "trait6": "Sua paciência revela o que outros perdem na pressa.",
+      "trait7": "Sua coragem enfrenta os medos que paralisam muitos.",
+      "trait8": "Sua sabedoria o guia através do labirinto da vida.",
+      "trait9": "Seu otimismo encontra luz nos cantos mais escuros.",
+      "trait10": "Seu foco transforma sonhos em realidade.",
+      "trait11": "Sua generosidade cria ondas de mudança.",
+      "trait12": "Sua honestidade constrói pontes inabaláveis.",
+      "trait13": "Sua compaixão cura feridas invisíveis.",
+      "trait14": "Sua confiabilidade faz de você uma âncora para todos.",
+      "trait15": "Sua adaptabilidade transforma o caos em oportunidades.",
+      "trait16": "Sua determinação move montanhas em silêncio.",
+      "trait17": "Sua consideração toca os corações profundamente.",
+      "trait18": "Seu entusiasmo acende as paixões dos outros.",
+      "trait19": "Sua inteligência vê padrões no ruído.",
+      "trait20": "Sua sensibilidade revela a verdade por trás das máscaras.",
+      "trait21": "Sua imaginação cria novos mundos.",
+      "trait22": "Sua confiança inspira sem palavras.",
+      "trait23": "Seu humor cura o que a medicina não pode.",
+      "trait24": "Sua calma estabiliza as águas turbulentas.",
+      "trait25": "Sua curiosidade desbloqueia os segredos da vida.",
+      "trait26": "Sua empatia une divisões impossíveis.",
+      "trait27": "Seu instinto fala a verdade antes que a lógica o faça."
+    },
+    "encouragements": {
+      "e1": "Confie na sua voz interior; conheça sua verdade.",
+      "e2": "Sua luz é necessária exatamente onde você está.",
+      "e3": "Mesmo pequenos passos à frente mudam seu destino.",
+      "e4": "O mundo precisa exatamente do que só você pode oferecer.",
+      "e5": "Sua jornada conta mais do que qualquer destino.",
+      "e6": "Desafios revelam suas forças ocultas.",
+      "e7": "Seu eu autêntico é sua maior força.",
+      "e8": "As sementes plantadas hoje se tornam a floresta de amanhã.",
+      "e9": "Seu impacto se estende além do que você verá.",
+      "e10": "Quando as sombras caem, sua luz interior se torna mais forte.",
+      "e11": "O que te desafia hoje te tornará mais forte amanhã.",
+      "e12": "O universo conspira para aqueles que ousam sonhar.",
+      "e13": "Sua presença importa mais do que você percebe.",
+      "e14": "Coragem não é a ausência de medo; é seguir em frente apesar disso.",
+      "e15": "Sua voz única merece ser ouvida.",
+      "e16": "O fogo dentro de você brilha mais forte do que os obstáculos à sua frente."
+    },
+    "transitions": {
+      "t1": " Lembre-se, ",
+      "t2": " Saiba que ",
+      "t3": " Abrace que ",
+      "t4": " Sinta que ",
+      "t5": " Confie que ",
+      "t6": " Acredite que ",
+      "t7": " Honre que "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Você não pode selecionar uma data futura como sua data de nascimento.",
+    "formIncomplete": "Por favor, insira uma data de nascimento e selecione um país!",
+    "resetConfirmation": "Tem certeza de que deseja redefinir seus dados? Isso removerá suas informações do nosso banco de dados.",
+    "resetError": "Ocorreu um problema ao redefinir seus dados. Tente novamente mais tarde.",
+    "resetSuccess": "Seus dados foram redefinidos com sucesso.",
+    "flowerSubmitFirst": "Por favor, envie suas informações primeiro para obter o código da flor.",
+    "captureError": "Falha ao capturar sua flor. Tente novamente.",
+    "clipboardSuccess": "Texto copiado para compartilhar na área de transferência! Agora você pode colar manualmente e compartilhar com a imagem. Se o link não funcionar diretamente, digite manualmente \"g-z.online\" no seu navegador.",
+    "clipboardError": "Falha ao copiar para a área de transferência. Por favor, compartilhe manualmente. Não se esqueça de digitar \"g-z.online\" no seu navegador para acessar o site.",
+    "shareManually": "Por favor, compartilhe a imagem manualmente. Não se esqueça de digitar \"g-z.online\" no seu navegador para acessar o site."
+  }
+}
