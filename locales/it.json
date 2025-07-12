@@ -1,1 +1,155 @@
-yjk
+{
+  "header": {
+    "accessCode": "Codice di accesso",
+    "accessCodeSubmit": "Invia - per ottenere il tuo codice."
+  },
+  "nav": {
+    "faq": "FAQ",
+    "discovery": "Scoperta",
+    "flower": "Fiore",
+    "community": "Comunità",
+    "contact": "Contatto",
+    "terms": "Termini",
+    "privacy": "Privacy"
+  },
+  "notification": {
+    "main": "Non sei nato da solo - Scopri i tuoi Gemelli di Compleanno ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Unisciti a noi e scopri i segreti delle generazioni passate, presenti e future in pochi clic."
+  },
+  "form": {
+    "dateLabel": "Seleziona la tua data di nascita",
+    "countryLabel": "Seleziona il tuo paese di nascita",
+    "terms": "Inviando, accetti i nostri termini di utilizzo.",
+    "submit": "Invia",
+    "submitted": "Inviato",
+    "pleaseWait": "Attendere prego...",
+    "error": "Errore"
+  },
+  "howItWorks": {
+    "title": "Come funziona?",
+    "description": "Hai a disposizione due selettori: il primo è un calendario per scegliere la tua data di nascita e il secondo è un selettore per il tuo paese di nascita. Una volta effettuate le tue scelte, fai clic su \"Invia\". Successivamente, ti verrà chiesto di specificare il tuo genere; fai clic su questa opzione per diventare un contributore. Infine, fai clic sul pulsante \"Scoperta\", che lampeggia di verde. Scoprirai quindi due nuovi selettori: naviga secondo le tue preferenze per esplorare le statistiche."
+  },
+  "footer": {
+    "dontMiss": "Non perdere nulla"
+  },
+  "gender": {
+    "title": "Il tuo genere?",
+    "binary": "Generi binari",
+    "man": "Uomo",
+    "woman": "Donna",
+    "nonBinary": "Generi non binari",
+    "nonBinaryOption": "Non binario",
+    "genderqueer": "Genderqueer",
+    "genderfluid": "Genere fluido",
+    "agender": "Agender",
+    "pangender": "Pangender",
+    "demigender": "Demigender",
+    "transgender": "Identità transgender",
+    "transMan": "Uomo transgender",
+    "transWoman": "Donna transgender",
+    "transgender2": "Transgender",
+    "transsexual": "Transessuale",
+    "cultural": "Generi culturali e spirituali",
+    "twoSpirit": "Due spiriti",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Altre identità di genere",
+    "bigender": "Bigender",
+    "androgyne": "Androgino",
+    "neutrois": "Neutrois"
+  },
+  "community": {
+    "title": "Unisciti alla Comunità G-Z",
+    "description": "Unisciti alla Comunità G-Z e connettiti con persone che condividono il tuo compleanno! Discuti, forma squadre per le prossime competizioni e scopri i tuoi gemelli di compleanno.",
+    "howItWorks": "Come funziona:",
+    "step1": "1. Fai clic sul pulsante \"Unisciti a G-Z\" qui sotto.",
+    "step2": "2. Accetta l'invito a Discord.",
+    "step3": "3. Fai clic su \"Indietro\" in alto a sinistra per vedere i gruppi del tuo mese dopo 'Scegli-la-tua-squadra'.",
+    "step5": "5. Seleziona il gruppo corrispondente al tuo giorno di nascita.",
+    "joinButton": "Unisciti a G-Z"
+  },
+  "flower": {
+    "title": "Fiore della Vita",
+    "myFlower": "Il mio Fiore",
+    "myFlowerWithDate": "Il mio Fiore - {{month}} ({{day}})",
+    "defaultMotivation": "Invia le tue informazioni per scoprire la tua motivazione floreale.",
+    "shareButton": "Condividi il mio Fiore",
+    "shareWarning": "Perfetto per condividere nelle tue Storie, basta solo aggiustare.",
+    "share": "Condividi",
+    "close": "Chiudi",
+    "websiteUrl": "Scopri il tuo su www.g-z.online",
+    "shareTitle": "Il mio Fiore G-Z",
+    "shareText": "Scopri il tuo su g-z.online",
+    "shareMessage": "Guarda il mio Fiore di G-Z: {{month}} ({{day}}). Scopri il tuo su g-z.online",
+    "motivations": {
+      "trait1": "La tua creatività illumina le sfide più buie.",
+      "trait2": "La tua gentilezza è un dono raro in questo mondo.",
+      "trait3": "La tua perseveranza rompe le barriere che altri non possono vedere.",
+      "trait4": "La tua prospettiva unica risolve ciò che sembra irrisolvibile.",
+      "trait5": "La tua energia è contagiosa e trasformante.",
+      "trait6": "La tua pazienza rivela ciò che altri perdono nella fretta.",
+      "trait7": "Il tuo coraggio affronta le paure che paralizzano molti.",
+      "trait8": "La tua saggezza ti guida attraverso il labirinto della vita.",
+      "trait9": "Il tuo ottimismo trova luce negli angoli più bui.",
+      "trait10": "Il tuo focus trasforma i sogni in realtà.",
+      "trait11": "La tua generosità crea onde di cambiamento.",
+      "trait12": "La tua onestà costruisce ponti inamovibili.",
+      "trait13": "La tua compassione guarisce ferite invisibili.",
+      "trait14": "La tua affidabilità ti rende il punto d'appoggio di tutti.",
+      "trait15": "La tua adattabilità trasforma il caos in opportunità.",
+      "trait16": "La tua determinazione sposta montagne silenziosamente.",
+      "trait17": "La tua considerazione tocca profondamente i cuori.",
+      "trait18": "Il tuo entusiasmo accende le passioni degli altri.",
+      "trait19": "La tua intelligenza vede modelli nel rumore.",
+      "trait20": "La tua sensibilità rivela la verità dietro le maschere.",
+      "trait21": "La tua immaginazione crea nuovi mondi.",
+      "trait22": "La tua fiducia ispira senza parole.",
+      "trait23": "Il tuo umorismo guarisce ciò che la medicina non può.",
+      "trait24": "La tua calma stabilizza le acque turbolente.",
+      "trait25": "La tua curiosità sblocca i misteri della vita.",
+      "trait26": "La tua empatia unisce divisioni impossibili.",
+      "trait27": "Il tuo intuito parla la verità prima che la logica lo faccia."
+    },
+    "encouragements": {
+      "e1": "Fidati della tua voce interiore; conosci la tua verità.",
+      "e2": "La tua luce è necessaria esattamente dove sei.",
+      "e3": "Anche piccoli passi in avanti cambiano il tuo destino.",
+      "e4": "Il mondo ha bisogno esattamente di ciò che solo tu puoi offrire.",
+      "e5": "Il tuo viaggio conta più di qualsiasi destinazione.",
+      "e6": "Le sfide rivelano le tue forze nascoste.",
+      "e7": "Il tuo io autentico è il tuo potere più grande.",
+      "e8": "I semi piantati oggi diventano la foresta di domani.",
+      "e9": "Il tuo impatto va oltre ciò che vedrai mai.",
+      "e10": "Quando le ombre cadono, la tua luce interiore diventa più forte.",
+      "e11": "Ciò che ti sfida oggi ti renderà più forte domani.",
+      "e12": "L'universo cospira per coloro che osano sognare.",
+      "e13": "La tua presenza conta più di quanto tu realizzi.",
+      "e14": "Il coraggio non è l'assenza di paura; è andare avanti comunque.",
+      "e15": "La tua voce unica merita di essere ascoltata.",
+      "e16": "Il fuoco dentro di te brilla più forte degli ostacoli davanti a te."
+    },
+    "transitions": {
+      "t1": " Ricorda, ",
+      "t2": " Sappi che ",
+      "t3": " Abbraccia che ",
+      "t4": " Senti che ",
+      "t5": " Fidati che ",
+      "t6": " Credi che ",
+      "t7": " Onora che "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Non puoi selezionare una data futura come data di nascita.",
+    "formIncomplete": "Inserisci una data di nascita e seleziona un paese!",
+    "resetConfirmation": "Sei sicuro di voler ripristinare i tuoi dati? Questo eliminerà le tue informazioni dal nostro database.",
+    "resetError": "Si è verificato un problema durante il ripristino dei tuoi dati. Riprova più tardi.",
+    "resetSuccess": "I tuoi dati sono stati ripristinati con successo.",
+    "flowerSubmitFirst": "Si prega di inviare prima le proprie informazioni per ottenere il codice del Fiore.",
+    "captureError": "Impossibile catturare il tuo fiore. Riprova.",
+    "clipboardSuccess": "Testo da condividere copiato negli appunti! Ora puoi incollarlo e condividerlo manualmente con l'immagine. Se il link non funziona direttamente, scrivi manualmente \"g-z.online\" nel tuo browser.",
+    "clipboardError": "Impossibile copiare negli appunti. Si prega di condividere manualmente. Non dimenticare di scrivere \"g-z.online\" nel tuo browser per accedere al sito.",
+    "shareManually": "Si prega di condividere l'immagine manualmente. Non dimenticare di scrivere \"g-z.online\" nel tuo browser per accedere al sito."
+  }
+}
