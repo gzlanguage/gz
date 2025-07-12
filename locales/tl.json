@@ -1,1 +1,155 @@
-gjk
+{
+  "header": {
+    "accessCode": "Access Code",
+    "accessCodeSubmit": "I-submit - para makuha ang iyong code."
+  },
+  "nav": {
+    "faq": "Mga Madalas Itanong",
+    "discovery": "Pagtuklas",
+    "flower": "Bulaklak",
+    "community": "Komunidad",
+    "contact": "Makipag-ugnay",
+    "terms": "Mga Tuntunin",
+    "privacy": "Pribadong Impormasyon"
+  },
+  "notification": {
+    "main": "Hindi ka nag-iisa sa iyong pagsilang - Tuklasin ang iyong mga Kambal sa Kaarawan ¯\\_(ツ)_/¯"
+  },
+  "main": {
+    "title": "Sumali sa amin at tuklasin ang mga lihim ng nakaraan, kasalukuyan, at hinaharap sa ilang pag-click."
+  },
+  "form": {
+    "dateLabel": "Pumili ng iyong Petsa ng Kapanganakan",
+    "countryLabel": "Pumili ng iyong Bansa ng Kapanganakan",
+    "terms": "Sa pamamagitan ng pagsusumite, sumasang-ayon ka sa aming mga tuntunin ng paggamit.",
+    "submit": "Isumite",
+    "submitted": "Naisumite",
+    "pleaseWait": "Pakisuyo, maghintay...",
+    "error": "Error"
+  },
+  "howItWorks": {
+    "title": "Paano ito gumagana?",
+    "description": "Mayroon kang dalawang pagpipilian: ang una ay isang kalendaryo upang pumili ng iyong petsa ng kapanganakan, at ang pangalawa ay isang selektor para sa iyong bansang isinilang. Kapag natapos mo na ang iyong mga pagpipilian, i-click ang \"Isumite\". Pagkatapos ay hihilingin sa iyo na tukuyin ang iyong kasarian; i-click ang opsyong ito upang maging isang kontribyutor. Sa wakas, i-click ang \"Tuklasin\" na pindutan na kumikislap ng berde. Matapos nito, matutuklasan mo ang dalawang bagong selektor: mag-navigate ayon sa iyong mga kagustuhan upang galugarin ang mga istatistika."
+  },
+  "footer": {
+    "dontMiss": "Huwag palampasin"
+  },
+  "gender": {
+    "title": "Ano ang iyong kasarian?",
+    "binary": "Binarong Kasarian",
+    "man": "Lalaki",
+    "woman": "Babae",
+    "nonBinary": "Hindi Binarong Kasarian",
+    "nonBinaryOption": "Hindi Binaro",
+    "genderqueer": "Genderqueer",
+    "genderfluid": "Genderfluid",
+    "agender": "Agender",
+    "pangender": "Pangender",
+    "demigender": "Demigender",
+    "transgender": "Transgender na mga Identidad",
+    "transMan": "Trans Lalaki",
+    "transWoman": "Trans Babae",
+    "transgender2": "Transgender",
+    "transsexual": "Transsexual",
+    "cultural": "Kultural at Espiritwal na mga Kasarian",
+    "twoSpirit": "Dalawang Espiritu",
+    "hijra": "Hijra",
+    "faafafine": "Fa'afafine",
+    "other": "Ibang mga Identidad ng Kasarian",
+    "bigender": "Bigender",
+    "androgyne": "Androgynous",
+    "neutrois": "Neutrois"
+  },
+  "community": {
+    "title": "Sumali sa Komunidad ng G-Z",
+    "description": "Sumali sa Komunidad ng G-Z at kumonekta sa mga taong may parehong kaarawan! Magtalakayan, bumuo ng mga koponan para sa mga darating na kumpetisyon, at tuklasin ang iyong mga kambal sa kaarawan.",
+    "howItWorks": "Paano ito gumagana:",
+    "step1": "1. I-click ang \"Sumali sa G-Z\" na pindutan sa ibaba.",
+    "step2": "2. Tanggapin ang paanyaya sa Discord.",
+    "step3": "3. I-click ang \"Bumalik\" sa itaas na kaliwa upang makita ang mga grupo ng iyong buwan pagkatapos ng 'Pumili ng Iyong Koponan'.",
+    "step5": "5. Pumili ng grupo na naaangkop sa iyong kaarawan.",
+    "joinButton": "Sumali sa G-Z"
+  },
+  "flower": {
+    "title": "Bulaklak ng Buhay",
+    "myFlower": "Aking Bulaklak",
+    "myFlowerWithDate": "Aking Bulaklak - {{month}} ({{day}})",
+    "defaultMotivation": "Ipadala ang iyong impormasyon upang matuklasan ang iyong mga motibasyon sa bulaklak.",
+    "shareButton": "Ibahagi ang Aking Bulaklak",
+    "shareWarning": "Perpekto para sa pagbabahagi sa iyong mga kwento, ayusin lamang.",
+    "share": "Ibahagi",
+    "close": "Isara",
+    "websiteUrl": "Tuklasin ang iyong mga bulaklak sa www.g-z.online",
+    "shareTitle": "Aking Bulaklak ng G-Z",
+    "shareText": "Tuklasin ang iyong mga bulaklak sa g-z.online",
+    "shareMessage": "Tingnan ang Aking Bulaklak ng G-Z: {{month}} ({{day}}). Tuklasin ang iyong mga bulaklak sa g-z.online",
+    "motivations": {
+      "trait1": "Ang iyong pagkamalikhain ay nagbibigay liwanag sa pinakamadilim na hamon.",
+      "trait2": "Ang iyong kabaitan ay isang bihirang regalo sa mundong ito.",
+      "trait3": "Ang iyong pagtitiyaga ay bumabasag sa mga hadlang na hindi nakikita ng iba.",
+      "trait4": "Ang iyong natatanging pananaw ay nalulutas ang tila hindi malulutas.",
+      "trait5": "Ang iyong enerhiya ay nakakahawa at nagbabago.",
+      "trait6": "Ang iyong pasensya ay nagpapakita ng mga bagay na nawawala ng iba sa pagmamadali.",
+      "trait7": "Ang iyong tapang ay humaharap sa mga takot na nagpaparalisa sa marami.",
+      "trait8": "Ang iyong karunungan ay gumagabay sa iyo sa labirint ng buhay.",
+      "trait9": "Ang iyong pag-asa ay nakakahanap ng liwanag sa pinakamadilim na sulok.",
+      "trait10": "Ang iyong pokus ay nagpapabago sa mga pangarap sa katotohanan.",
+      "trait11": "Ang iyong pagiging mapagbigay ay lumilikha ng mga alon ng pagbabago.",
+      "trait12": "Ang iyong katapatan ay nagtatayo ng mga tulay na hindi matitinag.",
+      "trait13": "Ang iyong empatiya ay nagpapagaling sa mga hindi nakikitang sugat.",
+      "trait14": "Ang iyong pagiging maaasahan ay nagiging angkan para sa lahat.",
+      "trait15": "Ang iyong kakayahang umangkop ay nagiging pagkakataon ang kaguluhan.",
+      "trait16": "Ang iyong determinasyon ay tahimik na nagpapagalaw ng mga bundok.",
+      "trait17": "Ang iyong pag-aalaga ay malalim na humahaplos sa mga puso.",
+      "trait18": "Ang iyong sigasig ay nag-aapoy sa mga pagnanasa ng iba.",
+      "trait19": "Ang iyong talino ay nakakakita ng mga pattern sa ingay.",
+      "trait20": "Ang iyong sensitibidad ay nagpapakita ng katotohanan sa likod ng mga maskara.",
+      "trait21": "Ang iyong imahinasyon ay lumilikha ng mga bagong mundo.",
+      "trait22": "Ang iyong tiwala ay nagbibigay inspirasyon nang walang salita.",
+      "trait23": "Ang iyong katatawanan ay nagpapagaling ng mga bagay na hindi kayang gamutin ng gamot.",
+      "trait24": "Ang iyong kapayapaan ay nagtutuwid sa magulong tubig.",
+      "trait25": "Ang iyong pag-usisa ay nagbubukas ng mga lihim ng buhay.",
+      "trait26": "Ang iyong empatiya ay nag-uugnay sa mga imposibleng dibisyon.",
+      "trait27": "Ang iyong kutob ay nagsasabi ng katotohanan bago pa man gawin ng lohika."
+    },
+    "encouragements": {
+      "e1": "Magtiwala sa iyong panloob na boses; alamin ang iyong katotohanan.",
+      "e2": "Ang iyong liwanag ay kinakailangan eksakto kung nasaan ka.",
+      "e3": "Kahit na ang maliliit na hakbang pasulong ay nagbabago sa iyong kapalaran.",
+      "e4": "Kailangan ng mundo ang eksaktong maaari mong ibigay.",
+      "e5": "Ang iyong paglalakbay ay mas mahalaga kaysa sa anumang destinasyon.",
+      "e6": "Ang mga hamon ay nagbubunyag ng iyong nakatagong lakas.",
+      "e7": "Ang iyong tunay na sarili ang iyong pinakamalaking lakas.",
+      "e8": "Ang mga buto na itinanim ngayon ay magiging gubat bukas.",
+      "e9": "Ang iyong epekto ay umaabot sa mas malayo kaysa sa iyong makikita.",
+      "e10": "Kapag bumagsak ang mga anino, ang iyong panloob na liwanag ay lalakas.",
+      "e11": "Ang nagha-hamon sa iyo ngayon ay magpapalakas sa iyo bukas.",
+      "e12": "Ang uniberso ay nagtataguyod para sa mga nangarap.",
+      "e13": "Ang iyong presensya ay mas mahalaga kaysa sa iyong nalalaman.",
+      "e14": "Ang tapang ay hindi ang kawalan ng takot; ito ay ang pagtuloy sa kabila nito.",
+      "e15": "Ang iyong natatanging boses ay nararapat marinig.",
+      "e16": "Ang apoy sa loob mo ay nagliliyab ng mas maliwanag kaysa sa mga hadlang sa harap mo."
+    },
+    "transitions": {
+      "t1": " Tandaan, ",
+      "t2": " Alamin na ",
+      "t3": " Yakapin na ",
+      "t4": " Ramdamin na ",
+      "t5": " Magtiwala na ",
+      "t6": " Manampalataya na ",
+      "t7": " Igalang na "
+    }
+  },
+  "alerts": {
+    "futureDateError": "Hindi mo maaring pumili ng hinaharap na petsa bilang petsa ng kapanganakan.",
+    "formIncomplete": "Mangyaring ipasok ang petsa ng kapanganakan at pumili ng isang bansa!",
+    "resetConfirmation": "Sigurado ka bang nais mong i-reset ang iyong data? Ito ay magbubura ng iyong impormasyon mula sa aming database.",
+    "resetError": "Nagkaroon ng problema habang nire-reset ang iyong data. Mangyaring subukan muli mamaya.",
+    "resetSuccess": "Ang iyong data ay matagumpay na na-reset.",
+    "flowerSubmitFirst": "Mangyaring isumite ang iyong impormasyon muna upang makuha ang iyong flower code.",
+    "captureError": "Nabigong makuha ang iyong bulaklak. Mangyaring subukan muli.",
+    "clipboardSuccess": "Ang teksto para sa pagbabahagi ay nakopya sa clipboard! Ngayon ay maaari mo itong i-paste nang manu-mano at ibahagi kasama ang larawan. Kung ang link ay hindi gumagana nang direkta, i-type nang manu-mano ang \"g-z.online\" sa iyong browser.",
+    "clipboardError": "Nabigong kopyahin sa clipboard. Mangyaring ibahagi ito nang manu-mano. Huwag kalimutan na isulat ang \"g-z.online\" sa iyong browser upang ma-access ang site.",
+    "shareManually": "Mangyaring ibahagi ang larawan nang manu-mano. Huwag kalimutan na isulat ang \"g-z.online\" sa iyong browser upang ma-access ang site."
+  }
+}
