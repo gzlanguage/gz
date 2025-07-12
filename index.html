@@ -765,9 +765,44 @@
         .key-message.show {
             opacity: 1;
         }
+        
+        /* Language selector styles */
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+            display: none; /* Hidden by default as per requirement */
+        }
+        
+        .language-btn {
+            background-color: transparent;
+            border: 1px solid #007bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            color: #007bff;
+            transition: all 0.3s;
+        }
+        
+        .language-btn:hover, .language-btn.active {
+            background-color: #007bff;
+            color: white;
+        }
     </style>
 </head>
 <body>
+  <!-- Optional language switcher (hidden by default) -->
+  <div class="language-switcher">
+    <button class="language-btn" data-lng="en">EN</button>
+    <button class="language-btn" data-lng="fr">FR</button>
+  </div>
 
   <header>
     <h1 translate="no">G-Z</h1>
@@ -803,27 +838,26 @@
   </script>
   <div class="divider"></div>
   <div class="notification">
-    <span class="notification-text" data-i18n="notification.text">You were not born alone - Discover Your Birthday Twins ¯\_(ツ)_/¯
-</span>
+    <span class="notification-text" data-i18n="notification.birthday">You were not born alone - Discover Your Birthday Twins ¯\_(ツ)_/¯</span>
     <div class="new-message-badge"></div>
   </div>
 
   <div class="divider"></div>
 
-  <div class="footer-title" data-i18n="footer.title">
+  <div class="footer-title" data-i18n="header.slogan">
     Join us and uncover the secrets of past, present, and future generations in just a few clicks.
   </div>
 
-  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" data-i18n="[placeholder]input.birthdate" />
+  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" />
   <select class="country-select" id="countrySelect">
-    <option value="" disabled selected data-i18n="select.country">Select your country of birth</option>
+    <option value="" disabled selected data-i18n="form.countrySelect">Select your country of birth</option>
   </select>
   
-  <div class="terms-text" data-i18n="terms.agreement">
+  <div class="terms-text" data-i18n="form.termsAgreement">
     By submitting, you agree to our terms of use.
   </div>
   
-  <button class="submit-button" type="submit" data-i18n="button.submit">Submit</button>
+  <button class="submit-button" type="submit" data-i18n="form.submit">Submit</button>
 
   <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
 
@@ -835,7 +869,7 @@
   </div>
 
   <div class="text-line" style="text-align: center; color: black;">
-    <span style="color: #007bff;">_____</span> <span data-i18n="dontMiss">Don't miss anything</span> <span style="color: #007bff;">_____</span>
+    <span style="color: #007bff;">_____</span> <span data-i18n="footer.dontMiss">Don't miss anything</span> <span style="color: #007bff;">_____</span>
   </div>
 
   <footer>
@@ -873,7 +907,7 @@
       
       <div class="gender-category" data-i18n="gender.nonbinary">Non-binary genders</div>
       <div class="modal-footer">
-        <button class="close-button gender-option" value="Non-binary" data-i18n="gender.nb">Non-binary</button>
+        <button class="close-button gender-option" value="Non-binary" data-i18n="gender.nonbinaryPerson">Non-binary</button>
         <button class="close-button gender-option" value="Genderqueer" data-i18n="gender.genderqueer">Genderqueer</button>
         <button class="close-button gender-option" value="Genderfluid" data-i18n="gender.genderfluid">Genderfluid</button>
         <button class="close-button gender-option" value="Agender" data-i18n="gender.agender">Agender</button>
@@ -883,15 +917,15 @@
       
       <div class="gender-category" data-i18n="gender.trans">Transgender identities</div>
       <div class="modal-footer">
-        <button class="close-button gender-option" value="Trans Man" data-i18n="gender.transman">Trans Man</button>
-        <button class="close-button gender-option" value="Trans Woman" data-i18n="gender.transwoman">Trans Woman</button>
+        <button class="close-button gender-option" value="Trans Man" data-i18n="gender.transMan">Trans Man</button>
+        <button class="close-button gender-option" value="Trans Woman" data-i18n="gender.transWoman">Trans Woman</button>
         <button class="close-button gender-option" value="Transgender" data-i18n="gender.transgender">Transgender</button>
         <button class="close-button gender-option" value="Transsexual" data-i18n="gender.transsexual">Transsexual</button>
       </div>
       
       <div class="gender-category" data-i18n="gender.cultural">Cultural & spiritual genders</div>
       <div class="modal-footer">
-        <button class="close-button gender-option" value="Two-Spirit" data-i18n="gender.twospirit">Two-Spirit</button>
+        <button class="close-button gender-option" value="Two-Spirit" data-i18n="gender.twoSpirit">Two-Spirit</button>
         <button class="close-button gender-option" value="Hijra" data-i18n="gender.hijra">Hijra</button>
         <button class="close-button gender-option" value="Fa'afafine" data-i18n="gender.faafafine">Fa'afafine</button>
       </div>
@@ -932,8 +966,8 @@
       <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
       <div class="billabong-title"><strong data-i18n="flower.title">Flower of Life</strong></div>
       
-      <div id="flowerCodeDisplay" class="flower-code"></div>
-      <div class="monthly-motivation" id="monthlyMotivation"></div>
+      <div id="flowerCodeDisplay" class="flower-code" data-i18n="flower.myFlower">My Flower</div>
+      <div class="monthly-motivation" id="monthlyMotivation" data-i18n="flower.defaultMotivation">Submit your information to discover your flower motivation.</div>
       
       <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;">
         <i class="fas fa-spa"></i>
@@ -941,8 +975,8 @@
     </div>
   </div>
   
-  <button class="share-flower-button" id="shareFlowerButton">
-    <span data-i18n="flower.shareButton">Share my Flower</span> <i class="fas fa-paper-plane"></i>
+  <button class="share-flower-button" id="shareFlowerButton" data-i18n="flower.shareButton">
+    Share my Flower <i class="fas fa-paper-plane"></i>
   </button>
   
   <div id="capturedFlower">
@@ -967,11 +1001,11 @@
   </div>
   
   <div id="flowerCaptureContainer">
-    <div class="capture-flower-header" data-i18n="flower.captureTitle">Flower of Life</div>
+    <div class="capture-flower-header" data-i18n="flower.title">Flower of Life</div>
     
-    <div id="captureFlowerCode" class="capture-flower-code"></div>
+    <div id="captureFlowerCode" class="capture-flower-code" data-i18n="flower.myFlower">My Flower</div>
     
-    <div id="captureFlowerMotivation" class="capture-flower-motivation"></div>
+    <div id="captureFlowerMotivation" class="capture-flower-motivation" data-i18n="flower.defaultMotivation">Submit your information to discover your flower motivation.</div>
     
     <div class="capture-flower-icon">
       <i class="fas fa-spa"></i>
@@ -979,413 +1013,93 @@
     
     <div class="gz-logo">G-Z</div>
     
-    <div class="capture-website-url" data-i18n="flower.websiteUrl">Discover yours at www.g-z.online</div>
+    <div class="capture-website-url" data-i18n="flower.websitePromo">Discover yours at www.g-z.online</div>
   </div>
 
   <!-- i18next scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
-  
-  <script>
-    // i18next initialization
-    function initializeI18n() {
-      const resources = {
-        en: {
-          translation: {
-            accessCode: {
-              title: "Access Code",
-              indicator: "Submit - to get your code."
-            },
-            nav: {
-              faq: "FAQ",
-              discovery: "Discovery",
-              flower: "Flower",
-              community: "Community",
-              contact: "Contact",
-              terms: "Terms",
-              privacy: "Privacy"
-            },
-            notification: {
-              text: "You were not born alone - Discover Your Birthday Twins ¯\\_(ツ)_/¯"
-            },
-            footer: {
-              title: "Join us and uncover the secrets of past, present, and future generations in just a few clicks."
-            },
-            input: {
-              birthdate: "Select your date of birth"
-            },
-            select: {
-              country: "Select your country of birth"
-            },
-            terms: {
-              agreement: "By submitting, you agree to our terms of use."
-            },
-            button: {
-              submit: "Submit",
-              submitted: "Submitted",
-              wait: "Please wait...",
-              error: "Error",
-              reset: "Reset"
-            },
-            howItWorks: {
-              title: "How does it work?",
-              description: "Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on \"Submit\". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the \"Discovery\" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics."
-            },
-            dontMiss: "Don't miss anything",
-            gender: {
-              title: "Your gender?",
-              binary: "Binary genders",
-              nonbinary: "Non-binary genders",
-              trans: "Transgender identities",
-              cultural: "Cultural & spiritual genders",
-              other: "Other gender identities",
-              man: "Man",
-              woman: "Woman",
-              nb: "Non-binary",
-              genderqueer: "Genderqueer",
-              genderfluid: "Genderfluid",
-              agender: "Agender",
-              pangender: "Pangender",
-              demigender: "Demigender",
-              transman: "Trans Man",
-              transwoman: "Trans Woman",
-              transgender: "Transgender",
-              transsexual: "Transsexual",
-              twospirit: "Two-Spirit",
-              hijra: "Hijra",
-              faafafine: "Fa'afafine",
-              bigender: "Bigender",
-              androgyne: "Androgyne",
-              neutrois: "Neutrois"
-            },
-            community: {
-              title: "Join the G-Z Community",
-              description: "Join the G-Z Community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.",
-              howItWorks: "How it works:",
-              step1: "1. Click the \"Join G-Z\" button below.",
-              step2: "2. Accept the Discord invitation.",
-              step3: "3. Click \"Back\" at the top left to see the groups for your month after 'Choose-your-team'.",
-              step5: "5. Select the group that matches your birth day.",
-              joinButton: "Join G-Z"
-            },
-            flower: {
-              title: "Flower of Life",
-              myFlower: "My Flower",
-              shareButton: "Share my Flower",
-              shareWarning: "Perfect for sharing in your Stories, just adjust.",
-              share: "Share",
-              close: "Close",
-              captureTitle: "Flower of Life",
-              websiteUrl: "Discover yours at www.g-z.online",
-              defaultMotivation: "Submit your information to discover your flower motivation."
-            },
-            alerts: {
-              futureDate: "You cannot select a future date for your date of birth",
-              missingInfo: "Please enter a date of birth and select a country!",
-              resetConfirm: "Are you sure you want to reset your data? This will delete your information from our database.",
-              resetError: "There was a problem resetting your data. Please try again later.",
-              resetSuccess: "Your data has been successfully reset.",
-              noFlowerCode: "Please submit your information first to get your Flower code.",
-              captureError: "Could not capture your flower. Please try again.",
-              copySuccess: "Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn't work directly, please manually type \"g-z.online\" in your browser.",
-              copyFail: "Could not copy to clipboard. Please share manually. Remember to type \"g-z.online\" in your browser to access the site."
-            },
-            months: [
-              "January", "February", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"
-            ]
-          }
-        },
-        fr: {
-          translation: {
-            accessCode: {
-              title: "Code d'accès",
-              indicator: "Soumettez - pour obtenir votre code."
-            },
-            nav: {
-              faq: "FAQ",
-              discovery: "Découverte",
-              flower: "Fleur",
-              community: "Communauté",
-              contact: "Contact",
-              terms: "Conditions",
-              privacy: "Confidentialité"
-            },
-            notification: {
-              text: "Vous n'êtes pas né seul - Découvrez vos jumeaux de naissance ¯\\_(ツ)_/¯"
-            },
-            footer: {
-              title: "Rejoignez-nous et découvrez les secrets des générations passées, présentes et futures en quelques clics."
-            },
-            input: {
-              birthdate: "Sélectionnez votre date de naissance"
-            },
-            select: {
-              country: "Sélectionnez votre pays de naissance"
-            },
-            terms: {
-              agreement: "En soumettant, vous acceptez nos conditions d'utilisation."
-            },
-            button: {
-              submit: "Soumettre",
-              submitted: "Soumis",
-              wait: "Veuillez patienter...",
-              error: "Erreur",
-              reset: "Réinitialiser"
-            },
-            howItWorks: {
-              title: "Comment ça marche ?",
-              description: "Deux sélecteurs sont à votre disposition : le premier est un calendrier pour choisir votre date de naissance, et le second est un sélecteur pour votre pays de naissance. Une fois vos sélections effectuées, cliquez sur \"Soumettre\". Après cela, on vous demandera de préciser votre genre ; cliquez sur cette option pour devenir contributeur. Enfin, cliquez sur le bouton \"Découverte\", qui clignote en vert. Vous découvrirez alors deux nouveaux sélecteurs : naviguez selon vos préférences pour explorer les statistiques."
-            },
-            dontMiss: "Ne manquez rien",
-            gender: {
-              title: "Votre genre ?",
-              binary: "Genres binaires",
-              nonbinary: "Genres non-binaires",
-              trans: "Identités transgenres",
-              cultural: "Genres culturels & spirituels",
-              other: "Autres identités de genre",
-              man: "Homme",
-              woman: "Femme",
-              nb: "Non-binaire",
-              genderqueer: "Genderqueer",
-              genderfluid: "Genre fluide",
-              agender: "Agenre",
-              pangender: "Pangenre",
-              demigender: "Demigenre",
-              transman: "Homme trans",
-              transwoman: "Femme trans",
-              transgender: "Transgenre",
-              transsexual: "Transsexuel",
-              twospirit: "Bispirituel",
-              hijra: "Hijra",
-              faafafine: "Fa'afafine",
-              bigender: "Bigenre",
-              androgyne: "Androgyne",
-              neutrois: "Neutrois"
-            },
-            community: {
-              title: "Rejoignez la communauté G-Z",
-              description: "Rejoignez la communauté G-Z et connectez-vous avec des personnes qui partagent votre date de naissance ! Chattez, formez des équipes pour les compétitions à venir et découvrez vos jumeaux d'anniversaire.",
-              howItWorks: "Comment ça marche :",
-              step1: "1. Cliquez sur le bouton \"Rejoindre G-Z\" ci-dessous.",
-              step2: "2. Acceptez l'invitation Discord.",
-              step3: "3. Cliquez sur \"Retour\" en haut à gauche pour voir les groupes de votre mois après 'Choisissez-votre-équipe'.",
-              step5: "5. Sélectionnez le groupe qui correspond à votre jour de naissance.",
-              joinButton: "Rejoindre G-Z"
-            },
-            flower: {
-              title: "Fleur de Vie",
-              myFlower: "Ma Fleur",
-              shareButton: "Partager ma Fleur",
-              shareWarning: "Parfait pour partager dans vos Stories, ajustez simplement.",
-              share: "Partager",
-              close: "Fermer",
-              captureTitle: "Fleur de Vie",
-              websiteUrl: "Découvrez la vôtre sur www.g-z.online",
-              defaultMotivation: "Soumettez vos informations pour découvrir votre motivation florale."
-            },
-            alerts: {
-              futureDate: "Vous ne pouvez pas sélectionner une date future pour votre date de naissance",
-              missingInfo: "Veuillez entrer une date de naissance et sélectionner un pays !",
-              resetConfirm: "Êtes-vous sûr de vouloir réinitialiser vos données ? Cela supprimera vos informations de notre base de données.",
-              resetError: "Un problème est survenu lors de la réinitialisation de vos données. Veuillez réessayer plus tard.",
-              resetSuccess: "Vos données ont été réinitialisées avec succès.",
-              noFlowerCode: "Veuillez d'abord soumettre vos informations pour obtenir votre code Fleur.",
-              captureError: "Impossible de capturer votre fleur. Veuillez réessayer.",
-              copySuccess: "Texte de partage copié dans le presse-papiers ! Vous pouvez maintenant le coller et le partager manuellement avec l'image. Si le lien ne fonctionne pas directement, veuillez taper manuellement \"g-z.online\" dans votre navigateur.",
-              copyFail: "Impossible de copier dans le presse-papiers. Veuillez partager manuellement. N'oubliez pas de taper \"g-z.online\" dans votre navigateur pour accéder au site."
-            },
-            months: [
-              "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-              "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-            ]
-          }
-        },
-        es: {
-          translation: {
-            accessCode: {
-              title: "Código de Acceso",
-              indicator: "Envíe - para obtener su código."
-            },
-            nav: {
-              faq: "FAQ",
-              discovery: "Descubrimiento",
-              flower: "Flor",
-              community: "Comunidad",
-              contact: "Contacto",
-              terms: "Términos",
-              privacy: "Privacidad"
-            },
-            notification: {
-              text: "No naciste solo - Descubre a tus gemelos de cumpleaños ¯\\_(ツ)_/¯"
-            },
-            footer: {
-              title: "Únete a nosotros y descubre los secretos de generaciones pasadas, presentes y futuras con solo unos clics."
-            },
-            input: {
-              birthdate: "Selecciona tu fecha de nacimiento"
-            },
-            select: {
-              country: "Selecciona tu país de nacimiento"
-            },
-            terms: {
-              agreement: "Al enviar, aceptas nuestros términos de uso."
-            },
-            button: {
-              submit: "Enviar",
-              submitted: "Enviado",
-              wait: "Por favor espere...",
-              error: "Error",
-              reset: "Reiniciar"
-            },
-            howItWorks: {
-              title: "¿Cómo funciona?",
-              description: "Tienes a tu disposición dos selectores: el primero es un calendario para elegir tu fecha de nacimiento, y el segundo es un selector para tu país de nacimiento. Una vez realizadas tus selecciones, haz clic en \"Enviar\". Después, se te pedirá que especifiques tu género; haz clic en esta opción para convertirte en colaborador. Finalmente, haz clic en el botón \"Descubrimiento\", que parpadea en verde. Descubrirás entonces dos nuevos selectores: navega según tus preferencias para explorar las estadísticas."
-            },
-            dontMiss: "No te pierdas nada",
-            gender: {
-              title: "¿Tu género?",
-              binary: "Géneros binarios",
-              nonbinary: "Géneros no binarios",
-              trans: "Identidades transgénero",
-              cultural: "Géneros culturales y espirituales",
-              other: "Otras identidades de género",
-              man: "Hombre",
-              woman: "Mujer",
-              nb: "No binario",
-              genderqueer: "Genderqueer",
-              genderfluid: "Género fluido",
-              agender: "Agénero",
-              pangender: "Pangénero",
-              demigender: "Demigénero",
-              transman: "Hombre trans",
-              transwoman: "Mujer trans",
-              transgender: "Transgénero",
-              transsexual: "Transexual",
-              twospirit: "Dos espíritus",
-              hijra: "Hijra",
-              faafafine: "Fa'afafine",
-              bigender: "Bigénero",
-              androgyne: "Andrógino",
-              neutrois: "Neutrois"
-            },
-            community: {
-              title: "Únete a la comunidad G-Z",
-              description: "¡Únete a la comunidad G-Z y conéctate con personas que comparten tu cumpleaños! Chatea, forma equipos para próximas competiciones y descubre a tus gemelos de cumpleaños.",
-              howItWorks: "Cómo funciona:",
-              step1: "1. Haz clic en el botón \"Unirse a G-Z\" de abajo.",
-              step2: "2. Acepta la invitación de Discord.",
-              step3: "3. Haz clic en \"Atrás\" en la parte superior izquierda para ver los grupos de tu mes después de 'Elige-tu-equipo'.",
-              step5: "5. Selecciona el grupo que coincida con tu día de nacimiento.",
-              joinButton: "Unirse a G-Z"
-            },
-            flower: {
-              title: "Flor de la Vida",
-              myFlower: "Mi Flor",
-              shareButton: "Compartir mi Flor",
-              shareWarning: "Perfecto para compartir en tus Historias, solo ajusta.",
-              share: "Compartir",
-              close: "Cerrar",
-              captureTitle: "Flor de la Vida",
-              websiteUrl: "Descubre la tuya en www.g-z.online",
-              defaultMotivation: "Envía tu información para descubrir tu motivación floral."
-            },
-            alerts: {
-              futureDate: "No puedes seleccionar una fecha futura para tu fecha de nacimiento",
-              missingInfo: "¡Por favor, introduce una fecha de nacimiento y selecciona un país!",
-              resetConfirm: "¿Estás seguro de que quieres reiniciar tus datos? Esto eliminará tu información de nuestra base de datos.",
-              resetError: "Hubo un problema al reiniciar tus datos. Por favor, inténtalo de nuevo más tarde.",
-              resetSuccess: "Tus datos se han reiniciado con éxito.",
-              noFlowerCode: "Por favor, envía primero tu información para obtener tu código de Flor.",
-              captureError: "No se pudo capturar tu flor. Por favor, inténtalo de nuevo.",
-              copySuccess: "¡Texto para compartir copiado al portapapeles! Ahora puedes pegarlo y compartirlo manualmente con la imagen. Si el enlace no funciona directamente, escribe manualmente \"g-z.online\" en tu navegador.",
-              copyFail: "No se pudo copiar al portapapeles. Por favor, comparte manualmente. Recuerda escribir \"g-z.online\" en tu navegador para acceder al sitio."
-            },
-            months: [
-              "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-              "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-            ]
-          }
-        }
-      };
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.5.0/i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.1.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.2.1/i18nextHttpBackend.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
 
-      // Get language from URL or localStorage or browser
+  <script>
+    // Initialize i18next
+    function initI18n() {
+      // Check URL parameters for language
       const urlParams = new URLSearchParams(window.location.search);
-      const langParam = urlParams.get('lng');
-      const storedLang = localStorage.getItem('i18nextLng');
+      const lngParam = urlParams.get('lng');
       
-      // Define default language
-      const defaultLang = langParam || storedLang || navigator.language || navigator.userLanguage || 'en';
+      // Get language from localStorage or use browser detection
+      const savedLng = localStorage.getItem('language') || (lngParam || navigator.language || navigator.userLanguage || 'en').substring(0, 2);
       
-      // Initialize i18next
+      // Save to localStorage and update URL
+      localStorage.setItem('language', savedLng);
+      if (!lngParam && savedLng !== 'en') {
+        const newUrl = window.location.pathname + '?lng=' + savedLng + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+      
       i18next
         .use(i18nextHttpBackend)
         .use(i18nextBrowserLanguageDetector)
         .init({
           fallbackLng: 'en',
+          lng: savedLng,
           debug: false,
-          resources: resources,
-          lng: defaultLang.substring(0, 2), // Take only the first two characters of language code
+          backend: {
+            loadPath: 'locales/{{lng}}.json'
+          },
           detection: {
             order: ['querystring', 'localStorage', 'navigator'],
             lookupQuerystring: 'lng',
+            lookupLocalStorage: 'language',
             caches: ['localStorage']
           }
         }, function(err, t) {
-          if (err) return console.error('i18next initialization error:', err);
-          
-          // Initialize jqueryI18next
-          jqueryI18next.init(i18next, $, {
-            handleName: 'i18n'
-          });
-          
-          // Update URL if needed
-          const currentLang = i18next.language;
-          if (!langParam && currentLang) {
-            const newUrl = new URL(window.location.href);
-            newUrl.searchParams.set('lng', currentLang);
-            history.replaceState(null, '', newUrl);
-          }
-          
-          // Store language in localStorage
-          localStorage.setItem('i18nextLng', currentLang);
-          
-          // Localize the page
-          $('body').localize();
-          
-          // Additional date format and placeholder updates
-          updateDatePlaceholder();
-        });
-        
-        // Listen for language changes
-        i18next.on('languageChanged', function(lng) {
-          $('body').localize();
-          updateDatePlaceholder();
-          
-          // Update URL
-          const newUrl = new URL(window.location.href);
-          newUrl.searchParams.set('lng', lng);
-          history.replaceState(null, '', newUrl);
-          
-          // Store language in localStorage
-          localStorage.setItem('i18nextLng', lng);
+          jqueryI18next.init(i18next, $, { useOptionsAttr: true });
+          updateContent();
         });
     }
 
-    function updateDatePlaceholder() {
-      const birthdate = document.getElementById('birthdate');
-      if (birthdate) {
-        birthdate.setAttribute('placeholder', i18next.t('input.birthdate'));
+    function updateContent() {
+      $('[data-i18n]').localize();
+      
+      // Update placeholder for date input based on language
+      const dateInput = document.getElementById('birthdate');
+      const placeholderKey = 'form.dateSelect';
+      const translatedPlaceholder = i18next.t(placeholderKey);
+      if (translatedPlaceholder && translatedPlaceholder !== placeholderKey) {
+        dateInput.setAttribute('placeholder', translatedPlaceholder);
       }
+      
+      // Update document title if needed
+      document.title = i18next.t('document.title', 'G-Z');
+      
+      // Handle any special cases for translated content
+      const submitButton = document.querySelector('.submit-button');
+      if (submitButton && !submitButton.disabled) {
+        submitButton.textContent = i18next.t('form.submit', 'Submit');
+      } else if (submitButton && submitButton.disabled) {
+        submitButton.textContent = i18next.t('form.submitted', 'Submitted');
+      }
+      
+      // Update flower motivations if needed
+      updateFlowerDisplay();
     }
     
-    // Call i18n initialization
+    // Initialize i18n when the document is ready
     document.addEventListener('DOMContentLoaded', function() {
-      initializeI18n();
+      initI18n();
+      
+      // Handle language switcher clicks (if visible)
+      document.querySelectorAll('.language-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const lng = this.getAttribute('data-lng');
+          localStorage.setItem('language', lng);
+          window.location.search = 'lng=' + lng;
+        });
+      });
     });
   </script>
 
@@ -1435,66 +1149,66 @@
 
     function generatePersonalizedMotivation(flowerCode) {
       if (!flowerCode || flowerCode.length < 8) {
-        return i18next.t('flower.defaultMotivation');
+        return i18next.t('flower.defaultMotivation', "Submit your information to discover your flower motivation.");
       }
       
       const positiveTraits = [
-        "Your creativity illuminates the darkest challenges.",
-        "Your kindness is a rare gift in this world.",
-        "Your persistence breaks barriers others cannot see.",
-        "Your unique perspective solves the unsolvable.",
-        "Your energy is contagious and transformative.",
-        "Your patience reveals what others miss in haste.",
-        "Your courage faces fears that paralyze many.",
-        "Your wisdom guides you through life's maze.",
-        "Your optimism finds light in the darkest corners.",
-        "Your focus transforms dreams into reality.",
-        "Your generosity creates ripples of change.",
-        "Your honesty builds unbreakable bridges.",
-        "Your compassion heals invisible wounds.",
-        "Your reliability makes you everyone's anchor.",
-        "Your adaptability turns chaos into opportunity.",
-        "Your determination moves mountains silently.",
-        "Your thoughtfulness touches hearts deeply.",
-        "Your enthusiasm ignites others' passions.",
-        "Your intelligence sees patterns in the noise.",
-        "Your sensitivity reveals truth behind masks.",
-        "Your imagination creates new worlds.",
-        "Your confidence inspires without words.",
-        "Your humor heals what medicine cannot.",
-        "Your calmness steadies stormy waters.",
-        "Your curiosity unlocks life's mysteries.",
-        "Your empathy bridges impossible divides.",
-        "Your intuition speaks truth before logic."
+        i18next.t('flower.traits.1', "Your creativity illuminates the darkest challenges."),
+        i18next.t('flower.traits.2', "Your kindness is a rare gift in this world."),
+        i18next.t('flower.traits.3', "Your persistence breaks barriers others cannot see."),
+        i18next.t('flower.traits.4', "Your unique perspective solves the unsolvable."),
+        i18next.t('flower.traits.5', "Your energy is contagious and transformative."),
+        i18next.t('flower.traits.6', "Your patience reveals what others miss in haste."),
+        i18next.t('flower.traits.7', "Your courage faces fears that paralyze many."),
+        i18next.t('flower.traits.8', "Your wisdom guides you through life's maze."),
+        i18next.t('flower.traits.9', "Your optimism finds light in the darkest corners."),
+        i18next.t('flower.traits.10', "Your focus transforms dreams into reality."),
+        i18next.t('flower.traits.11', "Your generosity creates ripples of change."),
+        i18next.t('flower.traits.12', "Your honesty builds unbreakable bridges."),
+        i18next.t('flower.traits.13', "Your compassion heals invisible wounds."),
+        i18next.t('flower.traits.14', "Your reliability makes you everyone's anchor."),
+        i18next.t('flower.traits.15', "Your adaptability turns chaos into opportunity."),
+        i18next.t('flower.traits.16', "Your determination moves mountains silently."),
+        i18next.t('flower.traits.17', "Your thoughtfulness touches hearts deeply."),
+        i18next.t('flower.traits.18', "Your enthusiasm ignites others' passions."),
+        i18next.t('flower.traits.19', "Your intelligence sees patterns in the noise."),
+        i18next.t('flower.traits.20', "Your sensitivity reveals truth behind masks."),
+        i18next.t('flower.traits.21', "Your imagination creates new worlds."),
+        i18next.t('flower.traits.22', "Your confidence inspires without words."),
+        i18next.t('flower.traits.23', "Your humor heals what medicine cannot."),
+        i18next.t('flower.traits.24', "Your calmness steadies stormy waters."),
+        i18next.t('flower.traits.25', "Your curiosity unlocks life's mysteries."),
+        i18next.t('flower.traits.26', "Your empathy bridges impossible divides."),
+        i18next.t('flower.traits.27', "Your intuition speaks truth before logic.")
       ];
       
       const encouragements = [
-        "Trust your inner voice; it knows your truth.",
-        "Your light is needed exactly where you stand.",
-        "Even small steps forward change your destiny.",
-        "The world needs exactly what only you offer.",
-        "Your journey matters more than any destination.",
-        "Challenges reveal your hidden strengths.",
-        "Your authentic self is your greatest power.",
-        "Seeds planted today become tomorrow's forest.",
-        "Your impact reaches further than you'll ever see.",
-        "When shadows fall, your inner light grows stronger.",
-        "What challenges you today empowers you tomorrow.",
-        "The universe conspires for those who dare to dream.",
-        "Your presence matters more than you realize.",
-        "Courage isn't fearlessness; it's moving forward anyway.",
-        "Your unique voice deserves to be heard.",
-        "The fire within you burns brighter than obstacles before you."
+        i18next.t('flower.encouragements.1', "Trust your inner voice; it knows your truth."),
+        i18next.t('flower.encouragements.2', "Your light is needed exactly where you stand."),
+        i18next.t('flower.encouragements.3', "Even small steps forward change your destiny."),
+        i18next.t('flower.encouragements.4', "The world needs exactly what only you offer."),
+        i18next.t('flower.encouragements.5', "Your journey matters more than any destination."),
+        i18next.t('flower.encouragements.6', "Challenges reveal your hidden strengths."),
+        i18next.t('flower.encouragements.7', "Your authentic self is your greatest power."),
+        i18next.t('flower.encouragements.8', "Seeds planted today become tomorrow's forest."),
+        i18next.t('flower.encouragements.9', "Your impact reaches further than you'll ever see."),
+        i18next.t('flower.encouragements.10', "When shadows fall, your inner light grows stronger."),
+        i18next.t('flower.encouragements.11', "What challenges you today empowers you tomorrow."),
+        i18next.t('flower.encouragements.12', "The universe conspires for those who dare to dream."),
+        i18next.t('flower.encouragements.13', "Your presence matters more than you realize."),
+        i18next.t('flower.encouragements.14', "Courage isn't fearlessness; it's moving forward anyway."),
+        i18next.t('flower.encouragements.15', "Your unique voice deserves to be heard."),
+        i18next.t('flower.encouragements.16', "The fire within you burns brighter than obstacles before you.")
       ];
       
       const transitions = [
-        " Remember, ",
-        " Know that ",
-        " Embrace that ",
-        " Feel that ",
-        " Trust that ",
-        " Believe that ",
-        " Honor that "
+        i18next.t('flower.transitions.1', " Remember, "),
+        i18next.t('flower.transitions.2', " Know that "),
+        i18next.t('flower.transitions.3', " Embrace that "),
+        i18next.t('flower.transitions.4', " Feel that "),
+        i18next.t('flower.transitions.5', " Trust that "),
+        i18next.t('flower.transitions.6', " Believe that "),
+        i18next.t('flower.transitions.7', " Honor that ")
       ];
       
       const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
@@ -1519,25 +1233,37 @@
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
       
-      const monthNames = i18next.t('months', {returnObjects: true});
+      const monthNames = i18next.t('months', {
+        returnObjects: true,
+        defaultValue: [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ]
+      });
       
       if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
         const monthName = monthNames[userBirthdayMonth - 1];
-        flowerCodeElement.textContent = `${i18next.t('flower.myFlower')} - ${monthName} (${userBirthdayDay})`;
+        const flowerText = i18next.t('flower.codeWithDate', {
+          month: monthName,
+          day: userBirthdayDay,
+          defaultValue: `My Flower - ${monthName} (${userBirthdayDay})`
+        });
+        
+        flowerCodeElement.textContent = flowerText;
         
         if (!currentMotivation) {
           currentMotivation = generatePersonalizedMotivation(userFlowerCode);
         }
         
         motivationElement.textContent = currentMotivation;
-        document.getElementById('captureFlowerCode').textContent = `${i18next.t('flower.myFlower')} - ${monthName} (${userBirthdayDay})`;
+        document.getElementById('captureFlowerCode').textContent = flowerText;
         document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
       } else {
-        flowerCodeElement.textContent = i18next.t('flower.myFlower');
-        motivationElement.textContent = i18next.t('flower.defaultMotivation');
+        flowerCodeElement.textContent = i18next.t('flower.myFlower', "My Flower");
+        motivationElement.textContent = i18next.t('flower.defaultMotivation', "Submit your information to discover your flower motivation.");
         
-        document.getElementById('captureFlowerCode').textContent = i18next.t('flower.myFlower');
-        document.getElementById('captureFlowerMotivation').textContent = i18next.t('flower.defaultMotivation');
+        document.getElementById('captureFlowerCode').textContent = i18next.t('flower.myFlower', "My Flower");
+        document.getElementById('captureFlowerMotivation').textContent = i18next.t('flower.defaultMotivation', "Submit your information to discover your flower motivation.");
       }
     }
 
@@ -1611,7 +1337,7 @@
 
     document.getElementById("birthdate").addEventListener('change', function(e) {
       if (isFutureDate(this.value)) {
-        alert(i18next.t('alerts.futureDate'));
+        alert(i18next.t('alerts.futureDateError', "You cannot select a future date for your date of birth"));
         this.value = "";
       }
     });
@@ -1620,7 +1346,7 @@
       const birthdate = document.getElementById('birthdate').value;
       if (isFutureDate(birthdate)) {
         e.preventDefault();
-        alert(i18next.t('alerts.futureDate'));
+        alert(i18next.t('alerts.futureDateError', "You cannot select a future date for your date of birth"));
         document.getElementById('birthdate').value = "";
         return false;
       }
@@ -1637,7 +1363,7 @@
         data.sort((a, b) => a.name.common.localeCompare(b.name.common));
         
         const countrySelect = document.getElementById('countrySelect');
-        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('select.country')}</option>`;
+        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countrySelect', "Select your country of birth")}</option>`;
         
         data.forEach(country => {
           const option = document.createElement('option');
@@ -1683,7 +1409,7 @@
         ].sort();
         
         const countrySelect = document.getElementById('countrySelect');
-        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('select.country')}</option>`;
+        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countrySelect', "Select your country of birth")}</option>`;
         
         fallbackCountries.forEach(country => {
           const option = document.createElement('option');
@@ -1759,7 +1485,7 @@
             document.getElementById('countrySelect').value = userCountry;
             
             const submitButton = document.querySelector('.submit-button');
-            submitButton.textContent = i18next.t('button.submitted');
+            submitButton.textContent = i18next.t('form.submitted', "Submitted");
             submitButton.style.backgroundColor = 'green';
             submitButton.disabled = true;
             
@@ -1782,7 +1508,7 @@
 
       if (birthdate && country) {
         if (isFutureDate(birthdate)) {
-          alert(i18next.t('alerts.futureDate'));
+          alert(i18next.t('alerts.futureDateError', "You cannot select a future date for your date of birth"));
           document.getElementById('birthdate').value = "";
           return;
         }
@@ -1796,7 +1522,7 @@
         userBirthdayDay = parseInt(birthdateParts[2]);
         
         const submitButton = document.querySelector('.submit-button');
-        submitButton.textContent = i18next.t('button.wait');
+        submitButton.textContent = i18next.t('form.processing', "Please wait...");
         submitButton.style.backgroundColor = 'orange';
 
         document.getElementById('birthdate').classList.add('disabled-field');
@@ -1804,7 +1530,7 @@
 
         document.getElementById('genderModal').style.display = 'block';
       } else {
-        alert(i18next.t('alerts.missingInfo'));
+        alert(i18next.t('alerts.missingInfo', "Please enter a date of birth and select a country!"));
       }
     });
 
@@ -1862,7 +1588,13 @@
           userRank = sameBirthdayCount;
         }
         
-        const monthNames = i18next.t('months', {returnObjects: true});
+        const monthNames = i18next.t('months', {
+          returnObjects: true,
+          defaultValue: [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ]
+        });
         const formattedDate = `${monthNames[userBirthdayMonth-1]} ${userBirthdayDay}`;
         
         return {
@@ -1872,7 +1604,13 @@
         };
       } catch (error) {
         console.error("Error fetching birthday statistics:", error);
-        const monthNames = i18next.t('months', {returnObjects: true});
+        const monthNames = i18next.t('months', {
+          returnObjects: true,
+          defaultValue: [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ]
+        });
         return {
           totalMembers: Math.floor(Math.random() * 50) + 5,
           userRank: Math.floor(Math.random() * 10) + 1,
@@ -1919,7 +1657,13 @@
         userCountryStats = await fetchCountryStatistics();
       } catch (error) {
         console.error("Error fetching statistics:", error);
-        const monthNames = i18next.t('months', {returnObjects: true});
+        const monthNames = i18next.t('months', {
+          returnObjects: true,
+          defaultValue: [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ]
+        });
         userBirthdayStats = {
           totalMembers: Math.floor(Math.random() * 50) + 5,
           userRank: Math.floor(Math.random() * 10) + 1,
@@ -2000,7 +1744,7 @@
         updateHeaderAccessCode();
         
         submitButton.style.backgroundColor = 'green';
-        submitButton.textContent = i18next.t('button.submitted');
+        submitButton.textContent = i18next.t('form.submitted', "Submitted");
         submitButton.disabled = true;
         document.getElementById('resetButton').style.display = "block";
         dataSubmitted = true;
@@ -2008,7 +1752,7 @@
         saveUserDataToCookie();
       } else {
         submitButton.style.backgroundColor = 'red';
-        submitButton.textContent = i18next.t('button.error');
+        submitButton.textContent = i18next.t('form.error', "Error");
         console.error("Error during submission");
         
         document.getElementById('birthdate').classList.remove('disabled-field');
@@ -2023,14 +1767,14 @@
     }
 
     document.getElementById('resetButton').addEventListener('click', function() {
-      if (confirm(i18next.t('alerts.resetConfirm'))) {
+      if (confirm(i18next.t('alerts.confirmReset', "Are you sure you want to reset your data? This will delete your information from our database."))) {
         resetLocalStorageData();
         
         deleteFromFirebase().then(() => {
           finishReset();
         }).catch(error => {
           console.error("Error during reset process:", error);
-          alert(i18next.t('alerts.resetError'));
+          alert(i18next.t('alerts.resetError', "There was a problem resetting your data. Please try again later."));
         });
       }
     });
@@ -2090,7 +1834,7 @@
       document.getElementById('birthdate').value = '';
       document.getElementById('countrySelect').value = '';
       const submitButton = document.querySelector('.submit-button');
-      submitButton.textContent = i18next.t('button.submit');
+      submitButton.textContent = i18next.t('form.submit', "Submit");
       submitButton.style.backgroundColor = '#007bff';
       submitButton.disabled = false;
       document.getElementById('resetButton').style.display = "none";
@@ -2124,7 +1868,7 @@
       
       eraseCookie('userData');
       
-      alert(i18next.t('alerts.resetSuccess'));
+      alert(i18next.t('alerts.resetSuccess', "Your data has been successfully reset."));
     }
 
     document.getElementById('flowerButton').addEventListener('click', function() {
@@ -2147,7 +1891,7 @@
       if (userFlowerCode) {
         captureFlower();
       } else {
-        alert(i18next.t('alerts.noFlowerCode'));
+        alert(i18next.t('alerts.flowerCodeNeeded', 'Please submit your information first to get your Flower code.'));
       }
     });
     
@@ -2177,7 +1921,7 @@
         document.getElementById('shareWarning').style.display = 'block';
       } catch (error) {
         console.error('Error capturing flower:', error);
-        alert(i18next.t('alerts.captureError'));
+        alert(i18next.t('alerts.captureError', 'Could not capture your flower. Please try again.'));
       }
     }
     
@@ -2200,8 +1944,8 @@
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: 'My G-Z Flower',
-              text: 'Discover yours at g-z.online',
+              title: i18next.t('share.title', 'My G-Z Flower'),
+              text: i18next.t('share.text', 'Discover yours at g-z.online'),
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -2219,20 +1963,30 @@
     
     function fallbackShare() {
       try {
-        const monthNames = i18next.t('months', {returnObjects: true});
+        const monthNames = i18next.t('months', {
+          returnObjects: true,
+          defaultValue: [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ]
+        });
         const monthName = userBirthdayMonth ? monthNames[userBirthdayMonth - 1] : "";
         const dayNumber = userBirthdayDay || "";
         
-        const shareText = `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at g-z.online`;
+        const shareText = i18next.t('share.fallbackText', {
+          month: monthName,
+          day: dayNumber,
+          defaultValue: `Check out my Flower from G-Z: ${monthName} (${dayNumber}). Discover yours at g-z.online`
+        });
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert(i18next.t('alerts.copySuccess'));
+          alert(i18next.t('alerts.clipboardCopy', 'Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.'));
         }).catch(function() {
-          alert(i18next.t('alerts.copyFail'));
+          alert(i18next.t('alerts.clipboardFail', 'Could not copy to clipboard. Please share manually. Remember to type "g-z.online" in your browser to access the site.'));
         });
       } catch (error) {
         console.error('Fallback share error:', error);
-        alert(i18next.t('alerts.copyFail'));
+        alert(i18next.t('alerts.shareFallback', 'Please share the image manually. Remember to type "g-z.online" in your browser to access the site.'));
       }
     }
     
@@ -2259,7 +2013,7 @@
       
       const submitButton = document.querySelector('.submit-button');
       submitButton.style.backgroundColor = '#007bff';
-      submitButton.textContent = i18next.t('button.submit');
+      submitButton.textContent = i18next.t('form.submit', "Submit");
       
       document.getElementById('birthdate').classList.remove('disabled-field');
       document.getElementById('countrySelect').classList.remove('disabled-field');
@@ -2279,8 +2033,8 @@
       if (event.target == genderModal) {
         genderModal.style.display = "none";
         const submitButton = document.querySelector('.submit-button');
-        submitButton.style.backgroundColor = 'red';
-        submitButton.textContent = i18next.t('button.error');
+        submitButton.style.backgroundColor = '#007bff';
+        submitButton.textContent = i18next.t('form.submit', "Submit");
         
         document.getElementById('birthdate').classList.remove('disabled-field');
         document.getElementById('countrySelect').classList.remove('disabled-field');
@@ -2299,22 +2053,6 @@
         communityModal.style.display = "none";
       }
     };
-
-    // Event listener for i18next language changes to update dynamic content
-    document.addEventListener('i18nextLanguageChanged', function() {
-      if (userFlowerCode) {
-        updateFlowerDisplay();
-      }
-      
-      const submitButton = document.querySelector('.submit-button');
-      if (dataSubmitted) {
-        submitButton.textContent = i18next.t('button.submitted');
-      } else {
-        submitButton.textContent = i18next.t('button.submit');
-      }
-      
-      document.getElementById('accessCodeIndicator').textContent = i18next.t('accessCode.indicator');
-    });
 
     checkCookieConsent();
     
