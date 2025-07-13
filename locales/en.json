@@ -29,7 +29,7 @@
   },
   "howItWorks": {
     "title": "How does it work?",
-    "description": "You have two selectors available: the first is a calendar to choose your birth date, and the second is a selector for your country of birth. Once you've made your selections, click \"Submit.\" Then you'll be prompted to specify your gender; click this option to become a contributor. Finally, click the \"Discovery\" button that flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics."
+    "description": "You've two selectors available: the first is a calendar to choose your birth date, and the second is a selector for your country of birth. Once you've made your selections, click \"Submit.\" Then you'll be prompted to specify your gender; click this option to become a contributor. Finally, click the \"Discovery\" button that flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics."
   },
   "footer": {
     "dontMiss": "Don't miss anything"
