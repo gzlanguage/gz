@@ -22,8 +22,8 @@
     "dateLabel": "Sélectionnez votre date de naissance",
     "countryLabel": "Sélectionnez votre pays de naissance",
     "terms": "En soumettant, vous acceptez nos conditions d'utilisation.",
-    "submit": "Envoyer",
-    "submitted": "Envoyé",
+    "submit": "Soumettre",
+    "submitted": "Soumise",
     "pleaseWait": "Veuillez patienter...",
     "error": "Erreur"
   },
