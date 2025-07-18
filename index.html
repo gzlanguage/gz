@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G-Z</title>
+    <title data-i18n="page.title">G-Z</title>
     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.9/i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.2.1/i18nextHttpBackend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,6 +19,10 @@
             padding: 0;
             background-color: white;
             position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
             background-color: white;
@@ -21,6 +30,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            transition: background-color 0.3s ease;
         }
         
         h1 {
@@ -32,20 +42,28 @@
             padding: 4px;
             border-radius: 12px;
             font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         .divider {
             height: 0.6px;
             background-color: #007bff;
             width: 100%;
             margin-top: 5px;
+            transition: background-color 0.3s ease;
         }
         .button-container {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center; /* Centre le bouton */
             margin-top: 5px;
             padding: 5px 0;
             overflow-x: auto;
             white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .button-container::-webkit-scrollbar {
+            display: none;
         }
         .button {
             background-color: #007bff;
@@ -59,12 +77,11 @@
             text-decoration: none;
             display: flex;
             align-items: center;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
         }
         .button i {
             margin-right: 2px;
-        }
-        .button#statisticsButton {
-            border-bottom: 4px solid lawngreen;
         }
         .notification {
             text-align: center;
@@ -72,71 +89,7 @@
             font-size: 0.8em;
             color: #0056b3;
             font-weight: bold;
-        }
-        .footer-title {
-            text-align: center;
-            color: black;
-            margin-top: 40px;
-            font-size: 1.1em;
-        }
-        .date-input, .country-select, .submit-button {
-            display: block;
-            width: 331px;
-            margin: 19px auto;
-            padding: 5px;
-            border: 1px solid #007bff;
-            border-radius: 11px;
-            background-color: white;
-            color: black;
-            font-size: 1em;
-        }
-        .submit-button {
-            padding: 7px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            background-color: #007bff;
-            color: white;
-        }
-        .reset-icon {
-            color: #007bff;
-            cursor: pointer;
-            font-size: 1.0em;
-            display: none;
-            margin: 10px auto;
-            text-align: center;
-        }
-        .rectangle {
-            width: 330px;
-            min-height: 30px;
-            background-color: #e7f3ff;
-            margin: 10px auto;
-            border-radius: 40px;
-            border: 1px solid #007bff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 5px;
-            text-align: center;
-        }
-        .text-line {
-            font-size: 0.8em;
-            color: #0056b3;
-            margin: 5px 0;
-        }
-        .text-line.bold {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-        .link {
-            color: white;
-            text-decoration: none;
-            background-color: #007bff;
-            border-radius: 5px;
-            padding: 8px 12px;
-            transition: background-color 0.3s;
-        }
-        .link:hover {
-            background-color: #0056b3;
+            transition: color 0.3s ease;
         }
         .share-icon {
             color: #007bff;
@@ -146,11 +99,14 @@
             border-radius: 7px;
             padding: 4px;
             background-color: white;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         footer {
             background-color: white;
             color: black;
             padding: 10px 15px;
+            margin-top: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .footer-content {
             display: flex;
@@ -168,7 +124,7 @@
             border-radius: 10px;
             padding: 5px;
             background-color: rgba(0, 119, 190, 0.1);
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
         .logo:hover {
             background-color: #007bff;
@@ -188,7 +144,8 @@
         }
         .modal-content {
             background-color: white;
-            margin: 29% auto;
+            /* Position du modal à 37% de hauteur au lieu de 29% */
+            margin: 40% auto;
             padding: 14px;
             border: 1px solid #007bff;
             border-radius: 60px;
@@ -198,6 +155,7 @@
             max-height: 60vh;
             overflow-y: auto;
             position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .modal-header {
             font-size: 1.8em;
@@ -206,6 +164,7 @@
             font-weight: bold;
             color: #007bff;
             text-decoration: underline;
+            transition: color 0.3s ease;
         }
         
         .modal-footer {
@@ -225,23 +184,10 @@
             font-size: 0.9em;
             width: 120px;
             margin: 4px;
+            transition: background-color 0.3s ease;
         }
         .close-button:hover {
             background-color: #0056b3;
-        }
-        .gender-category {
-            font-weight: bold;
-            color: #007bff;
-            margin-top: 12px;
-            margin-bottom: 5px;
-            text-align: center;
-            width: 100%;
-            font-size: 1em;
-        }
-
-        .disabled-field {
-            opacity: 0.7;
-            pointer-events: none;
         }
         
         @keyframes flowerRotate {
@@ -263,6 +209,7 @@
             font-size: 1.8em;
             margin-bottom: 8px;
             color: #007bff;
+            transition: color 0.3s ease;
         }
 
         .monthly-motivation {
@@ -275,6 +222,7 @@
             color: #333;
             font-size: 0.9em;
             line-height: 1.4;
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
         }
         
         .flower-code {
@@ -294,19 +242,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-
-        .access-code {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #007bff;
-            letter-spacing: 2px;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f0f7ff;
-            border-radius: 10px;
-            border: 1px dashed #007bff;
-            display: inline-block;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .copy-icon {
@@ -315,62 +251,7 @@
             margin-left: 10px;
             font-size: 1.2em;
             vertical-align: middle;
-        }
-        
-        .code-message {
-            margin: 12px 0;
-            font-size: 0.9em;
-            color: #333;
-            line-height: 1.4;
-        }
-        
-        .copy-confirmation {
-            color: green;
-            font-size: 0.8em;
-            visibility: hidden;
-            margin-top: 5px;
-        }
-        
-        .blink {
-            animation: blink-animation 1s steps(5, start) infinite;
-        }
-        
-        @keyframes blink-animation {
-            to {
-                visibility: hidden;
-            }
-        }
-        
-        .access-code-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f0f7ff;
-            border: 1px solid #007bff;
-            border-radius: 12px;
-            padding: 4px 8px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .access-code-title {
-            font-family: 'Billabong', cursive;
-            color: #007bff;
-            font-size: 1.0em;
-            margin: 0;
-        }
-        
-        .access-code-value {
-            font-weight: bold;
-            color: #007bff;
-            font-size: 0.9em;
-            letter-spacing: 1px;
-        }
-        
-        .access-code-indicator {
-            color: #777;
-            font-size: 0.8em;
-            font-style: italic;
+            transition: color 0.3s ease;
         }
         
         .header-controls {
@@ -378,86 +259,17 @@
             align-items: center;
         }
         
-        .stats-highlight {
-            font-weight: bold;
-            color: #ff69b4;
-            font-size: 1.2em;
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
         }
         
-        .achievement {
-            margin: 12px 0;
-            padding: 8px;
-            border: 1px dashed gold;
-            border-radius: 15px;
-            background-color: white;
-            color: #333;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-        
-        .later-button {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #388E3C;
-            border-radius: 12px;
-            padding: 8px 10px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin: 5px auto;
-            width: 180px;
-        }
-        
-        .later-button:hover {
-            background-color: #388E3C;
-        }
-
-        .join-description {
-            margin: 10px 0;
-            padding: 8px;
-            font-size: 0.9em;
-            line-height: 1.4;
-            color: #333;
-            text-align: left;
-        }
-
-        .join-highlight {
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        .join-section {
-            margin: 5px 0;
-            padding: 6px;
-            border: 1px dashed #007bff;
-            border-radius: 15px;
-            background-color: #f0f7ff;
-        }
-
-        .join-section-title {
-            color: #007bff;
-            font-weight: bold;
-            font-size: 1em;
-            margin-bottom: 2px;
-            text-align: center;
-        }
-
-      
-        .group-image {
-            width: 100%;
-            max-width: 200px;
-            margin: 10px auto;
-            border-radius: 10px;
-            border: 1px solid #007bff;
-        }
-        
-        #flowerModal .modal-content {
-            margin: 40% auto;
-            padding: 10px;
-            max-width: 85%;
-        }
-        
-        #flowerModal .monthly-motivation {
-            margin: 10px 0;
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
         }
         
         .modal-close {
@@ -469,14 +281,13 @@
             cursor: pointer;
             background-color: transparent;
             border: none;
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             transition: background-color 0.2s;
-            z-index: 1002; /* Added higher z-index to ensure visibility */
         }
         
         .modal-close:hover {
@@ -490,12 +301,12 @@
             border-radius: 14px;
             padding: 8px 16px;
             font-size: 0.9em;
-            margin: -270px auto 30px auto;
+            margin: 290px auto;
             display: none;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
             max-width: 190px;
             position: relative;
             z-index: 1001;
@@ -538,20 +349,6 @@
             border: 2px solid white;
         }
         
-        .share-warning {
-            background-color: white;
-            color: #333;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            margin: 10px auto;
-            max-width: 90%;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
         .share-message {
             background-color: white;
             color: #333;
@@ -564,17 +361,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .share-message i {
             margin-left: 8px;
             color: #007bff;
+            transition: color 0.3s ease;
         }
         
         .share-link {
             color: #007bff;
             font-weight: bold;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         
         .capture-controls {
@@ -594,6 +394,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.9em;
+            transition: background-color 0.3s ease;
         }
         
         .capture-button i {
@@ -601,8 +402,9 @@
         }
         
         .close-capture {
-            background-color: #007bff;
-            color: white;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         #flowerCaptureContainer {
@@ -616,6 +418,7 @@
             padding: 15px;
             width: 300px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .capture-flower-header {
@@ -626,20 +429,22 @@
             text-align: center;
             font-weight: bold;
             text-shadow: 0px 1px 1px rgba(0, 123, 255, 0.2);
+            transition: color 0.3s ease;
         }
         
         .capture-flower-code {
             font-weight: bold;
             color: #ff69b4;
-            font-size: 1.1em;
+            font-size: 0.8em; /* Taille réduite pour My Flower - ID */
             background-color: #fff0f8;
-            padding: 8px;
+            padding: 6px;
             border-radius: 10px;
             border: 1px solid #ff69b4;
-            margin: 8px auto;
+            margin: 6px auto;
             text-align: center;
-            max-width: 90%;
+            max-width: 80%; /* Réduction de la largeur */
             letter-spacing: 0.5px;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .capture-flower-motivation {
@@ -653,6 +458,7 @@
             padding: 12px;
             margin: 12px 0;
             text-align: center;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
         
         .capture-flower-icon {
@@ -660,6 +466,7 @@
             font-size: 2.5em;
             color: #ff69b4;
             margin: 10px 0;
+            transition: color 0.3s ease;
         }
         
         .gz-logo {
@@ -675,6 +482,7 @@
             margin-left: auto;
             margin-right: auto;
             font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         
         .share-warning {
@@ -688,6 +496,7 @@
             max-width: 90%;
             text-align: center;
             display: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         
         .capture-website-url {
@@ -699,6 +508,7 @@
             font-family: Arial, sans-serif;
             padding: 3px 0;
             border-top: 1px dashed #007bff;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         
         .terms-text {
@@ -707,272 +517,744 @@
             text-align: center;
             margin: 10px auto;
             width: 330px;
+            transition: color 0.3s ease;
         }
         
-        /* Styles for the new community modal */
-        #communityModal .modal-content {
-            margin: 25% auto;
-            padding: 20px;
-            max-width: 85%;
-            border-radius: 45px;
+        .billabong-title {
+            margin-bottom: 3px;
         }
-        
-        .community-title {
-            font-size: 1.2em;
-            margin-bottom: 15px;
+
+        /* Styles pour l'en-tête */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 1px;
+        }
+
+        .header-icon {
+            font-size: 1.4em;
             color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .app-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 1.4em;
             font-weight: bold;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 15px; /* Added margin-top for space from close button */
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
         }
         
-        .community-description {
-            margin: 15px 0;
+        /* Nouvelle structure pour l'en-tête */
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* Style pour le modal initial */
+        #welcomeModal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Réduction de la taille du modal de bienvenue */
+        #welcomeModal .modal-content {
+            background-color: #fff;
+            margin: 45% auto;
+            padding: 15px;
+            border: 1px solid #007BFF;
+            border-radius: 35px;
+            width: 75%;
+            max-width: 250px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #welcomeModal .close {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-bottom: 3px;
+            cursor: pointer;
+        }
+
+        #welcomeModal .welcome-text {
+            margin: 10px 0 15px 0;
             font-size: 0.9em;
             color: #333;
-            line-height: 1.5;
-            text-align: left;
-            padding: 0 10px;
+            line-height: 1.4;
+            transition: color 0.3s ease;
         }
-        
-        .step-highlight {
-            color: #007bff;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        
-        .join-button {
+
+        #welcomeModal .agree-button {
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 15px;
-            padding: 10px 20px;
-            font-size: 1em;
+            padding: 10px 25px;
             cursor: pointer;
-            margin: 15px auto 5px auto;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 10px auto 5px;
             display: block;
-            width: 150px;
-            transition: background-color 0.3s;
-            text-decoration: none;
+            width: 70%;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
         }
         
-        .join-button:hover {
+        #welcomeModal .agree-button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
         }
         
-        .selected-choice {
-            background-color: #4CAF50 !important;
-            pointer-events: none;
+        #welcomeModal .agree-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
         }
-        
-        .key-message {
+
+        /* Style pour le modal d'ID */
+        #idModal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        #idModal .modal-content {
+            background-color: #fff;
+            margin: 45% auto;
+            padding: 8px;
+            border: 1px solid #007BFF;
+            border-radius: 35px;
+            width: 65%;
+            max-width: 220px;
+            text-align: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #idModal .id-title {
+            font-size: 1em;
             color: #007bff;
-            font-size: 0.75em;
-            margin-top: 5px;
-            opacity: 0;
-            transition: opacity 1s ease-in;
-            font-style: italic;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
         }
-        
-        .key-message.show {
-            opacity: 1;
-        }
-        
-        /* Styles pour le sélecteur de langue */
-        .language-selector {
+
+        #idModal .id-display {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #ff69b4;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            margin: 5px auto;
             display: flex;
             align-items: center;
-            margin-right: 10px;
+            justify-content: center;
+            max-width: 80%;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #idModal .copy-icon {
+            margin-left: 6px;
+        }
+
+        #idModal .id-message {
+            font-size: 0.7em;
+            color: #333;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        #idModal .close-button {
+            margin-top: 8px;
+            width: auto;
+            padding: 6px 15px;
+            font-size: 0.7em;
+        }
+
+        /* Style pour le lien sans soulignement */
+        .menu-link {
+            text-decoration: none;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
         }
         
-        .language-option {
+        /* Sélecteur de style (thèmes) */
+        .style-selector {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        
+        .style-selector h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .style-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 5px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .style-options::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .style-option {
+            width: 60px;
+            height: 40px;
+            border-radius: 10px;
             cursor: pointer;
-            margin: 0 5px;
-            opacity: 0.6;
-            transition: opacity 0.3s;
+            flex-shrink: 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
         }
         
-        .language-option:hover, .language-option.active {
-            opacity: 1;
+        .style-option.selected {
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #007bff;
+        }
+        
+        /* Styles des thèmes */
+        .style-option.red-black {
+            background: linear-gradient(to right, #FF4500, #8B0000, #121212, #1F1F1F);
+        }
+        
+        .style-option.blue-purple {
+            background: linear-gradient(to right, #5865F2, #764BA2, #4B0082, #2C2C54);
+        }
+        
+        .style-option.green-blue {
+            background: linear-gradient(to right, #3EB489, #14532D, #0A2239, #1A2E4D);
+        }
+        
+        .style-option.orange-pink {
+            background: linear-gradient(to right, #FF7F50, #FF6F91, #C71585, #4B0082);
+        }
+        
+        .style-option.default {
+            background: linear-gradient(to right, #007bff, #0056b3);
+        }
+        
+        /* Contenu principal avec padding pour éviter le chevauchement avec le sélecteur de style */
+        .main-content {
+            padding-bottom: 80px; /* Pour éviter que le contenu soit caché derrière le sélecteur de style */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        /* Thème par défaut (bleu) */
+        body.theme-default {
+            background-color: white;
+            color: #333;
+        }
+        
+        body.theme-default header, 
+        body.theme-default footer,
+        body.theme-default .style-selector {
+            background-color: white;
+        }
+        
+        body.theme-default .app-logo,
+        body.theme-default .header-icon,
+        body.theme-default .divider,
+        body.theme-default .notification,
+        body.theme-default .billabong-title,
+        body.theme-default .gz-logo,
+        body.theme-default .capture-website-url,
+        body.theme-default .capture-flower-header,
+        body.theme-default .id-title {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        
+        body.theme-default .notification .notification-text {
+            color: #007bff;
+        }
+        
+        body.theme-default .button {
+            background-color: #007bff;
+        }
+        
+        body.theme-default .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        body.theme-default .flower-code,
+        body.theme-default .id-display {
+            color: #ff69b4;
+            background-color: #fff0f8;
+            border-color: #ff69b4;
+        }
+        
+        body.theme-default .monthly-motivation,
+        body.theme-default .capture-flower-motivation {
+            border-color: #ff69b4;
+            color: #333;
+            background-color: white;
+        }
+        
+        body.theme-default .modal-content {
+            background-color: white;
+            border-color: #007bff;
+        }
+        
+        /* Thème Rouge-Noir */
+        body.theme-red-black {
+            background: black;
+            color: #E5E5E5;
+        }
+        
+        body.theme-red-black header, 
+        body.theme-red-black footer,
+        body.theme-red-black .style-selector {
+            background-color: black;
+        }
+        
+        body.theme-red-black .app-logo,
+        body.theme-red-black .header-icon,
+        body.theme-red-black .gz-logo,
+        body.theme-red-black .capture-flower-header,
+        body.theme-red-black .capture-website-url,
+        body.theme-red-black .id-title,
+        body.theme-red-black .billabong-title {
+            color: #FF4500;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .divider {
+            background-color: #FF4500;
+        }
+        
+        body.theme-red-black .notification .notification-text {
+            color: #FF4500;
+        }
+        
+        body.theme-red-black .notification,
+        body.theme-red-black .welcome-text,
+        body.theme-red-black .id-message {
+            color: #CCCCCC;
+        }
+        
+        body.theme-red-black .button {
+            background-color: #8B0000;
+        }
+        
+        body.theme-red-black .share-flower-button {
+            background-color: #8B0000;
+            color: white;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .flower-code,
+        body.theme-red-black .id-display {
+            color: #FF4500;
+            background-color: #2C2C2C;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .monthly-motivation,
+        body.theme-red-black .capture-flower-motivation {
+            border-color: #FF4500;
+            color: #E5E5E5;
+            background-color: #1F1F1F;
+        }
+        
+        body.theme-red-black .modal-content,
+        body.theme-red-black #flowerCaptureContainer {
+            background-color: #1F1F1F;
+            border-color: #8B0000;
+        }
+        
+        /* Thème Bleu-Violet */
+        body.theme-blue-purple {
+            background: #2C2C54;
+            color: #FFFFFF;
+        }
+        
+        body.theme-blue-purple header, 
+        body.theme-blue-purple footer,
+        body.theme-blue-purple .style-selector {
+            background-color: #2C2C54;
+        }
+        
+        body.theme-blue-purple .app-logo,
+        body.theme-blue-purple .header-icon,
+        body.theme-blue-purple .gz-logo,
+        body.theme-blue-purple .capture-flower-header,
+        body.theme-blue-purple .capture-website-url,
+        body.theme-blue-purple .id-title,
+        body.theme-blue-purple .billabong-title {
+            color: #5865F2;
+            border-color: #5865F2;
+        }
+        
+        body.theme-blue-purple .divider {
+            background-color: #5865F2;
+        }
+        
+        body.theme-blue-purple .notification .notification-text {
+            color: #5865F2;
+        }
+        
+        body.theme-blue-purple .notification,
+        body.theme-blue-purple .welcome-text,
+        body.theme-blue-purple .id-message {
+            color: #B0B0B0;
+        }
+        
+        body.theme-blue-purple .button {
+            background-color: #764BA2;
+        }
+        
+        body.theme-blue-purple .share-flower-button {
+            background-color: #764BA2;
+            color: white;
+            border-color: #5865F2;
+        }
+        
+        body.theme-blue-purple .flower-code,
+        body.theme-blue-purple .id-display {
+            color: #5865F2;
+            background-color: #3A3A8C;
+            border-color: #5865F2;
+        }
+        
+        body.theme-blue-purple .monthly-motivation,
+        body.theme-blue-purple .capture-flower-motivation {
+            border-color: #5865F2;
+            color: #FFFFFF;
+            background-color: #2C2C54;
+        }
+        
+        body.theme-blue-purple .modal-content,
+        body.theme-blue-purple #flowerCaptureContainer {
+            background-color: #2C2C54;
+            border-color: #5865F2;
+        }
+        
+        /* Thème Vert-Bleu */
+        body.theme-green-blue {
+            background: #1A2E4D;
+            color: #F5F5F5;
+        }
+        
+        body.theme-green-blue header, 
+        body.theme-green-blue footer,
+        body.theme-green-blue .style-selector {
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .app-logo,
+        body.theme-green-blue .header-icon,
+        body.theme-green-blue .gz-logo,
+        body.theme-green-blue .capture-flower-header,
+        body.theme-green-blue .capture-website-url,
+        body.theme-green-blue .id-title,
+        body.theme-green-blue .billabong-title {
+            color: #3EB489;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .divider {
+            background-color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification .notification-text {
+            color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification,
+        body.theme-green-blue .welcome-text,
+        body.theme-green-blue .id-message {
+            color: #A0A0A0;
+        }
+        
+        body.theme-green-blue .button {
+            background-color: #14532D;
+        }
+        
+        body.theme-green-blue .share-flower-button {
+            background-color: #14532D;
+            color: white;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .flower-code,
+        body.theme-green-blue .id-display {
+            color: #3EB489;
+            background-color: #36454F;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .monthly-motivation,
+        body.theme-green-blue .capture-flower-motivation {
+            border-color: #3EB489;
+            color: #F5F5F5;
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .modal-content,
+        body.theme-green-blue #flowerCaptureContainer {
+            background-color: #1A2E4D;
+            border-color: #3EB489;
+        }
+        
+        /* Thème Orange-Rose */
+        body.theme-orange-pink {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-orange-pink header, 
+        body.theme-orange-pink footer,
+        body.theme-orange-pink .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .app-logo,
+        body.theme-orange-pink .header-icon,
+        body.theme-orange-pink .gz-logo,
+        body.theme-orange-pink .capture-flower-header,
+        body.theme-orange-pink .capture-website-url,
+        body.theme-orange-pink .id-title,
+        body.theme-orange-pink .billabong-title {
+            color: #FF7F50;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .divider {
+            background-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification .notification-text {
+            color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification,
+        body.theme-orange-pink .welcome-text,
+        body.theme-orange-pink .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-orange-pink .button {
+            background-color: #C71585;
+        }
+        
+        body.theme-orange-pink .share-flower-button {
+            background-color: #C71585;
+            color: white;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .flower-code,
+        body.theme-orange-pink .id-display {
+            color: #FF7F50;
+            background-color: #6A0DAD;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .monthly-motivation,
+        body.theme-orange-pink .capture-flower-motivation {
+            border-color: #FF7F50;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .modal-content,
+        body.theme-orange-pink #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FF7F50;
+        }
+        
+        /* Icône de rafraîchissement pour la motivation */
+        .refresh-motivation {
+            position: absolute;
+            right: 15px;
+            top: 70px;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .refresh-motivation:hover {
+            transform: rotate(180deg);
+        }
+        
+        body.theme-red-black .refresh-motivation {
+            color: #FF4500;
+        }
+        
+        body.theme-blue-purple .refresh-motivation {
+            color: #5865F2;
+        }
+        
+        body.theme-green-blue .refresh-motivation {
+            color: #3EB489;
+        }
+        
+        body.theme-orange-pink .refresh-motivation {
+            color: #FF7F50;
         }
     </style>
 </head>
-<body>
+<body class="theme-green-blue">
 
   <header>
-    <h1 translate="no">G-Z</h1>
-    <div class="header-controls">
-      <div class="access-code-container" id="accessCodeContainer">
-        <div class="access-code-title" data-i18n="header.accessCode">Access Code</div>
-        <div class="access-code-indicator" id="accessCodeIndicator" data-i18n="header.accessCodeSubmit">Submit - to get your code.</div>
-        <div class="access-code-value" id="headerAccessCode" style="display: none;"></div>
+   
+    <div class="header-container">
+      <!-- Logo G-Z à gauche -->
+      <div class="app-logo" data-i18n="header.logo">G-Z</div>
+      
+      <!-- Éléments regroupés à droite avec nouvel ordre -->
+      <div class="right-controls">
+        <!-- Icône ID -->
+        <div class="header-icon" id="showIdButton"><i class="fas fa-id-card"></i></div>
+        
+        <!-- Lien barres - même couleur que les autres icônes -->
+        <a href="g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
       </div>
     </div>
   </header>
 
   <div class="divider"></div>
 
-  <div class="button-container">
-    <a class="button" href="Faq.html" translate="yes"><i class="fas fa-question-circle"></i><span data-i18n="nav.faq">Guide</span></a>
-    <a class="button" href="Statistiques.html" id="statisticsButton">
-      <i class="fas fa-chart-bar"></i> <span data-i18n="nav.discovery">Discovery</span></a>
-    <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span data-i18n="nav.flower">Flower</span></a>
-    <a class="button" href="#" id="communityButton"><i class="fas fa-users"></i><span data-i18n="nav.community">Community</span></a>
-    <a class="button" href="Contact.html"><i class="fas fa-envelope"></i><span data-i18n="nav.contact">Contact</span></a>
-    <a class="button" href="Terms.html"><i class="fas fa-file-contract"></i><span data-i18n="nav.terms">Terms</span></a>
-    <a class="button" href="Confidentialité.html"><i class="fas fa-file-contract"></i><span data-i18n="nav.privacy">Privacy</span></a>
-  </div>
-  <script>
-    const button = document.getElementById('statisticsButton');
-    let colors = ['lawngreen', 'white'];
-    let index = 0;
-    setInterval(() => {
-      button.style.borderBottom = `4px solid ${colors[index]}`;
-      index = (index + 1) % colors.length;
-    }, 400);
-  </script>
-  <div class="divider"></div>
-  <div class="notification">
-    <span class="notification-text" data-i18n="notification.main">You were not born alone - Discover Your Birthday Twins ¯\_(ツ)_/¯</span>
-    <div class="new-message-badge"></div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="footer-title" data-i18n="main.title">
-    Join us and uncover the secrets of past, present, and future generations in just a few clicks.
-  </div>
-
-  <input type="date" class="date-input" id="birthdate" placeholder="Select your date of birth" min="1900-01-01" max="" data-i18n="[placeholder]form.dateLabel" />
-  <select class="country-select" id="countrySelect">
-    <option value="" disabled selected data-i18n="form.countryLabel">Select your country of birth</option>
-  </select>
-  
-  <div class="terms-text" data-i18n="form.terms">
-    By submitting, you agree to our terms of use.
-  </div>
-  
-  <button class="submit-button" type="submit" data-i18n="form.submit">Submit</button>
-
-  <i class="fas fa-redo reset-icon" id="resetButton" title="Reset"></i>
-
-  <div class="divider"></div>
-
-  <div class="rectangle">
-    <div class="text-line bold" style="font-size: 1em; color: #0056b3;" data-i18n="howItWorks.title">How does it work?</div>
-    <div class="text-line" data-i18n="howItWorks.description">Two selectors are available to you: the first is a calendar to choose your date of birth, and the second is a selector for your country of birth. Once your selections are made, click on "Submit". After that, you will be asked to specify your gender; click on this option to become a contributor. Finally, click on the "Discovery" button, which flashes green. You will then discover two new selectors: navigate according to your preferences to explore the statistics.</div>
-  </div>
-
-  <div class="text-line" style="text-align: center; color: black;">
-    <span style="color: #007bff;">_____</span> <span data-i18n="footer.dontMiss">Don't miss anything</span> <span style="color: #007bff;">_____</span>
-  </div>
-
-  <footer>
-    <div class="footer-content">
-      <div class="logo-container">
-        <a href="https://www.facebook.com/share/15nGTcCb4i/.html" target="_blank" class="logo">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://x.com/GZWRD?t=g7yvHCDW2-xPLaTTgea-YA&s=09.html" target="_blank" class="logo">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://www.instagram.com/gzw0orld?igsh=a3M3aWpob21qcmFn.html" target="_blank" class="logo">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://whatsapp.com/channel/0029Vb5rIcf4o7qF3PVCpy0c" target="_blank" class="logo">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </div>
-      <div class="copyright">
-        ©️ 2025 G-Z
-      </div>
+  <div class="main-content">
+    <div class="button-container">
+      <!-- Un seul bouton flower of life centré -->
+      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span data-i18n="button.flowerOfLife">Flower of life</span></a>
     </div>
-  </footer>
 
-  <div id="genderModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeGenderModal"><i class="fas fa-times"></i></button>
-      <div class="billabong-title"><strong data-i18n="gender.title">Your gender?</strong></div>
-      
-      <div class="gender-category" data-i18n="gender.binary">Binary genders</div>
-      <div class="modal-footer">
-        <button class="close-button gender-option" value="Man" data-i18n="gender.man">Man</button>
-        <button class="close-button gender-option" value="Woman" data-i18n="gender.woman">Woman</button>
-      </div>
-      
-      <div class="gender-category" data-i18n="gender.nonBinary">Non-binary genders</div>
-      <div class="modal-footer">
-        <button class="close-button gender-option" value="Non-binary" data-i18n="gender.nonBinaryOption">Non-binary</button>
-        <button class="close-button gender-option" value="Genderqueer" data-i18n="gender.genderqueer">Genderqueer</button>
-        <button class="close-button gender-option" value="Genderfluid" data-i18n="gender.genderfluid">Genderfluid</button>
-        <button class="close-button gender-option" value="Agender" data-i18n="gender.agender">Agender</button>
-        <button class="close-button gender-option" value="Pangender" data-i18n="gender.pangender">Pangender</button>
-        <button class="close-button gender-option" value="Demigender" data-i18n="gender.demigender">Demigender</button>
-      </div>
-      
-      <div class="gender-category" data-i18n="gender.transgender">Transgender identities</div>
-      <div class="modal-footer">
-        <button class="close-button gender-option" value="Trans Man" data-i18n="gender.transMan">Trans Man</button>
-        <button class="close-button gender-option" value="Trans Woman" data-i18n="gender.transWoman">Trans Woman</button>
-        <button class="close-button gender-option" value="Transgender" data-i18n="gender.transgender2">Transgender</button>
-        <button class="close-button gender-option" value="Transsexual" data-i18n="gender.transsexual">Transsexual</button>
-      </div>
-      
-      <div class="gender-category" data-i18n="gender.cultural">Cultural & spiritual genders</div>
-      <div class="modal-footer">
-        <button class="close-button gender-option" value="Two-Spirit" data-i18n="gender.twoSpirit">Two-Spirit</button>
-        <button class="close-button gender-option" value="Hijra" data-i18n="gender.hijra">Hijra</button>
-        <button class="close-button gender-option" value="Fa'afafine" data-i18n="gender.faafafine">Fa'afafine</button>
-      </div>
-      
-      <div class="gender-category" data-i18n="gender.other">Other gender identities</div>
-      <div class="modal-footer">
-        <button class="close-button gender-option" value="Bigender" data-i18n="gender.bigender">Bigender</button>
-        <button class="close-button gender-option" value="Androgyne" data-i18n="gender.androgyne">Androgyne</button>
-        <button class="close-button gender-option" value="Neutrois" data-i18n="gender.neutrois">Neutrois</button>
-      </div>
+    <div class="divider"></div>
+    <div class="notification">
+      <span class="notification-text" data-i18n="notification.message">💠 Flower -- The message the universe wrote just for you 💠</span>
+    </div>
+
+    <div class="divider"></div>
+  </div>
+
+  <!-- Style selector au bas de l'écran -->
+  <div class="style-selector">
+    <h3 data-i18n="styleSelector.title">Style</h3>
+    <div class="style-options">
+      <div class="style-option red-black" data-theme="red-black"></div>
+      <div class="style-option blue-purple" data-theme="blue-purple"></div>
+      <div class="style-option green-blue selected" data-theme="green-blue"></div>
+      <div class="style-option orange-pink" data-theme="orange-pink"></div>
+      <div class="style-option default" data-theme="default"></div>
     </div>
   </div>
 
-  <!-- New Community Modal -->
-  <div id="communityModal" class="modal">
+  <!-- Modal initial pour l'accueil - amélioré -->
+  <div id="welcomeModal" class="modal">
     <div class="modal-content">
-      <button class="modal-close" id="closeCommunityModal"><i class="fas fa-times"></i></button>
-      <div class="community-title" data-i18n="community.title">Join the G-Z Community</div>
-      
-      <div class="community-description" data-i18n="community.description">
-        Join the G-Z Community and connect with people who share your birthday! Chat, form teams for upcoming competitions, and discover your birthday twins.
+      <div class="welcome-text">
+        <strong data-i18n="welcome.title">Welcome to G-Z Flower!</strong><br>
+        <span data-i18n="welcome.message">Click OK to access your unique flower. This ID will represent and define you in G-Z. Keep it safe as it's your unique identifier.</span>
       </div>
-      
-      <div class="community-description">
-        <span class="step-highlight" data-i18n="community.howItWorks">How it works:</span><br>
-        <span data-i18n="community.step1">1. Click the "Join G-Z" button below.</span><br>
-        <span data-i18n="community.step2">2. Accept the Discord invitation.</span><br>
-        <span data-i18n="community.step3">3. Click "Back" at the top left to see the groups for your month after 'Choose-your-team'.</span><br>
-        <span data-i18n="community.step5">5. Select the group that matches your birth day.</span>
+      <button class="agree-button" id="agreeButton" data-i18n="welcome.button">OK</button>
+    </div>
+  </div>
+
+  <!-- Modal pour afficher l'ID unique -->
+  <div id="idModal" class="modal">
+    <div class="modal-content">
+      <div class="id-title" data-i18n="id.title">Your User ID</div>
+      <div class="id-display">
+        <span id="userIdDisplay"></span>
+        <i class="fas fa-copy copy-icon" id="copyIdButton"></i>
       </div>
-      
-      <a href="https://discord.gg/9ChDmzcxkB" target="_blank" class="join-button" data-i18n="community.joinButton">Join G-Z</a>
+      <div class="id-message" data-i18n="id.message">Keep this ID safe!</div>
+      <button class="close-button" id="closeIdModal" data-i18n="id.closeButton">Close</button>
     </div>
   </div>
 
   <div id="flowerModal" class="modal">
     <div class="modal-content">
       <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
-      <div class="billabong-title"><strong data-i18n="flower.title">Flower of Life</strong></div>
+      <div class="billabong-title"><strong id="flowerTypeTitle" data-i18n="flower.title">Flower of Life</strong></div>
       
-      <div id="flowerCodeDisplay" class="flower-code" data-i18n="flower.myFlower">My Flower</div>
-      <div class="monthly-motivation" id="monthlyMotivation" data-i18n="flower.defaultMotivation">Submit your information to discover your flower motivation.</div>
+      <div id="flowerCodeDisplay" class="flower-code"></div>
       
-      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;">
+      <!-- Ajout d'une icône pour rafraîchir la motivation -->
+      <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="Generate new motivation"></i>
+      
+      <div class="monthly-motivation" id="monthlyMotivation"></div>
+      
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;" id="flowerIconContainer">
         <i class="fas fa-spa"></i>
       </div>
     </div>
   </div>
   
-  <button class="share-flower-button" id="shareFlowerButton" data-i18n="flower.shareButton">
-    Share my Flower <i class="fas fa-paper-plane"></i>
+  <button class="share-flower-button" id="shareFlowerButton">
+    <span data-i18n="share.button">Share my Flower</span> <i class="fas fa-paper-plane"></i>
   </button>
   
   <div id="capturedFlower">
@@ -980,106 +1262,43 @@
       <img id="capturedImage" class="captured-image" src="" alt="Captured Flower">
     </div>
 
-    <div class="share-warning" id="shareWarning" data-i18n="flower.shareWarning">
+    <div class="share-warning" id="shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
-      Perfect for sharing in your Stories, just adjust.
+      <span data-i18n="share.warning">Perfect for sharing, just adjust.</span>
     </div>
     
     <div class="capture-controls">
       <button class="capture-button" id="shareCapture">
-        <i class="fas fa-paper-plane"></i> <span data-i18n="flower.share">Share</span>
+        <i class="fas fa-paper-plane"></i> <span data-i18n="share.shareButton">Share</span>
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span data-i18n="flower.close">Close</span>
+        <i class="fas fa-times"></i> <span data-i18n="share.closeButton">Close</span>
       </button>
     </div>
   </div>
   
   <div id="flowerCaptureContainer">
-    <div class="capture-flower-header" data-i18n="flower.title">Flower of Life</div>
+    <div class="capture-flower-header" id="captureFlowerHeader" data-i18n="capture.header">Flower of Life</div>
     
-    <div id="captureFlowerCode" class="capture-flower-code" data-i18n="flower.myFlower">My Flower</div>
+    <div id="captureFlowerCode" class="capture-flower-code"></div>
     
-    <div id="captureFlowerMotivation" class="capture-flower-motivation" data-i18n="flower.defaultMotivation">Submit your information to discover your flower motivation.</div>
+    <div id="captureFlowerMotivation" class="capture-flower-motivation"></div>
     
-    <div class="capture-flower-icon">
+    <div class="capture-flower-icon" id="captureFlowerIcon">
       <i class="fas fa-spa"></i>
     </div>
     
-    <div class="gz-logo">G-Z</div>
+    <div class="gz-logo" data-i18n="capture.logo">G-Z</div>
     
-    <div class="capture-website-url" data-i18n="flower.websiteUrl">Discover yours at www.g-z.online</div>
+    <div class="capture-website-url" data-i18n="capture.website">Discover yours at www.g-z.online</div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.16/i18next.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.4.0/i18nextHttpBackend.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
-  
-  <script>
-    // i18next initialization
-    function initI18n() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const lng = urlParams.get('lng') || localStorage.getItem('i18nextLng') || navigator.language || 'en';
-      
-      i18next
-        .use(i18nextHttpBackend)
-        .use(i18nextBrowserLanguageDetector)
-        .init({
-          fallbackLng: 'en',
-          debug: false,
-          load: 'languageOnly',
-          detection: {
-            order: ['querystring', 'localStorage', 'navigator'],
-            lookupQuerystring: 'lng',
-            lookupLocalStorage: 'i18nextLng',
-            caches: ['localStorage']
-          },
-          backend: {
-            loadPath: './locales/{{lng}}.json'
-          }
-        }, function(err, t) {
-          if (err) return console.error('Error loading translations:', err);
-          jqueryI18next.init(i18next, $, { useOptionsAttr: true });
-          $('body').localize();
-          
-          // Force URL to include language parameter
-          if (!urlParams.has('lng')) {
-            const newUrl = `${window.location.pathname}?lng=${i18next.language}`;
-            window.history.replaceState({}, document.title, newUrl);
-          }
-          
-          // Save language preference
-          localStorage.setItem('i18nextLng', i18next.language);
-        });
-    }
-    
-    // Call initialization when the document is ready
-    document.addEventListener('DOMContentLoaded', initI18n);
-
-    // Handle language change
-    function changeLanguage(lng) {
-      i18next.changeLanguage(lng, (err, t) => {
-        if (err) return console.log('Error changing language:', err);
-        $('body').localize();
-        
-        // Update URL
-        const url = new URL(window.location);
-        url.searchParams.set('lng', lng);
-        window.history.replaceState({}, document.title, url);
-        
-        // Save preference
-        localStorage.setItem('i18nextLng', lng);
-      });
-    }
-  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
     import { getDatabase, ref, push, remove, get, set, onValue, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
@@ -1093,103 +1312,283 @@
     };
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
+    const firestore = getFirestore(app);
     const auth = getAuth(app);
     
-    let userBirthdate = null;
-    let userCountry = null;
-    let userGender = null;
-    let userWantsMonetization = null;
-    let dataSubmitted = false;
-    let userBirthdayDay = null;
-    let userBirthdayMonth = null;
-    let lastSubmittedId = null;
     let userUid = null;
-    let userAccessCode = null;
     let userFlowerCode = null;
-    let userBirthdayStats = {
-      totalMembers: 0,
-      userRank: 0,
-      formattedDate: ""
-    };
-    let userCountryStats = {
-      totalMembers: 0
-    };
     let currentMotivation = null;
-    let tempSelectedGender = null;
-    let userBirthYear = null;
+    let currentCountry = null;
+    let userCity = null;
+    let userUniqueId = null; // ID unique pour l'utilisateur
+    let isAuthenticated = false; // Pour suivre l'état d'authentification
+    let isInstalled = false; // Indicateur d'installation
+    let currentTheme = "green-blue"; // Thème par défaut modifié à vert-bleu
 
-    const submitButton = document.querySelector('.submit-button');
+    // Configuration i18next pour la traduction
+    i18next
+      .use(i18nextHttpBackend)
+      .use(i18nextBrowserLanguageDetector)
+      .init({
+        fallbackLng: 'en',
+        debug: false,
+        load: 'languageOnly',
+        detection: {
+          order: ['querystring', 'cookie', 'navigator'],
+          lookupQuerystring: 'lng',
+          lookupCookie: 'i18next',
+          caches: ['cookie']
+        },
+        backend: {
+          loadPath: 'locales/{{lng}}.json',
+        }
+      }, function(err, t) {
+        jqueryI18next.init(i18next, $, {
+          useOptionsAttr: true
+        });
+        
+        // Appliquer les traductions au chargement
+        $('body').localize();
+        
+        // Vérifier si l'URL contient un paramètre de langue
+        const urlParams = new URLSearchParams(window.location.search);
+        const lang = urlParams.get('lng');
+        
+        // Si l'URL contient un paramètre de langue, l'utiliser
+        if (lang) {
+          i18next.changeLanguage(lang);
+        } 
+        // Sinon détecter automatiquement si l'utilisateur est en France
+        else {
+          detectUserLocation().then(location => {
+            if (location.country === 'France') {
+              i18next.changeLanguage('fr');
+            }
+          });
+        }
+      });
+    
+    // Fonction pour mettre à jour les traductions lorsque la langue change
+    i18next.on('languageChanged', () => {
+      $('body').localize();
+      
+      // Mettre à jour l'URL avec la langue actuelle
+      const url = new URL(window.location);
+      url.searchParams.set('lng', i18next.language);
+      window.history.pushState({}, '', url);
+      
+      // Mettre à jour également les textes dynamiques qui ne sont pas directement liés aux attributs data-i18n
+      if (currentMotivation) {
+        updateFlowerDisplay();
+      }
+    });
 
-    function generatePersonalizedMotivation(flowerCode) {
-      if (!flowerCode || flowerCode.length < 8) {
-        return i18next.t('flower.defaultMotivation', "Submit your information to discover your flower motivation.");
+    // Dictionnaire pour mapper les ID aux sujets
+    const subjectDictionary = {
+      // Success related
+      "Success": "Success",
+      "Achievement": "Achievement",
+      "Victory": "Victory",
+      "Triumph": "Triumph",
+      "Accomplishment": "Accomplishment",
+      
+      // Wealth related
+      "Richest": "Wealth",
+      "Prosperity": "Prosperity",
+      "Abundance": "Abundance",
+      "Fortune": "Fortune",
+      "Affluence": "Affluence",
+      
+      // Happiness related
+      "Joy": "Joy",
+      "Happiness": "Happiness",
+      "Bliss": "Bliss",
+      "Delight": "Delight",
+      "Contentment": "Contentment",
+      
+      // Growth related
+      "Growth": "Growth",
+      "Progress": "Progress",
+      "Advancement": "Advancement",
+      "Development": "Development",
+      "Improvement": "Improvement",
+      
+      // Strength related
+      "Power": "Power",
+      "Strength": "Strength",
+      "Might": "Might",
+      "Force": "Force",
+      "Energy": "Energy",
+      
+      // Wisdom related
+      "Wisdom": "Wisdom",
+      "Intelligence": "Intelligence",
+      "Knowledge": "Knowledge",
+      "Insight": "Insight",
+      "Understanding": "Understanding",
+      
+      // Creativity related
+      "Creativity": "Creativity",
+      "Innovation": "Innovation",
+      "Imagination": "Imagination",
+      "Invention": "Invention",
+      "Originality": "Originality",
+      
+      // Leadership related
+      "Leadership": "Leadership",
+      "Authority": "Authority",
+      "Influence": "Influence",
+      "Command": "Command",
+      "Direction": "Direction",
+      
+      // Peace related
+      "Peace": "Peace",
+      "Harmony": "Harmony",
+      "Tranquility": "Tranquility",
+      "Serenity": "Serenity",
+      "Calm": "Calm",
+      
+      // Love related
+      "Love": "Love",
+      "Affection": "Affection",
+      "Adoration": "Adoration",
+      "Devotion": "Devotion",
+      "Passion": "Passion",
+      
+      // Courage related
+      "Courage": "Courage",
+      "Bravery": "Bravery",
+      "Valor": "Valor",
+      "Heroism": "Heroism",
+      "Fearlessness": "Fearlessness",
+      
+      // Health related
+      "Health": "Health",
+      "Vitality": "Vitality",
+      "Wellness": "Wellness",
+      "Vigor": "Vigor",
+      "Fitness": "Fitness",
+      
+      // Freedom related
+      "Freedom": "Freedom",
+      "Liberty": "Liberty",
+      "Independence": "Independence",
+      "Autonomy": "Autonomy",
+      "Self-determination": "Self-determination"
+    };
+
+    // Fonction pour générer un ID unique (3 lettres + 3 chiffres)
+    function generateUniqueId() {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const numbers = '0123456789';
+      let id = '';
+      
+      // Générer 3 lettres aléatoires
+      for (let i = 0; i < 3; i++) {
+        id += letters.charAt(Math.floor(Math.random() * letters.length));
       }
       
-      const positiveTraits = [
-        i18next.t('flower.motivations.trait1', "Your creativity illuminates the darkest challenges."),
-        i18next.t('flower.motivations.trait2', "Your kindness is a rare gift in this world."),
-        i18next.t('flower.motivations.trait3', "Your persistence breaks barriers others cannot see."),
-        i18next.t('flower.motivations.trait4', "Your unique perspective solves the unsolvable."),
-        i18next.t('flower.motivations.trait5', "Your energy is contagious and transformative."),
-        i18next.t('flower.motivations.trait6', "Your patience reveals what others miss in haste."),
-        i18next.t('flower.motivations.trait7', "Your courage faces fears that paralyze many."),
-        i18next.t('flower.motivations.trait8', "Your wisdom guides you through life's maze."),
-        i18next.t('flower.motivations.trait9', "Your optimism finds light in the darkest corners."),
-        i18next.t('flower.motivations.trait10', "Your focus transforms dreams into reality."),
-        i18next.t('flower.motivations.trait11', "Your generosity creates ripples of change."),
-        i18next.t('flower.motivations.trait12', "Your honesty builds unbreakable bridges."),
-        i18next.t('flower.motivations.trait13', "Your compassion heals invisible wounds."),
-        i18next.t('flower.motivations.trait14', "Your reliability makes you everyone's anchor."),
-        i18next.t('flower.motivations.trait15', "Your adaptability turns chaos into opportunity."),
-        i18next.t('flower.motivations.trait16', "Your determination moves mountains silently."),
-        i18next.t('flower.motivations.trait17', "Your thoughtfulness touches hearts deeply."),
-        i18next.t('flower.motivations.trait18', "Your enthusiasm ignites others' passions."),
-        i18next.t('flower.motivations.trait19', "Your intelligence sees patterns in the noise."),
-        i18next.t('flower.motivations.trait20', "Your sensitivity reveals truth behind masks."),
-        i18next.t('flower.motivations.trait21', "Your imagination creates new worlds."),
-        i18next.t('flower.motivations.trait22', "Your confidence inspires without words."),
-        i18next.t('flower.motivations.trait23', "Your humor heals what medicine cannot."),
-        i18next.t('flower.motivations.trait24', "Your calmness steadies stormy waters."),
-        i18next.t('flower.motivations.trait25', "Your curiosity unlocks life's mysteries."),
-        i18next.t('flower.motivations.trait26', "Your empathy bridges impossible divides."),
-        i18next.t('flower.motivations.trait27', "Your intuition speaks truth before logic.")
+      // Générer 3 chiffres aléatoires
+      for (let i = 0; i < 3; i++) {
+        id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+      }
+      
+      return id;
+    }
+
+    // Fonction pour détecter le pays et la ville de l'utilisateur
+    async function detectUserLocation() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        currentCountry = data.country_name;
+        userCity = data.city;
+        console.log("Detected user location:", currentCountry, userCity);
+        return { country: currentCountry, city: userCity };
+      } catch (error) {
+        console.error("Error detecting user location:", error);
+        return { country: "Unknown", city: "Unknown" };
+      }
+    }
+
+    // Fonction pour générer des messages personnalisés - ENRICHIE avec plus de phrases
+    function generatePersonalizedMotivation(flowerCode) {
+      if (!flowerCode || flowerCode.length < 8) {
+        return i18next.t('motivations.default', "Your flower motivation is here to inspire and guide you.");
+      }
+      
+      // Collection élargie de traits positifs
+      const lifeTraits = [
+        i18next.t('motivations.traits.creativity', "Your creativity brings fresh ideas to every challenge."),
+        i18next.t('motivations.traits.kindness', "Your kindness inspires others around you."),
+        i18next.t('motivations.traits.persistence', "Your persistence helps you overcome obstacles."),
+        i18next.t('motivations.traits.perspective', "Your unique perspective solves problems in new ways."),
+        i18next.t('motivations.traits.energy', "Your energy brightens the day for everyone you meet."),
+        i18next.t('motivations.traits.patience', "Your patience helps you see the bigger picture."),
+        i18next.t('motivations.traits.courage', "Your courage allows you to face new challenges."),
+        i18next.t('motivations.traits.wisdom', "Your wisdom guides you through difficult decisions."),
+        i18next.t('motivations.traits.optimism', "Your optimism helps you find opportunity in any situation."),
+        i18next.t('motivations.traits.focus', "Your focus helps you achieve your goals step by step."),
+        i18next.t('motivations.traits.adaptability', "Your adaptability is your greatest strength."),
+        i18next.t('motivations.traits.intuition', "Your intuition guides you to the right path."),
+        i18next.t('motivations.traits.empathy', "Your empathy connects you deeply with others."),
+        i18next.t('motivations.traits.resilience', "Your resilience helps you bounce back stronger."),
+        i18next.t('motivations.traits.authenticity', "Your authenticity draws people to your true self."),
+        i18next.t('motivations.traits.gratitude', "Your gratitude multiplies the joy in your life."),
+        i18next.t('motivations.traits.curiosity', "Your curiosity leads to new discoveries."),
+        i18next.t('motivations.traits.humor', "Your sense of humor lightens even difficult moments."),
+        i18next.t('motivations.traits.generosity', "Your generosity creates ripples of kindness."),
+        i18next.t('motivations.traits.determination', "Your determination turns challenges into achievements."),
+        i18next.t('motivations.traits.compassion', "Your compassion heals those around you."),
+        i18next.t('motivations.traits.clarity', "Your clarity helps you make wise choices."),
+        i18next.t('motivations.traits.confidence', "Your confidence inspires trust in others."),
+        i18next.t('motivations.traits.mindfulness', "Your mindfulness keeps you centered in chaos."),
+        i18next.t('motivations.traits.integrity', "Your integrity earns respect wherever you go."),
+        i18next.t('motivations.traits.enthusiasm', "Your enthusiasm ignites passion in others."),
+        i18next.t('motivations.traits.warmth', "Your warmth makes people feel instantly welcome."),
+        i18next.t('motivations.traits.imagination', "Your imagination opens doors to possibilities."),
+        i18next.t('motivations.traits.balance', "Your balance helps you navigate life's complexities.")
       ];
       
-      const encouragements = [
-        i18next.t('flower.encouragements.e1', "Trust your inner voice; it knows your truth."),
-        i18next.t('flower.encouragements.e2', "Your light is needed exactly where you stand."),
-        i18next.t('flower.encouragements.e3', "Even small steps forward change your destiny."),
-        i18next.t('flower.encouragements.e4', "The world needs exactly what only you offer."),
-        i18next.t('flower.encouragements.e5', "Your journey matters more than any destination."),
-        i18next.t('flower.encouragements.e6', "Challenges reveal your hidden strengths."),
-        i18next.t('flower.encouragements.e7', "Your authentic self is your greatest power."),
-        i18next.t('flower.encouragements.e8', "Seeds planted today become tomorrow's forest."),
-        i18next.t('flower.encouragements.e9', "Your impact reaches further than you'll ever see."),
-        i18next.t('flower.encouragements.e10', "When shadows fall, your inner light grows stronger."),
-        i18next.t('flower.encouragements.e11', "What challenges you today empowers you tomorrow."),
-        i18next.t('flower.encouragements.e12', "The universe conspires for those who dare to dream."),
-        i18next.t('flower.encouragements.e13', "Your presence matters more than you realize."),
-        i18next.t('flower.encouragements.e14', "Courage isn't fearlessness; it's moving forward anyway."),
-        i18next.t('flower.encouragements.e15', "Your unique voice deserves to be heard."),
-        i18next.t('flower.encouragements.e16', "The fire within you burns brighter than obstacles before you.")
+      // Collection élargie d'encouragements
+      const lifeEncouragements = [
+        i18next.t('motivations.encouragements.share', "Keep sharing your gifts with the world."),
+        i18next.t('motivations.encouragements.trust', "Trust your instincts - they rarely lead you astray."),
+        i18next.t('motivations.encouragements.talents', "Your natural talents are meant to be shared."),
+        i18next.t('motivations.encouragements.challenges', "The path ahead may have challenges, but you're ready for them."),
+        i18next.t('motivations.encouragements.steps', "Small steps today lead to big achievements tomorrow."),
+        i18next.t('motivations.encouragements.celebrate', "Remember to celebrate your progress along the way."),
+        i18next.t('motivations.encouragements.journey', "Your unique journey is worth every step."),
+        i18next.t('motivations.encouragements.process', "Don't forget to enjoy the process, not just the results."),
+        i18next.t('motivations.encouragements.bestDays', "Your best days are still ahead of you."),
+        i18next.t('motivations.encouragements.efforts', "Your efforts today are building your tomorrow."),
+        i18next.t('motivations.encouragements.stayTrue', "Stay true to yourself in all situations."),
+        i18next.t('motivations.encouragements.change', "Embrace change as an opportunity to grow."),
+        i18next.t('motivations.encouragements.wisdom', "Listen to your inner wisdom more often."),
+        i18next.t('motivations.encouragements.rest', "Allow yourself to rest when needed."),
+        i18next.t('motivations.encouragements.focus', "Keep your focus on what truly matters."),
+        i18next.t('motivations.encouragements.gift', "Your presence is a gift to those around you."),
+        i18next.t('motivations.encouragements.passions', "Nurture your passions consistently."),
+        i18next.t('motivations.encouragements.gentle', "Be gentle with yourself during challenges."),
+        i18next.t('motivations.encouragements.path', "Your unique path is exactly right for you."),
+        i18next.t('motivations.encouragements.timing', "Trust the timing of your life's unfolding."),
+        i18next.t('motivations.encouragements.joy', "Find joy in the small moments each day."),
+        i18next.t('motivations.encouragements.perspective', "Your perspective is valuable - share it."),
+        i18next.t('motivations.encouragements.believe', "Believe in your ability to create change."),
+        i18next.t('motivations.encouragements.remember', "Remember why you started this journey."),
+        i18next.t('motivations.encouragements.fresh', "Each day offers a fresh beginning."),
+        i18next.t('motivations.encouragements.resilience', "Your resilience is inspiring to others."),
+        i18next.t('motivations.encouragements.victories', "Take time to celebrate small victories."),
+        i18next.t('motivations.encouragements.strength', "Every challenge you face strengthens you."),
+        i18next.t('motivations.encouragements.support', "The universe supports your authentic path."),
+        i18next.t('motivations.encouragements.shine', "Your light shines brightest when you're being you.")
       ];
       
-      const transitions = [
-        i18next.t('flower.transitions.t1', " Remember, "),
-        i18next.t('flower.transitions.t2', " Know that "),
-        i18next.t('flower.transitions.t3', " Embrace that "),
-        i18next.t('flower.transitions.t4', " Feel that "),
-        i18next.t('flower.transitions.t5', " Trust that "),
-        i18next.t('flower.transitions.t6', " Believe that "),
-        i18next.t('flower.transitions.t7', " Honor that ")
-      ];
+      // Pour générer une nouvelle motivation à chaque fois, utilisons une approche aléatoire
+      const traitIndex = Math.floor(Math.random() * lifeTraits.length);
+      const encourageIndex = Math.floor(Math.random() * lifeEncouragements.length);
       
-      const codeSum = flowerCode.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
-      const traitIndex = codeSum % positiveTraits.length;
-      const encourageIndex = (codeSum + 3) % encouragements.length;
-      const transitionIndex = (codeSum + 7) % transitions.length;
-      
-      return positiveTraits[traitIndex] + transitions[transitionIndex] + encouragements[encourageIndex].toLowerCase();
+      return lifeTraits[traitIndex] + " " + lifeEncouragements[encourageIndex];
     }
 
     function generateFlowerCode() {
@@ -1202,50 +1601,44 @@
       return code;
     }
 
+    // Fonction pour obtenir un sujet aléatoire du dictionnaire
+    function getRandomSubject() {
+      const subjects = Object.keys(subjectDictionary);
+      const randomIndex = Math.floor(Math.random() * subjects.length);
+      return subjects[randomIndex];
+    }
+
+    // Mise à jour de l'affichage du flower avec un sujet approprié
     function updateFlowerDisplay() {
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
       
-      const monthNames = {
-        en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-        es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-      };
-      
-      const currentLang = i18next.language || 'en';
-      const months = monthNames[currentLang] || monthNames.en;
-      
-      if (userFlowerCode && userBirthdayMonth && userBirthdayDay) {
-        const monthName = months[userBirthdayMonth - 1];
-        const flowerText = i18next.t('flower.myFlowerWithDate', "My Flower - {{month}} ({{day}})", {month: monthName, day: userBirthdayDay});
-        flowerCodeElement.textContent = flowerText;
-        
-        if (!currentMotivation) {
-          currentMotivation = generatePersonalizedMotivation(userFlowerCode);
-        }
-        
-        motivationElement.textContent = currentMotivation;
-        document.getElementById('captureFlowerCode').textContent = flowerText;
-        document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
-      } else {
-        flowerCodeElement.textContent = i18next.t('flower.myFlower', "My Flower");
-        motivationElement.textContent = i18next.t('flower.defaultMotivation', "Submit your information to discover your flower motivation.");
-        
-        document.getElementById('captureFlowerCode').textContent = i18next.t('flower.myFlower', "My Flower");
-        document.getElementById('captureFlowerMotivation').textContent = i18next.t('flower.defaultMotivation', "Submit your information to discover your flower motivation.");
+      // Générer un sujet aléatoire pour le flower si on n'en a pas déjà un
+      let subject = localStorage.getItem('flowerSubject');
+      if (!subject) {
+        subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
       }
+      
+      // Mettre à jour l'affichage du code avec le sujet
+      flowerCodeElement.textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${subject}`, subject);
+      
+      // Vérifier si on a déjà une motivation (pour garder la même motivation dans tous les thèmes)
+      if (!currentMotivation) {
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+      }
+      
+      // Utiliser la motivation actuelle
+      motivationElement.textContent = currentMotivation;
+      
+      // Mettre à jour les éléments de capture avec la même motivation
+      document.getElementById('captureFlowerCode').textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${subject}`, subject);
+      document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
+      
+      return currentMotivation;
     }
 
-    function generateAccessCode() {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let code = '';
-      for (let i = 0; i < 6; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        code += characters.charAt(randomIndex);
-      }
-      return code;
-    }
-
+    // Fonction pour définir un cookie avec expiration et path spécifique
     function setCookie(name, value, days) {
       let expires = "";
       if (days) {
@@ -1253,9 +1646,10 @@
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
-      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+      document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
     }
 
+    // Fonction pour récupérer un cookie
     function getCookie(name) {
       const nameEQ = name + "=";
       const ca = document.cookie.split(';');
@@ -1267,614 +1661,420 @@
       return null;
     }
 
-    function eraseCookie(name) {
-      document.cookie = name + '=; Max-Age=-99999999; path=/';
-    }
-
-    function checkCookieConsent() {
-      const cookiesAccepted = getCookie('cookiesAccepted');
-      if (!cookiesAccepted) {
-        setCookie('cookiesAccepted', 'true', 365);
-      }
-    }
-
-    signInAnonymously(auth)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        userUid = user.uid;
-        console.log("User connected: ", userUid);
-      })
-      .catch((error) => {
-        console.error("Error during anonymous connection: ", error);
-        
-        userUid = "local_" + Date.now().toString(36) + Math.random().toString(36).substring(2);
+    // Fonction pour définir le thème
+    function setTheme(theme) {
+      // Enlever toutes les classes de thème
+      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-blue-purple', 'theme-green-blue', 'theme-orange-pink');
+      
+      // Ajouter la classe du thème sélectionné
+      document.body.classList.add('theme-' + theme);
+      
+      // Mettre à jour le thème actuel
+      currentTheme = theme;
+      
+      // Sauvegarder la préférence dans localStorage et cookie
+      localStorage.setItem('preferredTheme', theme);
+      setCookie('preferredTheme', theme, 365); // Cookie valide pendant un an
+      
+      // Mettre à jour la sélection visuelle
+      const options = document.querySelectorAll('.style-option');
+      options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.theme === theme) {
+          option.classList.add('selected');
+        }
       });
-
-    const today = new Date();
-    const todayString = today.toISOString().split("T")[0];
-    document.getElementById("birthdate").setAttribute('max', todayString);
-
-    function isFutureDate(dateString) {
-      const selectedDate = new Date(dateString);
-      selectedDate.setHours(0, 0, 0, 0);
       
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
+      // Mettre à jour la couleur du cadre et du texte dans la capture en fonction du thème
+      updateCaptureStyles(theme);
+    }
+    
+    // Fonction pour mettre à jour les styles de capture en fonction du thème
+    function updateCaptureStyles(theme) {
+      const captureContainer = document.getElementById('flowerCaptureContainer');
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureHeader = document.getElementById('captureFlowerHeader');
+      const captureWebsiteUrl = document.querySelector('.capture-website-url');
+      const captureLogo = document.querySelector('.gz-logo');
       
-      return selectedDate > currentDate;
-    }
-
-    document.getElementById("birthdate").addEventListener('change', function(e) {
-      if (isFutureDate(this.value)) {
-        alert(i18next.t('alerts.futureDateError', "You cannot select a future date for your date of birth"));
-        this.value = "";
-      }
-    });
-
-    document.querySelector('.submit-button').addEventListener('click', function(e) {
-      const birthdate = document.getElementById('birthdate').value;
-      if (isFutureDate(birthdate)) {
-        e.preventDefault();
-        alert(i18next.t('alerts.futureDateError', "You cannot select a future date for your date of birth"));
-        document.getElementById('birthdate').value = "";
-        return false;
-      }
-    });
-
-    fetch('https://restcountries.com/v3.1/all')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network error: ' + response.status);
-        }
-        return response.json();
-      })
-      .then(data => {
-        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
-        
-        const countrySelect = document.getElementById('countrySelect');
-        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countryLabel', "Select your country of birth")}</option>`;
-        
-        data.forEach(country => {
-          const option = document.createElement('option');
-          option.value = country.name.common;
-          option.textContent = country.name.common;
-          countrySelect.appendChild(option);
-        });
-        
-        loadUserDataFromCookie();
-      })
-      .catch(error => {
-        console.error('Error loading countries from API:', error);
-        
-        const fallbackCountries = [
-            "Afghanistan","Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
-          "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", 
-          "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", 
-          "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", 
-          "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
-          "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", 
-          "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", 
-          "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
-          "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", 
-          "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
-          "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
-          "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", 
-          "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho",
-          "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", 
-          "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
-          "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", 
-          "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", 
-          "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", 
-          "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", 
-          "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
-          "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", 
-          "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", 
-          "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", 
-          "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", 
-          "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
-          "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", 
-          "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", 
-          "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe", 
-        ].sort();
-        
-        const countrySelect = document.getElementById('countrySelect');
-        countrySelect.innerHTML = `<option value="" disabled selected>${i18next.t('form.countryLabel', "Select your country of birth")}</option>`;
-        
-        fallbackCountries.forEach(country => {
-          const option = document.createElement('option');
-          option.value = country;
-          option.textContent = country;
-          countrySelect.appendChild(option);
-        });
-        
-        loadUserDataFromCookie();
-      });
-
-    function saveUserDataToCookie() {
-      if (userBirthdate && userCountry && userGender) {
-        const userData = {
-          birthdate: userBirthdate,
-          country: userCountry,
-          gender: userGender,
-          wantsMonetization: userWantsMonetization,
-          birthdayDay: userBirthdayDay,
-          birthdayMonth: userBirthdayMonth,
-          birthYear: userBirthYear,
-          dataSubmitted: true,
-          lastSubmittedId: lastSubmittedId,
-          accessCode: userAccessCode,
-          flowerCode: userFlowerCode,
-          motivation: currentMotivation,
-          birthdayStats: userBirthdayStats,
-          countryStats: userCountryStats
-        };
-        setCookie('userData', JSON.stringify(userData), 365);
-      }
-    }
-
-    function updateHeaderAccessCode() {
-      if (userAccessCode) {
-        document.getElementById('accessCodeIndicator').style.display = 'none';
-        document.getElementById('headerAccessCode').style.display = 'block';
-        document.getElementById('headerAccessCode').textContent = userAccessCode;
-      } else {
-        document.getElementById('accessCodeIndicator').style.display = 'block';
-        document.getElementById('headerAccessCode').style.display = 'none';
-      }
-    }
-
-    function loadUserDataFromCookie() {
-      const userDataCookie = getCookie('userData');
-      if (userDataCookie) {
-        try {
-          const userData = JSON.parse(userDataCookie);
-          userBirthdate = userData.birthdate;
-          userCountry = userData.country;
-          userGender = userData.gender;
-          userWantsMonetization = userData.wantsMonetization;
-          userBirthdayDay = userData.birthdayDay;
-          userBirthdayMonth = userData.birthdayMonth;
-          userBirthYear = userData.birthYear;
-          dataSubmitted = userData.dataSubmitted;
-          lastSubmittedId = userData.lastSubmittedId;
-          userAccessCode = userData.accessCode;
-          userFlowerCode = userData.flowerCode;
-          currentMotivation = userData.motivation;
-          
-          if (userData.birthdayStats) {
-            userBirthdayStats = userData.birthdayStats;
-          }
-          
-          if (userData.countryStats) {
-            userCountryStats = userData.countryStats;
-          }
-          
-          if (dataSubmitted) {
-            document.getElementById('birthdate').value = userBirthdate;
-            document.getElementById('countrySelect').value = userCountry;
-            
-            const submitButton = document.querySelector('.submit-button');
-            submitButton.textContent = i18next.t('form.submitted', "Submitted");
-            submitButton.style.backgroundColor = 'green';
-            submitButton.disabled = true;
-            
-            document.getElementById('resetButton').style.display = "block";
-            
-            document.getElementById('birthdate').classList.add('disabled-field');
-            document.getElementById('countrySelect').classList.add('disabled-field');
-            
-            updateHeaderAccessCode();
-          }
-        } catch (error) {
-          console.error("Error parsing user data from cookie:", error);
-        }
-      }
-    }
-
-    document.querySelector('.submit-button').addEventListener('click', function() {
-      const birthdate = document.getElementById('birthdate').value;
-      const country = document.getElementById('countrySelect').value;
-
-      if (birthdate && country) {
-        if (isFutureDate(birthdate)) {
-          alert(i18next.t('alerts.futureDateError', "You cannot select a future date for your date of birth"));
-          document.getElementById('birthdate').value = "";
-          return;
-        }
-        
-        userBirthdate = birthdate;
-        userCountry = country;
-        
-        const birthdateParts = birthdate.split('-');
-        userBirthYear = parseInt(birthdateParts[0]);
-        userBirthdayMonth = parseInt(birthdateParts[1]);
-        userBirthdayDay = parseInt(birthdateParts[2]);
-        
-        const submitButton = document.querySelector('.submit-button');
-        submitButton.textContent = i18next.t('form.pleaseWait', "Please wait...");
-        submitButton.style.backgroundColor = 'orange';
-
-        document.getElementById('birthdate').classList.add('disabled-field');
-        document.getElementById('countrySelect').classList.add('disabled-field');
-
-        document.getElementById('genderModal').style.display = 'block';
-      } else {
-        alert(i18next.t('alerts.formIncomplete', "Please enter a date of birth and select a country!"));
-      }
-    });
-
-    document.querySelectorAll('.gender-option').forEach(button => {
-      button.addEventListener('click', function() {
-        tempSelectedGender = this.value;
-        document.getElementById('genderModal').style.display = 'none';
-        proceedWithSubmission(tempSelectedGender);
-      });
-    });
-
-    function proceedWithSubmission(gender) {
-      userGender = gender;
+      // Réinitialiser les styles
+      captureContainer.style.borderColor = '';
+      captureCode.style.borderColor = '';
+      captureCode.style.color = '';
+      captureCode.style.backgroundColor = '';
+      captureHeader.style.color = '';
+      captureWebsiteUrl.style.color = '';
+      captureLogo.style.color = '';
+      captureLogo.style.borderColor = '';
       
-      userAccessCode = generateAccessCode();
-      userFlowerCode = generateFlowerCode();
-      currentMotivation = generatePersonalizedMotivation(userFlowerCode);
-      
-      submitData(gender);
-    }
-
-    async function fetchBirthdayStatistics() {
-      try {
-        const monthStr = userBirthdayMonth.toString().padStart(2, '0');
-        const dayStr = userBirthdayDay.toString().padStart(2, '0');
-        const birthdayPattern = `-${monthStr}-${dayStr}`;
-        
-        const birthdatesRef = ref(database, 'birthdates');
-        const birthdatesSnapshot = await get(birthdatesRef);
-        
-        let sameBirthdayCount = 0;
-        let userRank = 0;
-        let earlierSubmissions = 0;
-        let isCurrentUserCounted = false;
-        
-        if (birthdatesSnapshot.exists()) {
-          const data = birthdatesSnapshot.val();
+      // Appliquer les styles en fonction du thème
+      switch(theme) {
+        case 'red-black':
+          captureContainer.style.borderColor = '#8B0000';
+          captureContainer.style.backgroundColor = '#1F1F1F';
+          captureCode.style.borderColor = '#FF4500';
+          captureCode.style.color = '#FF4500';
+          captureCode.style.backgroundColor = '#2C2C2C';
+          captureHeader.style.color = '#FF4500';
+          captureWebsiteUrl.style.color = '#FF4500';
+          captureLogo.style.color = '#FF4500';
+          captureLogo.style.borderColor = '#FF4500';
+          break;
           
-          const entries = Object.entries(data)
-            .map(([key, value]) => ({ key, ...value }))
-            .filter(entry => entry.date && entry.date.includes(birthdayPattern))
-            .sort((a, b) => a.timestamp - b.timestamp);
+        case 'blue-purple':
+          captureContainer.style.borderColor = '#5865F2';
+          captureContainer.style.backgroundColor = '#2C2C54';
+          captureCode.style.borderColor = '#5865F2';
+          captureCode.style.color = '#5865F2';
+          captureCode.style.backgroundColor = '#3A3A8C';
+          captureHeader.style.color = '#5865F2';
+          captureWebsiteUrl.style.color = '#5865F2';
+          captureLogo.style.color = '#5865F2';
+          captureLogo.style.borderColor = '#5865F2';
+          break;
           
-          sameBirthdayCount = entries.length;
+        case 'green-blue':
+          captureContainer.style.borderColor = '#3EB489';
+          captureContainer.style.backgroundColor = '#1A2E4D';
+          captureCode.style.borderColor = '#3EB489';
+          captureCode.style.color = '#3EB489';
+          captureCode.style.backgroundColor = '#36454F';
+          captureHeader.style.color = '#3EB489';
+          captureWebsiteUrl.style.color = '#3EB489';
+          captureLogo.style.color = '#3EB489';
+          captureLogo.style.borderColor = '#3EB489';
+          break;
           
-          for (let i = 0; i < entries.length; i++) {
-            if (entries[i].key === lastSubmittedId || (entries[i].uid === userUid && !isCurrentUserCounted)) {
-              userRank = i + 1;
-              isCurrentUserCounted = true;
-            }
-          }
-        }
-        
-        if (userRank === 0) {
-          userRank = sameBirthdayCount;
-        }
-        
-        const monthNames = {
-          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-        };
-        
-        const currentLang = i18next.language || 'en';
-        const months = monthNames[currentLang] || monthNames.en;
-        
-        const formattedDate = `${months[userBirthdayMonth-1]} ${userBirthdayDay}`;
-        
-        return {
-          totalMembers: sameBirthdayCount,
-          userRank: userRank,
-          formattedDate: formattedDate
-        };
-      } catch (error) {
-        console.error("Error fetching birthday statistics:", error);
-        
-        const monthNames = {
-          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-        };
-        
-        const currentLang = i18next.language || 'en';
-        const months = monthNames[currentLang] || monthNames.en;
-        
-        return {
-          totalMembers: Math.floor(Math.random() * 50) + 5,
-          userRank: Math.floor(Math.random() * 10) + 1,
-          formattedDate: `${months[userBirthdayMonth-1]} ${userBirthdayDay}`
-        };
+        case 'orange-pink':
+          captureContainer.style.borderColor = '#FF7F50';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FF7F50';
+          captureCode.style.color = '#FF7F50';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FF7F50';
+          captureWebsiteUrl.style.color = '#FF7F50';
+          captureLogo.style.color = '#FF7F50';
+          captureLogo.style.borderColor = '#FF7F50';
+          break;
+          
+        default: // theme-default
+          captureContainer.style.borderColor = '#007bff';
+          captureContainer.style.backgroundColor = 'white';
+          captureCode.style.borderColor = '#ff69b4';
+          captureCode.style.color = '#ff69b4';
+          captureCode.style.backgroundColor = '#fff0f8';
+          captureHeader.style.color = '#007bff';
+          captureWebsiteUrl.style.color = '#007bff';
+          captureLogo.style.color = '#007bff';
+          captureLogo.style.borderColor = '#007bff';
       }
     }
 
-    async function fetchCountryStatistics() {
-      try {
-        const birthdatesRef = ref(database, 'birthdates');
-        const birthdatesSnapshot = await get(birthdatesRef);
-        
-        let sameCountryCount = 0;
-        
-        if (birthdatesSnapshot.exists()) {
-          const data = birthdatesSnapshot.val();
-          
-          sameCountryCount = Object.values(data).filter(entry => 
-            entry.country && entry.country === userCountry
-          ).length;
-        }
-        
-        return {
-          totalMembers: sameCountryCount
-        };
-      } catch (error) {
-        console.error("Error fetching country statistics:", error);
-        return {
-          totalMembers: Math.floor(Math.random() * 30) + 3
-        };
-      }
-    }
-
-    async function submitData(gender) {
-      const birthdate = userBirthdate;
-      const country = userCountry;
-      const submitButton = document.querySelector('.submit-button');
-
-      const localSuccess = submitToLocalStorage(gender);
-      
-      try {
-        userBirthdayStats = await fetchBirthdayStatistics();
-        userCountryStats = await fetchCountryStatistics();
-      } catch (error) {
-        console.error("Error fetching statistics:", error);
-        
-        const monthNames = {
-          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-        };
-        
-        const currentLang = i18next.language || 'en';
-        const months = monthNames[currentLang] || monthNames.en;
-        
-        userBirthdayStats = {
-          totalMembers: Math.floor(Math.random() * 50) + 5,
-          userRank: Math.floor(Math.random() * 10) + 1,
-          formattedDate: `${months[userBirthdayMonth-1]} ${userBirthdayDay}`
-        };
-        userCountryStats = {
-          totalMembers: Math.floor(Math.random() * 30) + 3
-        };
-      }
-      
-      if (localSuccess) {
-        try {
-          push(ref(database, 'birthdates'), {
-            date: birthdate,
-            country: country,
-            gender: gender,
-            monetize: userWantsMonetization,
-            birthdayDay: userBirthdayDay,
-            birthdayMonth: userBirthdayMonth,
-            birthYear: userBirthYear,
-            uid: userUid,
-            accessCode: userAccessCode,
-            flowerCode: userFlowerCode,
-            motivation: currentMotivation,
-            timestamp: Date.now()
-          }).then((newEntryRef) => {
-            lastSubmittedId = newEntryRef.key;
-            console.log("Data successfully submitted to Firebase:", lastSubmittedId);
-          }).catch((error) => {
-            console.warn("Firebase submission error:", error);
+    // S'authentifier à Firebase
+    function authenticateAnonymously() {
+      return new Promise((resolve, reject) => {
+        signInAnonymously(auth)
+          .then((userCredential) => {
+            console.log("User authenticated anonymously:", userCredential.user.uid);
+            userUid = userCredential.user.uid;
+            isAuthenticated = true;
+            resolve(userCredential.user);
+          })
+          .catch((error) => {
+            console.error("Authentication error:", error);
+            reject(error);
           });
-        } catch (error) {
-          console.warn("Firebase submission exception:", error);
-        }
-        
-        finishSubmission(true);
+      });
+    }
+
+    // Écouter les changements d'état d'authentification
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // L'utilisateur est connecté
+        userUid = user.uid;
+        isAuthenticated = true;
+        console.log("Auth state changed: user is signed in", user.uid);
       } else {
-        finishSubmission(false);
-      }
-    }
-
-    function submitToLocalStorage(gender) {
-      try {
-        const randomId = Date.now().toString(36) + Math.random().toString(36).substring(2);
-        
-        const data = {
-          date: userBirthdate,
-          country: userCountry,
-          gender: gender,
-          monetize: userWantsMonetization,
-          birthdayDay: userBirthdayDay,
-          birthdayMonth: userBirthdayMonth,
-          birthYear: userBirthYear,
-          uid: userUid || randomId,
-          accessCode: userAccessCode,
-          flowerCode: userFlowerCode,
-          motivation: currentMotivation,
-          timestamp: Date.now()
-        };
-        
-        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
-        submissions.push(data);
-        localStorage.setItem('submissions', JSON.stringify(submissions));
-        
-        lastSubmittedId = lastSubmittedId || "local_" + randomId;
-        
-        return true;
-      } catch (error) {
-        console.error("localStorage submission error:", error);
-        return false;
-      }
-    }
-
-    function finishSubmission(success) {
-      const submitButton = document.querySelector('.submit-button');
-      
-      if (success) {
-        updateHeaderAccessCode();
-        
-        submitButton.style.backgroundColor = 'green';
-        submitButton.textContent = i18next.t('form.submitted', "Submitted");
-        submitButton.disabled = true;
-        document.getElementById('resetButton').style.display = "block";
-        dataSubmitted = true;
-        
-        saveUserDataToCookie();
-      } else {
-        submitButton.style.backgroundColor = 'red';
-        submitButton.textContent = i18next.t('form.error', "Error");
-        console.error("Error during submission");
-        
-        document.getElementById('birthdate').classList.remove('disabled-field');
-        document.getElementById('countrySelect').classList.remove('disabled-field');
-      }
-    }
-
-    function getOrdinal(n) {
-      const s = ["th", "st", "nd", "rd"];
-      const v = n % 100;
-      return n + (s[(v - 20) % 10] || s[v] || s[0]);
-    }
-
-    document.getElementById('resetButton').addEventListener('click', function() {
-      if (confirm(i18next.t('alerts.resetConfirmation', "Are you sure you want to reset your data? This will delete your information from our database."))) {
-        resetLocalStorageData();
-        
-        deleteFromFirebase().then(() => {
-          finishReset();
-        }).catch(error => {
-          console.error("Error during reset process:", error);
-          alert(i18next.t('alerts.resetError', "There was a problem resetting your data. Please try again later."));
-        });
+        // L'utilisateur est déconnecté
+        isAuthenticated = false;
+        console.log("Auth state changed: user is signed out");
       }
     });
-    
-    async function deleteFromFirebase() {
-      if (!lastSubmittedId) {
-        try {
-          if (userUid) {
-            const birthdatesRef = ref(database, 'birthdates');
-            const birthdatesSnapshot = await get(birthdatesRef);
-            
-            if (birthdatesSnapshot.exists()) {
-              const data = birthdatesSnapshot.val();
-              
-              for (const [key, value] of Object.entries(data)) {
-                if (value.uid === userUid) {
-                  console.log(`Found entry with matching UID: ${key}`);
-                  
-                  await remove(ref(database, `birthdates/${key}`));
-                  console.log(`Deleted entry: ${key}`);
-                }
-              }
-            }
-          }
-        } catch (error) {
-          console.error("Error searching for user data in Firebase:", error);
-          throw error;
-        }
-      } else if (!lastSubmittedId.startsWith('local_')) {
-        try {
-          await remove(ref(database, `birthdates/${lastSubmittedId}`));
-          console.log("Firebase data successfully deleted:", lastSubmittedId);
-        } catch (error) {
-          console.error("Error deleting from Firebase:", error);
-          throw error;
-        }
-      }
-      
-      return true;
-    }
-    
-    function resetLocalStorageData() {
+
+    // Soumettre à Firebase (version simplifiée avec uniquement les données demandées)
+    async function submitToFirebase() {
       try {
-        const submissions = JSON.parse(localStorage.getItem('submissions') || '[]');
-        const filteredSubmissions = submissions.filter(sub => 
-          !sub.uid || sub.uid !== userUid
-        );
-        localStorage.setItem('submissions', JSON.stringify(filteredSubmissions));
+        // S'assurer que l'utilisateur est authentifié avant de soumettre
+        if (!isAuthenticated) {
+          console.log("User not authenticated, authenticating now...");
+          await authenticateAnonymously();
+        }
+        
+        // Obtenir la localisation de l'utilisateur
+        const location = await detectUserLocation();
+        
+        // Préparer les données utilisateur (uniquement celles demandées)
+        const userData = {
+          date: new Date().toISOString(), // Date et heure actuelles
+          country: location.country || "Unknown",
+          city: location.city || "Unknown",
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation, // Sauvegarder la motivation avec les données
+          timestamp: Date.now(),
+          theme: currentTheme, // Sauvegarder le thème préféré
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject() // Sauvegarder le sujet du flower
+        };
+
+        console.log("Submitting data to Firebase:", userData);
+        
+        // Soumettre à Realtime Database
+        const newEntryRef = await push(ref(database, 'birthdates'), userData);
+        console.log("Data submitted to Realtime Database:", newEntryRef.key);
+        
+        // Soumettre à Firestore également
+        try {
+          const docRef = await addDoc(collection(firestore, 'flowers'), userData);
+          console.log("Document written to Firestore with ID: ", docRef.id);
+        } catch (firestoreError) {
+          console.error("Error adding document to Firestore: ", firestoreError);
+        }
+        
+        // Ajouter dans une collection spécifique pour les codes
+        try {
+          await setDoc(doc(firestore, 'flowerCodes', userUniqueId), {
+            ...userData,
+            createdAt: new Date()
+          });
+          console.log("Flower code added to specific collection");
+        } catch (codeError) {
+          console.error("Error adding flower code to collection: ", codeError);
+        }
+        
+        // Sauvegarder dans localStorage et cookies pour l'installation
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
         return true;
       } catch (error) {
-        console.error("Error resetting localStorage data:", error);
+        console.error("Firebase submission error:", error);
         return false;
       }
     }
-    
-    function finishReset() {
-      document.getElementById('birthdate').value = '';
-      document.getElementById('countrySelect').value = '';
-      const submitButton = document.querySelector('.submit-button');
-      submitButton.textContent = i18next.t('form.submit', "Submit");
-      submitButton.style.backgroundColor = '#007bff';
-      submitButton.disabled = false;
-      document.getElementById('resetButton').style.display = "none";
+
+    // Vérifier si l'utilisateur a déjà des données sauvegardées
+    function checkSavedUserData() {
+      // Vérifier d'abord dans les cookies
+      const cookieUniqueId = getCookie('userUniqueId');
+      const cookieFlowerCode = getCookie('userFlowerCode');
+      const cookieInstalled = getCookie('isInstalled');
       
-      document.getElementById('accessCodeIndicator').style.display = 'block';
-      document.getElementById('headerAccessCode').style.display = 'none';
+      if (cookieUniqueId && cookieFlowerCode) {
+        userUniqueId = cookieUniqueId;
+        userFlowerCode = cookieFlowerCode;
+        isInstalled = cookieInstalled === 'true';
+        
+        // Générer une motivation basée sur le code sauvegardé
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        
+        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode });
+        return true;
+      }
       
-      dataSubmitted = false;
-      userBirthdate = null;
-      userCountry = null;
-      userGender = null;
-      userWantsMonetization = null;
-      userBirthdayDay = null;
-      userBirthdayMonth = null;
-      userBirthYear = null;
-      lastSubmittedId = null;
-      userAccessCode = null;
-      userFlowerCode = null;
-      currentMotivation = null;
-      userBirthdayStats = {
-        totalMembers: 0,
-        userRank: 0,
-        formattedDate: ""
-      };
-      userCountryStats = {
-        totalMembers: 0
-      };
-      
-      document.getElementById('birthdate').classList.remove('disabled-field');
-      document.getElementById('countrySelect').classList.remove('disabled-field');
-      
-      eraseCookie('userData');
-      
-      alert(i18next.t('alerts.resetSuccess', "Your data has been successfully reset."));
+      // Si pas dans les cookies, essayer localStorage
+      const savedData = localStorage.getItem('userFlowerData');
+      if (savedData) {
+        try {
+          const userData = JSON.parse(savedData);
+          userUniqueId = userData.uniqueId;
+          userFlowerCode = userData.flowerCode;
+          currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode);
+          userUid = userData.uid;
+          isInstalled = localStorage.getItem('isInstalled') === 'true';
+          
+          // Sauvegarder dans les cookies pour une persistance accrue
+          setCookie('userUniqueId', userUniqueId, 365);
+          setCookie('userFlowerCode', userFlowerCode, 365);
+          setCookie('isInstalled', 'true', 365);
+          
+          console.log("Found saved user data in localStorage:", userData);
+          return true;
+        } catch (e) {
+          console.error("Error parsing saved user data:", e);
+          return false;
+        }
+      }
+      return false;
     }
 
+    // Initialiser l'application au chargement
+    window.addEventListener('load', async () => {
+      // Vérifier le thème préféré
+      const savedTheme = localStorage.getItem('preferredTheme') || getCookie('preferredTheme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        // Définir le thème par défaut à vert-bleu s'il n'y a pas de thème sauvegardé
+        setTheme('green-blue');
+      }
+      
+      // Vérifier si l'utilisateur a déjà des données
+      if (checkSavedUserData()) {
+        console.log("User already has data, hiding welcome modal");
+        document.getElementById('welcomeModal').style.display = 'none';
+        
+        // Authentifier l'utilisateur si nécessaire
+        if (!isAuthenticated) {
+          try {
+            await authenticateAnonymously();
+          } catch (error) {
+            console.error("Error during authentication:", error);
+          }
+        }
+      } else {
+        console.log("No saved user data found, showing welcome modal");
+        document.getElementById('welcomeModal').style.display = 'block';
+      }
+    });
+
+    // Gestion du bouton flower
     document.getElementById('flowerButton').addEventListener('click', function() {
+      if (!userUniqueId) {
+        alert(i18next.t('alerts.generateFirst', "Please generate your flower first by clicking OK on the welcome screen."));
+        return;
+      }
+      
+      // Utiliser la même motivation pour tous les thèmes
       updateFlowerDisplay();
       document.getElementById('flowerModal').style.display = 'block';
       document.getElementById('shareFlowerButton').style.display = 'flex';
     });
 
-    // Community button handler - opens the community modal
-    document.getElementById('communityButton').addEventListener('click', function() {
-      document.getElementById('communityModal').style.display = 'block';
-    });
-
-    // Close community modal
-    document.getElementById('closeCommunityModal').addEventListener('click', function() {
-      document.getElementById('communityModal').style.display = 'none';
-    });
-
     document.getElementById('shareFlowerButton').addEventListener('click', function() {
-      if (userFlowerCode) {
-        captureFlower();
+      captureFlower();
+    });
+    
+    // Afficher le modal d'ID unique quand on clique sur l'icône ID
+    document.getElementById('showIdButton').addEventListener('click', function() {
+      if (userUniqueId) {
+        document.getElementById('userIdDisplay').textContent = userUniqueId;
+        document.getElementById('idModal').style.display = 'block';
       } else {
-        alert(i18next.t('alerts.flowerSubmitFirst', 'Please submit your information first to get your Flower code.'));
+        alert(i18next.t('alerts.idFirst', "Please generate your flower first to get your unique ID."));
+      }
+    });
+    
+    // Copier l'ID quand on clique sur l'icône de copie
+    document.getElementById('copyIdButton').addEventListener('click', function() {
+      const idText = document.getElementById('userIdDisplay').textContent;
+      navigator.clipboard.writeText(idText).then(function() {
+        alert(i18next.t('alerts.idCopied', 'ID copied to clipboard!'));
+      }).catch(function() {
+        alert(i18next.t('alerts.copyFailed', 'Could not copy ID. Please select and copy manually.'));
+      });
+    });
+    
+    // Fermer le modal d'ID
+    document.getElementById('closeIdModal').addEventListener('click', function() {
+      document.getElementById('idModal').style.display = 'none';
+    });
+    
+    // Gestionnaire pour le bouton de rafraîchissement de la motivation
+    document.getElementById('refreshMotivation').addEventListener('click', function() {
+      // Générer une nouvelle motivation
+      const newMotivation = generatePersonalizedMotivation(userFlowerCode);
+      currentMotivation = newMotivation;
+      
+      // Générer un nouveau sujet
+      const newSubject = getRandomSubject();
+      localStorage.setItem('flowerSubject', newSubject);
+      
+      // Mettre à jour l'affichage
+      document.getElementById('flowerCodeDisplay').textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${newSubject}`, newSubject);
+      document.getElementById('monthlyMotivation').textContent = newMotivation;
+      document.getElementById('captureFlowerCode').textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${newSubject}`, newSubject);
+      document.getElementById('captureFlowerMotivation').textContent = newMotivation;
+      
+      // Animation de rotation pour l'icône
+      this.style.transition = 'transform 0.5s ease';
+      this.style.transform = 'rotate(360deg)';
+      
+      // Réinitialiser l'animation après une rotation complète
+      setTimeout(() => {
+        this.style.transition = 'none';
+        this.style.transform = 'rotate(0deg)';
+      }, 500);
+    });
+    
+    // Gestionnaire d'événement pour le bouton OK du modal d'accueil
+    document.getElementById('agreeButton').addEventListener('click', async function() {
+      try {
+        // Authentifier l'utilisateur d'abord
+        await authenticateAnonymously();
+        
+        // Générer un ID unique
+        userUniqueId = generateUniqueId();
+        console.log("Generated unique ID:", userUniqueId);
+        
+        // Générer un code flower
+        userFlowerCode = generateFlowerCode();
+        
+        // Générer un sujet pour le flower
+        const subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+        
+        // Générer une motivation
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        document.getElementById('welcomeModal').style.display = 'none';
+        
+        // Soumettre à Firebase si pas encore installé
+        if (!isInstalled) {
+          const submitted = await submitToFirebase();
+          if (!submitted) {
+            console.log("Firebase submission failed, but continuing with local installation");
+          }
+        }
+        const userData = {
+          date: new Date().toISOString(),
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: subject
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        // Afficher le flower automatiquement après la génération
+        updateFlowerDisplay();
+        document.getElementById('flowerModal').style.display = 'block';
+        document.getElementById('shareFlowerButton').style.display = 'flex';
+        
+        console.log("Setup complete and data stored locally and in cookies");
+      } catch (error) {
+        console.error("Error during setup:", error);
+        alert(i18next.t('alerts.setupError', "There was a problem setting up your flower. Please try again."));
       }
     });
     
     async function captureFlower() {
       try {
         const captureContainer = document.getElementById('flowerCaptureContainer');
+        
+        // Mettre à jour les styles de capture en fonction du thème actuel
+        updateCaptureStyles(currentTheme);
         
         if (typeof html2canvas === 'undefined') {
           await loadHTML2Canvas();
@@ -1921,8 +2121,8 @@
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: i18next.t('flower.shareTitle', 'My G-Z Flower'),
-              text: i18next.t('flower.shareText', 'Discover yours at g-z.online'),
+              title: i18next.t('share.title', 'My G-Z Flower'),
+              text: i18next.t('share.text', 'Discover yours at g-z.online'),
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -1940,61 +2140,21 @@
     
     function fallbackShare() {
       try {
-        const monthNames = {
-          en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-          fr: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-          es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-        };
-        
-        const currentLang = i18next.language || 'en';
-        const months = monthNames[currentLang] || monthNames.en;
-        
-        const monthName = userBirthdayMonth ? months[userBirthdayMonth - 1] : "";
-        const dayNumber = userBirthdayDay || "";
-        
-        const shareText = i18next.t('flower.shareMessage', "Check out my Flower from G-Z: {{month}} ({{day}}). Discover yours at g-z.online", {
-          month: monthName,
-          day: dayNumber
-        });
+        const shareText = i18next.t('share.fallbackText', `Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`);
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert(i18next.t('alerts.clipboardSuccess', 'Share text copied to clipboard! You can now paste and share it manually with the image. If the link doesn\'t work directly, please manually type "g-z.online" in your browser.'));
+          alert(i18next.t('alerts.shareCopied', 'Share text copied to clipboard!'));
         }).catch(function() {
-          alert(i18next.t('alerts.clipboardError', 'Could not copy to clipboard. Please share manually. Remember to type "g-z.online" in your browser to access the site.'));
+          alert(i18next.t('alerts.shareError', 'Could not copy share text.'));
         });
       } catch (error) {
         console.error('Fallback share error:', error);
-        alert(i18next.t('alerts.shareManually', 'Please share the image manually. Remember to type "g-z.online" in your browser to access the site.'));
+        alert(i18next.t('alerts.generalError', 'An error occurred.'));
       }
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
       document.getElementById('capturedFlower').style.display = 'none';
-    });
-
-    document.getElementById('accessCodeContainer').addEventListener('click', function() {
-      if (userAccessCode) {
-        navigator.clipboard.writeText(userAccessCode).then(function() {
-          const container = document.getElementById('accessCodeContainer');
-          container.style.backgroundColor = '#e0f0ff';
-          setTimeout(() => {
-            container.style.backgroundColor = '#f0f7ff';
-          }, 300);
-        }).catch(function(err) {
-          console.error('Could not copy access code: ', err);
-        });
-      }
-    });
-    
-    document.getElementById('closeGenderModal').addEventListener('click', function() {
-      document.getElementById('genderModal').style.display = 'none';
-      
-      const submitButton = document.querySelector('.submit-button');
-      submitButton.style.backgroundColor = '#007bff';
-      submitButton.textContent = i18next.t('form.submit', "Submit");
-      
-      document.getElementById('birthdate').classList.remove('disabled-field');
-      document.getElementById('countrySelect').classList.remove('disabled-field');
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
@@ -2003,20 +2163,9 @@
     });
 
     window.onclick = function(event) {
-      const genderModal = document.getElementById('genderModal');
       const flowerModal = document.getElementById('flowerModal');
       const capturedFlower = document.getElementById('capturedFlower');
-      const communityModal = document.getElementById('communityModal');
-      
-      if (event.target == genderModal) {
-        genderModal.style.display = "none";
-        const submitButton = document.querySelector('.submit-button');
-        submitButton.style.backgroundColor = 'red';
-        submitButton.textContent = i18next.t('form.error', "Error");
-        
-        document.getElementById('birthdate').classList.remove('disabled-field');
-        document.getElementById('countrySelect').classList.remove('disabled-field');
-      }
+      const idModal = document.getElementById('idModal');
       
       if (event.target == flowerModal) {
         flowerModal.style.display = "none";
@@ -2027,36 +2176,24 @@
         capturedFlower.style.display = "none";
       }
       
-      if (event.target == communityModal) {
-        communityModal.style.display = "none";
+      if (event.target == idModal) {
+        idModal.style.display = "none";
       }
     };
-
-    checkCookieConsent();
     
+    // Initialiser les éléments d'interface
     document.getElementById('shareFlowerButton').style.display = 'none';
-    
     document.getElementById('shareWarning').style.display = 'none';
     
-    loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
-    
-    // Update translations when language changes
-    i18next.on('languageChanged', function() {
-      updateFlowerDisplay();
-      // Re-localize placeholders and other dynamic content
-      document.getElementById('countrySelect').querySelector('option[disabled][selected]').textContent = 
-        i18next.t('form.countryLabel', "Select your country of birth");
-      
-      const submitButton = document.querySelector('.submit-button');
-      if (submitButton.disabled) {
-        submitButton.textContent = i18next.t('form.submitted', "Submitted");
-      } else {
-        submitButton.textContent = i18next.t('form.submit', "Submit");
-      }
-      
-      document.getElementById('accessCodeIndicator').textContent = 
-        i18next.t('header.accessCodeSubmit', "Submit - to get your code.");
+    // Gestionnaires pour le sélecteur de thème
+    document.querySelectorAll('.style-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        setTheme(theme);
+      });
     });
+    
+    loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
   </script>
   
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
