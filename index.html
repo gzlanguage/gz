@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page.title">G-Z</title>
+    <title>G-Z</title>
     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.9/i18next.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.2.1/i18nextHttpBackend.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,7 +49,7 @@
         }
         .button-container {
             display: flex;
-            justify-content: center; /* Centre le bouton */
+            justify-content: center;
             margin-top: 5px;
             padding: 5px 0;
             overflow-x: auto;
@@ -141,11 +137,15 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
         }
         .modal-content {
             background-color: white;
-            /* Position du modal à 37% de hauteur au lieu de 29% */
-            margin: 40% auto;
+            margin: 50% auto;
             padding: 14px;
             border: 1px solid #007bff;
             border-radius: 60px;
@@ -155,7 +155,11 @@
             max-height: 60vh;
             overflow-y: auto;
             position: relative;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
         }
         .modal-header {
             font-size: 1.8em;
@@ -223,6 +227,7 @@
             font-size: 0.9em;
             line-height: 1.4;
             transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+            position: relative;
         }
         
         .flower-code {
@@ -435,14 +440,14 @@
         .capture-flower-code {
             font-weight: bold;
             color: #ff69b4;
-            font-size: 0.8em; /* Taille réduite pour My Flower - ID */
+            font-size: 0.8em;
             background-color: #fff0f8;
             padding: 6px;
             border-radius: 10px;
             border: 1px solid #ff69b4;
             margin: 6px auto;
             text-align: center;
-            max-width: 80%; /* Réduction de la largeur */
+            max-width: 80%;
             letter-spacing: 0.5px;
             transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
@@ -459,6 +464,7 @@
             margin: 12px 0;
             text-align: center;
             transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            position: relative;
         }
         
         .capture-flower-icon {
@@ -524,7 +530,7 @@
             margin-bottom: 3px;
         }
 
-        /* Styles pour l'en-tête */
+        /* Header styles */
         .header-container {
             display: flex;
             align-items: center;
@@ -566,14 +572,36 @@
             width: 100%;
         }
         
-        /* Nouvelle structure pour l'en-tête */
+        /* New header structure */
         .right-controls {
             display: flex;
             align-items: center;
             gap: 3px;
         }
 
-        /* Style pour le modal initial */
+        /* Welcome toast notification */
+        #welcomeToast {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-family: 'Billabong', cursive;
+            font-size: 1.2em;
+        }
+
+        /* Initial welcome modal */
         #welcomeModal {
             display: none;
             position: fixed;
@@ -584,20 +612,30 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #welcomeModal.show {
+            opacity: 1;
         }
 
-        /* Réduction de la taille du modal de bienvenue */
+        /* Welcome modal content */
         #welcomeModal .modal-content {
-            background-color: #fff;
-            margin: 45% auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 35% auto;
             padding: 15px;
-            border: 1px solid #007BFF;
-            border-radius: 35px;
-            width: 75%;
-            max-width: 250px;
+            border: 2px solid #4CAF50; /* Vert gazon pour la bordure */
+            border-radius: 25px;
+            width: 80%;
+            max-width: 300px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             text-align: center;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+            margin-top: 60px; /* Descendre le message d'accueil */
+        }
+        #welcomeModal.show .modal-content {
+            transform: scale(1);
         }
 
         #welcomeModal .close {
@@ -610,42 +648,164 @@
             cursor: pointer;
         }
 
+        #welcomeModal .welcome-header {
+            color: #007bff;
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
         #welcomeModal .welcome-text {
             margin: 10px 0 15px 0;
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: #333;
             line-height: 1.4;
             transition: color 0.3s ease;
         }
 
-        #welcomeModal .agree-button {
-            background-color: #007bff;
+        /* Birthday selector */
+        .dob-container {
+            margin: 10px 0;
+        }
+
+        .dob-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .dob-input {
+            width: 80%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.8em;
+        }
+
+        /* Profession selector */
+        .profession-container {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .profession-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .profession-search {
+            width: 80%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.8em;
+        }
+
+        .profession-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white; /* Fond blanc pour les options */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 80%;
+            max-height: 150px;
+            overflow-y: auto;
+            left: 10%;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .profession-option {
+            padding: 8px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            background-color: white; /* Fond blanc pour chaque option */
+            color: #333; /* Couleur de texte foncée pour contraste */
+        }
+
+        .profession-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Name input */
+        .name-container {
+            margin: 10px 0;
+        }
+
+        .name-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .name-input {
+            width: 80%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.8em;
+        }
+
+        /* Submit button */
+        #createAccountButton {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
             color: white;
             border: none;
             border-radius: 15px;
             padding: 10px 25px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: bold;
             margin: 10px auto 5px;
             display: block;
             width: 70%;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
         }
         
-        #welcomeModal .agree-button:hover {
-            background-color: #0056b3;
+        #createAccountButton:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d80 100%);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
         }
         
-        #welcomeModal .agree-button:active {
+        #createAccountButton:active {
             transform: translateY(0);
             box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
         }
 
-        /* Style pour le modal d'ID */
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        /* ID modal */
         #idModal {
             display: none;
             position: fixed;
@@ -656,28 +816,43 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #idModal.show {
+            opacity: 1;
         }
 
         #idModal .modal-content {
             background-color: #fff;
             margin: 45% auto;
-            padding: 8px;
+            padding: 15px;
             border: 1px solid #007BFF;
-            border-radius: 35px;
+            border-radius: 25px;
             width: 65%;
-            max-width: 220px;
+            max-width: 250px;
             text-align: center;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #idModal.show .modal-content {
+            transform: scale(1);
         }
 
-        #idModal .id-title {
+        .id-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .id-title {
             font-size: 1em;
             color: #007bff;
             margin-bottom: 5px;
             transition: color 0.3s ease;
         }
 
-        #idModal .id-display {
+        .id-display {
             font-weight: bold;
             font-size: 1.2em;
             color: #ff69b4;
@@ -693,11 +868,26 @@
             transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        #idModal .copy-icon {
+        .delete-account {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-account:hover {
+            background-color: #e60000;
+        }
+
+        .copy-icon {
             margin-left: 6px;
         }
 
-        #idModal .id-message {
+        .id-message {
             font-size: 0.7em;
             color: #333;
             margin: 5px 0;
@@ -711,7 +901,7 @@
             font-size: 0.7em;
         }
 
-        /* Style pour le lien sans soulignement */
+        /* Menu link without underline */
         .menu-link {
             text-decoration: none;
             color: #007bff;
@@ -721,7 +911,7 @@
             transition: color 0.3s ease;
         }
         
-        /* Sélecteur de style (thèmes) */
+        /* Style selector (themes) */
         .style-selector {
             position: fixed;
             bottom: 0;
@@ -772,9 +962,9 @@
             box-shadow: 0 0 0 2px #007bff;
         }
         
-        /* Styles des thèmes */
+        /* Theme styles */
         .style-option.red-black {
-            background: linear-gradient(to right, #FF4500, #8B0000, #121212, #1F1F1F);
+            background: linear-gradient(to right, #FF4500, #8B0000, #121212, #121212);
         }
         
         .style-option.blue-purple {
@@ -789,13 +979,17 @@
             background: linear-gradient(to right, #FF7F50, #FF6F91, #C71585, #4B0082);
         }
         
+        .style-option.yellow-purple {
+            background: linear-gradient(to right, #FFD700, #FFA500, #8A2BE2, #4B0082);
+        }
+        
         .style-option.default {
             background: linear-gradient(to right, #007bff, #0056b3);
         }
         
-        /* Contenu principal avec padding pour éviter le chevauchement avec le sélecteur de style */
+        /* Main content with padding to avoid overlap with style selector */
         .main-content {
-            padding-bottom: 80px; /* Pour éviter que le contenu soit caché derrière le sélecteur de style */
+            padding-bottom: 80px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -803,7 +997,7 @@
             align-items: center;
         }
         
-        /* Thème par défaut (bleu) */
+        /* Default theme (blue) */
         body.theme-default {
             background-color: white;
             color: #333;
@@ -861,7 +1055,7 @@
             border-color: #007bff;
         }
         
-        /* Thème Rouge-Noir */
+        /* Red-Black Theme */
         body.theme-red-black {
             background: black;
             color: #E5E5E5;
@@ -911,7 +1105,7 @@
         body.theme-red-black .flower-code,
         body.theme-red-black .id-display {
             color: #FF4500;
-            background-color: #2C2C2C;
+            background-color: black;
             border-color: #FF4500;
         }
         
@@ -919,16 +1113,16 @@
         body.theme-red-black .capture-flower-motivation {
             border-color: #FF4500;
             color: #E5E5E5;
-            background-color: #1F1F1F;
+            background-color: black;
         }
         
         body.theme-red-black .modal-content,
         body.theme-red-black #flowerCaptureContainer {
-            background-color: #1F1F1F;
+            background-color: black;
             border-color: #8B0000;
         }
         
-        /* Thème Bleu-Violet */
+        /* Blue-Purple Theme */
         body.theme-blue-purple {
             background: #2C2C54;
             color: #FFFFFF;
@@ -995,7 +1189,7 @@
             border-color: #5865F2;
         }
         
-        /* Thème Vert-Bleu */
+        /* Green-Blue Theme */
         body.theme-green-blue {
             background: #1A2E4D;
             color: #F5F5F5;
@@ -1062,7 +1256,7 @@
             border-color: #3EB489;
         }
         
-        /* Thème Orange-Rose */
+        /* Orange-Pink Theme */
         body.theme-orange-pink {
             background: #4B0082;
             color: #FFFFFF;
@@ -1128,8 +1322,75 @@
             background-color: #4B0082;
             border-color: #FF7F50;
         }
+
+        /* Yellow-Purple Theme */
+        body.theme-yellow-purple {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
         
-        /* Icône de rafraîchissement pour la motivation */
+        body.theme-yellow-purple header, 
+        body.theme-yellow-purple footer,
+        body.theme-yellow-purple .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .app-logo,
+        body.theme-yellow-purple .header-icon,
+        body.theme-yellow-purple .gz-logo,
+        body.theme-yellow-purple .capture-flower-header,
+        body.theme-yellow-purple .capture-website-url,
+        body.theme-yellow-purple .id-title,
+        body.theme-yellow-purple .billabong-title {
+            color: #FFD700;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .divider {
+            background-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification .notification-text {
+            color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification,
+        body.theme-yellow-purple .welcome-text,
+        body.theme-yellow-purple .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-yellow-purple .button {
+            background-color: #8A2BE2;
+        }
+        
+        body.theme-yellow-purple .share-flower-button {
+            background-color: #8A2BE2;
+            color: white;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .flower-code,
+        body.theme-yellow-purple .id-display {
+            color: #FFD700;
+            background-color: #6A0DAD;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .monthly-motivation,
+        body.theme-yellow-purple .capture-flower-motivation {
+            border-color: #FFD700;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .modal-content,
+        body.theme-yellow-purple #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FFD700;
+        }
+        
+        /* Refresh motivation icon */
         .refresh-motivation {
             position: absolute;
             right: 15px;
@@ -1162,6 +1423,29 @@
         body.theme-orange-pink .refresh-motivation {
             color: #FF7F50;
         }
+        
+        body.theme-yellow-purple .refresh-motivation {
+            color: #FFD700;
+        }
+
+        /* User signature */
+        .user-signature {
+            display: block;
+            font-size: 0.7em;  /* 1px smaller than main content */
+            text-align: right;
+            margin-top: 5px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .capture-signature {
+            display: block;
+            font-size: 0.7em;
+            text-align: right;
+            margin-top: 3px;
+            color: #666;
+            font-style: italic;
+        }
     </style>
 </head>
 <body class="theme-green-blue">
@@ -1169,15 +1453,15 @@
   <header>
    
     <div class="header-container">
-      <!-- Logo G-Z à gauche -->
-      <div class="app-logo" data-i18n="header.logo">G-Z</div>
+      <!-- G-Z Logo on the left -->
+      <div class="app-logo">G-Z</div>
       
-      <!-- Éléments regroupés à droite avec nouvel ordre -->
+      <!-- Elements grouped on the right with new order -->
       <div class="right-controls">
-        <!-- Icône ID -->
-        <div class="header-icon" id="showIdButton"><i class="fas fa-id-card"></i></div>
+        <!-- ID Icon -->
+        <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
         
-        <!-- Lien barres - même couleur que les autres icônes -->
+        <!-- Menu bars link - same color as other icons -->
         <a href="g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
       </div>
     </div>
@@ -1187,65 +1471,102 @@
 
   <div class="main-content">
     <div class="button-container">
-      <!-- Un seul bouton flower of life centré -->
-      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span data-i18n="button.flowerOfLife">Flower of life</span></a>
+      <!-- Single centered flower of life button -->
+      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span>Flower of life</span></a>
     </div>
 
     <div class="divider"></div>
     <div class="notification">
-      <span class="notification-text" data-i18n="notification.message">💠 Flower -- The message the universe wrote just for you ¯\\_(ツ)_/¯💠</span>
+      <span class="notification-text">💠 Flower -- The message the universe wrote just for you ¯\_(ツ)_/¯</span>
     </div>
 
     <div class="divider"></div>
   </div>
 
-  <!-- Style selector au bas de l'écran -->
+  <!-- Style selector at the bottom of the screen -->
   <div class="style-selector">
-    <h3 data-i18n="styleSelector.title">Style</h3>
+    <h3>Style</h3>
     <div class="style-options">
       <div class="style-option red-black" data-theme="red-black"></div>
       <div class="style-option blue-purple" data-theme="blue-purple"></div>
       <div class="style-option green-blue selected" data-theme="green-blue"></div>
       <div class="style-option orange-pink" data-theme="orange-pink"></div>
+      <div class="style-option yellow-purple" data-theme="yellow-purple"></div>
       <div class="style-option default" data-theme="default"></div>
     </div>
   </div>
 
-  <!-- Modal initial pour l'accueil - amélioré -->
+  <!-- Welcome toast notification -->
+  <div id="welcomeToast">
+    Welcome to G-Z Flower ¯\_(ツ)_/¯
+  </div>
+
+  <!-- Initial welcome modal - improved -->
   <div id="welcomeModal" class="modal">
     <div class="modal-content">
+      <div class="welcome-header">Create Your Flower</div>
       <div class="welcome-text">
-        <strong data-i18n="welcome.title">Welcome to G-Z Flower!</strong><br>
-        <span data-i18n="welcome.message">Click OK to access your unique flower. This ID will represent and define you in G-Z. Keep it safe as it's your unique identifier.</span>
+        Account creation only requires your date of birth and profession to create your unique flower.
       </div>
-      <button class="agree-button" id="agreeButton" data-i18n="welcome.button">OK</button>
+      
+      <!-- Date of birth input -->
+      <div class="dob-container">
+        <label for="dobInput">Date of Birth:</label>
+        <input type="date" id="dobInput" class="dob-input" max="">
+      </div>
+      
+      <!-- Profession selector -->
+      <div class="profession-container">
+        <label for="professionInput">Your Profession:</label>
+        <input type="text" id="professionInput" class="profession-search" placeholder="Type your profession...">
+        <div id="professionDropdown" class="profession-dropdown"></div>
+      </div>
+      
+      <!-- Name input for signature -->
+      <div class="name-container">
+        <label for="nameInput">Full Name (for signature):</label>
+        <input type="text" id="nameInput" class="name-input" placeholder="e.g. John Smith">
+      </div>
+      
+      <!-- Loading spinner -->
+      <div class="loading-spinner" id="loadingSpinner">
+        <span>Creating your unique flower</span>
+        <span class="loading-dots"></span>
+      </div>
+      
+      <button id="createAccountButton">Create Account</button>
     </div>
   </div>
 
-  <!-- Modal pour afficher l'ID unique -->
+  <!-- Modal to display unique ID -->
   <div id="idModal" class="modal">
     <div class="modal-content">
-      <div class="id-title" data-i18n="id.title">Your User ID</div>
+      <div class="id-title">Your User ID</div>
       <div class="id-display">
         <span id="userIdDisplay"></span>
         <i class="fas fa-copy copy-icon" id="copyIdButton"></i>
       </div>
-      <div class="id-message" data-i18n="id.message">Keep this ID safe!</div>
-      <button class="close-button" id="closeIdModal" data-i18n="id.closeButton">Close</button>
+      <div class="id-message">Keep this ID safe!</div>
+      <div class="id-actions">
+        <button class="delete-account" id="deleteAccountButton">Delete Account</button>
+        <button class="close-button" id="closeIdModal">Close</button>
+      </div>
     </div>
   </div>
 
   <div id="flowerModal" class="modal">
     <div class="modal-content">
       <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
-      <div class="billabong-title"><strong id="flowerTypeTitle" data-i18n="flower.title">Flower of Life</strong></div>
+      <div class="billabong-title"><strong id="flowerTypeTitle">Flower of Life</strong></div>
       
       <div id="flowerCodeDisplay" class="flower-code"></div>
       
-      <!-- Ajout d'une icône pour rafraîchir la motivation -->
+      <!-- Add refresh icon for motivation -->
       <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="Generate new motivation"></i>
       
-      <div class="monthly-motivation" id="monthlyMotivation"></div>
+      <div class="monthly-motivation" id="monthlyMotivation">
+        <div class="user-signature" id="userSignature"></div>
+      </div>
       
       <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;" id="flowerIconContainer">
         <i class="fas fa-spa"></i>
@@ -1254,7 +1575,7 @@
   </div>
   
   <button class="share-flower-button" id="shareFlowerButton">
-    <span data-i18n="share.button">Share my Flower</span> <i class="fas fa-paper-plane"></i>
+    <span>Share my Flower</span> <i class="fas fa-paper-plane"></i>
   </button>
   
   <div id="capturedFlower">
@@ -1264,41 +1585,43 @@
 
     <div class="share-warning" id="shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
-      <span data-i18n="share.warning">Perfect for sharing, just adjust.</span>
+      <span>Perfect for sharing, just adjust.</span>
     </div>
     
     <div class="capture-controls">
       <button class="capture-button" id="shareCapture">
-        <i class="fas fa-paper-plane"></i> <span data-i18n="share.shareButton">Share</span>
+        <i class="fas fa-paper-plane"></i> <span>Share</span>
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span data-i18n="share.closeButton">Close</span>
+        <i class="fas fa-times"></i> <span>Close</span>
       </button>
     </div>
   </div>
   
   <div id="flowerCaptureContainer">
-    <div class="capture-flower-header" id="captureFlowerHeader" data-i18n="capture.header">Flower of Life</div>
+    <div class="capture-flower-header" id="captureFlowerHeader">Flower of Life</div>
     
     <div id="captureFlowerCode" class="capture-flower-code"></div>
     
-    <div id="captureFlowerMotivation" class="capture-flower-motivation"></div>
+    <div id="captureFlowerMotivation" class="capture-flower-motivation">
+      <div class="capture-signature" id="captureSignature"></div>
+    </div>
     
     <div class="capture-flower-icon" id="captureFlowerIcon">
       <i class="fas fa-spa"></i>
     </div>
     
-    <div class="gz-logo" data-i18n="capture.logo">G-Z</div>
+    <div class="gz-logo">G-Z</div>
     
-    <div class="capture-website-url" data-i18n="capture.website">Discover yours at www.g-z.online</div>
+    <div class="capture-website-url">Discover yours at www.g-z.online</div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
     import { getDatabase, ref, push, remove, get, set, onValue, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, doc, setDoc, deleteDoc, where } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
@@ -1320,70 +1643,45 @@
     let currentMotivation = null;
     let currentCountry = null;
     let userCity = null;
-    let userUniqueId = null; // ID unique pour l'utilisateur
-    let isAuthenticated = false; // Pour suivre l'état d'authentification
-    let isInstalled = false; // Indicateur d'installation
-    let currentTheme = "green-blue"; // Thème par défaut modifié à vert-bleu
+    let userUniqueId = null; // Unique ID for user
+    let isAuthenticated = false; // Track authentication status
+    let isInstalled = false; // Installation indicator
+    let currentTheme = "green-blue"; // Default theme modified to green-blue
+    let userDateOfBirth = null; // User's date of birth
+    let userProfession = null; // User's profession/activity
+    let userSignature = null; // User's signature
+    let seenSubjects = []; // Track seen subjects
+    let shareCount = 0; // Track number of shares
 
-    // Configuration i18next pour la traduction
-    i18next
-      .use(i18nextHttpBackend)
-      .use(i18nextBrowserLanguageDetector)
-      .init({
-        fallbackLng: 'en',
-        debug: false,
-        load: 'languageOnly',
-        detection: {
-          order: ['querystring', 'cookie', 'navigator'],
-          lookupQuerystring: 'lng',
-          lookupCookie: 'i18next',
-          caches: ['cookie']
-        },
-        backend: {
-          loadPath: 'locales/{{lng}}.json',
-        }
-      }, function(err, t) {
-        jqueryI18next.init(i18next, $, {
-          useOptionsAttr: true
-        });
-        
-        // Appliquer les traductions au chargement
-        $('body').localize();
-        
-        // Vérifier si l'URL contient un paramètre de langue
-        const urlParams = new URLSearchParams(window.location.search);
-        const lang = urlParams.get('lng');
-        
-        // Si l'URL contient un paramètre de langue, l'utiliser
-        if (lang) {
-          i18next.changeLanguage(lang);
-        } 
-        // Sinon détecter automatiquement si l'utilisateur est en France
-        else {
-          detectUserLocation().then(location => {
-            if (location.country === 'France') {
-              i18next.changeLanguage('fr');
-            }
-          });
-        }
-      });
-    
-    // Fonction pour mettre à jour les traductions lorsque la langue change
-    i18next.on('languageChanged', () => {
-      $('body').localize();
-      
-      // Mettre à jour l'URL avec la langue actuelle
-      const url = new URL(window.location);
-      url.searchParams.set('lng', i18next.language);
-      window.history.pushState({}, '', url);
-      
-      // Mettre à jour également les textes dynamiques qui ne sont pas directement liés aux attributs data-i18n
-      if (currentMotivation) {
-        updateFlowerDisplay();
-      }
-    });
+    // List of professions for dropdown
+    const professions = [
+      "Musician", "Rapper", "Footballer", "Basketball Player", "Boxer", 
+      "Student", "Teacher", "Doctor", "Nurse", "Engineer", 
+      "Software Developer", "Designer", "Artist", "Writer", "Journalist", 
+      "Chef", "Waiter/Waitress", "Housekeeper", "TikToker", "YouTuber", 
+      "Influencer", "Photographer", "Videographer", "Dancer", "Actor/Actress", 
+      "Model", "Architect", "Lawyer", "Accountant", "Financial Advisor", 
+      "Banker", "Entrepreneur", "Business Owner", "Manager", "Executive", 
+      "Salesperson", "Marketer", "Social Media Manager", "Driver", "Pilot", 
+      "Flight Attendant", "Mechanic", "Electrician", "Plumber", "Construction Worker", 
+      "Farmer", "Gardener", "Veterinarian", "Personal Trainer", "Fitness Instructor", 
+      "Yoga Teacher", "Therapist", "Psychologist", "Counselor", "Pastor/Religious Leader",
+      "Scientist", "Researcher", "Professor", "Police Officer", "Firefighter",
+      "Military Personnel", "Security Guard", "Real Estate Agent", "Pharmacist", "Dentist",
+      "Optometrist", "Physical Therapist", "Occupational Therapist", "Speech Therapist", "Dietitian",
+      "Nutritionist", "Hairdresser", "Makeup Artist", "Esthetician", "Tailor",
+      "Fashion Designer", "Retail Worker", "Cashier", "Customer Service Representative", "Call Center Agent",
+      "Translator", "Interpreter", "Tour Guide", "Travel Agent", "Hotel Manager",
+      "Receptionist", "Secretary", "Administrative Assistant", "Librarian", "Archivist",
+      "Historian", "Archaeologist", "Anthropologist", "Sociologist", "Political Scientist",
+      "Economist", "Statistician", "Data Analyst", "Data Scientist", "UX/UI Designer",
+      "Game Developer", "App Developer", "Web Developer", "Network Administrator", "Cybersecurity Specialist",
+      "IT Support", "Technician", "Repair Specialist", "Baker", "Butcher",
+      "Fisherman", "Miner", "Forester", "Landscaper", "Interior Designer",
+      "Event Planner", "Wedding Planner", "Florist", "Jeweler", "Craftsperson"
+    ];
 
-    // Dictionnaire pour mapper les ID aux sujets
+    // Dictionary to map IDs to subjects
     const subjectDictionary = {
       // Success related
       "Success": "Success",
@@ -1474,21 +1772,63 @@
       "Liberty": "Liberty",
       "Independence": "Independence",
       "Autonomy": "Autonomy",
-      "Self-determination": "Self-determination"
+      "Self-determination": "Self-determination",
+      
+      // Purpose related
+      "Purpose": "Purpose",
+      "Meaning": "Meaning",
+      "Mission": "Mission",
+      "Calling": "Calling",
+      "Destiny": "Destiny",
+      
+      // Resilience related
+      "Resilience": "Resilience",
+      "Tenacity": "Tenacity",
+      "Perseverance": "Perseverance",
+      "Endurance": "Endurance",
+      "Grit": "Grit",
+      
+      // Authenticity related
+      "Authenticity": "Authenticity",
+      "Genuineness": "Genuineness",
+      "Honesty": "Honesty",
+      "Integrity": "Integrity",
+      "Sincerity": "Sincerity",
+      
+      // Transformation related
+      "Transformation": "Transformation",
+      "Change": "Change",
+      "Evolution": "Evolution",
+      "Rebirth": "Rebirth",
+      "Metamorphosis": "Metamorphosis",
+      
+      // Connection related
+      "Connection": "Connection",
+      "Relationship": "Relationship",
+      "Community": "Community",
+      "Belonging": "Belonging",
+      "Unity": "Unity",
+      
+      // Gratitude related
+      "Gratitude": "Gratitude",
+      "Thankfulness": "Thankfulness",
+      "Appreciation": "Appreciation",
+      "Recognition": "Recognition",
+      "Acknowledgment": "Acknowledgment"
     };
 
-    // Fonction pour générer un ID unique (3 lettres + 3 chiffres)
+    // Function to generate a unique ID (3 letters + 3 numbers)
     function generateUniqueId() {
       const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       const numbers = '0123456789';
       let id = '';
       
-      // Générer 3 lettres aléatoires
+      // Generate 3 random letters
       for (let i = 0; i < 3; i++) {
         id += letters.charAt(Math.floor(Math.random() * letters.length));
       }
       
-      // Générer 3 chiffres aléatoires
+      // Generate 3 random numbers
       for (let i = 0; i < 3; i++) {
         id += numbers.charAt(Math.floor(Math.random() * numbers.length));
       }
@@ -1496,7 +1836,7 @@
       return id;
     }
 
-    // Fonction pour détecter le pays et la ville de l'utilisateur
+    // Function to detect user's country and city
     async function detectUserLocation() {
       try {
         const response = await fetch('https://ipapi.co/json/');
@@ -1511,84 +1851,231 @@
       }
     }
 
-    // Fonction pour générer des messages personnalisés - ENRICHIE avec plus de phrases
-    function generatePersonalizedMotivation(flowerCode) {
+    // Function to generate personalized motivations based on profession and DOB
+    function generatePersonalizedMotivation(flowerCode, profession, dob) {
       if (!flowerCode || flowerCode.length < 8) {
-        return i18next.t('motivations.default', "Your flower motivation is here to inspire and guide you.");
+        return "Your flower motivation is here to inspire and guide you.";
       }
       
-      // Collection élargie de traits positifs
+      // Get month from date of birth if available
+      let month = 0;
+      if (dob) {
+        const dobDate = new Date(dob);
+        month = dobDate.getMonth();
+      }
+      
+      // Collection of positive traits
       const lifeTraits = [
-        i18next.t('motivations.traits.creativity', "Your creativity brings fresh ideas to every challenge."),
-        i18next.t('motivations.traits.kindness', "Your kindness inspires others around you."),
-        i18next.t('motivations.traits.persistence', "Your persistence helps you overcome obstacles."),
-        i18next.t('motivations.traits.perspective', "Your unique perspective solves problems in new ways."),
-        i18next.t('motivations.traits.energy', "Your energy brightens the day for everyone you meet."),
-        i18next.t('motivations.traits.patience', "Your patience helps you see the bigger picture."),
-        i18next.t('motivations.traits.courage', "Your courage allows you to face new challenges."),
-        i18next.t('motivations.traits.wisdom', "Your wisdom guides you through difficult decisions."),
-        i18next.t('motivations.traits.optimism', "Your optimism helps you find opportunity in any situation."),
-        i18next.t('motivations.traits.focus', "Your focus helps you achieve your goals step by step."),
-        i18next.t('motivations.traits.adaptability', "Your adaptability is your greatest strength."),
-        i18next.t('motivations.traits.intuition', "Your intuition guides you to the right path."),
-        i18next.t('motivations.traits.empathy', "Your empathy connects you deeply with others."),
-        i18next.t('motivations.traits.resilience', "Your resilience helps you bounce back stronger."),
-        i18next.t('motivations.traits.authenticity', "Your authenticity draws people to your true self."),
-        i18next.t('motivations.traits.gratitude', "Your gratitude multiplies the joy in your life."),
-        i18next.t('motivations.traits.curiosity', "Your curiosity leads to new discoveries."),
-        i18next.t('motivations.traits.humor', "Your sense of humor lightens even difficult moments."),
-        i18next.t('motivations.traits.generosity', "Your generosity creates ripples of kindness."),
-        i18next.t('motivations.traits.determination', "Your determination turns challenges into achievements."),
-        i18next.t('motivations.traits.compassion', "Your compassion heals those around you."),
-        i18next.t('motivations.traits.clarity', "Your clarity helps you make wise choices."),
-        i18next.t('motivations.traits.confidence', "Your confidence inspires trust in others."),
-        i18next.t('motivations.traits.mindfulness', "Your mindfulness keeps you centered in chaos."),
-        i18next.t('motivations.traits.integrity', "Your integrity earns respect wherever you go."),
-        i18next.t('motivations.traits.enthusiasm', "Your enthusiasm ignites passion in others."),
-        i18next.t('motivations.traits.warmth', "Your warmth makes people feel instantly welcome."),
-        i18next.t('motivations.traits.imagination', "Your imagination opens doors to possibilities."),
-        i18next.t('motivations.traits.balance', "Your balance helps you navigate life's complexities.")
+        "Your creativity brings fresh ideas to every challenge.",
+        "Your kindness inspires others around you.",
+        "Your persistence helps you overcome obstacles.",
+        "Your unique perspective solves problems in new ways.",
+        "Your energy brightens the day for everyone you meet.",
+        "Your patience helps you see the bigger picture.",
+        "Your courage allows you to face new challenges.",
+        "Your wisdom guides you through difficult decisions.",
+        "Your optimism helps you find opportunity in any situation.",
+        "Your focus helps you achieve your goals step by step.",
+        "Your adaptability is your greatest strength.",
+        "Your intuition guides you to the right path.",
+        "Your empathy connects you deeply with others.",
+        "Your resilience helps you bounce back stronger.",
+        "Your authenticity draws people to your true self.",
+        "Your gratitude multiplies the joy in your life.",
+        "Your curiosity leads to new discoveries.",
+        "Your sense of humor lightens even difficult moments.",
+        "Your generosity creates ripples of kindness.",
+        "Your determination turns challenges into achievements.",
+        "Your compassion heals those around you.",
+        "Your clarity helps you make wise choices.",
+        "Your confidence inspires trust in others.",
+        "Your mindfulness keeps you centered in chaos.",
+        "Your integrity earns respect wherever you go.",
+        "Your enthusiasm ignites passion in others.",
+        "Your warmth makes people feel instantly welcome.",
+        "Your imagination opens doors to possibilities.",
+        "Your balance helps you navigate life's complexities.",
+        "Your vision enables you to see beyond the horizon.",
+        "Your charisma draws people toward your energy.",
+        "Your discipline builds the foundation for success.",
+        "Your intuitive nature helps you understand subtle truths.",
+        "Your playfulness keeps your spirit young and vibrant.",
+        "Your analytical mind finds solutions others miss.",
+        "Your thoughtfulness creates meaningful connections.",
+        "Your sensitivity allows you to perceive what others need.",
+        "Your decisiveness moves projects forward efficiently.",
+        "Your consistency builds trust over time.",
+        "Your expressiveness communicates your truth beautifully.",
+        "Your resourcefulness turns limitations into opportunities.",
+        "Your diligence ensures quality in everything you do.",
+        "Your flexibility adapts to changing circumstances gracefully.",
+        "Your pragmatism grounds your actions in reality.",
+        "Your eloquence articulates complex ideas clearly.",
+        "Your foresight helps you prepare for future challenges.",
+        "Your gentleness heals wounds without leaving scars.",
+        "Your assertiveness stands up for what's right.",
+        "Your independence fosters self-reliance and strength.",
+        "Your conscientiousness pays attention to important details."
       ];
       
-      // Collection élargie d'encouragements
+      // Collection of encouragements
       const lifeEncouragements = [
-        i18next.t('motivations.encouragements.share', "Keep sharing your gifts with the world."),
-        i18next.t('motivations.encouragements.trust', "Trust your instincts - they rarely lead you astray."),
-        i18next.t('motivations.encouragements.talents', "Your natural talents are meant to be shared."),
-        i18next.t('motivations.encouragements.challenges', "The path ahead may have challenges, but you're ready for them."),
-        i18next.t('motivations.encouragements.steps', "Small steps today lead to big achievements tomorrow."),
-        i18next.t('motivations.encouragements.celebrate', "Remember to celebrate your progress along the way."),
-        i18next.t('motivations.encouragements.journey', "Your unique journey is worth every step."),
-        i18next.t('motivations.encouragements.process', "Don't forget to enjoy the process, not just the results."),
-        i18next.t('motivations.encouragements.bestDays', "Your best days are still ahead of you."),
-        i18next.t('motivations.encouragements.efforts', "Your efforts today are building your tomorrow."),
-        i18next.t('motivations.encouragements.stayTrue', "Stay true to yourself in all situations."),
-        i18next.t('motivations.encouragements.change', "Embrace change as an opportunity to grow."),
-        i18next.t('motivations.encouragements.wisdom', "Listen to your inner wisdom more often."),
-        i18next.t('motivations.encouragements.rest', "Allow yourself to rest when needed."),
-        i18next.t('motivations.encouragements.focus', "Keep your focus on what truly matters."),
-        i18next.t('motivations.encouragements.gift', "Your presence is a gift to those around you."),
-        i18next.t('motivations.encouragements.passions', "Nurture your passions consistently."),
-        i18next.t('motivations.encouragements.gentle', "Be gentle with yourself during challenges."),
-        i18next.t('motivations.encouragements.path', "Your unique path is exactly right for you."),
-        i18next.t('motivations.encouragements.timing', "Trust the timing of your life's unfolding."),
-        i18next.t('motivations.encouragements.joy', "Find joy in the small moments each day."),
-        i18next.t('motivations.encouragements.perspective', "Your perspective is valuable - share it."),
-        i18next.t('motivations.encouragements.believe', "Believe in your ability to create change."),
-        i18next.t('motivations.encouragements.remember', "Remember why you started this journey."),
-        i18next.t('motivations.encouragements.fresh', "Each day offers a fresh beginning."),
-        i18next.t('motivations.encouragements.resilience', "Your resilience is inspiring to others."),
-        i18next.t('motivations.encouragements.victories', "Take time to celebrate small victories."),
-        i18next.t('motivations.encouragements.strength', "Every challenge you face strengthens you."),
-        i18next.t('motivations.encouragements.support', "The universe supports your authentic path."),
-        i18next.t('motivations.encouragements.shine', "Your light shines brightest when you're being you.")
+        "Keep sharing your gifts with the world.",
+        "Trust your instincts - they rarely lead you astray.",
+        "Your natural talents are meant to be shared.",
+        "The path ahead may have challenges, but you're ready for them.",
+        "Small steps today lead to big achievements tomorrow.",
+        "Remember to celebrate your progress along the way.",
+        "Your unique journey is worth every step.",
+        "Don't forget to enjoy the process, not just the results.",
+        "Your best days are still ahead of you.",
+        "Your efforts today are building your tomorrow.",
+        "Stay true to yourself in all situations.",
+        "Embrace change as an opportunity to grow.",
+        "Listen to your inner wisdom more often.",
+        "Allow yourself to rest when needed.",
+        "Keep your focus on what truly matters.",
+        "Your presence is a gift to those around you.",
+        "Nurture your passions consistently.",
+        "Be gentle with yourself during challenges.",
+        "Your unique path is exactly right for you.",
+        "Trust the timing of your life's unfolding.",
+        "Find joy in the small moments each day.",
+        "Your perspective is valuable - share it.",
+        "Believe in your ability to create change.",
+        "Remember why you started this journey.",
+        "Each day offers a fresh beginning.",
+        "Your resilience is inspiring to others.",
+        "Take time to celebrate small victories.",
+        "Every challenge you face strengthens you.",
+        "The universe supports your authentic path.",
+        "Your light shines brightest when you're being you.",
+        "The world needs your unique contribution.",
+        "Let your work speak for itself.",
+        "Your consistent effort compounds over time.",
+        "What seems impossible today will be your reality tomorrow.",
+        "The strength within you is greater than the challenges ahead.",
+        "Your journey inspires others more than you realize.",
+        "Obstacles are redirections to a better path.",
+        "The depth of your character shows in difficult moments.",
+        "Your growth happens outside your comfort zone.",
+        "Even small progress is still progress worth celebrating.",
+        "Stay focused on your 'why' during difficult times.",
+        "Your daily choices are creating your legacy.",
+        "The lessons you're learning now will serve you forever.",
+        "Never underestimate the impact of your kindness.",
+        "Your authentic voice resonates with those who need to hear it.",
+        "The challenges you overcome today build your strength for tomorrow.",
+        "Your past doesn't define your future potential.",
+        "Each step forward, no matter how small, is still forward movement.",
+        "Your unique approach is your competitive advantage.",
+        "Trust that you are exactly where you need to be right now."
       ];
       
-      // Pour générer une nouvelle motivation à chaque fois, utilisons une approche aléatoire
-      const traitIndex = Math.floor(Math.random() * lifeTraits.length);
+      // Profession-specific encouragements
+      const professionMotivations = {
+        "Musician": [
+          "Your musical talent brings harmony to a chaotic world.",
+          "Each note you play resonates with someone's soul.",
+          "Your melodies have the power to heal and transform.",
+          "Your artistic expression speaks universal truths.",
+          "The music within you deserves to be heard."
+        ],
+        "Rapper": [
+          "Your words paint powerful stories that need to be told.",
+          "Your flow and rhythm capture emotions words alone cannot express.",
+          "Your verses give voice to experiences many feel but cannot articulate.",
+          "Your authentic voice resonates with truth-seekers.",
+          "Your lyrical prowess opens minds and hearts."
+        ],
+        "Footballer": [
+          "Your dedication on the field inspires teamwork off the field.",
+          "Your athletic discipline translates to all areas of life.",
+          "Your strategic thinking on the pitch shows your natural leadership.",
+          "Your passion for the beautiful game elevates those around you.",
+          "Your sportsmanship sets the standard for others to follow."
+        ],
+        "Basketball Player": [
+          "Your court vision translates to seeing opportunities in life.",
+          "Your ability to perform under pressure serves you in every challenge.",
+          "Your team-first mentality creates success in all your relationships.",
+          "Your vertical leap is matched by your ambition to reach new heights.",
+          "Your hustle on defense shows your commitment to excellence."
+        ],
+        "Boxer": [
+          "Your mental toughness is as impressive as your physical strength.",
+          "Your discipline in training reflects your character in life.",
+          "Your ability to take hits and keep moving forward is your superpower.",
+          "Your footwork in the ring mirrors your ability to navigate life's challenges.",
+          "Your fighting spirit never backs down from worthy challenges."
+        ],
+        "Student": [
+          "Your curiosity opens doors to endless possibilities.",
+          "Your commitment to learning will serve you throughout life.",
+          "Your fresh perspective brings new insights to old problems.",
+          "Your educational journey is preparing you for opportunities yet unseen.",
+          "Your academic discipline builds habits for lifetime success."
+        ],
+        "Teacher": [
+          "Your influence extends far beyond the classroom.",
+          "Your patience nurtures potential that others might miss.",
+          "Your guidance shapes futures in ways you may never fully see.",
+          "Your wisdom plants seeds that will bloom for generations.",
+          "Your dedication to knowledge creates ripples of positive change."
+        ],
+        "TikToker": [
+          "Your creative content brings joy and connection in a digital world.",
+          "Your authentic voice reaches those who need your message.",
+          "Your ability to communicate concisely is a rare and valuable skill.",
+          "Your cultural influence can be directed toward positive change.",
+          "Your digital presence makes a real-world impact."
+        ],
+        "Entrepreneur": [
+          "Your vision creates opportunities where others see obstacles.",
+          "Your ability to take calculated risks sets you apart.",
+          "Your innovative thinking solves problems at their root.",
+          "Your leadership inspires others to join your mission.",
+          "Your persistence through challenges defines your success."
+        ]
+      };
+      
+      // Birth month traits (based on birth month if available)
+      const monthTraits = [
+        "Your January birth gives you natural leadership qualities.",
+        "Your February birth blesses you with intuitive understanding.",
+        "Your March birth provides you with imaginative creativity.",
+        "Your April birth endows you with determined persistence.",
+        "Your May birth grants you persuasive communication skills.",
+        "Your June birth offers you adaptable versatility.",
+        "Your July birth gives you compassionate empathy.",
+        "Your August birth blesses you with magnetic charisma.",
+        "Your September birth provides you with analytical precision.",
+        "Your October birth endows you with balanced perspective.",
+        "Your November birth grants you penetrating insight.",
+        "Your December birth offers you visionary optimism."
+      ];
+      
+      // Select traits based on various factors
+      let selectedTrait;
+      
+      // If we have profession and it's in our dictionary, use a profession-specific motivation 20% of the time
+      if (profession && professionMotivations[profession] && Math.random() < 0.2) {
+        const profMotivations = professionMotivations[profession];
+        selectedTrait = profMotivations[Math.floor(Math.random() * profMotivations.length)];
+      } 
+      // If we have dob, use a month-based trait 15% of the time
+      else if (dob && Math.random() < 0.15) {
+        selectedTrait = monthTraits[month];
+      }
+      // Otherwise use a general trait
+      else {
+        selectedTrait = lifeTraits[Math.floor(Math.random() * lifeTraits.length)];
+      }
+      
+      // Always select a random encouragement
       const encourageIndex = Math.floor(Math.random() * lifeEncouragements.length);
       
-      return lifeTraits[traitIndex] + " " + lifeEncouragements[encourageIndex];
+      return selectedTrait + " " + lifeEncouragements[encourageIndex];
     }
 
     function generateFlowerCode() {
@@ -1601,44 +2088,89 @@
       return code;
     }
 
-    // Fonction pour obtenir un sujet aléatoire du dictionnaire
+    // Function to get a random subject from the dictionary
     function getRandomSubject() {
-      const subjects = Object.keys(subjectDictionary);
-      const randomIndex = Math.floor(Math.random() * subjects.length);
-      return subjects[randomIndex];
+      // Get all available subjects that haven't been seen yet
+      let availableSubjects = Object.keys(subjectDictionary).filter(subject => !seenSubjects.includes(subject));
+      
+      // If all subjects have been seen, reset the seen subjects list
+      if (availableSubjects.length === 0) {
+        seenSubjects = [];
+        availableSubjects = Object.keys(subjectDictionary);
+      }
+      
+      // Select a random subject from available subjects
+      const randomIndex = Math.floor(Math.random() * availableSubjects.length);
+      const selectedSubject = availableSubjects[randomIndex];
+      
+      // Add the selected subject to the seen subjects list
+      seenSubjects.push(selectedSubject);
+      
+      return selectedSubject;
     }
 
-    // Mise à jour de l'affichage du flower avec un sujet approprié
+    // Update flower display with appropriate subject
     function updateFlowerDisplay() {
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
+      const signatureElement = document.getElementById('userSignature');
       
-      // Générer un sujet aléatoire pour le flower si on n'en a pas déjà un
+      // Generate a random subject for the flower if we don't already have one
       let subject = localStorage.getItem('flowerSubject');
       if (!subject) {
         subject = getRandomSubject();
         localStorage.setItem('flowerSubject', subject);
       }
       
-      // Mettre à jour l'affichage du code avec le sujet
-      flowerCodeElement.textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${subject}`, subject);
+      // Get user signature
+      let signature = localStorage.getItem('userSignature') || userSignature;
       
-      // Vérifier si on a déjà une motivation (pour garder la même motivation dans tous les thèmes)
+      // Update code display with subject
+      flowerCodeElement.textContent = "My Flower - " + subject;
+      
+      // Check if we already have a motivation (to keep the same motivation across all themes)
       if (!currentMotivation) {
-        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
       }
       
-      // Utiliser la motivation actuelle
+      // Use current motivation
       motivationElement.textContent = currentMotivation;
       
-      // Mettre à jour les éléments de capture avec la même motivation
-      document.getElementById('captureFlowerCode').textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${subject}`, subject);
+      // Add signature if available
+      if (signature) {
+        signatureElement.textContent = signature + " 🌟";
+      } else {
+        signatureElement.textContent = "";
+      }
+      
+      // Update capture elements with the same motivation
+      document.getElementById('captureFlowerCode').textContent = "My Flower - " + subject;
       document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
+      document.getElementById('captureSignature').textContent = signature ? signature + " 🌟" : "";
       
       return currentMotivation;
     }
 
-    // Fonction pour définir un cookie avec expiration et path spécifique
+    // Function to create a user signature from full name
+    function formatSignature(fullName) {
+      if (!fullName) return "";
+      
+      const nameParts = fullName.trim().split(' ');
+      if (nameParts.length === 0) return "";
+      
+      // Get first name
+      const firstName = nameParts[0];
+      
+      // If there's a last name, get first letter + .
+      let lastInitial = "";
+      if (nameParts.length > 1) {
+        lastInitial = " " + nameParts[nameParts.length - 1].charAt(0) + ".";
+      }
+      
+      return firstName + lastInitial;
+    }
+
+    // Function to set a cookie with expiration and specific path
     function setCookie(name, value, days) {
       let expires = "";
       if (days) {
@@ -1649,7 +2181,7 @@
       document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
     }
 
-    // Fonction pour récupérer un cookie
+    // Function to get a cookie
     function getCookie(name) {
       const nameEQ = name + "=";
       const ca = document.cookie.split(';');
@@ -1661,22 +2193,27 @@
       return null;
     }
 
-    // Fonction pour définir le thème
+    // Function to remove a cookie
+    function removeCookie(name) {
+      document.cookie = name + "=; Max-Age=-99999999; path=/";
+    }
+
+    // Function to set theme
     function setTheme(theme) {
-      // Enlever toutes les classes de thème
-      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-blue-purple', 'theme-green-blue', 'theme-orange-pink');
+      // Remove all theme classes
+      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-blue-purple', 'theme-green-blue', 'theme-orange-pink', 'theme-yellow-purple');
       
-      // Ajouter la classe du thème sélectionné
+      // Add the selected theme class
       document.body.classList.add('theme-' + theme);
       
-      // Mettre à jour le thème actuel
+      // Update current theme
       currentTheme = theme;
       
-      // Sauvegarder la préférence dans localStorage et cookie
+      // Save preference in localStorage and cookie
       localStorage.setItem('preferredTheme', theme);
-      setCookie('preferredTheme', theme, 365); // Cookie valide pendant un an
+      setCookie('preferredTheme', theme, 365); // Cookie valid for one year
       
-      // Mettre à jour la sélection visuelle
+      // Update visual selection
       const options = document.querySelectorAll('.style-option');
       options.forEach(option => {
         option.classList.remove('selected');
@@ -1685,19 +2222,21 @@
         }
       });
       
-      // Mettre à jour la couleur du cadre et du texte dans la capture en fonction du thème
+      // Update capture styles based on theme
       updateCaptureStyles(theme);
     }
     
-    // Fonction pour mettre à jour les styles de capture en fonction du thème
+    // Function to update capture styles based on theme
     function updateCaptureStyles(theme) {
       const captureContainer = document.getElementById('flowerCaptureContainer');
       const captureCode = document.getElementById('captureFlowerCode');
       const captureHeader = document.getElementById('captureFlowerHeader');
       const captureWebsiteUrl = document.querySelector('.capture-website-url');
       const captureLogo = document.querySelector('.gz-logo');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      const captureSignature = document.getElementById('captureSignature');
       
-      // Réinitialiser les styles
+      // Reset styles
       captureContainer.style.borderColor = '';
       captureCode.style.borderColor = '';
       captureCode.style.color = '';
@@ -1706,19 +2245,27 @@
       captureWebsiteUrl.style.color = '';
       captureLogo.style.color = '';
       captureLogo.style.borderColor = '';
+      captureMotivation.style.color = '';
+      captureMotivation.style.backgroundColor = '';
+      captureMotivation.style.borderColor = '';
+      captureSignature.style.color = '';
       
-      // Appliquer les styles en fonction du thème
+      // Apply styles based on theme
       switch(theme) {
         case 'red-black':
           captureContainer.style.borderColor = '#8B0000';
-          captureContainer.style.backgroundColor = '#1F1F1F';
+          captureContainer.style.backgroundColor = 'black';
           captureCode.style.borderColor = '#FF4500';
           captureCode.style.color = '#FF4500';
-          captureCode.style.backgroundColor = '#2C2C2C';
+          captureCode.style.backgroundColor = 'black';
           captureHeader.style.color = '#FF4500';
           captureWebsiteUrl.style.color = '#FF4500';
           captureLogo.style.color = '#FF4500';
           captureLogo.style.borderColor = '#FF4500';
+          captureMotivation.style.color = '#E5E5E5';
+          captureMotivation.style.backgroundColor = 'black';
+          captureMotivation.style.borderColor = '#FF4500';
+          captureSignature.style.color = '#FF4500';
           break;
           
         case 'blue-purple':
@@ -1731,6 +2278,10 @@
           captureWebsiteUrl.style.color = '#5865F2';
           captureLogo.style.color = '#5865F2';
           captureLogo.style.borderColor = '#5865F2';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#2C2C54';
+          captureMotivation.style.borderColor = '#5865F2';
+          captureSignature.style.color = '#5865F2';
           break;
           
         case 'green-blue':
@@ -1743,6 +2294,10 @@
           captureWebsiteUrl.style.color = '#3EB489';
           captureLogo.style.color = '#3EB489';
           captureLogo.style.borderColor = '#3EB489';
+          captureMotivation.style.color = '#F5F5F5';
+          captureMotivation.style.backgroundColor = '#1A2E4D';
+          captureMotivation.style.borderColor = '#3EB489';
+          captureSignature.style.color = '#3EB489';
           break;
           
         case 'orange-pink':
@@ -1755,6 +2310,26 @@
           captureWebsiteUrl.style.color = '#FF7F50';
           captureLogo.style.color = '#FF7F50';
           captureLogo.style.borderColor = '#FF7F50';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FF7F50';
+          captureSignature.style.color = '#FF7F50';
+          break;
+          
+        case 'yellow-purple':
+          captureContainer.style.borderColor = '#FFD700';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FFD700';
+          captureCode.style.color = '#FFD700';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FFD700';
+          captureWebsiteUrl.style.color = '#FFD700';
+          captureLogo.style.color = '#FFD700';
+          captureLogo.style.borderColor = '#FFD700';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FFD700';
+          captureSignature.style.color = '#FFD700';
           break;
           
         default: // theme-default
@@ -1767,10 +2342,14 @@
           captureWebsiteUrl.style.color = '#007bff';
           captureLogo.style.color = '#007bff';
           captureLogo.style.borderColor = '#007bff';
+          captureMotivation.style.color = '#333';
+          captureMotivation.style.backgroundColor = 'white';
+          captureMotivation.style.borderColor = '#ff69b4';
+          captureSignature.style.color = '#666';
       }
     }
 
-    // S'authentifier à Firebase
+    // Authenticate to Firebase
     function authenticateAnonymously() {
       return new Promise((resolve, reject) => {
         signInAnonymously(auth)
@@ -1787,53 +2366,62 @@
       });
     }
 
-    // Écouter les changements d'état d'authentification
+    // Listen for authentication state changes
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // L'utilisateur est connecté
+        // User is signed in
         userUid = user.uid;
         isAuthenticated = true;
         console.log("Auth state changed: user is signed in", user.uid);
       } else {
-        // L'utilisateur est déconnecté
+        // User is signed out
         isAuthenticated = false;
         console.log("Auth state changed: user is signed out");
       }
     });
 
-    // Soumettre à Firebase (version simplifiée avec uniquement les données demandées)
+    // Submit to Firebase (corrigé pour assurer la soumission de données)
     async function submitToFirebase() {
       try {
-        // S'assurer que l'utilisateur est authentifié avant de soumettre
+        // Ensure user is authenticated before submitting
         if (!isAuthenticated) {
           console.log("User not authenticated, authenticating now...");
           await authenticateAnonymously();
         }
         
-        // Obtenir la localisation de l'utilisateur
+        // Get user location
         const location = await detectUserLocation();
         
-        // Préparer les données utilisateur (uniquement celles demandées)
+        // Prepare user data (only requested data)
         const userData = {
-          date: new Date().toISOString(), // Date et heure actuelles
+          date: new Date().toISOString(), // Current date and time
           country: location.country || "Unknown",
           city: location.city || "Unknown",
           uid: userUid,
           uniqueId: userUniqueId,
           flowerCode: userFlowerCode,
-          motivation: currentMotivation, // Sauvegarder la motivation avec les données
+          motivation: currentMotivation, // Save motivation with data
+          dateOfBirth: userDateOfBirth, // Add date of birth
+          profession: userProfession, // Add profession
+          signature: userSignature, // Add signature
           timestamp: Date.now(),
-          theme: currentTheme, // Sauvegarder le thème préféré
-          subject: localStorage.getItem('flowerSubject') || getRandomSubject() // Sauvegarder le sujet du flower
+          theme: currentTheme, // Save preferred theme
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(), // Save flower subject
+          shareCount: shareCount // Track shares
         };
 
         console.log("Submitting data to Firebase:", userData);
         
-        // Soumettre à Realtime Database
-        const newEntryRef = await push(ref(database, 'birthdates'), userData);
-        console.log("Data submitted to Realtime Database:", newEntryRef.key);
+        // Submit to Realtime Database avec correction pour éviter les erreurs
+        try {
+          const newEntryRef = await push(ref(database, 'birthdates'), userData);
+          console.log("Data submitted to Realtime Database:", newEntryRef.key);
+        } catch (dbError) {
+          console.error("Error with Realtime Database:", dbError);
+          // Continue anyway to try Firestore
+        }
         
-        // Soumettre à Firestore également
+        // Submit to Firestore as well
         try {
           const docRef = await addDoc(collection(firestore, 'flowers'), userData);
           console.log("Document written to Firestore with ID: ", docRef.id);
@@ -1841,7 +2429,7 @@
           console.error("Error adding document to Firestore: ", firestoreError);
         }
         
-        // Ajouter dans une collection spécifique pour les codes
+        // Add to specific collection for codes
         try {
           await setDoc(doc(firestore, 'flowerCodes', userUniqueId), {
             ...userData,
@@ -1852,54 +2440,127 @@
           console.error("Error adding flower code to collection: ", codeError);
         }
         
-        // Sauvegarder dans localStorage et cookies pour l'installation
+        // Save in localStorage and cookies for installation
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
         localStorage.setItem('isInstalled', 'true');
         setCookie('userUniqueId', userUniqueId, 365);
         setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userSignature', userSignature, 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
         return true;
       } catch (error) {
         console.error("Firebase submission error:", error);
-        return false;
+        // Si la soumission échoue, on garde quand même les données localement
+        const userData = {
+          date: new Date().toISOString(),
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          signature: userSignature,
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: 0
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userSignature', userSignature, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true; // Retourne true même en cas d'erreur pour continuer l'expérience utilisateur
       }
     }
 
-    // Vérifier si l'utilisateur a déjà des données sauvegardées
+    // Update share count in Firebase
+    async function updateShareCount() {
+      if (!isAuthenticated || !userUniqueId) return;
+      
+      try {
+        // Increment local share count
+        shareCount++;
+        
+        // Update in localStorage
+        const savedData = localStorage.getItem('userFlowerData');
+        if (savedData) {
+          const userData = JSON.parse(savedData);
+          userData.shareCount = shareCount;
+          localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        }
+        
+        // Update in Firestore
+        await setDoc(doc(firestore, 'flowerCodes', userUniqueId), {
+          shareCount: shareCount,
+          lastShared: new Date().toISOString(),
+          country: currentCountry || "Unknown",
+          city: userCity || "Unknown",
+          uid: userUid,
+          uniqueId: userUniqueId
+        }, { merge: true });
+        
+        console.log("Share count updated:", shareCount);
+      } catch (error) {
+        console.error("Error updating share count:", error);
+      }
+    }
+
+    // Check if user already has saved data
     function checkSavedUserData() {
-      // Vérifier d'abord dans les cookies
+      // Check cookies first
       const cookieUniqueId = getCookie('userUniqueId');
       const cookieFlowerCode = getCookie('userFlowerCode');
       const cookieInstalled = getCookie('isInstalled');
+      const cookieDOB = getCookie('userDateOfBirth');
+      const cookieProfession = getCookie('userProfession');
+      const cookieSignature = getCookie('userSignature');
       
       if (cookieUniqueId && cookieFlowerCode) {
         userUniqueId = cookieUniqueId;
         userFlowerCode = cookieFlowerCode;
+        userDateOfBirth = cookieDOB || null;
+        userProfession = cookieProfession || null;
+        userSignature = cookieSignature || null;
         isInstalled = cookieInstalled === 'true';
         
-        // Générer une motivation basée sur le code sauvegardé
-        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
+        // Generate motivation based on saved code
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
-        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode });
+        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userSignature });
         return true;
       }
       
-      // Si pas dans les cookies, essayer localStorage
+      // If not in cookies, try localStorage
       const savedData = localStorage.getItem('userFlowerData');
       if (savedData) {
         try {
           const userData = JSON.parse(savedData);
           userUniqueId = userData.uniqueId;
           userFlowerCode = userData.flowerCode;
-          currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode);
+          userDateOfBirth = userData.dateOfBirth || null;
+          userProfession = userData.profession || null;
+          userSignature = userData.signature || null;
+          shareCount = userData.shareCount || 0;
+          currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
           userUid = userData.uid;
           isInstalled = localStorage.getItem('isInstalled') === 'true';
           
-          // Sauvegarder dans les cookies pour une persistance accrue
+          // Save to cookies for increased persistence
           setCookie('userUniqueId', userUniqueId, 365);
           setCookie('userFlowerCode', userFlowerCode, 365);
+          setCookie('userDateOfBirth', userDateOfBirth, 365);
+          setCookie('userProfession', userProfession, 365);
+          setCookie('userSignature', userSignature, 365);
           setCookie('isInstalled', 'true', 365);
           
           console.log("Found saved user data in localStorage:", userData);
@@ -1912,23 +2573,88 @@
       return false;
     }
 
-    // Initialiser l'application au chargement
+    // Delete user account
+    async function deleteUserAccount() {
+      if (!userUniqueId) return false;
+      
+      try {
+        // Delete from Firestore
+        try {
+          await deleteDoc(doc(firestore, 'flowerCodes', userUniqueId));
+          console.log("User deleted from flowerCodes collection");
+          
+          // We can't easily delete from the 'flowers' collection without knowing the document ID
+          // In a real-world scenario, you might want to use a query to find and delete all matching documents
+        } catch (error) {
+          console.error("Error deleting from Firestore:", error);
+        }
+        
+        // Clear localStorage
+        localStorage.removeItem('userFlowerData');
+        localStorage.removeItem('isInstalled');
+        localStorage.removeItem('flowerSubject');
+        localStorage.removeItem('userSignature');
+        
+        // Clear cookies
+        removeCookie('userUniqueId');
+        removeCookie('userFlowerCode');
+        removeCookie('isInstalled');
+        removeCookie('userDateOfBirth');
+        removeCookie('userProfession');
+        removeCookie('userSignature');
+        
+        // Reset variables
+        userUniqueId = null;
+        userFlowerCode = null;
+        currentMotivation = null;
+        userDateOfBirth = null;
+        userProfession = null;
+        userSignature = null;
+        isInstalled = false;
+        seenSubjects = [];
+        shareCount = 0;
+        
+        console.log("User account deleted");
+        return true;
+      } catch (error) {
+        console.error("Error deleting user account:", error);
+        return false;
+      }
+    }
+
+    // Initialize application on load
     window.addEventListener('load', async () => {
-      // Vérifier le thème préféré
+      // Set max date for DOB input to today - 2 years
+      const today = new Date();
+      const twoYearsAgo = new Date(today.getFullYear() - 2, today.getMonth(), today.getDate());
+      document.getElementById('dobInput').max = twoYearsAgo.toISOString().split('T')[0];
+      
+      // Check preferred theme
       const savedTheme = localStorage.getItem('preferredTheme') || getCookie('preferredTheme');
       if (savedTheme) {
         setTheme(savedTheme);
       } else {
-        // Définir le thème par défaut à vert-bleu s'il n'y a pas de thème sauvegardé
+        // Set default theme to green-blue if no saved theme
         setTheme('green-blue');
       }
       
-      // Vérifier si l'utilisateur a déjà des données
+      // Check if user already has data
       if (checkSavedUserData()) {
         console.log("User already has data, hiding welcome modal");
-        document.getElementById('welcomeModal').style.display = 'none';
+        // Show welcome toast
+        const welcomeToast = document.getElementById('welcomeToast');
+        welcomeToast.style.display = 'block';
+        setTimeout(() => {
+          welcomeToast.style.opacity = '1';
+        }, 100);
+        setTimeout(() => {
+          welcomeToast.style.opacity = '0';
+          setTimeout(() => {
+            welcomeToast.style.display = 'none';
+          }, 500);
+        }, 2000);
         
-        // Authentifier l'utilisateur si nécessaire
+        // Authenticate user if needed
         if (!isAuthenticated) {
           try {
             await authenticateAnonymously();
@@ -1938,20 +2664,98 @@
         }
       } else {
         console.log("No saved user data found, showing welcome modal");
-        document.getElementById('welcomeModal').style.display = 'block';
+        const welcomeModal = document.getElementById('welcomeModal');
+        welcomeModal.style.display = 'block';
+        setTimeout(() => {
+          welcomeModal.classList.add('show');
+        }, 100);
       }
+      
+      // Setup profession dropdown
+      setupProfessionDropdown();
     });
 
-    // Gestion du bouton flower
+    // Setup profession dropdown functionality
+    function setupProfessionDropdown() {
+      const professionInput = document.getElementById('professionInput');
+      const professionDropdown = document.getElementById('professionDropdown');
+      
+      // Function to filter professions based on input
+      function filterProfessions(input) {
+        if (!input) return [];
+        
+        input = input.toLowerCase();
+        return professions.filter(profession => 
+          profession.toLowerCase().includes(input)
+        );
+      }
+      
+      // Function to render dropdown options
+      function renderDropdownOptions(filteredProfessions) {
+        professionDropdown.innerHTML = '';
+        
+        if (filteredProfessions.length === 0) {
+          const option = document.createElement('div');
+          option.className = 'profession-option';
+          option.textContent = 'No matches found';
+          professionDropdown.appendChild(option);
+        } else {
+          filteredProfessions.forEach(profession => {
+            const option = document.createElement('div');
+            option.className = 'profession-option';
+            option.textContent = profession;
+            option.addEventListener('click', () => {
+              professionInput.value = profession;
+              professionDropdown.style.display = 'none';
+            });
+            professionDropdown.appendChild(option);
+          });
+        }
+      }
+      
+      // Input event listener
+      professionInput.addEventListener('input', () => {
+        const filtered = filterProfessions(professionInput.value);
+        renderDropdownOptions(filtered);
+        
+        if (filtered.length > 0) {
+          professionDropdown.style.display = 'block';
+        } else {
+          professionDropdown.style.display = 'none';
+        }
+      });
+      
+      // Focus event listener
+      professionInput.addEventListener('focus', () => {
+        if (professionInput.value) {
+          const filtered = filterProfessions(professionInput.value);
+          renderDropdownOptions(filtered);
+          professionDropdown.style.display = 'block';
+        }
+      });
+      
+      // Click outside to close dropdown
+      document.addEventListener('click', (e) => {
+        if (!professionInput.contains(e.target) && !professionDropdown.contains(e.target)) {
+          professionDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    // Flower button event handler
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (!userUniqueId) {
-        alert(i18next.t('alerts.generateFirst', "Please generate your flower first by clicking OK on the welcome screen."));
+        alert("Please create your flower account first.");
         return;
       }
       
-      // Utiliser la même motivation pour tous les thèmes
+      // Use same motivation for all themes
       updateFlowerDisplay();
-      document.getElementById('flowerModal').style.display = 'block';
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.style.display = 'block';
+      setTimeout(() => {
+        flowerModal.classList.add('show');
+      }, 10);
       document.getElementById('shareFlowerButton').style.display = 'flex';
     });
 
@@ -1959,113 +2763,220 @@
       captureFlower();
     });
     
-    // Afficher le modal d'ID unique quand on clique sur l'icône ID
+    // Show ID modal when clicking ID icon
     document.getElementById('showIdButton').addEventListener('click', function() {
       if (userUniqueId) {
         document.getElementById('userIdDisplay').textContent = userUniqueId;
-        document.getElementById('idModal').style.display = 'block';
+        const idModal = document.getElementById('idModal');
+        idModal.style.display = 'block';
+        setTimeout(() => {
+          idModal.classList.add('show');
+        }, 10);
       } else {
-        alert(i18next.t('alerts.idFirst', "Please generate your flower first to get your unique ID."));
+        alert("Please create your flower account first to get your unique ID.");
       }
     });
     
-    // Copier l'ID quand on clique sur l'icône de copie
+    // Copy ID when clicking copy icon
     document.getElementById('copyIdButton').addEventListener('click', function() {
       const idText = document.getElementById('userIdDisplay').textContent;
       navigator.clipboard.writeText(idText).then(function() {
-        alert(i18next.t('alerts.idCopied', 'ID copied to clipboard!'));
+        alert('ID copied to clipboard!');
       }).catch(function() {
-        alert(i18next.t('alerts.copyFailed', 'Could not copy ID. Please select and copy manually.'));
+        alert('Could not copy ID. Please select and copy manually.');
       });
     });
     
-    // Fermer le modal d'ID
+    // Close ID modal
     document.getElementById('closeIdModal').addEventListener('click', function() {
-      document.getElementById('idModal').style.display = 'none';
+      const idModal = document.getElementById('idModal');
+      idModal.classList.remove('show');
+      setTimeout(() => {
+        idModal.style.display = 'none';
+      }, 300);
     });
     
-    // Gestionnaire pour le bouton de rafraîchissement de la motivation
+    // Delete account button handler
+    document.getElementById('deleteAccountButton').addEventListener('click', function() {
+      if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+        deleteUserAccount().then(success => {
+          if (success) {
+            alert("Account deleted successfully. You will need to create a new account to use this app.");
+            const idModal = document.getElementById('idModal');
+            idModal.classList.remove('show');
+            setTimeout(() => {
+              idModal.style.display = 'none';
+              // Show welcome modal again
+              const welcomeModal = document.getElementById('welcomeModal');
+              welcomeModal.style.display = 'block';
+              setTimeout(() => {
+                welcomeModal.classList.add('show');
+              }, 100);
+            }, 300);
+          } else {
+            alert("There was a problem deleting your account. Please try again.");
+          }
+        });
+      }
+    });
+    
+    // Refresh motivation button handler
     document.getElementById('refreshMotivation').addEventListener('click', function() {
-      // Générer une nouvelle motivation
-      const newMotivation = generatePersonalizedMotivation(userFlowerCode);
+      // Generate new motivation
+      const newMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
       currentMotivation = newMotivation;
       
-      // Générer un nouveau sujet
+      // Generate new subject
       const newSubject = getRandomSubject();
       localStorage.setItem('flowerSubject', newSubject);
       
-      // Mettre à jour l'affichage
-      document.getElementById('flowerCodeDisplay').textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${newSubject}`, newSubject);
+      // Update display
+      document.getElementById('flowerCodeDisplay').textContent = "My Flower - " + newSubject;
       document.getElementById('monthlyMotivation').textContent = newMotivation;
-      document.getElementById('captureFlowerCode').textContent = i18next.t('flower.codePrefix', "My Flower") + " - " + i18next.t(`subjects.${newSubject}`, newSubject);
-      document.getElementById('captureFlowerMotivation').textContent = newMotivation;
       
-      // Animation de rotation pour l'icône
+      // Update signature if available
+      if (userSignature) {
+        document.getElementById('userSignature').textContent = userSignature + " 🌟";
+      }
+      
+      // Update capture elements
+      document.getElementById('captureFlowerCode').textContent = "My Flower - " + newSubject;
+      document.getElementById('captureFlowerMotivation').textContent = newMotivation;
+      if (userSignature) {
+        document.getElementById('captureSignature').textContent = userSignature + " 🌟";
+      }
+      
+      // Rotation animation for icon
       this.style.transition = 'transform 0.5s ease';
       this.style.transform = 'rotate(360deg)';
       
-      // Réinitialiser l'animation après une rotation complète
+      // Reset animation after complete rotation
       setTimeout(() => {
         this.style.transition = 'none';
         this.style.transform = 'rotate(0deg)';
       }, 500);
     });
     
-    // Gestionnaire d'événement pour le bouton OK du modal d'accueil
-    document.getElementById('agreeButton').addEventListener('click', async function() {
+    // Create account button handler
+    document.getElementById('createAccountButton').addEventListener('click', async function() {
+      // Validate inputs
+      const dobInput = document.getElementById('dobInput');
+      const professionInput = document.getElementById('professionInput');
+      const nameInput = document.getElementById('nameInput');
+      
+      if (!dobInput.value) {
+        alert("Please enter your date of birth.");
+        return;
+      }
+      
+      if (!professionInput.value) {
+        alert("Please enter your profession.");
+        return;
+      }
+      
+      if (!nameInput.value) {
+        alert("Please enter your name for the signature.");
+        return;
+      }
+      
+      // Show loading spinner
+      document.getElementById('loadingSpinner').style.display = 'block';
+      document.getElementById('createAccountButton').disabled = true;
+      
       try {
-        // Authentifier l'utilisateur d'abord
+        // Authenticate user first
         await authenticateAnonymously();
         
-        // Générer un ID unique
+        // Save user inputs
+        userDateOfBirth = dobInput.value;
+        userProfession = professionInput.value;
+        userSignature = formatSignature(nameInput.value);
+        
+        // Generate unique ID
         userUniqueId = generateUniqueId();
         console.log("Generated unique ID:", userUniqueId);
         
-        // Générer un code flower
+        // Generate flower code
         userFlowerCode = generateFlowerCode();
         
-        // Générer un sujet pour le flower
+        // Generate subject for flower
         const subject = getRandomSubject();
         localStorage.setItem('flowerSubject', subject);
+        localStorage.setItem('userSignature', userSignature);
         
-        // Générer une motivation
-        currentMotivation = generatePersonalizedMotivation(userFlowerCode);
-        document.getElementById('welcomeModal').style.display = 'none';
+        // Generate motivation
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
-        // Soumettre à Firebase si pas encore installé
-        if (!isInstalled) {
-          const submitted = await submitToFirebase();
-          if (!submitted) {
-            console.log("Firebase submission failed, but continuing with local installation");
+        // Hide welcome modal with animation
+        const welcomeModal = document.getElementById('welcomeModal');
+        welcomeModal.classList.remove('show');
+        setTimeout(() => {
+          welcomeModal.style.display = 'none';
+          document.getElementById('loadingSpinner').style.display = 'none';
+          
+          // Submit to Firebase if not already installed
+          if (!isInstalled) {
+            submitToFirebase().then(submitted => {
+              if (!submitted) {
+                console.log("Firebase submission failed, but continuing with local installation");
+              }
+              
+              // Show welcome toast
+              const welcomeToast = document.getElementById('welcomeToast');
+              welcomeToast.style.display = 'block';
+              setTimeout(() => {
+                welcomeToast.style.opacity = '1';
+              }, 100);
+              setTimeout(() => {
+                welcomeToast.style.opacity = '0';
+                setTimeout(() => {
+                  welcomeToast.style.display = 'none';
+                }, 500);
+              }, 2000);
+              
+              // Show flower automatically after creation
+              updateFlowerDisplay();
+              const flowerModal = document.getElementById('flowerModal');
+              flowerModal.style.display = 'block';
+              setTimeout(() => {
+                flowerModal.classList.add('show');
+              }, 10);
+              document.getElementById('shareFlowerButton').style.display = 'flex';
+            });
           }
-        }
+        }, 300);
+        
         const userData = {
           date: new Date().toISOString(),
           uid: userUid,
           uniqueId: userUniqueId,
           flowerCode: userFlowerCode,
           motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          signature: userSignature,
           timestamp: Date.now(),
           theme: currentTheme,
-          subject: subject
+          subject: subject,
+          shareCount: 0
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
         localStorage.setItem('isInstalled', 'true');
         setCookie('userUniqueId', userUniqueId, 365);
         setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userSignature', userSignature, 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
-        
-        // Afficher le flower automatiquement après la génération
-        updateFlowerDisplay();
-        document.getElementById('flowerModal').style.display = 'block';
-        document.getElementById('shareFlowerButton').style.display = 'flex';
         
         console.log("Setup complete and data stored locally and in cookies");
       } catch (error) {
         console.error("Error during setup:", error);
-        alert(i18next.t('alerts.setupError', "There was a problem setting up your flower. Please try again."));
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('createAccountButton').disabled = false;
+        alert("There was a problem setting up your flower. Please try again.");
       }
     });
     
@@ -2073,7 +2984,7 @@
       try {
         const captureContainer = document.getElementById('flowerCaptureContainer');
         
-        // Mettre à jour les styles de capture en fonction du thème actuel
+        // Update capture styles based on current theme
         updateCaptureStyles(currentTheme);
         
         if (typeof html2canvas === 'undefined') {
@@ -2081,7 +2992,11 @@
         }
         
         const canvas = await html2canvas(captureContainer, {
-          backgroundColor: 'white',
+          backgroundColor: currentTheme === 'red-black' ? 'black' : 
+                          (currentTheme === 'blue-purple' ? '#2C2C54' : 
+                           currentTheme === 'green-blue' ? '#1A2E4D' : 
+                           currentTheme === 'orange-pink' || currentTheme === 'yellow-purple' ? '#4B0082' : 
+                           'white'),
           scale: 7,
           logging: false,
           useCORS: true,
@@ -2096,9 +3011,12 @@
         document.getElementById('capturedFlower').style.display = 'flex';
         
         document.getElementById('shareWarning').style.display = 'block';
+        
+        // Update share count
+        updateShareCount();
       } catch (error) {
         console.error('Error capturing flower:', error);
-        alert(i18next.t('alerts.captureError', 'Could not capture your flower. Please try again.'));
+        alert('Could not capture your flower. Please try again.');
       }
     }
     
@@ -2121,8 +3039,8 @@
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: i18next.t('share.title', 'My G-Z Flower'),
-              text: i18next.t('share.text', 'Discover yours at g-z.online'),
+              title: 'My G-Z Flower',
+              text: 'Discover yours at g-z.online',
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -2140,16 +3058,16 @@
     
     function fallbackShare() {
       try {
-        const shareText = i18next.t('share.fallbackText', `Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`);
+        const shareText = `Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert(i18next.t('alerts.shareCopied', 'Share text copied to clipboard!'));
+          alert('Share text copied to clipboard!');
         }).catch(function() {
-          alert(i18next.t('alerts.shareError', 'Could not copy share text.'));
+          alert('Could not copy share text.');
         });
       } catch (error) {
         console.error('Fallback share error:', error);
-        alert(i18next.t('alerts.generalError', 'An error occurred.'));
+        alert('An error occurred.');
       }
     }
     
@@ -2158,18 +3076,26 @@
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
-      document.getElementById('flowerModal').style.display = 'none';
-      document.getElementById('shareFlowerButton').style.display = 'none';
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.classList.remove('show');
+      setTimeout(() => {
+        flowerModal.style.display = 'none';
+        document.getElementById('shareFlowerButton').style.display = 'none';
+      }, 300);
     });
 
     window.onclick = function(event) {
       const flowerModal = document.getElementById('flowerModal');
       const capturedFlower = document.getElementById('capturedFlower');
       const idModal = document.getElementById('idModal');
+      const welcomeModal = document.getElementById('welcomeModal');
       
       if (event.target == flowerModal) {
-        flowerModal.style.display = "none";
-        document.getElementById('shareFlowerButton').style.display = 'none';
+        flowerModal.classList.remove('show');
+        setTimeout(() => {
+          flowerModal.style.display = "none";
+          document.getElementById('shareFlowerButton').style.display = 'none';
+        }, 300);
       }
       
       if (event.target == capturedFlower) {
@@ -2177,15 +3103,25 @@
       }
       
       if (event.target == idModal) {
-        idModal.style.display = "none";
+        idModal.classList.remove('show');
+        setTimeout(() => {
+          idModal.style.display = "none";
+        }, 300);
+      }
+      
+      if (event.target == welcomeModal && isInstalled) {
+        welcomeModal.classList.remove('show');
+        setTimeout(() => {
+          welcomeModal.style.display = "none";
+        }, 300);
       }
     };
     
-    // Initialiser les éléments d'interface
+    // Initialize UI elements
     document.getElementById('shareFlowerButton').style.display = 'none';
     document.getElementById('shareWarning').style.display = 'none';
     
-    // Gestionnaires pour le sélecteur de thème
+    // Theme selector handlers
     document.querySelectorAll('.style-option').forEach(option => {
       option.addEventListener('click', function() {
         const theme = this.dataset.theme;
