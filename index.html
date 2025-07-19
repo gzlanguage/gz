@@ -582,7 +582,7 @@
         /* Welcome toast notification */
         #welcomeToast {
             position: fixed;
-            top: 10px;
+            top: 140px;
             left: 0;
             right: 0;
             background-color: rgba(0,0,0,0.7);
@@ -597,8 +597,9 @@
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease;
-            font-family: 'Billabong', cursive;
-            font-size: 1.2em;
+            font-family: , cursive;
+            font-size: 1.1em;
+            border: 2px solid #4CAF50; /* Bordure verte de 2px comme demandé */
         }
 
         /* Initial welcome modal */
@@ -967,10 +968,6 @@
             background: linear-gradient(to right, #FF4500, #8B0000, #121212, #121212);
         }
         
-        .style-option.blue-purple {
-            background: linear-gradient(to right, #5865F2, #764BA2, #4B0082, #2C2C54);
-        }
-        
         .style-option.green-blue {
             background: linear-gradient(to right, #3EB489, #14532D, #0A2239, #1A2E4D);
         }
@@ -1120,73 +1117,6 @@
         body.theme-red-black #flowerCaptureContainer {
             background-color: black;
             border-color: #8B0000;
-        }
-        
-        /* Blue-Purple Theme */
-        body.theme-blue-purple {
-            background: #2C2C54;
-            color: #FFFFFF;
-        }
-        
-        body.theme-blue-purple header, 
-        body.theme-blue-purple footer,
-        body.theme-blue-purple .style-selector {
-            background-color: #2C2C54;
-        }
-        
-        body.theme-blue-purple .app-logo,
-        body.theme-blue-purple .header-icon,
-        body.theme-blue-purple .gz-logo,
-        body.theme-blue-purple .capture-flower-header,
-        body.theme-blue-purple .capture-website-url,
-        body.theme-blue-purple .id-title,
-        body.theme-blue-purple .billabong-title {
-            color: #5865F2;
-            border-color: #5865F2;
-        }
-        
-        body.theme-blue-purple .divider {
-            background-color: #5865F2;
-        }
-        
-        body.theme-blue-purple .notification .notification-text {
-            color: #5865F2;
-        }
-        
-        body.theme-blue-purple .notification,
-        body.theme-blue-purple .welcome-text,
-        body.theme-blue-purple .id-message {
-            color: #B0B0B0;
-        }
-        
-        body.theme-blue-purple .button {
-            background-color: #764BA2;
-        }
-        
-        body.theme-blue-purple .share-flower-button {
-            background-color: #764BA2;
-            color: white;
-            border-color: #5865F2;
-        }
-        
-        body.theme-blue-purple .flower-code,
-        body.theme-blue-purple .id-display {
-            color: #5865F2;
-            background-color: #3A3A8C;
-            border-color: #5865F2;
-        }
-        
-        body.theme-blue-purple .monthly-motivation,
-        body.theme-blue-purple .capture-flower-motivation {
-            border-color: #5865F2;
-            color: #FFFFFF;
-            background-color: #2C2C54;
-        }
-        
-        body.theme-blue-purple .modal-content,
-        body.theme-blue-purple #flowerCaptureContainer {
-            background-color: #2C2C54;
-            border-color: #5865F2;
         }
         
         /* Green-Blue Theme */
@@ -1412,10 +1342,6 @@
             color: #FF4500;
         }
         
-        body.theme-blue-purple .refresh-motivation {
-            color: #5865F2;
-        }
-        
         body.theme-green-blue .refresh-motivation {
             color: #3EB489;
         }
@@ -1462,7 +1388,7 @@
         <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
         
         <!-- Menu bars link - same color as other icons -->
-        <a href="g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
+        <a href="https://g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
       </div>
     </div>
   </header>
@@ -1488,7 +1414,6 @@
     <h3>Style</h3>
     <div class="style-options">
       <div class="style-option red-black" data-theme="red-black"></div>
-      <div class="style-option blue-purple" data-theme="blue-purple"></div>
       <div class="style-option green-blue selected" data-theme="green-blue"></div>
       <div class="style-option orange-pink" data-theme="orange-pink"></div>
       <div class="style-option yellow-purple" data-theme="yellow-purple"></div>
@@ -1617,12 +1542,14 @@
     <div class="capture-website-url">Discover yours at www.g-z.online</div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-    import { getDatabase, ref, push, remove, get, set, onValue, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, doc, setDoc, deleteDoc, where } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
+  <script>
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
       authDomain: "genz-abb36.firebaseapp.com",
@@ -1633,10 +1560,14 @@
       appId: "1:405021535683:web:ee5a28fde27f5558046176",
       measurementId: "G-XZNQND2J00"
     };
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const firestore = getFirestore(app);
-    const auth = getAuth(app);
+
+    // Initialize Firebase with compat version
+    firebase.initializeApp(firebaseConfig);
+    
+    // Get references to Firebase services
+    const auth = firebase.auth();
+    const database = firebase.database();
+    const firestore = firebase.firestore();
     
     let userUid = null;
     let userFlowerCode = null;
@@ -2115,6 +2046,11 @@
       const motivationElement = document.getElementById('monthlyMotivation');
       const signatureElement = document.getElementById('userSignature');
       
+      if (!flowerCodeElement || !motivationElement) {
+        console.error("Required elements not found in the DOM");
+        return;
+      }
+      
       // Generate a random subject for the flower if we don't already have one
       let subject = localStorage.getItem('flowerSubject');
       if (!subject) {
@@ -2137,16 +2073,22 @@
       motivationElement.textContent = currentMotivation;
       
       // Add signature if available
-      if (signature) {
-        signatureElement.textContent = signature + " 🌟";
-      } else {
-        signatureElement.textContent = "";
+      if (signatureElement) {
+        if (signature) {
+          signatureElement.textContent = signature + " 🌟";
+        } else {
+          signatureElement.textContent = "";
+        }
       }
       
       // Update capture elements with the same motivation
-      document.getElementById('captureFlowerCode').textContent = "My Flower - " + subject;
-      document.getElementById('captureFlowerMotivation').textContent = currentMotivation;
-      document.getElementById('captureSignature').textContent = signature ? signature + " 🌟" : "";
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      const captureSignature = document.getElementById('captureSignature');
+      
+      if (captureCode) captureCode.textContent = "My Flower - " + subject;
+      if (captureMotivation) captureMotivation.textContent = currentMotivation;
+      if (captureSignature) captureSignature.textContent = signature ? signature + " 🌟" : "";
       
       return currentMotivation;
     }
@@ -2201,7 +2143,7 @@
     // Function to set theme
     function setTheme(theme) {
       // Remove all theme classes
-      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-blue-purple', 'theme-green-blue', 'theme-orange-pink', 'theme-yellow-purple');
+      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-green-blue', 'theme-orange-pink', 'theme-yellow-purple');
       
       // Add the selected theme class
       document.body.classList.add('theme-' + theme);
@@ -2236,6 +2178,12 @@
       const captureMotivation = document.getElementById('captureFlowerMotivation');
       const captureSignature = document.getElementById('captureSignature');
       
+      if (!captureContainer || !captureCode || !captureHeader || !captureWebsiteUrl || 
+          !captureLogo || !captureMotivation) {
+        console.error("One or more capture elements not found");
+        return;
+      }
+      
       // Reset styles
       captureContainer.style.borderColor = '';
       captureCode.style.borderColor = '';
@@ -2248,7 +2196,7 @@
       captureMotivation.style.color = '';
       captureMotivation.style.backgroundColor = '';
       captureMotivation.style.borderColor = '';
-      captureSignature.style.color = '';
+      if (captureSignature) captureSignature.style.color = '';
       
       // Apply styles based on theme
       switch(theme) {
@@ -2265,23 +2213,7 @@
           captureMotivation.style.color = '#E5E5E5';
           captureMotivation.style.backgroundColor = 'black';
           captureMotivation.style.borderColor = '#FF4500';
-          captureSignature.style.color = '#FF4500';
-          break;
-          
-        case 'blue-purple':
-          captureContainer.style.borderColor = '#5865F2';
-          captureContainer.style.backgroundColor = '#2C2C54';
-          captureCode.style.borderColor = '#5865F2';
-          captureCode.style.color = '#5865F2';
-          captureCode.style.backgroundColor = '#3A3A8C';
-          captureHeader.style.color = '#5865F2';
-          captureWebsiteUrl.style.color = '#5865F2';
-          captureLogo.style.color = '#5865F2';
-          captureLogo.style.borderColor = '#5865F2';
-          captureMotivation.style.color = '#FFFFFF';
-          captureMotivation.style.backgroundColor = '#2C2C54';
-          captureMotivation.style.borderColor = '#5865F2';
-          captureSignature.style.color = '#5865F2';
+          if (captureSignature) captureSignature.style.color = '#FF4500';
           break;
           
         case 'green-blue':
@@ -2297,7 +2229,7 @@
           captureMotivation.style.color = '#F5F5F5';
           captureMotivation.style.backgroundColor = '#1A2E4D';
           captureMotivation.style.borderColor = '#3EB489';
-          captureSignature.style.color = '#3EB489';
+          if (captureSignature) captureSignature.style.color = '#3EB489';
           break;
           
         case 'orange-pink':
@@ -2313,7 +2245,7 @@
           captureMotivation.style.color = '#FFFFFF';
           captureMotivation.style.backgroundColor = '#4B0082';
           captureMotivation.style.borderColor = '#FF7F50';
-          captureSignature.style.color = '#FF7F50';
+          if (captureSignature) captureSignature.style.color = '#FF7F50';
           break;
           
         case 'yellow-purple':
@@ -2329,7 +2261,7 @@
           captureMotivation.style.color = '#FFFFFF';
           captureMotivation.style.backgroundColor = '#4B0082';
           captureMotivation.style.borderColor = '#FFD700';
-          captureSignature.style.color = '#FFD700';
+          if (captureSignature) captureSignature.style.color = '#FFD700';
           break;
           
         default: // theme-default
@@ -2345,14 +2277,14 @@
           captureMotivation.style.color = '#333';
           captureMotivation.style.backgroundColor = 'white';
           captureMotivation.style.borderColor = '#ff69b4';
-          captureSignature.style.color = '#666';
+          if (captureSignature) captureSignature.style.color = '#666';
       }
     }
 
     // Authenticate to Firebase
     function authenticateAnonymously() {
       return new Promise((resolve, reject) => {
-        signInAnonymously(auth)
+        auth.signInAnonymously()
           .then((userCredential) => {
             console.log("User authenticated anonymously:", userCredential.user.uid);
             userUid = userCredential.user.uid;
@@ -2367,7 +2299,7 @@
     }
 
     // Listen for authentication state changes
-    onAuthStateChanged(auth, (user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
         userUid = user.uid;
@@ -2380,7 +2312,7 @@
       }
     });
 
-    // Submit to Firebase (corrigé pour assurer la soumission de données)
+    // Submit to Firebase (fixed to ensure data submission)
     async function submitToFirebase() {
       try {
         // Ensure user is authenticated before submitting
@@ -2412,9 +2344,9 @@
 
         console.log("Submitting data to Firebase:", userData);
         
-        // Submit to Realtime Database avec correction pour éviter les erreurs
+        // Submit to Realtime Database with error handling
         try {
-          const newEntryRef = await push(ref(database, 'birthdates'), userData);
+          const newEntryRef = database.ref('birthdates').push(userData);
           console.log("Data submitted to Realtime Database:", newEntryRef.key);
         } catch (dbError) {
           console.error("Error with Realtime Database:", dbError);
@@ -2423,7 +2355,7 @@
         
         // Submit to Firestore as well
         try {
-          const docRef = await addDoc(collection(firestore, 'flowers'), userData);
+          const docRef = await firestore.collection('flowers').add(userData);
           console.log("Document written to Firestore with ID: ", docRef.id);
         } catch (firestoreError) {
           console.error("Error adding document to Firestore: ", firestoreError);
@@ -2431,7 +2363,7 @@
         
         // Add to specific collection for codes
         try {
-          await setDoc(doc(firestore, 'flowerCodes', userUniqueId), {
+          await firestore.collection('flowerCodes').doc(userUniqueId).set({
             ...userData,
             createdAt: new Date()
           });
@@ -2454,7 +2386,7 @@
         return true;
       } catch (error) {
         console.error("Firebase submission error:", error);
-        // Si la soumission échoue, on garde quand même les données localement
+        // Keep data locally even if submission fails
         const userData = {
           date: new Date().toISOString(),
           uniqueId: userUniqueId,
@@ -2479,7 +2411,7 @@
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
-        return true; // Retourne true même en cas d'erreur pour continuer l'expérience utilisateur
+        return true; // Return true even on error to continue the user experience
       }
     }
 
@@ -2500,7 +2432,7 @@
         }
         
         // Update in Firestore
-        await setDoc(doc(firestore, 'flowerCodes', userUniqueId), {
+        await firestore.collection('flowerCodes').doc(userUniqueId).set({
           shareCount: shareCount,
           lastShared: new Date().toISOString(),
           country: currentCountry || "Unknown",
@@ -2580,7 +2512,7 @@
       try {
         // Delete from Firestore
         try {
-          await deleteDoc(doc(firestore, 'flowerCodes', userUniqueId));
+          await firestore.collection('flowerCodes').doc(userUniqueId).delete();
           console.log("User deleted from flowerCodes collection");
           
           // We can't easily delete from the 'flowers' collection without knowing the document ID
@@ -2679,6 +2611,11 @@
     function setupProfessionDropdown() {
       const professionInput = document.getElementById('professionInput');
       const professionDropdown = document.getElementById('professionDropdown');
+      
+      if (!professionInput || !professionDropdown) {
+        console.error("Profession dropdown elements not found");
+        return;
+      }
       
       // Function to filter professions based on input
       function filterProfessions(input) {
@@ -2836,14 +2773,21 @@
       
       // Update signature if available
       if (userSignature) {
-        document.getElementById('userSignature').textContent = userSignature + " 🌟";
+        const signatureElement = document.getElementById('userSignature');
+        if (signatureElement) {
+          signatureElement.textContent = userSignature + " 🌟";
+        }
       }
       
       // Update capture elements
-      document.getElementById('captureFlowerCode').textContent = "My Flower - " + newSubject;
-      document.getElementById('captureFlowerMotivation').textContent = newMotivation;
-      if (userSignature) {
-        document.getElementById('captureSignature').textContent = userSignature + " 🌟";
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      const captureSignature = document.getElementById('captureSignature');
+      
+      if (captureCode) captureCode.textContent = "My Flower - " + newSubject;
+      if (captureMotivation) captureMotivation.textContent = newMotivation;
+      if (captureSignature && userSignature) {
+        captureSignature.textContent = userSignature + " 🌟";
       }
       
       // Rotation animation for icon
@@ -2910,42 +2854,8 @@
         // Hide welcome modal with animation
         const welcomeModal = document.getElementById('welcomeModal');
         welcomeModal.classList.remove('show');
-        setTimeout(() => {
-          welcomeModal.style.display = 'none';
-          document.getElementById('loadingSpinner').style.display = 'none';
-          
-          // Submit to Firebase if not already installed
-          if (!isInstalled) {
-            submitToFirebase().then(submitted => {
-              if (!submitted) {
-                console.log("Firebase submission failed, but continuing with local installation");
-              }
-              
-              // Show welcome toast
-              const welcomeToast = document.getElementById('welcomeToast');
-              welcomeToast.style.display = 'block';
-              setTimeout(() => {
-                welcomeToast.style.opacity = '1';
-              }, 100);
-              setTimeout(() => {
-                welcomeToast.style.opacity = '0';
-                setTimeout(() => {
-                  welcomeToast.style.display = 'none';
-                }, 500);
-              }, 2000);
-              
-              // Show flower automatically after creation
-              updateFlowerDisplay();
-              const flowerModal = document.getElementById('flowerModal');
-              flowerModal.style.display = 'block';
-              setTimeout(() => {
-                flowerModal.classList.add('show');
-              }, 10);
-              document.getElementById('shareFlowerButton').style.display = 'flex';
-            });
-          }
-        }, 300);
         
+        // Create user data object
         const userData = {
           date: new Date().toISOString(),
           uid: userUid,
@@ -2961,6 +2871,7 @@
           shareCount: 0
         };
         
+        // Save data locally
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
         localStorage.setItem('isInstalled', 'true');
         setCookie('userUniqueId', userUniqueId, 365);
@@ -2970,6 +2881,39 @@
         setCookie('userSignature', userSignature, 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
+        
+        // Hide welcome modal
+        setTimeout(() => {
+          welcomeModal.style.display = 'none';
+          document.getElementById('loadingSpinner').style.display = 'none';
+          
+          // Submit to Firebase
+          submitToFirebase().then(submitted => {
+            console.log("Firebase submission result:", submitted);
+            
+            // Show welcome toast
+            const welcomeToast = document.getElementById('welcomeToast');
+            welcomeToast.style.display = 'block';
+            setTimeout(() => {
+              welcomeToast.style.opacity = '1';
+            }, 100);
+            setTimeout(() => {
+              welcomeToast.style.opacity = '0';
+              setTimeout(() => {
+                welcomeToast.style.display = 'none';
+              }, 500);
+            }, 2000);
+            
+            // Show flower automatically after creation
+            updateFlowerDisplay();
+            const flowerModal = document.getElementById('flowerModal');
+            flowerModal.style.display = 'block';
+            setTimeout(() => {
+              flowerModal.classList.add('show');
+            }, 10);
+            document.getElementById('shareFlowerButton').style.display = 'flex';
+          });
+        }, 300);
         
         console.log("Setup complete and data stored locally and in cookies");
       } catch (error) {
@@ -2987,47 +2931,47 @@
         // Update capture styles based on current theme
         updateCaptureStyles(currentTheme);
         
-        if (typeof html2canvas === 'undefined') {
-          await loadHTML2Canvas();
+        // Ensure html2canvas is loaded
+        if (typeof html2canvas !== 'function') {
+          console.error("html2canvas not loaded or not available as a function");
+          alert("Cannot capture flower. The capture library is not loaded.");
+          return;
         }
         
+        // Set background color based on theme
+        let bgColor = 'white';
+        if (currentTheme === 'red-black') bgColor = 'black';
+        else if (currentTheme === 'green-blue') bgColor = '#1A2E4D';
+        else if (currentTheme === 'orange-pink' || currentTheme === 'yellow-purple') bgColor = '#4B0082';
+        
+        // Capture the container
         const canvas = await html2canvas(captureContainer, {
-          backgroundColor: currentTheme === 'red-black' ? 'black' : 
-                          (currentTheme === 'blue-purple' ? '#2C2C54' : 
-                           currentTheme === 'green-blue' ? '#1A2E4D' : 
-                           currentTheme === 'orange-pink' || currentTheme === 'yellow-purple' ? '#4B0082' : 
-                           'white'),
-          scale: 7,
-          logging: false,
+          backgroundColor: bgColor,
+          scale: 2,
+          logging: true,
           useCORS: true,
-          allowTaint: false,
-          letterRendering: true,
-          imageTimeout: 0
+          allowTaint: true,
+          letterRendering: true
         });
         
-        const imageUrl = canvas.toDataURL('image/png', 1.0);
+        const imageUrl = canvas.toDataURL('image/png');
         
-        document.getElementById('capturedImage').src = imageUrl;
-        document.getElementById('capturedFlower').style.display = 'flex';
-        
-        document.getElementById('shareWarning').style.display = 'block';
-        
-        // Update share count
-        updateShareCount();
+        // Set the image and show capture UI
+        const capturedImage = document.getElementById('capturedImage');
+        if (capturedImage) {
+          capturedImage.src = imageUrl;
+          document.getElementById('capturedFlower').style.display = 'flex';
+          document.getElementById('shareWarning').style.display = 'block';
+          
+          // Update share count
+          updateShareCount();
+        } else {
+          console.error("capturedImage element not found");
+        }
       } catch (error) {
         console.error('Error capturing flower:', error);
         alert('Could not capture your flower. Please try again.');
       }
-    }
-    
-    function loadHTML2Canvas() {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
     }
     
     document.getElementById('shareCapture').addEventListener('click', function() {
@@ -3128,10 +3072,6 @@
         setTheme(theme);
       });
     });
-    
-    loadHTML2Canvas().catch(err => console.log('Non-critical preload error:', err));
   </script>
-  
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
