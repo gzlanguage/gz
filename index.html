@@ -2830,7 +2830,7 @@
       
       try {
         // Afficher une confirmation supplémentaire pour être sûr
-        if (!confirm("Êtes-vous vraiment sûr de vouloir supprimer TOUTES vos données ? Cette action est irréversible.")) {
+        if (!confirm("Are you sure you want to delete ALL your data? This action is irreversible.")) {
           return false;
         }
         
@@ -3331,7 +3331,7 @@
         // Capture the container
         const canvas = await html2canvas(captureContainer, {
           backgroundColor: bgColor,
-          scale: 5,
+          scale: 7,
           logging: true,
           useCORS: true,
           allowTaint: true,
