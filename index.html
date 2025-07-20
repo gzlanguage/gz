@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.appspot.com/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <style>
+        /* Empêcher le zoom sur iOS */
+        input, textarea, select, button {
+            font-size: 16px; /* Police minimum de 16px pour éviter le zoom automatique sur iOS */
+            touch-action: manipulation; /* Désactive la manipulation tactile spécifique */
+        }
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -19,6 +25,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            -webkit-text-size-adjust: 100%; /* Empêche l'ajustement automatique de la taille du texte */
         }
         header {
             background-color: white;
@@ -86,6 +93,10 @@
             color: #0056b3;
             font-weight: bold;
             transition: color 0.3s ease;
+            /* Reduced height of notification container */
+            padding: 3px 0;
+            max-height: 30px;
+            overflow: hidden;
         }
         .share-icon {
             color: #007bff;
@@ -582,7 +593,7 @@
         /* Welcome toast notification */
         #welcomeToast {
             position: fixed;
-            top: 140px;
+            top: 160px;
             left: 0;
             right: 0;
             background-color: rgba(0,0,0,0.7);
@@ -623,17 +634,17 @@
         /* Welcome modal content */
         #welcomeModal .modal-content {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 35% auto;
-            padding: 15px;
+            margin: 40% auto; /* Descendu de 35% à 65% pour être plus bas sur l'écran */
+            padding: 15px 10px; /* Réduction du padding sur les côtés */
             border: 2px solid #4CAF50; /* Vert gazon pour la bordure */
             border-radius: 25px;
-            width: 80%;
-            max-width: 300px;
+            width: 85%; /* Réduction de la largeur pour moins d'espace sur les côtés */
+            max-width: 290px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             text-align: center;
             transition: transform 0.3s ease;
             transform: scale(0.8);
-            margin-top: 60px; /* Descendre le message d'accueil */
+            /* Suppression de margin-top pour laisser la propriété margin fonctionner seule */
         }
         #welcomeModal.show .modal-content {
             transform: scale(1);
@@ -680,11 +691,11 @@
         }
 
         .dob-input {
-            width: 80%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             padding: 8px;
             border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 0.8em;
+            font-size: 16px; /* Taille minimum pour éviter le zoom sur iOS */
         }
 
         /* Profession selector */
@@ -702,11 +713,11 @@
         }
 
         .profession-search {
-            width: 80%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             padding: 8px;
             border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 0.8em;
+            font-size: 16px; /* Taille minimum pour éviter le zoom sur iOS */
         }
 
         .profession-dropdown {
@@ -715,10 +726,10 @@
             background-color: white; /* Fond blanc pour les options */
             border: 1px solid #ccc;
             border-radius: 10px;
-            width: 80%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             max-height: 150px;
             overflow-y: auto;
-            left: 10%;
+            left: 5%; /* Ajusté pour le centrage */
             z-index: 10;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
@@ -750,11 +761,11 @@
         }
 
         .name-input {
-            width: 80%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             padding: 8px;
             border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 0.8em;
+            font-size: 16px; /* Taille minimum pour éviter le zoom sur iOS */
         }
 
         /* Submit button */
@@ -769,7 +780,7 @@
             font-weight: bold;
             margin: 10px auto 5px;
             display: block;
-            width: 70%;
+            width: 80%; /* Augmenté pour utiliser plus d'espace */
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
         }
@@ -878,6 +889,11 @@
             font-size: 0.7em;
             cursor: pointer;
             transition: background-color 0.3s;
+            /* Ajustement pour que le bouton ait la même hauteur que close-button */
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .delete-account:hover {
@@ -900,6 +916,7 @@
             width: auto;
             padding: 6px 15px;
             font-size: 0.7em;
+            height: 28px; /* Hauteur fixe pour correspondre au bouton delete */
         }
 
         /* Menu link without underline */
@@ -1372,7 +1389,13 @@
             color: #666;
             font-style: italic;
         }
+  
+        .user-signature {
+            font-size: 14px;
+        }
     </style>
+</head>
+
 </head>
 <body class="theme-green-blue">
 
@@ -1429,7 +1452,7 @@
   <!-- Initial welcome modal - improved -->
   <div id="welcomeModal" class="modal">
     <div class="modal-content">
-      <div class="welcome-header">Create Your Flower</div>
+      <div class="welcome-header">💠 Welcome 💠</div>
       <div class="welcome-text">
         Account creation only requires your date of birth and profession to create your unique flower.
       </div>
@@ -1609,7 +1632,17 @@
       "Game Developer", "App Developer", "Web Developer", "Network Administrator", "Cybersecurity Specialist",
       "IT Support", "Technician", "Repair Specialist", "Baker", "Butcher",
       "Fisherman", "Miner", "Forester", "Landscaper", "Interior Designer",
-      "Event Planner", "Wedding Planner", "Florist", "Jeweler", "Craftsperson"
+      "Event Planner", "Wedding Planner", "Florist", "Jeweler", "Craftsperson",
+      "Programmer", "Web Designer", "Digital Marketer", "SEO Specialist", "Content Creator",
+      "Product Manager", "Project Manager", "Quality Assurance", "Business Analyst", "Consultant",
+      "Recruiter", "HR Manager", "Career Coach", "Life Coach", "Motivational Speaker",
+      "Public Speaker", "Radio Host", "TV Host", "Broadcaster", "Podcaster",
+      "Author", "Screenwriter", "Copywriter", "Technical Writer", "Editor",
+      "Publisher", "Literary Agent", "Bookstore Owner", "Librarian", "Book Reviewer",
+      "Graphic Designer", "Illustrator", "Animator", "3D Artist", "VFX Artist",
+      "Film Director", "Producer", "Camera Operator", "Sound Engineer", "Lighting Technician",
+      "Film Editor", "Production Assistant", "Set Designer", "Costume Designer", "Makeup Artist for Film",
+      "Special Effects Artist", "Stunt Performer", "Voice Actor", "Talent Agent", "Casting Director"
     ];
 
     // Dictionary to map IDs to subjects
@@ -1745,7 +1778,112 @@
       "Thankfulness": "Thankfulness",
       "Appreciation": "Appreciation",
       "Recognition": "Recognition",
-      "Acknowledgment": "Acknowledgment"
+      "Acknowledgment": "Acknowledgment",
+      
+      // Mindfulness related
+      "Mindfulness": "Mindfulness",
+      "Presence": "Presence",
+      "Awareness": "Awareness",
+      "Consciousness": "Consciousness",
+      "Attentiveness": "Attentiveness",
+      
+      // Compassion related
+      "Compassion": "Compassion",
+      "Empathy": "Empathy",
+      "Kindness": "Kindness",
+      "Generosity": "Generosity",
+      "Altruism": "Altruism",
+      
+      // Balance related
+      "Balance": "Balance",
+      "Equilibrium": "Equilibrium",
+      "Harmony": "Harmony",
+      "Proportion": "Proportion",
+      "Symmetry": "Symmetry",
+      
+      // Inspiration related
+      "Inspiration": "Inspiration",
+      "Motivation": "Motivation",
+      "Enthusiasm": "Enthusiasm",
+      "Excitement": "Excitement",
+      "Passion": "Passion",
+      
+      // Focus related
+      "Focus": "Focus",
+      "Concentration": "Concentration",
+      "Attention": "Attention",
+      "Discipline": "Discipline",
+      "Dedication": "Dedication",
+      
+      // Humility related
+      "Humility": "Humility",
+      "Modesty": "Modesty",
+      "Simplicity": "Simplicity",
+      "Unpretentiousness": "Unpretentiousness",
+      "Groundedness": "Groundedness",
+      
+      // Patience related
+      "Patience": "Patience",
+      "Tolerance": "Tolerance",
+      "Forbearance": "Forbearance",
+      "Endurance": "Endurance",
+      "Persistence": "Persistence",
+      
+      // Joy related
+      "Joy": "Joy",
+      "Delight": "Delight",
+      "Gladness": "Gladness",
+      "Exultation": "Exultation",
+      "Jubilation": "Jubilation",
+      
+      // Trust related
+      "Trust": "Trust",
+      "Faith": "Faith",
+      "Confidence": "Confidence",
+      "Reliance": "Reliance",
+      "Dependability": "Dependability",
+      
+      // Self-confidence related
+      "Self-confidence": "Self-confidence",
+      "Self-esteem": "Self-esteem",
+      "Self-belief": "Self-belief",
+      "Self-assurance": "Self-assurance",
+      "Self-trust": "Self-trust",
+      
+      // Enthusiasm related
+      "Enthusiasm": "Enthusiasm",
+      "Zeal": "Zeal",
+      "Eagerness": "Eagerness",
+      "Ardor": "Ardor",
+      "Fervor": "Fervor",
+      
+      // Clarity related
+      "Clarity": "Clarity",
+      "Lucidity": "Lucidity",
+      "Transparency": "Transparency",
+      "Precision": "Precision",
+      "Sharpness": "Sharpness",
+      
+      // Adaptability related
+      "Adaptability": "Adaptability",
+      "Flexibility": "Flexibility",
+      "Versatility": "Versatility",
+      "Adjustability": "Adjustability",
+      "Malleability": "Malleability",
+      
+      // Communication related
+      "Communication": "Communication",
+      "Expression": "Expression",
+      "Articulation": "Articulation",
+      "Dialogue": "Dialogue",
+      "Conversation": "Conversation",
+      
+      // Profession related
+      "Career": "Career",
+      "Profession": "Profession",
+      "Vocation": "Vocation",
+      "Occupation": "Occupation",
+      "Calling": "Calling"
     };
 
     // Function to generate a unique ID (3 letters + 3 numbers)
@@ -1846,7 +1984,26 @@
         "Your gentleness heals wounds without leaving scars.",
         "Your assertiveness stands up for what's right.",
         "Your independence fosters self-reliance and strength.",
-        "Your conscientiousness pays attention to important details."
+        "Your conscientiousness pays attention to important details.",
+        "Your mental agility helps you adapt to new situations quickly.",
+        "Your self-awareness illuminates your path to growth.",
+        "Your inner strength shines brightest during difficult times.",
+        "Your magnetic personality draws people into your orbit.",
+        "Your emotional intelligence helps you navigate complex relationships.",
+        "Your quick thinking finds solutions when others see only problems.",
+        "Your quiet confidence speaks volumes without saying a word.",
+        "Your natural leadership inspires others to follow their best instincts.",
+        "Your unwavering ethics guide your decisions even when no one is watching.",
+        "Your artistic sensibility finds beauty in unexpected places.",
+        "Your strategic mind anticipates future developments with remarkable accuracy.",
+        "Your spontaneity brings fresh energy to stale situations.",
+        "Your meticulous attention to detail prevents future complications.",
+        "Your peaceful presence calms even the most chaotic environments.",
+        "Your innovative thinking breaks through conventional limitations.",
+        "Your natural diplomacy resolves conflicts with grace and fairness.",
+        "Your trustworthiness makes you a confidant for those who need one.",
+        "Your infectious enthusiasm elevates everyone around you.",
+        "Your open-mindedness welcomes new perspectives and possibilities."
       ];
       
       // Collection of encouragements
@@ -1900,7 +2057,29 @@
         "Your past doesn't define your future potential.",
         "Each step forward, no matter how small, is still forward movement.",
         "Your unique approach is your competitive advantage.",
-        "Trust that you are exactly where you need to be right now."
+        "Trust that you are exactly where you need to be right now.",
+        "Your greatest achievements often come after your biggest challenges.",
+        "Your story is still being written - make it remarkable.",
+        "The universe conspires in favor of your authentic dreams.",
+        "Your most powerful resource is your unwavering belief in yourself.",
+        "The impact you have on others is greater than you know.",
+        "Your current limitations are temporary, but your potential is permanent.",
+        "The most important approval comes from within yourself.",
+        "Your intuition is your inner compass - trust its direction.",
+        "Today's discipline creates tomorrow's freedom.",
+        "Each experience, good or challenging, adds depth to your character.",
+        "Your life's purpose unfolds through both joy and difficulty.",
+        "The way you handle adversity reveals your true strength.",
+        "Your uniqueness is your greatest competitive advantage.",
+        "Allow yourself to evolve as your dreams evolve.",
+        "Your commitment to growth is already changing your future.",
+        "Never underestimate how far consistency can take you.",
+        "Your determination outweighs any temporary setbacks.",
+        "The right path isn't always the easiest, but it's always worth taking.",
+        "Your courage to begin inspires others to do the same.",
+        "Each time you choose growth over comfort, you expand your potential.",
+        "Your highest potential is waiting for you just beyond your comfort zone.",
+        "Every challenge you face prepares you for something greater."
       ];
       
       // Profession-specific encouragements
@@ -1967,35 +2146,154 @@
           "Your innovative thinking solves problems at their root.",
           "Your leadership inspires others to join your mission.",
           "Your persistence through challenges defines your success."
+        ],
+        "Doctor": [
+          "Your healing hands bring comfort in times of distress.",
+          "Your commitment to healthcare changes lives every day.",
+          "Your medical knowledge combined with empathy creates true healing.",
+          "Your dedication to patient care exemplifies the highest calling.",
+          "Your diagnostic skills are matched by your compassionate heart."
+        ],
+        "Engineer": [
+          "Your problem-solving abilities create solutions that improve lives.",
+          "Your technical expertise builds foundations for the future.",
+          "Your analytical mind sees patterns others miss.",
+          "Your precision and attention to detail ensure quality in everything you create.",
+          "Your innovative approaches to challenges advance your entire field."
+        ],
+        "Software Developer": [
+          "Your code creates possibilities that didn't exist before.",
+          "Your technical solutions solve real human problems.",
+          "Your logical thinking combines beautifully with creative innovation.",
+          "Your digital creations impact countless lives daily.",
+          "Your ability to learn new technologies keeps you at the cutting edge."
+        ],
+        "Artist": [
+          "Your creative vision shows others new ways of seeing the world.",
+          "Your artistic expression touches emotions words cannot reach.",
+          "Your unique perspective adds beauty to everyday experiences.",
+          "Your work sparks important conversations across boundaries.",
+          "Your creative courage inspires others to express their truth."
+        ],
+        "Nurse": [
+          "Your compassionate care heals more than physical ailments.",
+          "Your attentiveness notices what others might miss.",
+          "Your calm presence provides comfort in difficult moments.",
+          "Your dedication to patient care makes a difference every shift.",
+          "Your balance of technical skill and human warmth is invaluable."
+        ],
+        "Writer": [
+          "Your words create worlds in the minds of your readers.",
+          "Your storytelling connects people across different experiences.",
+          "Your eloquence gives voice to what others struggle to express.",
+          "Your written insights offer new perspectives on familiar challenges.",
+          "Your literary craft preserves important truths for future generations."
+        ],
+        "Lawyer": [
+          "Your advocacy brings justice to those who need a voice.",
+          "Your analytical mind navigates complex legal challenges with precision.",
+          "Your commitment to legal principles strengthens the foundations of society.",
+          "Your ability to construct compelling arguments changes outcomes.",
+          "Your ethical approach to law practice sets the standard for others."
+        ],
+        "Chef": [
+          "Your culinary creations bring joy through all the senses.",
+          "Your cooking connects people across tables and cultures.",
+          "Your flavor combinations demonstrate your artistic intuition.",
+          "Your dedication to quality ingredients honors both tradition and innovation.",
+          "Your kitchen leadership brings out the best in your entire team."
+        ],
+        "Accountant": [
+          "Your financial expertise provides security and peace of mind.",
+          "Your attention to detail catches what others might miss.",
+          "Your analytical skills bring clarity to complex financial situations.",
+          "Your integrity ensures trust in all your professional relationships.",
+          "Your organizational abilities create order from financial complexity."
+        ],
+        "Designer": [
+          "Your visual solutions combine beauty with practical function.",
+          "Your design thinking transforms user experiences for the better.",
+          "Your aesthetic sensibility elevates everyday objects and interactions.",
+          "Your creative process balances innovation with usability.",
+          "Your design language communicates across barriers and boundaries."
+        ],
+        "Police Officer": [
+          "Your commitment to public safety makes communities stronger.",
+          "Your courage in challenging situations protects those who need it most.",
+          "Your quick decision-making under pressure demonstrates remarkable composure.",
+          "Your dedication to justice guides your professional conduct.",
+          "Your presence brings security to tense situations."
+        ],
+        "Firefighter": [
+          "Your bravery in dangerous situations saves lives and property.",
+          "Your quick thinking under extreme pressure is extraordinary.",
+          "Your physical and mental preparation enables your heroic response.",
+          "Your teamwork in crisis situations exemplifies the best of human cooperation.",
+          "Your commitment to community safety extends beyond emergency response."
+        ],
+        "Military Personnel": [
+          "Your service demonstrates the highest form of commitment to others.",
+          "Your discipline under challenging conditions sets you apart.",
+          "Your strategic thinking balances mission objectives with team safety.",
+          "Your adaptability to changing situations ensures mission success.",
+          "Your loyalty to your unit creates bonds that transcend ordinary friendship."
+        ],
+        "Journalist": [
+          "Your pursuit of truth brings clarity in confusing times.",
+          "Your storytelling helps others understand complex issues.",
+          "Your investigative skills uncover what needs to be seen.",
+          "Your commitment to facts balances the information ecosystem.",
+          "Your voice adds important perspective to public discourse."
+        ],
+        "Psychologist": [
+          "Your empathetic listening creates space for healing.",
+          "Your insights help others navigate their inner landscapes.",
+          "Your therapeutic approach balances compassion with evidence-based practice.",
+          "Your patience allows others to discover their own solutions.",
+          "Your professional boundaries enable sustainable healing relationships."
+        ],
+        "Teacher": [
+          "Your guidance shapes futures beyond what you may ever see.",
+          "Your patience with the learning process allows growth to unfold naturally.",
+          "Your ability to explain complex concepts makes knowledge accessible.",
+          "Your classroom management creates safe spaces for intellectual exploration.",
+          "Your recognition of different learning styles reaches every student."
+        ],
+        "Programmer": [
+          "Your coding skills transform abstract ideas into functional reality.",
+          "Your problem-solving approach breaks complex challenges into manageable parts.",
+          "Your attention to detail prevents future complications in your code.",
+          "Your continuous learning keeps your skills relevant in a changing field.",
+          "Your technical creativity finds elegant solutions to difficult problems."
         ]
       };
       
       // Birth month traits (based on birth month if available)
       const monthTraits = [
-        "Your January birth gives you natural leadership qualities.",
-        "Your February birth blesses you with intuitive understanding.",
-        "Your March birth provides you with imaginative creativity.",
-        "Your April birth endows you with determined persistence.",
-        "Your May birth grants you persuasive communication skills.",
-        "Your June birth offers you adaptable versatility.",
-        "Your July birth gives you compassionate empathy.",
-        "Your August birth blesses you with magnetic charisma.",
-        "Your September birth provides you with analytical precision.",
-        "Your October birth endows you with balanced perspective.",
-        "Your November birth grants you penetrating insight.",
-        "Your December birth offers you visionary optimism."
+        "Your January birth gives you natural leadership qualities and determined focus.",
+        "Your February birth blesses you with intuitive understanding and humanitarian vision.",
+        "Your March birth provides you with imaginative creativity and adaptable resilience.",
+        "Your April birth endows you with determined persistence and courageous initiative.",
+        "Your May birth grants you persuasive communication skills and practical sensibility.",
+        "Your June birth offers you adaptable versatility and emotional intelligence.",
+        "Your July birth gives you compassionate empathy and protective nurturing.",
+        "Your August birth blesses you with magnetic charisma and generous confidence.",
+        "Your September birth provides you with analytical precision and methodical organization.",
+        "Your October birth endows you with balanced perspective and diplomatic harmony.",
+        "Your November birth grants you penetrating insight and transformative intensity.",
+        "Your December birth offers you visionary optimism and philosophical wisdom."
       ];
       
       // Select traits based on various factors
       let selectedTrait;
       
-      // If we have profession and it's in our dictionary, use a profession-specific motivation 20% of the time
-      if (profession && professionMotivations[profession] && Math.random() < 0.2) {
+      // If we have profession and it's in our dictionary, use a profession-specific motivation 25% of the time
+      if (profession && professionMotivations[profession] && Math.random() < 0.25) {
         const profMotivations = professionMotivations[profession];
         selectedTrait = profMotivations[Math.floor(Math.random() * profMotivations.length)];
       } 
-      // If we have dob, use a month-based trait 15% of the time
-      else if (dob && Math.random() < 0.15) {
+      // If we have dob, use a month-based trait 20% of the time
+      else if (dob && Math.random() < 0.2) {
         selectedTrait = monthTraits[month];
       }
       // Otherwise use a general trait
@@ -2040,7 +2338,7 @@
       return selectedSubject;
     }
 
-    // Update flower display with appropriate subject
+    // Update flower display with appropriate subject and enforce signature color
     function updateFlowerDisplay() {
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
@@ -2072,10 +2370,14 @@
       // Use current motivation
       motivationElement.textContent = currentMotivation;
       
-      // Add signature if available
+      // Add signature if available and FORCE the theme color
       if (signatureElement) {
         if (signature) {
           signatureElement.textContent = signature + " 🌟";
+          
+          // AMÉLIORATION: Force la couleur de la signature en fonction du thème actuel
+          const themeSignatureColor = getComputedStyle(document.documentElement).getPropertyValue('--signature-color').trim();
+          signatureElement.style.color = themeSignatureColor;
         } else {
           signatureElement.textContent = "";
         }
@@ -2088,7 +2390,13 @@
       
       if (captureCode) captureCode.textContent = "My Flower - " + subject;
       if (captureMotivation) captureMotivation.textContent = currentMotivation;
-      if (captureSignature) captureSignature.textContent = signature ? signature + " 🌟" : "";
+      
+      // AMÉLIORATION: Force la couleur de la signature dans la capture aussi
+      if (captureSignature && signature) {
+        captureSignature.textContent = signature + " 🌟";
+        const themeSignatureColor = getComputedStyle(document.documentElement).getPropertyValue('--signature-color').trim();
+        captureSignature.style.color = themeSignatureColor;
+      }
       
       return currentMotivation;
     }
@@ -2106,10 +2414,10 @@
       // If there's a last name, get first letter + .
       let lastInitial = "";
       if (nameParts.length > 1) {
-        lastInitial = " " + nameParts[nameParts.length - 1].charAt(0) + ".";
+        lastInitial = nameParts[nameParts.length - 1].charAt(0) + ".";
       }
       
-      return firstName + lastInitial;
+      return firstName + " " + lastInitial;
     }
 
     // Function to set a cookie with expiration and specific path
@@ -2166,6 +2474,19 @@
       
       // Update capture styles based on theme
       updateCaptureStyles(theme);
+      
+      // AMÉLIORATION: Mettre à jour la couleur de la signature si elle existe déjà
+      const signatureElement = document.getElementById('userSignature');
+      if (signatureElement && signatureElement.textContent) {
+        const themeSignatureColor = getComputedStyle(document.documentElement).getPropertyValue('--signature-color').trim();
+        signatureElement.style.color = themeSignatureColor;
+      }
+      
+      const captureSignature = document.getElementById('captureSignature');
+      if (captureSignature && captureSignature.textContent) {
+        const themeSignatureColor = getComputedStyle(document.documentElement).getPropertyValue('--signature-color').trim();
+        captureSignature.style.color = themeSignatureColor;
+      }
     }
     
     // Function to update capture styles based on theme
@@ -2505,37 +2826,81 @@
       return false;
     }
 
-    // Delete user account
+    // AMÉLIORATION: Fonction améliorée pour supprimer complètement les données de l'utilisateur
     async function deleteUserAccount() {
       if (!userUniqueId) return false;
       
       try {
-        // Delete from Firestore
-        try {
-          await firestore.collection('flowerCodes').doc(userUniqueId).delete();
-          console.log("User deleted from flowerCodes collection");
-          
-          // We can't easily delete from the 'flowers' collection without knowing the document ID
-          // In a real-world scenario, you might want to use a query to find and delete all matching documents
-        } catch (error) {
-          console.error("Error deleting from Firestore:", error);
+        // Afficher une confirmation supplémentaire pour être sûr
+        if (!confirm("Êtes-vous vraiment sûr de vouloir supprimer TOUTES vos données ? Cette action est irréversible.")) {
+          return false;
         }
         
-        // Clear localStorage
+        console.log("Suppression du compte utilisateur:", userUniqueId);
+        
+        // Supprimer de Firestore - collection flowerCodes
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).delete();
+          console.log("Données supprimées de la collection flowerCodes");
+        } catch (error) {
+          console.error("Erreur lors de la suppression de flowerCodes:", error);
+        }
+        
+        // Supprimer de Firestore - collection flowers
+        try {
+          // Rechercher tous les documents correspondant à cet uniqueId
+          const flowersQuery = await firestore.collection('flowers').where('uniqueId', '==', userUniqueId).get();
+          
+          // Supprimer chaque document trouvé
+          const batch = firestore.batch();
+          let count = 0;
+          
+          flowersQuery.forEach((doc) => {
+            batch.delete(doc.ref);
+            count++;
+          });
+          
+          if (count > 0) {
+            await batch.commit();
+            console.log(`${count} documents supprimés de la collection flowers`);
+          }
+        } catch (error) {
+          console.error("Erreur lors de la suppression de flowers:", error);
+        }
+        
+        // Supprimer de la base de données en temps réel
+        try {
+          const birthdatesRef = database.ref('birthdates');
+          const query = birthdatesRef.orderByChild('uniqueId').equalTo(userUniqueId);
+          
+          query.once('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              birthdatesRef.child(childSnapshot.key).remove();
+            });
+          });
+          
+          console.log("Données supprimées de la base de données en temps réel");
+        } catch (error) {
+          console.error("Erreur lors de la suppression de la base de données en temps réel:", error);
+        }
+        
+        // Supprimer les données locales
         localStorage.removeItem('userFlowerData');
         localStorage.removeItem('isInstalled');
         localStorage.removeItem('flowerSubject');
         localStorage.removeItem('userSignature');
+        localStorage.removeItem('preferredTheme');
         
-        // Clear cookies
+        // Supprimer les cookies
         removeCookie('userUniqueId');
         removeCookie('userFlowerCode');
         removeCookie('isInstalled');
         removeCookie('userDateOfBirth');
         removeCookie('userProfession');
         removeCookie('userSignature');
+        removeCookie('preferredTheme');
         
-        // Reset variables
+        // Réinitialiser les variables
         userUniqueId = null;
         userFlowerCode = null;
         currentMotivation = null;
@@ -2546,10 +2911,20 @@
         seenSubjects = [];
         shareCount = 0;
         
-        console.log("User account deleted");
+        // Supprimer l'authentification si possible
+        try {
+          if (auth.currentUser) {
+            await auth.currentUser.delete();
+            console.log("Utilisateur Firebase supprimé");
+          }
+        } catch (authError) {
+          console.error("Erreur lors de la suppression de l'authentification:", authError);
+        }
+        
+        console.log("Compte utilisateur complètement supprimé");
         return true;
       } catch (error) {
-        console.error("Error deleting user account:", error);
+        console.error("Erreur lors de la suppression du compte:", error);
         return false;
       }
     }
@@ -2733,28 +3108,26 @@
       }, 300);
     });
     
-    // Delete account button handler
+    // Delete account button handler - AMÉLIORATION: gérer la suppression complète
     document.getElementById('deleteAccountButton').addEventListener('click', function() {
-      if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-        deleteUserAccount().then(success => {
-          if (success) {
-            alert("Account deleted successfully. You will need to create a new account to use this app.");
-            const idModal = document.getElementById('idModal');
-            idModal.classList.remove('show');
+      deleteUserAccount().then(success => {
+        if (success) {
+          alert("Compte supprimé avec succès. Vous devrez créer un nouveau compte pour utiliser cette application.");
+          const idModal = document.getElementById('idModal');
+          idModal.classList.remove('show');
+          setTimeout(() => {
+            idModal.style.display = 'none';
+            // Afficher à nouveau l'écran de bienvenue
+            const welcomeModal = document.getElementById('welcomeModal');
+            welcomeModal.style.display = 'block';
             setTimeout(() => {
-              idModal.style.display = 'none';
-              // Show welcome modal again
-              const welcomeModal = document.getElementById('welcomeModal');
-              welcomeModal.style.display = 'block';
-              setTimeout(() => {
-                welcomeModal.classList.add('show');
-              }, 100);
-            }, 300);
-          } else {
-            alert("There was a problem deleting your account. Please try again.");
-          }
-        });
-      }
+              welcomeModal.classList.add('show');
+            }, 100);
+          }, 300);
+        } else {
+          alert("Un problème est survenu lors de la suppression de votre compte. Veuillez réessayer.");
+        }
+      });
     });
     
     // Refresh motivation button handler
@@ -2771,11 +3144,13 @@
       document.getElementById('flowerCodeDisplay').textContent = "My Flower - " + newSubject;
       document.getElementById('monthlyMotivation').textContent = newMotivation;
       
-      // Update signature if available
+      // Update signature if available - AMÉLIORATION: Forcer la couleur du thème
       if (userSignature) {
         const signatureElement = document.getElementById('userSignature');
         if (signatureElement) {
           signatureElement.textContent = userSignature + " 🌟";
+          const themeSignatureColor = getComputedStyle(document.documentElement).getPropertyValue('--signature-color').trim();
+          signatureElement.style.color = themeSignatureColor;
         }
       }
       
@@ -2788,6 +3163,8 @@
       if (captureMotivation) captureMotivation.textContent = newMotivation;
       if (captureSignature && userSignature) {
         captureSignature.textContent = userSignature + " 🌟";
+        const themeSignatureColor = getComputedStyle(document.documentElement).getPropertyValue('--signature-color').trim();
+        captureSignature.style.color = themeSignatureColor;
       }
       
       // Rotation animation for icon
@@ -2851,9 +3228,10 @@
         // Generate motivation
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
-        // Hide welcome modal with animation
-        const welcomeModal = document.getElementById('welcomeModal');
-        welcomeModal.classList.remove('show');
+        // Change button text to Done with check icon
+        const createButton = document.getElementById('createAccountButton');
+        createButton.innerHTML = '<i class="fas fa-check"></i> Done';
+        createButton.style.backgroundColor = '#4CAF50'; // Green color
         
         // Create user data object
         const userData = {
@@ -2882,38 +3260,46 @@
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
-        // Hide welcome modal
+        // Hide welcome modal after a brief delay to show the Done state
         setTimeout(() => {
-          welcomeModal.style.display = 'none';
-          document.getElementById('loadingSpinner').style.display = 'none';
+          const welcomeModal = document.getElementById('welcomeModal');
+          welcomeModal.classList.remove('show');
           
-          // Submit to Firebase
-          submitToFirebase().then(submitted => {
-            console.log("Firebase submission result:", submitted);
+          setTimeout(() => {
+            welcomeModal.style.display = 'none';
+            document.getElementById('loadingSpinner').style.display = 'none';
+            createButton.innerHTML = 'Create Account'; // Reset button text
+            createButton.style.backgroundColor = ''; // Reset button color
+            createButton.disabled = false;
             
-            // Show welcome toast
-            const welcomeToast = document.getElementById('welcomeToast');
-            welcomeToast.style.display = 'block';
-            setTimeout(() => {
-              welcomeToast.style.opacity = '1';
-            }, 100);
-            setTimeout(() => {
-              welcomeToast.style.opacity = '0';
+            // Submit to Firebase
+            submitToFirebase().then(submitted => {
+              console.log("Firebase submission result:", submitted);
+              
+              // Show welcome toast
+              const welcomeToast = document.getElementById('welcomeToast');
+              welcomeToast.style.display = 'block';
               setTimeout(() => {
-                welcomeToast.style.display = 'none';
-              }, 500);
-            }, 2000);
-            
-            // Show flower automatically after creation
-            updateFlowerDisplay();
-            const flowerModal = document.getElementById('flowerModal');
-            flowerModal.style.display = 'block';
-            setTimeout(() => {
-              flowerModal.classList.add('show');
-            }, 10);
-            document.getElementById('shareFlowerButton').style.display = 'flex';
-          });
-        }, 300);
+                welcomeToast.style.opacity = '1';
+              }, 100);
+              setTimeout(() => {
+                welcomeToast.style.opacity = '0';
+                setTimeout(() => {
+                  welcomeToast.style.display = 'none';
+                }, 500);
+              }, 2000);
+              
+              // Show flower automatically after creation
+              updateFlowerDisplay();
+              const flowerModal = document.getElementById('flowerModal');
+              flowerModal.style.display = 'block';
+              setTimeout(() => {
+                flowerModal.classList.add('show');
+              }, 10);
+              document.getElementById('shareFlowerButton').style.display = 'flex';
+            });
+          }, 300);
+        }, 2000); // Wait 2 seconds to show the Done state
         
         console.log("Setup complete and data stored locally and in cookies");
       } catch (error) {
@@ -2947,7 +3333,7 @@
         // Capture the container
         const canvas = await html2canvas(captureContainer, {
           backgroundColor: bgColor,
-          scale: 2,
+          scale: 5,
           logging: true,
           useCORS: true,
           allowTaint: true,
@@ -3002,7 +3388,8 @@
     
     function fallbackShare() {
       try {
-        const shareText = `Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
+        const shareText = `
+Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
           alert('Share text copied to clipboard!');
