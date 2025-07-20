@@ -26,7 +26,6 @@
             flex-direction: column;
             min-height: 100vh;
             -webkit-text-size-adjust: 100%; /* Empêche l'ajustement automatique de la taille du texte */
-            overflow-x: hidden; /* Empêche le défilement horizontal */
         }
         header {
             background-color: white;
@@ -35,11 +34,6 @@
             align-items: center;
             justify-content: space-between;
             transition: background-color 0.3s ease;
-            position: sticky; /* Garder l'en-tête visible */
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            box-sizing: border-box;
         }
         
         h1 {
@@ -120,9 +114,6 @@
             padding: 10px 15px;
             margin-top: auto;
             transition: background-color 0.3s ease, color 0.3s ease;
-            position: relative; /* Assurer que le footer reste en bas */
-            width: 100%;
-            box-sizing: border-box;
         }
         .footer-content {
             display: flex;
@@ -643,18 +634,17 @@
         /* Welcome modal content */
         #welcomeModal .modal-content {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 20px auto; /* Modifié pour être plus proche du haut */
-            padding: 15px 10px;
-            border: 2px solid #4CAF50;
+            margin: 40% auto; /* Descendu de 35% à 65% pour être plus bas sur l'écran */
+            padding: 15px 10px; /* Réduction du padding sur les côtés */
+            border: 2px solid #4CAF50; /* Vert gazon pour la bordure */
             border-radius: 25px;
-            width: 85%;
+            width: 85%; /* Réduction de la largeur pour moins d'espace sur les côtés */
             max-width: 290px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             text-align: center;
             transition: transform 0.3s ease;
             transform: scale(0.8);
-            max-height: calc(100vh - 40px); /* Limite la hauteur pour éviter le débordement */
-            overflow-y: auto; /* Permet le défilement si le contenu est trop grand */
+            /* Suppression de margin-top pour laisser la propriété margin fonctionner seule */
         }
         #welcomeModal.show .modal-content {
             transform: scale(1);
@@ -668,9 +658,6 @@
             text-align: center;
             margin-bottom: 3px;
             cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 15px;
         }
 
         #welcomeModal .welcome-header {
@@ -680,7 +667,6 @@
             margin-bottom: 8px;
             text-align: center;
             font-weight: bold;
-            padding-top: 10px; /* Espace pour le bouton de fermeture */
         }
 
         #welcomeModal .welcome-text {
@@ -705,12 +691,11 @@
         }
 
         .dob-input {
-            width: 90%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             padding: 8px;
             border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 16px;
-            box-sizing: border-box; /* S'assure que le padding est inclus dans la largeur */
+            font-size: 16px; /* Taille minimum pour éviter le zoom sur iOS */
         }
 
         /* Profession selector */
@@ -728,24 +713,23 @@
         }
 
         .profession-search {
-            width: 90%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             padding: 8px;
             border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 16px;
-            box-sizing: border-box;
+            font-size: 16px; /* Taille minimum pour éviter le zoom sur iOS */
         }
 
         .profession-dropdown {
             display: none;
             position: absolute;
-            background-color: white;
+            background-color: white; /* Fond blanc pour les options */
             border: 1px solid #ccc;
             border-radius: 10px;
-            width: 90%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             max-height: 150px;
             overflow-y: auto;
-            left: 5%;
+            left: 5%; /* Ajusté pour le centrage */
             z-index: 10;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
@@ -755,8 +739,8 @@
             font-size: 0.8em;
             cursor: pointer;
             transition: background-color 0.2s;
-            background-color: white;
-            color: #333;
+            background-color: white; /* Fond blanc pour chaque option */
+            color: #333; /* Couleur de texte foncée pour contraste */
         }
 
         .profession-option:hover {
@@ -777,12 +761,11 @@
         }
 
         .name-input {
-            width: 90%;
+            width: 90%; /* Augmenté pour utiliser plus d'espace */
             padding: 8px;
             border-radius: 10px;
             border: 1px solid #ccc;
-            font-size: 16px;
-            box-sizing: border-box;
+            font-size: 16px; /* Taille minimum pour éviter le zoom sur iOS */
         }
 
         /* Submit button */
@@ -797,10 +780,9 @@
             font-weight: bold;
             margin: 10px auto 5px;
             display: block;
-            width: 80%;
+            width: 80%; /* Augmenté pour utiliser plus d'espace */
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
-            box-sizing: border-box;
         }
         
         #createAccountButton:hover {
@@ -907,6 +889,7 @@
             font-size: 0.7em;
             cursor: pointer;
             transition: background-color 0.3s;
+            /* Ajustement pour que le bouton ait la même hauteur que close-button */
             height: 30px;
             display: flex;
             align-items: center;
@@ -933,7 +916,7 @@
             width: auto;
             padding: 6px 15px;
             font-size: 0.7em;
-            height: 28px;
+            height: 28px; /* Hauteur fixe pour correspondre au bouton delete */
         }
 
         /* Menu link without underline */
@@ -1026,8 +1009,6 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            width: 100%;
-            overflow-x: hidden; /* Empêche le défilement horizontal */
         }
         
         /* Default theme (blue) */
@@ -1393,7 +1374,7 @@
         /* User signature */
         .user-signature {
             display: block;
-            font-size: 0.7em;
+            font-size: 0.7em;  /* 1px smaller than main content */
             text-align: right;
             margin-top: 5px;
             color: #666;
@@ -1413,7 +1394,6 @@
             font-size: 14px;
         }
     </style>
-
 </head>
 <body class="theme-green-blue">
 
