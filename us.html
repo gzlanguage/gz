@@ -31,16 +31,6 @@
             border-radius: 12px;
             font-weight: bold;
         }
-        .logo {
-            margin-left: 10px;
-            font-size: 1.4em;
-            color: #007bff;
-            border: 2px solid #007bff;
-            padding: 4px;
-            border-radius: 12px;
-            font-weight: normal;
-            font-family: Arial, sans-serif;
-        }
         .user-icon-container {
             margin-right: 2px;
             display: flex;
@@ -65,11 +55,9 @@
         }
         .button-container {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center; /* Centrer les boutons */
             margin-top: 5px;
             padding: 5px 0;
-            overflow-x: auto;
-            white-space: nowrap;
         }
         .button {
             background-color: #007bff;
@@ -77,18 +65,15 @@
             border: 2px solid #4CAF50;
             border-radius: 10px;
             padding: 5px 10px;
-            margin: 0 3px;
+            margin: 0 2px; /* Distance de 4px entre les boutons */
             font-size: 0.8em;
-            cursor: pointer;
+            cursor: default; /* Rendre le curseur par défaut */
             text-decoration: none;
             display: flex;
             align-items: center;
         }
-        .button.active {
-            background-color: #4CAF50;
-        }
         .button i {
-            margin-right: 2px;
+            margin-right: 4px; /* Espacement de 4px entre l'icône et le texte */
         }
         .notification {
             text-align: center;
@@ -141,29 +126,21 @@
 <div class="divider"></div>
 
 <div class="button-container">
-    <button class="button active" onclick="changePage('Confession')"><i class="fas fa-microphone"></i>Confession</button>
-    <button class="button" onclick="changePage('Most Stylish')"><i class="fas fa-star"></i>Most Stylish</button>
-    <button class="button" onclick="changePage('Best Looking')"><i class="fas fa-eye"></i>Best Looking</button>
-    <button class="button" onclick="changePage('Best Outfit')"><i class="fas fa-tshirt"></i>Best Outfit</button>
-    <button class="button" onclick="changePage('How to Participate')">How to Participate<i class="fas fa-question"></i></button>
-    <button class="button" onclick="changePage('Style Awards')"><i class="fas fa-award"></i>Style Awards</button>
-    <button class="button" onclick="changePage('Style Talk')"><i class="fas fa-comments"></i>Style Talk</button>
-    <button class="button" onclick="changePage('Open Mic')"><i class="fas fa-microphone"></i>Open Mic</button>
-    <button class="button" onclick="changePage('Live Quiz')"><i class="fas fa-question-circle"></i>Live Quiz</button>
-    <button class="button" onclick="changePage('Collective Story')"><i class="fas fa-book"></i>Collective Story</button>
-    <button class="button" onclick="changePage('Horror Night')"><i class="fas fa-ghost"></i>Horror Night</button>
-    <button class="button" onclick="changePage('Become Moderator')"><i class="fas fa-user-shield"></i>Become Moderator</button>
-    <a href="https://g-z.online" style="text-decoration: none;">
-        <button class="button"><i class="fas fa-arrow-right"></i>Go to G-Z</button>
+    <button class="button"><i class="fas fa-star"></i>Important</button>
+    <a href="Faq.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-file-contract"></i>FAQ</button>
     </a>
-    <a href="https://g-z.online/Faq.html" style="text-decoration: none;">
-        <button class="button"><i class="fas fa-info-circle"></i>About G-Z</button>
+    <a href="Confidentialité.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-file-contract"></i>Privacy</button>
+    </a>
+    <a href="Terms.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-file-contract"></i>Terms</button>
     </a>
 </div>
 
 <div class="divider"></div>
 <div class="notification">
-    <span class="notification-text">Members vote with ❤️ reactions. Most hearts wins.</span>
+    <span class="notification-text">¯\_(ツ)_/¯</span>
 </div>
 
 <div class="divider"></div>
@@ -171,51 +148,15 @@
 <div class="how-it-works-container">
     <h2 class="section-title"> - To know -</h2>
     <p class="description" id="operationDescription">
-     Your confession -- whether it's weird, funny, emotional, or completely random, like "We laugh but we don't joke."
-All submissions are reviewed before being published. If approved, your confession will be posted anonymously in the Confession channel.
+     For any questions about navigation, please click on the FAQ section. You'll find the information you're looking for there.
+You can also visit our Privacy Policy and Terms of Use pages to learn more about how our service works.
     </p>
 </div>
 
 <script>
-    const descriptions = {
-        'Confession': 'Your confession, whether it\'s weird, funny, emotional, or completely random, like "We laugh but we don\'t joke."\nAll submissions are reviewed before being published. If approved, your confession will be posted anonymously in the Confession channel.\n',
-        
-        'Most Stylish': 'Who has the best personal style in the community?\nThis contest is about showing off your full-body look and your overall vibe. We\'re judging based on:\n\nOriginality of your style\n\nConsistency in your fashion choices\n\nConfidence and presence\n\nThe mood or energy you give off\nSeparate contests for men and women. Bring your best and let your style speak.',
-        
-        'Best Looking': 'This is about natural beauty, authenticity, and charisma.\nPost a clear, unfiltered photo of yourself -- no filters, no AI, no edits.\nJudging is based on:\n\nNatural appearance\n\nFacial harmony and expression\n\nPresence and energy\nLet your real self shine.',
-        
-        'Best Outfit': 'This category is all about the full fit -- your top, bottom, shoes, and accessories all matter.\nPost your cleanest, boldest, or most creative outfit.\nSeparate contests for men and women. One complete look to impress.',
-        
-        'How to Participate': 'If you would like to participate in one of the following categories: Confession, Most Stylish, Best Outfit, Best looking, you have two options:\n\n1. Apply for the "Star" role (recommended)\n\nThis role allows you to:\n\nSubmit content in all categories without restriction\n\nObtain a "Star" badge\n\nBenefit from greater visibility within the G-Z community\n\nGain credibility and recognition\n\n\nTo apply, send an email to the following address: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@g-z.online" class="email-link" target="_blank">admin@g-z.online</a>\nEmail subject: Star Request\n\nYour email must include:\n\nYour full name\n\nYour country and your age (minimum 18 years old)\n\nYour Discord username\n\nA link to your social media profile (Instagram, TikTok, etc.) containing photos or videos of you\n\nA short written presentation explaining who you are and why you wish to obtain the Star role\n\n\nIf your request is approved, you will receive personalized support to help you get started and participate smoothly.\n\n2. Submit your video directly\n\nYou may also send your content to KabaOulare via G-Z.\nPlease include:\n\nThe relevant category\n\nA brief introduction of yourself\n\n\nOnce your video is received, it will be reviewed. If approved, the G-Z team will publish it on your behalf.\n\nWe highly recommend the first option, which helps build trust and gives you full access to the G-Z ecosystem.\n\nThe G-Z Team.',
-        
-        'Style Awards': 'This is the central space for everything related to fashion and style competitions.\nYou\'ll find:\n\nOfficial announcements\n\nContest rules\n\nSubmission links\n\nResults and winners\nIf it\'s about style, it starts here.',
-        
-        'Style Talk': 'This is an open discussion space for anything related to fashion and personal style.\nShare your opinions, trends you like or hate, outfits, brand discoveries, or ask for advice.\nWhether you\'re into high fashion or just exploring your own taste, this is the space to speak your mind.',
-        
-        'Open Mic': 'A voice channel dedicated to spontaneous and creative expression.\nJoin to sing, freestyle, read poetry, perform, or simply speak your mind.\nNo pressure, no competition -- just good energy and raw talent from the community.',
-        
-        'Live Quiz': 'We\'re developing live quiz games where members can test their knowledge in real time.\nTopics will include pop culture, movies, fashion, current events, and more.\nIt\'s about fun, learning, and a little friendly competition between members.',
-        
-        'Collective Story': 'Each month, members take turns building an original story -- one post at a time.\nOne person starts, another continues, and so on.\nThe goal is to create a unique narrative together, based on imagination, creativity, and collaboration.\nNo writing experience needed -- just your ideas.',
-        
-        'Horror Night': 'A dedicated voice event for fans of scary stories.\nCome share or listen to chilling tales -- whether they\'re real, fictional, urban legends, or horror movie-inspired.\nPerfect for those who love suspense, mystery, and storytelling in a dark and immersive setting.',
-        
-        'Become Moderator': 'Moderators help us maintain a safe, welcoming, and respectful environment.\nAs a mod, you\'ll assist with managing discussions, supporting members, and keeping the community organized.\nTo apply, email us at <a href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@g-z.online" class="email-link" target="_blank">admin@g-z.online</a> with the following:\n\nFull name\n\nAge (must be 18 or older)\n\nCountry\n\nLanguages you speak\n\nYour Discord username\nWe\'re looking for committed, mature, and active members to help guide the community forward.'
-    };
-
     function changePage(page) {
         const descriptionElement = document.getElementById('operationDescription');
-        const buttons = document.querySelectorAll('.button');
-
-        // Change the description
-        descriptionElement.innerHTML = descriptions[page];
-
-        // Update button styles
-        buttons.forEach(button => {
-            button.classList.remove('active');
-        });
-        const activeButton = Array.from(buttons).find(button => button.textContent.includes(page));
-        activeButton.classList.add('active');
+        // Change the description as needed based on the selected page
     }
 </script>
 
