@@ -1347,7 +1347,7 @@
         }
         
         .user-name {
-            font-size: 0.95em;
+            font-size: 0.75em;
             font-weight: bold;
         }
     </style>
@@ -1542,6 +1542,10 @@
     let userFullName = null;
     let seenSubjects = [];
     let shareCount = 0;
+    let userRank = 0;
+    let userEmoji = "👑";
+
+    const rankEmojis = ["👑", "🌟", "🔥", "⚡️", "⭐️", "❄️", "✨️", "🎖", "🗿"];
 
     const professions = [
       "Musician", "Rapper", "Footballer", "Basketball Player", "Boxer", 
@@ -1785,6 +1789,29 @@
       "Occupation": "Occupation",
       "Calling": "Calling"
     };
+
+    async function getUserRankAndEmoji() {
+      try {
+        const userCount = await getUserCount();
+        userRank = userCount % rankEmojis.length;
+        userEmoji = rankEmojis[userRank];
+        console.log(`User rank: ${userRank}, emoji: ${userEmoji}`);
+        return userEmoji;
+      } catch (error) {
+        console.error("Error getting user rank:", error);
+        return "👑";
+      }
+    }
+
+    async function getUserCount() {
+      try {
+        const snapshot = await firestore.collection('flowerCodes').get();
+        return snapshot.size;
+      } catch (error) {
+        console.error("Error counting users:", error);
+        return 0;
+      }
+    }
 
     function formatUserName(fullName) {
       if (!fullName) return "";
@@ -2233,7 +2260,7 @@
       return selectedSubject;
     }
 
-    function updateFlowerDisplay() {
+    async function updateFlowerDisplay() {
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
       
@@ -2251,7 +2278,7 @@
       const formattedName = formatUserName(userFullName);
       
       if (formattedName) {
-        flowerCodeElement.innerHTML = `My Flower - ${subject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `My Flower - ${subject} / ${formattedName} ${userEmoji}`;
       } else {
         flowerCodeElement.textContent = "My Flower - " + subject;
       }
@@ -2267,7 +2294,7 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `My Flower - ${subject} / ${formattedName}`;
+          captureCode.innerHTML = `My Flower - ${subject} / ${formattedName} ${userEmoji}`;
         } else {
           captureCode.textContent = "My Flower - " + subject;
         }
@@ -2463,6 +2490,8 @@
         
         const location = await detectUserLocation();
         
+        await getUserRankAndEmoji();
+        
         const userData = {
           date: new Date().toISOString(),
           country: location.country || "Unknown",
@@ -2478,7 +2507,9 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
-          shareCount: shareCount
+          shareCount: shareCount,
+          rank: userRank,
+          emoji: userEmoji
         };
 
         console.log("Submitting data to Firebase:", userData);
@@ -2514,12 +2545,16 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
         return true;
       } catch (error) {
         console.error("Firebase submission error:", error);
+        await getUserRankAndEmoji();
+        
         const userData = {
           date: new Date().toISOString(),
           uniqueId: userUniqueId,
@@ -2532,7 +2567,9 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
-          shareCount: 0
+          shareCount: 0,
+          rank: userRank,
+          emoji: userEmoji
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -2542,6 +2579,8 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
@@ -2584,6 +2623,8 @@
       const cookieDOB = getCookie('userDateOfBirth');
       const cookieProfession = getCookie('userProfession');
       const cookieFullName = getCookie('userFullName');
+      const cookieEmoji = getCookie('userEmoji');
+      const cookieRank = getCookie('userRank');
       
       if (cookieUniqueId && cookieFlowerCode) {
         userUniqueId = cookieUniqueId;
@@ -2591,11 +2632,13 @@
         userDateOfBirth = cookieDOB || null;
         userProfession = cookieProfession || null;
         userFullName = cookieFullName || null;
+        userEmoji = cookieEmoji || "👑";
+        userRank = cookieRank ? parseInt(cookieRank) : 0;
         isInstalled = cookieInstalled === 'true';
         
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
-        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName });
+        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName, userEmoji, userRank });
         return true;
       }
       
@@ -2609,6 +2652,8 @@
           userProfession = userData.profession || null;
           userFullName = userData.fullName || null;
           shareCount = userData.shareCount || 0;
+          userEmoji = userData.emoji || "👑";
+          userRank = userData.rank || 0;
           currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
           userUid = userData.uid;
           isInstalled = localStorage.getItem('isInstalled') === 'true';
@@ -2618,6 +2663,8 @@
           setCookie('userDateOfBirth', userDateOfBirth, 365);
           setCookie('userProfession', userProfession, 365);
           setCookie('userFullName', userFullName, 365);
+          setCookie('userEmoji', userEmoji, 365);
+          setCookie('userRank', userRank.toString(), 365);
           setCookie('isInstalled', 'true', 365);
           
           console.log("Found saved user data in localStorage:", userData);
@@ -2692,6 +2739,8 @@
         removeCookie('userDateOfBirth');
         removeCookie('userProfession');
         removeCookie('userFullName');
+        removeCookie('userEmoji');
+        removeCookie('userRank');
         removeCookie('preferredTheme');
         
         userUniqueId = null;
@@ -2700,6 +2749,8 @@
         userDateOfBirth = null;
         userProfession = null;
         userFullName = null;
+        userEmoji = null;
+        userRank = null;
         isInstalled = false;
         seenSubjects = [];
         shareCount = 0;
@@ -2912,7 +2963,7 @@
       
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       if (formattedName) {
-        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName} ${userEmoji}`;
       } else {
         flowerCodeElement.textContent = "My Flower - " + newSubject;
       }
@@ -2924,7 +2975,7 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName} ${userEmoji}`;
         } else {
           captureCode.textContent = "My Flower - " + newSubject;
         }
@@ -2976,6 +3027,8 @@
         
         userFlowerCode = generateFlowerCode();
         
+        userEmoji = await getUserRankAndEmoji();
+        
         const subject = getRandomSubject();
         localStorage.setItem('flowerSubject', subject);
         
@@ -2998,7 +3051,9 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: subject,
-          shareCount: 0
+          shareCount: 0,
+          rank: userRank,
+          emoji: userEmoji
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -3008,6 +3063,8 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
