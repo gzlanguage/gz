@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5; /* Light background color */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+            font-family: 'Roboto', Arial, sans-serif; /* Use a similar font */
+        }
+        header {
+            background-color: #ffffff; /* White background */
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+            max-width: 1200px; /* Limit the container width */
+            margin: 0 auto; /* Center the container */
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.3em; /* Adjusted font size */
+            font-family: 'Billabong', cursive;
+            color: #007BFF; /* Blue color */
+        }
+        .logo-genz {
+            border: 1.5px solid #007BFF; /* Blue border */
+            padding: 3px 6px; /* Reduced padding */
+            display: inline-block;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .divider {
+            height: 1px;
+            background-color: #007BFF; /* Blue border */
+            width: 100%;
+            margin-top: 0; /* Remove top margin */
+        }
+        .divider-text {
+            text-align: center;
+            color: #333; /* Text color */
+            font-size: 0.9em;
+            margin: 10px 0; 
+        }
+        footer {
+            text-align: center;
+            color: #333; /* Text color */
+            margin: 20px 0;
+            font-size: 0.8em;
+        }
+        /* Style for the dropdown menu */
+        #language-selector {
+            margin-left: auto; /* Push the menu to the right */
+            padding: 4px; /* Reduce inner padding */
+            border: 1px solid #007BFF;
+            border-radius: 10px;
+            font-size: 1em;
+            color: #333;
+            background-color: #ffffff; /* White background */
+            width: 115px; /* Set width */
+        }
+    </style>
+    <script>
+        function changeLanguage() {
+            var selector = document.getElementById("language-selector");
+            var url = selector.value;
+            if (url) {
+                window.location.href = url;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+        <h1 class="logo-genz" translate="no">G-Z</h1>
+    </a>
+    <select id="language-selector" onchange="changeLanguage()">
+        <option value="" disabled selected>Translate</option>
+        <option value="index.html">English (en)</option>
+        <option value="index-fr.html">Français (fr)</option>
+        <option value="index-es.html">Español (es)</option>
+        <option value="index-pt.html">Português (pt)</option>
+        <option value="index-ar.html">العربية (ar)</option>
+        <option value="index-hi.html">हिंदी (hi)</option>
+        <option value="index-ur.html">اردو (ur)</option>
+        <option value="index-am.html">አማርኛ (am)</option>
+        <option value="index-id.html">Bahasa Indonesia (id)</option>
+        <option value="index-vi.html">Tiếng Việt (vi)</option>
+        <option value="index-zh.html">普通话 (zh)</option>
+        <option value="index-ja.html">日本語 (ja)</option>
+        <option value="index-ko.html">한국어 (ko)</option>
+        <option value="index-ru.html">Русский (ru)</option>
+        <option value="index-de.html">Deutsch (de)</option>
+        <option value="index-tr.html">Türkçe (tr)</option>
+    </select>
+</header>
+
+<div class="divider"></div>
+<div class="divider-text">Select your language in "Translate"</div>
+<div class="divider"></div>
+
+<footer>
+    <p></p> <!-- Suppression de la section copyright -->
+</footer>
+
+</body>
+</html>
