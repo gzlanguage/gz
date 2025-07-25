@@ -1,1 +1,3266 @@
-hmm
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.appspot.com/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style>
+        input, textarea, select, button {
+            font-size: 16px;
+            touch-action: manipulation;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .divider {
+            height: 0.6px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .button-container::-webkit-scrollbar {
+            display: none;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            padding: 3px 0;
+            max-height: 30px;
+            overflow: hidden;
+        }
+        .share-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.3em;
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 4px;
+            background-color: white;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        footer {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            margin-top: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+        }
+        .logo {
+            color: #007bff;
+            font-size: 1.6em;
+            margin-right: 10px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(0, 119, 190, 0.1);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .logo:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 50% auto;
+            padding: 14px;
+            border: 1px solid #007bff;
+            border-radius: 60px;
+            width: 280px;
+            max-width: 70%;
+            text-align: center;
+            max-height: 60vh;
+            overflow-y: auto;
+            position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-header {
+            font-size: 1.8em;
+            font-family: 'Billabong', cursive;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: 120px;
+            margin: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .close-button:hover {
+            background-color: #0056b3;
+        }
+        
+        @keyframes flowerRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .flower-icon {
+            display: inline-block;
+            animation: flowerRotate 2s infinite ease-in-out;
+            color: #ff69b4;
+        }
+        
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        .monthly-motivation {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            background-color: white;
+            font-style: italic;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+        
+        .flower-code {
+            display: block;
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            max-width: 220px;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .copy-icon {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+            transition: color 0.3s ease;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            margin: 290px auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            max-width: 190px;
+            position: relative;
+            z-index: 1001;
+            border: 1px solid #0056b3;
+        }
+        
+        .share-flower-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .share-flower-button i {
+            margin-left: 8px;
+        }
+        
+        #capturedFlower {
+            position: fixed;
+            z-index: 1003;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .captured-image-container {
+            position: relative;
+            max-width: 85%;
+            max-height: 60vh;
+            margin-bottom: 15px;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        
+        .share-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 10px auto;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .share-message i {
+            margin-left: 8px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        
+        .share-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .capture-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .capture-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+        
+        .capture-button i {
+            margin-right: 5px;
+        }
+        
+        .close-capture {
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        #flowerCaptureContainer {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: -9999px;
+            background-color: white;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-flower-header {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px rgba(0, 123, 255, 0.2);
+            transition: color 0.3s ease;
+        }
+        
+        .capture-flower-code {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.8em;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 10px;
+            border: 1px solid #ff69b4;
+            margin: 6px auto;
+            text-align: center;
+            max-width: 80%;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-flower-motivation {
+            font-style: italic;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px dashed #ff69b4;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+            text-align: center;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+        
+        .capture-flower-icon {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+        
+        .gz-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.4em;
+            text-align: center;
+            margin-top: 10px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 4px;
+            width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .share-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 0.85em;
+            margin: 5px auto 15px auto;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-website-url {
+            text-align: center;
+            font-size: 0.85em;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 8px;
+            font-family: Arial, sans-serif;
+            padding: 3px 0;
+            border-top: 1px dashed #007bff;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .terms-text {
+            font-size: 0.8em;
+            color: black;
+            text-align: center;
+            margin: 10px auto;
+            width: 330px;
+            transition: color 0.3s ease;
+        }
+        
+        .billabong-title {
+            margin-bottom: 3px;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 1px;
+        }
+
+        .header-icon {
+            font-size: 1.4em;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .app-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 1.4em;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        #welcomeToast {
+            position: fixed;
+            top: 160px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-family: , cursive;
+            font-size: 1.1em;
+            border: 2px solid #4CAF50;
+        }
+
+        #welcomeModal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #welcomeModal.show {
+            opacity: 1;
+        }
+
+        #welcomeModal .modal-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 40% auto;
+            padding: 15px 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            width: 85%;
+            max-width: 290px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #welcomeModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        #welcomeModal .close {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-bottom: 3px;
+            cursor: pointer;
+        }
+
+        #welcomeModal .welcome-header {
+            color: #007bff;
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #welcomeModal .welcome-text {
+            margin: 10px 0 15px 0;
+            font-size: 0.8em;
+            color: #333;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .dob-container {
+            margin: 10px 0;
+        }
+
+        .dob-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .dob-input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .profession-container {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .profession-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .profession-search {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .profession-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 90%;
+            max-height: 150px;
+            overflow-y: auto;
+            left: 5%;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .profession-option {
+            padding: 8px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            background-color: white;
+            color: #333;
+        }
+
+        .profession-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .name-container {
+            margin: 10px 0;
+        }
+
+        .name-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .name-input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        #createAccountButton {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 10px auto 5px;
+            display: block;
+            width: 80%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+        }
+        
+        #createAccountButton:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d80 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+        
+        #createAccountButton:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        #idModal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #idModal.show {
+            opacity: 1;
+        }
+
+        #idModal .modal-content {
+            background-color: #fff;
+            margin: 45% auto;
+            padding: 15px;
+            border: 1px solid #007BFF;
+            border-radius: 25px;
+            width: 65%;
+            max-width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #idModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .id-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .id-title {
+            font-size: 1em;
+            color: #007bff;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .id-display {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #ff69b4;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            margin: 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 80%;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .delete-account {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-account:hover {
+            background-color: #e60000;
+        }
+
+        .copy-icon {
+            margin-left: 6px;
+        }
+
+        .id-message {
+            font-size: 0.7em;
+            color: #333;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        #idModal .close-button {
+            margin-top: 8px;
+            width: auto;
+            padding: 6px 15px;
+            font-size: 0.7em;
+            height: 28px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+        
+        .style-selector {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        
+        .style-selector h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .style-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 5px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .style-options::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .style-option {
+            width: 60px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .style-option.selected {
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #007bff;
+        }
+        
+        .style-option.red-black {
+            background: linear-gradient(to right, #FF4500, #8B0000, #121212, #121212);
+        }
+        
+        .style-option.green-blue {
+            background: linear-gradient(to right, #3EB489, #14532D, #0A2239, #1A2E4D);
+        }
+        
+        .style-option.orange-pink {
+            background: linear-gradient(to right, #FF7F50, #FF6F91, #C71585, #4B0082);
+        }
+        
+        .style-option.yellow-purple {
+            background: linear-gradient(to right, #FFD700, #FFA500, #8A2BE2, #4B0082);
+        }
+        
+        .style-option.default {
+            background: linear-gradient(to right, #007bff, #0056b3);
+        }
+        
+        .main-content {
+            padding-bottom: 80px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        body.theme-default {
+            background-color: white;
+            color: #333;
+        }
+        
+        body.theme-default header, 
+        body.theme-default footer,
+        body.theme-default .style-selector {
+            background-color: white;
+        }
+        
+        body.theme-default .app-logo,
+        body.theme-default .header-icon,
+        body.theme-default .divider,
+        body.theme-default .notification,
+        body.theme-default .billabong-title,
+        body.theme-default .gz-logo,
+        body.theme-default .capture-website-url,
+        body.theme-default .capture-flower-header,
+        body.theme-default .id-title {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        
+        body.theme-default .notification .notification-text {
+            color: #007bff;
+        }
+        
+        body.theme-default .button {
+            background-color: #007bff;
+        }
+        
+        body.theme-default .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        body.theme-default .flower-code,
+        body.theme-default .id-display {
+            color: #ff69b4;
+            background-color: #fff0f8;
+            border-color: #ff69b4;
+        }
+        
+        body.theme-default .monthly-motivation,
+        body.theme-default .capture-flower-motivation {
+            border-color: #ff69b4;
+            color: #333;
+            background-color: white;
+        }
+        
+        body.theme-default .modal-content {
+            background-color: white;
+            border-color: #007bff;
+        }
+        
+        body.theme-red-black {
+            background: black;
+            color: #E5E5E5;
+        }
+        
+        body.theme-red-black header, 
+        body.theme-red-black footer,
+        body.theme-red-black .style-selector {
+            background-color: black;
+        }
+        
+        body.theme-red-black .app-logo,
+        body.theme-red-black .header-icon,
+        body.theme-red-black .gz-logo,
+        body.theme-red-black .capture-flower-header,
+        body.theme-red-black .capture-website-url,
+        body.theme-red-black .id-title,
+        body.theme-red-black .billabong-title {
+            color: #FF4500;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .divider {
+            background-color: #FF4500;
+        }
+        
+        body.theme-red-black .notification .notification-text {
+            color: #FF4500;
+        }
+        
+        body.theme-red-black .notification,
+        body.theme-red-black .welcome-text,
+        body.theme-red-black .id-message {
+            color: #CCCCCC;
+        }
+        
+        body.theme-red-black .button {
+            background-color: #8B0000;
+        }
+        
+        body.theme-red-black .share-flower-button {
+            background-color: #8B0000;
+            color: white;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .flower-code,
+        body.theme-red-black .id-display {
+            color: #FF4500;
+            background-color: black;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .monthly-motivation,
+        body.theme-red-black .capture-flower-motivation {
+            border-color: #FF4500;
+            color: #E5E5E5;
+            background-color: black;
+        }
+        
+        body.theme-red-black .modal-content,
+        body.theme-red-black #flowerCaptureContainer {
+            background-color: black;
+            border-color: #8B0000;
+        }
+        
+        body.theme-green-blue {
+            background: #1A2E4D;
+            color: #F5F5F5;
+        }
+        
+        body.theme-green-blue header, 
+        body.theme-green-blue footer,
+        body.theme-green-blue .style-selector {
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .app-logo,
+        body.theme-green-blue .header-icon,
+        body.theme-green-blue .gz-logo,
+        body.theme-green-blue .capture-flower-header,
+        body.theme-green-blue .capture-website-url,
+        body.theme-green-blue .id-title,
+        body.theme-green-blue .billabong-title {
+            color: #3EB489;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .divider {
+            background-color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification .notification-text {
+            color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification,
+        body.theme-green-blue .welcome-text,
+        body.theme-green-blue .id-message {
+            color: #A0A0A0;
+        }
+        
+        body.theme-green-blue .button {
+            background-color: #14532D;
+        }
+        
+        body.theme-green-blue .share-flower-button {
+            background-color: #14532D;
+            color: white;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .flower-code,
+        body.theme-green-blue .id-display {
+            color: #3EB489;
+            background-color: #36454F;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .monthly-motivation,
+        body.theme-green-blue .capture-flower-motivation {
+            border-color: #3EB489;
+            color: #F5F5F5;
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .modal-content,
+        body.theme-green-blue #flowerCaptureContainer {
+            background-color: #1A2E4D;
+            border-color: #3EB489;
+        }
+        
+        body.theme-orange-pink {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-orange-pink header, 
+        body.theme-orange-pink footer,
+        body.theme-orange-pink .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .app-logo,
+        body.theme-orange-pink .header-icon,
+        body.theme-orange-pink .gz-logo,
+        body.theme-orange-pink .capture-flower-header,
+        body.theme-orange-pink .capture-website-url,
+        body.theme-orange-pink .id-title,
+        body.theme-orange-pink .billabong-title {
+            color: #FF7F50;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .divider {
+            background-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification .notification-text {
+            color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification,
+        body.theme-orange-pink .welcome-text,
+        body.theme-orange-pink .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-orange-pink .button {
+            background-color: #C71585;
+        }
+        
+        body.theme-orange-pink .share-flower-button {
+            background-color: #C71585;
+            color: white;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .flower-code,
+        body.theme-orange-pink .id-display {
+            color: #FF7F50;
+            background-color: #6A0DAD;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .monthly-motivation,
+        body.theme-orange-pink .capture-flower-motivation {
+            border-color: #FF7F50;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .modal-content,
+        body.theme-orange-pink #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FF7F50;
+        }
+
+        body.theme-yellow-purple {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-yellow-purple header, 
+        body.theme-yellow-purple footer,
+        body.theme-yellow-purple .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .app-logo,
+        body.theme-yellow-purple .header-icon,
+        body.theme-yellow-purple .gz-logo,
+        body.theme-yellow-purple .capture-flower-header,
+        body.theme-yellow-purple .capture-website-url,
+        body.theme-yellow-purple .id-title,
+        body.theme-yellow-purple .billabong-title {
+            color: #FFD700;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .divider {
+            background-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification .notification-text {
+            color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification,
+        body.theme-yellow-purple .welcome-text,
+        body.theme-yellow-purple .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-yellow-purple .button {
+            background-color: #8A2BE2;
+        }
+        
+        body.theme-yellow-purple .share-flower-button {
+            background-color: #8A2BE2;
+            color: white;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .flower-code,
+        body.theme-yellow-purple .id-display {
+            color: #FFD700;
+            background-color: #6A0DAD;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .monthly-motivation,
+        body.theme-yellow-purple .capture-flower-motivation {
+            border-color: #FFD700;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .modal-content,
+        body.theme-yellow-purple #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FFD700;
+        }
+        
+        .refresh-motivation {
+            position: absolute;
+            right: 15px;
+            top: 70px;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .refresh-motivation:hover {
+            transform: rotate(180deg);
+        }
+        
+        body.theme-red-black .refresh-motivation {
+            color: #FF4500;
+        }
+        
+        body.theme-green-blue .refresh-motivation {
+            color: #3EB489;
+        }
+        
+        body.theme-orange-pink .refresh-motivation {
+            color: #FF7F50;
+        }
+        
+        body.theme-yellow-purple .refresh-motivation {
+            color: #FFD700;
+        }
+        
+        .user-name {
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="theme-green-blue">
+
+  <header>
+   
+    <div class="header-container">
+      <div class="app-logo" translate="no">G-Z</div>
+      
+      <div class="right-controls">
+      
+        <a href="https://g-z.online/language.html" class="header-icon menu-link"><i class="fas fa-language"></i></a>
+        
+      <div class="right-controls">
+        <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
+  
+        
+        <a href="https://g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="main-content">
+    <div class="button-container">
+      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span>Flor da vida</span></a>
+    </div>
+
+    <div class="divider"></div>
+    <div class="notification">
+      <span class="notification-text">💠 Flor -- A mensagem que o universo escreveu só para você ¯\_(ツ)_/¯</span>
+    </div>
+
+    <div class="divider"></div>
+  </div>
+
+  <div class="style-selector">
+    <h3>Estilo</h3>
+    <div class="style-options">
+      <div class="style-option red-black" data-theme="red-black"></div>
+      <div class="style-option green-blue selected" data-theme="green-blue"></div>
+      <div class="style-option orange-pink" data-theme="orange-pink"></div>
+      <div class="style-option yellow-purple" data-theme="yellow-purple"></div>
+      <div class="style-option default" data-theme="default"></div>
+    </div>
+  </div>
+
+  <div id="welcomeToast" translate="no">
+    Bem-vindo ¯\_(ツ)_/¯
+  </div>
+
+  <div id="welcomeModal" class="modal">
+    <div class="modal-content">
+      <div class="welcome-header">💠 Bem-vindo 💠</div>
+      <div class="welcome-text">
+        A criação de uma conta requer sua data de nascimento, profissão e nome para criar sua flor única.
+      </div>
+      
+      <div class="name-container">
+        <label for="fullNameInput">Seu Nome Completo:</label>
+        <input type="text" id="fullNameInput" class="name-input" placeholder="Digite seu nome completo...">
+      </div>
+      
+      <div class="dob-container">
+        <label for="dobInput">Data de Nascimento:</label>
+        <input type="date" id="dobInput" class="dob-input" max="">
+      </div>
+      
+      <div class="profession-container">
+        <label for="professionInput">Sua Profissão:</label>
+        <input type="text" id="professionInput" class="profession-search" placeholder="Digite sua profissão...">
+        <div id="professionDropdown" class="profession-dropdown"></div>
+      </div>
+      
+      <div class="loading-spinner" id="loadingSpinner">
+        <span>Criando sua flor única</span>
+        <span class="loading-dots"></span>
+      </div>
+      
+      <button id="createAccountButton">Criar Conta</button>
+    </div>
+  </div>
+
+  <div id="idModal" class="modal">
+    <div class="modal-content">
+      <div class="id-title">Seu ID de Usuário</div>
+      <div class="id-display">
+        <span id="userIdDisplay"></span>
+        <i class="fas fa-copy copy-icon" id="copyIdButton"></i>
+      </div>
+      <div class="id-message">Mantenha este ID seguro!</div>
+      <div class="id-actions">
+        <button class="delete-account" id="deleteAccountButton">Excluir Conta</button>
+        <button class="close-button" id="closeIdModal">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="flowerModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong id="flowerTypeTitle">Flor da Vida</strong></div>
+      
+      <div id="flowerCodeDisplay" class="flower-code"></div>
+      
+      <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="Gerar nova motivação"></i>
+      
+      <div class="monthly-motivation" id="monthlyMotivation">
+      </div>
+      
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;" id="flowerIconContainer">
+        <i class="fas fa-spa"></i>
+      </div>
+    </div>
+  </div>
+  
+  <button class="share-flower-button" id="shareFlowerButton">
+    <span>Compartilhar minha Flor</span> <i class="fas fa-paper-plane"></i>
+  </button>
+  
+  <div id="capturedFlower">
+    <div class="captured-image-container">
+      <img id="capturedImage" class="captured-image" src="" alt="Flor Capturada">
+    </div>
+
+    <div class="share-warning" id="shareWarning">
+      <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+      <span>Perfeito para compartilhar, apenas ajuste.</span>
+    </div>
+    
+    <div class="capture-controls">
+      <button class="capture-button" id="shareCapture">
+        <i class="fas fa-paper-plane"></i> <span>Compartilhar</span>
+      </button>
+      
+      <button class="capture-button close-capture" id="closeCapture">
+        <i class="fas fa-times"></i> <span>Fechar</span>
+      </button>
+    </div>
+  </div>
+  
+  <div id="flowerCaptureContainer">
+    <div class="capture-flower-header" id="captureFlowerHeader">Flor da Vida</div>
+    
+    <div id="captureFlowerCode" class="capture-flower-code"></div>
+    
+    <div id="captureFlowerMotivation" class="capture-flower-motivation">
+    </div>
+    
+    <div class="capture-flower-icon" id="captureFlowerIcon">
+      <i class="fas fa-spa"></i>
+    </div>
+    
+    <div class="gz-logo" translate="no">G-Z</div>
+  <div class="capture-website-url">
+  Descubra a sua em <span translate="no">www.g-z.online</span>
+</div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    
+    const auth = firebase.auth();
+    const database = firebase.database();
+    const firestore = firebase.firestore();
+    
+    let userUid = null;
+    let userFlowerCode = null;
+    let currentMotivation = null;
+    let currentCountry = null;
+    let userCity = null;
+    let userUniqueId = null;
+    let isAuthenticated = false;
+    let isInstalled = false;
+    let currentTheme = "green-blue";
+    let userDateOfBirth = null;
+    let userProfession = null;
+    let userFullName = null;
+    let seenSubjects = [];
+    let shareCount = 0;
+    let userRank = 0;
+    let userEmoji = "👑";
+
+    const rankEmojis = ["👑", "🌟", "🔥", "⚡️", "⭐️", "❄️", "✨️", "🎖", "🗿"];
+
+    const professions = [
+      "Músico", "Rapper", "Jogador de Futebol", "Jogador de Basquete", "Boxeador", 
+      "Estudante", "Professor", "Médico", "Enfermeiro", "Engenheiro", 
+      "Desenvolvedor", "Designer", "Artista", "Escritor", "Jornalista", 
+      "Chef de cozinha", "Garçom/Garçonete", "Empregada doméstica", "TikToker", "YouTuber", 
+      "Influenciador", "Fotógrafo", "Videógrafo", "Dançarino", "Ator/Atriz", 
+      "Modelo", "Arquiteto", "Advogado", "Contador", "Consultor financeiro", 
+      "Bancário", "Empreendedor", "Proprietário de empresa", "Gerente", "Executivo", 
+      "Vendedor", "Marqueteiro", "Gerente de mídia social", "Motorista", "Piloto", 
+      "Comissário de bordo", "Mecânico", "Eletricista", "Encanador", "Operário da construção", 
+      "Agricultor", "Jardineiro", "Veterinário", "Treinador esportivo", "Instrutor de fitness", 
+      "Professor de yoga", "Terapeuta", "Psicólogo", "Conselheiro", "Pastor/Líder religioso",
+      "Cientista", "Pesquisador", "Professor universitário", "Policial", "Bombeiro",
+      "Militar", "Segurança", "Corretor de imóveis", "Farmacêutico", "Dentista",
+      "Optometrista", "Fisioterapeuta", "Terapeuta ocupacional", "Fonoaudiólogo", "Nutricionista",
+      "Nutricionista clínico", "Cabeleireiro", "Maquiador", "Esteticista", "Alfaiate",
+      "Designer de moda", "Funcionário de loja", "Caixa", "Atendimento ao cliente", "Atendente de call center",
+      "Tradutor", "Intérprete", "Guia turístico", "Agente de viagens", "Gerente de hotel",
+      "Recepcionista", "Secretário", "Assistente administrativo", "Bibliotecário", "Arquivista",
+      "Historiador", "Arqueólogo", "Antropólogo", "Sociólogo", "Cientista político",
+      "Economista", "Estatístico", "Analista de dados", "Cientista de dados", "Designer UX/UI",
+      "Desenvolvedor de jogos", "Desenvolvedor de aplicativos", "Desenvolvedor web", "Administrador de rede", "Especialista em cibersegurança",
+      "Suporte técnico", "Técnico", "Especialista em reparos", "Padeiro", "Açougueiro",
+      "Pescador", "Minerador", "Silvicultor", "Paisagista", "Decorador de interiores",
+      "Organizador de eventos", "Organizador de casamentos", "Florista", "Joalheiro", "Artesão",
+      "Programador", "Webdesigner", "Especialista em marketing digital", "Especialista SEO", "Criador de conteúdo",
+      "Gerente de produto", "Gerente de projeto", "Controle de qualidade", "Analista de negócios", "Consultor",
+      "Recrutador", "Gerente de RH", "Coach de carreira", "Coach de vida", "Palestrante motivacional",
+      "Palestrante", "Locutor de rádio", "Apresentador de TV", "Jornalista de TV", "Podcaster",
+      "Autor", "Roteirista", "Redator", "Redator técnico", "Editor",
+      "Editor de livros", "Agente literário", "Livreiro", "Bibliotecário", "Crítico literário",
+      "Designer gráfico", "Ilustrador", "Animador", "Artista 3D", "Artista VFX",
+      "Diretor", "Produtor", "Operador de câmera", "Engenheiro de som", "Técnico de iluminação",
+      "Editor de vídeo", "Assistente de produção", "Cenógrafo", "Figurinista", "Maquiador de cinema",
+      "Artista de efeitos especiais", "Dublê", "Dublador", "Agente artístico", "Diretor de elenco"
+    ];
+
+    const subjectDictionary = {
+    "Sucesso": "Sucesso",
+    "Conquista": "Conquista",
+    "Vitória": "Vitória",
+    "Triunfo": "Triunfo",
+    "Realização": "Realização",
+    
+    "Riqueza": "Riqueza",
+    "Prosperidade": "Prosperidade",
+    "Abundância": "Abundância",
+    "Fortuna": "Fortuna",
+    "Afluência": "Afluência",
+    
+    "Alegria": "Alegria",
+    "Felicidade": "Felicidade",
+    "Êxtase": "Êxtase",
+    "Deleite": "Deleite",
+    "Contentamento": "Contentamento",
+    
+    "Crescimento": "Crescimento",
+    "Progresso": "Progresso",
+    "Avanço": "Avanço",
+    "Desenvolvimento": "Desenvolvimento",
+    "Melhoria": "Melhoria",
+    
+    "Poder": "Poder",
+    "Força": "Força",
+    "Potência": "Potência",
+    "Energia": "Energia",
+    
+    "Sabedoria": "Sabedoria",
+    "Inteligência": "Inteligência",
+    "Conhecimento": "Conhecimento",
+    "Perspicácia": "Perspicácia",
+    "Compreensão": "Compreensão",
+    
+    "Criatividade": "Criatividade",
+    "Inovação": "Inovação",
+    "Imaginação": "Imaginação",
+    "Invenção": "Invenção",
+    "Originalidade": "Originalidade",
+    
+    "Liderança": "Liderança",
+    "Autoridade": "Autoridade",
+    "Influência": "Influência",
+    "Comando": "Comando",
+    "Direção": "Direção",
+    
+    "Paz": "Paz",
+    "Harmonia": "Harmonia",
+    "Tranquilidade": "Tranquilidade",
+    "Serenidade": "Serenidade",
+    "Calma": "Calma",
+    
+    "Amor": "Amor",
+    "Afeição": "Afeição",
+    "Adoração": "Adoração",
+    "Devoção": "Devoção",
+    "Paixão": "Paixão",
+    
+    "Coragem": "Coragem",
+    "Bravura": "Bravura",
+    "Valor": "Valor",
+    "Heroísmo": "Heroísmo",
+    "Destemor": "Destemor",
+    
+    "Saúde": "Saúde",
+    "Vitalidade": "Vitalidade",
+    "Bem-estar": "Bem-estar",
+    "Vigor": "Vigor",
+    "Forma física": "Forma física",
+    
+    "Liberdade": "Liberdade",
+    "Independência": "Independência",
+    "Autonomia": "Autonomia",
+    "Autodeterminação": "Autodeterminação",
+    
+    "Propósito": "Propósito",
+    "Significado": "Significado",
+    "Missão": "Missão",
+    "Vocação": "Vocação",
+    "Destino": "Destino",
+    
+    "Resiliência": "Resiliência",
+    "Tenacidade": "Tenacidade",
+    "Perseverança": "Perseverança",
+    "Resistência": "Resistência",
+    "Determinação": "Determinação",
+    
+    "Autenticidade": "Autenticidade",
+    "Genuinidade": "Genuinidade",
+    "Honestidade": "Honestidade",
+    "Integridade": "Integridade",
+    "Sinceridade": "Sinceridade",
+    
+    "Transformação": "Transformação",
+    "Mudança": "Mudança",
+    "Evolução": "Evolução",
+    "Renascimento": "Renascimento",
+    "Metamorfose": "Metamorfose",
+    
+    "Conexão": "Conexão",
+    "Relacionamento": "Relacionamento",
+    "Comunidade": "Comunidade",
+    "Pertencimento": "Pertencimento",
+    "Unidade": "Unidade",
+    
+    "Gratidão": "Gratidão",
+    "Agradecimento": "Agradecimento",
+    "Apreciação": "Apreciação",
+    "Reconhecimento": "Reconhecimento",
+    "Reconhecimento": "Reconhecimento",
+    
+    "Atenção plena": "Atenção plena",
+    "Presença": "Presença",
+    "Consciência": "Consciência",
+    "Consciência": "Consciência",
+    "Atenção": "Atenção",
+    
+    "Compaixão": "Compaixão",
+    "Empatia": "Empatia",
+    "Bondade": "Bondade",
+    "Generosidade": "Generosidade",
+    "Altruísmo": "Altruísmo",
+    
+    "Equilíbrio": "Equilíbrio",
+    "Equilíbrio": "Equilíbrio",
+    "Harmonia": "Harmonia",
+    "Proporção": "Proporção",
+    "Simetria": "Simetria",
+    
+    "Inspiração": "Inspiração",
+    "Motivação": "Motivação",
+    "Entusiasmo": "Entusiasmo",
+    "Excitação": "Excitação",
+    "Paixão": "Paixão",
+    
+    "Foco": "Foco",
+    "Concentração": "Concentração",
+    "Atenção": "Atenção",
+    "Disciplina": "Disciplina",
+    "Dedicação": "Dedicação",
+    
+    "Humildade": "Humildade",
+    "Modéstia": "Modéstia",
+    "Simplicidade": "Simplicidade",
+    "Simplicidade": "Simplicidade",
+    "Fundamentação": "Fundamentação",
+    
+    "Paciência": "Paciência",
+    "Tolerância": "Tolerância",
+    "Paciência": "Paciência",
+    "Resistência": "Resistência",
+    "Persistência": "Persistência",
+    
+    "Alegria": "Alegria",
+    "Deleite": "Deleite",
+    "Contentamento": "Contentamento",
+    "Exultação": "Exultação",
+    "Júbilo": "Júbilo",
+    
+    "Confiança": "Confiança",
+    "Fé": "Fé",
+    "Confiança": "Confiança",
+    "Confiança": "Confiança",
+    "Confiabilidade": "Confiabilidade",
+    
+    "Autoconfiança": "Autoconfiança",
+    "Autoestima": "Autoestima",
+    "Autocrença": "Autocrença",
+    "Autoconfiança": "Autoconfiança",
+    "Autoconfiança": "Autoconfiança",
+    
+    "Entusiasmo": "Entusiasmo",
+    "Zelo": "Zelo",
+    "Avidez": "Avidez",
+    "Ardor": "Ardor",
+    "Fervor": "Fervor",
+    
+    "Clareza": "Clareza",
+    "Lucidez": "Lucidez",
+    "Transparência": "Transparência",
+    "Precisão": "Precisão",
+    "Nitidez": "Nitidez",
+    
+    "Adaptabilidade": "Adaptabilidade",
+    "Flexibilidade": "Flexibilidade",
+    "Versatilidade": "Versatilidade",
+    "Adaptabilidade": "Adaptabilidade",
+    "Maleabilidade": "Maleabilidade",
+    
+    "Comunicação": "Comunicação",
+    "Expressão": "Expressão",
+    "Articulação": "Articulação",
+    "Diálogo": "Diálogo",
+    "Conversa": "Conversa",
+    
+    "Carreira": "Carreira",
+    "Profissão": "Profissão",
+    "Vocação": "Vocação",
+    "Ocupação": "Ocupação",
+    "Vocação": "Vocação"
+};
+
+    async function getUserRankAndEmoji() {
+      try {
+        const userCount = await getUserCount();
+        userRank = userCount % rankEmojis.length;
+        userEmoji = rankEmojis[userRank];
+        console.log(`User rank: ${userRank}, emoji: ${userEmoji}`);
+        return userEmoji;
+      } catch (error) {
+        console.error("Erro ao obter classificação do usuário:", error);
+        return "👑";
+      }
+    }
+
+    async function getUserCount() {
+      try {
+        const snapshot = await firestore.collection('flowerCodes').get();
+        return snapshot.size;
+      } catch (error) {
+        console.error("Erro ao contar usuários:", error);
+        return 0;
+      }
+    }
+
+    function formatUserName(fullName) {
+      if (!fullName) return "";
+      
+      const nameParts = fullName.trim().split(' ');
+      
+      if (nameParts.length === 1) {
+        return nameParts[0];
+      }
+      
+      const firstName = nameParts[0];
+      const lastNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+      
+      return `${firstName} ${lastNameInitial}.`;
+    }
+
+    function generateUniqueId() {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const numbers = '0123456789';
+      let id = '';
+      
+      for (let i = 0; i < 3; i++) {
+        id += letters.charAt(Math.floor(Math.random() * letters.length));
+      }
+      
+      for (let i = 0; i < 3; i++) {
+        id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+      }
+      
+      return id;
+    }
+
+    async function detectUserLocation() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        currentCountry = data.country_name;
+        userCity = data.city;
+        console.log("Localização do usuário detectada:", currentCountry, userCity);
+        return { country: currentCountry, city: userCity };
+      } catch (error) {
+        console.error("Erro ao detectar localização:", error);
+        return { country: "Desconhecido", city: "Desconhecido" };
+      }
+    }
+
+    function generatePersonalizedMotivation(flowerCode, profession, dob) {
+      if (!flowerCode || flowerCode.length < 8) {
+        return "Sua motivação floral está aqui para inspirar e guiar você.";
+      }
+      
+      let month = 0;
+      if (dob) {
+        const dobDate = new Date(dob);
+        month = dobDate.getMonth();
+      }
+      
+      const lifeTraits = [
+        "Sua criatividade traz ideias frescas para cada desafio.",
+        "Sua gentileza inspira os outros ao seu redor.",
+        "Sua perseverança ajuda você a superar obstáculos.",
+        "Sua perspectiva única resolve problemas de novas maneiras.",
+        "Sua energia ilumina o dia de todos que você encontra.",
+        "Sua paciência ajuda você a ver o quadro geral.",
+        "Sua coragem permite que você encare novos desafios.",
+        "Sua sabedoria guia você através de decisões difíceis.",
+        "Seu otimismo ajuda você a encontrar oportunidades em todas as situações.",
+        "Seu foco ajuda você a alcançar seus objetivos passo a passo.",
+        "Sua adaptabilidade é sua maior força.",
+        "Sua intuição guia você para o caminho certo.",
+        "Sua empatia conecta você profundamente com os outros.",
+        "Sua resiliência ajuda você a se recuperar mais forte.",
+        "Sua autenticidade atrai pessoas para seu verdadeiro eu.",
+        "Sua gratidão multiplica a alegria em sua vida.",
+        "Sua curiosidade leva a novas descobertas.",
+        "Seu senso de humor ilumina até os momentos difíceis.",
+        "Sua generosidade cria ondas de bondade.",
+        "Sua determinação transforma desafios em sucessos.",
+        "Sua compaixão cura aqueles ao seu redor.",
+        "Sua clareza ajuda você a fazer escolhas sábias.",
+        "Sua confiança inspira confiança nos outros.",
+        "Sua atenção plena mantém você centrado no caos.",
+        "Sua integridade faz você ganhar respeito onde quer que vá.",
+        "Seu entusiasmo acende paixão nos outros.",
+        "Seu calor faz as pessoas se sentirem instantaneamente bem-vindas.",
+        "Sua imaginação abre portas para possibilidades.",
+        "Seu equilíbrio ajuda você a navegar nas complexidades da vida.",
+        "Sua visão permite que você veja além do horizonte.",
+        "Seu carisma atrai pessoas para sua energia.",
+        "Sua disciplina constrói a base para o sucesso.",
+        "Sua natureza intuitiva ajuda você a entender verdades sutis.",
+        "Sua alegria mantém seu espírito jovem e vibrante.",
+        "Sua mente analítica encontra soluções que outros perdem.",
+        "Sua consideração cria conexões significativas.",
+        "Sua sensibilidade permite que você perceba o que os outros precisam.",
+        "Sua decisão avança projetos eficientemente.",
+        "Sua consistência constrói confiança ao longo do tempo.",
+        "Sua expressividade comunica sua verdade magnificamente.",
+        "Sua engenhosidade transforma limitações em oportunidades.",
+        "Sua diligência garante qualidade em tudo o que você faz.",
+        "Sua flexibilidade se adapta a circunstâncias em mudança com graça.",
+        "Seu pragmatismo ancora suas ações na realidade.",
+        "Sua eloquência articula ideias complexas claramente.",
+        "Sua previsão ajuda você a se preparar para desafios futuros.",
+        "Sua suavidade cura feridas sem deixar cicatrizes.",
+        "Sua assertividade defende o que é certo.",
+        "Sua independência promove autonomia e força.",
+        "Sua consciência presta atenção a detalhes importantes.",
+        "Sua agilidade mental ajuda você a se adaptar rapidamente a novas situações.",
+        "Sua autoconsciência ilumina seu caminho para o crescimento.",
+        "Sua força interior brilha mais intensamente durante tempos difíceis.",
+        "Sua personalidade magnética atrai pessoas para sua órbita.",
+        "Sua inteligência emocional ajuda você a navegar por relacionamentos complexos.",
+        "Sua rapidez mental encontra soluções quando outros só veem problemas.",
+        "Sua confiança tranquila fala volumes sem dizer uma palavra.",
+        "Sua liderança natural inspira outros a seguirem seus melhores instintos.",
+        "Sua ética inabalável guia suas decisões mesmo quando ninguém está olhando.",
+        "Sua sensibilidade artística encontra beleza em lugares inesperados.",
+        "Sua mente estratégica antecipa desenvolvimentos futuros com notável precisão.",
+        "Sua espontaneidade traz energia fresca para situações estagnadas.",
+        "Sua atenção meticulosa aos detalhes previne complicações futuras.",
+        "Sua presença pacífica acalma até os ambientes mais caóticos.",
+        "Seu pensamento inovador quebra limitações convencionais.",
+        "Sua diplomacia natural resolve conflitos com graça e equidade.",
+        "Sua confiabilidade faz de você um confidente para aqueles que precisam.",
+        "Seu entusiasmo contagiante eleva todos ao seu redor.",
+        "Sua mente aberta acolhe novas perspectivas e possibilidades."
+      ];
+      
+      const lifeEncouragements = [
+        "Continue compartilhando seus dons com o mundo.",
+        "Confie em seus instintos - eles raramente o levam na direção errada.",
+        "Seus talentos naturais são feitos para serem compartilhados.",
+        "O caminho à frente pode ter desafios, mas você está pronto para enfrentá-los.",
+        "Pequenos passos hoje levam a grandes realizações amanhã.",
+        "Não se esqueça de celebrar seu progresso ao longo do caminho.",
+        "Sua jornada única vale cada passo.",
+        "Lembre-se de desfrutar do processo, não apenas dos resultados.",
+        "Seus melhores dias ainda estão à frente.",
+        "Seus esforços de hoje constroem seu amanhã.",
+        "Permaneça fiel a si mesmo em todas as situações.",
+        "Abrace a mudança como uma oportunidade de crescer.",
+        "Ouça sua sabedoria interior com mais frequência.",
+        "Permita-se descansar quando necessário.",
+        "Mantenha seu foco no que realmente importa.",
+        "Sua presença é um presente para aqueles ao seu redor.",
+        "Alimente suas paixões constantemente.",
+        "Seja gentil consigo mesmo durante os desafios.",
+        "Seu caminho único é exatamente o que você precisa.",
+        "Confie no tempo do desenrolar da sua vida.",
+        "Encontre alegria nos pequenos momentos todos os dias.",
+        "Sua perspectiva é valiosa - compartilhe-a.",
+        "Acredite em sua capacidade de criar mudanças.",
+        "Lembre-se do motivo pelo qual você começou esta jornada.",
+        "Cada dia oferece um novo começo.",
+        "Sua resiliência é inspiradora para os outros.",
+        "Reserve tempo para celebrar pequenas vitórias.",
+        "Cada desafio que você enfrenta o fortalece.",
+        "O universo apoia seu caminho autêntico.",
+        "Sua luz brilha mais intensamente quando você é você mesmo.",
+        "O mundo precisa da sua contribuição única.",
+        "Deixe seu trabalho falar por si mesmo.",
+        "Seu esforço constante se multiplica com o tempo.",
+        "O que parece impossível hoje será sua realidade amanhã.",
+        "A força dentro de você é maior que os desafios à sua frente.",
+        "Sua jornada inspira outros mais do que você percebe.",
+        "Obstáculos são redirecionamentos para um caminho melhor.",
+        "A profundidade do seu caráter se mostra em momentos difíceis.",
+        "Seu crescimento acontece fora da sua zona de conforto.",
+        "Mesmo um pequeno progresso ainda é progresso e merece ser celebrado.",
+        "Mantenha o foco no seu 'porquê' durante tempos difíceis.",
+        "Suas escolhas diárias criam seu legado.",
+        "As lições que você aprende agora o servirão para sempre.",
+        "Nunca subestime o impacto da sua gentileza.",
+        "Sua voz autêntica ressoa com aqueles que precisam ouvi-la.",
+        "Os desafios que você supera hoje constroem sua força para amanhã.",
+        "Seu passado não define seu potencial futuro.",
+        "Cada passo à frente, por menor que seja, ainda é movimento para frente.",
+        "Sua abordagem única é sua vantagem competitiva.",
+        "Confie que você está exatamente onde precisa estar neste momento.",
+        "Suas maiores realizações frequentemente vêm após seus maiores desafios.",
+        "Sua história ainda está sendo escrita - torne-a notável.",
+        "O universo conspira a favor dos seus sonhos autênticos.",
+        "Seu recurso mais poderoso é sua crença inabalável em si mesmo.",
+        "O impacto que você tem nos outros é maior do que você sabe.",
+        "Suas limitações atuais são temporárias, mas seu potencial é permanente.",
+        "A aprovação mais importante vem de dentro de você mesmo.",
+        "Sua intuição é sua bússola interna - confie em sua direção.",
+        "A disciplina de hoje cria a liberdade de amanhã.",
+        "Cada experiência, boa ou difícil, adiciona profundidade ao seu caráter.",
+        "O propósito da sua vida se revela através da alegria e da dificuldade.",
+        "A maneira como você lida com a adversidade revela sua verdadeira força.",
+        "Sua singularidade é sua maior vantagem competitiva.",
+        "Permita-se evoluir à medida que seus sonhos evoluem.",
+        "Seu compromisso com o crescimento já está mudando seu futuro.",
+        "Nunca subestime até onde a consistência pode levá-lo.",
+        "Sua determinação supera qualquer revés temporário.",
+        "O caminho certo nem sempre é o mais fácil, mas sempre vale a pena seguir.",
+        "Sua coragem de começar inspira outros a fazerem o mesmo.",
+        "Cada vez que você escolhe o crescimento em vez do conforto, você expande seu potencial.",
+        "Seu maior potencial o aguarda logo além da sua zona de conforto.",
+        "Cada desafio que você enfrenta o prepara para algo maior."
+      ];
+      
+      const professionMotivations = {
+        "Músico": [
+          "Seu talento musical traz harmonia a um mundo caótico.",
+          "Cada nota que você toca ressoa com a alma de alguém.",
+          "Suas melodias têm o poder de curar e transformar.",
+          "Sua expressão artística expressa verdades universais.",
+          "A música em você merece ser ouvida."
+        ],
+        "Rapper": [
+          "Suas palavras pintam histórias poderosas que precisam ser contadas.",
+          "Seu flow e ritmo capturam emoções que palavras sozinhas não podem expressar.",
+          "Seus versos dão voz a experiências que muitos sentem mas não conseguem articular.",
+          "Sua voz autêntica ressoa com buscadores da verdade.",
+          "Sua proeza lírica abre mentes e corações."
+        ],
+        "Jogador de Futebol": [
+          "Sua dedicação em campo inspira trabalho em equipe fora do campo.",
+          "Sua disciplina atlética se traduz em todas as áreas da vida.",
+          "Seu pensamento estratégico em campo mostra sua liderança natural.",
+          "Sua paixão pelo jogo bonito eleva aqueles ao seu redor.",
+          "Seu espírito esportivo estabelece o padrão para os outros."
+        ],
+        "Jogador de Basquete": [
+          "Sua visão de jogo se traduz na capacidade de ver oportunidades na vida.",
+          "Sua capacidade de se apresentar sob pressão serve você em cada desafio.",
+          "Sua mentalidade de equipe cria sucesso em todos os seus relacionamentos.",
+          "Seu salto vertical é igualado por sua ambição de alcançar novos patamares.",
+          "Sua tenacidade na defesa mostra seu compromisso com a excelência."
+        ],
+        "Boxeador": [
+          "Sua força mental é tão impressionante quanto sua força física.",
+          "Sua disciplina no treinamento reflete seu caráter na vida.",
+          "Sua capacidade de aguentar golpes e continuar avançando é seu superpoder.",
+          "Seu jogo de pés no ringue reflete sua capacidade de navegar pelos desafios da vida.",
+          "Seu espírito combativo nunca recua de desafios que valem a pena."
+        ],
+        "Estudante": [
+          "Sua curiosidade abre portas para possibilidades infinitas.",
+          "Seu compromisso com o aprendizado servirá você por toda a vida.",
+          "Sua perspectiva fresca traz novas ideias para problemas antigos.",
+          "Sua jornada educacional prepara você para oportunidades ainda invisíveis.",
+          "Sua disciplina acadêmica constrói hábitos para o sucesso ao longo da vida."
+        ],
+        "Professor": [
+          "Sua influência se estende muito além da sala de aula.",
+          "Sua paciência nutre um potencial que outros podem perder.",
+          "Sua orientação molda futuros de uma maneira que você talvez nunca veja completamente.",
+          "Sua sabedoria planta sementes que florescerão por gerações.",
+          "Sua dedicação ao conhecimento cria ondas de mudança positiva."
+        ],
+        "TikToker": [
+          "Seu conteúdo criativo traz alegria e conexão em um mundo digital.",
+          "Sua voz autêntica alcança aqueles que precisam da sua mensagem.",
+          "Sua capacidade de comunicar de forma concisa é uma habilidade rara e valiosa.",
+          "Sua influência cultural pode ser direcionada para mudanças positivas.",
+          "Sua presença digital tem impacto no mundo real."
+        ],
+        "Empreendedor": [
+          "Sua visão cria oportunidades onde outros veem obstáculos.",
+          "Sua capacidade de assumir riscos calculados o distingue.",
+          "Seu pensamento inovador resolve problemas em sua raiz.",
+          "Sua liderança inspira outros a se juntarem à sua missão.",
+          "Sua persistência através dos desafios define seu sucesso."
+        ],
+        "Médico": [
+          "Suas mãos curadoras trazem conforto em momentos de angústia.",
+          "Seu compromisso com a saúde muda vidas todos os dias.",
+          "Seu conhecimento médico combinado com empatia cria verdadeira cura.",
+          "Sua dedicação ao cuidado dos pacientes exemplifica a mais alta vocação.",
+          "Suas habilidades de diagnóstico são igualadas por seu coração compassivo."
+        ],
+        "Engenheiro": [
+          "Suas habilidades de resolução de problemas criam soluções que melhoram vidas.",
+          "Sua experiência técnica constrói fundações para o futuro.",
+          "Sua mente analítica vê padrões que outros perdem.",
+          "Sua precisão e atenção aos detalhes garantem qualidade em tudo o que você cria.",
+          "Suas abordagens inovadoras aos desafios fazem avançar todo o seu campo."
+        ],
+        "Desenvolvedor": [
+          "Seu código cria possibilidades que não existiam antes.",
+          "Suas soluções técnicas resolvem problemas humanos reais.",
+          "Seu pensamento lógico se combina lindamente com inovação criativa.",
+          "Suas criações digitais impactam inúmeras vidas diariamente.",
+          "Sua capacidade de aprender novas tecnologias mantém você na vanguarda."
+        ],
+        "Artista": [
+          "Sua visão criativa mostra aos outros novas maneiras de ver o mundo.",
+          "Sua expressão artística toca emoções que palavras não podem alcançar.",
+          "Sua perspectiva única adiciona beleza às experiências cotidianas.",
+          "Seu trabalho provoca conversas importantes além das fronteiras.",
+          "Sua coragem criativa inspira outros a expressarem sua verdade."
+        ],
+        "Enfermeiro": [
+          "Seus cuidados compassivos curam mais do que males físicos.",
+          "Sua atenção percebe o que outros poderiam perder.",
+          "Sua presença calma traz conforto em momentos difíceis.",
+          "Sua dedicação ao cuidado dos pacientes faz diferença em cada turno.",
+          "Seu equilíbrio entre habilidade técnica e calor humano é inestimável."
+        ],
+        "Escritor": [
+          "Suas palavras criam mundos na mente de seus leitores.",
+          "Sua narrativa conecta pessoas através de diferentes experiências.",
+          "Sua eloquência dá voz ao que outros lutam para expressar.",
+          "Suas ideias escritas oferecem novas perspectivas sobre desafios familiares.",
+          "Sua arte literária preserva verdades importantes para gerações futuras."
+        ],
+        "Advogado": [
+          "Sua defesa traz justiça para aqueles que precisam de uma voz.",
+          "Sua mente analítica navega por desafios jurídicos complexos com precisão.",
+          "Seu compromisso com princípios legais fortalece os fundamentos da sociedade.",
+          "Sua capacidade de construir argumentos convincentes muda resultados.",
+          "Sua abordagem ética da prática jurídica estabelece o padrão para outros."
+        ],
+        "Chef de cozinha": [
+          "Suas criações culinárias trazem alegria através de todos os sentidos.",
+          "Sua culinária conecta pessoas através de mesas e culturas.",
+          "Suas combinações de sabores demonstram sua intuição artística.",
+          "Sua dedicação a ingredientes de qualidade honra tanto a tradição quanto a inovação.",
+          "Sua liderança na cozinha traz o melhor de toda a sua equipe."
+        ],
+        "Contador": [
+          "Sua experiência financeira proporciona segurança e tranquilidade.",
+          "Sua atenção aos detalhes captura o que outros poderiam perder.",
+          "Suas habilidades analíticas trazem clareza a situações financeiras complexas.",
+          "Sua integridade garante confiança em todos os seus relacionamentos profissionais.",
+          "Suas habilidades organizacionais criam ordem a partir da complexidade financeira."
+        ],
+        "Designer": [
+          "Suas soluções visuais combinam beleza e função prática.",
+          "Seu pensamento de design transforma experiências do usuário para melhor.",
+          "Sua sensibilidade estética eleva objetos e interações cotidianos.",
+          "Seu processo criativo equilibra inovação e usabilidade.",
+          "Sua linguagem de design comunica através de barreiras e fronteiras."
+        ],
+        "Policial": [
+          "Seu compromisso com a segurança pública torna as comunidades mais fortes.",
+          "Sua coragem em situações difíceis protege aqueles que mais precisam.",
+          "Sua tomada de decisão rápida sob pressão demonstra notável frieza.",
+          "Sua dedicação à justiça guia sua conduta profissional.",
+          "Sua presença traz segurança em situações tensas."
+        ],
+        "Bombeiro": [
+          "Sua bravura em situações perigosas salva vidas e propriedades.",
+          "Seu pensamento rápido sob pressão extrema é extraordinário.",
+          "Sua preparação física e mental permite sua resposta heroica.",
+          "Seu trabalho em equipe em crises exemplifica o melhor da cooperação humana.",
+          "Seu compromisso com a segurança da comunidade se estende além da resposta a emergências."
+        ],
+        "Militar": [
+          "Seu serviço demonstra a mais alta forma de compromisso com os outros.",
+          "Sua disciplina em condições difíceis o distingue.",
+          "Seu pensamento estratégico equilibra objetivos de missão com segurança da equipe.",
+          "Sua adaptabilidade a situações em mudança garante o sucesso da missão.",
+          "Sua lealdade à sua unidade cria laços que transcendem a amizade comum."
+        ],
+        "Jornalista": [
+          "Sua busca pela verdade traz clareza em tempos confusos.",
+          "Sua narrativa ajuda outros a entenderem questões complexas.",
+          "Suas habilidades investigativas descobrem o que precisa ser visto.",
+          "Seu compromisso com os fatos equilibra o ecossistema de informações.",
+          "Sua voz adiciona uma perspectiva importante ao discurso público."
+        ],
+        "Psicólogo": [
+          "Sua escuta empática cria espaço para a cura.",
+          "Seus insights ajudam outros a navegarem por suas paisagens interiores.",
+          "Sua abordagem terapêutica equilibra compaixão e prática baseada em evidências.",
+          "Sua paciência permite que outros descubram suas próprias soluções.",
+          "Seus limites profissionais permitem relacionamentos de cura duradouros."
+        ],
+        "Professor": [
+          "Sua orientação molda futuros além do que você jamais poderá ver.",
+          "Sua paciência com o processo de aprendizagem permite que o crescimento se desenvolva naturalmente.",
+          "Sua capacidade de explicar conceitos complexos torna o conhecimento acessível.",
+          "Seu gerenciamento de sala de aula cria espaços seguros para exploração intelectual.",
+          "Seu reconhecimento de diferentes estilos de aprendizagem alcança cada aluno."
+        ],
+        "Programador": [
+          "Suas habilidades de codificação transformam ideias abstratas em realidade funcional.",
+          "Sua abordagem de resolução de problemas decompõe desafios complexos em partes gerenciáveis.",
+          "Sua atenção aos detalhes previne complicações futuras em seu código.",
+          "Seu aprendizado contínuo mantém suas habilidades relevantes em um campo em mudança.",
+          "Sua criatividade técnica encontra soluções elegantes para problemas difíceis."
+        ]
+      };
+      
+      const monthTraits = [
+        "Seu nascimento em janeiro lhe confere qualidades de liderança natural e foco determinado.",
+        "Seu nascimento em fevereiro o abençoa com compreensão intuitiva e visão humanitária.",
+        "Seu nascimento em março lhe proporciona criatividade imaginativa e resiliência adaptável.",
+        "Seu nascimento em abril o dota de persistência determinada e iniciativa corajosa.",
+        "Seu nascimento em maio lhe concede habilidades de comunicação persuasivas e sensibilidade prática.",
+        "Seu nascimento em junho lhe oferece versatilidade adaptável e inteligência emocional.",
+        "Seu nascimento em julho lhe dá empatia compassiva e instinto protetor.",
+        "Seu nascimento em agosto o abençoa com carisma magnético e confiança generosa.",
+        "Seu nascimento em setembro lhe proporciona precisão analítica e organização metódica.",
+        "Seu nascimento em outubro o dota de perspectiva equilibrada e harmonia diplomática.",
+        "Seu nascimento em novembro lhe concede perspicácia penetrante e intensidade transformadora.",
+        "Seu nascimento em dezembro lhe oferece otimismo visionário e sabedoria filosófica."
+      ];
+      
+      let selectedTrait;
+      
+      if (profession && professionMotivations[profession] && Math.random() < 0.25) {
+        const profMotivations = professionMotivations[profession];
+        selectedTrait = profMotivations[Math.floor(Math.random() * profMotivations.length)];
+      } 
+      else if (dob && Math.random() < 0.2) {
+        selectedTrait = monthTraits[month];
+      }
+      else {
+        selectedTrait = lifeTraits[Math.floor(Math.random() * lifeTraits.length)];
+      }
+      
+      const encourageIndex = Math.floor(Math.random() * lifeEncouragements.length);
+      
+      return selectedTrait + " " + lifeEncouragements[encourageIndex];
+    }
+
+    function generateFlowerCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function getRandomSubject() {
+      let availableSubjects = Object.keys(subjectDictionary).filter(subject => !seenSubjects.includes(subject));
+      
+      if (availableSubjects.length === 0) {
+        seenSubjects = [];
+        availableSubjects = Object.keys(subjectDictionary);
+      }
+      
+      const randomIndex = Math.floor(Math.random() * availableSubjects.length);
+      const selectedSubject = availableSubjects[randomIndex];
+      
+      seenSubjects.push(selectedSubject);
+      
+      return selectedSubject;
+    }
+
+    async function updateFlowerDisplay() {
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      const motivationElement = document.getElementById('monthlyMotivation');
+      
+      if (!flowerCodeElement || !motivationElement) {
+        console.error("Elementos necessários não encontrados no DOM");
+        return;
+      }
+      
+      let subject = localStorage.getItem('flowerSubject');
+      if (!subject) {
+        subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+      }
+      
+      let translatedSubject = subjectDictionary[subject] || subject;
+      
+      const formattedName = formatUserName(userFullName);
+      
+      if (formattedName) {
+        flowerCodeElement.innerHTML = `Minha Flor - ${translatedSubject} / ${formattedName} ${userEmoji}`;
+      } else {
+        flowerCodeElement.textContent = "Minha Flor - " + translatedSubject;
+      }
+      
+      if (!currentMotivation) {
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+      }
+      
+      motivationElement.textContent = currentMotivation;
+      
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (captureCode) {
+        if (formattedName) {
+          captureCode.innerHTML = `Minha Flor - ${translatedSubject} / ${formattedName} ${userEmoji}`;
+        } else {
+          captureCode.textContent = "Minha Flor - " + translatedSubject;
+        }
+      }
+      
+      if (captureMotivation) captureMotivation.textContent = currentMotivation;
+      
+      return currentMotivation;
+    }
+
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function removeCookie(name) {
+      document.cookie = name + "=; Max-Age=-99999999; path=/";
+    }
+
+    function setTheme(theme) {
+      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-green-blue', 'theme-orange-pink', 'theme-yellow-purple');
+      
+      document.body.classList.add('theme-' + theme);
+      
+      currentTheme = theme;
+      
+      localStorage.setItem('preferredTheme', theme);
+      setCookie('preferredTheme', theme, 365);
+      
+      const options = document.querySelectorAll('.style-option');
+      options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.theme === theme) {
+          option.classList.add('selected');
+        }
+      });
+      
+      updateCaptureStyles(theme);
+    }
+    
+    function updateCaptureStyles(theme) {
+      const captureContainer = document.getElementById('flowerCaptureContainer');
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureHeader = document.getElementById('captureFlowerHeader');
+      const captureWebsiteUrl = document.querySelector('.capture-website-url');
+      const captureLogo = document.querySelector('.gz-logo');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (!captureContainer || !captureCode || !captureHeader || !captureWebsiteUrl || 
+          !captureLogo || !captureMotivation) {
+        console.error("Um ou mais elementos de captura não encontrados");
+        return;
+      }
+      
+      captureContainer.style.borderColor = '';
+      captureCode.style.borderColor = '';
+      captureCode.style.color = '';
+      captureCode.style.backgroundColor = '';
+      captureHeader.style.color = '';
+      captureWebsiteUrl.style.color = '';
+      captureLogo.style.color = '';
+      captureLogo.style.borderColor = '';
+      captureMotivation.style.color = '';
+      captureMotivation.style.backgroundColor = '';
+      captureMotivation.style.borderColor = '';
+      
+      switch(theme) {
+        case 'red-black':
+          captureContainer.style.borderColor = '#8B0000';
+          captureContainer.style.backgroundColor = 'black';
+          captureCode.style.borderColor = '#FF4500';
+          captureCode.style.color = '#FF4500';
+          captureCode.style.backgroundColor = 'black';
+          captureHeader.style.color = '#FF4500';
+          captureWebsiteUrl.style.color = '#FF4500';
+          captureLogo.style.color = '#FF4500';
+          captureLogo.style.borderColor = '#FF4500';
+          captureMotivation.style.color = '#E5E5E5';
+          captureMotivation.style.backgroundColor = 'black';
+          captureMotivation.style.borderColor = '#FF4500';
+          break;
+          
+        case 'green-blue':
+          captureContainer.style.borderColor = '#3EB489';
+          captureContainer.style.backgroundColor = '#1A2E4D';
+          captureCode.style.borderColor = '#3EB489';
+          captureCode.style.color = '#3EB489';
+          captureCode.style.backgroundColor = '#36454F';
+          captureHeader.style.color = '#3EB489';
+          captureWebsiteUrl.style.color = '#3EB489';
+          captureLogo.style.color = '#3EB489';
+          captureLogo.style.borderColor = '#3EB489';
+          captureMotivation.style.color = '#F5F5F5';
+          captureMotivation.style.backgroundColor = '#1A2E4D';
+          captureMotivation.style.borderColor = '#3EB489';
+          break;
+          
+        case 'orange-pink':
+          captureContainer.style.borderColor = '#FF7F50';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FF7F50';
+          captureCode.style.color = '#FF7F50';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FF7F50';
+          captureWebsiteUrl.style.color = '#FF7F50';
+          captureLogo.style.color = '#FF7F50';
+          captureLogo.style.borderColor = '#FF7F50';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FF7F50';
+          break;
+          
+        case 'yellow-purple':
+          captureContainer.style.borderColor = '#FFD700';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FFD700';
+          captureCode.style.color = '#FFD700';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FFD700';
+          captureWebsiteUrl.style.color = '#FFD700';
+          captureLogo.style.color = '#FFD700';
+          captureLogo.style.borderColor = '#FFD700';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FFD700';
+          break;
+          
+        default:
+          captureContainer.style.borderColor = '#007bff';
+          captureContainer.style.backgroundColor = 'white';
+          captureCode.style.borderColor = '#ff69b4';
+          captureCode.style.color = '#ff69b4';
+          captureCode.style.backgroundColor = '#fff0f8';
+          captureHeader.style.color = '#007bff';
+          captureWebsiteUrl.style.color = '#007bff';
+          captureLogo.style.color = '#007bff';
+          captureLogo.style.borderColor = '#007bff';
+          captureMotivation.style.color = '#333';
+          captureMotivation.style.backgroundColor = 'white';
+          captureMotivation.style.borderColor = '#ff69b4';
+      }
+    }
+
+    function authenticateAnonymously() {
+      return new Promise((resolve, reject) => {
+        auth.signInAnonymously()
+          .then((userCredential) => {
+            console.log("Usuário autenticado anonimamente:", userCredential.user.uid);
+            userUid = userCredential.user.uid;
+            isAuthenticated = true;
+            resolve(userCredential.user);
+          })
+          .catch((error) => {
+            console.error("Erro de autenticação:", error);
+            reject(error);
+          });
+      });
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        userUid = user.uid;
+        isAuthenticated = true;
+        console.log("Estado de autenticação alterado: usuário conectado", user.uid);
+      } else {
+        isAuthenticated = false;
+        console.log("Estado de autenticação alterado: usuário desconectado");
+      }
+    });
+
+    async function submitToFirebase() {
+      try {
+        if (!isAuthenticated) {
+          console.log("Usuário não autenticado, autenticando...");
+          await authenticateAnonymously();
+        }
+        
+        const location = await detectUserLocation();
+        
+        await getUserRankAndEmoji();
+        
+        const userData = {
+          date: new Date().toISOString(),
+          country: location.country || "Desconhecido",
+          city: location.city || "Desconhecido",
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: shareCount,
+          rank: userRank,
+          emoji: userEmoji
+        };
+
+        console.log("Enviando dados para o Firebase:", userData);
+        
+        try {
+          const newEntryRef = database.ref('birthdates').push(userData);
+          console.log("Dados enviados para o banco de dados em tempo real:", newEntryRef.key);
+        } catch (dbError) {
+          console.error("Erro com o banco de dados em tempo real:", dbError);
+        }
+        
+        try {
+          const docRef = await firestore.collection('flowers').add(userData);
+          console.log("Documento escrito no Firestore com ID: ", docRef.id);
+        } catch (firestoreError) {
+          console.error("Erro ao adicionar documento ao Firestore: ", firestoreError);
+        }
+        
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).set({
+            ...userData,
+            createdAt: new Date()
+          });
+          console.log("Código de flor adicionado à coleção específica");
+        } catch (codeError) {
+          console.error("Erro ao adicionar código de flor à coleção: ", codeError);
+        }
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true;
+      } catch (error) {
+        console.error("Erro de envio para o Firebase:", error);
+        await getUserRankAndEmoji();
+        
+        const userData = {
+          date: new Date().toISOString(),
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: 0,
+          rank: userRank,
+          emoji: userEmoji
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true;
+      }
+    }
+
+    async function updateShareCount() {
+      if (!isAuthenticated || !userUniqueId) return;
+      
+      try {
+        shareCount++;
+        
+        const savedData = localStorage.getItem('userFlowerData');
+        if (savedData) {
+          const userData = JSON.parse(savedData);
+          userData.shareCount = shareCount;
+          localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        }
+        
+        await firestore.collection('flowerCodes').doc(userUniqueId).set({
+          shareCount: shareCount,
+          lastShared: new Date().toISOString(),
+          country: currentCountry || "Desconhecido",
+          city: userCity || "Desconhecido",
+          uid: userUid,
+          uniqueId: userUniqueId
+        }, { merge: true });
+        
+        console.log("Contador de compartilhamentos atualizado:", shareCount);
+      } catch (error) {
+        console.error("Erro ao atualizar contador de compartilhamentos:", error);
+      }
+    }
+
+    function checkSavedUserData() {
+      const cookieUniqueId = getCookie('userUniqueId');
+      const cookieFlowerCode = getCookie('userFlowerCode');
+      const cookieInstalled = getCookie('isInstalled');
+      const cookieDOB = getCookie('userDateOfBirth');
+      const cookieProfession = getCookie('userProfession');
+      const cookieFullName = getCookie('userFullName');
+      const cookieEmoji = getCookie('userEmoji');
+      const cookieRank = getCookie('userRank');
+      
+      if (cookieUniqueId && cookieFlowerCode) {
+        userUniqueId = cookieUniqueId;
+        userFlowerCode = cookieFlowerCode;
+        userDateOfBirth = cookieDOB || null;
+        userProfession = cookieProfession || null;
+        userFullName = cookieFullName || null;
+        userEmoji = cookieEmoji || "👑";
+        userRank = cookieRank ? parseInt(cookieRank) : 0;
+        isInstalled = cookieInstalled === 'true';
+        
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+        
+        console.log("Dados do usuário encontrados nos cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName, userEmoji, userRank });
+        return true;
+      }
+      
+      const savedData = localStorage.getItem('userFlowerData');
+      if (savedData) {
+        try {
+          const userData = JSON.parse(savedData);
+          userUniqueId = userData.uniqueId;
+          userFlowerCode = userData.flowerCode;
+          userDateOfBirth = userData.dateOfBirth || null;
+          userProfession = userData.profession || null;
+          userFullName = userData.fullName || null;
+          shareCount = userData.shareCount || 0;
+          userEmoji = userData.emoji || "👑";
+          userRank = userData.rank || 0;
+          currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
+          userUid = userData.uid;
+          isInstalled = localStorage.getItem('isInstalled') === 'true';
+          
+          setCookie('userUniqueId', userUniqueId, 365);
+          setCookie('userFlowerCode', userFlowerCode, 365);
+          setCookie('userDateOfBirth', userDateOfBirth, 365);
+          setCookie('userProfession', userProfession, 365);
+          setCookie('userFullName', userFullName, 365);
+          setCookie('userEmoji', userEmoji, 365);
+          setCookie('userRank', userRank.toString(), 365);
+          setCookie('isInstalled', 'true', 365);
+          
+          console.log("Dados do usuário encontrados no localStorage:", userData);
+          return true;
+        } catch (e) {
+          console.error("Erro ao analisar dados do usuário salvos:", e);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    async function deleteUserAccount() {
+      if (!userUniqueId) return false;
+      
+      try {
+        if (!confirm("Tem certeza de que deseja excluir TODOS os seus dados? Esta ação é irreversível.")) {
+          return false;
+        }
+        
+        console.log("Excluindo conta de usuário:", userUniqueId);
+        
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).delete();
+          console.log("Dados excluídos da coleção flowerCodes");
+        } catch (error) {
+          console.error("Erro ao excluir de flowerCodes:", error);
+        }
+        
+        try {
+          const flowersQuery = await firestore.collection('flowers').where('uniqueId', '==', userUniqueId).get();
+          
+          const batch = firestore.batch();
+          let count = 0;
+          
+          flowersQuery.forEach((doc) => {
+            batch.delete(doc.ref);
+            count++;
+          });
+          
+          if (count > 0) {
+            await batch.commit();
+            console.log(`${count} documentos excluídos da coleção flowers`);
+          }
+        } catch (error) {
+          console.error("Erro ao excluir de flowers:", error);
+        }
+        
+        try {
+          const birthdatesRef = database.ref('birthdates');
+          const query = birthdatesRef.orderByChild('uniqueId').equalTo(userUniqueId);
+          
+          query.once('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              birthdatesRef.child(childSnapshot.key).remove();
+            });
+          });
+          
+          console.log("Dados excluídos do banco de dados em tempo real");
+        } catch (error) {
+          console.error("Erro ao excluir do banco de dados em tempo real:", error);
+        }
+        
+        localStorage.removeItem('userFlowerData');
+        localStorage.removeItem('isInstalled');
+        localStorage.removeItem('flowerSubject');
+        localStorage.removeItem('preferredTheme');
+        
+        removeCookie('userUniqueId');
+        removeCookie('userFlowerCode');
+        removeCookie('isInstalled');
+        removeCookie('userDateOfBirth');
+        removeCookie('userProfession');
+        removeCookie('userFullName');
+        removeCookie('userEmoji');
+        removeCookie('userRank');
+        removeCookie('preferredTheme');
+        
+        userUniqueId = null;
+        userFlowerCode = null;
+        currentMotivation = null;
+        userDateOfBirth = null;
+        userProfession = null;
+        userFullName = null;
+        userEmoji = null;
+        userRank = null;
+        isInstalled = false;
+        seenSubjects = [];
+        shareCount = 0;
+        
+        try {
+          if (auth.currentUser) {
+            await auth.currentUser.delete();
+            console.log("Usuário do Firebase excluído");
+          }
+        } catch (authError) {
+          console.error("Erro ao excluir autenticação:", authError);
+        }
+        
+        console.log("Conta de usuário completamente excluída");
+        return true;
+      } catch (error) {
+        console.error("Erro ao excluir conta:", error);
+        return false;
+      }
+    }
+
+    window.addEventListener('load', async () => {
+      const today = new Date();
+      const twoYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+      document.getElementById('dobInput').max = twoYearsAgo.toISOString().split('T')[0];
+      
+      const savedTheme = localStorage.getItem('preferredTheme') || getCookie('preferredTheme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        setTheme('green-blue');
+      }
+      
+      if (checkSavedUserData()) {
+        console.log("O usuário já tem dados, ocultando a janela de boas-vindas");
+        const welcomeToast = document.getElementById('welcomeToast');
+        welcomeToast.style.display = 'block';
+        setTimeout(() => {
+          welcomeToast.style.opacity = '1';
+        }, 100);
+        setTimeout(() => {
+          welcomeToast.style.opacity = '0';
+          setTimeout(() => {
+            welcomeToast.style.display = 'none';
+          }, 500);
+        }, 2000);
+        
+        if (!isAuthenticated) {
+          try {
+            await authenticateAnonymously();
+          } catch (error) {
+            console.error("Erro ao autenticar:", error);
+          }
+        }
+      } else {
+        console.log("Nenhum dado de usuário salvo encontrado, exibindo a janela de boas-vindas");
+        const welcomeModal = document.getElementById('welcomeModal');
+        welcomeModal.style.display = 'block';
+        setTimeout(() => {
+          welcomeModal.classList.add('show');
+        }, 100);
+      }
+      
+      setupProfessionDropdown();
+    });
+
+    function setupProfessionDropdown() {
+      const professionInput = document.getElementById('professionInput');
+      const professionDropdown = document.getElementById('professionDropdown');
+      
+      if (!professionInput || !professionDropdown) {
+        console.error("Elementos do menu suspenso de profissões não encontrados");
+        return;
+      }
+      
+      function filterProfessions(input) {
+        if (!input) return [];
+        
+        input = input.toLowerCase();
+        return professions.filter(profession => 
+          profession.toLowerCase().includes(input)
+        );
+      }
+      
+      function renderDropdownOptions(filteredProfessions) {
+        professionDropdown.innerHTML = '';
+        
+        if (filteredProfessions.length === 0) {
+          const option = document.createElement('div');
+          option.className = 'profession-option';
+          option.textContent = 'Nenhuma correspondência encontrada';
+          professionDropdown.appendChild(option);
+        } else {
+          filteredProfessions.forEach(profession => {
+            const option = document.createElement('div');
+            option.className = 'profession-option';
+            option.textContent = profession;
+            option.addEventListener('click', () => {
+              professionInput.value = profession;
+              professionDropdown.style.display = 'none';
+            });
+            professionDropdown.appendChild(option);
+          });
+        }
+      }
+      
+      professionInput.addEventListener('input', () => {
+        const filtered = filterProfessions(professionInput.value);
+        renderDropdownOptions(filtered);
+        
+        if (filtered.length > 0) {
+          professionDropdown.style.display = 'block';
+        } else {
+          professionDropdown.style.display = 'none';
+        }
+      });
+      
+      professionInput.addEventListener('focus', () => {
+        if (professionInput.value) {
+          const filtered = filterProfessions(professionInput.value);
+          renderDropdownOptions(filtered);
+          professionDropdown.style.display = 'block';
+        }
+      });
+      
+      document.addEventListener('click', (e) => {
+        if (!professionInput.contains(e.target) && !professionDropdown.contains(e.target)) {
+          professionDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    document.getElementById('flowerButton').addEventListener('click', function() {
+      if (!userUniqueId) {
+        alert("Por favor, crie sua conta de flor primeiro.");
+        return;
+      }
+      
+      updateFlowerDisplay();
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.style.display = 'block';
+      setTimeout(() => {
+        flowerModal.classList.add('show');
+      }, 10);
+      document.getElementById('shareFlowerButton').style.display = 'flex';
+    });
+
+    document.getElementById('shareFlowerButton').addEventListener('click', function() {
+      captureFlower();
+    });
+    
+    document.getElementById('showIdButton').addEventListener('click', function() {
+      if (userUniqueId) {
+        document.getElementById('userIdDisplay').textContent = userUniqueId;
+        const idModal = document.getElementById('idModal');
+        idModal.style.display = 'block';
+        setTimeout(() => {
+          idModal.classList.add('show');
+        }, 10);
+      } else {
+        alert("Por favor, crie sua conta de flor primeiro para obter seu ID único.");
+      }
+    });
+    
+    document.getElementById('copyIdButton').addEventListener('click', function() {
+      const idText = document.getElementById('userIdDisplay').textContent;
+      navigator.clipboard.writeText(idText).then(function() {
+        alert('ID copiado para a área de transferência!');
+      }).catch(function() {
+        alert('Não foi possível copiar o ID. Por favor, selecione e copie manualmente.');
+      });
+    });
+    
+    document.getElementById('closeIdModal').addEventListener('click', function() {
+      const idModal = document.getElementById('idModal');
+      idModal.classList.remove('show');
+      setTimeout(() => {
+        idModal.style.display = 'none';
+      }, 300);
+    });
+    
+    document.getElementById('deleteAccountButton').addEventListener('click', function() {
+
+      deleteUserAccount().then(success => {
+        if (success) {
+          alert("Conta excluída com sucesso. Você precisará criar uma nova conta para usar este aplicativo.");
+          const idModal = document.getElementById('idModal');
+          idModal.classList.remove('show');
+          setTimeout(() => {
+            idModal.style.display = 'none';
+            const welcomeModal = document.getElementById('welcomeModal');
+            welcomeModal.style.display = 'block';
+            setTimeout(() => {
+              welcomeModal.classList.add('show');
+            }, 100);
+          }, 300);
+        } else {
+          alert("Erro, tente mais tarde");
+        }
+      });
+    });
+    
+    document.getElementById('refreshMotivation').addEventListener('click', function() {
+      const newMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+      currentMotivation = newMotivation;
+      
+      const newSubject = getRandomSubject();
+      localStorage.setItem('flowerSubject', newSubject);
+      
+      const formattedName = formatUserName(userFullName);
+      
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      if (formattedName) {
+        flowerCodeElement.innerHTML = `Minha Flor - ${newSubject} / ${formattedName} ${userEmoji}`;
+      } else {
+        flowerCodeElement.textContent = "Minha Flor - " + newSubject;
+      }
+      
+      document.getElementById('monthlyMotivation').textContent = newMotivation;
+      
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (captureCode) {
+        if (formattedName) {
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName} ${userEmoji}`;
+        } else {
+          captureCode.textContent = "My Flower - " + newSubject;
+        }
+      }
+      
+      if (captureMotivation) captureMotivation.textContent = newMotivation;
+      
+      this.style.transition = 'transform 0.5s ease';
+      this.style.transform = 'rotate(360deg)';
+      
+      setTimeout(() => {
+        this.style.transition = 'none';
+        this.style.transform = 'rotate(0deg)';
+      }, 500);
+    });
+    
+    document.getElementById('createAccountButton').addEventListener('click', async function() {
+      const dobInput = document.getElementById('dobInput');
+      const professionInput = document.getElementById('professionInput');
+      const fullNameInput = document.getElementById('fullNameInput');
+      
+      if (!fullNameInput.value) {
+        alert("Please enter your full name.");
+        return;
+      }
+      
+      if (!dobInput.value) {
+        alert("Please enter your date of birth.");
+        return;
+      }
+      
+      if (!professionInput.value) {
+        alert("Please enter your profession.");
+        return;
+      }
+      
+      document.getElementById('loadingSpinner').style.display = 'block';
+      document.getElementById('createAccountButton').disabled = true;
+      
+      try {
+        await authenticateAnonymously();
+        
+        userFullName = fullNameInput.value;
+        userDateOfBirth = dobInput.value;
+        userProfession = professionInput.value;
+        
+        userUniqueId = generateUniqueId();
+        console.log("Generated unique ID:", userUniqueId);
+        
+        userFlowerCode = generateFlowerCode();
+        
+        userEmoji = await getUserRankAndEmoji();
+        
+        const subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+        
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+        
+        const createButton = document.getElementById('createAccountButton');
+        createButton.innerHTML = '<i class="fas fa-check"></i> Done';
+        createButton.style.backgroundColor = '#4CAF50';
+        
+        const userData = {
+          date: new Date().toISOString(),
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: subject,
+          shareCount: 0,
+          rank: userRank,
+          emoji: userEmoji
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        setTimeout(() => {
+          const welcomeModal = document.getElementById('welcomeModal');
+          welcomeModal.classList.remove('show');
+          
+          setTimeout(() => {
+            welcomeModal.style.display = 'none';
+            document.getElementById('loadingSpinner').style.display = 'none';
+            createButton.innerHTML = 'Create Account';
+            createButton.style.backgroundColor = '';
+            createButton.disabled = false;
+            
+            submitToFirebase().then(submitted => {
+              console.log("Firebase submission result:", submitted);
+              
+              const welcomeToast = document.getElementById('welcomeToast');
+              welcomeToast.style.display = 'block';
+              setTimeout(() => {
+                welcomeToast.style.opacity = '1';
+              }, 100);
+              setTimeout(() => {
+                welcomeToast.style.opacity = '0';
+                setTimeout(() => {
+                  welcomeToast.style.display = 'none';
+                }, 500);
+              }, 2000);
+              
+              updateFlowerDisplay();
+              const flowerModal = document.getElementById('flowerModal');
+              flowerModal.style.display = 'block';
+              setTimeout(() => {
+                flowerModal.classList.add('show');
+              }, 10);
+              document.getElementById('shareFlowerButton').style.display = 'flex';
+            });
+          }, 300);
+        }, 2000);
+        
+        console.log("Setup complete and data stored locally and in cookies");
+      } catch (error) {
+        console.error("Error during setup:", error);
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('createAccountButton').disabled = false;
+        alert("There was a problem setting up your flower. Please try again.");
+      }
+    });
+    
+    async function captureFlower() {
+      try {
+        const captureContainer = document.getElementById('flowerCaptureContainer');
+        
+        updateCaptureStyles(currentTheme);
+        
+        if (typeof html2canvas !== 'function') {
+          console.error("html2canvas not loaded or not available as a function");
+          alert("Cannot capture flower. The capture library is not loaded.");
+          return;
+        }
+        
+        let bgColor = 'white';
+        if (currentTheme === 'red-black') bgColor = 'black';
+        else if (currentTheme === 'green-blue') bgColor = '#1A2E4D';
+        else if (currentTheme === 'orange-pink' || currentTheme === 'yellow-purple') bgColor = '#4B0082';
+        
+        const canvas = await html2canvas(captureContainer, {
+          backgroundColor: bgColor,
+          scale: 7,
+          logging: true,
+          useCORS: true,
+          allowTaint: true,
+          letterRendering: true
+        });
+        
+        const imageUrl = canvas.toDataURL('image/png');
+        
+        const capturedImage = document.getElementById('capturedImage');
+        if (capturedImage) {
+          capturedImage.src = imageUrl;
+          document.getElementById('capturedFlower').style.display = 'flex';
+          document.getElementById('shareWarning').style.display = 'block';
+          
+          updateShareCount();
+        } else {
+          console.error("capturedImage element not found");
+        }
+      } catch (error) {
+        console.error('Error capturing flower:', error);
+        alert('Could not capture your flower. Please try again.');
+      }
+    }
+    
+    document.getElementById('shareCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      if (navigator.share) {
+        fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
+            navigator.share({
+              title: 'My G-Z Flower',
+              text: 'Discover yours at g-z.online',
+              files: [file]
+            }).catch(err => {
+              console.log('Error sharing:', err);
+              fallbackShare();
+            });
+          })
+          .catch(err => {
+            console.log('Error preparing image:', err);
+            fallbackShare();
+          });
+      } else {
+        fallbackShare();
+      }
+    });
+    
+    function fallbackShare() {
+      try {
+        const shareText = `
+Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
+        
+        navigator.clipboard.writeText(shareText).then(function() {
+          alert('Share text copied to clipboard!');
+        }).catch(function() {
+          alert('Could not copy share text.');
+        });
+      } catch (error) {
+        console.error('Fallback share error:', error);
+        alert('An error occurred.');
+      }
+    }
+    
+    document.getElementById('closeCapture').addEventListener('click', function() {
+      document.getElementById('capturedFlower').style.display = 'none';
+    });
+    
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.classList.remove('show');
+      setTimeout(() => {
+        flowerModal.style.display = 'none';
+        document.getElementById('shareFlowerButton').style.display = 'none';
+      }, 300);
+    });
+
+    window.onclick = function(event) {
+      const flowerModal = document.getElementById('flowerModal');
+      const capturedFlower = document.getElementById('capturedFlower');
+      const idModal = document.getElementById('idModal');
+      const welcomeModal = document.getElementById('welcomeModal');
+      
+      if (event.target == flowerModal) {
+        flowerModal.classList.remove('show');
+        setTimeout(() => {
+          flowerModal.style.display = "none";
+          document.getElementById('shareFlowerButton').style.display = 'none';
+        }, 300);
+      }
+      
+      if (event.target == capturedFlower) {
+        capturedFlower.style.display = "none";
+      }
+      
+      if (event.target == idModal) {
+        idModal.classList.remove('show');
+        setTimeout(() => {
+          idModal.style.display = "none";
+        }, 300);
+      }
+      
+      if (event.target == welcomeModal && isInstalled) {
+        welcomeModal.classList.remove('show');
+        setTimeout(() => {
+          welcomeModal.style.display = "none";
+        }, 300);
+      }
+    };
+    
+    document.getElementById('shareFlowerButton').style.display = 'none';
+    document.getElementById('shareWarning').style.display = 'none';
+    
+    document.querySelectorAll('.style-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        setTheme(theme);
+      });
+    });
+  </script>
+</body>
+</html>
