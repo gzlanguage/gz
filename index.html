@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.appspot.com/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1A2E4D">
+    <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76">
+    <link rel="manifest" id="manifest-placeholder">
     <style>
         input, textarea, select, button {
             font-size: 16px;
@@ -1350,6 +1356,50 @@
             font-size: 0.75em;
             font-weight: bold;
         }
+
+        .install-prompt {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .install-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .install-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        
+        .dismiss-btn {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="theme-green-blue">
@@ -1360,12 +1410,7 @@
       <div class="app-logo">G-Z</div>
       
       <div class="right-controls">
-      
-        <a href="https://g-z.online/language.html" class="header-icon menu-link"><i class="fas fa-language"></i></a>
-        
-      <div class="right-controls">
         <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
-  
         
         <a href="https://g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
       </div>
@@ -1509,6 +1554,14 @@
     <div class="capture-website-url">Discover yours at www.g-z.online</div>
   </div>
 
+  <div class="install-prompt" id="installPrompt">
+    <p>Add G-Z to your home screen for a better experience!</p>
+    <div class="install-buttons">
+      <button class="install-btn" id="installBtn">Install</button>
+      <button class="dismiss-btn" id="dismissBtn">Later</button>
+    </div>
+  </div>
+
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
@@ -1547,10 +1600,7 @@
     let userFullName = null;
     let seenSubjects = [];
     let shareCount = 0;
-    let userRank = 0;
-    let userEmoji = "👑";
-
-    const rankEmojis = ["👑", "🌟", "🔥", "⚡️", "⭐️", "❄️", "✨️", "🎖", "🗿"];
+    let deferredPrompt = null;
 
     const professions = [
       "Musician", "Rapper", "Footballer", "Basketball Player", "Boxer", 
@@ -1795,29 +1845,6 @@
       "Calling": "Calling"
     };
 
-    async function getUserRankAndEmoji() {
-      try {
-        const userCount = await getUserCount();
-        userRank = userCount % rankEmojis.length;
-        userEmoji = rankEmojis[userRank];
-        console.log(`User rank: ${userRank}, emoji: ${userEmoji}`);
-        return userEmoji;
-      } catch (error) {
-        console.error("Error getting user rank:", error);
-        return "👑";
-      }
-    }
-
-    async function getUserCount() {
-      try {
-        const snapshot = await firestore.collection('flowerCodes').get();
-        return snapshot.size;
-      } catch (error) {
-        console.error("Error counting users:", error);
-        return 0;
-      }
-    }
-
     function formatUserName(fullName) {
       if (!fullName) return "";
       
@@ -1830,7 +1857,7 @@
       const firstName = nameParts[0];
       const lastNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
       
-      return `${firstName} ${lastNameInitial}.`;
+      return `👑 ${firstName} ${lastNameInitial}.`;
     }
 
     function generateUniqueId() {
@@ -1865,7 +1892,7 @@
 
     function generatePersonalizedMotivation(flowerCode, profession, dob) {
       if (!flowerCode || flowerCode.length < 8) {
-        return "Your flower motivation is here to inspire and guide you.";
+        return "This flower motivation is here to inspire and guide you.";
       }
       
       let month = 0;
@@ -1875,350 +1902,349 @@
       }
       
       const lifeTraits = [
-        "Your creativity brings fresh ideas to every challenge.",
-        "Your kindness inspires others around you.",
-        "Your persistence helps you overcome obstacles.",
-        "Your unique perspective solves problems in new ways.",
-        "Your energy brightens the day for everyone you meet.",
-        "Your patience helps you see the bigger picture.",
-        "Your courage allows you to face new challenges.",
-        "Your wisdom guides you through difficult decisions.",
-        "Your optimism helps you find opportunity in any situation.",
-        "Your focus helps you achieve your goals step by step.",
-        "Your adaptability is your greatest strength.",
-        "Your intuition guides you to the right path.",
-        "Your empathy connects you deeply with others.",
-        "Your resilience helps you bounce back stronger.",
-        "Your authenticity draws people to your true self.",
-        "Your gratitude multiplies the joy in your life.",
-        "Your curiosity leads to new discoveries.",
-        "Your sense of humor lightens even difficult moments.",
-        "Your generosity creates ripples of kindness.",
-        "Your determination turns challenges into achievements.",
-        "Your compassion heals those around you.",
-        "Your clarity helps you make wise choices.",
-        "Your confidence inspires trust in others.",
-        "Your mindfulness keeps you centered in chaos.",
-        "Your integrity earns respect wherever you go.",
-        "Your enthusiasm ignites passion in others.",
-        "Your warmth makes people feel instantly welcome.",
-        "Your imagination opens doors to possibilities.",
-        "Your balance helps you navigate life's complexities.",
-        "Your vision enables you to see beyond the horizon.",
-        "Your charisma draws people toward your energy.",
-        "Your discipline builds the foundation for success.",
-        "Your intuitive nature helps you understand subtle truths.",
-        "Your playfulness keeps your spirit young and vibrant.",
-        "Your analytical mind finds solutions others miss.",
-        "Your thoughtfulness creates meaningful connections.",
-        "Your sensitivity allows you to perceive what others need.",
-        "Your decisiveness moves projects forward efficiently.",
-        "Your consistency builds trust over time.",
-        "Your expressiveness communicates your truth beautifully.",
-        "Your resourcefulness turns limitations into opportunities.",
-        "Your diligence ensures quality in everything you do.",
-        "Your flexibility adapts to changing circumstances gracefully.",
-        "Your pragmatism grounds your actions in reality.",
-        "Your eloquence articulates complex ideas clearly.",
-        "Your foresight helps you prepare for future challenges.",
-        "Your gentleness heals wounds without leaving scars.",
-        "Your assertiveness stands up for what's right.",
-        "Your independence fosters self-reliance and strength.",
-        "Your conscientiousness pays attention to important details.",
-        "Your mental agility helps you adapt to new situations quickly.",
-        "Your self-awareness illuminates your path to growth.",
-        "Your inner strength shines brightest during difficult times.",
-        "Your magnetic personality draws people into your orbit.",
-        "Your emotional intelligence helps you navigate complex relationships.",
-        "Your quick thinking finds solutions when others see only problems.",
-        "Your quiet confidence speaks volumes without saying a word.",
-        "Your natural leadership inspires others to follow their best instincts.",
-        "Your unwavering ethics guide your decisions even when no one is watching.",
-        "Your artistic sensibility finds beauty in unexpected places.",
-        "Your strategic mind anticipates future developments with remarkable accuracy.",
-        "Your spontaneity brings fresh energy to stale situations.",
-        "Your meticulous attention to detail prevents future complications.",
-        "Your peaceful presence calms even the most chaotic environments.",
-        "Your innovative thinking breaks through conventional limitations.",
-        "Your natural diplomacy resolves conflicts with grace and fairness.",
-        "Your trustworthiness makes you a confidant for those who need one.",
-        "Your infectious enthusiasm elevates everyone around you.",
-        "Your open-mindedness welcomes new perspectives and possibilities."
+        "Creativity brings fresh ideas to every challenge you face.",
+        "Kindness in your heart inspires others around you daily.",
+        "Persistence helps you overcome obstacles others find impossible.",
+        "A unique perspective allows you to solve problems in innovative ways.",
+        "Energetic presence brightens the day for everyone you meet.",
+        "Patience enables you to see the bigger picture when others cannot.",
+        "Courage allows you to face new challenges with determination.",
+        "Wisdom guides you through difficult decisions with clarity.",
+        "Optimism helps you find opportunity in any situation you encounter.",
+        "Focus drives you to achieve goals step by step with precision.",
+        "Adaptability becomes your greatest strength in changing times.",
+        "Intuition guides you to the right path when choices seem unclear.",
+        "Empathy connects you deeply with others in meaningful ways.",
+        "Resilience helps you bounce back stronger from any setback.",
+        "Authenticity draws people to your true self without pretense.",
+        "Gratitude multiplies the joy in your life each passing day.",
+        "Curiosity leads to new discoveries that others might miss.",
+        "A sense of humor lightens even the most difficult moments.",
+        "Generosity creates ripples of kindness throughout your community.",
+        "Determination turns challenges into achievements worth celebrating.",
+        "Compassion heals those around you in subtle but powerful ways.",
+        "Clarity helps you make wise choices when confusion surrounds you.",
+        "Confidence inspires trust in others who follow your lead.",
+        "Mindfulness keeps you centered even amidst chaos and uncertainty.",
+        "Integrity earns respect wherever you go among peers and leaders.",
+        "Enthusiasm ignites passion in others who witness your energy.",
+        "Warmth makes people feel instantly welcome in your presence.",
+        "Imagination opens doors to possibilities others cannot see.",
+        "Balance helps you navigate life's complexities with grace.",
+        "Vision enables you to see beyond the horizon when others stop short.",
+        "Charisma draws people toward your magnetic energy naturally.",
+        "Discipline builds the foundation for success in all endeavors.",
+        "Intuitive nature helps you understand subtle truths others miss.",
+        "Playfulness keeps your spirit young and vibrant through challenges.",
+        "An analytical mind finds solutions others overlook completely.",
+        "Thoughtfulness creates meaningful connections that last a lifetime.",
+        "Sensitivity allows you to perceive what others need without asking.",
+        "Decisiveness moves projects forward when others hesitate.",
+        "Consistency builds trust over time in all your relationships.",
+        "Expressiveness communicates your truth beautifully to the world.",
+        "Resourcefulness turns limitations into opportunities for growth.",
+        "Diligence ensures quality in everything you touch or create.",
+        "Flexibility adapts to changing circumstances with remarkable grace.",
+        "Pragmatism grounds your actions in reality while dreaming big.",
+        "Eloquence articulates complex ideas clearly for others to understand.",
+        "Foresight helps you prepare for future challenges before they arrive.",
+        "Gentleness heals wounds without leaving scars in tender hearts.",
+        "Assertiveness stands up for what's right without hesitation.",
+        "Independence fosters self-reliance and strength in adversity.",
+        "Conscientiousness pays attention to important details others miss.",
+        "Mental agility helps you adapt to new situations with ease.",
+        "Self-awareness illuminates your path to growth and fulfillment.",
+        "Inner strength shines brightest during difficult times of trial.",
+        "Magnetic personality draws people into your orbit effortlessly.",
+        "Emotional intelligence helps you navigate complex relationships.",
+        "Quick thinking finds solutions when others see only problems.",
+        "Quiet confidence speaks volumes without saying a word.",
+        "Natural leadership inspires others to follow their best instincts.",
+        "Unwavering ethics guide your decisions even in darkness.",
+        "Artistic sensibility finds beauty in unexpected places and moments.",
+        "Strategic mind anticipates future developments with accuracy.",
+        "Spontaneity brings fresh energy to stale situations instantly.",
+        "Meticulous attention to detail prevents future complications.",
+        "Peaceful presence calms even the most chaotic environments.",
+        "Innovative thinking breaks through conventional limitations.",
+        "Natural diplomacy resolves conflicts with grace and fairness.",
+        "Trustworthiness makes you a confidant for those in need.",
+        "Infectious enthusiasm elevates everyone around you higher."
       ];
       
       const lifeEncouragements = [
-        "Keep sharing your gifts with the world.",
-        "Trust your instincts - they rarely lead you astray.",
-        "Your natural talents are meant to be shared.",
-        "The path ahead may have challenges, but you're ready for them.",
+        "Keep sharing these gifts with the world around you.",
+        "Trust these instincts - they rarely lead you astray.",
+        "These natural talents are meant to be shared widely.",
+        "The path ahead may have challenges, but you're perfectly equipped.",
         "Small steps today lead to big achievements tomorrow.",
-        "Remember to celebrate your progress along the way.",
-        "Your unique journey is worth every step.",
+        "Remember to celebrate progress along the way forward.",
+        "This unique journey is worth every step you take.",
         "Don't forget to enjoy the process, not just the results.",
-        "Your best days are still ahead of you.",
-        "Your efforts today are building your tomorrow.",
-        "Stay true to yourself in all situations.",
-        "Embrace change as an opportunity to grow.",
-        "Listen to your inner wisdom more often.",
-        "Allow yourself to rest when needed.",
-        "Keep your focus on what truly matters.",
-        "Your presence is a gift to those around you.",
-        "Nurture your passions consistently.",
-        "Be gentle with yourself during challenges.",
-        "Your unique path is exactly right for you.",
-        "Trust the timing of your life's unfolding.",
-        "Find joy in the small moments each day.",
-        "Your perspective is valuable - share it.",
-        "Believe in your ability to create change.",
-        "Remember why you started this journey.",
-        "Each day offers a fresh beginning.",
-        "Your resilience is inspiring to others.",
-        "Take time to celebrate small victories.",
-        "Every challenge you face strengthens you.",
-        "The universe supports your authentic path.",
-        "Your light shines brightest when you're being you.",
-        "The world needs your unique contribution.",
-        "Let your work speak for itself.",
-        "Your consistent effort compounds over time.",
-        "What seems impossible today will be your reality tomorrow.",
-        "The strength within you is greater than the challenges ahead.",
-        "Your journey inspires others more than you realize.",
-        "Obstacles are redirections to a better path.",
-        "The depth of your character shows in difficult moments.",
-        "Your growth happens outside your comfort zone.",
-        "Even small progress is still progress worth celebrating.",
-        "Stay focused on your 'why' during difficult times.",
-        "Your daily choices are creating your legacy.",
-        "The lessons you're learning now will serve you forever.",
-        "Never underestimate the impact of your kindness.",
-        "Your authentic voice resonates with those who need to hear it.",
-        "The challenges you overcome today build your strength for tomorrow.",
-        "Your past doesn't define your future potential.",
-        "Each step forward, no matter how small, is still forward movement.",
-        "Your unique approach is your competitive advantage.",
-        "Trust that you are exactly where you need to be right now.",
-        "Your greatest achievements often come after your biggest challenges.",
-        "Your story is still being written - make it remarkable.",
-        "The universe conspires in favor of your authentic dreams.",
-        "Your most powerful resource is your unwavering belief in yourself.",
-        "The impact you have on others is greater than you know.",
-        "Your current limitations are temporary, but your potential is permanent.",
-        "The most important approval comes from within yourself.",
-        "Your intuition is your inner compass - trust its direction.",
-        "Today's discipline creates tomorrow's freedom.",
-        "Each experience, good or challenging, adds depth to your character.",
-        "Your life's purpose unfolds through both joy and difficulty.",
-        "The way you handle adversity reveals your true strength.",
-        "Your uniqueness is your greatest competitive advantage.",
-        "Allow yourself to evolve as your dreams evolve.",
-        "Your commitment to growth is already changing your future.",
-        "Never underestimate how far consistency can take you.",
-        "Your determination outweighs any temporary setbacks.",
-        "The right path isn't always the easiest, but it's always worth taking.",
-        "Your courage to begin inspires others to do the same.",
-        "Each time you choose growth over comfort, you expand your potential.",
-        "Your highest potential is waiting for you just beyond your comfort zone.",
-        "Every challenge you face prepares you for something greater."
+        "The best days are still ahead on this adventure.",
+        "Today's efforts are building tomorrow's success story.",
+        "Stay true to yourself in all situations and challenges.",
+        "Embrace change as an opportunity to grow stronger.",
+        "Listen to inner wisdom more often - it knows the way.",
+        "Allow yourself to rest when needed without guilt.",
+        "Keep focused on what truly matters in the bigger picture.",
+        "Your presence is a gift to those fortunate enough to know you.",
+        "Nurture passions consistently despite busy schedules.",
+        "Be gentle with yourself during challenges and setbacks.",
+        "This unique path is exactly right for where you need to go.",
+        "Trust the timing of life's unfolding mysteries.",
+        "Find joy in small moments each day without fail.",
+        "This perspective is valuable - share it more often.",
+        "Believe in the ability to create meaningful change.",
+        "Remember why this journey started in the first place.",
+        "Each day offers a fresh beginning to start anew.",
+        "This resilience inspires others more than you realize.",
+        "Take time to celebrate small victories along the way.",
+        "Every challenge faced strengthens character profoundly.",
+        "The universe supports this authentic path completely.",
+        "Light shines brightest when authenticity leads the way.",
+        "The world needs this unique contribution only you can give.",
+        "Let meaningful work speak for itself without explanation.",
+        "Consistent effort compounds over time into greatness.",
+        "What seems impossible today will become reality tomorrow.",
+        "The strength within exceeds any challenge ahead by far.",
+        "This journey inspires others more than will ever be known.",
+        "Obstacles are merely redirections to a better path forward.",
+        "Character depth shows most clearly in difficult moments.",
+        "Growth happens outside comfort zones, not within them.",
+        "Even small progress deserves celebration and acknowledgment.",
+        "Stay focused on personal 'why' during difficult times.",
+        "Daily choices create a lasting legacy worth remembering.",
+        "Lessons learned now will serve forever in countless ways.",
+        "Never underestimate the impact of kindness on others.",
+        "An authentic voice resonates with those who need to hear it.",
+        "Challenges overcome today build strength for tomorrow's tests.",
+        "The past doesn't define future potential or possibilities.",
+        "Each step forward, no matter how small, creates momentum.",
+        "A unique approach becomes the competitive advantage others lack.",
+        "Trust that current position is exactly where growth needs to happen.",
+        "Greatest achievements often follow biggest challenges overcome.",
+        "This story continues being written with remarkable chapters ahead.",
+        "The universe conspires in favor of authentic dreams pursued.",
+        "The most powerful resource remains unwavering self-belief.",
+        "Impact on others extends far beyond what can be measured.",
+        "Current limitations are temporary, while potential remains limitless.",
+        "The most important approval comes from within, not outside.",
+        "Intuition serves as an inner compass pointing true north.",
+        "Today's discipline creates tomorrow's freedom and opportunity.",
+        "Each experience adds depth to character and wisdom.",
+        "Life's purpose unfolds through both joy and difficulty equally.",
+        "How adversity is handled reveals true strength of character.",
+        "Uniqueness becomes the greatest competitive advantage in life.",
+        "Allow personal evolution as dreams and goals evolve naturally.",
+        "Commitment to growth already changes future outcomes positively.",
+        "Never underestimate how far consistency can take worthy goals.",
+        "Determination outweighs any temporary setback encountered.",
+        "The right path isn't always easiest, but remains most worthwhile.",
+        "Courage to begin inspires others to start their own journey.",
+        "Choosing growth over comfort expands potential exponentially.",
+        "Highest potential waits just beyond the comfort zone's edge.",
+        "Every challenge prepares for something greater on the horizon."
       ];
       
       const professionMotivations = {
         "Musician": [
-          "Your musical talent brings harmony to a chaotic world.",
-          "Each note you play resonates with someone's soul.",
-          "Your melodies have the power to heal and transform.",
-          "Your artistic expression speaks universal truths.",
-          "The music within you deserves to be heard."
+          "Musical talent brings harmony to a chaotic world searching for peace.",
+          "Each note played resonates with someone's soul in need of comfort.",
+          "These melodies have power to heal and transform broken spirits.",
+          "Artistic expression speaks universal truths that words cannot convey.",
+          "The music within deserves to be heard by waiting audiences."
         ],
         "Rapper": [
-          "Your words paint powerful stories that need to be told.",
-          "Your flow and rhythm capture emotions words alone cannot express.",
-          "Your verses give voice to experiences many feel but cannot articulate.",
-          "Your authentic voice resonates with truth-seekers.",
-          "Your lyrical prowess opens minds and hearts."
+          "Poetic words paint powerful stories that need to be told boldly.",
+          "This flow and rhythm capture emotions words alone cannot express.",
+          "These verses give voice to experiences many feel but cannot articulate.",
+          "An authentic voice resonates with truth-seekers in every community.",
+          "Lyrical prowess opens minds and hearts to new perspectives."
         ],
         "Footballer": [
-          "Your dedication on the field inspires teamwork off the field.",
-          "Your athletic discipline translates to all areas of life.",
-          "Your strategic thinking on the pitch shows your natural leadership.",
-          "Your passion for the beautiful game elevates those around you.",
-          "Your sportsmanship sets the standard for others to follow."
+          "Dedication on the field inspires teamwork beyond the game itself.",
+          "Athletic discipline translates to all areas of life seamlessly.",
+          "Strategic thinking on the pitch shows natural leadership abilities.",
+          "Passion for the beautiful game elevates those watching and playing.",
+          "Sportsmanship sets the standard for others to follow and respect."
         ],
         "Basketball Player": [
-          "Your court vision translates to seeing opportunities in life.",
-          "Your ability to perform under pressure serves you in every challenge.",
-          "Your team-first mentality creates success in all your relationships.",
-          "Your vertical leap is matched by your ambition to reach new heights.",
-          "Your hustle on defense shows your commitment to excellence."
+          "Court vision translates to seeing opportunities in all of life's games.",
+          "Performing under pressure serves well in every challenge faced.",
+          "Team-first mentality creates success in all relationships formed.",
+          "Vertical leap matches ambition to reach impressive new heights.",
+          "Defensive hustle shows commitment to excellence in all things."
         ],
         "Boxer": [
-          "Your mental toughness is as impressive as your physical strength.",
-          "Your discipline in training reflects your character in life.",
-          "Your ability to take hits and keep moving forward is your superpower.",
-          "Your footwork in the ring mirrors your ability to navigate life's challenges.",
-          "Your fighting spirit never backs down from worthy challenges."
+          "Mental toughness impresses as much as physical strength displayed.",
+          "Training discipline reflects character in all life circumstances.",
+          "Taking hits and moving forward becomes a life superpower.",
+          "Footwork in the ring mirrors ability to navigate life challenges.",
+          "Fighting spirit never backs down from worthy challenges presented."
         ],
         "Student": [
-          "Your curiosity opens doors to endless possibilities.",
-          "Your commitment to learning will serve you throughout life.",
-          "Your fresh perspective brings new insights to old problems.",
-          "Your educational journey is preparing you for opportunities yet unseen.",
-          "Your academic discipline builds habits for lifetime success."
+          "Curiosity opens doors to endless possibilities and discoveries.",
+          "Commitment to learning serves throughout life's many chapters.",
+          "Fresh perspective brings new insights to old problems needing solutions.",
+          "Educational journey prepares for opportunities not yet visible.",
+          "Academic discipline builds habits ensuring lifetime success."
         ],
         "Teacher": [
-          "Your influence extends far beyond the classroom.",
-          "Your patience nurtures potential that others might miss.",
-          "Your guidance shapes futures in ways you may never fully see.",
-          "Your wisdom plants seeds that will bloom for generations.",
-          "Your dedication to knowledge creates ripples of positive change."
+          "Influence extends far beyond classroom walls into futures unseen.",
+          "Patience nurtures potential that others might miss or overlook.",
+          "Guidance shapes futures in ways never fully appreciated or measured.",
+          "Wisdom plants seeds blooming for generations after today's lessons.",
+          "Dedication to knowledge creates ripples of positive change everywhere."
         ],
         "TikToker": [
-          "Your creative content brings joy and connection in a digital world.",
-          "Your authentic voice reaches those who need your message.",
-          "Your ability to communicate concisely is a rare and valuable skill.",
-          "Your cultural influence can be directed toward positive change.",
-          "Your digital presence makes a real-world impact."
+          "Creative content brings joy and connection in our digital landscape.",
+          "An authentic voice reaches those needing exactly this message now.",
+          "Communicating concisely demonstrates rare and valuable skill mastery.",
+          "Cultural influence directs toward positive change for viewers worldwide.",
+          "Digital presence makes real-world impact beyond the screen's limits."
         ],
         "Entrepreneur": [
-          "Your vision creates opportunities where others see obstacles.",
-          "Your ability to take calculated risks sets you apart.",
-          "Your innovative thinking solves problems at their root.",
-          "Your leadership inspires others to join your mission.",
-          "Your persistence through challenges defines your success."
+          "Visionary thinking creates opportunities where others see only obstacles.",
+          "Taking calculated risks sets apart true innovators from followers.",
+          "Innovative solutions solve problems at their root cause effectively.",
+          "Leadership inspires others to join meaningful missions worth pursuing.",
+          "Persistence through challenges defines entrepreneurial success stories."
         ],
         "Doctor": [
-          "Your healing hands bring comfort in times of distress.",
-          "Your commitment to healthcare changes lives every day.",
-          "Your medical knowledge combined with empathy creates true healing.",
-          "Your dedication to patient care exemplifies the highest calling.",
-          "Your diagnostic skills are matched by your compassionate heart."
+          "Healing hands bring comfort in distress when patients need it most.",
+          "Commitment to healthcare changes lives daily in profound ways.",
+          "Medical knowledge combined with empathy creates true healing moments.",
+          "Dedication to patient care exemplifies the highest professional calling.",
+          "Diagnostic skills match compassionate heart in perfect balance."
         ],
         "Engineer": [
-          "Your problem-solving abilities create solutions that improve lives.",
-          "Your technical expertise builds foundations for the future.",
-          "Your analytical mind sees patterns others miss.",
-          "Your precision and attention to detail ensure quality in everything you create.",
-          "Your innovative approaches to challenges advance your entire field."
+          "Problem-solving abilities create solutions improving countless lives.",
+          "Technical expertise builds foundations for future innovations.",
+          "Analytical mind sees patterns others miss completely in complex systems.",
+          "Precision and attention to detail ensure quality in every creation.",
+          "Innovative approaches to challenges advance entire fields forward."
         ],
         "Software Developer": [
-          "Your code creates possibilities that didn't exist before.",
-          "Your technical solutions solve real human problems.",
-          "Your logical thinking combines beautifully with creative innovation.",
-          "Your digital creations impact countless lives daily.",
-          "Your ability to learn new technologies keeps you at the cutting edge."
+          "Code creates possibilities that didn't exist before implementation.",
+          "Technical solutions solve real human problems facing society.",
+          "Logical thinking combines beautifully with creative innovation.",
+          "Digital creations impact countless users daily across platforms.",
+          "Learning new technologies maintains cutting edge professional position."
         ],
         "Artist": [
-          "Your creative vision shows others new ways of seeing the world.",
-          "Your artistic expression touches emotions words cannot reach.",
-          "Your unique perspective adds beauty to everyday experiences.",
-          "Your work sparks important conversations across boundaries.",
-          "Your creative courage inspires others to express their truth."
+          "Creative vision shows others new ways of seeing familiar worlds.",
+          "Artistic expression touches emotions words simply cannot reach.",
+          "Unique perspective adds beauty to everyday experiences for viewers.",
+          "Creative work sparks important conversations across boundaries.",
+          "Artistic courage inspires others to express their truth authentically."
         ],
         "Nurse": [
-          "Your compassionate care heals more than physical ailments.",
-          "Your attentiveness notices what others might miss.",
-          "Your calm presence provides comfort in difficult moments.",
-          "Your dedication to patient care makes a difference every shift.",
-          "Your balance of technical skill and human warmth is invaluable."
+          "Compassionate care heals more than physical ailments alone.",
+          "Attentiveness notices what others might miss in patient care.",
+          "Calm presence provides comfort in difficult healthcare moments.",
+          "Dedication makes a difference every shift for countless patients.",
+          "Balance of technical skill and human warmth proves invaluable."
         ],
         "Writer": [
-          "Your words create worlds in the minds of your readers.",
-          "Your storytelling connects people across different experiences.",
-          "Your eloquence gives voice to what others struggle to express.",
-          "Your written insights offer new perspectives on familiar challenges.",
-          "Your literary craft preserves important truths for future generations."
+          "Words create worlds in readers' minds waiting to be explored.",
+          "Storytelling connects people across vastly different experiences.",
+          "Eloquence gives voice to what others struggle expressing clearly.",
+          "Written insights offer new perspectives on familiar challenges.",
+          "Literary craft preserves important truths for future generations."
         ],
         "Lawyer": [
-          "Your advocacy brings justice to those who need a voice.",
-          "Your analytical mind navigates complex legal challenges with precision.",
-          "Your commitment to legal principles strengthens the foundations of society.",
-          "Your ability to construct compelling arguments changes outcomes.",
-          "Your ethical approach to law practice sets the standard for others."
+          "Advocacy brings justice to those needing a voice in complex systems.",
+          "Analytical mind navigates legal challenges with impressive precision.",
+          "Commitment to legal principles strengthens societal foundations.",
+          "Compelling arguments change outcomes for clients seeking justice.",
+          "Ethical approach to law practice sets standards for the profession."
         ],
         "Chef": [
-          "Your culinary creations bring joy through all the senses.",
-          "Your cooking connects people across tables and cultures.",
-          "Your flavor combinations demonstrate your artistic intuition.",
-          "Your dedication to quality ingredients honors both tradition and innovation.",
-          "Your kitchen leadership brings out the best in your entire team."
+          "Culinary creations bring joy through all senses to appreciative diners.",
+          "Cooking connects people across tables and diverse cultural backgrounds.",
+          "Flavor combinations demonstrate artistic intuition and technical skill.",
+          "Dedication to quality ingredients honors tradition and innovation.",
+          "Kitchen leadership brings out the best in entire culinary teams."
         ],
         "Accountant": [
-          "Your financial expertise provides security and peace of mind.",
-          "Your attention to detail catches what others might miss.",
-          "Your analytical skills bring clarity to complex financial situations.",
-          "Your integrity ensures trust in all your professional relationships.",
-          "Your organizational abilities create order from financial complexity."
+          "Financial expertise provides security and peace of mind to clients.",
+          "Attention to detail catches what others would certainly miss.",
+          "Analytical skills bring clarity to complex financial situations.",
+          "Professional integrity ensures trust in all business relationships.",
+          "Organizational abilities create order from financial complexity."
         ],
         "Designer": [
-          "Your visual solutions combine beauty with practical function.",
-          "Your design thinking transforms user experiences for the better.",
-          "Your aesthetic sensibility elevates everyday objects and interactions.",
-          "Your creative process balances innovation with usability.",
-          "Your design language communicates across barriers and boundaries."
+          "Visual solutions combine beauty with practical function seamlessly.",
+          "Design thinking transforms user experiences in meaningful ways.",
+          "Aesthetic sensibility elevates everyday objects and interactions.",
+          "Creative process balances innovation with essential usability.",
+          "Design language communicates across barriers effectively."
         ],
         "Police Officer": [
-          "Your commitment to public safety makes communities stronger.",
-          "Your courage in challenging situations protects those who need it most.",
-          "Your quick decision-making under pressure demonstrates remarkable composure.",
-          "Your dedication to justice guides your professional conduct.",
-          "Your presence brings security to tense situations."
+          "Commitment to public safety makes communities demonstrably stronger.",
+          "Courage in challenging situations protects vulnerable citizens.",
+          "Quick decision-making under pressure demonstrates remarkable composure.",
+          "Dedication to justice guides professional conduct consistently.",
+          "Presence brings security to tense situations requiring intervention."
         ],
         "Firefighter": [
-          "Your bravery in dangerous situations saves lives and property.",
-          "Your quick thinking under extreme pressure is extraordinary.",
-          "Your physical and mental preparation enables your heroic response.",
-          "Your teamwork in crisis situations exemplifies the best of human cooperation.",
-          "Your commitment to community safety extends beyond emergency response."
+          "Bravery in dangerous situations saves lives and valuable property.",
+          "Quick thinking under extreme pressure demonstrates extraordinary skill.",
+          "Physical and mental preparation enables heroic emergency response.",
+          "Teamwork in crisis situations exemplifies human cooperation.",
+          "Commitment to community safety extends beyond emergency situations."
         ],
         "Military Personnel": [
-          "Your service demonstrates the highest form of commitment to others.",
-          "Your discipline under challenging conditions sets you apart.",
-          "Your strategic thinking balances mission objectives with team safety.",
-          "Your adaptability to changing situations ensures mission success.",
-          "Your loyalty to your unit creates bonds that transcend ordinary friendship."
+          "Service demonstrates highest commitment to protecting others.",
+          "Discipline under challenging conditions sets exceptional standards.",
+          "Strategic thinking balances mission objectives with team safety.",
+          "Adaptability to changing situations ensures mission success consistently.",
+          "Loyalty to unit creates bonds transcending ordinary friendship."
         ],
         "Journalist": [
-          "Your pursuit of truth brings clarity in confusing times.",
-          "Your storytelling helps others understand complex issues.",
-          "Your investigative skills uncover what needs to be seen.",
-          "Your commitment to facts balances the information ecosystem.",
-          "Your voice adds important perspective to public discourse."
+          "Pursuit of truth brings clarity in confusing and complex times.",
+          "Storytelling helps audiences understand important complex issues.",
+          "Investigative skills uncover what desperately needs visibility.",
+          "Commitment to facts balances the information ecosystem responsibly.",
+          "Journalistic voice adds important perspective to public discourse."
         ],
         "Psychologist": [
-          "Your empathetic listening creates space for healing.",
-          "Your insights help others navigate their inner landscapes.",
-          "Your therapeutic approach balances compassion with evidence-based practice.",
-          "Your patience allows others to discover their own solutions.",
-          "Your professional boundaries enable sustainable healing relationships."
+          "Empathetic listening creates safe space for necessary healing.",
+          "Insights help clients navigate their inner landscapes effectively.",
+          "Therapeutic approach balances compassion with evidence-based practice.",
+          "Patient guidance allows others to discover their own solutions.",
+          "Professional boundaries enable sustainable healing relationships."
         ],
         "Teacher": [
-          "Your guidance shapes futures beyond what you may ever see.",
-          "Your patience with the learning process allows growth to unfold naturally.",
-          "Your ability to explain complex concepts makes knowledge accessible.",
-          "Your classroom management creates safe spaces for intellectual exploration.",
-          "Your recognition of different learning styles reaches every student."
+          "Guidance shapes futures beyond what can be immediately seen.",
+          "Patience with learning processes allows growth to unfold naturally.",
+          "Ability to explain complex concepts makes knowledge accessible.",
+          "Classroom management creates safe spaces for intellectual exploration.",
+          "Recognition of different learning styles reaches every student uniquely."
         ],
         "Programmer": [
-          "Your coding skills transform abstract ideas into functional reality.",
-          "Your problem-solving approach breaks complex challenges into manageable parts.",
-          "Your attention to detail prevents future complications in your code.",
-          "Your continuous learning keeps your skills relevant in a changing field.",
-          "Your technical creativity finds elegant solutions to difficult problems."
+          "Coding skills transform abstract ideas into functional reality.",
+          "Problem-solving approach breaks complex challenges into manageable parts.",
+          "Attention to detail prevents future complications in sophisticated code.",
+          "Continuous learning keeps skills relevant in rapidly changing field.",
+          "Technical creativity finds elegant solutions to difficult problems."
         ]
       };
       
       const monthTraits = [
-        "Your January birth gives you natural leadership qualities and determined focus.",
-        "Your February birth blesses you with intuitive understanding and humanitarian vision.",
-        "Your March birth provides you with imaginative creativity and adaptable resilience.",
-        "Your April birth endows you with determined persistence and courageous initiative.",
-        "Your May birth grants you persuasive communication skills and practical sensibility.",
-        "Your June birth offers you adaptable versatility and emotional intelligence.",
-        "Your July birth gives you compassionate empathy and protective nurturing.",
-        "Your August birth blesses you with magnetic charisma and generous confidence.",
-        "Your September birth provides you with analytical precision and methodical organization.",
-        "Your October birth endows you with balanced perspective and diplomatic harmony.",
-        "Your November birth grants you penetrating insight and transformative intensity.",
-        "Your December birth offers you visionary optimism and philosophical wisdom."
+        "A January birth gives natural leadership qualities and determined focus.",
+        "February birth blesses with intuitive understanding and humanitarian vision.",
+        "March birth provides imaginative creativity and adaptable resilience.",
+        "April birth endows determined persistence and courageous initiative.",
+        "May birth grants persuasive communication skills and practical sensibility.",
+        "June birth offers adaptable versatility and emotional intelligence.",
+        "July birth gives compassionate empathy and protective nurturing instincts.",
+        "August birth blesses with magnetic charisma and generous confidence.",
+        "September birth provides analytical precision and methodical organization.",
+        "October birth endows balanced perspective and diplomatic harmony.",
+        "November birth grants penetrating insight and transformative intensity.",
+        "December birth offers visionary optimism and philosophical wisdom."
       ];
       
       let selectedTrait;
@@ -2265,7 +2291,7 @@
       return selectedSubject;
     }
 
-    async function updateFlowerDisplay() {
+    function updateFlowerDisplay() {
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
       
@@ -2283,7 +2309,7 @@
       const formattedName = formatUserName(userFullName);
       
       if (formattedName) {
-        flowerCodeElement.innerHTML = `My Flower - ${subject} / ${formattedName} ${userEmoji}`;
+        flowerCodeElement.innerHTML = `My Flower - ${subject} / ${formattedName}`;
       } else {
         flowerCodeElement.textContent = "My Flower - " + subject;
       }
@@ -2299,7 +2325,7 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `My Flower - ${subject} / ${formattedName} ${userEmoji}`;
+          captureCode.innerHTML = `My Flower - ${subject} / ${formattedName}`;
         } else {
           captureCode.textContent = "My Flower - " + subject;
         }
@@ -2354,6 +2380,26 @@
       });
       
       updateCaptureStyles(theme);
+      
+      let themeColor = '#1A2E4D';
+      switch(theme) {
+        case 'red-black':
+          themeColor = '#000000';
+          break;
+        case 'green-blue':
+          themeColor = '#1A2E4D';
+          break;
+        case 'orange-pink':
+        case 'yellow-purple':
+          themeColor = '#4B0082';
+          break;
+        case 'default':
+          themeColor = '#FFFFFF';
+          break;
+      }
+      
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
+      document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content', theme === 'default' ? 'default' : 'black-translucent');
     }
     
     function updateCaptureStyles(theme) {
@@ -2495,8 +2541,6 @@
         
         const location = await detectUserLocation();
         
-        await getUserRankAndEmoji();
-        
         const userData = {
           date: new Date().toISOString(),
           country: location.country || "Unknown",
@@ -2512,9 +2556,7 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
-          shareCount: shareCount,
-          rank: userRank,
-          emoji: userEmoji
+          shareCount: shareCount
         };
 
         console.log("Submitting data to Firebase:", userData);
@@ -2550,16 +2592,12 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
-        setCookie('userEmoji', userEmoji, 365);
-        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
         return true;
       } catch (error) {
         console.error("Firebase submission error:", error);
-        await getUserRankAndEmoji();
-        
         const userData = {
           date: new Date().toISOString(),
           uniqueId: userUniqueId,
@@ -2572,9 +2610,7 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
-          shareCount: 0,
-          rank: userRank,
-          emoji: userEmoji
+          shareCount: 0
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -2584,8 +2620,6 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
-        setCookie('userEmoji', userEmoji, 365);
-        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
@@ -2628,8 +2662,6 @@
       const cookieDOB = getCookie('userDateOfBirth');
       const cookieProfession = getCookie('userProfession');
       const cookieFullName = getCookie('userFullName');
-      const cookieEmoji = getCookie('userEmoji');
-      const cookieRank = getCookie('userRank');
       
       if (cookieUniqueId && cookieFlowerCode) {
         userUniqueId = cookieUniqueId;
@@ -2637,13 +2669,11 @@
         userDateOfBirth = cookieDOB || null;
         userProfession = cookieProfession || null;
         userFullName = cookieFullName || null;
-        userEmoji = cookieEmoji || "👑";
-        userRank = cookieRank ? parseInt(cookieRank) : 0;
         isInstalled = cookieInstalled === 'true';
         
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
-        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName, userEmoji, userRank });
+        console.log("Found saved user data in cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName });
         return true;
       }
       
@@ -2657,8 +2687,6 @@
           userProfession = userData.profession || null;
           userFullName = userData.fullName || null;
           shareCount = userData.shareCount || 0;
-          userEmoji = userData.emoji || "👑";
-          userRank = userData.rank || 0;
           currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
           userUid = userData.uid;
           isInstalled = localStorage.getItem('isInstalled') === 'true';
@@ -2668,8 +2696,6 @@
           setCookie('userDateOfBirth', userDateOfBirth, 365);
           setCookie('userProfession', userProfession, 365);
           setCookie('userFullName', userFullName, 365);
-          setCookie('userEmoji', userEmoji, 365);
-          setCookie('userRank', userRank.toString(), 365);
           setCookie('isInstalled', 'true', 365);
           
           console.log("Found saved user data in localStorage:", userData);
@@ -2744,8 +2770,6 @@
         removeCookie('userDateOfBirth');
         removeCookie('userProfession');
         removeCookie('userFullName');
-        removeCookie('userEmoji');
-        removeCookie('userRank');
         removeCookie('preferredTheme');
         
         userUniqueId = null;
@@ -2754,8 +2778,6 @@
         userDateOfBirth = null;
         userProfession = null;
         userFullName = null;
-        userEmoji = null;
-        userRank = null;
         isInstalled = false;
         seenSubjects = [];
         shareCount = 0;
@@ -2776,8 +2798,87 @@
         return false;
       }
     }
+    
+    function createWebAppManifest() {
+      const manifestData = {
+        name: "G-Z Flower",
+        short_name: "G-Z",
+        description: "Discover your unique Flower of Life",
+        start_url: window.location.href,
+        display: "standalone",
+        background_color: "#1A2E4D",
+        theme_color: "#1A2E4D",
+        icons: [
+          {
+            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
+            sizes: "192x192",
+            type: "image/webp"
+          },
+          {
+            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
+            sizes: "512x512",
+            type: "image/webp"
+          }
+        ]
+      };
+      
+      const manifestStr = JSON.stringify(manifestData);
+      const manifestBlob = new Blob([manifestStr], {type: 'application/json'});
+      const manifestURL = URL.createObjectURL(manifestBlob);
+      
+      const manifestLink = document.getElementById('manifest-placeholder');
+      manifestLink.setAttribute('href', manifestURL);
+      manifestLink.setAttribute('rel', 'manifest');
+    }
+    
+    function setupInstallPrompt() {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        const isInstallPromptShownBefore = localStorage.getItem('installPromptShown');
+        if (!isInstallPromptShownBefore) {
+          setTimeout(() => {
+            document.getElementById('installPrompt').style.display = 'block';
+          }, 3000);
+        }
+      });
+      
+      document.getElementById('installBtn').addEventListener('click', async () => {
+        if (!deferredPrompt) {
+          window.location.href = "https://g-z.online/install.html";
+          return;
+        }
+        
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        
+        deferredPrompt = null;
+        document.getElementById('installPrompt').style.display = 'none';
+        localStorage.setItem('installPromptShown', 'true');
+      });
+      
+      document.getElementById('dismissBtn').addEventListener('click', () => {
+        document.getElementById('installPrompt').style.display = 'none';
+        localStorage.setItem('installPromptShown', 'true');
+      });
+      
+      window.addEventListener('appinstalled', (evt) => {
+        console.log('App was installed');
+        document.getElementById('installPrompt').style.display = 'none';
+      });
+    }
 
     window.addEventListener('load', async () => {
+      createWebAppManifest();
+      setupInstallPrompt();
+      
       const today = new Date();
       const twoYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
       document.getElementById('dobInput').max = twoYearsAgo.toISOString().split('T')[0];
@@ -2968,7 +3069,7 @@
       
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       if (formattedName) {
-        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName} ${userEmoji}`;
+        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
       } else {
         flowerCodeElement.textContent = "My Flower - " + newSubject;
       }
@@ -2980,7 +3081,7 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName} ${userEmoji}`;
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
         } else {
           captureCode.textContent = "My Flower - " + newSubject;
         }
@@ -3032,8 +3133,6 @@
         
         userFlowerCode = generateFlowerCode();
         
-        userEmoji = await getUserRankAndEmoji();
-        
         const subject = getRandomSubject();
         localStorage.setItem('flowerSubject', subject);
         
@@ -3056,9 +3155,7 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: subject,
-          shareCount: 0,
-          rank: userRank,
-          emoji: userEmoji
+          shareCount: 0
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -3068,8 +3165,6 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
-        setCookie('userEmoji', userEmoji, 365);
-        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
@@ -3165,8 +3260,7 @@
     
     document.getElementById('shareCapture').addEventListener('click', function() {
       const imageUrl = document.getElementById('capturedImage').src;
-      
-      if (navigator.share) {
+if (navigator.share) {
         fetch(imageUrl)
           .then(res => res.blob())
           .then(blob => {
