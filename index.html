@@ -4,16 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76">
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#1A2E4D">
-    <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
     <link rel="manifest" id="manifest-placeholder">
+    <style>
+        /* Style pour l'écran de chargement en noir */
+        body {
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .splash-icon {
+            width: 100px;
+            height: 100px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Écran de chargement -->
+    <div class="splash-screen" id="splash-screen">
+        <img src="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41" alt="Logo" class="splash-icon">
+    </div>
+    
+    <!-- Contenu principal de la page (qui sera affiché après le chargement) -->
+    <div id="main-content" style="display: none;">
+        <!-- Votre contenu principal ici -->
+    </div>
+    
+    <script>
+        // Création dynamique du fichier manifest
+        const manifestData = {
+            "name": "G-Z App",
+            "short_name": "G-Z",
+            "description": "G-Z Application",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#000000",
+            "theme_color": "#000000",
+            "icons": [
+                {
+                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+        
+        const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+        const manifestURL = URL.createObjectURL(blob);
+        document.querySelector('#manifest-placeholder').setAttribute('href', manifestURL);
+        
+        // Simulation de chargement et affichage du contenu principal
+        window.addEventListener('load', function() {
+            // Simuler un temps de chargement (peut être ajusté ou remplacé par votre vrai logique)
+            setTimeout(function() {
+                // Masquer l'écran de chargement
+                const splashScreen = document.getElementById('splash-screen');
+                splashScreen.style.opacity = '0';
+                
+                // Afficher le contenu principal
+                setTimeout(function() {
+                    splashScreen.style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 500); // Attendre que l'animation de fondu soit terminée
+            }, 1500); //  secondes de chargement simulé
+        });
+    </script>
     <style>
         input, textarea, select, button {
             font-size: 16px;
