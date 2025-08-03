@@ -3,89 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title translate="no">G-Z</title>
+    <title>G-Z</title>
     <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            font-family: 'Roboto', Arial, sans-serif;
+            background-color: white;
         }
         header {
-            background-color: #ffffff;
-            padding: 5px 10px;
+            background-color: white;
+            padding: 6px;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centering the logo */
-            height: 50px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
         }
         h1 {
             margin: 0;
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-family: 'Billabong', cursive;
-            color: #007BFF;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            font-weight: bold;
         }
-        .logo-genz {
-            border: 1.5px solid #007BFF;
-            padding: 3px 6px;
-            display: inline-block;
-            border-radius: 10px;
+        .user-icon-container {
+            margin-right: 2px;
+            display: flex;
             align-items: center;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 2px;
+            width: 28px;
+            height: 28px;
+            justify-content: center;
+            background-color: #f0f7ff;
+        }
+        .user-icon {
+            color: #007bff;
+            font-size: 1.5em;
         }
         .divider {
-            height: 1px;
-            background-color: #007BFF;
+            height: 0.6px;
+            background-color: #007bff;
             width: 100%;
+            margin-top: 5px;
         }
-        .divider-text {
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centrer les boutons */
+            margin-top: 5px;
+            padding: 5px 0;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin: 0 2px; /* Distance de 4px entre les boutons */
+            font-size: 0.8em;
+            cursor: default; /* Rendre le curseur par défaut */
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .button i {
+            margin-right: 4px; /* Espacement de 4px entre l'icône et le texte */
+        }
+        .notification {
             text-align: center;
-            color: #333;
-            font-size: 0.9em;
-            margin: 10px 0;
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
         }
-        .content {
-            padding: 10px 20px;
-            font-size: 0.85em;
+        .how-it-works-container {
+            text-align: center;
+            margin: 20px auto;
+            width: 310px;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 20px;
+            background-color: #f0f7ff;
+            overflow: hidden;
+        }
+        .section-title {
+            font-size: 1.1em;
+            color: #007bff;
+            margin-bottom: 5px;
+            margin-top: 0;
+        }
+        .description {
+            font-size: 0.9em;
+            color: #0056b3;
+            line-height: 1.2;
+            overflow-y: auto;
+            margin: 0;
+        }
+        .email-link {
+            color: #0056b3;
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="index.html" style="text-decoration: none; color: inherit;">
-        <h1 class="logo-genz" translate="no">G-Z</h1>
+    <a href="https://g-z.online" style="text-decoration: none;">
+        <h1 translate="no">G-Z</h1>
     </a>
+    <div class="user-icon-container">
+        <i class="fas fa-handshake user-icon"></i>
+    </div>
 </header>
 
 <div class="divider"></div>
-<div class="divider-text">Installation Guide</div>
+
+<div class="button-container">
+    <button class="button"><i class="fas fa-star"></i>Important</button>
+    <a href="guide.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-arrow-circle-down"></i>Install</button>
+    </a>
+    <a href="Faq.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-file-contract"></i>FAQ</button>
+    </a>
+    <a href="Confidentialité.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-file-contract"></i>Privacy</button>
+    </a>
+    <a href="Terms.html" style="text-decoration: none;">
+        <button class="button"><i class="fas fa-file-contract"></i>Terms</button>
+    </a>
+</div>
+
+<div class="divider"></div>
+<div class="notification">
+    <span class="notification-text">¯\_(ツ)_/¯</span>
+</div>
+
 <div class="divider"></div>
 
-<div class="content">
-    <h2>1. On iPhone</h2>
-    <p>In Safari:</p>
-    <ol>
-        <li>Tap the <strong>Share</strong> icon (a square with an arrow pointing up).</li>
-        <li>Select <strong>Add to Home Screen</strong>.</li>
-        <li>Confirm by tapping <strong>Add</strong>.</li>
-    </ol>
-
-    <h2>2. On Android</h2>
-    <p>In Chrome:</p>
-    <ol>
-        <li>You may see a prompt at the bottom asking if you want to install the site as an app. Tap <strong>Install</strong>.</li>
-        <li>If the prompt does not appear:</li>
-        <ul>
-            <li>Open the <strong>Menu</strong> (three dots in the top-right corner).</li>
-            <li>Select <strong>Add to Home Screen</strong>.</li>
-            <li>Confirm by tapping <strong>Add</strong>.</li>
-        </ul>
-    </ol>
+<div class="how-it-works-container">
+    <h2 class="section-title"> - To know -</h2>
+    <p class="description" id="operationDescription"> You can install G-Z.
+     For any questions about navigation, please click on the FAQ section. You'll find the information you're looking for there.
+You can also visit our Privacy Policy and Terms of Use pages to learn more about how our service works.
+    </p>
 </div>
+
+<script>
+    function changePage(page) {
+        const descriptionElement = document.getElementById('operationDescription');
+        // Change the description as needed based on the selected page
+    }
+</script>
 
 </body>
 </html>
