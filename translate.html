@@ -66,6 +66,46 @@
             background-color: #ffffff; /* White background */
             width: 115px; /* Set width */
         }
+        /* Style pour la section des langues */
+        .language-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #007BFF;
+            border-radius: 20px; /* Bordure arrondie à 20px */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        .language-item {
+            padding: 8px;
+            border: 1px solid #007BFF; /* Bordure bleue océan */
+            border-radius: 20px; /* Bordure arrondie à 20px */
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .language-item:hover {
+            background-color: #f0f7ff;
+            border-color: #005bb7; /* Bleu océan plus foncé au survol */
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+        }
+        .language-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .language-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #007BFF;
+            font-size: 1.1em;
+        }
     </style>
     <script>
         function changeLanguage() {
@@ -107,6 +147,60 @@
 <div class="divider"></div>
 <div class="divider-text">Select your language in "Translate"</div>
 <div class="divider"></div>
+
+<div class="language-container">
+    <div class="language-title">Available Languages</div>
+    <div class="language-grid">
+        <div class="language-item">
+            <a href="index.html">English (en)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-fr.html">Français (fr)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-es.html">Español (es)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-pt.html">Português (pt)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-ar.html">العربية (ar)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-hi.html">हिंदी (hi)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-ur.html">اردو (ur)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-am.html">አማርኛ (am)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-id.html">Bahasa Indonesia (id)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-vi.html">Tiếng Việt (vi)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-zh.html">普通话 (zh)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-ja.html">日本語 (ja)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-ko.html">한국어 (ko)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-ru.html">Русский (ru)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-de.html">Deutsch (de)</a>
+        </div>
+        <div class="language-item">
+            <a href="index-tr.html">Türkçe (tr)</a>
+        </div>
+    </div>
+</div>
 
 <footer>
     <p></p> <!-- Suppression de la section copyright -->
