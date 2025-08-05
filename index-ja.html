@@ -1,1 +1,3460 @@
-gnn
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
+    <link rel="manifest" id="manifest-placeholder">
+    <style>
+        /* Style pour l'écran de chargement en noir */
+        body {
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .splash-icon {
+            width: 100px;
+            height: 100px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Écran de chargement -->
+    <div class="splash-screen" id="splash-screen">
+        <img src="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41" alt="Logo" class="splash-icon">
+    </div>
+    
+    <!-- Contenu principal de la page (qui sera affiché après le chargement) -->
+    <div id="main-content" style="display: none;">
+        <!-- Votre contenu principal ici -->
+    </div>
+    
+    <script>
+        // Création dynamique du fichier manifest
+        const manifestData = {
+            "name": "Flower of life",
+            "short_name": "Flower",
+            "description": "G-Z Application",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#000000",
+            "theme_color": "#000000",
+            "icons": [
+                {
+                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+        
+        const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+        const manifestURL = URL.createObjectURL(blob);
+        document.querySelector('#manifest-placeholder').setAttribute('href', manifestURL);
+        
+        // Simulation de chargement et affichage du contenu principal
+        window.addEventListener('load', function() {
+            // Simuler un temps de chargement (peut être ajusté ou remplacé par votre vrai logique)
+            setTimeout(function() {
+                // Masquer l'écran de chargement
+                const splashScreen = document.getElementById('splash-screen');
+                splashScreen.style.opacity = '0';
+                
+                // Afficher le contenu principal
+                setTimeout(function() {
+                    splashScreen.style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 500); // Attendre que l'animation de fondu soit terminée
+            }, 1500); // 2 secondes de chargement simulé
+        });
+    </script>
+</body>
+</html>
+    <style>
+        input, textarea, select, button {
+            font-size: 16px;
+            touch-action: manipulation;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .divider {
+            height: 0.6px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .button-container::-webkit-scrollbar {
+            display: none;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            padding: 3px 0;
+            max-height: 30px;
+            overflow: hidden;
+        }
+        .share-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.3em;
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 4px;
+            background-color: white;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        footer {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            margin-top: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+        }
+        .logo {
+            color: #007bff;
+            font-size: 1.6em;
+            margin-right: 10px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(0, 119, 190, 0.1);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .logo:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 50% auto;
+            padding: 14px;
+            border: 1px solid #007bff;
+            border-radius: 60px;
+            width: 280px;
+            max-width: 70%;
+            text-align: center;
+            max-height: 60vh;
+            overflow-y: auto;
+            position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-header {
+            font-size: 1.8em;
+            font-family: 'Billabong', cursive;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: 120px;
+            margin: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .close-button:hover {
+            background-color: #0056b3;
+        }
+        
+        @keyframes flowerRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .flower-icon {
+            display: inline-block;
+            animation: flowerRotate 2s infinite ease-in-out;
+            color: #ff69b4;
+        }
+        
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        .monthly-motivation {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            background-color: white;
+            font-style: italic;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+        
+        .flower-code {
+            display: block;
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            max-width: 220px;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .copy-icon {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+            transition: color 0.3s ease;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            margin: 290px auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            max-width: 190px;
+            position: relative;
+            z-index: 1001;
+            border: 1px solid #0056b3;
+        }
+        
+        .share-flower-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .share-flower-button i {
+            margin-left: 8px;
+        }
+        
+        #capturedFlower {
+            position: fixed;
+            z-index: 1003;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .captured-image-container {
+            position: relative;
+            max-width: 85%;
+            max-height: 60vh;
+            margin-bottom: 15px;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        
+        .share-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 10px auto;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .share-message i {
+            margin-left: 8px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        
+        .share-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .capture-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .capture-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+        
+        .capture-button i {
+            margin-right: 5px;
+        }
+        
+        .close-capture {
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        #flowerCaptureContainer {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: -9999px;
+            background-color: white;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-flower-header {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px rgba(0, 123, 255, 0.2);
+            transition: color 0.3s ease;
+        }
+        
+        .capture-flower-code {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.8em;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 10px;
+            border: 1px solid #ff69b4;
+            margin: 6px auto;
+            text-align: center;
+            max-width: 80%;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-flower-motivation {
+            font-style: italic;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px dashed #ff69b4;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+            text-align: center;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+        
+        .capture-flower-icon {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+        
+        .gz-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.4em;
+            text-align: center;
+            margin-top: 10px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 4px;
+            width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .share-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 0.85em;
+            margin: 5px auto 15px auto;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-website-url {
+            text-align: center;
+            font-size: 0.85em;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 8px;
+            font-family: Arial, sans-serif;
+            padding: 3px 0;
+            border-top: 1px dashed #007bff;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .terms-text {
+            font-size: 0.8em;
+            color: black;
+            text-align: center;
+            margin: 10px auto;
+            width: 330px;
+            transition: color 0.3s ease;
+        }
+        
+        .billabong-title {
+            margin-bottom: 3px;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 1px;
+        }
+
+        .header-icon {
+            font-size: 1.4em;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .app-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 1.4em;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        #welcomeToast {
+            position: fixed;
+            top: 160px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-family: , cursive;
+            font-size: 1.1em;
+            border: 2px solid #4CAF50;
+        }
+
+        #welcomeModal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #welcomeModal.show {
+            opacity: 1;
+        }
+
+        #welcomeModal .modal-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 40% auto;
+            padding: 15px 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            width: 85%;
+            max-width: 290px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #welcomeModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        #welcomeModal .close {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-bottom: 3px;
+            cursor: pointer;
+        }
+
+        #welcomeModal .welcome-header {
+            color: #007bff;
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #welcomeModal .welcome-text {
+            margin: 10px 0 15px 0;
+            font-size: 0.8em;
+            color: #333;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .dob-container {
+            margin: 10px 0;
+        }
+
+        .dob-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .dob-input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .profession-container {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .profession-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .profession-search {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .profession-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 90%;
+            max-height: 150px;
+            overflow-y: auto;
+            left: 5%;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .profession-option {
+            padding: 8px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            background-color: white;
+            color: #333;
+        }
+
+        .profession-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .name-container {
+            margin: 10px 0;
+        }
+
+        .name-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .name-input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        #createAccountButton {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 10px auto 5px;
+            display: block;
+            width: 80%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+        }
+        
+        #createAccountButton:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d80 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+        
+        #createAccountButton:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        #idModal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #idModal.show {
+            opacity: 1;
+        }
+
+        #idModal .modal-content {
+            background-color: #fff;
+            margin: 45% auto;
+            padding: 15px;
+            border: 1px solid #007BFF;
+            border-radius: 25px;
+            width: 65%;
+            max-width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #idModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .id-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .id-title {
+            font-size: 1em;
+            color: #007bff;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .id-display {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #ff69b4;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            margin: 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 80%;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .delete-account {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-account:hover {
+            background-color: #e60000;
+        }
+
+        .copy-icon {
+            margin-left: 6px;
+        }
+
+        .id-message {
+            font-size: 0.7em;
+            color: #333;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        #idModal .close-button {
+            margin-top: 8px;
+            width: auto;
+            padding: 6px 15px;
+            font-size: 0.7em;
+            height: 28px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+        
+        .style-selector {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        
+        .style-selector h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .style-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 5px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .style-options::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .style-option {
+            width: 60px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .style-option.selected {
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #007bff;
+        }
+        
+        .style-option.red-black {
+            background: linear-gradient(to right, #FF4500, #8B0000, #121212, #121212);
+        }
+        
+        .style-option.green-blue {
+            background: linear-gradient(to right, #3EB489, #14532D, #0A2239, #1A2E4D);
+        }
+        
+        .style-option.orange-pink {
+            background: linear-gradient(to right, #FF7F50, #FF6F91, #C71585, #4B0082);
+        }
+        
+        .style-option.yellow-purple {
+            background: linear-gradient(to right, #FFD700, #FFA500, #8A2BE2, #4B0082);
+        }
+        
+        .style-option.default {
+            background: linear-gradient(to right, #007bff, #0056b3);
+        }
+        
+        .main-content {
+            padding-bottom: 80px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        body.theme-default {
+            background-color: white;
+            color: #333;
+        }
+        
+        body.theme-default header, 
+        body.theme-default footer,
+        body.theme-default .style-selector {
+            background-color: white;
+        }
+        
+        body.theme-default .app-logo,
+        body.theme-default .header-icon,
+        body.theme-default .divider,
+        body.theme-default .notification,
+        body.theme-default .billabong-title,
+        body.theme-default .gz-logo,
+        body.theme-default .capture-website-url,
+        body.theme-default .capture-flower-header,
+        body.theme-default .id-title {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        
+        body.theme-default .notification .notification-text {
+            color: #007bff;
+        }
+        
+        body.theme-default .button {
+            background-color: #007bff;
+        }
+        
+        body.theme-default .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        body.theme-default .flower-code,
+        body.theme-default .id-display {
+            color: #ff69b4;
+            background-color: #fff0f8;
+            border-color: #ff69b4;
+        }
+        
+        body.theme-default .monthly-motivation,
+        body.theme-default .capture-flower-motivation {
+            border-color: #ff69b4;
+            color: #333;
+            background-color: white;
+        }
+        
+        body.theme-default .modal-content {
+            background-color: white;
+            border-color: #007bff;
+        }
+        
+        body.theme-red-black {
+            background: black;
+            color: #E5E5E5;
+        }
+        
+        body.theme-red-black header, 
+        body.theme-red-black footer,
+        body.theme-red-black .style-selector {
+            background-color: black;
+        }
+        
+        body.theme-red-black .app-logo,
+        body.theme-red-black .header-icon,
+        body.theme-red-black .gz-logo,
+        body.theme-red-black .capture-flower-header,
+        body.theme-red-black .capture-website-url,
+        body.theme-red-black .id-title,
+        body.theme-red-black .billabong-title {
+            color: #FF4500;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .divider {
+            background-color: #FF4500;
+        }
+        
+        body.theme-red-black .notification .notification-text {
+            color: #FF4500;
+        }
+        
+        body.theme-red-black .notification,
+        body.theme-red-black .welcome-text,
+        body.theme-red-black .id-message {
+            color: #CCCCCC;
+        }
+        
+        body.theme-red-black .button {
+            background-color: #8B0000;
+        }
+        
+        body.theme-red-black .share-flower-button {
+            background-color: #8B0000;
+            color: white;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .flower-code,
+        body.theme-red-black .id-display {
+            color: #FF4500;
+            background-color: black;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .monthly-motivation,
+        body.theme-red-black .capture-flower-motivation {
+            border-color: #FF4500;
+            color: #E5E5E5;
+            background-color: black;
+        }
+        
+        body.theme-red-black .modal-content,
+        body.theme-red-black #flowerCaptureContainer {
+            background-color: black;
+            border-color: #8B0000;
+        }
+        
+        body.theme-green-blue {
+            background: #1A2E4D;
+            color: #F5F5F5;
+        }
+        
+        body.theme-green-blue header, 
+        body.theme-green-blue footer,
+        body.theme-green-blue .style-selector {
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .app-logo,
+        body.theme-green-blue .header-icon,
+        body.theme-green-blue .gz-logo,
+        body.theme-green-blue .capture-flower-header,
+        body.theme-green-blue .capture-website-url,
+        body.theme-green-blue .id-title,
+        body.theme-green-blue .billabong-title {
+            color: #3EB489;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .divider {
+            background-color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification .notification-text {
+            color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification,
+        body.theme-green-blue .welcome-text,
+        body.theme-green-blue .id-message {
+            color: #A0A0A0;
+        }
+        
+        body.theme-green-blue .button {
+            background-color: #14532D;
+        }
+        
+        body.theme-green-blue .share-flower-button {
+            background-color: #14532D;
+            color: white;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .flower-code,
+        body.theme-green-blue .id-display {
+            color: #3EB489;
+            background-color: #36454F;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .monthly-motivation,
+        body.theme-green-blue .capture-flower-motivation {
+            border-color: #3EB489;
+            color: #F5F5F5;
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .modal-content,
+        body.theme-green-blue #flowerCaptureContainer {
+            background-color: #1A2E4D;
+            border-color: #3EB489;
+        }
+        
+        body.theme-orange-pink {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-orange-pink header, 
+        body.theme-orange-pink footer,
+        body.theme-orange-pink .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .app-logo,
+        body.theme-orange-pink .header-icon,
+        body.theme-orange-pink .gz-logo,
+        body.theme-orange-pink .capture-flower-header,
+        body.theme-orange-pink .capture-website-url,
+        body.theme-orange-pink .id-title,
+        body.theme-orange-pink .billabong-title {
+            color: #FF7F50;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .divider {
+            background-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification .notification-text {
+            color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification,
+        body.theme-orange-pink .welcome-text,
+        body.theme-orange-pink .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-orange-pink .button {
+            background-color: #C71585;
+        }
+        
+        body.theme-orange-pink .share-flower-button {
+            background-color: #C71585;
+            color: white;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .flower-code,
+        body.theme-orange-pink .id-display {
+            color: #FF7F50;
+            background-color: #6A0DAD;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .monthly-motivation,
+        body.theme-orange-pink .capture-flower-motivation {
+            border-color: #FF7F50;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .modal-content,
+        body.theme-orange-pink #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FF7F50;
+        }
+
+        body.theme-yellow-purple {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-yellow-purple header, 
+        body.theme-yellow-purple footer,
+        body.theme-yellow-purple .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .app-logo,
+        body.theme-yellow-purple .header-icon,
+        body.theme-yellow-purple .gz-logo,
+        body.theme-yellow-purple .capture-flower-header,
+        body.theme-yellow-purple .capture-website-url,
+        body.theme-yellow-purple .id-title,
+        body.theme-yellow-purple .billabong-title {
+            color: #FFD700;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .divider {
+            background-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification .notification-text {
+            color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification,
+        body.theme-yellow-purple .welcome-text,
+        body.theme-yellow-purple .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-yellow-purple .button {
+            background-color: #8A2BE2;
+        }
+        
+        body.theme-yellow-purple .share-flower-button {
+            background-color: #8A2BE2;
+            color: white;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .flower-code,
+        body.theme-yellow-purple .id-display {
+            color: #FFD700;
+            background-color: #6A0DAD;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .monthly-motivation,
+        body.theme-yellow-purple .capture-flower-motivation {
+            border-color: #FFD700;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .modal-content,
+        body.theme-yellow-purple #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FFD700;
+        }
+        
+        .refresh-motivation {
+            position: absolute;
+            right: 15px;
+            top: 70px;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .refresh-motivation:hover {
+            transform: rotate(180deg);
+        }
+        
+        body.theme-red-black .refresh-motivation {
+            color: #FF4500;
+        }
+        
+        body.theme-green-blue .refresh-motivation {
+            color: #3EB489;
+        }
+        
+        body.theme-orange-pink .refresh-motivation {
+            color: #FF7F50;
+        }
+        
+        body.theme-yellow-purple .refresh-motivation {
+            color: #FFD700;
+        }
+        
+        .user-name {
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .install-prompt {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .install-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .install-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        
+        .dismiss-btn {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="theme-green-blue">
+
+  <header>
+   
+    <div class="header-container">
+      <div class="app-logo">G-Z</div>
+      
+      <div class="right-controls">
+        
+   
+        <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
+        
+         <a href="https://g-z.online/translate.html" class="header-icon menu-link"><i class="fas fa-globe"></i></a>
+        
+        <a href="https://g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="main-content">
+    <div class="button-container">
+      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span>命の花</span></a>
+      
+    
+
+    </div>
+
+    <div class="divider"></div>
+    <div class="notification">
+      <span class="notification-text">💠 フラワー -- 宇宙があなただけのために書いたメッセージ ¯\_(ツ)_/¯</span>
+    </div>
+
+    <div class="divider"></div>
+  </div>
+
+  <div class="style-selector">
+    <h3>スタイル</h3>
+    <div class="style-options">
+      <div class="style-option red-black" data-theme="red-black"></div>
+      <div class="style-option green-blue selected" data-theme="green-blue"></div>
+      <div class="style-option orange-pink" data-theme="orange-pink"></div>
+      <div class="style-option yellow-purple" data-theme="yellow-purple"></div>
+      <div class="style-option default" data-theme="default"></div>
+    </div>
+  </div>
+
+  <div id="welcomeToast">
+    
+    おかえりなさい    ¯\_(ツ)_/¯
+  </div>
+
+  <div id="welcomeModal" class="modal">
+    <div class="modal-content">
+      <div class="welcome-header">💠 ようこそ 💠</div>
+      <div class="welcome-text">
+        アカウント作成には、あなただけの花を作るために生年月日、職業、名前が必要です。
+      </div>
+      
+      <div class="name-container">
+        <label for="fullNameInput">フルネーム:</label>
+        <input type="text" id="fullNameInput" class="name-input" placeholder="フルネームを入力してください...">
+      </div>
+      
+      <div class="dob-container">
+        <label for="dobInput">生年月日:</label>
+        <input type="date" id="dobInput" class="dob-input" max="">
+      </div>
+      
+      <div class="profession-container">
+        <label for="professionInput">職業:</label>
+        <input type="text" id="professionInput" class="profession-search" placeholder="職業を入力してください...">
+        <div id="professionDropdown" class="profession-dropdown"></div>
+      </div>
+      
+      <div class="loading-spinner" id="loadingSpinner">
+        <span>あなただけの花を作成中</span>
+        <span class="loading-dots"></span>
+      </div>
+      
+      <button id="createAccountButton">アカウント作成</button>
+    </div>
+  </div>
+
+  <div id="idModal" class="modal">
+    <div class="modal-content">
+      <div class="id-title">あなたのユーザーID</div>
+      <div class="id-display">
+        <span id="userIdDisplay"></span>
+        <i class="fas fa-copy copy-icon" id="copyIdButton"></i>
+      </div>
+      <div class="id-message">このIDを安全に保管してください！</div>
+      <div class="id-actions">
+        <button class="delete-account" id="deleteAccountButton">アカウント削除</button>
+        <button class="close-button" id="closeIdModal">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="flowerModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong id="flowerTypeTitle">命の花</strong></div>
+      
+      <div id="flowerCodeDisplay" class="flower-code"></div>
+      
+      <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="新しいモチベーションを生成"></i>
+      
+      <div class="monthly-motivation" id="monthlyMotivation">
+      </div>
+      
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;" id="flowerIconContainer">
+        <i class="fas fa-spa"></i>
+      </div>
+    </div>
+  </div>
+  
+  <button class="share-flower-button" id="shareFlowerButton">
+    <span>私の花をシェア</span> <i class="fas fa-arrow-right send-icon"></i>
+  </button>
+  
+  <div id="capturedFlower">
+    <div class="captured-image-container">
+      <img id="capturedImage" class="captured-image" src="" alt="キャプチャーされた花">
+    </div>
+
+    <div class="share-warning" id="shareWarning">
+      <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+      <span>Google/Safariからのシェアに最適です。</span>
+    </div>
+    
+    <div class="capture-controls">
+      <button class="capture-button" id="shareCapture">
+        <i class="fas fa-share"></i> <span>シェア</span>
+      </button>
+      
+      <button class="capture-button close-capture" id="closeCapture">
+        <i class="fas fa-times"></i> <span>閉じる</span>
+      </button>
+    </div>
+  </div>
+  
+  <div id="flowerCaptureContainer">
+    <div class="capture-flower-header" id="captureFlowerHeader">命の花</div>
+    
+    <div id="captureFlowerCode" class="capture-flower-code"></div>
+    
+    <div id="captureFlowerMotivation" class="capture-flower-motivation">
+    </div>
+    
+    <div class="capture-flower-icon" id="captureFlowerIcon">
+      <i class="fas fa-spa"></i>
+    </div>
+    
+    <div class="gz-logo">G-Z</div>
+    
+    <div class="capture-website-url">www.g-z.onlineで自分だけの花を見つけよう</div>
+  </div>
+
+  <div class="install-prompt" id="installPrompt">
+    <p>より良い体験のためにG-Zをホーム画面に追加しましょう！</p>
+    <div class="install-buttons">
+      <button class="install-btn" id="installBtn">インストール</button>
+      <button class="dismiss-btn" id="dismissBtn">後で</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    
+    const auth = firebase.auth();
+    const database = firebase.database();
+    const firestore = firebase.firestore();
+    
+    let userUid = null;
+    let userFlowerCode = null;
+    let currentMotivation = null;
+    let currentCountry = null;
+    let userCity = null;
+    let userUniqueId = null;
+    let isAuthenticated = false;
+    let isInstalled = false;
+    let currentTheme = "green-blue";
+    let userDateOfBirth = null;
+    let userProfession = null;
+    let userFullName = null;
+    let seenSubjects = [];
+    let shareCount = 0;
+    let deferredPrompt = null;
+
+    const professions = [
+      "ミュージシャン", "ラッパー", "サッカー選手", "バスケットボール選手", "ボクサー", 
+      "学生", "教師", "医師", "看護師", "エンジニア", 
+      "ソフトウェア開発者", "デザイナー", "アーティスト", "作家", "ジャーナリスト", 
+      "シェフ", "ウェイター/ウェイトレス", "ハウスキーパー", "TikToker", "YouTuber", 
+      "インフルエンサー", "写真家", "ビデオグラファー", "ダンサー", "俳優/女優", 
+      "モデル", "建築家", "弁護士", "会計士", "ファイナンシャルアドバイザー", 
+      "銀行員", "起業家", "ビジネスオーナー", "マネージャー", "エグゼクティブ", 
+      "営業担当", "マーケター", "ソーシャルメディアマネージャー", "ドライバー", "パイロット", 
+      "客室乗務員", "整備士", "電気技師", "配管工", "建設作業員", 
+      "農家", "庭師", "獣医", "パーソナルトレーナー", "フィットネスインストラクター", 
+      "ヨガ講師", "セラピスト", "心理学者", "カウンセラー", "牧師/宗教指導者",
+      "科学者", "研究者", "教授", "警察官", "消防士",
+      "軍人", "警備員", "不動産エージェント", "薬剤師", "歯科医",
+      "検眼医", "理学療法士", "作業療法士", "言語療法士", "栄養士",
+      "栄養学者", "美容師", "メイクアップアーティスト", "美容師", "仕立て屋",
+      "ファッションデザイナー", "小売業者", "レジ係", "カスタマーサービス担当", "コールセンター担当",
+      "翻訳者", "通訳者", "ツアーガイド", "旅行代理店", "ホテルマネージャー",
+      "受付係", "秘書", "管理アシスタント", "図書館司書", "アーキビスト",
+      "歴史家", "考古学者", "人類学者", "社会学者", "政治科学者",
+      "経済学者", "統計学者", "データアナリスト", "データサイエンティスト", "UX/UIデザイナー",
+      "ゲーム開発者", "アプリ開発者", "ウェブ開発者", "ネットワーク管理者", "サイバーセキュリティスペシャリスト",
+      "ITサポート", "技術者", "修理スペシャリスト", "パン職人", "肉屋",
+      "漁師", "鉱山労働者", "林業作業員", "造園業者", "インテリアデザイナー",
+      "イベントプランナー", "ウェディングプランナー", "フローリスト", "宝石職人", "職人",
+      "プログラマー", "ウェブデザイナー", "デジタルマーケター", "SEOスペシャリスト", "コンテンツクリエイター",
+      "プロダクトマネージャー", "プロジェクトマネージャー", "品質保証担当", "ビジネスアナリスト", "コンサルタント",
+      "リクルーター", "人事マネージャー", "キャリアコーチ", "ライフコーチ", "モチベーションスピーカー",
+      "パブリックスピーカー", "ラジオホスト", "TVホスト", "放送員", "ポッドキャスター",
+      "著者", "脚本家", "コピーライター", "テクニカルライター", "編集者",
+      "出版社", "文学エージェント", "書店オーナー", "図書館司書", "書評家",
+      "グラフィックデザイナー", "イラストレーター", "アニメーター", "3Dアーティスト", "VFXアーティスト",
+      "映画監督", "プロデューサー", "カメラオペレーター", "音響エンジニア", "照明技術者",
+      "映像編集者", "制作アシスタント", "セットデザイナー", "衣装デザイナー", "映画用メイクアップアーティスト",
+      "特殊効果アーティスト", "スタントパフォーマー", "声優", "タレントエージェント", "キャスティングディレクター"
+    ];
+
+    const subjectDictionary = {
+      "成功": "成功",
+      "達成": "達成",
+      "勝利": "勝利",
+      "勝利": "勝利",
+      "成就": "成就",
+      
+      "最も豊か": "富",
+      "繁栄": "繁栄",
+      "豊かさ": "豊かさ",
+      "財産": "財産",
+      "富裕": "富裕",
+      
+      "喜び": "喜び",
+      "幸福": "幸福",
+      "至福": "至福",
+      "喜悦": "喜悦",
+      "満足": "満足",
+      
+      "成長": "成長",
+      "進歩": "進歩",
+      "進展": "進展",
+      "発展": "発展",
+      "改善": "改善",
+      
+      "力": "力",
+      "強さ": "強さ",
+      "威力": "威力",
+      "力量": "力量",
+      "エネルギー": "エネルギー",
+      
+      "知恵": "知恵",
+      "知性": "知性",
+      "知識": "知識",
+      "洞察": "洞察",
+      "理解": "理解",
+      
+      "創造性": "創造性",
+      "革新": "革新",
+      "想像力": "想像力",
+      "発明": "発明",
+      "独創性": "独創性",
+      
+      "リーダーシップ": "リーダーシップ",
+      "権威": "権威",
+      "影響力": "影響力",
+      "指揮": "指揮",
+      "方向性": "方向性",
+      
+      "平和": "平和",
+      "調和": "調和",
+      "静寂": "静寂",
+      "静穏": "静穏",
+      "穏やかさ": "穏やかさ",
+      
+      "愛": "愛",
+      "愛情": "愛情",
+      "崇拝": "崇拝",
+      "献身": "献身",
+      "情熱": "情熱",
+      
+      "勇気": "勇気",
+      "勇敢さ": "勇敢さ",
+      "武勇": "武勇",
+      "英雄的精神": "英雄的精神",
+      "恐れのなさ": "恐れのなさ",
+      
+      "健康": "健康",
+      "活力": "活力",
+      "健全": "健全",
+      "元気": "元気",
+      "フィットネス": "フィットネス",
+      
+      "自由": "自由",
+      "自由": "自由",
+      "独立": "独立",
+      "自律": "自律",
+      "自己決定": "自己決定",
+      
+      "目的": "目的",
+      "意味": "意味",
+      "使命": "使命",
+      "天職": "天職",
+      "運命": "運命",
+      
+      "回復力": "回復力",
+      "粘り強さ": "粘り強さ",
+      "忍耐": "忍耐",
+      "持久力": "持久力",
+      "不屈の精神": "不屈の精神",
+      
+      "本物": "本物",
+      "真正": "真正",
+      "正直": "正直",
+      "誠実": "誠実",
+      "真摯": "真摯",
+      
+      "変容": "変容",
+      "変化": "変化",
+      "進化": "進化",
+      "再生": "再生",
+      "変態": "変態",
+      
+      "繋がり": "繋がり",
+      "関係": "関係",
+      "コミュニティ": "コミュニティ",
+      "所属感": "所属感",
+      "統一": "統一",
+      
+      "感謝": "感謝",
+      "感謝の気持ち": "感謝の気持ち",
+      "感謝": "感謝",
+      "認識": "認識",
+      "承認": "承認",
+      
+      "マインドフルネス": "マインドフルネス",
+      "存在感": "存在感",
+      "意識": "意識",
+      "意識": "意識",
+      "注意深さ": "注意深さ",
+      
+      "思いやり": "思いやり",
+      "共感": "共感",
+      "優しさ": "優しさ",
+      "寛大さ": "寛大さ",
+      "利他主義": "利他主義",
+      
+      "バランス": "バランス",
+      "均衡": "均衡",
+      "調和": "調和",
+      "比率": "比率",
+      "対称性": "対称性",
+      
+      "インスピレーション": "インスピレーション",
+      "モチベーション": "モチベーション",
+      "熱意": "熱意",
+      "興奮": "興奮",
+      "情熱": "情熱",
+      
+      "集中": "集中",
+      "集中力": "集中力",
+      "注意力": "注意力",
+      "規律": "規律",
+      "献身": "献身",
+      
+      "謙虚": "謙虚",
+      "謙遜": "謙遜",
+      "シンプル": "シンプル",
+      "飾り気のなさ": "飾り気のなさ",
+      "地に足のついた": "地に足のついた",
+      
+      "忍耐": "忍耐",
+      "寛容": "寛容",
+      "忍耐": "忍耐",
+      "耐久力": "耐久力",
+      "持続性": "持続性",
+      
+      "喜び": "喜び",
+      "喜悦": "喜悦",
+      "喜び": "喜び",
+      "歓喜": "歓喜",
+      "祝賀": "祝賀",
+      
+      "信頼": "信頼",
+      "信仰": "信仰",
+      "自信": "自信",
+      "信頼": "信頼",
+      "頼り甲斐": "頼り甲斐",
+      
+      "自信": "自信",
+      "自尊心": "自尊心",
+      "自己信念": "自己信念",
+      "自信": "自信",
+      "自己信頼": "自己信頼",
+      
+      "熱意": "熱意",
+      "熱意": "熱意",
+      "熱心さ": "熱心さ",
+      "熱意": "熱意",
+      "熱心": "熱心",
+      
+      "明確さ": "明確さ",
+      "明晰さ": "明晰さ",
+      "透明性": "透明性",
+      "精度": "精度",
+      "鋭さ": "鋭さ",
+      
+      "適応力": "適応力",
+      "柔軟性": "柔軟性",
+      "多才": "多才",
+      "調整力": "調整力",
+      "柔軟性": "柔軟性",
+      
+      "コミュニケーション": "コミュニケーション",
+      "表現": "表現",
+      "明確な表現": "明確な表現",
+      "対話": "対話",
+      "会話": "会話",
+      
+      "キャリア": "キャリア",
+      "職業": "職業",
+      "天職": "天職",
+      "職業": "職業",
+      "使命": "使命"
+    };
+
+    function formatUserName(fullName) {
+      if (!fullName) return "";
+      
+      const nameParts = fullName.trim().split(' ');
+      
+      if (nameParts.length === 1) {
+        return nameParts[0];
+      }
+      
+      const firstName = nameParts[0];
+      const lastNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+      
+      return `👑 ${firstName} ${lastNameInitial}.`;
+    }
+
+    function generateUniqueId() {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const numbers = '0123456789';
+      let id = '';
+      
+      for (let i = 0; i < 3; i++) {
+        id += letters.charAt(Math.floor(Math.random() * letters.length));
+      }
+      
+      for (let i = 0; i < 3; i++) {
+        id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+      }
+      
+      return id;
+    }
+
+    async function detectUserLocation() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        currentCountry = data.country_name;
+        userCity = data.city;
+        console.log("検出されたユーザーの場所:", currentCountry, userCity);
+        return { country: currentCountry, city: userCity };
+      } catch (error) {
+        console.error("ユーザーの場所の検出エラー:", error);
+        return { country: "不明", city: "不明" };
+      }
+    }
+
+    function generatePersonalizedMotivation(flowerCode, profession, dob) {
+      if (!flowerCode || flowerCode.length < 8) {
+        return "この花のモチベーションはあなたを鼓舞し、導くためにここにあります。";
+      }
+      
+      let month = 0;
+      if (dob) {
+        const dobDate = new Date(dob);
+        month = dobDate.getMonth();
+      }
+      
+      const lifeTraits = [
+        "創造性は、あなたが直面するすべての課題に新しいアイデアをもたらします。",
+        "あなたの心の優しさは、周りの人々を日々鼓舞します。",
+        "忍耐力は、他の人が不可能だと思う障害を乗り越えるのに役立ちます。",
+        "独自の視点により、革新的な方法で問題を解決することができます。",
+        "活気ある存在感は、あなたが会うすべての人の一日を明るくします。",
+        "忍耐力は、他の人ができないときに大きな絵を見ることを可能にします。",
+        "勇気により、決意を持って新しい課題に立ち向かうことができます。",
+        "知恵は、困難な決断を明確にするガイドとなります。",
+        "楽観主義は、あなたが遭遇するどんな状況でも機会を見つけるのに役立ちます。",
+        "集中力は、正確にステップバイステップで目標を達成するよう導きます。",
+        "適応力は、変化する時代にあなたの最大の強みとなります。",
+        "直感は、選択肢が不明確に見えるときに正しい道へと導きます。",
+        "共感は、他者と深く意味のある方法でつながります。",
+        "回復力は、どんな挫折からも強く跳ね返るのに役立ちます。",
+        "本物であることは、見せかけなしにあなたの真の自分に人々を引き寄せます。",
+        "感謝の気持ちは、あなたの人生の喜びを日々増やします。",
+        "好奇心は、他の人が見逃すかもしれない新しい発見につながります。",
+        "ユーモアのセンスは、最も困難な瞬間でさえ明るくします。",
+        "寛大さは、あなたのコミュニティ全体に優しさの波紋を作り出します。",
+        "決意は、課題を祝うべき成果に変えます。",
+        "思いやりは、あなたの周りの人々を微妙だが強力な方法で癒します。",
+        "明晰さは、混乱が周りを取り巻いているときに賢明な選択をするのに役立ちます。",
+        "自信は、あなたの指導に従う他者の信頼を鼓舞します。",
+        "マインドフルネスは、混沌と不確実性の中でもあなたを中心に保ちます。",
+        "誠実さは、仲間やリーダーの間でどこへ行っても尊敬を勝ち取ります。",
+        "熱意は、あなたのエネルギーを目撃する他者の情熱を点火します。",
+        "温かさは、人々をあなたの存在ですぐに歓迎します。",
+        "想像力は、他者が見ることができない可能性への扉を開きます。",
+        "バランスは、人生の複雑さを優雅にナビゲートするのに役立ちます。",
+        "ビジョンは、他者が止まるところを超えて地平線を見ることを可能にします。",
+        "カリスマ性は、自然にあなたの磁気エネルギーに人々を引き寄せます。",
+        "規律は、すべての努力における成功の基盤を築きます。",
+        "直感的な性質は、他者が見逃す微妙な真実を理解するのに役立ちます。",
+        "遊び心は、課題を通じてあなたの精神を若く活気付けます。",
+        "分析的な思考は、他者が完全に見落とす解決策を見つけます。",
+        "思いやりは、一生続く意味のあるつながりを作り出します。",
+        "感受性により、他者が尋ねなくても彼らのニーズを感じ取ることができます。",
+        "決断力は、他者が躊躇するときにプロジェクトを前進させます。",
+        "一貫性は、すべての関係において時間をかけて信頼を築きます。",
+        "表現力は、あなたの真実を世界に美しく伝えます。",
+        "資源の豊かさは、制限を成長の機会に変えます。",
+        "勤勉さは、あなたが触れるまたは作成するすべてのものに品質を保証します。",
+        "柔軟性は、変化する状況に対して顕著な優雅さで適応します。",
+        "実用主義は、大きな夢を持ちながらも現実にあなたの行動を根付かせます。",
+        "雄弁さは、他者が理解するために複雑なアイデアを明確に表現します。",
+        "先見性は、到着する前に将来の課題に備えるのに役立ちます。",
+        "優しさは、傷跡を残すことなく優しい心を癒します。",
+        "主張性は、躊躇なく正しいことのために立ち上がります。",
+        "独立性は、逆境において自立と強さを育みます。",
+        "良心的さは、他者が見逃す重要な詳細に注意を払います。",
+        "精神的な俊敏性は、新しい状況に容易に適応するのに役立ちます。",
+        "自己認識は、成長と充実への道を照らします。",
+        "内なる強さは、試練の困難な時期に最も明るく輝きます。",
+        "磁気的な人格は、努力なくあなたの軌道に人々を引き寄せます。",
+        "感情的知性は、複雑な関係をナビゲートするのに役立ちます。",
+        "素早い思考は、他者が問題しか見ないところに解決策を見つけます。",
+        "静かな自信は、言葉を発することなく多くを語ります。",
+        "自然なリーダーシップは、他者が最高の本能に従うよう鼓舞します。",
+        "揺るぎない倫理観は、暗闇の中でもあなたの決断を導きます。",
+        "芸術的感性は、予期せぬ場所や瞬間に美を見出します。",
+        "戦略的思考は、将来の展開を正確に予測します。",
+        "自発性は、停滞した状況に即座に新鮮なエネルギーをもたらします。",
+        "緻密な注意力は、将来の複雑さを防ぎます。",
+        "平和な存在感は、最も混沌とした環境でさえ落ち着かせます。",
+        "革新的思考は、従来の限界を打ち破ります。",
+        "自然な外交術は、優雅さと公平さで紛争を解決します。",
+        "信頼性は、必要とする人々のための信頼できる存在となります。",
+        "感染力のある熱意は、あなたの周りのすべての人を高めます。"
+      ];
+      
+      const lifeEncouragements = [
+        "これらの贈り物を周りの世界と共有し続けてください。",
+        "これらの本能を信じてください - めったに道を誤りません。",
+        "これらの自然な才能は、広く共有されるべきです。",
+        "前方の道には課題があるかもしれませんが、あなたは完璧に装備されています。",
+        "今日の小さな一歩が、明日の大きな成果につながります。",
+        "前進する過程で進歩を祝うことを忘れないでください。",
+        "このユニークな旅は、あなたが踏み出す一歩一歩の価値があります。",
+        "結果だけでなく、過程も楽しむことを忘れないでください。",
+        "最高の日々はまだこの冒険の先にあります。",
+        "今日の努力が、明日の成功物語を築いています。",
+        "すべての状況と課題において自分自身に忠実でいてください。",
+        "変化を成長するための機会として受け入れてください。",
+        "内なる知恵をより頻繁に聞いてください - それは道を知っています。",
+        "必要なときは罪悪感なく休むことを許してください。",
+        "より大きな絵の中で本当に重要なことに集中し続けてください。",
+        "あなたの存在は、あなたを知る幸運な人々への贈り物です。",
+        "忙しいスケジュールにもかかわらず、情熱を一貫して育ててください。",
+        "課題や挫折の間、自分に優しくしてください。",
+        "このユニークな道は、あなたが行く必要のある場所にぴったりです。",
+        "人生の謎が展開するタイミングを信頼してください。",
+        "毎日、失敗することなく小さな瞬間に喜びを見つけてください。",
+        "この視点は価値があります - より頻繁に共有してください。",
+        "意味のある変化を生み出す能力を信じてください。",
+        "なぜこの旅が始まったのかを思い出してください。",
+        "毎日が新たに始める新鮮な始まりを提供します。",
+        "この回復力は、あなたが思っている以上に他者を鼓舞します。",
+        "道中の小さな勝利を祝う時間を取ってください。",
+        "直面するすべての課題が、深く性格を強化します。",
+        "宇宙はこの本物の道を完全にサポートしています。",
+        "光は本物性が道を導くとき最も明るく輝きます。",
+        "世界は、あなただけが与えることができるこのユニークな貢献を必要としています。",
+        "意味のある仕事が説明なしに自分自身を語るようにしましょう。",
+        "一貫した努力は時間とともに偉大さに複利効果をもたらします。",
+        "今日不可能に思えることが、明日現実になるでしょう。",
+        "内なる強さはこれからの課題をはるかに超えています。",
+        "この旅は、知られることのないほど多くの人々を鼓舞します。",
+        "障害物は単により良い道への方向転換に過ぎません。",
+        "性格の深さは、困難な瞬間に最も明確に現れます。",
+        "成長はコンフォートゾーンの外で起こり、内側では起こりません。",
+        "小さな進歩でも、祝福と認識に値します。",
+        "困難な時期には個人的な「なぜ」に集中し続けてください。",
+        "毎日の選択が記憶に残る永続的な遺産を作り出します。",
+        "今学んだ教訓は、数え切れないほどの方法で永遠に役立つでしょう。",
+        "他者への親切さの影響を過小評価しないでください。",
+        "本物の声は、それを聞く必要のある人々と共鳴します。",
+        "今日乗り越えた課題は、明日のテストのための強さを築きます。",
+        "過去は将来の可能性を定義しません。",
+        "どんなに小さくても、前進する各ステップが勢いを生み出します。",
+        "ユニークなアプローチは、他者が欠けている競争上の優位性となります。",
+        "現在の位置が成長に必要な場所であることを信頼してください。",
+        "最大の達成は、乗り越えた最大の課題の後に続くことがよくあります。",
+        "この物語は、前方に素晴らしい章がありながら、書き続けられています。",
+        "宇宙は、追求される本物の夢を支持して共謀します。",
+        "最も強力なリソースは、揺るぎない自己信念のままです。",
+        "他者への影響は、測定可能な範囲をはるかに超えて広がります。",
+        "現在の制限は一時的ですが、可能性は無限のままです。",
+        "最も重要な承認は外部からではなく、内部から来ます。",
+        "直感は真北を指す内なるコンパスとして機能します。",
+        "今日の規律が明日の自由と機会を生み出します。",
+        "各経験が性格と知恵に深さを加えます。",
+        "人生の目的は、喜びと困難の両方を通じて等しく展開します。",
+        "逆境への対処方法が、性格の真の強さを明らかにします。",
+        "独自性が人生における最大の競争上の優位性となります。",
+        "夢と目標が自然に発展するにつれて、個人的な進化を許可してください。",
+        "成長へのコミットメントが、既に将来の結果を肯定的に変えています。",
+        "一貫性がいかに価値のある目標を遠くまで導くかを過小評価しないでください。",
+        "決意は一時的な挫折を上回ります。",
+        "正しい道は必ずしも最も簡単ではありませんが、最も価値があります。",
+        "始める勇気が他者に自分の旅を始めるよう鼓舞します。",
+        "快適さよりも成長を選ぶことで、可能性が指数関数的に拡大します。",
+        "最高の可能性は、コンフォートゾーンの端のすぐ向こうにあります。",
+        "すべての課題は、地平線上にある何かより大きなものの準備です。"
+      ];
+      
+      const professionMotivations = {
+        "ミュージシャン": [
+          "音楽の才能は、平和を求める混沌とした世界に調和をもたらします。",
+          "演奏される各音符は、慰めを必要とする誰かの魂と共鳴します。",
+          "これらのメロディーには、壊れた精神を癒し変容させる力があります。",
+          "芸術的表現は、言葉では伝えられない普遍的な真実を語ります。",
+          "あなたの内なる音楽は、待っている観客に聞かれるべきです。"
+        ],
+        "ラッパー": [
+          "詩的な言葉は、大胆に語られる必要のある強力な物語を描きます。",
+          "このフローとリズムは、言葉だけでは表現できない感情を捉えます。",
+          "これらの詩は、多くの人が感じるが表現できない経験に声を与えます。",
+          "本物の声は、すべてのコミュニティで真実を求める人々と共鳴します。",
+          "詩的な才能は、新しい視点へと心と心を開きます。"
+        ],
+        "サッカー選手": [
+          "フィールドでの献身は、ゲーム自体を超えたチームワークを鼓舞します。",
+          "運動の規律は、人生のすべての領域にシームレスに変換されます。",
+          "ピッチでの戦略的思考は、自然なリーダーシップ能力を示しています。",
+          "美しいゲームへの情熱は、観戦する人とプレーする人の両方を高めます。",
+          "スポーツマンシップが他者が従い尊重する基準を設定します。"
+        ],
+        "バスケットボール選手": [
+          "コートビジョンは、人生のすべてのゲームでの機会を見る能力に変換されます。",
+          "プレッシャーの下でのパフォーマンスは、直面するすべての課題でうまく機能します。",
+          "チーム第一のメンタリティは、形成されるすべての関係で成功を生み出します。",
+          "垂直跳躍は、印象的な新しい高みに達する野心と一致します。",
+          "防御の熱心さは、すべてのことにおける卓越性へのコミットメントを示しています。"
+        ],
+        "ボクサー": [
+          "精神的な強さは、表示される身体的な強さと同じくらい印象的です。",
+          "トレーニングの規律は、すべての人生の状況で性格を反映しています。",
+          "ヒットを受けて前進する能力が人生のスーパーパワーになります。",
+          "リングでのフットワークは、人生の課題をナビゲートする能力を映し出しています。",
+          "戦う精神は、提示される価値のある課題から決して後退しません。"
+        ],
+        "学生": [
+          "好奇心は無限の可能性と発見への扉を開きます。",
+          "学習へのコミットメントは、人生の多くの章を通じて役立ちます。",
+          "新鮮な視点が、解決策を必要とする古い問題に新しい洞察をもたらします。",
+          "教育の旅は、まだ目に見えない機会への準備をします。",
+          "学問的な規律は、生涯の成功を確実にする習慣を築きます。"
+        ],
+        "教師": [
+          "影響力は教室の壁を超えて、見えない将来へと広がります。",
+          "忍耐力は、他者が見逃したり見過ごしたりする可能性を育てます。",
+          "ガイダンスは、今日の教訓の後に完全に感謝されることのない方法で将来を形作ります。",
+          "知恵は、今日の教訓の後に世代にわたって花開く種を植えます。",
+          "知識への献身は、どこにでも肯定的な変化の波紋を作り出します。"
+        ],
+        "TikToker": [
+          "創造的なコンテンツは、デジタル風景で喜びとつながりをもたらします。",
+          "本物の声は、今ちょうどこのメッセージを必要としている人々に届きます。",
+          "簡潔に伝える能力は、稀で価値のあるスキルの習得を示しています。",
+          "文化的影響力は、世界中の視聴者に肯定的な変化をもたらします。",
+          "デジタルプレゼンスは、画面の限界を超えた現実世界の影響を与えます。"
+        ],
+        "起業家": [
+          "先見性のある思考は、他者が障害しか見ない場所に機会を生み出します。",
+          "計算されたリスクを取ることが、真のイノベーターをフォロワーと区別します。",
+          "革新的な解決策は、問題をその根本原因で効果的に解決します。",
+          "リーダーシップは、追求する価値のある意味のあるミッションに他者が参加するよう鼓舞します。",
+          "課題を通じての忍耐力が、起業家の成功物語を定義します。"
+        ],
+        "医師": [
+          "癒しの手は、患者が最も必要とするときに苦痛の中で慰めをもたらします。",
+          "ヘルスケアへのコミットメントは、日々深遠な方法で人生を変えます。",
+          "医学的知識と共感が組み合わさることで、真の癒しの瞬間が生まれます。",
+          "患者ケアへの献身は、最高の専門的使命を例示しています。",
+          "診断スキルが思いやりのある心と完璧なバランスで一致します。"
+        ],
+        "エンジニア": [
+          "問題解決能力は、数え切れないほどの人生を改善する解決策を生み出します。",
+          "技術的専門知識は、将来のイノベーションの基盤を築きます。",
+          "分析的思考は、複雑なシステムにおいて他者が完全に見逃すパターンを見ます。",
+          "精度と細部への注意は、すべての創造物での品質を保証します。",
+          "革新的なアプローチが課題に対して、全分野を前進させます。"
+        ],
+        "ソフトウェア開発者": [
+          "コードは、実装前には存在しなかった可能性を生み出します。",
+          "技術的解決策は、社会が直面する実際の人間の問題を解決します。",
+          "論理的思考は、創造的イノベーションと美しく組み合わさります。",
+          "デジタル創作物は、プラットフォーム全体で日々数え切れないユーザーに影響します。",
+          "新しい技術を学ぶことで、最先端の専門的立場を維持します。"
+        ],
+        "アーティスト": [
+          "創造的なビジョンは、他者に馴染みの世界を見る新しい方法を示します。",
+          "芸術的表現は、言葉が単純に到達できない感情に触れます。",
+          "独自の視点は、視聴者の日常の経験に美しさを加えます。",
+          "創造的な作品は、境界を超えて重要な会話を促します。",
+          "芸術的勇気は、他者が真実を本物に表現するよう鼓舞します。"
+        ],
+        "看護師": [
+          "思いやりのあるケアは、身体的な疾患だけでなく癒します。",
+          "注意深さは、患者のケアで他者が見落とすかもしれないことに気づきます。",
+          "落ち着いた存在は、困難なヘルスケアの瞬間に慰めを提供します。",
+          "献身は、数え切れないほどの患者のために毎シフトで違いを生み出します。",
+          "技術的スキルと人間の温かさのバランスは非常に貴重です。"
+        ],
+        "作家": [
+          "言葉は、読者の心の中で探索を待つ世界を創造します。",
+          "ストーリーテリングは、非常に異なる経験を持つ人々をつなぎます。",
+          "雄弁さは、他者が明確に表現するのに苦労することに声を与えます。",
+          "書かれた洞察は、馴染みの課題に新しい視点を提供します。",
+          "文学的技巧は、将来の世代のために重要な真実を保存します。"
+        ],
+        "弁護士": [
+          "擁護は、複雑なシステムで声を必要とする人々に正義をもたらします。",
+          "分析的思考は、印象的な精度で法的課題をナビゲートします。",
+          "法的原則へのコミットメントは、社会の基盤を強化します。",
+          "説得力のある議論は、正義を求めるクライアントの結果を変えます。",
+          "法実務への倫理的アプローチは、職業の基準を設定します。"
+        ],
+        "シェフ": [
+          "料理の創作は、感謝する食事客にすべての感覚を通じて喜びをもたらします。",
+          "料理は人々をテーブルと多様な文化的背景を超えてつなぎます。",
+          "フレーバーの組み合わせは、芸術的直感と技術的スキルを示しています。",
+          "品質の食材への献身は、伝統とイノベーションを尊重します。",
+          "キッチンでのリーダーシップは、料理チーム全体から最高を引き出します。"
+        ],
+        "会計士": [
+          "財務の専門知識は、クライアントにセキュリティと安心をもたらします。",
+          "細部への注意は、他者が確実に見落とすことを捉えます。",
+          "分析スキルは、複雑な財務状況に明確さをもたらします。",
+          "プロフェッショナルとしての誠実さは、すべてのビジネス関係における信頼を保証します。",
+          "組織能力は、財務の複雑さから秩序を生み出します。"
+        ],
+        "デザイナー": [
+          "視覚的解決策は、美しさと実用的機能をシームレスに組み合わせます。",
+          "デザイン思考は、意味のある方法でユーザー体験を変革します。",
+          "美的感覚は、日常の物体や相互作用を高めます。",
+          "創造的プロセスは、イノベーションと本質的な使いやすさのバランスを取ります。",
+          "デザイン言語は、障壁を効果的に超えてコミュニケーションします。"
+        ],
+        "警察官": [
+          "公共安全へのコミットメントは、コミュニティをはっきりと強化します。",
+          "困難な状況での勇気は、弱い市民を保護します。",
+          "圧力下での素早い意思決定は、驚異的な落ち着きを示しています。",
+          "正義へのコミットメントは、専門的行動を一貫して導きます。",
+          "存在感は、介入を必要とする緊張した状況にセキュリティをもたらします。"
+        ],
+        "消防士": [
+          "危険な状況での勇敢さは、人命と貴重な財産を救います。",
+          "極度のプレッシャー下での素早い思考は、並外れたスキルを示しています。",
+          "身体的および精神的準備により、英雄的な緊急対応が可能になります。",
+          "危機状況でのチームワークは、人間の協力を例示しています。",
+          "コミュニティの安全へのコミットメントは、緊急事態を超えて広がります。"
+        ],
+        "軍人": [
+          "奉仕は、他者を保護する最高のコミットメントを示しています。",
+          "困難な条件下での規律は、例外的な基準を設定します。",
+          "戦略的思考は、ミッション目標とチームの安全のバランスを取ります。",
+          "変化する状況への適応力は、一貫してミッションの成功を保証します。",
+          "部隊への忠誠心は、通常の友情を超える絆を作り出します。"
+        ],
+        "ジャーナリスト": [
+          "真実の追求は、混乱し複雑な時代に明確さをもたらします。",
+          "ストーリーテリングは、観客が重要な複雑な問題を理解するのに役立ちます。",
+          "調査スキルは、切実に可視性を必要とするものを明らかにします。",
+          "事実へのコミットメントは、情報エコシステムを責任を持ってバランスさせます。",
+          "ジャーナリスティックな声は、公共の議論に重要な視点を加えます。"
+        ],
+        "心理学者": [
+          "共感的な傾聴は、必要な癒しのための安全な空間を作り出します。",
+          "洞察は、クライアントが内なる風景を効果的にナビゲートするのに役立ちます。",
+          "治療的アプローチは、思いやりとエビデンスに基づく実践のバランスを取ります。",
+          "忍耐強いガイダンスにより、他者が自分自身の解決策を発見することができます。",
+          "専門的境界により、持続可能な癒しの関係が可能になります。"
+        ],
+        "教師": [
+          "ガイダンスは、すぐに見ることができない将来を形作ります。",
+          "学習プロセスへの忍耐は、成長が自然に展開することを可能にします。",
+          "複雑な概念を説明する能力は、知識をアクセス可能にします。",
+          "クラスルーム管理は、知的探求のための安全な空間を作り出します。",
+          "異なる学習スタイルの認識は、すべての学生に独自にリーチします。"
+        ],
+        "プログラマー": [
+          "コーディングスキルは、抽象的なアイデアを機能する現実に変換します。",
+          "問題解決アプローチは、複雑な課題を管理可能な部分に分解します。",
+          "細部への注意は、洗練されたコードにおける将来の複雑さを防ぎます。",
+          "継続的な学習は、急速に変化する分野でスキルを関連させ続けます。",
+          "技術的創造性は、困難な問題にエレガントな解決策を見つけます。"
+        ]
+      };
+      
+      const monthTraits = [
+        "1月生まれは、自然なリーダーシップの資質と決定的な焦点を与えます。",
+        "2月生まれは、直感的な理解と人道的なビジョンを授けます。",
+        "3月生まれは、想像力豊かな創造性と適応力のある回復力を提供します。",
+        "4月生まれは、断固とした忍耐力と勇敢なイニシアチブを与えます。",
+        "5月生まれは、説得力のあるコミュニケーションスキルと実用的な感覚を授けます。",
+        "6月生まれは、適応可能な多才さと感情的知性を提供します。",
+        "7月生まれは、思いやりのある共感と保護的な養育の本能を与えます。",
+        "8月生まれは、磁気的なカリスマと寛大な自信を授けます。",
+        "9月生まれは、分析的な精度と方法論的な組織を提供します。",
+        "10月生まれは、バランスの取れた視点と外交的な調和を与えます。",
+        "11月生まれは、鋭い洞察力と変革的な強度を授けます。",
+        "12月生まれは、先見的な楽観主義と哲学的な知恵を提供します。"
+      ];
+      
+      let selectedTrait;
+      
+      if (profession && professionMotivations[profession] && Math.random() < 0.25) {
+        const profMotivations = professionMotivations[profession];
+        selectedTrait = profMotivations[Math.floor(Math.random() * profMotivations.length)];
+      } 
+      else if (dob && Math.random() < 0.2) {
+        selectedTrait = monthTraits[month];
+      }
+      else {
+        selectedTrait = lifeTraits[Math.floor(Math.random() * lifeTraits.length)];
+      }
+      
+      const encourageIndex = Math.floor(Math.random() * lifeEncouragements.length);
+      
+      return selectedTrait + " " + lifeEncouragements[encourageIndex];
+    }
+
+    function generateFlowerCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function getRandomSubject() {
+      let availableSubjects = Object.keys(subjectDictionary).filter(subject => !seenSubjects.includes(subject));
+      
+      if (availableSubjects.length === 0) {
+        seenSubjects = [];
+        availableSubjects = Object.keys(subjectDictionary);
+      }
+      
+      const randomIndex = Math.floor(Math.random() * availableSubjects.length);
+      const selectedSubject = availableSubjects[randomIndex];
+      
+      seenSubjects.push(selectedSubject);
+      
+      return selectedSubject;
+    }
+
+    function updateFlowerDisplay() {
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      const motivationElement = document.getElementById('monthlyMotivation');
+      
+      if (!flowerCodeElement || !motivationElement) {
+        console.error("必要な要素がDOMに見つかりません");
+        return;
+      }
+      
+      let subject = localStorage.getItem('flowerSubject');
+      if (!subject) {
+        subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+      }
+      
+      const formattedName = formatUserName(userFullName);
+      
+      if (formattedName) {
+        flowerCodeElement.innerHTML = `私の花 - ${subject} / ${formattedName}`;
+      } else {
+        flowerCodeElement.textContent = "私の花 - " + subject;
+      }
+      
+      if (!currentMotivation) {
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+      }
+      
+      motivationElement.textContent = currentMotivation;
+      
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (captureCode) {
+        if (formattedName) {
+          captureCode.innerHTML = `私の花 - ${subject} / ${formattedName}`;
+        } else {
+          captureCode.textContent = "私の花 - " + subject;
+        }
+      }
+      
+      if (captureMotivation) captureMotivation.textContent = currentMotivation;
+      
+      return currentMotivation;
+    }
+
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function removeCookie(name) {
+      document.cookie = name + "=; Max-Age=-99999999; path=/";
+    }
+
+    function setTheme(theme) {
+      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-green-blue', 'theme-orange-pink', 'theme-yellow-purple');
+      
+      document.body.classList.add('theme-' + theme);
+      
+      currentTheme = theme;
+      
+      localStorage.setItem('preferredTheme', theme);
+      setCookie('preferredTheme', theme, 365);
+      
+      const options = document.querySelectorAll('.style-option');
+      options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.theme === theme) {
+          option.classList.add('selected');
+        }
+      });
+      
+      updateCaptureStyles(theme);
+      
+      let themeColor = '#1A2E4D';
+      switch(theme) {
+        case 'red-black':
+          themeColor = '#000000';
+          break;
+        case 'green-blue':
+          themeColor = '#1A2E4D';
+          break;
+        case 'orange-pink':
+        case 'yellow-purple':
+          themeColor = '#4B0082';
+          break;
+        case 'default':
+          themeColor = '#FFFFFF';
+          break;
+      }
+      
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
+      document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content', theme === 'default' ? 'default' : 'black-translucent');
+    }
+    
+    function updateCaptureStyles(theme) {
+      const captureContainer = document.getElementById('flowerCaptureContainer');
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureHeader = document.getElementById('captureFlowerHeader');
+      const captureWebsiteUrl = document.querySelector('.capture-website-url');
+      const captureLogo = document.querySelector('.gz-logo');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (!captureContainer || !captureCode || !captureHeader || !captureWebsiteUrl || 
+          !captureLogo || !captureMotivation) {
+        console.error("キャプチャー要素の1つ以上が見つかりません");
+        return;
+      }
+      
+      captureContainer.style.borderColor = '';
+      captureCode.style.borderColor = '';
+      captureCode.style.color = '';
+      captureCode.style.backgroundColor = '';
+      captureHeader.style.color = '';
+      captureWebsiteUrl.style.color = '';
+      captureLogo.style.color = '';
+      captureLogo.style.borderColor = '';
+      captureMotivation.style.color = '';
+      captureMotivation.style.backgroundColor = '';
+      captureMotivation.style.borderColor = '';
+      
+      switch(theme) {
+        case 'red-black':
+          captureContainer.style.borderColor = '#8B0000';
+          captureContainer.style.backgroundColor = 'black';
+          captureCode.style.borderColor = '#FF4500';
+          captureCode.style.color = '#FF4500';
+          captureCode.style.backgroundColor = 'black';
+          captureHeader.style.color = '#FF4500';
+          captureWebsiteUrl.style.color = '#FF4500';
+          captureLogo.style.color = '#FF4500';
+          captureLogo.style.borderColor = '#FF4500';
+          captureMotivation.style.color = '#E5E5E5';
+          captureMotivation.style.backgroundColor = 'black';
+          captureMotivation.style.borderColor = '#FF4500';
+          break;
+          
+        case 'green-blue':
+          captureContainer.style.borderColor = '#3EB489';
+          captureContainer.style.backgroundColor = '#1A2E4D';
+          captureCode.style.borderColor = '#3EB489';
+          captureCode.style.color = '#3EB489';
+          captureCode.style.backgroundColor = '#36454F';
+          captureHeader.style.color = '#3EB489';
+          captureWebsiteUrl.style.color = '#3EB489';
+          captureLogo.style.color = '#3EB489';
+          captureLogo.style.borderColor = '#3EB489';
+          captureMotivation.style.color = '#F5F5F5';
+          captureMotivation.style.backgroundColor = '#1A2E4D';
+          captureMotivation.style.borderColor = '#3EB489';
+          break;
+          
+        case 'orange-pink':
+          captureContainer.style.borderColor = '#FF7F50';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FF7F50';
+          captureCode.style.color = '#FF7F50';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FF7F50';
+          captureWebsiteUrl.style.color = '#FF7F50';
+          captureLogo.style.color = '#FF7F50';
+          captureLogo.style.borderColor = '#FF7F50';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FF7F50';
+          break;
+          
+        case 'yellow-purple':
+          captureContainer.style.borderColor = '#FFD700';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FFD700';
+          captureCode.style.color = '#FFD700';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FFD700';
+          captureWebsiteUrl.style.color = '#FFD700';
+          captureLogo.style.color = '#FFD700';
+          captureLogo.style.borderColor = '#FFD700';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FFD700';
+          break;
+          
+        default:
+          captureContainer.style.borderColor = '#007bff';
+          captureContainer.style.backgroundColor = 'white';
+          captureCode.style.borderColor = '#ff69b4';
+          captureCode.style.color = '#ff69b4';
+          captureCode.style.backgroundColor = '#fff0f8';
+          captureHeader.style.color = '#007bff';
+          captureWebsiteUrl.style.color = '#007bff';
+          captureLogo.style.color = '#007bff';
+          captureLogo.style.borderColor = '#007bff';
+          captureMotivation.style.color = '#333';
+          captureMotivation.style.backgroundColor = 'white';
+          captureMotivation.style.borderColor = '#ff69b4';
+      }
+    }
+
+    function authenticateAnonymously() {
+      return new Promise((resolve, reject) => {
+        auth.signInAnonymously()
+          .then((userCredential) => {
+            console.log("ユーザーが匿名で認証されました:", userCredential.user.uid);
+            userUid = userCredential.user.uid;
+            isAuthenticated = true;
+            resolve(userCredential.user);
+          })
+          .catch((error) => {
+            console.error("認証エラー:", error);
+            reject(error);
+          });
+      });
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        userUid = user.uid;
+        isAuthenticated = true;
+        console.log("認証状態が変更されました: ユーザーはサインインしています", user.uid);
+      } else {
+        isAuthenticated = false;
+        console.log("認証状態が変更されました: ユーザーはサインアウトしています");
+      }
+    });
+
+    async function submitToFirebase() {
+      try {
+        if (!isAuthenticated) {
+          console.log("ユーザーが認証されていません、今認証しています...");
+          await authenticateAnonymously();
+        }
+        
+        const location = await detectUserLocation();
+        
+        const userData = {
+          date: new Date().toISOString(),
+          country: location.country || "不明",
+          city: location.city || "不明",
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: shareCount
+        };
+
+        console.log("Firebaseにデータを送信:", userData);
+        
+        try {
+          const newEntryRef = database.ref('birthdates').push(userData);
+          console.log("リアルタイムデータベースにデータが送信されました:", newEntryRef.key);
+        } catch (dbError) {
+          console.error("リアルタイムデータベースのエラー:", dbError);
+        }
+        
+        try {
+          const docRef = await firestore.collection('flowers').add(userData);
+          console.log("Firestoreにドキュメントが書き込まれました（ID）: ", docRef.id);
+        } catch (firestoreError) {
+          console.error("Firestoreにドキュメントを追加中のエラー: ", firestoreError);
+        }
+        
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).set({
+            ...userData,
+            createdAt: new Date()
+          });
+          console.log("特定のコレクションにフラワーコードが追加されました");
+        } catch (codeError) {
+          console.error("コレクションにフラワーコードを追加中のエラー: ", codeError);
+        }
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true;
+      } catch (error) {
+        console.error("Firebase送信エラー:", error);
+        const userData = {
+          date: new Date().toISOString(),
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: 0
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true;
+      }
+    }
+
+    async function updateShareCount() {
+      if (!isAuthenticated || !userUniqueId) return;
+      
+      try {
+        shareCount++;
+        
+        const savedData = localStorage.getItem('userFlowerData');
+        if (savedData) {
+          const userData = JSON.parse(savedData);
+          userData.shareCount = shareCount;
+          localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        }
+        
+        await firestore.collection('flowerCodes').doc(userUniqueId).set({
+          shareCount: shareCount,
+          lastShared: new Date().toISOString(),
+          country: currentCountry || "不明",
+          city: userCity || "不明",
+          uid: userUid,
+          uniqueId: userUniqueId
+        }, { merge: true });
+        
+        console.log("シェア数が更新されました:", shareCount);
+      } catch (error) {
+        console.error("シェア数の更新エラー:", error);
+      }
+    }
+
+    function checkSavedUserData() {
+      const cookieUniqueId = getCookie('userUniqueId');
+      const cookieFlowerCode = getCookie('userFlowerCode');
+      const cookieInstalled = getCookie('isInstalled');
+      const cookieDOB = getCookie('userDateOfBirth');
+      const cookieProfession = getCookie('userProfession');
+      const cookieFullName = getCookie('userFullName');
+      
+      if (cookieUniqueId && cookieFlowerCode) {
+        userUniqueId = cookieUniqueId;
+        userFlowerCode = cookieFlowerCode;
+        userDateOfBirth = cookieDOB || null;
+        userProfession = cookieProfession || null;
+        userFullName = cookieFullName || null;
+        isInstalled = cookieInstalled === 'true';
+        
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+        
+        console.log("クッキーに保存されたユーザーデータが見つかりました:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName });
+        return true;
+      }
+      
+      const savedData = localStorage.getItem('userFlowerData');
+      if (savedData) {
+        try {
+          const userData = JSON.parse(savedData);
+          userUniqueId = userData.uniqueId;
+          userFlowerCode = userData.flowerCode;
+          userDateOfBirth = userData.dateOfBirth || null;
+          userProfession = userData.profession || null;
+          userFullName = userData.fullName || null;
+          shareCount = userData.shareCount || 0;
+          currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
+          userUid = userData.uid;
+          isInstalled = localStorage.getItem('isInstalled') === 'true';
+          
+          setCookie('userUniqueId', userUniqueId, 365);
+          setCookie('userFlowerCode', userFlowerCode, 365);
+          setCookie('userDateOfBirth', userDateOfBirth, 365);
+          setCookie('userProfession', userProfession, 365);
+          setCookie('userFullName', userFullName, 365);
+          setCookie('isInstalled', 'true', 365);
+          
+          console.log("localStorageに保存されたユーザーデータが見つかりました:", userData);
+          return true;
+        } catch (e) {
+          console.error("保存されたユーザーデータの解析エラー:", e);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    async function deleteUserAccount() {
+      if (!userUniqueId) return false;
+      
+      try {
+        if (!confirm("すべてのデータを削除してもよろしいですか？この操作は元に戻せません。")) {
+          return false;
+        }
+        
+        console.log("Suppression du compte utilisateur:", userUniqueId);
+        
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).delete();
+          console.log("Données supprimées de la collection flowerCodes");
+        } catch (error) {
+          console.error("Erreur lors de la suppression de flowerCodes:", error);
+        }
+        
+        try {
+          const flowersQuery = await firestore.collection('flowers').where('uniqueId', '==', userUniqueId).get();
+          
+          const batch = firestore.batch();
+          let count = 0;
+          
+          flowersQuery.forEach((doc) => {
+            batch.delete(doc.ref);
+            count++;
+          });
+          
+          if (count > 0) {
+            await batch.commit();
+            console.log(`${count} documents supprimés de la collection flowers`);
+          }
+        } catch (error) {
+          console.error("Erreur lors de la suppression de flowers:", error);
+        }
+        
+        try {
+          const birthdatesRef = database.ref('birthdates');
+          const query = birthdatesRef.orderByChild('uniqueId').equalTo(userUniqueId);
+          
+          query.once('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              birthdatesRef.child(childSnapshot.key).remove();
+            });
+          });
+          
+          console.log("Données supprimées de la base de données en temps réel");
+        } catch (error) {
+          console.error("Erreur lors de la suppression de la base de données en temps réel:", error);
+        }
+        
+        localStorage.removeItem('userFlowerData');
+        localStorage.removeItem('isInstalled');
+        localStorage.removeItem('flowerSubject');
+        localStorage.removeItem('preferredTheme');
+        
+        removeCookie('userUniqueId');
+        removeCookie('userFlowerCode');
+        removeCookie('isInstalled');
+        removeCookie('userDateOfBirth');
+        removeCookie('userProfession');
+        removeCookie('userFullName');
+        removeCookie('preferredTheme');
+        
+        userUniqueId = null;
+        userFlowerCode = null;
+        currentMotivation = null;
+        userDateOfBirth = null;
+        userProfession = null;
+        userFullName = null;
+        isInstalled = false;
+        seenSubjects = [];
+        shareCount = 0;
+        
+        try {
+          if (auth.currentUser) {
+            await auth.currentUser.delete();
+            console.log("Utilisateur Firebase supprimé");
+          }
+        } catch (authError) {
+          console.error("Erreur lors de la suppression de l'authentification:", authError);
+        }
+        
+        console.log("Compte utilisateur complètement supprimé");
+        return true;
+      } catch (error) {
+        console.error("Erreur lors de la suppression du compte:", error);
+        return false;
+      }
+    }
+    
+    function createWebAppManifest() {
+      const manifestData = {
+        name: "G-Z フラワー",
+        short_name: "G-Z",
+        description: "あなただけの命の花を発見しよう",
+        start_url: window.location.href,
+        display: "standalone",
+        background_color: "#1A2E4D",
+        theme_color: "#1A2E4D",
+        icons: [
+          {
+            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
+            sizes: "192x192",
+            type: "image/webp"
+          },
+          {
+            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
+            sizes: "512x512",
+            type: "image/webp"
+          }
+        ]
+      };
+      
+      const manifestStr = JSON.stringify(manifestData);
+      const manifestBlob = new Blob([manifestStr], {type: 'application/json'});
+      const manifestURL = URL.createObjectURL(manifestBlob);
+      
+      const manifestLink = document.getElementById('manifest-placeholder');
+      manifestLink.setAttribute('href', manifestURL);
+      manifestLink.setAttribute('rel', 'manifest');
+    }
+    
+    function setupInstallPrompt() {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        const isInstallPromptShownBefore = localStorage.getItem('installPromptShown');
+        if (!isInstallPromptShownBefore) {
+          setTimeout(() => {
+            document.getElementById('installPrompt').style.display = 'block';
+          }, 3000);
+        }
+      });
+      
+      document.getElementById('installBtn').addEventListener('click', async () => {
+        if (!deferredPrompt) {
+          window.location.href = "https://g-z.online/install.html";
+          return;
+        }
+        
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        
+        if (choiceResult.outcome === 'accepted') {
+          console.log('ユーザーがインストールプロンプトを受け入れました');
+        } else {
+          console.log('ユーザーがインストールプロンプトを却下しました');
+        }
+        
+        deferredPrompt = null;
+        document.getElementById('installPrompt').style.display = 'none';
+        localStorage.setItem('installPromptShown', 'true');
+      });
+      
+      document.getElementById('dismissBtn').addEventListener('click', () => {
+        document.getElementById('installPrompt').style.display = 'none';
+        localStorage.setItem('installPromptShown', 'true');
+      });
+      
+      window.addEventListener('appinstalled', (evt) => {
+        console.log('アプリがインストールされました');
+        document.getElementById('installPrompt').style.display = 'none';
+      });
+    }
+
+    window.addEventListener('load', async () => {
+      createWebAppManifest();
+      setupInstallPrompt();
+      
+      const today = new Date();
+      const twoYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+      document.getElementById('dobInput').max = twoYearsAgo.toISOString().split('T')[0];
+      
+      const savedTheme = localStorage.getItem('preferredTheme') || getCookie('preferredTheme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        setTheme('green-blue');
+      }
+      
+      if (checkSavedUserData()) {
+        console.log("ユーザーは既にデータを持っています、ウェルカムモーダルを非表示にします");
+        const welcomeToast = document.getElementById('welcomeToast');
+        welcomeToast.style.display = 'block';
+        setTimeout(() => {
+          welcomeToast.style.opacity = '1';
+        }, 100);
+        setTimeout(() => {
+          welcomeToast.style.opacity = '0';
+          setTimeout(() => {
+            welcomeToast.style.display = 'none';
+          }, 500);
+        }, 6500);
+        
+        if (!isAuthenticated) {
+          try {
+            await authenticateAnonymously();
+          } catch (error) {
+            console.error("認証中のエラー:", error);
+          }
+        }
+      } else {
+        console.log("保存されたユーザーデータが見つかりません、ウェルカムモーダルを表示します");
+        const welcomeModal = document.getElementById('welcomeModal');
+        welcomeModal.style.display = 'block';
+        setTimeout(() => {
+          welcomeModal.classList.add('show');
+        }, 100);
+      }
+      
+      setupProfessionDropdown();
+    });
+
+    function setupProfessionDropdown() {
+      const professionInput = document.getElementById('professionInput');
+      const professionDropdown = document.getElementById('professionDropdown');
+      
+      if (!professionInput || !professionDropdown) {
+        console.error("職業ドロップダウン要素が見つかりません");
+        return;
+      }
+      
+      function filterProfessions(input) {
+        if (!input) return [];
+        
+        input = input.toLowerCase();
+        return professions.filter(profession => 
+          profession.toLowerCase().includes(input)
+        );
+      }
+      
+      function renderDropdownOptions(filteredProfessions) {
+        professionDropdown.innerHTML = '';
+        
+        if (filteredProfessions.length === 0) {
+          const option = document.createElement('div');
+          option.className = 'profession-option';
+          option.textContent = '一致するものが見つかりません';
+          professionDropdown.appendChild(option);
+        } else {
+          filteredProfessions.forEach(profession => {
+            const option = document.createElement('div');
+            option.className = 'profession-option';
+            option.textContent = profession;
+            option.addEventListener('click', () => {
+              professionInput.value = profession;
+              professionDropdown.style.display = 'none';
+            });
+            professionDropdown.appendChild(option);
+          });
+        }
+      }
+      
+      professionInput.addEventListener('input', () => {
+        const filtered = filterProfessions(professionInput.value);
+        renderDropdownOptions(filtered);
+        
+        if (filtered.length > 0) {
+          professionDropdown.style.display = 'block';
+        } else {
+          professionDropdown.style.display = 'none';
+        }
+      });
+      
+      professionInput.addEventListener('focus', () => {
+        if (professionInput.value) {
+          const filtered = filterProfessions(professionInput.value);
+          renderDropdownOptions(filtered);
+          professionDropdown.style.display = 'block';
+        }
+      });
+      
+      document.addEventListener('click', (e) => {
+        if (!professionInput.contains(e.target) && !professionDropdown.contains(e.target)) {
+          professionDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    document.getElementById('flowerButton').addEventListener('click', function() {
+      if (!userUniqueId) {
+        alert("最初にフラワーアカウントを作成してください。");
+        return;
+      }
+      
+      updateFlowerDisplay();
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.style.display = 'block';
+      setTimeout(() => {
+        flowerModal.classList.add('show');
+      }, 10);
+      document.getElementById('shareFlowerButton').style.display = 'flex';
+    });
+
+    document.getElementById('shareFlowerButton').addEventListener('click', function() {
+      captureFlower();
+    });
+    
+    document.getElementById('showIdButton').addEventListener('click', function() {
+      if (userUniqueId) {
+        document.getElementById('userIdDisplay').textContent = userUniqueId;
+        const idModal = document.getElementById('idModal');
+        idModal.style.display = 'block';
+        setTimeout(() => {
+          idModal.classList.add('show');
+        }, 10);
+      } else {
+        alert("ユニークIDを取得するには、まずフラワーアカウントを作成してください。");
+      }
+    });
+    
+    document.getElementById('copyIdButton').addEventListener('click', function() {
+      const idText = document.getElementById('userIdDisplay').textContent;
+      navigator.clipboard.writeText(idText).then(function() {
+        alert('IDがクリップボードにコピーされました！');
+      }).catch(function() {
+        alert('IDをコピーできませんでした。手動で選択してコピーしてください。');
+      });
+    });
+    
+    document.getElementById('closeIdModal').addEventListener('click', function() {
+      const idModal = document.getElementById('idModal');
+      idModal.classList.remove('show');
+      setTimeout(() => {
+        idModal.style.display = 'none';
+      }, 300);
+    });
+    
+    document.getElementById('deleteAccountButton').addEventListener('click', function() {
+      deleteUserAccount().then(success => {
+        if (success) {
+          alert("アカウントが正常に削除されました。このアプリを使用するには新しいアカウントを作成する必要があります。");
+          const idModal = document.getElementById('idModal');
+          idModal.classList.remove('show');
+          setTimeout(() => {
+            idModal.style.display = 'none';
+            const welcomeModal = document.getElementById('welcomeModal');
+            welcomeModal.style.display = 'block';
+            setTimeout(() => {
+              welcomeModal.classList.add('show');
+            }, 100);
+          }, 300);
+        } else {
+          alert("エラー、後でもう一度お試しください");
+        }
+      });
+    });
+    
+    document.getElementById('refreshMotivation').addEventListener('click', function() {
+      const newMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+      currentMotivation = newMotivation;
+      
+      const newSubject = getRandomSubject();
+      localStorage.setItem('flowerSubject', newSubject);
+      
+      const formattedName = formatUserName(userFullName);
+      
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      if (formattedName) {
+        flowerCodeElement.innerHTML = `私の花 - ${newSubject} / ${formattedName}`;
+      } else {
+        flowerCodeElement.textContent = "私の花 - " + newSubject;
+      }
+      
+      document.getElementById('monthlyMotivation').textContent = newMotivation;
+      
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (captureCode) {
+        if (formattedName) {
+          captureCode.innerHTML = `私の花 - ${newSubject} / ${formattedName}`;
+        } else {
+          captureCode.textContent = "私の花 - " + newSubject;
+        }
+      }
+      
+      if (captureMotivation) captureMotivation.textContent = newMotivation;
+      
+      this.style.transition = 'transform 0.5s ease';
+      this.style.transform = 'rotate(360deg)';
+      
+      setTimeout(() => {
+        this.style.transition = 'none';
+        this.style.transform = 'rotate(0deg)';
+      }, 500);
+    });
+    
+    document.getElementById('createAccountButton').addEventListener('click', async function() {
+      const dobInput = document.getElementById('dobInput');
+      const professionInput = document.getElementById('professionInput');
+      const fullNameInput = document.getElementById('fullNameInput');
+      
+      if (!fullNameInput.value) {
+        alert("フルネームを入力してください。");
+        return;
+      }
+      
+      if (!dobInput.value) {
+        alert("生年月日を入力してください。");
+        return;
+      }
+      
+      if (!professionInput.value) {
+        alert("職業を入力してください。");
+        return;
+      }
+      
+      document.getElementById('loadingSpinner').style.display = 'block';
+      document.getElementById('createAccountButton').disabled = true;
+      
+      try {
+        await authenticateAnonymously();
+        
+        userFullName = fullNameInput.value;
+        userDateOfBirth = dobInput.value;
+        userProfession = professionInput.value;
+        
+        userUniqueId = generateUniqueId();
+        console.log("生成されたユニークID:", userUniqueId);
+        
+        userFlowerCode = generateFlowerCode();
+        
+        const subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+        
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+        
+        const createButton = document.getElementById('createAccountButton');
+        createButton.innerHTML = '<i class="fas fa-check"></i> 完了';
+        createButton.style.backgroundColor = '#4CAF50';
+        
+        const userData = {
+          date: new Date().toISOString(),
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: subject,
+          shareCount: 0
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        setTimeout(() => {
+          const welcomeModal = document.getElementById('welcomeModal');
+          welcomeModal.classList.remove('show');
+          
+          setTimeout(() => {
+            welcomeModal.style.display = 'none';
+            document.getElementById('loadingSpinner').style.display = 'none';
+            createButton.innerHTML = 'アカウント作成';
+            createButton.style.backgroundColor = '';
+            createButton.disabled = false;
+            
+            submitToFirebase().then(submitted => {
+              console.log("Firebase送信結果:", submitted);
+              
+              const welcomeToast = document.getElementById('welcomeToast');
+              welcomeToast.style.display = 'block';
+              setTimeout(() => {
+                welcomeToast.style.opacity = '1';
+              }, 100);
+              setTimeout(() => {
+                welcomeToast.style.opacity = '0';
+                setTimeout(() => {
+                  welcomeToast.style.display = 'none';
+                }, 500);
+              }, 2000);
+              
+              updateFlowerDisplay();
+              const flowerModal = document.getElementById('flowerModal');
+              flowerModal.style.display = 'block';
+              setTimeout(() => {
+                flowerModal.classList.add('show');
+              }, 10);
+              document.getElementById('shareFlowerButton').style.display = 'flex';
+            });
+          }, 300);
+        }, 2000);
+        
+        console.log("セットアップ完了、データをローカルとクッキーに保存しました");
+      } catch (error) {
+        console.error("セットアップ中のエラー:", error);
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('createAccountButton').disabled = false;
+        alert("フラワーのセットアップに問題がありました。もう一度お試しください。");
+      }
+    });
+    
+    async function captureFlower() {
+      try {
+        const captureContainer = document.getElementById('flowerCaptureContainer');
+        
+        updateCaptureStyles(currentTheme);
+        
+        if (typeof html2canvas !== 'function') {
+          console.error("html2canvasが読み込まれていないか、関数として利用できません");
+          alert("花をキャプチャできません。キャプチャライブラリが読み込まれていません。");
+          return;
+        }
+        
+        let bgColor = 'white';
+        if (currentTheme === 'red-black') bgColor = 'black';
+        else if (currentTheme === 'green-blue') bgColor = '#1A2E4D';
+        else if (currentTheme === 'orange-pink' || currentTheme === 'yellow-purple') bgColor = '#4B0082';
+        
+        const canvas = await html2canvas(captureContainer, {
+          backgroundColor: bgColor,
+          scale: 7,
+          logging: true,
+          useCORS: true,
+          allowTaint: true,
+          letterRendering: true
+        });
+        
+        const imageUrl = canvas.toDataURL('image/png');
+        
+        const capturedImage = document.getElementById('capturedImage');
+        if (capturedImage) {
+          capturedImage.src = imageUrl;
+          document.getElementById('capturedFlower').style.display = 'flex';
+          document.getElementById('shareWarning').style.display = 'block';
+          
+          updateShareCount();
+        } else {
+          console.error("capturedImage要素が見つかりません");
+        }
+      } catch (error) {
+        console.error('フラワーのキャプチャエラー:', error);
+        alert('フラワーをキャプチャできませんでした。もう一度お試しください。');
+      }
+    }
+    
+    document.getElementById('shareCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+if (navigator.share) {
+        fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
+            navigator.share({
+              title: '私のG-Z フラワー',
+              text: 'g-z.onlineであなたの花を見つけよう',
+              files: [file]
+            }).catch(err => {
+              console.log('シェアエラー:', err);
+              fallbackShare();
+            });
+          })
+          .catch(err => {
+            console.log('画像準備エラー:', err);
+            fallbackShare();
+          });
+      } else {
+        fallbackShare();
+      }
+    });
+    
+    function fallbackShare() {
+      try {
+        const shareText = `
+G-Zから私の命の花をチェックしてください: ${userUniqueId}。g-z.onlineであなたの花を見つけよう`;
+        
+        navigator.clipboard.writeText(shareText).then(function() {
+          alert('シェアテキストがクリップボードにコピーされました！');
+        }).catch(function() {
+          alert('シェアテキストをコピーできませんでした。');
+        });
+      } catch (error) {
+        console.error('フォールバックシェアエラー:', error);
+        alert('エラーが発生しました。');
+      }
+    }
+    
+    document.getElementById('closeCapture').addEventListener('click', function() {
+      document.getElementById('capturedFlower').style.display = 'none';
+    });
+    
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.classList.remove('show');
+      setTimeout(() => {
+        flowerModal.style.display = 'none';
+        document.getElementById('shareFlowerButton').style.display = 'none';
+      }, 300);
+    });
+
+    window.onclick = function(event) {
+      const flowerModal = document.getElementById('flowerModal');
+      const capturedFlower = document.getElementById('capturedFlower');
+      const idModal = document.getElementById('idModal');
+      const welcomeModal = document.getElementById('welcomeModal');
+      
+      if (event.target == flowerModal) {
+        flowerModal.classList.remove('show');
+        setTimeout(() => {
+          flowerModal.style.display = "none";
+          document.getElementById('shareFlowerButton').style.display = 'none';
+        }, 300);
+      }
+      
+      if (event.target == capturedFlower) {
+        capturedFlower.style.display = "none";
+      }
+      
+      if (event.target == idModal) {
+        idModal.classList.remove('show');
+        setTimeout(() => {
+          idModal.style.display = "none";
+        }, 300);
+      }
+      
+      if (event.target == welcomeModal && isInstalled) {
+        welcomeModal.classList.remove('show');
+        setTimeout(() => {
+          welcomeModal.style.display = "none";
+        }, 300);
+      }
+    };
+    
+    document.getElementById('shareFlowerButton').style.display = 'none';
+    document.getElementById('shareWarning').style.display = 'none';
+    
+    document.querySelectorAll('.style-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        setTheme(theme);
+      });
+    });
+  </script>
+</body>
