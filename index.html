@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>Close</span>
+        <i class="fas fa-download"></i> <span>Save</span>
       </button>
     </div>
   </div>
@@ -3369,7 +3369,7 @@ if (navigator.share) {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
               title: 'My G-Z Flower',
-              text: 'Discover yours at g-z.online',
+              text: 'Discover  yours at g-z.online',
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -3402,7 +3402,22 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      const imageUrl = document.getElementById('capturedImage').src;
+      try {
+        // Create an invisible link to trigger download
+        const a = document.createElement('a');
+        a.href = imageUrl;
+        a.download = 'my-flower.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        alert('Flower image saved to your device!');
+        document.getElementById('capturedFlower').style.display = 'none';
+      } catch (error) {
+        console.error('Error saving image:', error);
+        alert('Could not save the image. Try long-pressing on the image and select "Save image".');
+      }
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
@@ -3458,4 +3473,5 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     });
   </script>
 </body>
+
 </html>
