@@ -1487,7 +1487,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>Cerrar</span>
+        <i class="fas fa-download"></i> <span>Guardar</span>
       </button>
     </div>
   </div>
@@ -1550,7 +1550,7 @@
     let userRank = 0;
     let userEmoji = "👑";
 
-    const rankEmojis = ["👑", "🌟", "🔥", "⚡️", "⭐️", "❄️", "✨️", "🎖", "🗿"];
+    const rankEmojis = ["👑",  "🗿"];
 
     const professions = [
       "Músico", "Rapero", "Futbolista", "Jugador de Baloncesto", "Boxeador", 
@@ -3207,6 +3207,19 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      // Crear un enlace temporal para descargar la imagen
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageUrl;
+      downloadLink.download = 'mi-flor-gz.png';
+      
+      // Simular clic en el enlace para iniciar la descarga
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      
+      // Opcional: cerrar la vista de captura después de guardar
       document.getElementById('capturedFlower').style.display = 'none';
     });
     
@@ -3263,4 +3276,3 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     });
   </script>
 </body>
-</html>
