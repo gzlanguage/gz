@@ -1,1 +1,3475 @@
-ybk
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>G-Z</title>
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
+    <link rel="manifest" id="manifest-placeholder">
+    <style>
+        /* Style pour l'écran de chargement en noir */
+        body {
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .splash-icon {
+            width: 100px;
+            height: 100px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Écran de chargement -->
+    <div class="splash-screen" id="splash-screen">
+        <img src="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41" alt="Logo" class="splash-icon">
+    </div>
+    
+    <!-- Contenu principal de la page (qui sera affiché après le chargement) -->
+    <div id="main-content" style="display: none;">
+        <!-- Votre contenu principal ici -->
+    </div>
+    
+    <script>
+        // Création dynamique du fichier manifest
+        const manifestData = {
+            "name": "Flower of life",
+            "short_name": "Flower",
+            "description": "G-Z Application",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#000000",
+            "theme_color": "#000000",
+            "icons": [
+                {
+                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+        
+        const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+        const manifestURL = URL.createObjectURL(blob);
+        document.querySelector('#manifest-placeholder').setAttribute('href', manifestURL);
+        
+        // Simulation de chargement et affichage du contenu principal
+        window.addEventListener('load', function() {
+            // Simuler un temps de chargement (peut être ajusté ou remplacé par votre vrai logique)
+            setTimeout(function() {
+                // Masquer l'écran de chargement
+                const splashScreen = document.getElementById('splash-screen');
+                splashScreen.style.opacity = '0';
+                
+                // Afficher le contenu principal
+                setTimeout(function() {
+                    splashScreen.style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 500); // Attendre que l'animation de fondu soit terminée
+            }, 1500); // 2 secondes de chargement simulé
+        });
+    </script>
+</body>
+</html>
+    <style>
+        input, textarea, select, button {
+            font-size: 16px;
+            touch-action: manipulation;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+        header {
+            background-color: white;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .divider {
+            height: 0.6px;
+            background-color: #007bff;
+            width: 100%;
+            margin-top: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            padding: 5px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .button-container::-webkit-scrollbar {
+            display: none;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin: 0 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+        .button i {
+            margin-right: 2px;
+        }
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #0056b3;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            padding: 3px 0;
+            max-height: 30px;
+            overflow: hidden;
+        }
+        .share-icon {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.3em;
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 4px;
+            background-color: white;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        footer {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            margin-top: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+        }
+        .logo {
+            color: #007bff;
+            font-size: 1.6em;
+            margin-right: 10px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(0, 119, 190, 0.1);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .logo:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 50% auto;
+            padding: 14px;
+            border: 1px solid #007bff;
+            border-radius: 60px;
+            width: 280px;
+            max-width: 70%;
+            text-align: center;
+            max-height: 60vh;
+            overflow-y: auto;
+            position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-header {
+            font-size: 1.8em;
+            font-family: 'Billabong', cursive;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: 120px;
+            margin: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .close-button:hover {
+            background-color: #0056b3;
+        }
+        
+        @keyframes flowerRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .flower-icon {
+            display: inline-block;
+            animation: flowerRotate 2s infinite ease-in-out;
+            color: #ff69b4;
+        }
+        
+        .billabong-title {
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        .monthly-motivation {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff69b4;
+            border-radius: 15px;
+            background-color: white;
+            font-style: italic;
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.4;
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+        
+        .flower-code {
+            display: block;
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            max-width: 220px;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .copy-icon {
+            color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1.2em;
+            vertical-align: middle;
+            transition: color 0.3s ease;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .celebrate-icon {
+            font-size: 2em;
+            color: gold;
+            margin-bottom: 8px;
+            animation: celebrate 2s infinite alternate;
+        }
+        
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #ff0000;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            margin: 290px auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            max-width: 190px;
+            position: relative;
+            z-index: 1001;
+            border: 1px solid #0056b3;
+        }
+        
+        .share-flower-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .share-flower-button i {
+            margin-left: 8px;
+        }
+        
+        #capturedFlower {
+            position: fixed;
+            z-index: 1003;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .captured-image-container {
+            position: relative;
+            max-width: 85%;
+            max-height: 60vh;
+            margin-bottom: 15px;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        
+        .share-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 10px auto;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .share-message i {
+            margin-left: 8px;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        
+        .share-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .capture-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .capture-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+        
+        .capture-button i {
+            margin-right: 5px;
+        }
+        
+        .close-capture {
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        #flowerCaptureContainer {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: -9999px;
+            background-color: white;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-flower-header {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px rgba(0, 123, 255, 0.2);
+            transition: color 0.3s ease;
+        }
+        
+        .capture-flower-code {
+            font-weight: bold;
+            color: #ff69b4;
+            font-size: 0.8em;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 10px;
+            border: 1px solid #ff69b4;
+            margin: 6px auto;
+            text-align: center;
+            max-width: 80%;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-flower-motivation {
+            font-style: italic;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px dashed #ff69b4;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+            text-align: center;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+        
+        .capture-flower-icon {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+        
+        .gz-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            font-size: 1.4em;
+            text-align: center;
+            margin-top: 10px;
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 4px;
+            width: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .share-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 0.85em;
+            margin: 5px auto 15px auto;
+            max-width: 90%;
+            text-align: center;
+            display: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .capture-website-url {
+            text-align: center;
+            font-size: 0.85em;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 8px;
+            font-family: Arial, sans-serif;
+            padding: 3px 0;
+            border-top: 1px dashed #007bff;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .terms-text {
+            font-size: 0.8em;
+            color: black;
+            text-align: center;
+            margin: 10px auto;
+            width: 330px;
+            transition: color 0.3s ease;
+        }
+        
+        .billabong-title {
+            margin-bottom: 3px;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 1px;
+        }
+
+        .header-icon {
+            font-size: 1.4em;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .app-logo {
+            font-family: 'Billabong', cursive;
+            color: #007bff;
+            border: 2px solid #007bff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 1.4em;
+            font-weight: bold;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        #welcomeToast {
+            position: fixed;
+            top: 160px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-family: , cursive;
+            font-size: 1.1em;
+            border: 2px solid #4CAF50;
+        }
+
+        #welcomeModal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #welcomeModal.show {
+            opacity: 1;
+        }
+
+        #welcomeModal .modal-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 40% auto;
+            padding: 15px 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            width: 85%;
+            max-width: 290px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #welcomeModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        #welcomeModal .close {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-bottom: 3px;
+            cursor: pointer;
+        }
+
+        #welcomeModal .welcome-header {
+            color: #007bff;
+            font-family: 'Billabong', cursive;
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #welcomeModal .welcome-text {
+            margin: 10px 0 15px 0;
+            font-size: 0.8em;
+            color: #333;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .dob-container {
+            margin: 10px 0;
+        }
+
+        .dob-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .dob-input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .profession-container {
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .profession-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .profession-search {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .profession-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 90%;
+            max-height: 150px;
+            overflow-y: auto;
+            left: 5%;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .profession-option {
+            padding: 8px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            background-color: white;
+            color: #333;
+        }
+
+        .profession-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .name-container {
+            margin: 10px 0;
+        }
+
+        .name-container label {
+            display: block;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .name-input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        #createAccountButton {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 10px auto 5px;
+            display: block;
+            width: 80%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+        }
+        
+        #createAccountButton:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d80 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+        
+        #createAccountButton:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        #idModal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #idModal.show {
+            opacity: 1;
+        }
+
+        #idModal .modal-content {
+            background-color: #fff;
+            margin: 45% auto;
+            padding: 15px;
+            border: 1px solid #007BFF;
+            border-radius: 25px;
+            width: 65%;
+            max-width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            transform: scale(0.8);
+        }
+        #idModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .id-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .id-title {
+            font-size: 1em;
+            color: #007bff;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .id-display {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #ff69b4;
+            background-color: #fff0f8;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1px solid #ff69b4;
+            margin: 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 80%;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .delete-account {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-account:hover {
+            background-color: #e60000;
+        }
+
+        .copy-icon {
+            margin-left: 6px;
+        }
+
+        .id-message {
+            font-size: 0.7em;
+            color: #333;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        #idModal .close-button {
+            margin-top: 8px;
+            width: auto;
+            padding: 6px 15px;
+            font-size: 0.7em;
+            height: 28px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+        
+        .style-selector {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        
+        .style-selector h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .style-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 5px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .style-options::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .style-option {
+            width: 60px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .style-option.selected {
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #007bff;
+        }
+        
+        .style-option.red-black {
+            background: linear-gradient(to right, #FF4500, #8B0000, #121212, #121212);
+        }
+        
+        .style-option.green-blue {
+            background: linear-gradient(to right, #3EB489, #14532D, #0A2239, #1A2E4D);
+        }
+        
+        .style-option.orange-pink {
+            background: linear-gradient(to right, #FF7F50, #FF6F91, #C71585, #4B0082);
+        }
+        
+        .style-option.yellow-purple {
+            background: linear-gradient(to right, #FFD700, #FFA500, #8A2BE2, #4B0082);
+        }
+        
+        .style-option.default {
+            background: linear-gradient(to right, #007bff, #0056b3);
+        }
+        
+        .main-content {
+            padding-bottom: 80px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        body.theme-default {
+            background-color: white;
+            color: #333;
+        }
+        
+        body.theme-default header, 
+        body.theme-default footer,
+        body.theme-default .style-selector {
+            background-color: white;
+        }
+        
+        body.theme-default .app-logo,
+        body.theme-default .header-icon,
+        body.theme-default .divider,
+        body.theme-default .notification,
+        body.theme-default .billabong-title,
+        body.theme-default .gz-logo,
+        body.theme-default .capture-website-url,
+        body.theme-default .capture-flower-header,
+        body.theme-default .id-title {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        
+        body.theme-default .notification .notification-text {
+            color: #007bff;
+        }
+        
+        body.theme-default .button {
+            background-color: #007bff;
+        }
+        
+        body.theme-default .share-flower-button {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        body.theme-default .flower-code,
+        body.theme-default .id-display {
+            color: #ff69b4;
+            background-color: #fff0f8;
+            border-color: #ff69b4;
+        }
+        
+        body.theme-default .monthly-motivation,
+        body.theme-default .capture-flower-motivation {
+            border-color: #ff69b4;
+            color: #333;
+            background-color: white;
+        }
+        
+        body.theme-default .modal-content {
+            background-color: white;
+            border-color: #007bff;
+        }
+        
+        body.theme-red-black {
+            background: black;
+            color: #E5E5E5;
+        }
+        
+        body.theme-red-black header, 
+        body.theme-red-black footer,
+        body.theme-red-black .style-selector {
+            background-color: black;
+        }
+        
+        body.theme-red-black .app-logo,
+        body.theme-red-black .header-icon,
+        body.theme-red-black .gz-logo,
+        body.theme-red-black .capture-flower-header,
+        body.theme-red-black .capture-website-url,
+        body.theme-red-black .id-title,
+        body.theme-red-black .billabong-title {
+            color: #FF4500;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .divider {
+            background-color: #FF4500;
+        }
+        
+        body.theme-red-black .notification .notification-text {
+            color: #FF4500;
+        }
+        
+        body.theme-red-black .notification,
+        body.theme-red-black .welcome-text,
+        body.theme-red-black .id-message {
+            color: #CCCCCC;
+        }
+        
+        body.theme-red-black .button {
+            background-color: #8B0000;
+        }
+        
+        body.theme-red-black .share-flower-button {
+            background-color: #8B0000;
+            color: white;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .flower-code,
+        body.theme-red-black .id-display {
+            color: #FF4500;
+            background-color: black;
+            border-color: #FF4500;
+        }
+        
+        body.theme-red-black .monthly-motivation,
+        body.theme-red-black .capture-flower-motivation {
+            border-color: #FF4500;
+            color: #E5E5E5;
+            background-color: black;
+        }
+        
+        body.theme-red-black .modal-content,
+        body.theme-red-black #flowerCaptureContainer {
+            background-color: black;
+            border-color: #8B0000;
+        }
+        
+        body.theme-green-blue {
+            background: #1A2E4D;
+            color: #F5F5F5;
+        }
+        
+        body.theme-green-blue header, 
+        body.theme-green-blue footer,
+        body.theme-green-blue .style-selector {
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .app-logo,
+        body.theme-green-blue .header-icon,
+        body.theme-green-blue .gz-logo,
+        body.theme-green-blue .capture-flower-header,
+        body.theme-green-blue .capture-website-url,
+        body.theme-green-blue .id-title,
+        body.theme-green-blue .billabong-title {
+            color: #3EB489;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .divider {
+            background-color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification .notification-text {
+            color: #3EB489;
+        }
+        
+        body.theme-green-blue .notification,
+        body.theme-green-blue .welcome-text,
+        body.theme-green-blue .id-message {
+            color: #A0A0A0;
+        }
+        
+        body.theme-green-blue .button {
+            background-color: #14532D;
+        }
+        
+        body.theme-green-blue .share-flower-button {
+            background-color: #14532D;
+            color: white;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .flower-code,
+        body.theme-green-blue .id-display {
+            color: #3EB489;
+            background-color: #36454F;
+            border-color: #3EB489;
+        }
+        
+        body.theme-green-blue .monthly-motivation,
+        body.theme-green-blue .capture-flower-motivation {
+            border-color: #3EB489;
+            color: #F5F5F5;
+            background-color: #1A2E4D;
+        }
+        
+        body.theme-green-blue .modal-content,
+        body.theme-green-blue #flowerCaptureContainer {
+            background-color: #1A2E4D;
+            border-color: #3EB489;
+        }
+        
+        body.theme-orange-pink {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-orange-pink header, 
+        body.theme-orange-pink footer,
+        body.theme-orange-pink .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .app-logo,
+        body.theme-orange-pink .header-icon,
+        body.theme-orange-pink .gz-logo,
+        body.theme-orange-pink .capture-flower-header,
+        body.theme-orange-pink .capture-website-url,
+        body.theme-orange-pink .id-title,
+        body.theme-orange-pink .billabong-title {
+            color: #FF7F50;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .divider {
+            background-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification .notification-text {
+            color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .notification,
+        body.theme-orange-pink .welcome-text,
+        body.theme-orange-pink .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-orange-pink .button {
+            background-color: #C71585;
+        }
+        
+        body.theme-orange-pink .share-flower-button {
+            background-color: #C71585;
+            color: white;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .flower-code,
+        body.theme-orange-pink .id-display {
+            color: #FF7F50;
+            background-color: #6A0DAD;
+            border-color: #FF7F50;
+        }
+        
+        body.theme-orange-pink .monthly-motivation,
+        body.theme-orange-pink .capture-flower-motivation {
+            border-color: #FF7F50;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-orange-pink .modal-content,
+        body.theme-orange-pink #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FF7F50;
+        }
+
+        body.theme-yellow-purple {
+            background: #4B0082;
+            color: #FFFFFF;
+        }
+        
+        body.theme-yellow-purple header, 
+        body.theme-yellow-purple footer,
+        body.theme-yellow-purple .style-selector {
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .app-logo,
+        body.theme-yellow-purple .header-icon,
+        body.theme-yellow-purple .gz-logo,
+        body.theme-yellow-purple .capture-flower-header,
+        body.theme-yellow-purple .capture-website-url,
+        body.theme-yellow-purple .id-title,
+        body.theme-yellow-purple .billabong-title {
+            color: #FFD700;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .divider {
+            background-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification .notification-text {
+            color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .notification,
+        body.theme-yellow-purple .welcome-text,
+        body.theme-yellow-purple .id-message {
+            color: #D3D3D3;
+        }
+        
+        body.theme-yellow-purple .button {
+            background-color: #8A2BE2;
+        }
+        
+        body.theme-yellow-purple .share-flower-button {
+            background-color: #8A2BE2;
+            color: white;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .flower-code,
+        body.theme-yellow-purple .id-display {
+            color: #FFD700;
+            background-color: #6A0DAD;
+            border-color: #FFD700;
+        }
+        
+        body.theme-yellow-purple .monthly-motivation,
+        body.theme-yellow-purple .capture-flower-motivation {
+            border-color: #FFD700;
+            color: #FFFFFF;
+            background-color: #4B0082;
+        }
+        
+        body.theme-yellow-purple .modal-content,
+        body.theme-yellow-purple #flowerCaptureContainer {
+            background-color: #4B0082;
+            border-color: #FFD700;
+        }
+        
+        .refresh-motivation {
+            position: absolute;
+            right: 15px;
+            top: 70px;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .refresh-motivation:hover {
+            transform: rotate(180deg);
+        }
+        
+        body.theme-red-black .refresh-motivation {
+            color: #FF4500;
+        }
+        
+        body.theme-green-blue .refresh-motivation {
+            color: #3EB489;
+        }
+        
+        body.theme-orange-pink .refresh-motivation {
+            color: #FF7F50;
+        }
+        
+        body.theme-yellow-purple .refresh-motivation {
+            color: #FFD700;
+        }
+        
+        .user-name {
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .install-prompt {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .install-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .install-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        
+        .dismiss-btn {
+            background-color: transparent;
+            color: #ccc;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="theme-green-blue">
+
+  <header>
+   
+    <div class="header-container">
+      <div class="app-logo">G-Z</div>
+      
+      <div class="right-controls">
+        
+   
+        <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
+        
+         <a href="https://g-z.online/translate.html" class="header-icon menu-link"><i class="fas fa-globe"></i></a>
+        
+        <a href="https://g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="main-content">
+    <div class="button-container">
+      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span>ดอกไม้แห่งชีวิต</span></a>
+      
+    
+
+    </div>
+
+    <div class="divider"></div>
+    <div class="notification">
+      <span class="notification-text">💠 ดอกไม้ -- ข้อความที่จักรวาลเขียนให้คุณ ¯\_(ツ)_/¯</span>
+    </div>
+
+    <div class="divider"></div>
+  </div>
+
+  <div class="style-selector">
+    <h3>สไตล์</h3>
+    <div class="style-options">
+      <div class="style-option red-black" data-theme="red-black"></div>
+      <div class="style-option green-blue selected" data-theme="green-blue"></div>
+      <div class="style-option orange-pink" data-theme="orange-pink"></div>
+      <div class="style-option yellow-purple" data-theme="yellow-purple"></div>
+      <div class="style-option default" data-theme="default"></div>
+    </div>
+  </div>
+
+  <div id="welcomeToast">
+    
+    ยินดีต้อนรับกลับ    ¯\_(ツ)_/¯
+  </div>
+
+  <div id="welcomeModal" class="modal">
+    <div class="modal-content">
+      <div class="welcome-header">💠 ยินดีต้อนรับ 💠</div>
+      <div class="welcome-text">
+        การสร้างบัญชีต้องการวันเกิด อาชีพ และชื่อของคุณเพื่อสร้างดอกไม้ที่ไม่ซ้ำใคร
+      </div>
+      
+      <div class="name-container">
+        <label for="fullNameInput">ชื่อเต็มของคุณ:</label>
+        <input type="text" id="fullNameInput" class="name-input" placeholder="ใส่ชื่อเต็มของคุณ...">
+      </div>
+      
+      <div class="dob-container">
+        <label for="dobInput">วันเกิด:</label>
+        <input type="date" id="dobInput" class="dob-input" max="">
+      </div>
+      
+      <div class="profession-container">
+        <label for="professionInput">อาชีพของคุณ:</label>
+        <input type="text" id="professionInput" class="profession-search" placeholder="ใส่อาชีพของคุณ...">
+        <div id="professionDropdown" class="profession-dropdown"></div>
+      </div>
+      
+      <div class="loading-spinner" id="loadingSpinner">
+        <span>กำลังสร้างดอกไม้ที่ไม่ซ้ำใครของคุณ</span>
+        <span class="loading-dots"></span>
+      </div>
+      
+      <button id="createAccountButton">สร้างบัญชี</button>
+    </div>
+  </div>
+
+  <div id="idModal" class="modal">
+    <div class="modal-content">
+      <div class="id-title">ไอดีผู้ใช้ของคุณ</div>
+      <div class="id-display">
+        <span id="userIdDisplay"></span>
+        <i class="fas fa-copy copy-icon" id="copyIdButton"></i>
+      </div>
+      <div class="id-message">โปรดเก็บรักษาไอดีนี้!</div>
+      <div class="id-actions">
+        <button class="delete-account" id="deleteAccountButton">ลบบัญชี</button>
+        <button class="close-button" id="closeIdModal">ปิด</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="flowerModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
+      <div class="billabong-title"><strong id="flowerTypeTitle">ดอกไม้แห่งชีวิต</strong></div>
+      
+      <div id="flowerCodeDisplay" class="flower-code"></div>
+      
+      <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="สร้างแรงบันดาลใจใหม่"></i>
+      
+      <div class="monthly-motivation" id="monthlyMotivation">
+      </div>
+      
+      <div style="margin: 10px auto; font-size: 3em; color: #ff69b4;" id="flowerIconContainer">
+        <i class="fas fa-spa"></i>
+      </div>
+    </div>
+  </div>
+  
+  <button class="share-flower-button" id="shareFlowerButton">
+    <span>แชร์ดอกไม้ของฉัน</span> <i class="fas fa-arrow-right send-icon"></i>
+  </button>
+  
+  <div id="capturedFlower">
+    <div class="captured-image-container">
+      <img id="capturedImage" class="captured-image" src="" alt="ดอกไม้ที่จับภาพ">
+    </div>
+
+    <div class="share-warning" id="shareWarning">
+      <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+      <span>การแชร์จาก Google/Safari ให้ผลลัพธ์ที่ดีที่สุด</span>
+    </div>
+    
+    <div class="capture-controls">
+      <button class="capture-button" id="shareCapture">
+        <i class="fas fa-share"></i> <span>แชร์</span>
+      </button>
+      
+      <button class="capture-button close-capture" id="closeCapture">
+        <i class="fas fa-times"></i> <span>ปิด</span>
+      </button>
+    </div>
+  </div>
+  
+  <div id="flowerCaptureContainer">
+    <div class="capture-flower-header" id="captureFlowerHeader">ดอกไม้แห่งชีวิต</div>
+    
+    <div id="captureFlowerCode" class="capture-flower-code"></div>
+    
+    <div id="captureFlowerMotivation" class="capture-flower-motivation">
+    </div>
+    
+    <div class="capture-flower-icon" id="captureFlowerIcon">
+      <i class="fas fa-spa"></i>
+    </div>
+    
+    <div class="gz-logo">G-Z</div>
+    
+    <div class="capture-website-url">ค้นพบดอกไม้ของคุณที่ www.g-z.online</div>
+  </div>
+
+  <div class="install-prompt" id="installPrompt">
+    <p>เพิ่ม G-Z ไปยังหน้าจอหลักของคุณสำหรับประสบการณ์ที่ดีขึ้น!</p>
+    <div class="install-buttons">
+      <button class="install-btn" id="installBtn">ติดตั้ง</button>
+      <button class="dismiss-btn" id="dismissBtn">ไว้ภายหลัง</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrPKQOqw4zciASa_5PbI_etfkvrBaDPDI",
+      authDomain: "genz-abb36.firebaseapp.com",
+      databaseURL: "https://genz-abb36-default-rtdb.firebaseio.com",
+      projectId: "genz-abb36",
+      storageBucket: "genz-abb36.firebasestorage.app",
+      messagingSenderId: "405021535683",
+      appId: "1:405021535683:web:ee5a28fde27f5558046176",
+      measurementId: "G-XZNQND2J00"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    
+    const auth = firebase.auth();
+    const database = firebase.database();
+    const firestore = firebase.firestore();
+    
+    let userUid = null;
+    let userFlowerCode = null;
+    let currentMotivation = null;
+    let currentCountry = null;
+    let userCity = null;
+    let userUniqueId = null;
+    let isAuthenticated = false;
+    let isInstalled = false;
+    let currentTheme = "green-blue";
+    let userDateOfBirth = null;
+    let userProfession = null;
+    let userFullName = null;
+    let seenSubjects = [];
+    let shareCount = 0;
+    let deferredPrompt = null;
+
+    const professions = [
+      "นักดนตรี", "แร็ปเปอร์", "นักฟุตบอล", "นักบาสเกตบอล", "นักมวย", 
+      "นักเรียน", "ครู", "หมอ", "พยาบาล", "วิศวกร", 
+      "นักพัฒนาซอฟต์แวร์", "นักออกแบบ", "ศิลปิน", "นักเขียน", "นักข่าว", 
+      "เชฟ", "พนักงานเสิร์ฟ", "แม่บ้าน", "ผู้สร้างเนื้อหา TikTok", "ยูทูบเบอร์", 
+      "อินฟลูเอนเซอร์", "ช่างภาพ", "ผู้ผลิตวิดีโอ", "นักเต้น", "นักแสดง", 
+      "นายแบบ/นางแบบ", "สถาปนิก", "ทนายความ", "นักบัญชี", "ที่ปรึกษาทางการเงิน", 
+      "นักการธนาคาร", "ผู้ประกอบการ", "เจ้าของธุรกิจ", "ผู้จัดการ", "ผู้บริหาร", 
+      "พนักงานขาย", "นักการตลาด", "ผู้จัดการโซเชียลมีเดีย", "คนขับรถ", "นักบิน", 
+      "พนักงานต้อนรับบนเครื่องบิน", "ช่างเครื่อง", "ช่างไฟฟ้า", "ช่างประปา", "คนงานก่อสร้าง", 
+      "เกษตรกร", "คนสวน", "สัตวแพทย์", "เทรนเนอร์ส่วนตัว", "โค้ชฟิตเนส", 
+      "ครูโยคะ", "นักบำบัด", "นักจิตวิทยา", "ที่ปรึกษา", "ผู้นำทางศาสนา",
+      "นักวิทยาศาสตร์", "นักวิจัย", "ศาสตราจารย์", "ตำรวจ", "นักดับเพลิง",
+      "ทหาร", "ยาม", "นายหน้าอสังหาริมทรัพย์", "เภสัชกร", "ทันตแพทย์",
+      "จักษุแพทย์", "นักกายภาพบำบัด", "นักกิจกรรมบำบัด", "นักบำบัดการพูด", "นักโภชนาการ",
+      "ผู้เชี่ยวชาญด้านโภชนาการ", "ช่างทำผม", "ช่างแต่งหน้า", "นักสุนทรียศาสตร์", "ช่างตัดเสื้อ",
+      "นักออกแบบแฟชั่น", "พนักงานค้าปลีก", "แคชเชียร์", "ตัวแทนบริการลูกค้า", "ตัวแทนศูนย์บริการ",
+      "นักแปล", "ล่าม", "ไกด์นำเที่ยว", "ตัวแทนท่องเที่ยว", "ผู้จัดการโรงแรม",
+      "พนักงานต้อนรับ", "เลขานุการ", "ผู้ช่วยฝ่ายบริหาร", "บรรณารักษ์", "เจ้าหน้าที่จัดเก็บเอกสาร",
+      "นักประวัติศาสตร์", "นักโบราณคดี", "นักมานุษยวิทยา", "นักสังคมวิทยา", "นักรัฐศาสตร์",
+      "นักเศรษฐศาสตร์", "นักสถิติ", "นักวิเคราะห์ข้อมูล", "นักวิทยาศาสตร์ข้อมูล", "นักออกแบบประสบการณ์ผู้ใช้",
+      "นักพัฒนาเกม", "นักพัฒนาแอป", "นักพัฒนาเว็บ", "ผู้ดูแลระบบเครือข่าย", "ผู้เชี่ยวชาญด้านความปลอดภัยทางไซเบอร์",
+      "ฝ่ายสนับสนุนไอที", "ช่างเทคนิค", "ผู้เชี่ยวชาญด้านการซ่อมแซม", "คนทำขนมปัง", "คนขายเนื้อ",
+      "ชาวประมง", "คนงานเหมือง", "เจ้าหน้าที่ป่าไม้", "นักออกแบบภูมิทัศน์", "นักออกแบบตกแต่งภายใน",
+      "ผู้วางแผนกิจกรรม", "ผู้วางแผนงานแต่งงาน", "นักจัดดอกไม้", "ช่างทอง", "ช่างฝีมือ",
+      "โปรแกรมเมอร์", "นักออกแบบเว็บ", "นักการตลาดดิจิทัล", "ผู้เชี่ยวชาญด้าน SEO", "ผู้สร้างคอนเทนต์",
+      "ผู้จัดการผลิตภัณฑ์", "ผู้จัดการโครงการ", "ผู้ดูแลคุณภาพ", "นักวิเคราะห์ธุรกิจ", "ที่ปรึกษา",
+      "ผู้เชี่ยวชาญด้านการจัดหางาน", "ผู้จัดการทรัพยากรมนุษย์", "โค้ชอาชีพ", "โค้ชชีวิต", "นักพูดสร้างแรงบันดาลใจ",
+      "นักพูดในที่สาธารณะ", "ผู้ประกาศวิทยุ", "ผู้ประกาศโทรทัศน์", "ผู้กระจายเสียง", "ผู้ดำเนินรายการพอดแคสต์",
+      "ผู้เขียน", "นักเขียนบท", "คนเขียนโฆษณา", "นักเขียนด้านเทคนิค", "บรรณาธิการ",
+      "ผู้จัดพิมพ์", "ตัวแทนวรรณกรรม", "เจ้าของร้านหนังสือ", "บรรณารักษ์", "นักวิจารณ์หนังสือ",
+      "นักออกแบบกราฟิก", "นักวาดภาพประกอบ", "นักทำภาพเคลื่อนไหว", "ศิลปิน 3D", "ศิลปินเอฟเฟกต์ภาพ",
+      "ผู้กำกับภาพยนตร์", "โปรดิวเซอร์", "ช่างภาพวิดีโอ", "วิศวกรเสียง", "ช่างเทคนิคด้านแสง",
+      "บรรณาธิการภาพยนตร์", "ผู้ช่วยผลิต", "นักออกแบบฉาก", "นักออกแบบเครื่องแต่งกาย", "ช่างแต่งหน้าภาพยนตร์",
+      "ศิลปินเอฟเฟกต์พิเศษ", "นักแสดงผาดโผน", "นักพากย์", "นักแนะนำดารา", "ผู้กำกับการคัดเลือกนักแสดง"
+    ];
+
+    const subjectDictionary = {
+      "ความสำเร็จ": "ความสำเร็จ",
+      "ความสัมฤทธิ์": "ความสัมฤทธิ์",
+      "ชัยชนะ": "ชัยชนะ",
+      "การฉลองชัย": "การฉลองชัย",
+      "ผลงาน": "ผลงาน",
+      
+      "ความมั่งคั่ง": "ความมั่งคั่ง",
+      "ความเจริญรุ่งเรือง": "ความเจริญรุ่งเรือง",
+      "ความอุดมสมบูรณ์": "ความอุดมสมบูรณ์",
+      "ทรัพย์สิน": "ทรัพย์สิน",
+      "ความร่ำรวย": "ความร่ำรวย",
+      
+      "ความสุข": "ความสุข",
+      "ความยินดี": "ความยินดี",
+      "ความปีติ": "ความปีติ",
+      "ความเบิกบาน": "ความเบิกบาน",
+      "ความพึงพอใจ": "ความพึงพอใจ",
+      
+      "การเติบโต": "การเติบโต",
+      "ความก้าวหน้า": "ความก้าวหน้า",
+      "การก้าวไปข้างหน้า": "การก้าวไปข้างหน้า",
+      "การพัฒนา": "การพัฒนา",
+      "การปรับปรุง": "การปรับปรุง",
+      
+      "พลัง": "พลัง",
+      "ความแข็งแกร่ง": "ความแข็งแกร่ง",
+      "อำนาจ": "อำนาจ",
+      "ความสามารถ": "ความสามารถ",
+      "พลังงาน": "พลังงาน",
+      
+      "ปัญญา": "ปัญญา",
+      "ความฉลาด": "ความฉลาด",
+      "ความรู้": "ความรู้",
+      "ความเข้าใจลึกซึ้ง": "ความเข้าใจลึกซึ้ง",
+      "ความเข้าใจ": "ความเข้าใจ",
+      
+      "ความคิดสร้างสรรค์": "ความคิดสร้างสรรค์",
+      "นวัตกรรม": "นวัตกรรม",
+      "จินตนาการ": "จินตนาการ",
+      "การประดิษฐ์": "การประดิษฐ์",
+      "ความเป็นต้นแบบ": "ความเป็นต้นแบบ",
+      
+      "ภาวะผู้นำ": "ภาวะผู้นำ",
+      "อำนาจ": "อำนาจ",
+      "อิทธิพล": "อิทธิพล",
+      "การนำ": "การนำ",
+      "ทิศทาง": "ทิศทาง",
+      
+      "สันติภาพ": "สันติภาพ",
+      "ความสงบสุข": "ความสงบสุข",
+      "ความสงบ": "ความสงบ",
+      "ความสงบใจ": "ความสงบใจ",
+      "ความสงบเงียบ": "ความสงบเงียบ",
+      
+      "ความรัก": "ความรัก",
+      "ความลึกซึ้ง": "ความลึกซึ้ง",
+      "การบูชา": "การบูชา",
+      "การอุทิศตน": "การอุทิศตน",
+      "ความกระตือรือร้น": "ความกระตือรือร้น",
+      
+      "ความกล้าหาญ": "ความกล้าหาญ",
+      "ความกล้า": "ความกล้า",
+      "ความกล้าหาญ": "ความกล้าหาญ",
+      "ความเป็นวีรบุรุษ": "ความเป็นวีรบุรุษ",
+      "ความไม่กลัว": "ความไม่กลัว",
+      
+      "สุขภาพ": "สุขภาพ",
+      "ความมีชีวิตชีวา": "ความมีชีวิตชีวา",
+      "ความเป็นอยู่ที่ดี": "ความเป็นอยู่ที่ดี",
+      "พลังชีวิต": "พลังชีวิต",
+      "ความฟิต": "ความฟิต",
+      
+      "เสรีภาพ": "เสรีภาพ",
+      "การปลดปล่อย": "การปลดปล่อย",
+      "ความเป็นอิสระ": "ความเป็นอิสระ",
+      "การพึ่งพาตนเอง": "การพึ่งพาตนเอง",
+      "การตัดสินใจด้วยตนเอง": "การตัดสินใจด้วยตนเอง",
+      
+      "จุดประสงค์": "จุดประสงค์",
+      "ความหมาย": "ความหมาย",
+      "ภารกิจ": "ภารกิจ",
+      "การเรียกร้อง": "การเรียกร้อง",
+      "โชคชะตา": "โชคชะตา",
+      
+      "ความยืดหยุ่น": "ความยืดหยุ่น",
+      "ความแข็งแกร่ง": "ความแข็งแกร่ง",
+      "ความอดทน": "ความอดทน",
+      "ความทนทาน": "ความทนทาน",
+      "ความมุ่งมั่น": "ความมุ่งมั่น",
+      
+      "ความจริงแท้": "ความจริงแท้",
+      "ความจริงใจ": "ความจริงใจ",
+      "ความซื่อสัตย์": "ความซื่อสัตย์",
+      "ความสุจริต": "ความสุจริต",
+      "ความจริงใจ": "ความจริงใจ",
+      
+      "การเปลี่ยนแปลง": "การเปลี่ยนแปลง",
+      "การแปรเปลี่ยน": "การแปรเปลี่ยน",
+      "วิวัฒนาการ": "วิวัฒนาการ",
+      "การเกิดใหม่": "การเกิดใหม่",
+      "การแปรสภาพ": "การแปรสภาพ",
+      
+      "การเชื่อมต่อ": "การเชื่อมต่อ",
+      "ความสัมพันธ์": "ความสัมพันธ์",
+      "ชุมชน": "ชุมชน",
+      "ความรู้สึกเป็นส่วนหนึ่ง": "ความรู้สึกเป็นส่วนหนึ่ง",
+      "ความเป็นหนึ่งเดียว": "ความเป็นหนึ่งเดียว",
+      
+      "ความกตัญญู": "ความกตัญญู",
+      "ความขอบคุณ": "ความขอบคุณ",
+      "การชื่นชม": "การชื่นชม",
+      "การยอมรับ": "การยอมรับ",
+      "การรับรู้": "การรับรู้",
+      
+      "สติ": "สติ",
+      "การรับรู้ถึงการมีอยู่": "การรับรู้ถึงการมีอยู่",
+      "ความตระหนักรู้": "ความตระหนักรู้",
+      "ความรู้ตัว": "ความรู้ตัว",
+      "ความมุ่งเน้น": "ความมุ่งเน้น",
+      
+      "ความเห็นอกเห็นใจ": "ความเห็นอกเห็นใจ",
+      "การเข้าใจความรู้สึก": "การเข้าใจความรู้สึก",
+      "ความกรุณา": "ความกรุณา",
+      "ความใจกว้าง": "ความใจกว้าง",
+      "การเห็นแก่ผู้อื่น": "การเห็นแก่ผู้อื่น",
+      
+      "ความสมดุล": "ความสมดุล",
+      "ความสมดุล": "ความสมดุล",
+      "ความสงบสุข": "ความสงบสุข",
+      "สัดส่วน": "สัดส่วน",
+      "ความสมมาตร": "ความสมมาตร",
+      
+      "แรงบันดาลใจ": "แรงบันดาลใจ",
+      "แรงขับเคลื่อน": "แรงขับเคลื่อน",
+      "ความกระตือรือร้น": "ความกระตือรือร้น",
+      "ความตื่นเต้น": "ความตื่นเต้น",
+      "ความหลงใหล": "ความหลงใหล",
+      
+      "การมุ่งเน้น": "การมุ่งเน้น",
+      "ความเข้มข้น": "ความเข้มข้น",
+      "ความสนใจ": "ความสนใจ",
+      "วินัย": "วินัย",
+      "การอุทิศตน": "การอุทิศตน",
+      
+      "ความถ่อมตน": "ความถ่อมตน",
+      "ความอ่อนน้อมถ่อมตน": "ความอ่อนน้อมถ่อมตน",
+      "ความเรียบง่าย": "ความเรียบง่าย",
+      "ความไม่เสแสร้ง": "ความไม่เสแสร้ง",
+      "ความมั่นคง": "ความมั่นคง",
+      
+      "ความอดทน": "ความอดทน",
+      "ความใจกว้าง": "ความใจกว้าง",
+      "ความอดกลั้น": "ความอดกลั้น",
+      "ความทนทาน": "ความทนทาน",
+      "ความพากเพียร": "ความพากเพียร",
+      
+      "ความยินดี": "ความยินดี",
+      "ความสุข": "ความสุข",
+      "ความปีติยินดี": "ความปีติยินดี",
+      "ความรื่นเริง": "ความรื่นเริง",
+      "การฉลอง": "การฉลอง",
+      
+      "ความไว้วางใจ": "ความไว้วางใจ",
+      "ความเชื่อมั่น": "ความเชื่อมั่น",
+      "ความมั่นใจ": "ความมั่นใจ",
+      "การพึ่งพา": "การพึ่งพา",
+      "ความน่าเชื่อถือ": "ความน่าเชื่อถือ",
+      
+      "ความมั่นใจในตนเอง": "ความมั่นใจในตนเอง",
+      "ความนับถือตนเอง": "ความนับถือตนเอง",
+      "ความเชื่อมั่นในตนเอง": "ความเชื่อมั่นในตนเอง",
+      "การยืนยันตนเอง": "การยืนยันตนเอง",
+      "ความไว้วางใจในตนเอง": "ความไว้วางใจในตนเอง",
+      
+      "ความกระตือรือร้น": "ความกระตือรือร้น",
+      "ความร้อนแรง": "ความร้อนแรง",
+      "ความปรารถนา": "ความปรารถนา",
+      "ความตั้งใจจริง": "ความตั้งใจจริง",
+      "ความกระตือรือร้น": "ความกระตือรือร้น",
+      
+      "ความชัดเจน": "ความชัดเจน",
+      "ความแจ่มแจ้ง": "ความแจ่มแจ้ง",
+      "ความโปร่งใส": "ความโปร่งใส",
+      "ความแม่นยำ": "ความแม่นยำ",
+      "ความเฉียบคม": "ความเฉียบคม",
+      
+      "การปรับตัว": "การปรับตัว",
+      "ความยืดหยุ่น": "ความยืดหยุ่น",
+      "ความหลากหลาย": "ความหลากหลาย",
+      "ความสามารถในการปรับตัว": "ความสามารถในการปรับตัว",
+      "ความยืดหยุ่น": "ความยืดหยุ่น",
+      
+      "การสื่อสาร": "การสื่อสาร",
+      "การแสดงออก": "การแสดงออก",
+      "การอธิบาย": "การอธิบาย",
+      "การสนทนา": "การสนทนา",
+      "การพูดคุย": "การพูดคุย",
+      
+      "อาชีพ": "อาชีพ",
+      "ความเป็นมืออาชีพ": "ความเป็นมืออาชีพ",
+      "กระแสเรียก": "กระแสเรียก",
+      "งาน": "งาน",
+      "การเรียกร้อง": "การเรียกร้อง"
+    };
+
+    function formatUserName(fullName) {
+      if (!fullName) return "";
+      
+      const nameParts = fullName.trim().split(' ');
+      
+      if (nameParts.length === 1) {
+        return nameParts[0];
+      }
+      
+      const firstName = nameParts[0];
+      const lastNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+      
+      return `👑 ${firstName} ${lastNameInitial}.`;
+    }
+
+    function generateUniqueId() {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const numbers = '0123456789';
+      let id = '';
+      
+      for (let i = 0; i < 3; i++) {
+        id += letters.charAt(Math.floor(Math.random() * letters.length));
+      }
+      
+      for (let i = 0; i < 3; i++) {
+        id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+      }
+      
+      return id;
+    }
+
+    async function detectUserLocation() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        currentCountry = data.country_name;
+        userCity = data.city;
+        console.log("ตรวจพบตำแหน่งผู้ใช้:", currentCountry, userCity);
+        return { country: currentCountry, city: userCity };
+      } catch (error) {
+        console.error("เกิดข้อผิดพลาดในการตรวจสอบตำแหน่งผู้ใช้:", error);
+        return { country: "ไม่ทราบ", city: "ไม่ทราบ" };
+      }
+    }
+
+    function generatePersonalizedMotivation(flowerCode, profession, dob) {
+      if (!flowerCode || flowerCode.length < 8) {
+        return "แรงบันดาลใจจากดอกไม้นี้จะนำทางและชี้นำคุณ";
+      }
+      
+      let month = 0;
+      if (dob) {
+        const dobDate = new Date(dob);
+        month = dobDate.getMonth();
+      }
+      
+      const lifeTraits = [
+        "ความคิดสร้างสรรค์ของคุณนำความคิดใหม่ๆ มาสู่ทุกความท้าทายที่คุณเผชิญ",
+        "ความกรุณาในใจของคุณสร้างแรงบันดาลใจให้กับคนรอบข้างทุกวัน",
+        "ความพากเพียรช่วยให้คุณเอาชนะอุปสรรคที่คนอื่นคิดว่าเป็นไปไม่ได้",
+        "มุมมองที่เป็นเอกลักษณ์ช่วยให้คุณแก้ปัญหาด้วยวิธีที่สร้างสรรค์",
+        "การมีอยู่อย่างมีชีวิตชีวาของคุณทำให้วันของทุกคนที่คุณพบสว่างขึ้น",
+        "ความอดทนทำให้คุณเห็นภาพใหญ่เมื่อคนอื่นไม่เห็น",
+        "ความกล้าหาญทำให้คุณเผชิญกับความท้าทายใหม่ๆ ด้วยความมุ่งมั่น",
+        "ปัญญานำทางให้คุณตัดสินใจที่ยากด้วยความชัดเจน",
+        "การมองโลกในแง่ดีช่วยให้คุณค้นพบโอกาสในทุกสถานการณ์ที่คุณพบ",
+        "ความมุ่งมั่นขับเคลื่อนให้คุณบรรลุเป้าหมายทีละขั้นอย่างแม่นยำ",
+        "ความสามารถในการปรับตัวกลายเป็นจุดแข็งที่ยิ่งใหญ่ที่สุดของคุณในยุคแห่งการเปลี่ยนแปลง",
+        "สัญชาตญาณนำทางคุณไปสู่เส้นทางที่ถูกต้องเมื่อตัวเลือกดูเหมือนไม่ชัดเจน",
+        "ความเห็นอกเห็นใจช่วยให้คุณสร้างการเชื่อมต่อที่มีความหมายลึกซึ้งกับผู้อื่น",
+        "ความยืดหยุ่นช่วยให้คุณฟื้นตัวจากความล้มเหลวใดๆ ได้อย่างแข็งแกร่งขึ้น",
+        "ความเป็นตัวของตัวเองดึงดูดผู้คนให้ยอมรับตัวตนที่แท้จริงของคุณโดยไม่ต้องแสร้ง",
+        "ความกตัญญูเพิ่มความสุขในชีวิตของคุณทุกวัน",
+        "ความอยากรู้อยากเห็นนำคุณไปสู่การค้นพบใหม่ที่คนอื่นอาจพลาด",
+        "อารมณ์ขันช่วยบรรเทาช่วงเวลาที่ยากที่สุด",
+        "ความใจกว้างสร้างระลอกคลื่นแห่งความดีในชุมชนของคุณ",
+        "ความมุ่งมั่นเปลี่ยนความท้าทายให้เป็นความสำเร็จที่ควรค่าแก่การเฉลิมฉลอง",
+        "ความเห็นอกเห็นใจช่วยเยียวยาคนรอบข้างคุณในวิธีที่ละเอียดอ่อนแต่ทรงพลัง",
+        "ความชัดเจนช่วยให้คุณตัดสินใจอย่างชาญฉลาดท่ามกลางความสับสน",
+        "ความมั่นใจสร้างความไว้วางใจในคนที่ติดตามการนำของคุณ",
+        "สติช่วยให้คุณมีสมาธิแม้ในความวุ่นวายและความไม่แน่นอน",
+        "ความซื่อสัตย์ได้รับความเคารพจากเพื่อนร่วมงานและผู้นำ",
+        "ความกระตือรือร้นจุดประกายความหลงใหลในผู้อื่นที่เห็นพลังงานของคุณ",
+        "ความอบอุ่นทำให้ผู้คนรู้สึกได้รับการต้อนรับทันทีในการอยู่ร่วมกับคุณ",
+        "จินตนาการเปิดประตูสู่ความเป็นไปได้ที่ผู้อื่นมองไม่เห็น",
+        "ความสมดุลช่วยให้คุณนำทางความซับซ้อนของชีวิตอย่างสง่างาม",
+        "วิสัยทัศน์ช่วยให้คุณมองเห็นเลยขอบฟ้าเมื่อผู้อื่นหยุดอยู่",
+        "เสน่ห์ดึงดูดผู้คนให้เข้ามาใกล้พลังงานแม่เหล็กของคุณโดยธรรมชาติ",
+        "วินัยสร้างรากฐานแห่งความสำเร็จสำหรับความพยายามทั้งหมด",
+        "ธรรมชาติที่หยั่งรู้ช่วยให้คุณเข้าใจความจริงที่ซับซ้อนที่คนอื่นพลาด",
+        "จิตวิญญาณที่เต็มไปด้วยความสนุกสนานทำให้จิตใจของคุณยังคงอ่อนเยาว์และมีชีวิตชีวาในความท้าทาย",
+        "ความคิดเชิงวิเคราะห์ค้นพบวิธีแก้ปัญหาที่คนอื่นมองข้ามอย่างสิ้นเชิง",
+        "ความคิดถึงสร้างการเชื่อมต่อที่มีความหมายที่ยังคงอยู่ตลอดชีวิต",
+        "ความอ่อนไหวช่วยให้คุณรับรู้ความต้องการของผู้อื่นโดยไม่ต้องถาม",
+        "ความกล้าตัดสินใจช่วยผลักดันโครงการไปข้างหน้าเมื่อคนอื่นลังเล",
+        "ความสม่ำเสมอสร้างความไว้วางใจในทุกความสัมพันธ์เมื่อเวลาผ่านไป",
+        "การแสดงออกสื่อสารความจริงของคุณสู่โลกอย่างสวยงาม",
+        "ความช่างประดิษฐ์เปลี่ยนข้อจำกัดให้เป็นโอกาสในการเติบโต",
+        "ความขยันขันแข็งรับประกันคุณภาพในทุกสิ่งที่คุณสัมผัสหรือสร้าง",
+        "ความยืดหยุ่นปรับตัวเข้ากับสภาพแวดล้อมที่เปลี่ยนแปลงด้วยความสง่างามที่พิเศษ",
+        "ความเป็นจริงยึดการกระทำของคุณให้อยู่ในความเป็นจริงในขณะที่ยังคงฝันใหญ่",
+        "วาทศิลป์สื่อสารแนวคิดที่ซับซ้อนอย่างชัดเจนเพื่อให้ผู้อื่นเข้าใจ",
+        "การมองการณ์ไกลช่วยให้คุณเตรียมพร้อมสำหรับความท้าทายก่อนที่มันจะมาถึง",
+        "ความอ่อนโยนรักษาบาดแผลโดยไม่ทิ้งรอยแผลเป็นบนหัวใจที่อ่อนโยน",
+        "ความกล้าหาญในการยืนหยัดเพื่อสิ่งที่ถูกต้องโดยไม่ลังเล",
+        "ความเป็นอิสระส่งเสริมการพึ่งพาตนเองและความแข็งแกร่งในความทุกข์ยาก",
+        "ความพิถีพิถันให้ความสนใจกับรายละเอียดสำคัญที่คนอื่นพลาด",
+        "ความว่องไวทางปัญญาช่วยให้คุณปรับตัวเข้ากับสถานการณ์ใหม่ได้อย่างง่ายดาย",
+        "การรู้จักตนเองส่องสว่างเส้นทางของคุณสู่การเติบโตและความสมบูรณ์",
+        "พลังภายในส่องประกายสว่างที่สุดในช่วงเวลาแห่งการทดสอบที่ยากลำบาก",
+        "บุคลิกภาพที่มีเสน่ห์ดึงดูดผู้คนเข้าสู่วงโคจรของคุณโดยไม่ต้องใช้ความพยายาม",
+        "ความฉลาดทางอารมณ์ช่วยให้คุณนำทางความสัมพันธ์ที่ซับซ้อน",
+        "ความคิดที่รวดเร็วพบวิธีแก้ไขเมื่อคนอื่นเห็นเพียงปัญหา",
+        "ความสงบนิ่งมั่นใจโดยไม่ต้องพูดอะไร",
+        "ภาวะผู้นำโดยสัญชาตญาณสร้างแรงบันดาลใจให้ผู้อื่นทำตามสัญชาตญาณที่ดีที่สุดของพวกเขา",
+        "จริยธรรมที่มั่นคงนำทางการตัดสินใจของคุณในความมืด",
+        "ความรู้สึกทางศิลปะพบความงามในสถานที่และช่วงเวลาที่ไม่คาดคิด",
+        "ความคิดเชิงกลยุทธ์คาดการณ์การพัฒนาในอนาคตอย่างแม่นยำ",
+        "ความฉับไวนำพลังงานใหม่มาสู่สถานการณ์ที่ซ้ำซาก",
+        "ความพิถีพิถันในรายละเอียดป้องกันความซับซ้อนในอนาคต",
+        "การมีอยู่อย่างสงบทำให้สภาพแวดล้อมที่วุ่นวายที่สุดสงบลง",
+        "ความคิดเชิงนวัตกรรมทะลุผ่านข้อจำกัดแบบดั้งเดิม",
+        "ทักษะการทูตโดยธรรมชาติแก้ไขความขัดแย้งด้วยความสง่างามและความยุติธรรม",
+        "ความน่าเชื่อถือทำให้คุณเป็นที่ปรึกษาของผู้ที่ต้องการความช่วยเหลือ",
+        "ความกระตือรือร้นที่ติดต่อได้ยกระดับทุกคนรอบตัวคุณ"
+      ];
+      
+      const lifeEncouragements = [
+        "ยังคงแบ่งปันของขวัญเหล่านี้กับโลกรอบตัวคุณ",
+        "เชื่อมั่นในสัญชาตญาณเหล่านี้ - พวกมันแทบจะไม่นำทางคุณผิด",
+        "พรสวรรค์เหล่านี้มีไว้เพื่อแบ่งปันอย่างกว้างขวาง",
+        "เส้นทางข้างหน้าอาจมีความท้าทาย แต่คุณได้รับการเตรียมพร้อมอย่างสมบูรณ์",
+        "ก้าวเล็กๆ ในวันนี้นำไปสู่ความสำเร็จที่ยิ่งใหญ่ในวันพรุ่งนี้",
+        "อย่าลืมเฉลิมฉลองความก้าวหน้าตลอดเส้นทาง",
+        "การเดินทางที่เป็นเอกลักษณ์นี้คุ้มค่ากับทุกก้าวที่คุณเดิน",
+        "อย่าลืมที่จะเพลิดเพลินกับกระบวนการ ไม่ใช่แค่ผลลัพธ์",
+        "วันที่ดีที่สุดยังคงอยู่ข้างหน้าในการผจญภัยนี้",
+        "ความพยายามในวันนี้กำลังสร้างเรื่องราวความสำเร็จของพรุ่งนี้",
+        "รักษาความเป็นตัวของตัวเองในทุกสถานการณ์และความท้าทาย",
+        "มองการเปลี่ยนแปลงเป็นโอกาสในการเติบโตให้แข็งแกร่งขึ้น",
+        "รับฟังปัญญาภายในบ่อยขึ้น - มันรู้ทิศทาง",
+        "อนุญาตให้ตัวเองพักผ่อนโดยไม่รู้สึกผิดเมื่อจำเป็น",
+        "มุ่งเน้นไปที่สิ่งที่สำคัญอย่างแท้จริงในภาพใหญ่",
+        "การมีอยู่ของคุณเป็นของขวัญสำหรับผู้ที่มีโชคได้รู้จักคุณ",
+        "ยังคงเลี้ยงดูสิ่งที่คุณหลงใหลแม้จะมีตารางเวลาที่ยุ่ง",
+        "อ่อนโยนกับตัวเองในช่วงเวลาแห่งความท้าทายและความล้มเหลว",
+        "เส้นทางที่เป็นเอกลักษณ์นี้คือที่ที่คุณต้องไป",
+        "เชื่อในจังหวะเวลาของการคลี่คลายความลึกลับของชีวิต",
+        "ค้นหาความสุขในช่วงเวลาเล็กๆ ทุกวัน",
+        "มุมมองนี้มีค่า - แบ่งปันบ่อยขึ้น",
+        "เชื่อในความสามารถในการสร้างการเปลี่ยนแปลงที่มีความหมาย",
+        "จดจำว่าทำไมคุณถึงเริ่มต้นการเดินทางนี้ในตอนแรก",
+        "ทุกวันนำเสนอการเริ่มต้นใหม่ทั้งหมด",
+        "ความยืดหยุ่นนี้สร้างแรงบันดาลใจให้ผู้อื่นมากกว่าที่คุณตระหนัก",
+        "ใช้เวลาเฉลิมฉลองชัยชนะเล็กๆ ตลอดทาง",
+        "ทุกความท้าทายที่เผชิญเสริมสร้างอุปนิสัยอย่างลึกซึ้ง",
+        "จักรวาลสนับสนุนเส้นทางที่แท้จริงนี้อย่างเต็มที่",
+        "เมื่อความเป็นตัวของตัวเองนำทาง คุณจะส่องประกายสว่างที่สุด",
+        "โลกต้องการการมีส่วนร่วมที่เป็นเอกลักษณ์ที่มีเพียงคุณเท่านั้นที่สามารถให้ได้",
+        "ให้งานที่มีความหมายพูดด้วยตัวเอง โดยไม่ต้องการคำอธิบาย",
+        "ความพยายามที่ต่อเนื่องเปลี่ยนเป็นความยิ่งใหญ่เมื่อเวลาผ่านไป",
+        "สิ่งที่ดูเหมือนเป็นไปไม่ได้ในวันนี้จะกลายเป็นความเป็นจริงในวันพรุ่งนี้",
+        "พลังภายในมีมากกว่าความท้าทายใดๆ ที่อยู่ข้างหน้า",
+        "การเดินทางนี้สร้างแรงบันดาลใจให้กับคนมากกว่าที่คุณรู้",
+        "อุปสรรคเป็นเพียงการเปลี่ยนทิศทางไปสู่เส้นทางที่ดีกว่า",
+        "ความลึกของอุปนิสัยปรากฏชัดเจนที่สุดในช่วงเวลาที่ยากลำบาก",
+        "การเติบโตเกิดขึ้นนอกโซนสบาย ไม่ใช่ภายใน",
+        "แม้แต่ความก้าวหน้าเล็กๆ ก็คู่ควรกับการเฉลิมฉลองและการยอมรับ",
+        "มุ่งเน้นไปที่ 'ทำไม' ส่วนตัวของคุณในช่วงเวลาที่ยากลำบาก",
+        "การเลือกในชีวิตประจำวันสร้างมรดกที่ยั่งยืนที่คู่ควรกับการจดจำ",
+        "บทเรียนที่เรียนรู้ในตอนนี้จะรับใช้คุณในนับไม่ถ้วนวิธีตลอดไป",
+        "อย่าประเมินผลกระทบของความกรุณาต่อผู้อื่นต่ำไป",
+        "เสียงที่แท้จริงสั่นสะเทือนกับผู้ที่ต้องการได้ยิน",
+        "ความท้าทายที่เอาชนะในวันนี้สร้างความแข็งแกร่งสำหรับการทดสอบในวันพรุ่งนี้",
+        "อดีตไม่ได้กำหนดศักยภาพในอนาคตหรือความเป็นไปได้",
+        "ทุกก้าวไปข้างหน้า ไม่ว่าจะเล็กแค่ไหน ก็สร้างแรงผลักดัน",
+        "วิธีการที่เป็นเอกลักษณ์กลายเป็นข้อได้เปรียบในการแข่งขันที่คนอื่นขาด",
+        "เชื่อว่าตำแหน่งปัจจุบันของคุณคือที่ที่การเติบโตต้องเกิดขึ้น",
+        "ความสำเร็จที่ยิ่งใหญ่ที่สุดมักจะตามหลังการเอาชนะความท้าทายที่ยิ่งใหญ่ที่สุด",
+        "เรื่องราวนี้ยังคงเขียนบทที่น่าตื่นเต้นข้างหน้า",
+        "จักรวาลสนับสนุนความฝันที่ไล่ตามอย่างแท้จริง",
+        "ทรัพยากรที่ทรงพลังที่สุดยังคงเป็นความเชื่อมั่นที่ไม่สั่นคลอนในตัวเอง",
+        "อิทธิพลของคุณต่อผู้อื่นเกินขอบเขตที่วัดได้",
+        "ข้อจำกัดในปัจจุบันเป็นเพียงชั่วคราว ในขณะที่ศักยภาพยังคงไม่มีที่สิ้นสุด",
+        "การยอมรับที่สำคัญที่สุดมาจากภายใน ไม่ใช่ภายนอก",
+        "สัญชาตญาณเป็นเข็มทิศภายในที่ชี้ไปทางทิศเหนือที่แท้จริง",
+        "วินัยในวันนี้สร้างเสรีภาพและโอกาสในวันพรุ่งนี้",
+        "ทุกประสบการณ์เพิ่มความลึกให้กับอุปนิสัยและปัญญา",
+        "จุดประสงค์ของชีวิตคลี่คลายผ่านความสุขและความยากลำบากอย่างเท่าเทียมกัน",
+        "วิธีที่คุณจัดการกับความทุกข์ยากเปิดเผยพลังของอุปนิสัยที่แท้จริง",
+        "ความเป็นเอกลักษณ์กลายเป็นข้อได้เปรียบในการแข่งขันที่ยิ่งใหญ่ที่สุดในชีวิต",
+        "อนุญาตให้ความฝันและเป้าหมายพัฒนาตามธรรมชาติเมื่อคุณเติบโตเป็นส่วนตัว",
+        "คำมั่นสัญญาในการเติบโตได้เปลี่ยนผลลัพธ์ในอนาคตในเชิงบวกแล้ว",
+        "อย่าประเมินว่าความสม่ำเสมอสามารถนำเป้าหมายที่มีค่าไปได้ไกลแค่ไหนต่ำไป",
+        "ความมุ่งมั่นเหนือกว่าความผิดหวังชั่วคราวใดๆ",
+        "เส้นทางที่ถูกต้องไม่ใช่เสมอไปที่ง่ายที่สุด แต่ยังคงมีค่ามากที่สุด",
+        "ความกล้าหาญที่จะเริ่มต้นสร้างแรงบันดาลใจให้ผู้อื่นเริ่มการเดินทางของตัวเอง",
+        "การเลือกที่จะเติบโตแทนที่จะสบายจะขยายศักยภาพของคุณเป็นทวีคูณ",
+        "ศักยภาพสูงสุดของคุณรออยู่ที่ขอบของโซนสบาย",
+        "ทุกความท้าทายเตรียมคุณสำหรับสิ่งที่ยิ่งใหญ่กว่าที่รออยู่ที่ขอบฟ้า"
+      ];
+      
+      const professionMotivations = {
+        "นักดนตรี": [
+          "พรสวรรค์ทางดนตรีของคุณนำความกลมกลืนมาสู่โลกที่วุ่นวายที่ค้นหาสันติภาพ",
+          "ทุกโน้ตที่คุณเล่นก้องกังวานกับจิตวิญญาณที่ต้องการการปลอบโยน",
+          "ทำนองเหล่านี้มีพลังที่จะรักษาและเปลี่ยนแปลงหัวใจที่แตกสลาย",
+          "การแสดงออกทางศิลปะสื่อสารความจริงสากลที่คำพูดไม่สามารถถ่ายทอดได้",
+          "ดนตรีภายในคุณคู่ควรที่จะได้รับการได้ยินจากผู้ชมที่รออยู่"
+        ],
+        "แร็ปเปอร์": [
+          "คำพูดที่เป็นกวีของคุณวาดภาพเรื่องราวที่ทรงพลังที่ต้องการการบอกเล่าอย่างกล้าหาญ",
+          "การไหลและจังหวะนี้จับความรู้สึกที่คำพูดธรรมดาไม่สามารถสื่อสารได้",
+          "บทกวีเหล่านี้ให้เสียงแก่ประสบการณ์ที่หลายคนรู้สึกแต่ไม่สามารถแสดงออกได้",
+          "เสียงที่แท้จริงก้องกังวานกับผู้แสวงหาความจริงในทุกชุมชน",
+          "ความสามารถในการใช้คำพูดเปิดหัวใจและความคิดให้มุมมองใหม่"
+        ],
+        "นักฟุตบอล": [
+          "การอุทิศตนในสนามสร้างแรงบันดาลใจให้เกิดการทำงานเป็นทีมที่เกินกว่าเกม",
+          "วินัยในกีฬาเปลี่ยนไปสู่ทุกด้านของชีวิตอย่างไร้รอยต่อ",
+          "ความคิดเชิงกลยุทธ์ในสนามแสดงให้เห็นถึงความเป็นผู้นำโดยธรรมชาติ",
+          "ความหลงใหลในเกมที่สวยงามนี้ยกระดับผู้ที่ดูและมีส่วนร่วม",
+          "น้ำใจนักกีฬาตั้งมาตรฐานสำหรับผู้อื่นในการติดตามและเคารพ"
+        ],
+        "นักบาสเกตบอล": [
+          "วิสัยทัศน์ในสนามเปลี่ยนเป็นการมองเห็นโอกาสในทุกเกมของชีวิต",
+          "การแสดงภายใต้ความกดดันมีประโยชน์ในทุกความท้าทายที่คุณเผชิญ",
+          "จิตใจที่คิดถึงทีมก่อนสร้างความสำเร็จในทุกความสัมพันธ์ที่คุณสร้าง",
+          "ความสามารถในการกระโดดสูงคู่ขนานกับความทะเยอทะยานในการไปถึงความสูงใหม่ที่น่าประทับใจ",
+          "แรงขับเคลื่อนในการป้องกันแสดงให้เห็นถึงความมุ่งมั่นในความเป็นเลิศในทุกสิ่ง"
+        ],
+        "นักมวย": [
+          "ความยืดหยุ่นทางจิตใจน่าประทับใจพอๆ กับพละกำลังทางกายภาพที่แสดงออก",
+          "วินัยในการฝึกสะท้อนถึงอุปนิสัยในทุกสภาพแวดล้อมของชีวิต",
+          "การรับผลกระทบและเดินหน้าต่อกลายเป็นพลังพิเศษในชีวิต",
+          "การวางเท้าในสังเวียนสะท้อนถึงความสามารถในการนำทางความท้าทายของชีวิต",
+          "จิตวิญญาณของนักสู้ไม่เคยถอยห่างจากความท้าทายที่มีค่า"
+        ],
+        "นักเรียน": [
+          "ความอยากรู้อยากเห็นเปิดประตูสู่ความเป็นไปได้และการค้นพบที่ไม่มีที่สิ้นสุด",
+          "ความมุ่งมั่นในการเรียนรู้ขยายไปสู่บทต่างๆ มากมายของชีวิต",
+          "มุมมองที่สดใหม่นำความเข้าใจใหม่มาสู่ปัญหาเก่าที่ต้องการการแก้ไข",
+          "การเดินทางทางการศึกษาเตรียมคุณสำหรับโอกาสที่ยังมองไม่เห็น",
+          "วินัยทางวิชาการเลี้ยงดูนิสัยที่รับประกันความสำเร็จตลอดชีวิต"
+        ],
+        "ครู": [
+          "อิทธิพลของคุณขยายไปไกลเกินกำแพงห้องเรียน ลึกเข้าไปในอนาคตที่มองไม่เห็น",
+          "ความอดทนบ่มเพาะศักยภาพที่คนอื่นอาจพลาดหรือมองข้าม",
+          "การนำทางที่ปั้นอนาคตไม่เคยได้รับการชื่นชมหรือวัดผลอย่างเพียงพอ",
+          "เมล็ดพันธุ์แห่งปัญญาที่คุณปลูกเบ่งบานหลายชั่วอายุคนหลังจากบทเรียนวันนี้",
+          "การอุทิศตนเพื่อความรู้สร้างระลอกคลื่นแห่งการเปลี่ยนแปลงในทางบวกในทุกที่"
+        ],
+        "ผู้สร้างเนื้อหา TikTok": [
+          "เนื้อหาที่สร้างสรรค์นำความสุขและการเชื่อมต่อมาสู่ภูมิทัศน์ดิจิทัลของเรา",
+          "เสียงที่แท้จริงแตะต้องผู้ที่ต้องการข้อความนี้ในขณะนี้",
+          "การสื่อสารที่กระชับแสดงให้เห็นถึงการรู้จักทักษะที่หายากและมีค่า",
+          "อิทธิพลทางวัฒนธรรมนำผู้ชมทั่วโลกไปสู่การเปลี่ยนแปลงในทางบวก",
+          "การมีอยู่ในโลกดิจิทัลสร้างผลกระทบในโลกจริงเกินกว่าข้อจำกัดของหน้าจอ"
+        ],
+        "ผู้ประกอบการ": [
+          "ความคิดที่มองการณ์ไกลสร้างโอกาสในที่ที่คนอื่นเห็นเพียงอุปสรรค",
+          "การเสี่ยงอย่างคำนวณแยกนักนวัตกรรมที่แท้จริงออกจากผู้ติดตาม",
+          "วิธีแก้ปัญหาที่เป็นนวัตกรรมแก้ไขสาเหตุพื้นฐานของปัญหาอย่างมีประสิทธิภาพ",
+          "ความเป็นผู้นำสร้างแรงบันดาลใจให้ผู้อื่นเข้าร่วมภารกิจที่มีความหมายที่คู่ควรแก่การติดตาม",
+          "ความพากเพียรในการเผชิญกับความท้าทายกำหนดเรื่องราวความสำเร็จของผู้ประกอบการ"
+        ],
+        "หมอ": [
+          "มือที่เยียวยานำความสบายใจมาให้ผู้ป่วยเมื่อพวกเขาต้องการมากที่สุด",
+          "ความมุ่งมั่นในการดูแลสุขภาพเปลี่ยนชีวิตทุกวันในวิธีที่ลึกซึ้ง",
+          "ความรู้ทางการแพทย์ผสมผสานกับความเห็นอกเห็นใจสร้างช่วงเวลาแห่งการเยียวยาที่แท้จริง",
+          "การอุทิศตนเพื่อการดูแลผู้ป่วยเป็นตัวอย่างของการเรียกร้องทางวิชาชีพในระดับสูงสุด",
+          "ทักษะการวินิจฉัยสมดุลกับหัวใจที่เมตตา"
+        ],
+        "วิศวกร": [
+          "ความสามารถในการแก้ปัญหาสร้างวิธีแก้ปัญหาที่ปรับปรุงชีวิตนับไม่ถ้วน",
+          "ความเชี่ยวชาญทางเทคนิควางรากฐานสำหรับนวัตกรรมในอนาคต",
+          "ความคิดเชิงวิเคราะห์เห็นรูปแบบในระบบที่ซับซ้อนที่คนอื่นพลาดอย่างสิ้นเชิง",
+          "ความแม่นยำและความใส่ใจในรายละเอียดรับประกันคุณภาพของทุกสิ่งที่สร้าง",
+          "วิธีการที่เป็นนวัตกรรมผลักดันทั้งสาขาวิชาให้ก้าวไปข้างหน้า"
+        ],
+        "นักพัฒนาซอฟต์แวร์": [
+          "โค้ดสร้างความเป็นไปได้ที่ไม่มีอยู่ก่อนการดำเนินการ",
+          "วิธีแก้ปัญหาทางเทคนิคแก้ไขปัญหาของมนุษย์ที่แท้จริงที่สังคมเผชิญ",
+          "ความคิดเชิงตรรกะผสมผสานกับนวัตกรรมเชิงสร้างสรรค์อย่างสมบูรณ์แบบ",
+          "การสร้างดิจิทัลมีอิทธิพลต่อผู้ใช้นับไม่ถ้วนในทุกแพลตฟอร์มทุกวัน",
+          "การเรียนรู้เทคโนโลยีใหม่รักษาความเป็นมืออาชีพชั้นนำ"
+        ],
+        "ศิลปิน": [
+          "วิสัยทัศน์เชิงสร้างสรรค์แสดงให้ผู้อื่นเห็นวิธีใหม่ในการมองโลกที่คุ้นเคย",
+          "การแสดงออกทางศิลปะสัมผัสความรู้สึกที่ภาษาไม่สามารถเข้าถึงได้",
+          "มุมมองที่เป็นเอกลักษณ์เพิ่มความงามให้กับประสบการณ์ในชีวิตประจำวันของผู้ชม",
+          "งานสร้างสรรค์ข้ามขอบเขตเพื่อสร้างการสนทนาที่สำคัญ",
+          "ความกล้าทางศิลปะสร้างแรงบันดาลใจให้ผู้อื่นแสดงความจริงของตนอย่างแท้จริง"
+        ],
+        "พยาบาล": [
+          "การดูแลด้วยความเห็นอกเห็นใจรักษามากกว่าแค่การเจ็บป่วยทางกาย",
+          "ความตั้งใจที่ละเอียดอ่อนสังเกตเห็นรายละเอียดในการดูแลผู้ป่วยที่คนอื่นอาจพลาด",
+          "การมีอยู่ที่สงบให้ความสบายใจในช่วงเวลาทางการแพทย์ที่ยากลำบาก",
+          "การอุทิศตนทำให้เกิดความแตกต่างสำหรับผู้ป่วยนับไม่ถ้วนในทุกกะ",
+          "ความสมดุลของทักษะทางเทคนิคและความอบอุ่นของมนุษย์พิสูจน์แล้วว่าไม่มีค่า"
+        ],
+        "นักเขียน": [
+          "คำพูดสร้างโลกในหัวใจของผู้อ่านที่รอการสำรวจ",
+          "การเล่าเรื่องเชื่อมโยงผู้คนที่มีประสบการณ์ที่แตกต่างกันอย่างสิ้นเชิง",
+          "วาทศิลป์ให้เสียงแก่ผู้ที่ต่อสู้เพื่อแสดงออกอย่างชัดเจน",
+          "ข้อมูลเชิงลึกที่เขียนนำเสนอมุมมองใหม่เกี่ยวกับความท้าทายที่คุ้นเคย",
+          "งานฝีมือทางวรรณกรรมรักษาความจริงที่สำคัญสำหรับคนรุ่นต่อไป"
+        ],
+        "ทนายความ": [
+          "การสนับสนุนนำความยุติธรรมมาสู่ผู้ที่ต้องการเสียงในระบบที่ซับซ้อน",
+          "ความคิดเชิงวิเคราะห์นำทางความท้าทายทางกฎหมายด้วยความแม่นยำที่น่าประทับใจ",
+          "ความมุ่งมั่นต่อหลักการทางกฎหมายเสริมสร้างรากฐานของสังคม",
+          "การโต้แย้งที่น่าเชื่อถือเปลี่ยนผลลัพธ์สำหรับลูกความที่แสวงหาความยุติธรรม",
+          "วิธีการทางจริยธรรมในการปฏิบัติกฎหมายกำหนดมาตรฐานสำหรับวิชาชีพ"
+        ],
+        "เชฟ": [
+          "การสร้างสรรค์ในการทำอาหารนำความสุขผ่านประสาทสัมผัสทั้งหมดให้กับผู้ทานที่ชื่นชม",
+          "อาหารเชื่อมโยงผู้คนตามโต๊ะอาหารและภูมิหลังทางวัฒนธรรมที่แตกต่างกัน",
+          "การผสมผสานรสชาติแสดงให้เห็นถึงสัญชาตญาณทางศิลปะและทักษะทางเทคนิค",
+          "การอุทิศตนเพื่อส่วนผสมคุณภาพเคารพทั้งประเพณีและนวัตกรรม",
+          "ความเป็นผู้นำในครัวดึงเอาสิ่งที่ดีที่สุดจากทีมทำอาหารทั้งหมด"
+        ],
+        "นักบัญชี": [
+          "ความเชี่ยวชาญทางการเงินให้ความมั่นคงและความสงบใจแก่ลูกค้า",
+          "ความใส่ใจในรายละเอียดจับสิ่งที่คนอื่นจะพลาดอย่างแน่นอน",
+          "ทักษะการวิเคราะห์นำความชัดเจนมาสู่สถานการณ์ทางการเงินที่ซับซ้อน",
+          "ความซื่อสัตย์ทางวิชาชีพรับประกันความไว้วางใจในทุกความสัมพันธ์ทางธุรกิจ",
+          "ความสามารถในการจัดระเบียบสร้างความเป็นระเบียบเรียบร้อยจากความซับซ้อนทางการเงิน"
+        ],
+        "นักออกแบบ": [
+          "วิธีแก้ปัญหาทางสายตาผสมผสานความสวยงามกับการทำงานอย่างไร้รอยต่อ",
+          "ความคิดในการออกแบบเปลี่ยนประสบการณ์ของผู้ใช้ในวิธีที่มีความหมาย",
+          "ความรู้สึกทางสุนทรียศาสตร์ยกระดับวัตถุและการโต้ตอบในชีวิตประจำวัน",
+          "กระบวนการสร้างสรรค์สร้างสมดุลระหว่างนวัตกรรมกับการใช้งานที่จำเป็น",
+          "ภาษาในการออกแบบสื่อสารอย่างมีประสิทธิภาพข้ามอุปสรรค"
+        ],
+        "ตำรวจ": [
+          "ความมุ่งมั่นในความปลอดภัยสาธารณะทำให้ชุมชนแข็งแกร่งขึ้นอย่างเห็นได้ชัด",
+          "ความกล้าหาญในสถานการณ์ที่ท้าทายปกป้องพลเมืองที่เปราะบาง",
+          "การตัดสินใจอย่างรวดเร็วภายใต้ความกดดันแสดงให้เห็นถึงความสงบนิ่งที่ยอดเยี่ยม",
+          "การอุทิศตนเพื่อความยุติธรรมนำทางพฤติกรรมทางวิชาชีพอย่างสม่ำเสมอ",
+          "การมีอยู่นำความรู้สึกปลอดภัยมาสู่สถานการณ์ตึงเครียดที่ต้องการการแทรกแซง"
+        ],
+        "นักดับเพลิง": [
+          "ความกล้าหาญในสถานการณ์อันตรายช่วยชีวิตและทรัพย์สินอันมีค่า",
+          "ความคิดที่รวดเร็วภายใต้ความกดดันสูงแสดงให้เห็นถึงทักษะที่ยอดเยี่ยม",
+          "การเตรียมความพร้อมทั้งทางร่างกายและจิตใจทำให้การตอบสนองฉุกเฉินที่กล้าหาญเป็นไปได้",
+          "การทำงานเป็นทีมในสถานการณ์วิกฤตแสดงให้เห็นถึงความร่วมมือของมนุษย์ในรูปแบบที่ดีที่สุด",
+          "ความมุ่งมั่นในความปลอดภัยของชุมชนขยายไปไกลเกินกว่าเหตุการณ์ฉุกเฉิน"
+        ],
+        "ทหาร": [
+          "การรับใช้แสดงให้เห็นถึงความมุ่งมั่นสูงสุดในการปกป้องผู้อื่น",
+          "วินัยในสภาวะที่ท้าทายกำหนดมาตรฐานแห่งความเป็นเลิศ",
+          "ความคิดเชิงกลยุทธ์สร้างสมดุลระหว่างวัตถุประสงค์ของภารกิจกับความปลอดภัยของทีม",
+          "ความสามารถในการปรับตัวให้เข้ากับสถานการณ์ที่เปลี่ยนแปลงรับประกันความสำเร็จของภารกิจเสมอ",
+          "ความจงรักภักดีต่อหน่วยสร้างพันธะที่เกินกว่ามิตรภาพธรรมดา"
+        ],
+        "นักข่าว": [
+          "การแสวงหาความจริงนำความชัดเจนมาสู่ยุคสมัยที่วุ่นวายและซับซ้อน",
+          "การเล่าเรื่องช่วยให้ผู้ชมเข้าใจประเด็นที่ซับซ้อนและสำคัญ",
+          "ทักษะการสืบสวนเปิดเผยสิ่งที่ต้องการการมองเห็นอย่างเร่งด่วน",
+          "ความมุ่งมั่นต่อข้อเท็จจริงสร้างสมดุลให้กับระบบนิเวศของข้อมูลอย่างมีความรับผิดชอบ",
+          "เสียงของสื่อเพิ่มมุมมองที่สำคัญให้กับการสนทนาสาธารณะ"
+        ],
+        "นักจิตวิทยา": [
+          "การรับฟังด้วยความเห็นอกเห็นใจสร้างพื้นที่ปลอดภัยสำหรับการเยียวยาที่จำเป็น",
+          "ข้อมูลเชิงลึกช่วยให้ลูกค้านำทางภูมิทัศน์ภายในของพวกเขาอย่างมีประสิทธิภาพ",
+          "วิธีการบำบัดสร้างสมดุลระหว่างความเห็นอกเห็นใจกับการปฏิบัติตามหลักฐาน",
+          "การนำทางอย่างอดทนช่วยให้ผู้อื่นค้นพบวิธีแก้ปัญหาของตัวเอง",
+          "ขอบเขตทางวิชาชีพทำให้ความสัมพันธ์ในการรักษาต่อเนื่องเป็นไปได้"
+        ],
+        "ครู": [
+          "การนำทางปั้นอนาคตเกินกว่าสิ่งที่สามารถมองเห็นได้ทันที",
+          "ความอดทนต่อกระบวนการเรียนรู้ช่วยให้การเติบโตคลี่คลายอย่างเป็นธรรมชาติ",
+          "ความสามารถในการอธิบายแนวคิดที่ซับซ้อนทำให้ความรู้เข้าถึงได้",
+          "การจัดการชั้นเรียนสร้างพื้นที่ปลอดภัยสำหรับการสำรวจทางปัญญา",
+          "การตระหนักถึงรูปแบบการเรียนรู้ที่แตกต่างกันสัมผัสกับนักเรียนแต่ละคนอย่างเป็นเอกลักษณ์"
+        ],
+        "โปรแกรมเมอร์": [
+          "ทักษะการเขียนโค้ดเปลี่ยนแนวคิดที่เป็นนามธรรมให้เป็นความเป็นจริงที่ใช้งานได้",
+          "วิธีการแก้ปัญหาแยกความท้าทายที่ซับซ้อนออกเป็นส่วนที่จัดการได้",
+          "ความใส่ใจในรายละเอียดป้องกันภาวะแทรกซ้อนในอนาคตในโค้ดที่ซับซ้อน",
+          "การเรียนรู้อย่างต่อเนื่องรักษาทักษะที่เกี่ยวข้องในสาขาที่เปลี่ยนแปลงอย่างรวดเร็ว",
+          "ความคิดสร้างสรรค์ทางเทคนิคพบวิธีแก้ปัญหาที่สง่างามสำหรับปัญหาที่ยาก"
+        ]
+      };
+      
+      const monthTraits = [
+        "การเกิดในเดือนมกราคมมอบคุณลักษณะความเป็นผู้นำตามธรรมชาติและความมุ่งมั่นที่มุ่งเน้น",
+        "การเกิดในเดือนกุมภาพันธ์มอบความเข้าใจที่เป็นสัญชาตญาณและวิสัยทัศน์ด้านมนุษยธรรม",
+        "การเกิดในเดือนมีนาคมให้ความคิดสร้างสรรค์ที่เต็มไปด้วยจินตนาการและความยืดหยุ่นที่ยืดหยุ่น",
+        "การเกิดในเดือนเมษายนมอบความพากเพียนที่มั่นคงและความคิดริเริ่มที่กล้าหาญ",
+        "การเกิดในเดือนพฤษภาคมมอบทักษะการสื่อสารที่โน้มน้าวและความรู้สึกที่ใช้งานได้",
+        "การเกิดในเดือนมิถุนายนให้ความอเนกประสงค์ที่ปรับตัวได้และความฉลาดทางอารมณ์",
+        "การเกิดในเดือนกรกฎาคมมอบความเห็นอกเห็นใจที่เข้าอกเข้าใจและสัญชาตญาณการเลี้ยงดูเชิงป้องกัน",
+        "การเกิดในเดือนสิงหาคมมอบเสน่ห์ที่เป็นแม่เหล็กและความมั่นใจที่ใจกว้าง",
+        "การเกิดในเดือนกันยายนให้ความแม่นยำในการวิเคราะห์และความสามารถในการจัดระเบียบที่มีระเบียบ",
+        "การเกิดในเดือนตุลาคมมอบมุมมองที่สมดุลและการประสานทางการทูต",
+        "การเกิดในเดือนพฤศจิกายนให้ความเข้าใจที่ลึกซึ้งและความเข้มข้นที่เปลี่ยนแปลง",
+        "การเกิดในเดือนธันวาคมมอบการมองโลกในแง่ดีที่มองการณ์ไกลและปัญญาเชิงปรัชญา"
+      ];
+      
+      let selectedTrait;
+      
+      if (profession && professionMotivations[profession] && Math.random() < 0.25) {
+        const profMotivations = professionMotivations[profession];
+        selectedTrait = profMotivations[Math.floor(Math.random() * profMotivations.length)];
+      } 
+      else if (dob && Math.random() < 0.2) {
+        selectedTrait = monthTraits[month];
+      }
+      else {
+        selectedTrait = lifeTraits[Math.floor(Math.random() * lifeTraits.length)];
+      }
+      
+      const encourageIndex = Math.floor(Math.random() * lifeEncouragements.length);
+      
+      return selectedTrait + " " + lifeEncouragements[encourageIndex];
+    }
+
+    function generateFlowerCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    }
+
+    function getRandomSubject() {
+      let availableSubjects = Object.keys(subjectDictionary).filter(subject => !seenSubjects.includes(subject));
+      
+      if (availableSubjects.length === 0) {
+        seenSubjects = [];
+        availableSubjects = Object.keys(subjectDictionary);
+      }
+      
+      const randomIndex = Math.floor(Math.random() * availableSubjects.length);
+      const selectedSubject = availableSubjects[randomIndex];
+      
+      seenSubjects.push(selectedSubject);
+      
+      return selectedSubject;
+    }
+
+    function updateFlowerDisplay() {
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      const motivationElement = document.getElementById('monthlyMotivation');
+      
+      if (!flowerCodeElement || !motivationElement) {
+        console.error("ไม่พบองค์ประกอบที่ต้องการใน DOM");
+        return;
+      }
+      
+      let subject = localStorage.getItem('flowerSubject');
+      if (!subject) {
+        subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+      }
+      
+      const formattedName = formatUserName(userFullName);
+      
+      if (formattedName) {
+        flowerCodeElement.innerHTML = `ดอกไม้ของฉัน - ${subject} / ${formattedName}`;
+      } else {
+        flowerCodeElement.textContent = "ดอกไม้ของฉัน - " + subject;
+      }
+      
+      if (!currentMotivation) {
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+      }
+      
+      motivationElement.textContent = currentMotivation;
+      
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (captureCode) {
+        if (formattedName) {
+          captureCode.innerHTML = `ดอกไม้ของฉัน - ${subject} / ${formattedName}`;
+        } else {
+          captureCode.textContent = "ดอกไม้ของฉัน - " + subject;
+        }
+      }
+      
+      if (captureMotivation) captureMotivation.textContent = currentMotivation;
+      
+      return currentMotivation;
+    }
+
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function removeCookie(name) {
+      document.cookie = name + "=; Max-Age=-99999999; path=/";
+    }
+
+    function setTheme(theme) {
+      document.body.classList.remove('theme-default', 'theme-red-black', 'theme-green-blue', 'theme-orange-pink', 'theme-yellow-purple');
+      
+      document.body.classList.add('theme-' + theme);
+      
+      currentTheme = theme;
+      
+      localStorage.setItem('preferredTheme', theme);
+      setCookie('preferredTheme', theme, 365);
+      
+      const options = document.querySelectorAll('.style-option');
+      options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.theme === theme) {
+          option.classList.add('selected');
+        }
+      });
+      
+      updateCaptureStyles(theme);
+      
+      let themeColor = '#1A2E4D';
+      switch(theme) {
+        case 'red-black':
+          themeColor = '#000000';
+          break;
+        case 'green-blue':
+          themeColor = '#1A2E4D';
+          break;
+        case 'orange-pink':
+        case 'yellow-purple':
+          themeColor = '#4B0082';
+          break;
+        case 'default':
+          themeColor = '#FFFFFF';
+          break;
+      }
+      
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
+      document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content', theme === 'default' ? 'default' : 'black-translucent');
+    }
+    
+    function updateCaptureStyles(theme) {
+      const captureContainer = document.getElementById('flowerCaptureContainer');
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureHeader = document.getElementById('captureFlowerHeader');
+      const captureWebsiteUrl = document.querySelector('.capture-website-url');
+      const captureLogo = document.querySelector('.gz-logo');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (!captureContainer || !captureCode || !captureHeader || !captureWebsiteUrl || 
+          !captureLogo || !captureMotivation) {
+        console.error("ไม่พบองค์ประกอบการจับภาพหนึ่งหรือหลายองค์ประกอบ");
+        return;
+      }
+      
+      captureContainer.style.borderColor = '';
+      captureCode.style.borderColor = '';
+      captureCode.style.color = '';
+      captureCode.style.backgroundColor = '';
+      captureHeader.style.color = '';
+      captureWebsiteUrl.style.color = '';
+      captureLogo.style.color = '';
+      captureLogo.style.borderColor = '';
+      captureMotivation.style.color = '';
+      captureMotivation.style.backgroundColor = '';
+      captureMotivation.style.borderColor = '';
+      
+      switch(theme) {
+        case 'red-black':
+          captureContainer.style.borderColor = '#8B0000';
+          captureContainer.style.backgroundColor = 'black';
+          captureCode.style.borderColor = '#FF4500';
+          captureCode.style.color = '#FF4500';
+          captureCode.style.backgroundColor = 'black';
+          captureHeader.style.color = '#FF4500';
+          captureWebsiteUrl.style.color = '#FF4500';
+          captureLogo.style.color = '#FF4500';
+          captureLogo.style.borderColor = '#FF4500';
+          captureMotivation.style.color = '#E5E5E5';
+          captureMotivation.style.backgroundColor = 'black';
+          captureMotivation.style.borderColor = '#FF4500';
+          break;
+          
+        case 'green-blue':
+          captureContainer.style.borderColor = '#3EB489';
+          captureContainer.style.backgroundColor = '#1A2E4D';
+          captureCode.style.borderColor = '#3EB489';
+          captureCode.style.color = '#3EB489';
+          captureCode.style.backgroundColor = '#36454F';
+          captureHeader.style.color = '#3EB489';
+          captureWebsiteUrl.style.color = '#3EB489';
+          captureLogo.style.color = '#3EB489';
+          captureLogo.style.borderColor = '#3EB489';
+          captureMotivation.style.color = '#F5F5F5';
+          captureMotivation.style.backgroundColor = '#1A2E4D';
+          captureMotivation.style.borderColor = '#3EB489';
+          break;
+          
+        case 'orange-pink':
+          captureContainer.style.borderColor = '#FF7F50';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FF7F50';
+          captureCode.style.color = '#FF7F50';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FF7F50';
+          captureWebsiteUrl.style.color = '#FF7F50';
+          captureLogo.style.color = '#FF7F50';
+          captureLogo.style.borderColor = '#FF7F50';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FF7F50';
+          break;
+          
+        case 'yellow-purple':
+          captureContainer.style.borderColor = '#FFD700';
+          captureContainer.style.backgroundColor = '#4B0082';
+          captureCode.style.borderColor = '#FFD700';
+          captureCode.style.color = '#FFD700';
+          captureCode.style.backgroundColor = '#6A0DAD';
+          captureHeader.style.color = '#FFD700';
+          captureWebsiteUrl.style.color = '#FFD700';
+          captureLogo.style.color = '#FFD700';
+          captureLogo.style.borderColor = '#FFD700';
+          captureMotivation.style.color = '#FFFFFF';
+          captureMotivation.style.backgroundColor = '#4B0082';
+          captureMotivation.style.borderColor = '#FFD700';
+          break;
+          
+        default:
+          captureContainer.style.borderColor = '#007bff';
+          captureContainer.style.backgroundColor = 'white';
+          captureCode.style.borderColor = '#ff69b4';
+          captureCode.style.color = '#ff69b4';
+          captureCode.style.backgroundColor = '#fff0f8';
+          captureHeader.style.color = '#007bff';
+          captureWebsiteUrl.style.color = '#007bff';
+          captureLogo.style.color = '#007bff';
+          captureLogo.style.borderColor = '#007bff';
+          captureMotivation.style.color = '#333';
+          captureMotivation.style.backgroundColor = 'white';
+          captureMotivation.style.borderColor = '#ff69b4';
+      }
+    }
+
+    function authenticateAnonymously() {
+      return new Promise((resolve, reject) => {
+        auth.signInAnonymously()
+          .then((userCredential) => {
+            console.log("ผู้ใช้ได้รับการตรวจสอบความถูกต้องแบบไม่ระบุชื่อ:", userCredential.user.uid);
+            userUid = userCredential.user.uid;
+            isAuthenticated = true;
+            resolve(userCredential.user);
+          })
+          .catch((error) => {
+            console.error("ข้อผิดพลาดในการตรวจสอบความถูกต้อง:", error);
+            reject(error);
+          });
+      });
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        userUid = user.uid;
+        isAuthenticated = true;
+        console.log("สถานะการตรวจสอบความถูกต้องเปลี่ยนแปลง: ผู้ใช้เข้าสู่ระบบ", user.uid);
+      } else {
+        isAuthenticated = false;
+        console.log("สถานะการตรวจสอบความถูกต้องเปลี่ยนแปลง: ผู้ใช้ออกจากระบบ");
+      }
+    });
+
+    async function submitToFirebase() {
+      try {
+        if (!isAuthenticated) {
+          console.log("ผู้ใช้ไม่ได้รับการตรวจสอบความถูกต้อง กำลังตรวจสอบความถูกต้อง...");
+          await authenticateAnonymously();
+        }
+        
+        const location = await detectUserLocation();
+        
+        const userData = {
+          date: new Date().toISOString(),
+          country: location.country || "ไม่ทราบ",
+          city: location.city || "ไม่ทราบ",
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: shareCount
+        };
+
+        console.log("ส่งข้อมูลไปยัง Firebase:", userData);
+        
+        try {
+          const newEntryRef = database.ref('birthdates').push(userData);
+          console.log("ข้อมูลส่งไปยังฐานข้อมูลเรียลไทม์:", newEntryRef.key);
+        } catch (dbError) {
+          console.error("ข้อผิดพลาดฐานข้อมูลเรียลไทม์:", dbError);
+        }
+        
+        try {
+          const docRef = await firestore.collection('flowers').add(userData);
+          console.log("เขียนเอกสารไปยัง Firestore, ID: ", docRef.id);
+        } catch (firestoreError) {
+          console.error("ข้อผิดพลาดในการเพิ่มเอกสารไปยัง Firestore: ", firestoreError);
+        }
+        
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).set({
+            ...userData,
+            createdAt: new Date()
+          });
+          console.log("รหัสดอกไม้เพิ่มไปยังคอลเลกชันเฉพาะ");
+        } catch (codeError) {
+          console.error("ข้อผิดพลาดในการเพิ่มรหัสดอกไม้ไปยังคอลเลกชัน: ", codeError);
+        }
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true;
+      } catch (error) {
+        console.error("ข้อผิดพลาดในการส่ง Firebase:", error);
+        const userData = {
+          date: new Date().toISOString(),
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
+          shareCount: 0
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        return true;
+      }
+    }
+
+    async function updateShareCount() {
+      if (!isAuthenticated || !userUniqueId) return;
+      
+      try {
+        shareCount++;
+        
+        const savedData = localStorage.getItem('userFlowerData');
+        if (savedData) {
+          const userData = JSON.parse(savedData);
+          userData.shareCount = shareCount;
+          localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        }
+        
+        await firestore.collection('flowerCodes').doc(userUniqueId).set({
+          shareCount: shareCount,
+          lastShared: new Date().toISOString(),
+          country: currentCountry || "ไม่ทราบ",
+          city: userCity || "ไม่ทราบ",
+          uid: userUid,
+          uniqueId: userUniqueId
+        }, { merge: true });
+        
+        console.log("อัปเดตจำนวนการแชร์:", shareCount);
+      } catch (error) {
+        console.error("ข้อผิดพลาดในการอัปเดตจำนวนการแชร์:", error);
+      }
+    }
+
+    function checkSavedUserData() {
+      const cookieUniqueId = getCookie('userUniqueId');
+      const cookieFlowerCode = getCookie('userFlowerCode');
+      const cookieInstalled = getCookie('isInstalled');
+      const cookieDOB = getCookie('userDateOfBirth');
+      const cookieProfession = getCookie('userProfession');
+      const cookieFullName = getCookie('userFullName');
+      
+      if (cookieUniqueId && cookieFlowerCode) {
+        userUniqueId = cookieUniqueId;
+        userFlowerCode = cookieFlowerCode;
+        userDateOfBirth = cookieDOB || null;
+        userProfession = cookieProfession || null;
+        userFullName = cookieFullName || null;
+        isInstalled = cookieInstalled === 'true';
+        
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+        
+        console.log("พบข้อมูลผู้ใช้ที่บันทึกไว้ในคุกกี้:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName });
+        return true;
+      }
+      
+      const savedData = localStorage.getItem('userFlowerData');
+      if (savedData) {
+        try {
+          const userData = JSON.parse(savedData);
+          userUniqueId = userData.uniqueId;
+          userFlowerCode = userData.flowerCode;
+          userDateOfBirth = userData.dateOfBirth || null;
+          userProfession = userData.profession || null;
+          userFullName = userData.fullName || null;
+          shareCount = userData.shareCount || 0;
+          currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
+          userUid = userData.uid;
+          isInstalled = localStorage.getItem('isInstalled') === 'true';
+          
+          setCookie('userUniqueId', userUniqueId, 365);
+          setCookie('userFlowerCode', userFlowerCode, 365);
+          setCookie('userDateOfBirth', userDateOfBirth, 365);
+          setCookie('userProfession', userProfession, 365);
+          setCookie('userFullName', userFullName, 365);
+          setCookie('isInstalled', 'true', 365);
+          
+          console.log("พบข้อมูลผู้ใช้ที่บันทึกไว้ใน localStorage:", userData);
+          return true;
+        } catch (e) {
+          console.error("ข้อผิดพลาดในการแยกวิเคราะห์ข้อมูลผู้ใช้ที่บันทึกไว้:", e);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    async function deleteUserAccount() {
+      if (!userUniqueId) return false;
+      
+      try {
+        if (!confirm("คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลทั้งหมด? การดำเนินการนี้ไม่สามารถย้อนกลับได้")) {
+          return false;
+        }
+        
+        console.log("กำลังลบบัญชีผู้ใช้:", userUniqueId);
+        
+        try {
+          await firestore.collection('flowerCodes').doc(userUniqueId).delete();
+          console.log("ข้อมูลถูกลบออกจากคอลเลกชัน flowerCodes");
+        } catch (error) {
+          console.error("ข้อผิดพลาดในการลบ flowerCodes:", error);
+        
+
+        }
+        
+        try {
+          const flowersQuery = await firestore.collection('flowers').where('uniqueId', '==', userUniqueId).get();
+          
+          const batch = firestore.batch();
+          let count = 0;
+          
+          flowersQuery.forEach((doc) => {
+            batch.delete(doc.ref);
+            count++;
+          });
+          
+          if (count > 0) {
+            await batch.commit();
+            console.log(`flowers 컬렉션에서 ${count}개 문서 삭제됨`);
+          }
+        } catch (error) {
+          console.error("flowers 삭제 중 오류:", error);
+        }
+        
+        try {
+          const birthdatesRef = database.ref('birthdates');
+          const query = birthdatesRef.orderByChild('uniqueId').equalTo(userUniqueId);
+          
+          query.once('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              birthdatesRef.child(childSnapshot.key).remove();
+            });
+          });
+          
+          console.log("실시간 데이터베이스에서 데이터 삭제됨");
+        } catch (error) {
+          console.error("실시간 데이터베이스에서 삭제 중 오류:", error);
+        }
+        
+        localStorage.removeItem('userFlowerData');
+        localStorage.removeItem('isInstalled');
+        localStorage.removeItem('flowerSubject');
+        localStorage.removeItem('preferredTheme');
+        
+        removeCookie('userUniqueId');
+        removeCookie('userFlowerCode');
+        removeCookie('isInstalled');
+        removeCookie('userDateOfBirth');
+        removeCookie('userProfession');
+        removeCookie('userFullName');
+        removeCookie('preferredTheme');
+        
+        userUniqueId = null;
+        userFlowerCode = null;
+        currentMotivation = null;
+        userDateOfBirth = null;
+        userProfession = null;
+        userFullName = null;
+        isInstalled = false;
+        seenSubjects = [];
+        shareCount = 0;
+        
+        try {
+          if (auth.currentUser) {
+            await auth.currentUser.delete();
+            console.log("Firebase 사용자 삭제됨");
+          }
+        } catch (authError) {
+          console.error("인증 삭제 중 오류:", authError);
+        }
+        
+        console.log("사용자 계정이 완전히 삭제됨");
+        return true;
+      } catch (error) {
+        console.error("계정 삭제 중 오류:", error);
+        return false;
+      }
+    }
+    
+    function createWebAppManifest() {
+      const manifestData = {
+        name: "G-Z 꽃",
+        short_name: "G-Z",
+        description: "당신만의 생명의 꽃을 발견하세요",
+        start_url: window.location.href,
+        display: "standalone",
+        background_color: "#1A2E4D",
+        theme_color: "#1A2E4D",
+        icons: [
+          {
+            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
+            sizes: "192x192",
+            type: "image/webp"
+          },
+          {
+            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
+            sizes: "512x512",
+            type: "image/webp"
+          }
+        ]
+      };
+      
+      const manifestStr = JSON.stringify(manifestData);
+      const manifestBlob = new Blob([manifestStr], {type: 'application/json'});
+      const manifestURL = URL.createObjectURL(manifestBlob);
+      
+      const manifestLink = document.getElementById('manifest-placeholder');
+      if (manifestLink) {
+        manifestLink.setAttribute('href', manifestURL);
+        manifestLink.setAttribute('rel', 'manifest');
+      } else {
+        const link = document.createElement('link');
+        link.id = 'manifest-placeholder';
+        link.rel = 'manifest';
+        link.href = manifestURL;
+        document.head.appendChild(link);
+      }
+    }
+    
+    function setupInstallPrompt() {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        const isInstallPromptShownBefore = localStorage.getItem('installPromptShown');
+        if (!isInstallPromptShownBefore) {
+          setTimeout(() => {
+            document.getElementById('installPrompt').style.display = 'block';
+          }, 3000);
+        }
+      });
+      
+      document.getElementById('installBtn').addEventListener('click', async () => {
+        if (!deferredPrompt) {
+          window.location.href = "https://g-z.online/install.html";
+          return;
+        }
+        
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        
+        if (choiceResult.outcome === 'accepted') {
+          console.log('사용자가 설치 프롬프트를 수락함');
+        } else {
+          console.log('사용자가 설치 프롬프트를 거부함');
+        }
+        
+        deferredPrompt = null;
+        document.getElementById('installPrompt').style.display = 'none';
+        localStorage.setItem('installPromptShown', 'true');
+      });
+      
+      document.getElementById('dismissBtn').addEventListener('click', () => {
+        document.getElementById('installPrompt').style.display = 'none';
+        localStorage.setItem('installPromptShown', 'true');
+      });
+      
+      window.addEventListener('appinstalled', (evt) => {
+        console.log('앱이 설치됨');
+        document.getElementById('installPrompt').style.display = 'none';
+      });
+    }
+
+    window.addEventListener('load', async () => {
+      createWebAppManifest();
+      setupInstallPrompt();
+      
+      const today = new Date();
+      const twoYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+      document.getElementById('dobInput').max = twoYearsAgo.toISOString().split('T')[0];
+      
+      const savedTheme = localStorage.getItem('preferredTheme') || getCookie('preferredTheme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        setTheme('green-blue');
+      }
+      
+      if (checkSavedUserData()) {
+        console.log("사용자가 이미 데이터를 가지고 있음, 환영 모달 숨김");
+        const welcomeToast = document.getElementById('welcomeToast');
+        welcomeToast.style.display = 'block';
+        setTimeout(() => {
+          welcomeToast.style.opacity = '1';
+        }, 100);
+        setTimeout(() => {
+          welcomeToast.style.opacity = '0';
+          setTimeout(() => {
+            welcomeToast.style.display = 'none';
+          }, 500);
+        }, 6500);
+        
+        if (!isAuthenticated) {
+          try {
+            await authenticateAnonymously();
+          } catch (error) {
+            console.error("인증 중 오류:", error);
+          }
+        }
+      } else {
+        console.log("저장된 사용자 데이터를 찾을 수 없음, 환영 모달 표시");
+        const welcomeModal = document.getElementById('welcomeModal');
+        welcomeModal.style.display = 'block';
+        setTimeout(() => {
+          welcomeModal.classList.add('show');
+        }, 100);
+      }
+      
+      setupProfessionDropdown();
+    });
+
+    function setupProfessionDropdown() {
+      const professionInput = document.getElementById('professionInput');
+      const professionDropdown = document.getElementById('professionDropdown');
+      
+      if (!professionInput || !professionDropdown) {
+        console.error("직업 드롭다운 요소를 찾을 수 없음");
+        return;
+      }
+      
+      function filterProfessions(input) {
+        if (!input) return [];
+        
+        input = input.toLowerCase();
+        return professions.filter(profession => 
+          profession.toLowerCase().includes(input)
+        );
+      }
+      
+      function renderDropdownOptions(filteredProfessions) {
+        professionDropdown.innerHTML = '';
+        
+        if (filteredProfessions.length === 0) {
+          const option = document.createElement('div');
+          option.className = 'profession-option';
+          option.textContent = '일치하는 항목 없음';
+          professionDropdown.appendChild(option);
+        } else {
+          filteredProfessions.forEach(profession => {
+            const option = document.createElement('div');
+            option.className = 'profession-option';
+            option.textContent = profession;
+            option.addEventListener('click', () => {
+              professionInput.value = profession;
+              professionDropdown.style.display = 'none';
+            });
+            professionDropdown.appendChild(option);
+          });
+        }
+      }
+      
+      professionInput.addEventListener('input', () => {
+        const filtered = filterProfessions(professionInput.value);
+        renderDropdownOptions(filtered);
+        
+        if (filtered.length > 0) {
+          professionDropdown.style.display = 'block';
+        } else {
+          professionDropdown.style.display = 'none';
+        }
+      });
+      
+      professionInput.addEventListener('focus', () => {
+        if (professionInput.value) {
+          const filtered = filterProfessions(professionInput.value);
+          renderDropdownOptions(filtered);
+          professionDropdown.style.display = 'block';
+        }
+      });
+      
+      document.addEventListener('click', (e) => {
+        if (!professionInput.contains(e.target) && !professionDropdown.contains(e.target)) {
+          professionDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    document.getElementById('flowerButton').addEventListener('click', function() {
+      if (!userUniqueId) {
+        // 이 부분이 중요합니다 - 계정 생성 모달을 표시합니다
+        const welcomeModal = document.getElementById('welcomeModal');
+        welcomeModal.style.display = 'block';
+        setTimeout(() => {
+          welcomeModal.classList.add('show');
+        }, 100);
+        return;
+      }
+      
+      updateFlowerDisplay();
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.style.display = 'block';
+      setTimeout(() => {
+        flowerModal.classList.add('show');
+      }, 10);
+      document.getElementById('shareFlowerButton').style.display = 'flex';
+    });
+
+    document.getElementById('shareFlowerButton').addEventListener('click', function() {
+      captureFlower();
+    });
+    
+    document.getElementById('showIdButton').addEventListener('click', function() {
+      if (userUniqueId) {
+        document.getElementById('userIdDisplay').textContent = userUniqueId;
+        const idModal = document.getElementById('idModal');
+        idModal.style.display = 'block';
+        setTimeout(() => {
+          idModal.classList.add('show');
+        }, 10);
+      } else {
+        alert("고유 ID를 얻으려면 먼저 꽃 계정을 만드세요.");
+      }
+    });
+    
+    document.getElementById('copyIdButton').addEventListener('click', function() {
+      const idText = document.getElementById('userIdDisplay').textContent;
+      navigator.clipboard.writeText(idText).then(function() {
+        alert('ID가 클립보드에 복사되었습니다!');
+      }).catch(function() {
+        alert('ID를 복사할 수 없습니다. 수동으로 선택하여 복사하세요.');
+      });
+    });
+    
+    document.getElementById('closeIdModal').addEventListener('click', function() {
+      const idModal = document.getElementById('idModal');
+      idModal.classList.remove('show');
+      setTimeout(() => {
+        idModal.style.display = 'none';
+      }, 300);
+    });
+    
+    document.getElementById('deleteAccountButton').addEventListener('click', function() {
+      deleteUserAccount().then(success => {
+        if (success) {
+          alert("계정이 성공적으로 삭제되었습니다. 이 앱을 사용하려면 새 계정을 만들어야 합니다.");
+          const idModal = document.getElementById('idModal');
+          idModal.classList.remove('show');
+          setTimeout(() => {
+            idModal.style.display = 'none';
+            const welcomeModal = document.getElementById('welcomeModal');
+            welcomeModal.style.display = 'block';
+            setTimeout(() => {
+              welcomeModal.classList.add('show');
+            }, 100);
+          }, 300);
+        } else {
+          alert("오류가 발생했습니다. 나중에 다시 시도하세요");
+        }
+      });
+    });
+    
+    document.getElementById('refreshMotivation').addEventListener('click', function() {
+      const newMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+      currentMotivation = newMotivation;
+      
+      const newSubject = getRandomSubject();
+      localStorage.setItem('flowerSubject', newSubject);
+      
+      const formattedName = formatUserName(userFullName);
+      
+      const flowerCodeElement = document.getElementById('flowerCodeDisplay');
+      if (formattedName) {
+        flowerCodeElement.innerHTML = `내 꽃 - ${newSubject} / ${formattedName}`;
+      } else {
+        flowerCodeElement.textContent = "내 꽃 - " + newSubject;
+      }
+      
+      document.getElementById('monthlyMotivation').textContent = newMotivation;
+      
+      const captureCode = document.getElementById('captureFlowerCode');
+      const captureMotivation = document.getElementById('captureFlowerMotivation');
+      
+      if (captureCode) {
+        if (formattedName) {
+          captureCode.innerHTML = `내 꽃 - ${newSubject} / ${formattedName}`;
+        } else {
+          captureCode.textContent = "내 꽃 - " + newSubject;
+        }
+      }
+      
+      if (captureMotivation) captureMotivation.textContent = newMotivation;
+      
+      this.style.transition = 'transform 0.5s ease';
+      this.style.transform = 'rotate(360deg)';
+      
+      setTimeout(() => {
+        this.style.transition = 'none';
+        this.style.transform = 'rotate(0deg)';
+      }, 500);
+    });
+    
+    document.getElementById('createAccountButton').addEventListener('click', async function() {
+      const dobInput = document.getElementById('dobInput');
+      const professionInput = document.getElementById('professionInput');
+      const fullNameInput = document.getElementById('fullNameInput');
+      
+      if (!fullNameInput.value) {
+        alert("전체 이름을 입력하세요.");
+        return;
+      }
+      
+      if (!dobInput.value) {
+        alert("생년월일을 입력하세요.");
+        return;
+      }
+      
+      if (!professionInput.value) {
+        alert("직업을 입력하세요.");
+        return;
+      }
+      
+      document.getElementById('loadingSpinner').style.display = 'block';
+      document.getElementById('createAccountButton').disabled = true;
+      
+      try {
+        await authenticateAnonymously();
+        
+        userFullName = fullNameInput.value;
+        userDateOfBirth = dobInput.value;
+        userProfession = professionInput.value;
+        
+        userUniqueId = generateUniqueId();
+        console.log("고유 ID 생성됨:", userUniqueId);
+        
+        userFlowerCode = generateFlowerCode();
+        
+        const subject = getRandomSubject();
+        localStorage.setItem('flowerSubject', subject);
+        
+        currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
+        
+        const createButton = document.getElementById('createAccountButton');
+        createButton.innerHTML = '<i class="fas fa-check"></i> 완료';
+        createButton.style.backgroundColor = '#4CAF50';
+        
+        const userData = {
+          date: new Date().toISOString(),
+          uid: userUid,
+          uniqueId: userUniqueId,
+          flowerCode: userFlowerCode,
+          motivation: currentMotivation,
+          dateOfBirth: userDateOfBirth,
+          profession: userProfession,
+          fullName: userFullName,
+          formattedName: formatUserName(userFullName),
+          timestamp: Date.now(),
+          theme: currentTheme,
+          subject: subject,
+          shareCount: 0
+        };
+        
+        localStorage.setItem('userFlowerData', JSON.stringify(userData));
+        localStorage.setItem('isInstalled', 'true');
+        setCookie('userUniqueId', userUniqueId, 365);
+        setCookie('userFlowerCode', userFlowerCode, 365);
+        setCookie('userDateOfBirth', userDateOfBirth, 365);
+        setCookie('userProfession', userProfession, 365);
+        setCookie('userFullName', userFullName, 365);
+        setCookie('isInstalled', 'true', 365);
+        isInstalled = true;
+        
+        setTimeout(() => {
+          const welcomeModal = document.getElementById('welcomeModal');
+          welcomeModal.classList.remove('show');
+          
+          setTimeout(() => {
+            welcomeModal.style.display = 'none';
+            document.getElementById('loadingSpinner').style.display = 'none';
+            createButton.innerHTML = '계정 만들기';
+            createButton.style.backgroundColor = '';
+            createButton.disabled = false;
+            
+            submitToFirebase().then(submitted => {
+              console.log("Firebase 제출 결과:", submitted);
+              
+              const welcomeToast = document.getElementById('welcomeToast');
+              welcomeToast.style.display = 'block';
+              setTimeout(() => {
+                welcomeToast.style.opacity = '1';
+              }, 100);
+              setTimeout(() => {
+                welcomeToast.style.opacity = '0';
+                setTimeout(() => {
+                  welcomeToast.style.display = 'none';
+                }, 500);
+              }, 2000);
+              
+              updateFlowerDisplay();
+              const flowerModal = document.getElementById('flowerModal');
+              flowerModal.style.display = 'block';
+              setTimeout(() => {
+                flowerModal.classList.add('show');
+              }, 10);
+              document.getElementById('shareFlowerButton').style.display = 'flex';
+            });
+          }, 300);
+        }, 2000);
+        
+        console.log("설정 완료, 데이터가 로컬에 저장되고 쿠키에 저장됨");
+      } catch (error) {
+        console.error("설정 중 오류:", error);
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('createAccountButton').disabled = false;
+        alert("꽃을 설정하는 중 문제가 발생했습니다. 다시 시도하세요.");
+      }
+    });
+    
+    async function captureFlower() {
+      try {
+        const captureContainer = document.getElementById('flowerCaptureContainer');
+        
+        updateCaptureStyles(currentTheme);
+        
+        if (typeof html2canvas !== 'function') {
+          console.error("html2canvas가 로드되지 않았거나 함수로 사용할 수 없습니다");
+          alert("꽃을 캡처할 수 없습니다. 캡처 라이브러리가 로드되지 않았습니다.");
+          return;
+        }
+        
+        let bgColor = 'white';
+        if (currentTheme === 'red-black') bgColor = 'black';
+        else if (currentTheme === 'green-blue') bgColor = '#1A2E4D';
+        else if (currentTheme === 'orange-pink' || currentTheme === 'yellow-purple') bgColor = '#4B0082';
+        
+        const canvas = await html2canvas(captureContainer, {
+          backgroundColor: bgColor,
+          scale: 7,
+          logging: true,
+          useCORS: true,
+          allowTaint: true,
+          letterRendering: true
+        });
+        
+        const imageUrl = canvas.toDataURL('image/png');
+        
+        const capturedImage = document.getElementById('capturedImage');
+        if (capturedImage) {
+          capturedImage.src = imageUrl;
+          document.getElementById('capturedFlower').style.display = 'flex';
+          document.getElementById('shareWarning').style.display = 'block';
+          
+          updateShareCount();
+        } else {
+          console.error("capturedImage 요소를 찾을 수 없습니다");
+        }
+      } catch (error) {
+        console.error('꽃 캡처 중 오류:', error);
+        alert('꽃을 캡처할 수 없습니다. 다시 시도하세요.');
+      }
+    }
+    
+    document.getElementById('shareCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      if (navigator.share) {
+        fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
+            navigator.share({
+              title: '내 G-Z 꽃',
+              text: 'g-z.online에서 당신만의 꽃을 발견하세요',
+              files: [file]
+            }).catch(err => {
+              console.log('공유 오류:', err);
+              fallbackShare();
+            });
+          })
+          .catch(err => {
+            console.log('이미지 준비 중 오류:', err);
+            fallbackShare();
+          });
+      } else {
+        fallbackShare();
+      }
+    });
+    
+    function fallbackShare() {
+      try {
+        const shareText = `
+G-Z에서 내 생명의 꽃을 확인하세요: ${userUniqueId}. g-z.online에서 당신만의 꽃을 발견하세요`;
+        
+        navigator.clipboard.writeText(shareText).then(function() {
+          alert('공유 텍스트가 클립보드에 복사되었습니다!');
+        }).catch(function() {
+          alert('공유 텍스트를 복사할 수 없습니다.');
+        });
+      } catch (error) {
+        console.error('폴백 공유 오류:', error);
+        alert('오류가 발생했습니다.');
+      }
+    }
+    
+    document.getElementById('closeCapture').addEventListener('click', function() {
+      document.getElementById('capturedFlower').style.display = 'none';
+    });
+    
+    document.getElementById('closeFlowerModal').addEventListener('click', function() {
+      const flowerModal = document.getElementById('flowerModal');
+      flowerModal.classList.remove('show');
+      setTimeout(() => {
+        flowerModal.style.display = 'none';
+        document.getElementById('shareFlowerButton').style.display = 'none';
+      }, 300);
+    });
+
+    window.onclick = function(event) {
+      const flowerModal = document.getElementById('flowerModal');
+      const capturedFlower = document.getElementById('capturedFlower');
+      const idModal = document.getElementById('idModal');
+      const welcomeModal = document.getElementById('welcomeModal');
+      
+      if (event.target == flowerModal) {
+        flowerModal.classList.remove('show');
+        setTimeout(() => {
+          flowerModal.style.display = "none";
+          document.getElementById('shareFlowerButton').style.display = 'none';
+        }, 300);
+      }
+      
+      if (event.target == capturedFlower) {
+        capturedFlower.style.display = "none";
+      }
+      
+      if (event.target == idModal) {
+        idModal.classList.remove('show');
+        setTimeout(() => {
+          idModal.style.display = "none";
+        }, 300);
+      }
+      
+      if (event.target == welcomeModal && isInstalled) {
+        welcomeModal.classList.remove('show');
+        setTimeout(() => {
+          welcomeModal.style.display = "none";
+        }, 300);
+      }
+    };
+    
+    document.getElementById('shareFlowerButton').style.display = 'none';
+    document.getElementById('shareWarning').style.display = 'none';
+    
+    document.querySelectorAll('.style-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        setTheme(theme);
+      });
+    });
+  </script>
+</body>
