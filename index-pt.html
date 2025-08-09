@@ -1487,7 +1487,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>Fechar</span>
+        <i class="fas fa-download"></i> <span>Salvar</span>
       </button>
     </div>
   </div>
@@ -3207,6 +3207,19 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      // Créer un lien temporaire pour télécharger l'image
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageUrl;
+      downloadLink.download = 'minha-flor-gz.png';
+      
+      // Ajouter le lien au document, cliquer dessus, puis le supprimer
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      
+      // Cacher la vue de capture après le téléchargement
       document.getElementById('capturedFlower').style.display = 'none';
     });
     
@@ -3263,4 +3276,3 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     });
   </script>
 </body>
-</html>
