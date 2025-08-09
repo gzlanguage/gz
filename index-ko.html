@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>닫기</span>
+        <i class="fas fa-download"></i> <span>저장</span>
       </button>
     </div>
   </div>
@@ -3415,7 +3415,20 @@ G-Z에서 내 생명의 꽃을 확인하세요: ${userUniqueId}. g-z.online에�
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      // 이미지 다운로드 함수
+      const downloadImage = (url, filename) => {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename || 'my-gz-flower.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+      
+      // 이미지 저장 실행
+      downloadImage(imageUrl, 'my-gz-flower.png');
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
