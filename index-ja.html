@@ -1,113 +1,13 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>G-Z</title>
-    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
+    <link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.appspot.com/o/photo_2025-03-09_13-00-43.jpg?alt=media&token=e3d3c543-164c-4c79-8cd1-0a9c710fb002">
     <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#000000">
-    <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41">
-    <link rel="manifest" id="manifest-placeholder">
-    <style>
-        /* Style pour l'écran de chargement en noir */
-        body {
-            background-color: #000000;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        
-        .splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-        
-        .splash-icon {
-            width: 100px;
-            height: 100px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.7; }
-            50% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0.8); opacity: 0.7; }
-        }
-    </style>
-</head>
-<body>
-    <!-- Écran de chargement -->
-    <div class="splash-screen" id="splash-screen">
-        <img src="https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41" alt="Logo" class="splash-icon">
-    </div>
-    
-    <!-- Contenu principal de la page (qui sera affiché après le chargement) -->
-    <div id="main-content" style="display: none;">
-        <!-- Votre contenu principal ici -->
-    </div>
-    
-    <script>
-        // Création dynamique du fichier manifest
-        const manifestData = {
-            "name": "Flower of life",
-            "short_name": "Flower",
-            "description": "G-Z Application",
-            "start_url": "/",
-            "display": "standalone",
-            "background_color": "#000000",
-            "theme_color": "#000000",
-            "icons": [
-                {
-                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
-                    "sizes": "192x192",
-                    "type": "image/png"
-                },
-                {
-                    "src": "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/file_00000000182461f694cccea0b9e89e1f.png?alt=media&token=3fda1ca9-1d47-4b35-9b07-af86c3098c41",
-                    "sizes": "512x512",
-                    "type": "image/png"
-                }
-            ]
-        };
-        
-        const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
-        const manifestURL = URL.createObjectURL(blob);
-        document.querySelector('#manifest-placeholder').setAttribute('href', manifestURL);
-        
-        // Simulation de chargement et affichage du contenu principal
-        window.addEventListener('load', function() {
-            // Simuler un temps de chargement (peut être ajusté ou remplacé par votre vrai logique)
-            setTimeout(function() {
-                // Masquer l'écran de chargement
-                const splashScreen = document.getElementById('splash-screen');
-                splashScreen.style.opacity = '0';
-                
-                // Afficher le contenu principal
-                setTimeout(function() {
-                    splashScreen.style.display = 'none';
-                    document.getElementById('main-content').style.display = 'block';
-                }, 500); // Attendre que l'animation de fondu soit terminée
-            }, 1500); // 2 secondes de chargement simulé
-        });
-    </script>
-</body>
-</html>
     <style>
         input, textarea, select, button {
             font-size: 16px;
@@ -1450,50 +1350,6 @@
             font-size: 0.75em;
             font-weight: bold;
         }
-
-        .install-prompt {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 0.9em;
-            z-index: 1000;
-            width: 80%;
-            max-width: 300px;
-            text-align: center;
-        }
-        
-        .install-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .install-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 0.8em;
-            cursor: pointer;
-        }
-        
-        .dismiss-btn {
-            background-color: transparent;
-            color: #ccc;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 0.8em;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body class="theme-green-blue">
@@ -1501,14 +1357,15 @@
   <header>
    
     <div class="header-container">
-      <div class="app-logo">G-Z</div>
+      <div class="app-logo" translate="no">G-Z</div>
       
       <div class="right-controls">
+      
+        <a href="https://g-z.online/language.html" class="header-icon menu-link"><i class="fas fa-globe"></i></a>
         
-   
+      <div class="right-controls">
         <div class="header-icon" id="showIdButton"><i class="fas fa-user"></i></div>
-        
-         <a href="https://g-z.online/translate.html" class="header-icon menu-link"><i class="fas fa-globe"></i></a>
+  
         
         <a href="https://g-z.online/us.html" class="header-icon menu-link"><i class="fas fa-bars"></i></a>
       </div>
@@ -1519,22 +1376,19 @@
 
   <div class="main-content">
     <div class="button-container">
-      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span>命の花</span></a>
-      
-    
-
+      <a class="button" href="#" id="flowerButton"><i class="fas fa-spa flower-icon"></i><span>Flor da vida</span></a>
     </div>
 
     <div class="divider"></div>
     <div class="notification">
-      <span class="notification-text">💠 フラワー -- 宇宙があなただけのために書いたメッセージ ¯\_(ツ)_/¯</span>
+      <span class="notification-text">💠 Flor -- A mensagem que o universo escreveu só para você ¯\_(ツ)_/¯</span>
     </div>
 
     <div class="divider"></div>
   </div>
 
   <div class="style-selector">
-    <h3>スタイル</h3>
+    <h3>Estilo</h3>
     <div class="style-options">
       <div class="style-option red-black" data-theme="red-black"></div>
       <div class="style-option green-blue selected" data-theme="green-blue"></div>
@@ -1544,54 +1398,53 @@
     </div>
   </div>
 
-  <div id="welcomeToast">
-    
-    おかえりなさい    ¯\_(ツ)_/¯
+  <div id="welcomeToast" translate="no">
+    Bem-vindo ¯\_(ツ)_/¯
   </div>
 
   <div id="welcomeModal" class="modal">
     <div class="modal-content">
-      <div class="welcome-header">💠 ようこそ 💠</div>
+      <div class="welcome-header">💠 Bem-vindo 💠</div>
       <div class="welcome-text">
-        アカウント作成には、あなただけの花を作るために生年月日、職業、名前が必要です。
+        A criação de uma conta requer sua data de nascimento, profissão e nome para criar sua flor única.
       </div>
       
       <div class="name-container">
-        <label for="fullNameInput">フルネーム:</label>
-        <input type="text" id="fullNameInput" class="name-input" placeholder="フルネームを入力してください...">
+        <label for="fullNameInput">Seu Nome Completo:</label>
+        <input type="text" id="fullNameInput" class="name-input" placeholder="Digite seu nome completo...">
       </div>
       
       <div class="dob-container">
-        <label for="dobInput">生年月日:</label>
+        <label for="dobInput">Data de Nascimento:</label>
         <input type="date" id="dobInput" class="dob-input" max="">
       </div>
       
       <div class="profession-container">
-        <label for="professionInput">職業:</label>
-        <input type="text" id="professionInput" class="profession-search" placeholder="職業を入力してください...">
+        <label for="professionInput">Sua Profissão:</label>
+        <input type="text" id="professionInput" class="profession-search" placeholder="Digite sua profissão...">
         <div id="professionDropdown" class="profession-dropdown"></div>
       </div>
       
       <div class="loading-spinner" id="loadingSpinner">
-        <span>あなただけの花を作成中</span>
+        <span>Criando sua flor única</span>
         <span class="loading-dots"></span>
       </div>
       
-      <button id="createAccountButton">アカウント作成</button>
+      <button id="createAccountButton">Criar Conta</button>
     </div>
   </div>
 
   <div id="idModal" class="modal">
     <div class="modal-content">
-      <div class="id-title">あなたのユーザーID</div>
+      <div class="id-title">Seu ID de Usuário</div>
       <div class="id-display">
         <span id="userIdDisplay"></span>
         <i class="fas fa-copy copy-icon" id="copyIdButton"></i>
       </div>
-      <div class="id-message">このIDを安全に保管してください！</div>
+      <div class="id-message">Mantenha este ID seguro!</div>
       <div class="id-actions">
-        <button class="delete-account" id="deleteAccountButton">アカウント削除</button>
-        <button class="close-button" id="closeIdModal">閉じる</button>
+        <button class="delete-account" id="deleteAccountButton">Excluir Conta</button>
+        <button class="close-button" id="closeIdModal">Fechar</button>
       </div>
     </div>
   </div>
@@ -1599,11 +1452,11 @@
   <div id="flowerModal" class="modal">
     <div class="modal-content">
       <button class="modal-close" id="closeFlowerModal"><i class="fas fa-times"></i></button>
-      <div class="billabong-title"><strong id="flowerTypeTitle">命の花</strong></div>
+      <div class="billabong-title"><strong id="flowerTypeTitle">Flor da Vida</strong></div>
       
       <div id="flowerCodeDisplay" class="flower-code"></div>
       
-      <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="新しいモチベーションを生成"></i>
+      <i class="fas fa-sync-alt refresh-motivation" id="refreshMotivation" title="Gerar nova motivação"></i>
       
       <div class="monthly-motivation" id="monthlyMotivation">
       </div>
@@ -1615,32 +1468,32 @@
   </div>
   
   <button class="share-flower-button" id="shareFlowerButton">
-    <span>私の花をシェア</span> <i class="fas fa-arrow-right send-icon"></i>
+    <span>Compartilhar minha Flor</span> <i class="fas fa-arrow-right send-icon"></i>
   </button>
   
   <div id="capturedFlower">
     <div class="captured-image-container">
-      <img id="capturedImage" class="captured-image" src="" alt="キャプチャーされた花">
+      <img id="capturedImage" class="captured-image" src="" alt="Flor Capturada">
     </div>
 
     <div class="share-warning" id="shareWarning">
       <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
-      <span>Google/Safariからのシェアに最適です。</span>
+      <span>Perfeito para compartilhar, apenas ajuste.</span>
     </div>
     
     <div class="capture-controls">
       <button class="capture-button" id="shareCapture">
-        <i class="fas fa-share"></i> <span>シェア</span>
+        <i class="fas fa-share"></i> <span>Compartilhar</span>
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-download"></i> <span>保存</span>
+        <i class="fas fa-download"></i> <span>Salvar</span>
       </button>
     </div>
   </div>
   
   <div id="flowerCaptureContainer">
-    <div class="capture-flower-header" id="captureFlowerHeader">命の花</div>
+    <div class="capture-flower-header" id="captureFlowerHeader">Flor da Vida</div>
     
     <div id="captureFlowerCode" class="capture-flower-code"></div>
     
@@ -1651,18 +1504,10 @@
       <i class="fas fa-spa"></i>
     </div>
     
-    <div class="gz-logo">G-Z</div>
-    
-    <div class="capture-website-url">www.g-z.onlineで自分だけの花を見つけよう</div>
-  </div>
-
-  <div class="install-prompt" id="installPrompt">
-    <p>より良い体験のためにG-Zをホーム画面に追加しましょう！</p>
-    <div class="install-buttons">
-      <button class="install-btn" id="installBtn">インストール</button>
-      <button class="dismiss-btn" id="dismissBtn">後で</button>
-    </div>
-  </div>
+    <div class="gz-logo" translate="no">G-Z</div>
+  <div class="capture-website-url">
+  Descubra a sua em <span translate="no">www.g-z.online</span>
+</div>
 
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
@@ -1702,250 +1547,274 @@
     let userFullName = null;
     let seenSubjects = [];
     let shareCount = 0;
-    let deferredPrompt = null;
+    let userRank = 0;
+    let userEmoji = "👑";
+
+    const rankEmojis = ["👑", "🌟", "🔥", "⚡️", "⭐️", "❄️", "✨️", "🎖", "🗿"];
 
     const professions = [
-      "ミュージシャン", "ラッパー", "サッカー選手", "バスケットボール選手", "ボクサー", 
-      "学生", "教師", "医師", "看護師", "エンジニア", 
-      "ソフトウェア開発者", "デザイナー", "アーティスト", "作家", "ジャーナリスト", 
-      "シェフ", "ウェイター/ウェイトレス", "ハウスキーパー", "TikToker", "YouTuber", 
-      "インフルエンサー", "写真家", "ビデオグラファー", "ダンサー", "俳優/女優", 
-      "モデル", "建築家", "弁護士", "会計士", "ファイナンシャルアドバイザー", 
-      "銀行員", "起業家", "ビジネスオーナー", "マネージャー", "エグゼクティブ", 
-      "営業担当", "マーケター", "ソーシャルメディアマネージャー", "ドライバー", "パイロット", 
-      "客室乗務員", "整備士", "電気技師", "配管工", "建設作業員", 
-      "農家", "庭師", "獣医", "パーソナルトレーナー", "フィットネスインストラクター", 
-      "ヨガ講師", "セラピスト", "心理学者", "カウンセラー", "牧師/宗教指導者",
-      "科学者", "研究者", "教授", "警察官", "消防士",
-      "軍人", "警備員", "不動産エージェント", "薬剤師", "歯科医",
-      "検眼医", "理学療法士", "作業療法士", "言語療法士", "栄養士",
-      "栄養学者", "美容師", "メイクアップアーティスト", "美容師", "仕立て屋",
-      "ファッションデザイナー", "小売業者", "レジ係", "カスタマーサービス担当", "コールセンター担当",
-      "翻訳者", "通訳者", "ツアーガイド", "旅行代理店", "ホテルマネージャー",
-      "受付係", "秘書", "管理アシスタント", "図書館司書", "アーキビスト",
-      "歴史家", "考古学者", "人類学者", "社会学者", "政治科学者",
-      "経済学者", "統計学者", "データアナリスト", "データサイエンティスト", "UX/UIデザイナー",
-      "ゲーム開発者", "アプリ開発者", "ウェブ開発者", "ネットワーク管理者", "サイバーセキュリティスペシャリスト",
-      "ITサポート", "技術者", "修理スペシャリスト", "パン職人", "肉屋",
-      "漁師", "鉱山労働者", "林業作業員", "造園業者", "インテリアデザイナー",
-      "イベントプランナー", "ウェディングプランナー", "フローリスト", "宝石職人", "職人",
-      "プログラマー", "ウェブデザイナー", "デジタルマーケター", "SEOスペシャリスト", "コンテンツクリエイター",
-      "プロダクトマネージャー", "プロジェクトマネージャー", "品質保証担当", "ビジネスアナリスト", "コンサルタント",
-      "リクルーター", "人事マネージャー", "キャリアコーチ", "ライフコーチ", "モチベーションスピーカー",
-      "パブリックスピーカー", "ラジオホスト", "TVホスト", "放送員", "ポッドキャスター",
-      "著者", "脚本家", "コピーライター", "テクニカルライター", "編集者",
-      "出版社", "文学エージェント", "書店オーナー", "図書館司書", "書評家",
-      "グラフィックデザイナー", "イラストレーター", "アニメーター", "3Dアーティスト", "VFXアーティスト",
-      "映画監督", "プロデューサー", "カメラオペレーター", "音響エンジニア", "照明技術者",
-      "映像編集者", "制作アシスタント", "セットデザイナー", "衣装デザイナー", "映画用メイクアップアーティスト",
-      "特殊効果アーティスト", "スタントパフォーマー", "声優", "タレントエージェント", "キャスティングディレクター"
+      "Músico", "Rapper", "Jogador de Futebol", "Jogador de Basquete", "Boxeador", 
+      "Estudante", "Professor", "Médico", "Enfermeiro", "Engenheiro", 
+      "Desenvolvedor", "Designer", "Artista", "Escritor", "Jornalista", 
+      "Chef de cozinha", "Garçom/Garçonete", "Empregada doméstica", "TikToker", "YouTuber", 
+      "Influenciador", "Fotógrafo", "Videógrafo", "Dançarino", "Ator/Atriz", 
+      "Modelo", "Arquiteto", "Advogado", "Contador", "Consultor financeiro", 
+      "Bancário", "Empreendedor", "Proprietário de empresa", "Gerente", "Executivo", 
+      "Vendedor", "Marqueteiro", "Gerente de mídia social", "Motorista", "Piloto", 
+      "Comissário de bordo", "Mecânico", "Eletricista", "Encanador", "Operário da construção", 
+      "Agricultor", "Jardineiro", "Veterinário", "Treinador esportivo", "Instrutor de fitness", 
+      "Professor de yoga", "Terapeuta", "Psicólogo", "Conselheiro", "Pastor/Líder religioso",
+      "Cientista", "Pesquisador", "Professor universitário", "Policial", "Bombeiro",
+      "Militar", "Segurança", "Corretor de imóveis", "Farmacêutico", "Dentista",
+      "Optometrista", "Fisioterapeuta", "Terapeuta ocupacional", "Fonoaudiólogo", "Nutricionista",
+      "Nutricionista clínico", "Cabeleireiro", "Maquiador", "Esteticista", "Alfaiate",
+      "Designer de moda", "Funcionário de loja", "Caixa", "Atendimento ao cliente", "Atendente de call center",
+      "Tradutor", "Intérprete", "Guia turístico", "Agente de viagens", "Gerente de hotel",
+      "Recepcionista", "Secretário", "Assistente administrativo", "Bibliotecário", "Arquivista",
+      "Historiador", "Arqueólogo", "Antropólogo", "Sociólogo", "Cientista político",
+      "Economista", "Estatístico", "Analista de dados", "Cientista de dados", "Designer UX/UI",
+      "Desenvolvedor de jogos", "Desenvolvedor de aplicativos", "Desenvolvedor web", "Administrador de rede", "Especialista em cibersegurança",
+      "Suporte técnico", "Técnico", "Especialista em reparos", "Padeiro", "Açougueiro",
+      "Pescador", "Minerador", "Silvicultor", "Paisagista", "Decorador de interiores",
+      "Organizador de eventos", "Organizador de casamentos", "Florista", "Joalheiro", "Artesão",
+      "Programador", "Webdesigner", "Especialista em marketing digital", "Especialista SEO", "Criador de conteúdo",
+      "Gerente de produto", "Gerente de projeto", "Controle de qualidade", "Analista de negócios", "Consultor",
+      "Recrutador", "Gerente de RH", "Coach de carreira", "Coach de vida", "Palestrante motivacional",
+      "Palestrante", "Locutor de rádio", "Apresentador de TV", "Jornalista de TV", "Podcaster",
+      "Autor", "Roteirista", "Redator", "Redator técnico", "Editor",
+      "Editor de livros", "Agente literário", "Livreiro", "Bibliotecário", "Crítico literário",
+      "Designer gráfico", "Ilustrador", "Animador", "Artista 3D", "Artista VFX",
+      "Diretor", "Produtor", "Operador de câmera", "Engenheiro de som", "Técnico de iluminação",
+      "Editor de vídeo", "Assistente de produção", "Cenógrafo", "Figurinista", "Maquiador de cinema",
+      "Artista de efeitos especiais", "Dublê", "Dublador", "Agente artístico", "Diretor de elenco"
     ];
 
     const subjectDictionary = {
-      "成功": "成功",
-      "達成": "達成",
-      "勝利": "勝利",
-      "勝利": "勝利",
-      "成就": "成就",
-      
-      "最も豊か": "富",
-      "繁栄": "繁栄",
-      "豊かさ": "豊かさ",
-      "財産": "財産",
-      "富裕": "富裕",
-      
-      "喜び": "喜び",
-      "幸福": "幸福",
-      "至福": "至福",
-      "喜悦": "喜悦",
-      "満足": "満足",
-      
-      "成長": "成長",
-      "進歩": "進歩",
-      "進展": "進展",
-      "発展": "発展",
-      "改善": "改善",
-      
-      "力": "力",
-      "強さ": "強さ",
-      "威力": "威力",
-      "力量": "力量",
-      "エネルギー": "エネルギー",
-      
-      "知恵": "知恵",
-      "知性": "知性",
-      "知識": "知識",
-      "洞察": "洞察",
-      "理解": "理解",
-      
-      "創造性": "創造性",
-      "革新": "革新",
-      "想像力": "想像力",
-      "発明": "発明",
-      "独創性": "独創性",
-      
-      "リーダーシップ": "リーダーシップ",
-      "権威": "権威",
-      "影響力": "影響力",
-      "指揮": "指揮",
-      "方向性": "方向性",
-      
-      "平和": "平和",
-      "調和": "調和",
-      "静寂": "静寂",
-      "静穏": "静穏",
-      "穏やかさ": "穏やかさ",
-      
-      "愛": "愛",
-      "愛情": "愛情",
-      "崇拝": "崇拝",
-      "献身": "献身",
-      "情熱": "情熱",
-      
-      "勇気": "勇気",
-      "勇敢さ": "勇敢さ",
-      "武勇": "武勇",
-      "英雄的精神": "英雄的精神",
-      "恐れのなさ": "恐れのなさ",
-      
-      "健康": "健康",
-      "活力": "活力",
-      "健全": "健全",
-      "元気": "元気",
-      "フィットネス": "フィットネス",
-      
-      "自由": "自由",
-      "自由": "自由",
-      "独立": "独立",
-      "自律": "自律",
-      "自己決定": "自己決定",
-      
-      "目的": "目的",
-      "意味": "意味",
-      "使命": "使命",
-      "天職": "天職",
-      "運命": "運命",
-      
-      "回復力": "回復力",
-      "粘り強さ": "粘り強さ",
-      "忍耐": "忍耐",
-      "持久力": "持久力",
-      "不屈の精神": "不屈の精神",
-      
-      "本物": "本物",
-      "真正": "真正",
-      "正直": "正直",
-      "誠実": "誠実",
-      "真摯": "真摯",
-      
-      "変容": "変容",
-      "変化": "変化",
-      "進化": "進化",
-      "再生": "再生",
-      "変態": "変態",
-      
-      "繋がり": "繋がり",
-      "関係": "関係",
-      "コミュニティ": "コミュニティ",
-      "所属感": "所属感",
-      "統一": "統一",
-      
-      "感謝": "感謝",
-      "感謝の気持ち": "感謝の気持ち",
-      "感謝": "感謝",
-      "認識": "認識",
-      "承認": "承認",
-      
-      "マインドフルネス": "マインドフルネス",
-      "存在感": "存在感",
-      "意識": "意識",
-      "意識": "意識",
-      "注意深さ": "注意深さ",
-      
-      "思いやり": "思いやり",
-      "共感": "共感",
-      "優しさ": "優しさ",
-      "寛大さ": "寛大さ",
-      "利他主義": "利他主義",
-      
-      "バランス": "バランス",
-      "均衡": "均衡",
-      "調和": "調和",
-      "比率": "比率",
-      "対称性": "対称性",
-      
-      "インスピレーション": "インスピレーション",
-      "モチベーション": "モチベーション",
-      "熱意": "熱意",
-      "興奮": "興奮",
-      "情熱": "情熱",
-      
-      "集中": "集中",
-      "集中力": "集中力",
-      "注意力": "注意力",
-      "規律": "規律",
-      "献身": "献身",
-      
-      "謙虚": "謙虚",
-      "謙遜": "謙遜",
-      "シンプル": "シンプル",
-      "飾り気のなさ": "飾り気のなさ",
-      "地に足のついた": "地に足のついた",
-      
-      "忍耐": "忍耐",
-      "寛容": "寛容",
-      "忍耐": "忍耐",
-      "耐久力": "耐久力",
-      "持続性": "持続性",
-      
-      "喜び": "喜び",
-      "喜悦": "喜悦",
-      "喜び": "喜び",
-      "歓喜": "歓喜",
-      "祝賀": "祝賀",
-      
-      "信頼": "信頼",
-      "信仰": "信仰",
-      "自信": "自信",
-      "信頼": "信頼",
-      "頼り甲斐": "頼り甲斐",
-      
-      "自信": "自信",
-      "自尊心": "自尊心",
-      "自己信念": "自己信念",
-      "自信": "自信",
-      "自己信頼": "自己信頼",
-      
-      "熱意": "熱意",
-      "熱意": "熱意",
-      "熱心さ": "熱心さ",
-      "熱意": "熱意",
-      "熱心": "熱心",
-      
-      "明確さ": "明確さ",
-      "明晰さ": "明晰さ",
-      "透明性": "透明性",
-      "精度": "精度",
-      "鋭さ": "鋭さ",
-      
-      "適応力": "適応力",
-      "柔軟性": "柔軟性",
-      "多才": "多才",
-      "調整力": "調整力",
-      "柔軟性": "柔軟性",
-      
-      "コミュニケーション": "コミュニケーション",
-      "表現": "表現",
-      "明確な表現": "明確な表現",
-      "対話": "対話",
-      "会話": "会話",
-      
-      "キャリア": "キャリア",
-      "職業": "職業",
-      "天職": "天職",
-      "職業": "職業",
-      "使命": "使命"
-    };
+    "Sucesso": "Sucesso",
+    "Conquista": "Conquista",
+    "Vitória": "Vitória",
+    "Triunfo": "Triunfo",
+    "Realização": "Realização",
+    
+    "Riqueza": "Riqueza",
+    "Prosperidade": "Prosperidade",
+    "Abundância": "Abundância",
+    "Fortuna": "Fortuna",
+    "Afluência": "Afluência",
+    
+    "Alegria": "Alegria",
+    "Felicidade": "Felicidade",
+    "Êxtase": "Êxtase",
+    "Deleite": "Deleite",
+    "Contentamento": "Contentamento",
+    
+    "Crescimento": "Crescimento",
+    "Progresso": "Progresso",
+    "Avanço": "Avanço",
+    "Desenvolvimento": "Desenvolvimento",
+    "Melhoria": "Melhoria",
+    
+    "Poder": "Poder",
+    "Força": "Força",
+    "Potência": "Potência",
+    "Energia": "Energia",
+    
+    "Sabedoria": "Sabedoria",
+    "Inteligência": "Inteligência",
+    "Conhecimento": "Conhecimento",
+    "Perspicácia": "Perspicácia",
+    "Compreensão": "Compreensão",
+    
+    "Criatividade": "Criatividade",
+    "Inovação": "Inovação",
+    "Imaginação": "Imaginação",
+    "Invenção": "Invenção",
+    "Originalidade": "Originalidade",
+    
+    "Liderança": "Liderança",
+    "Autoridade": "Autoridade",
+    "Influência": "Influência",
+    "Comando": "Comando",
+    "Direção": "Direção",
+    
+    "Paz": "Paz",
+    "Harmonia": "Harmonia",
+    "Tranquilidade": "Tranquilidade",
+    "Serenidade": "Serenidade",
+    "Calma": "Calma",
+    
+    "Amor": "Amor",
+    "Afeição": "Afeição",
+    "Adoração": "Adoração",
+    "Devoção": "Devoção",
+    "Paixão": "Paixão",
+    
+    "Coragem": "Coragem",
+    "Bravura": "Bravura",
+    "Valor": "Valor",
+    "Heroísmo": "Heroísmo",
+    "Destemor": "Destemor",
+    
+    "Saúde": "Saúde",
+    "Vitalidade": "Vitalidade",
+    "Bem-estar": "Bem-estar",
+    "Vigor": "Vigor",
+    "Forma física": "Forma física",
+    
+    "Liberdade": "Liberdade",
+    "Independência": "Independência",
+    "Autonomia": "Autonomia",
+    "Autodeterminação": "Autodeterminação",
+    
+    "Propósito": "Propósito",
+    "Significado": "Significado",
+    "Missão": "Missão",
+    "Vocação": "Vocação",
+    "Destino": "Destino",
+    
+    "Resiliência": "Resiliência",
+    "Tenacidade": "Tenacidade",
+    "Perseverança": "Perseverança",
+    "Resistência": "Resistência",
+    "Determinação": "Determinação",
+    
+    "Autenticidade": "Autenticidade",
+    "Genuinidade": "Genuinidade",
+    "Honestidade": "Honestidade",
+    "Integridade": "Integridade",
+    "Sinceridade": "Sinceridade",
+    
+    "Transformação": "Transformação",
+    "Mudança": "Mudança",
+    "Evolução": "Evolução",
+    "Renascimento": "Renascimento",
+    "Metamorfose": "Metamorfose",
+    
+    "Conexão": "Conexão",
+    "Relacionamento": "Relacionamento",
+    "Comunidade": "Comunidade",
+    "Pertencimento": "Pertencimento",
+    "Unidade": "Unidade",
+    
+    "Gratidão": "Gratidão",
+    "Agradecimento": "Agradecimento",
+    "Apreciação": "Apreciação",
+    "Reconhecimento": "Reconhecimento",
+    "Reconhecimento": "Reconhecimento",
+    
+    "Atenção plena": "Atenção plena",
+    "Presença": "Presença",
+    "Consciência": "Consciência",
+    "Consciência": "Consciência",
+    "Atenção": "Atenção",
+    
+    "Compaixão": "Compaixão",
+    "Empatia": "Empatia",
+    "Bondade": "Bondade",
+    "Generosidade": "Generosidade",
+    "Altruísmo": "Altruísmo",
+    
+    "Equilíbrio": "Equilíbrio",
+    "Equilíbrio": "Equilíbrio",
+    "Harmonia": "Harmonia",
+    "Proporção": "Proporção",
+    "Simetria": "Simetria",
+    
+    "Inspiração": "Inspiração",
+    "Motivação": "Motivação",
+    "Entusiasmo": "Entusiasmo",
+    "Excitação": "Excitação",
+    "Paixão": "Paixão",
+    
+    "Foco": "Foco",
+    "Concentração": "Concentração",
+    "Atenção": "Atenção",
+    "Disciplina": "Disciplina",
+    "Dedicação": "Dedicação",
+    
+    "Humildade": "Humildade",
+    "Modéstia": "Modéstia",
+    "Simplicidade": "Simplicidade",
+    "Simplicidade": "Simplicidade",
+    "Fundamentação": "Fundamentação",
+    
+    "Paciência": "Paciência",
+    "Tolerância": "Tolerância",
+    "Paciência": "Paciência",
+    "Resistência": "Resistência",
+    "Persistência": "Persistência",
+    
+    "Alegria": "Alegria",
+    "Deleite": "Deleite",
+    "Contentamento": "Contentamento",
+    "Exultação": "Exultação",
+    "Júbilo": "Júbilo",
+    
+    "Confiança": "Confiança",
+    "Fé": "Fé",
+    "Confiança": "Confiança",
+    "Confiança": "Confiança",
+    "Confiabilidade": "Confiabilidade",
+    
+    "Autoconfiança": "Autoconfiança",
+    "Autoestima": "Autoestima",
+    "Autocrença": "Autocrença",
+    "Autoconfiança": "Autoconfiança",
+    "Autoconfiança": "Autoconfiança",
+    
+    "Entusiasmo": "Entusiasmo",
+    "Zelo": "Zelo",
+    "Avidez": "Avidez",
+    "Ardor": "Ardor",
+    "Fervor": "Fervor",
+    
+    "Clareza": "Clareza",
+    "Lucidez": "Lucidez",
+    "Transparência": "Transparência",
+    "Precisão": "Precisão",
+    "Nitidez": "Nitidez",
+    
+    "Adaptabilidade": "Adaptabilidade",
+    "Flexibilidade": "Flexibilidade",
+    "Versatilidade": "Versatilidade",
+    "Adaptabilidade": "Adaptabilidade",
+    "Maleabilidade": "Maleabilidade",
+    
+    "Comunicação": "Comunicação",
+    "Expressão": "Expressão",
+    "Articulação": "Articulação",
+    "Diálogo": "Diálogo",
+    "Conversa": "Conversa",
+    
+    "Carreira": "Carreira",
+    "Profissão": "Profissão",
+    "Vocação": "Vocação",
+    "Ocupação": "Ocupação",
+    "Vocação": "Vocação"
+};
+
+    async function getUserRankAndEmoji() {
+      try {
+        const userCount = await getUserCount();
+        userRank = userCount % rankEmojis.length;
+        userEmoji = rankEmojis[userRank];
+        console.log(`User rank: ${userRank}, emoji: ${userEmoji}`);
+        return userEmoji;
+      } catch (error) {
+        console.error("Erro ao obter classificação do usuário:", error);
+        return "👑";
+      }
+    }
+
+    async function getUserCount() {
+      try {
+        const snapshot = await firestore.collection('flowerCodes').get();
+        return snapshot.size;
+      } catch (error) {
+        console.error("Erro ao contar usuários:", error);
+        return 0;
+      }
+    }
 
     function formatUserName(fullName) {
       if (!fullName) return "";
@@ -1959,7 +1828,7 @@
       const firstName = nameParts[0];
       const lastNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase();
       
-      return `👑 ${firstName} ${lastNameInitial}.`;
+      return `${firstName} ${lastNameInitial}.`;
     }
 
     function generateUniqueId() {
@@ -1984,17 +1853,17 @@
         const data = await response.json();
         currentCountry = data.country_name;
         userCity = data.city;
-        console.log("検出されたユーザーの場所:", currentCountry, userCity);
+        console.log("Localização do usuário detectada:", currentCountry, userCity);
         return { country: currentCountry, city: userCity };
       } catch (error) {
-        console.error("ユーザーの場所の検出エラー:", error);
-        return { country: "不明", city: "不明" };
+        console.error("Erro ao detectar localização:", error);
+        return { country: "Desconhecido", city: "Desconhecido" };
       }
     }
 
     function generatePersonalizedMotivation(flowerCode, profession, dob) {
       if (!flowerCode || flowerCode.length < 8) {
-        return "この花のモチベーションはあなたを鼓舞し、導くためにここにあります。";
+        return "Sua motivação floral está aqui para inspirar e guiar você.";
       }
       
       let month = 0;
@@ -2004,349 +1873,350 @@
       }
       
       const lifeTraits = [
-        "創造性は、あなたが直面するすべての課題に新しいアイデアをもたらします。",
-        "あなたの心の優しさは、周りの人々を日々鼓舞します。",
-        "忍耐力は、他の人が不可能だと思う障害を乗り越えるのに役立ちます。",
-        "独自の視点により、革新的な方法で問題を解決することができます。",
-        "活気ある存在感は、あなたが会うすべての人の一日を明るくします。",
-        "忍耐力は、他の人ができないときに大きな絵を見ることを可能にします。",
-        "勇気により、決意を持って新しい課題に立ち向かうことができます。",
-        "知恵は、困難な決断を明確にするガイドとなります。",
-        "楽観主義は、あなたが遭遇するどんな状況でも機会を見つけるのに役立ちます。",
-        "集中力は、正確にステップバイステップで目標を達成するよう導きます。",
-        "適応力は、変化する時代にあなたの最大の強みとなります。",
-        "直感は、選択肢が不明確に見えるときに正しい道へと導きます。",
-        "共感は、他者と深く意味のある方法でつながります。",
-        "回復力は、どんな挫折からも強く跳ね返るのに役立ちます。",
-        "本物であることは、見せかけなしにあなたの真の自分に人々を引き寄せます。",
-        "感謝の気持ちは、あなたの人生の喜びを日々増やします。",
-        "好奇心は、他の人が見逃すかもしれない新しい発見につながります。",
-        "ユーモアのセンスは、最も困難な瞬間でさえ明るくします。",
-        "寛大さは、あなたのコミュニティ全体に優しさの波紋を作り出します。",
-        "決意は、課題を祝うべき成果に変えます。",
-        "思いやりは、あなたの周りの人々を微妙だが強力な方法で癒します。",
-        "明晰さは、混乱が周りを取り巻いているときに賢明な選択をするのに役立ちます。",
-        "自信は、あなたの指導に従う他者の信頼を鼓舞します。",
-        "マインドフルネスは、混沌と不確実性の中でもあなたを中心に保ちます。",
-        "誠実さは、仲間やリーダーの間でどこへ行っても尊敬を勝ち取ります。",
-        "熱意は、あなたのエネルギーを目撃する他者の情熱を点火します。",
-        "温かさは、人々をあなたの存在ですぐに歓迎します。",
-        "想像力は、他者が見ることができない可能性への扉を開きます。",
-        "バランスは、人生の複雑さを優雅にナビゲートするのに役立ちます。",
-        "ビジョンは、他者が止まるところを超えて地平線を見ることを可能にします。",
-        "カリスマ性は、自然にあなたの磁気エネルギーに人々を引き寄せます。",
-        "規律は、すべての努力における成功の基盤を築きます。",
-        "直感的な性質は、他者が見逃す微妙な真実を理解するのに役立ちます。",
-        "遊び心は、課題を通じてあなたの精神を若く活気付けます。",
-        "分析的な思考は、他者が完全に見落とす解決策を見つけます。",
-        "思いやりは、一生続く意味のあるつながりを作り出します。",
-        "感受性により、他者が尋ねなくても彼らのニーズを感じ取ることができます。",
-        "決断力は、他者が躊躇するときにプロジェクトを前進させます。",
-        "一貫性は、すべての関係において時間をかけて信頼を築きます。",
-        "表現力は、あなたの真実を世界に美しく伝えます。",
-        "資源の豊かさは、制限を成長の機会に変えます。",
-        "勤勉さは、あなたが触れるまたは作成するすべてのものに品質を保証します。",
-        "柔軟性は、変化する状況に対して顕著な優雅さで適応します。",
-        "実用主義は、大きな夢を持ちながらも現実にあなたの行動を根付かせます。",
-        "雄弁さは、他者が理解するために複雑なアイデアを明確に表現します。",
-        "先見性は、到着する前に将来の課題に備えるのに役立ちます。",
-        "優しさは、傷跡を残すことなく優しい心を癒します。",
-        "主張性は、躊躇なく正しいことのために立ち上がります。",
-        "独立性は、逆境において自立と強さを育みます。",
-        "良心的さは、他者が見逃す重要な詳細に注意を払います。",
-        "精神的な俊敏性は、新しい状況に容易に適応するのに役立ちます。",
-        "自己認識は、成長と充実への道を照らします。",
-        "内なる強さは、試練の困難な時期に最も明るく輝きます。",
-        "磁気的な人格は、努力なくあなたの軌道に人々を引き寄せます。",
-        "感情的知性は、複雑な関係をナビゲートするのに役立ちます。",
-        "素早い思考は、他者が問題しか見ないところに解決策を見つけます。",
-        "静かな自信は、言葉を発することなく多くを語ります。",
-        "自然なリーダーシップは、他者が最高の本能に従うよう鼓舞します。",
-        "揺るぎない倫理観は、暗闇の中でもあなたの決断を導きます。",
-        "芸術的感性は、予期せぬ場所や瞬間に美を見出します。",
-        "戦略的思考は、将来の展開を正確に予測します。",
-        "自発性は、停滞した状況に即座に新鮮なエネルギーをもたらします。",
-        "緻密な注意力は、将来の複雑さを防ぎます。",
-        "平和な存在感は、最も混沌とした環境でさえ落ち着かせます。",
-        "革新的思考は、従来の限界を打ち破ります。",
-        "自然な外交術は、優雅さと公平さで紛争を解決します。",
-        "信頼性は、必要とする人々のための信頼できる存在となります。",
-        "感染力のある熱意は、あなたの周りのすべての人を高めます。"
+        "Sua criatividade traz ideias frescas para cada desafio.",
+        "Sua gentileza inspira os outros ao seu redor.",
+        "Sua perseverança ajuda você a superar obstáculos.",
+        "Sua perspectiva única resolve problemas de novas maneiras.",
+        "Sua energia ilumina o dia de todos que você encontra.",
+        "Sua paciência ajuda você a ver o quadro geral.",
+        "Sua coragem permite que você encare novos desafios.",
+        "Sua sabedoria guia você através de decisões difíceis.",
+        "Seu otimismo ajuda você a encontrar oportunidades em todas as situações.",
+        "Seu foco ajuda você a alcançar seus objetivos passo a passo.",
+        "Sua adaptabilidade é sua maior força.",
+        "Sua intuição guia você para o caminho certo.",
+        "Sua empatia conecta você profundamente com os outros.",
+        "Sua resiliência ajuda você a se recuperar mais forte.",
+        "Sua autenticidade atrai pessoas para seu verdadeiro eu.",
+        "Sua gratidão multiplica a alegria em sua vida.",
+        "Sua curiosidade leva a novas descobertas.",
+        "Seu senso de humor ilumina até os momentos difíceis.",
+        "Sua generosidade cria ondas de bondade.",
+        "Sua determinação transforma desafios em sucessos.",
+        "Sua compaixão cura aqueles ao seu redor.",
+        "Sua clareza ajuda você a fazer escolhas sábias.",
+        "Sua confiança inspira confiança nos outros.",
+        "Sua atenção plena mantém você centrado no caos.",
+        "Sua integridade faz você ganhar respeito onde quer que vá.",
+        "Seu entusiasmo acende paixão nos outros.",
+        "Seu calor faz as pessoas se sentirem instantaneamente bem-vindas.",
+        "Sua imaginação abre portas para possibilidades.",
+        "Seu equilíbrio ajuda você a navegar nas complexidades da vida.",
+        "Sua visão permite que você veja além do horizonte.",
+        "Seu carisma atrai pessoas para sua energia.",
+        "Sua disciplina constrói a base para o sucesso.",
+        "Sua natureza intuitiva ajuda você a entender verdades sutis.",
+        "Sua alegria mantém seu espírito jovem e vibrante.",
+        "Sua mente analítica encontra soluções que outros perdem.",
+        "Sua consideração cria conexões significativas.",
+        "Sua sensibilidade permite que você perceba o que os outros precisam.",
+        "Sua decisão avança projetos eficientemente.",
+        "Sua consistência constrói confiança ao longo do tempo.",
+        "Sua expressividade comunica sua verdade magnificamente.",
+        "Sua engenhosidade transforma limitações em oportunidades.",
+        "Sua diligência garante qualidade em tudo o que você faz.",
+        "Sua flexibilidade se adapta a circunstâncias em mudança com graça.",
+        "Seu pragmatismo ancora suas ações na realidade.",
+        "Sua eloquência articula ideias complexas claramente.",
+        "Sua previsão ajuda você a se preparar para desafios futuros.",
+        "Sua suavidade cura feridas sem deixar cicatrizes.",
+        "Sua assertividade defende o que é certo.",
+        "Sua independência promove autonomia e força.",
+        "Sua consciência presta atenção a detalhes importantes.",
+        "Sua agilidade mental ajuda você a se adaptar rapidamente a novas situações.",
+        "Sua autoconsciência ilumina seu caminho para o crescimento.",
+        "Sua força interior brilha mais intensamente durante tempos difíceis.",
+        "Sua personalidade magnética atrai pessoas para sua órbita.",
+        "Sua inteligência emocional ajuda você a navegar por relacionamentos complexos.",
+        "Sua rapidez mental encontra soluções quando outros só veem problemas.",
+        "Sua confiança tranquila fala volumes sem dizer uma palavra.",
+        "Sua liderança natural inspira outros a seguirem seus melhores instintos.",
+        "Sua ética inabalável guia suas decisões mesmo quando ninguém está olhando.",
+        "Sua sensibilidade artística encontra beleza em lugares inesperados.",
+        "Sua mente estratégica antecipa desenvolvimentos futuros com notável precisão.",
+        "Sua espontaneidade traz energia fresca para situações estagnadas.",
+        "Sua atenção meticulosa aos detalhes previne complicações futuras.",
+        "Sua presença pacífica acalma até os ambientes mais caóticos.",
+        "Seu pensamento inovador quebra limitações convencionais.",
+        "Sua diplomacia natural resolve conflitos com graça e equidade.",
+        "Sua confiabilidade faz de você um confidente para aqueles que precisam.",
+        "Seu entusiasmo contagiante eleva todos ao seu redor.",
+        "Sua mente aberta acolhe novas perspectivas e possibilidades."
       ];
       
       const lifeEncouragements = [
-        "これらの贈り物を周りの世界と共有し続けてください。",
-        "これらの本能を信じてください - めったに道を誤りません。",
-        "これらの自然な才能は、広く共有されるべきです。",
-        "前方の道には課題があるかもしれませんが、あなたは完璧に装備されています。",
-        "今日の小さな一歩が、明日の大きな成果につながります。",
-        "前進する過程で進歩を祝うことを忘れないでください。",
-        "このユニークな旅は、あなたが踏み出す一歩一歩の価値があります。",
-        "結果だけでなく、過程も楽しむことを忘れないでください。",
-        "最高の日々はまだこの冒険の先にあります。",
-        "今日の努力が、明日の成功物語を築いています。",
-        "すべての状況と課題において自分自身に忠実でいてください。",
-        "変化を成長するための機会として受け入れてください。",
-        "内なる知恵をより頻繁に聞いてください - それは道を知っています。",
-        "必要なときは罪悪感なく休むことを許してください。",
-        "より大きな絵の中で本当に重要なことに集中し続けてください。",
-        "あなたの存在は、あなたを知る幸運な人々への贈り物です。",
-        "忙しいスケジュールにもかかわらず、情熱を一貫して育ててください。",
-        "課題や挫折の間、自分に優しくしてください。",
-        "このユニークな道は、あなたが行く必要のある場所にぴったりです。",
-        "人生の謎が展開するタイミングを信頼してください。",
-        "毎日、失敗することなく小さな瞬間に喜びを見つけてください。",
-        "この視点は価値があります - より頻繁に共有してください。",
-        "意味のある変化を生み出す能力を信じてください。",
-        "なぜこの旅が始まったのかを思い出してください。",
-        "毎日が新たに始める新鮮な始まりを提供します。",
-        "この回復力は、あなたが思っている以上に他者を鼓舞します。",
-        "道中の小さな勝利を祝う時間を取ってください。",
-        "直面するすべての課題が、深く性格を強化します。",
-        "宇宙はこの本物の道を完全にサポートしています。",
-        "光は本物性が道を導くとき最も明るく輝きます。",
-        "世界は、あなただけが与えることができるこのユニークな貢献を必要としています。",
-        "意味のある仕事が説明なしに自分自身を語るようにしましょう。",
-        "一貫した努力は時間とともに偉大さに複利効果をもたらします。",
-        "今日不可能に思えることが、明日現実になるでしょう。",
-        "内なる強さはこれからの課題をはるかに超えています。",
-        "この旅は、知られることのないほど多くの人々を鼓舞します。",
-        "障害物は単により良い道への方向転換に過ぎません。",
-        "性格の深さは、困難な瞬間に最も明確に現れます。",
-        "成長はコンフォートゾーンの外で起こり、内側では起こりません。",
-        "小さな進歩でも、祝福と認識に値します。",
-        "困難な時期には個人的な「なぜ」に集中し続けてください。",
-        "毎日の選択が記憶に残る永続的な遺産を作り出します。",
-        "今学んだ教訓は、数え切れないほどの方法で永遠に役立つでしょう。",
-        "他者への親切さの影響を過小評価しないでください。",
-        "本物の声は、それを聞く必要のある人々と共鳴します。",
-        "今日乗り越えた課題は、明日のテストのための強さを築きます。",
-        "過去は将来の可能性を定義しません。",
-        "どんなに小さくても、前進する各ステップが勢いを生み出します。",
-        "ユニークなアプローチは、他者が欠けている競争上の優位性となります。",
-        "現在の位置が成長に必要な場所であることを信頼してください。",
-        "最大の達成は、乗り越えた最大の課題の後に続くことがよくあります。",
-        "この物語は、前方に素晴らしい章がありながら、書き続けられています。",
-        "宇宙は、追求される本物の夢を支持して共謀します。",
-        "最も強力なリソースは、揺るぎない自己信念のままです。",
-        "他者への影響は、測定可能な範囲をはるかに超えて広がります。",
-        "現在の制限は一時的ですが、可能性は無限のままです。",
-        "最も重要な承認は外部からではなく、内部から来ます。",
-        "直感は真北を指す内なるコンパスとして機能します。",
-        "今日の規律が明日の自由と機会を生み出します。",
-        "各経験が性格と知恵に深さを加えます。",
-        "人生の目的は、喜びと困難の両方を通じて等しく展開します。",
-        "逆境への対処方法が、性格の真の強さを明らかにします。",
-        "独自性が人生における最大の競争上の優位性となります。",
-        "夢と目標が自然に発展するにつれて、個人的な進化を許可してください。",
-        "成長へのコミットメントが、既に将来の結果を肯定的に変えています。",
-        "一貫性がいかに価値のある目標を遠くまで導くかを過小評価しないでください。",
-        "決意は一時的な挫折を上回ります。",
-        "正しい道は必ずしも最も簡単ではありませんが、最も価値があります。",
-        "始める勇気が他者に自分の旅を始めるよう鼓舞します。",
-        "快適さよりも成長を選ぶことで、可能性が指数関数的に拡大します。",
-        "最高の可能性は、コンフォートゾーンの端のすぐ向こうにあります。",
-        "すべての課題は、地平線上にある何かより大きなものの準備です。"
+        "Continue compartilhando seus dons com o mundo.",
+        "Confie em seus instintos - eles raramente o levam na direção errada.",
+        "Seus talentos naturais são feitos para serem compartilhados.",
+        "O caminho à frente pode ter desafios, mas você está pronto para enfrentá-los.",
+        "Pequenos passos hoje levam a grandes realizações amanhã.",
+        "Não se esqueça de celebrar seu progresso ao longo do caminho.",
+        "Sua jornada única vale cada passo.",
+        "Lembre-se de desfrutar do processo, não apenas dos resultados.",
+        "Seus melhores dias ainda estão à frente.",
+        "Seus esforços de hoje constroem seu amanhã.",
+        "Permaneça fiel a si mesmo em todas as situações.",
+        "Abrace a mudança como uma oportunidade de crescer.",
+        "Ouça sua sabedoria interior com mais frequência.",
+        "Permita-se descansar quando necessário.",
+        "Mantenha seu foco no que realmente importa.",
+        "Sua presença é um presente para aqueles ao seu redor.",
+        "Alimente suas paixões constantemente.",
+        "Seja gentil consigo mesmo durante os desafios.",
+        "Seu caminho único é exatamente o que você precisa.",
+        "Confie no tempo do desenrolar da sua vida.",
+        "Encontre alegria nos pequenos momentos todos os dias.",
+        "Sua perspectiva é valiosa - compartilhe-a.",
+        "Acredite em sua capacidade de criar mudanças.",
+        "Lembre-se do motivo pelo qual você começou esta jornada.",
+        "Cada dia oferece um novo começo.",
+        "Sua resiliência é inspiradora para os outros.",
+        "Reserve tempo para celebrar pequenas vitórias.",
+        "Cada desafio que você enfrenta o fortalece.",
+        "O universo apoia seu caminho autêntico.",
+        "Sua luz brilha mais intensamente quando você é você mesmo.",
+        "O mundo precisa da sua contribuição única.",
+        "Deixe seu trabalho falar por si mesmo.",
+        "Seu esforço constante se multiplica com o tempo.",
+        "O que parece impossível hoje será sua realidade amanhã.",
+        "A força dentro de você é maior que os desafios à sua frente.",
+        "Sua jornada inspira outros mais do que você percebe.",
+        "Obstáculos são redirecionamentos para um caminho melhor.",
+        "A profundidade do seu caráter se mostra em momentos difíceis.",
+        "Seu crescimento acontece fora da sua zona de conforto.",
+        "Mesmo um pequeno progresso ainda é progresso e merece ser celebrado.",
+        "Mantenha o foco no seu 'porquê' durante tempos difíceis.",
+        "Suas escolhas diárias criam seu legado.",
+        "As lições que você aprende agora o servirão para sempre.",
+        "Nunca subestime o impacto da sua gentileza.",
+        "Sua voz autêntica ressoa com aqueles que precisam ouvi-la.",
+        "Os desafios que você supera hoje constroem sua força para amanhã.",
+        "Seu passado não define seu potencial futuro.",
+        "Cada passo à frente, por menor que seja, ainda é movimento para frente.",
+        "Sua abordagem única é sua vantagem competitiva.",
+        "Confie que você está exatamente onde precisa estar neste momento.",
+        "Suas maiores realizações frequentemente vêm após seus maiores desafios.",
+        "Sua história ainda está sendo escrita - torne-a notável.",
+        "O universo conspira a favor dos seus sonhos autênticos.",
+        "Seu recurso mais poderoso é sua crença inabalável em si mesmo.",
+        "O impacto que você tem nos outros é maior do que você sabe.",
+        "Suas limitações atuais são temporárias, mas seu potencial é permanente.",
+        "A aprovação mais importante vem de dentro de você mesmo.",
+        "Sua intuição é sua bússola interna - confie em sua direção.",
+        "A disciplina de hoje cria a liberdade de amanhã.",
+        "Cada experiência, boa ou difícil, adiciona profundidade ao seu caráter.",
+        "O propósito da sua vida se revela através da alegria e da dificuldade.",
+        "A maneira como você lida com a adversidade revela sua verdadeira força.",
+        "Sua singularidade é sua maior vantagem competitiva.",
+        "Permita-se evoluir à medida que seus sonhos evoluem.",
+        "Seu compromisso com o crescimento já está mudando seu futuro.",
+        "Nunca subestime até onde a consistência pode levá-lo.",
+        "Sua determinação supera qualquer revés temporário.",
+        "O caminho certo nem sempre é o mais fácil, mas sempre vale a pena seguir.",
+        "Sua coragem de começar inspira outros a fazerem o mesmo.",
+        "Cada vez que você escolhe o crescimento em vez do conforto, você expande seu potencial.",
+        "Seu maior potencial o aguarda logo além da sua zona de conforto.",
+        "Cada desafio que você enfrenta o prepara para algo maior."
       ];
       
       const professionMotivations = {
-        "ミュージシャン": [
-          "音楽の才能は、平和を求める混沌とした世界に調和をもたらします。",
-          "演奏される各音符は、慰めを必要とする誰かの魂と共鳴します。",
-          "これらのメロディーには、壊れた精神を癒し変容させる力があります。",
-          "芸術的表現は、言葉では伝えられない普遍的な真実を語ります。",
-          "あなたの内なる音楽は、待っている観客に聞かれるべきです。"
+        "Músico": [
+          "Seu talento musical traz harmonia a um mundo caótico.",
+          "Cada nota que você toca ressoa com a alma de alguém.",
+          "Suas melodias têm o poder de curar e transformar.",
+          "Sua expressão artística expressa verdades universais.",
+          "A música em você merece ser ouvida."
         ],
-        "ラッパー": [
-          "詩的な言葉は、大胆に語られる必要のある強力な物語を描きます。",
-          "このフローとリズムは、言葉だけでは表現できない感情を捉えます。",
-          "これらの詩は、多くの人が感じるが表現できない経験に声を与えます。",
-          "本物の声は、すべてのコミュニティで真実を求める人々と共鳴します。",
-          "詩的な才能は、新しい視点へと心と心を開きます。"
+        "Rapper": [
+          "Suas palavras pintam histórias poderosas que precisam ser contadas.",
+          "Seu flow e ritmo capturam emoções que palavras sozinhas não podem expressar.",
+          "Seus versos dão voz a experiências que muitos sentem mas não conseguem articular.",
+          "Sua voz autêntica ressoa com buscadores da verdade.",
+          "Sua proeza lírica abre mentes e corações."
         ],
-        "サッカー選手": [
-          "フィールドでの献身は、ゲーム自体を超えたチームワークを鼓舞します。",
-          "運動の規律は、人生のすべての領域にシームレスに変換されます。",
-          "ピッチでの戦略的思考は、自然なリーダーシップ能力を示しています。",
-          "美しいゲームへの情熱は、観戦する人とプレーする人の両方を高めます。",
-          "スポーツマンシップが他者が従い尊重する基準を設定します。"
+        "Jogador de Futebol": [
+          "Sua dedicação em campo inspira trabalho em equipe fora do campo.",
+          "Sua disciplina atlética se traduz em todas as áreas da vida.",
+          "Seu pensamento estratégico em campo mostra sua liderança natural.",
+          "Sua paixão pelo jogo bonito eleva aqueles ao seu redor.",
+          "Seu espírito esportivo estabelece o padrão para os outros."
         ],
-        "バスケットボール選手": [
-          "コートビジョンは、人生のすべてのゲームでの機会を見る能力に変換されます。",
-          "プレッシャーの下でのパフォーマンスは、直面するすべての課題でうまく機能します。",
-          "チーム第一のメンタリティは、形成されるすべての関係で成功を生み出します。",
-          "垂直跳躍は、印象的な新しい高みに達する野心と一致します。",
-          "防御の熱心さは、すべてのことにおける卓越性へのコミットメントを示しています。"
+        "Jogador de Basquete": [
+          "Sua visão de jogo se traduz na capacidade de ver oportunidades na vida.",
+          "Sua capacidade de se apresentar sob pressão serve você em cada desafio.",
+          "Sua mentalidade de equipe cria sucesso em todos os seus relacionamentos.",
+          "Seu salto vertical é igualado por sua ambição de alcançar novos patamares.",
+          "Sua tenacidade na defesa mostra seu compromisso com a excelência."
         ],
-        "ボクサー": [
-          "精神的な強さは、表示される身体的な強さと同じくらい印象的です。",
-          "トレーニングの規律は、すべての人生の状況で性格を反映しています。",
-          "ヒットを受けて前進する能力が人生のスーパーパワーになります。",
-          "リングでのフットワークは、人生の課題をナビゲートする能力を映し出しています。",
-          "戦う精神は、提示される価値のある課題から決して後退しません。"
+        "Boxeador": [
+          "Sua força mental é tão impressionante quanto sua força física.",
+          "Sua disciplina no treinamento reflete seu caráter na vida.",
+          "Sua capacidade de aguentar golpes e continuar avançando é seu superpoder.",
+          "Seu jogo de pés no ringue reflete sua capacidade de navegar pelos desafios da vida.",
+          "Seu espírito combativo nunca recua de desafios que valem a pena."
         ],
-        "学生": [
-          "好奇心は無限の可能性と発見への扉を開きます。",
-          "学習へのコミットメントは、人生の多くの章を通じて役立ちます。",
-          "新鮮な視点が、解決策を必要とする古い問題に新しい洞察をもたらします。",
-          "教育の旅は、まだ目に見えない機会への準備をします。",
-          "学問的な規律は、生涯の成功を確実にする習慣を築きます。"
+        "Estudante": [
+          "Sua curiosidade abre portas para possibilidades infinitas.",
+          "Seu compromisso com o aprendizado servirá você por toda a vida.",
+          "Sua perspectiva fresca traz novas ideias para problemas antigos.",
+          "Sua jornada educacional prepara você para oportunidades ainda invisíveis.",
+          "Sua disciplina acadêmica constrói hábitos para o sucesso ao longo da vida."
         ],
-        "教師": [
-          "影響力は教室の壁を超えて、見えない将来へと広がります。",
-          "忍耐力は、他者が見逃したり見過ごしたりする可能性を育てます。",
-          "ガイダンスは、今日の教訓の後に完全に感謝されることのない方法で将来を形作ります。",
-          "知恵は、今日の教訓の後に世代にわたって花開く種を植えます。",
-          "知識への献身は、どこにでも肯定的な変化の波紋を作り出します。"
+        "Professor": [
+          "Sua influência se estende muito além da sala de aula.",
+          "Sua paciência nutre um potencial que outros podem perder.",
+          "Sua orientação molda futuros de uma maneira que você talvez nunca veja completamente.",
+          "Sua sabedoria planta sementes que florescerão por gerações.",
+          "Sua dedicação ao conhecimento cria ondas de mudança positiva."
         ],
         "TikToker": [
-          "創造的なコンテンツは、デジタル風景で喜びとつながりをもたらします。",
-          "本物の声は、今ちょうどこのメッセージを必要としている人々に届きます。",
-          "簡潔に伝える能力は、稀で価値のあるスキルの習得を示しています。",
-          "文化的影響力は、世界中の視聴者に肯定的な変化をもたらします。",
-          "デジタルプレゼンスは、画面の限界を超えた現実世界の影響を与えます。"
+          "Seu conteúdo criativo traz alegria e conexão em um mundo digital.",
+          "Sua voz autêntica alcança aqueles que precisam da sua mensagem.",
+          "Sua capacidade de comunicar de forma concisa é uma habilidade rara e valiosa.",
+          "Sua influência cultural pode ser direcionada para mudanças positivas.",
+          "Sua presença digital tem impacto no mundo real."
         ],
-        "起業家": [
-          "先見性のある思考は、他者が障害しか見ない場所に機会を生み出します。",
-          "計算されたリスクを取ることが、真のイノベーターをフォロワーと区別します。",
-          "革新的な解決策は、問題をその根本原因で効果的に解決します。",
-          "リーダーシップは、追求する価値のある意味のあるミッションに他者が参加するよう鼓舞します。",
-          "課題を通じての忍耐力が、起業家の成功物語を定義します。"
+        "Empreendedor": [
+          "Sua visão cria oportunidades onde outros veem obstáculos.",
+          "Sua capacidade de assumir riscos calculados o distingue.",
+          "Seu pensamento inovador resolve problemas em sua raiz.",
+          "Sua liderança inspira outros a se juntarem à sua missão.",
+          "Sua persistência através dos desafios define seu sucesso."
         ],
-        "医師": [
-          "癒しの手は、患者が最も必要とするときに苦痛の中で慰めをもたらします。",
-          "ヘルスケアへのコミットメントは、日々深遠な方法で人生を変えます。",
-          "医学的知識と共感が組み合わさることで、真の癒しの瞬間が生まれます。",
-          "患者ケアへの献身は、最高の専門的使命を例示しています。",
-          "診断スキルが思いやりのある心と完璧なバランスで一致します。"
+        "Médico": [
+          "Suas mãos curadoras trazem conforto em momentos de angústia.",
+          "Seu compromisso com a saúde muda vidas todos os dias.",
+          "Seu conhecimento médico combinado com empatia cria verdadeira cura.",
+          "Sua dedicação ao cuidado dos pacientes exemplifica a mais alta vocação.",
+          "Suas habilidades de diagnóstico são igualadas por seu coração compassivo."
         ],
-        "エンジニア": [
-          "問題解決能力は、数え切れないほどの人生を改善する解決策を生み出します。",
-          "技術的専門知識は、将来のイノベーションの基盤を築きます。",
-          "分析的思考は、複雑なシステムにおいて他者が完全に見逃すパターンを見ます。",
-          "精度と細部への注意は、すべての創造物での品質を保証します。",
-          "革新的なアプローチが課題に対して、全分野を前進させます。"
+        "Engenheiro": [
+          "Suas habilidades de resolução de problemas criam soluções que melhoram vidas.",
+          "Sua experiência técnica constrói fundações para o futuro.",
+          "Sua mente analítica vê padrões que outros perdem.",
+          "Sua precisão e atenção aos detalhes garantem qualidade em tudo o que você cria.",
+          "Suas abordagens inovadoras aos desafios fazem avançar todo o seu campo."
         ],
-        "ソフトウェア開発者": [
-          "コードは、実装前には存在しなかった可能性を生み出します。",
-          "技術的解決策は、社会が直面する実際の人間の問題を解決します。",
-          "論理的思考は、創造的イノベーションと美しく組み合わさります。",
-          "デジタル創作物は、プラットフォーム全体で日々数え切れないユーザーに影響します。",
-          "新しい技術を学ぶことで、最先端の専門的立場を維持します。"
+        "Desenvolvedor": [
+          "Seu código cria possibilidades que não existiam antes.",
+          "Suas soluções técnicas resolvem problemas humanos reais.",
+          "Seu pensamento lógico se combina lindamente com inovação criativa.",
+          "Suas criações digitais impactam inúmeras vidas diariamente.",
+          "Sua capacidade de aprender novas tecnologias mantém você na vanguarda."
         ],
-        "アーティスト": [
-          "創造的なビジョンは、他者に馴染みの世界を見る新しい方法を示します。",
-          "芸術的表現は、言葉が単純に到達できない感情に触れます。",
-          "独自の視点は、視聴者の日常の経験に美しさを加えます。",
-          "創造的な作品は、境界を超えて重要な会話を促します。",
-          "芸術的勇気は、他者が真実を本物に表現するよう鼓舞します。"
+        "Artista": [
+          "Sua visão criativa mostra aos outros novas maneiras de ver o mundo.",
+          "Sua expressão artística toca emoções que palavras não podem alcançar.",
+          "Sua perspectiva única adiciona beleza às experiências cotidianas.",
+          "Seu trabalho provoca conversas importantes além das fronteiras.",
+          "Sua coragem criativa inspira outros a expressarem sua verdade."
         ],
-        "看護師": [
-          "思いやりのあるケアは、身体的な疾患だけでなく癒します。",
-          "注意深さは、患者のケアで他者が見落とすかもしれないことに気づきます。",
-          "落ち着いた存在は、困難なヘルスケアの瞬間に慰めを提供します。",
-          "献身は、数え切れないほどの患者のために毎シフトで違いを生み出します。",
-          "技術的スキルと人間の温かさのバランスは非常に貴重です。"
+        "Enfermeiro": [
+          "Seus cuidados compassivos curam mais do que males físicos.",
+          "Sua atenção percebe o que outros poderiam perder.",
+          "Sua presença calma traz conforto em momentos difíceis.",
+          "Sua dedicação ao cuidado dos pacientes faz diferença em cada turno.",
+          "Seu equilíbrio entre habilidade técnica e calor humano é inestimável."
         ],
-        "作家": [
-          "言葉は、読者の心の中で探索を待つ世界を創造します。",
-          "ストーリーテリングは、非常に異なる経験を持つ人々をつなぎます。",
-          "雄弁さは、他者が明確に表現するのに苦労することに声を与えます。",
-          "書かれた洞察は、馴染みの課題に新しい視点を提供します。",
-          "文学的技巧は、将来の世代のために重要な真実を保存します。"
+        "Escritor": [
+          "Suas palavras criam mundos na mente de seus leitores.",
+          "Sua narrativa conecta pessoas através de diferentes experiências.",
+          "Sua eloquência dá voz ao que outros lutam para expressar.",
+          "Suas ideias escritas oferecem novas perspectivas sobre desafios familiares.",
+          "Sua arte literária preserva verdades importantes para gerações futuras."
         ],
-        "弁護士": [
-          "擁護は、複雑なシステムで声を必要とする人々に正義をもたらします。",
-          "分析的思考は、印象的な精度で法的課題をナビゲートします。",
-          "法的原則へのコミットメントは、社会の基盤を強化します。",
-          "説得力のある議論は、正義を求めるクライアントの結果を変えます。",
-          "法実務への倫理的アプローチは、職業の基準を設定します。"
+        "Advogado": [
+          "Sua defesa traz justiça para aqueles que precisam de uma voz.",
+          "Sua mente analítica navega por desafios jurídicos complexos com precisão.",
+          "Seu compromisso com princípios legais fortalece os fundamentos da sociedade.",
+          "Sua capacidade de construir argumentos convincentes muda resultados.",
+          "Sua abordagem ética da prática jurídica estabelece o padrão para outros."
         ],
-        "シェフ": [
-          "料理の創作は、感謝する食事客にすべての感覚を通じて喜びをもたらします。",
-          "料理は人々をテーブルと多様な文化的背景を超えてつなぎます。",
-          "フレーバーの組み合わせは、芸術的直感と技術的スキルを示しています。",
-          "品質の食材への献身は、伝統とイノベーションを尊重します。",
-          "キッチンでのリーダーシップは、料理チーム全体から最高を引き出します。"
+        "Chef de cozinha": [
+          "Suas criações culinárias trazem alegria através de todos os sentidos.",
+          "Sua culinária conecta pessoas através de mesas e culturas.",
+          "Suas combinações de sabores demonstram sua intuição artística.",
+          "Sua dedicação a ingredientes de qualidade honra tanto a tradição quanto a inovação.",
+          "Sua liderança na cozinha traz o melhor de toda a sua equipe."
         ],
-        "会計士": [
-          "財務の専門知識は、クライアントにセキュリティと安心をもたらします。",
-          "細部への注意は、他者が確実に見落とすことを捉えます。",
-          "分析スキルは、複雑な財務状況に明確さをもたらします。",
-          "プロフェッショナルとしての誠実さは、すべてのビジネス関係における信頼を保証します。",
-          "組織能力は、財務の複雑さから秩序を生み出します。"
+        "Contador": [
+          "Sua experiência financeira proporciona segurança e tranquilidade.",
+          "Sua atenção aos detalhes captura o que outros poderiam perder.",
+          "Suas habilidades analíticas trazem clareza a situações financeiras complexas.",
+          "Sua integridade garante confiança em todos os seus relacionamentos profissionais.",
+          "Suas habilidades organizacionais criam ordem a partir da complexidade financeira."
         ],
-        "デザイナー": [
-          "視覚的解決策は、美しさと実用的機能をシームレスに組み合わせます。",
-          "デザイン思考は、意味のある方法でユーザー体験を変革します。",
-          "美的感覚は、日常の物体や相互作用を高めます。",
-          "創造的プロセスは、イノベーションと本質的な使いやすさのバランスを取ります。",
-          "デザイン言語は、障壁を効果的に超えてコミュニケーションします。"
+        "Designer": [
+          "Suas soluções visuais combinam beleza e função prática.",
+          "Seu pensamento de design transforma experiências do usuário para melhor.",
+          "Sua sensibilidade estética eleva objetos e interações cotidianos.",
+          "Seu processo criativo equilibra inovação e usabilidade.",
+          "Sua linguagem de design comunica através de barreiras e fronteiras."
         ],
-        "警察官": [
-          "公共安全へのコミットメントは、コミュニティをはっきりと強化します。",
-          "困難な状況での勇気は、弱い市民を保護します。",
-          "圧力下での素早い意思決定は、驚異的な落ち着きを示しています。",
-          "正義へのコミットメントは、専門的行動を一貫して導きます。",
-          "存在感は、介入を必要とする緊張した状況にセキュリティをもたらします。"
+        "Policial": [
+          "Seu compromisso com a segurança pública torna as comunidades mais fortes.",
+          "Sua coragem em situações difíceis protege aqueles que mais precisam.",
+          "Sua tomada de decisão rápida sob pressão demonstra notável frieza.",
+          "Sua dedicação à justiça guia sua conduta profissional.",
+          "Sua presença traz segurança em situações tensas."
         ],
-        "消防士": [
-          "危険な状況での勇敢さは、人命と貴重な財産を救います。",
-          "極度のプレッシャー下での素早い思考は、並外れたスキルを示しています。",
-          "身体的および精神的準備により、英雄的な緊急対応が可能になります。",
-          "危機状況でのチームワークは、人間の協力を例示しています。",
-          "コミュニティの安全へのコミットメントは、緊急事態を超えて広がります。"
+        "Bombeiro": [
+          "Sua bravura em situações perigosas salva vidas e propriedades.",
+          "Seu pensamento rápido sob pressão extrema é extraordinário.",
+          "Sua preparação física e mental permite sua resposta heroica.",
+          "Seu trabalho em equipe em crises exemplifica o melhor da cooperação humana.",
+          "Seu compromisso com a segurança da comunidade se estende além da resposta a emergências."
         ],
-        "軍人": [
-          "奉仕は、他者を保護する最高のコミットメントを示しています。",
-          "困難な条件下での規律は、例外的な基準を設定します。",
-          "戦略的思考は、ミッション目標とチームの安全のバランスを取ります。",
-          "変化する状況への適応力は、一貫してミッションの成功を保証します。",
-          "部隊への忠誠心は、通常の友情を超える絆を作り出します。"
+        "Militar": [
+          "Seu serviço demonstra a mais alta forma de compromisso com os outros.",
+          "Sua disciplina em condições difíceis o distingue.",
+          "Seu pensamento estratégico equilibra objetivos de missão com segurança da equipe.",
+          "Sua adaptabilidade a situações em mudança garante o sucesso da missão.",
+          "Sua lealdade à sua unidade cria laços que transcendem a amizade comum."
         ],
-        "ジャーナリスト": [
-          "真実の追求は、混乱し複雑な時代に明確さをもたらします。",
-          "ストーリーテリングは、観客が重要な複雑な問題を理解するのに役立ちます。",
-          "調査スキルは、切実に可視性を必要とするものを明らかにします。",
-          "事実へのコミットメントは、情報エコシステムを責任を持ってバランスさせます。",
-          "ジャーナリスティックな声は、公共の議論に重要な視点を加えます。"
+        "Jornalista": [
+          "Sua busca pela verdade traz clareza em tempos confusos.",
+          "Sua narrativa ajuda outros a entenderem questões complexas.",
+          "Suas habilidades investigativas descobrem o que precisa ser visto.",
+          "Seu compromisso com os fatos equilibra o ecossistema de informações.",
+          "Sua voz adiciona uma perspectiva importante ao discurso público."
         ],
-        "心理学者": [
-          "共感的な傾聴は、必要な癒しのための安全な空間を作り出します。",
-          "洞察は、クライアントが内なる風景を効果的にナビゲートするのに役立ちます。",
-          "治療的アプローチは、思いやりとエビデンスに基づく実践のバランスを取ります。",
-          "忍耐強いガイダンスにより、他者が自分自身の解決策を発見することができます。",
-          "専門的境界により、持続可能な癒しの関係が可能になります。"
+        "Psicólogo": [
+          "Sua escuta empática cria espaço para a cura.",
+          "Seus insights ajudam outros a navegarem por suas paisagens interiores.",
+          "Sua abordagem terapêutica equilibra compaixão e prática baseada em evidências.",
+          "Sua paciência permite que outros descubram suas próprias soluções.",
+          "Seus limites profissionais permitem relacionamentos de cura duradouros."
         ],
-        "教師": [
-          "ガイダンスは、すぐに見ることができない将来を形作ります。",
-          "学習プロセスへの忍耐は、成長が自然に展開することを可能にします。",
-          "複雑な概念を説明する能力は、知識をアクセス可能にします。",
-          "クラスルーム管理は、知的探求のための安全な空間を作り出します。",
-          "異なる学習スタイルの認識は、すべての学生に独自にリーチします。"
+        "Professor": [
+          "Sua orientação molda futuros além do que você jamais poderá ver.",
+          "Sua paciência com o processo de aprendizagem permite que o crescimento se desenvolva naturalmente.",
+          "Sua capacidade de explicar conceitos complexos torna o conhecimento acessível.",
+          "Seu gerenciamento de sala de aula cria espaços seguros para exploração intelectual.",
+          "Seu reconhecimento de diferentes estilos de aprendizagem alcança cada aluno."
         ],
-        "プログラマー": [
-          "コーディングスキルは、抽象的なアイデアを機能する現実に変換します。",
-          "問題解決アプローチは、複雑な課題を管理可能な部分に分解します。",
-          "細部への注意は、洗練されたコードにおける将来の複雑さを防ぎます。",
-          "継続的な学習は、急速に変化する分野でスキルを関連させ続けます。",
-          "技術的創造性は、困難な問題にエレガントな解決策を見つけます。"
+        "Programador": [
+          "Suas habilidades de codificação transformam ideias abstratas em realidade funcional.",
+          "Sua abordagem de resolução de problemas decompõe desafios complexos em partes gerenciáveis.",
+          "Sua atenção aos detalhes previne complicações futuras em seu código.",
+          "Seu aprendizado contínuo mantém suas habilidades relevantes em um campo em mudança.",
+          "Sua criatividade técnica encontra soluções elegantes para problemas difíceis."
         ]
       };
       
       const monthTraits = [
-        "1月生まれは、自然なリーダーシップの資質と決定的な焦点を与えます。",
-        "2月生まれは、直感的な理解と人道的なビジョンを授けます。",
-        "3月生まれは、想像力豊かな創造性と適応力のある回復力を提供します。",
-        "4月生まれは、断固とした忍耐力と勇敢なイニシアチブを与えます。",
-        "5月生まれは、説得力のあるコミュニケーションスキルと実用的な感覚を授けます。",
-        "6月生まれは、適応可能な多才さと感情的知性を提供します。",
-        "7月生まれは、思いやりのある共感と保護的な養育の本能を与えます。",
-        "8月生まれは、磁気的なカリスマと寛大な自信を授けます。",
-        "9月生まれは、分析的な精度と方法論的な組織を提供します。",
-        "10月生まれは、バランスの取れた視点と外交的な調和を与えます。",
-        "11月生まれは、鋭い洞察力と変革的な強度を授けます。",
-        "12月生まれは、先見的な楽観主義と哲学的な知恵を提供します。"
+        "Seu nascimento em janeiro lhe confere qualidades de liderança natural e foco determinado.",
+        "Seu nascimento em fevereiro o abençoa com compreensão intuitiva e visão humanitária.",
+        "Seu nascimento em março lhe proporciona criatividade imaginativa e resiliência adaptável.",
+        "Seu nascimento em abril o dota de persistência determinada e iniciativa corajosa.",
+        "Seu nascimento em maio lhe concede habilidades de comunicação persuasivas e sensibilidade prática.",
+        "Seu nascimento em junho lhe oferece versatilidade adaptável e inteligência emocional.",
+        "Seu nascimento em julho lhe dá empatia compassiva e instinto protetor.",
+        "Seu nascimento em agosto o abençoa com carisma magnético e confiança generosa.",
+        "Seu nascimento em setembro lhe proporciona precisão analítica e organização metódica.",
+        "Seu nascimento em outubro o dota de perspectiva equilibrada e harmonia diplomática.",
+        "Seu nascimento em novembro lhe concede perspicácia penetrante e intensidade transformadora.",
+        "Seu nascimento em dezembro lhe oferece otimismo visionário e sabedoria filosófica."
       ];
       
       let selectedTrait;
@@ -2393,12 +2263,12 @@
       return selectedSubject;
     }
 
-    function updateFlowerDisplay() {
+    async function updateFlowerDisplay() {
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       const motivationElement = document.getElementById('monthlyMotivation');
       
       if (!flowerCodeElement || !motivationElement) {
-        console.error("必要な要素がDOMに見つかりません");
+        console.error("Elementos necessários não encontrados no DOM");
         return;
       }
       
@@ -2408,12 +2278,14 @@
         localStorage.setItem('flowerSubject', subject);
       }
       
+      let translatedSubject = subjectDictionary[subject] || subject;
+      
       const formattedName = formatUserName(userFullName);
       
       if (formattedName) {
-        flowerCodeElement.innerHTML = `私の花 - ${subject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `Minha Flor - ${translatedSubject} / ${formattedName} ${userEmoji}`;
       } else {
-        flowerCodeElement.textContent = "私の花 - " + subject;
+        flowerCodeElement.textContent = "Minha Flor - " + translatedSubject;
       }
       
       if (!currentMotivation) {
@@ -2427,9 +2299,9 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `私の花 - ${subject} / ${formattedName}`;
+          captureCode.innerHTML = `Minha Flor - ${translatedSubject} / ${formattedName} ${userEmoji}`;
         } else {
-          captureCode.textContent = "私の花 - " + subject;
+          captureCode.textContent = "Minha Flor - " + translatedSubject;
         }
       }
       
@@ -2482,26 +2354,6 @@
       });
       
       updateCaptureStyles(theme);
-      
-      let themeColor = '#1A2E4D';
-      switch(theme) {
-        case 'red-black':
-          themeColor = '#000000';
-          break;
-        case 'green-blue':
-          themeColor = '#1A2E4D';
-          break;
-        case 'orange-pink':
-        case 'yellow-purple':
-          themeColor = '#4B0082';
-          break;
-        case 'default':
-          themeColor = '#FFFFFF';
-          break;
-      }
-      
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
-      document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').setAttribute('content', theme === 'default' ? 'default' : 'black-translucent');
     }
     
     function updateCaptureStyles(theme) {
@@ -2514,7 +2366,7 @@
       
       if (!captureContainer || !captureCode || !captureHeader || !captureWebsiteUrl || 
           !captureLogo || !captureMotivation) {
-        console.error("キャプチャー要素の1つ以上が見つかりません");
+        console.error("Um ou mais elementos de captura não encontrados");
         return;
       }
       
@@ -2611,13 +2463,13 @@
       return new Promise((resolve, reject) => {
         auth.signInAnonymously()
           .then((userCredential) => {
-            console.log("ユーザーが匿名で認証されました:", userCredential.user.uid);
+            console.log("Usuário autenticado anonimamente:", userCredential.user.uid);
             userUid = userCredential.user.uid;
             isAuthenticated = true;
             resolve(userCredential.user);
           })
           .catch((error) => {
-            console.error("認証エラー:", error);
+            console.error("Erro de autenticação:", error);
             reject(error);
           });
       });
@@ -2627,26 +2479,28 @@
       if (user) {
         userUid = user.uid;
         isAuthenticated = true;
-        console.log("認証状態が変更されました: ユーザーはサインインしています", user.uid);
+        console.log("Estado de autenticação alterado: usuário conectado", user.uid);
       } else {
         isAuthenticated = false;
-        console.log("認証状態が変更されました: ユーザーはサインアウトしています");
+        console.log("Estado de autenticação alterado: usuário desconectado");
       }
     });
 
     async function submitToFirebase() {
       try {
         if (!isAuthenticated) {
-          console.log("ユーザーが認証されていません、今認証しています...");
+          console.log("Usuário não autenticado, autenticando...");
           await authenticateAnonymously();
         }
         
         const location = await detectUserLocation();
         
+        await getUserRankAndEmoji();
+        
         const userData = {
           date: new Date().toISOString(),
-          country: location.country || "不明",
-          city: location.city || "不明",
+          country: location.country || "Desconhecido",
+          city: location.city || "Desconhecido",
           uid: userUid,
           uniqueId: userUniqueId,
           flowerCode: userFlowerCode,
@@ -2658,23 +2512,25 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
-          shareCount: shareCount
+          shareCount: shareCount,
+          rank: userRank,
+          emoji: userEmoji
         };
 
-        console.log("Firebaseにデータを送信:", userData);
+        console.log("Enviando dados para o Firebase:", userData);
         
         try {
           const newEntryRef = database.ref('birthdates').push(userData);
-          console.log("リアルタイムデータベースにデータが送信されました:", newEntryRef.key);
+          console.log("Dados enviados para o banco de dados em tempo real:", newEntryRef.key);
         } catch (dbError) {
-          console.error("リアルタイムデータベースのエラー:", dbError);
+          console.error("Erro com o banco de dados em tempo real:", dbError);
         }
         
         try {
           const docRef = await firestore.collection('flowers').add(userData);
-          console.log("Firestoreにドキュメントが書き込まれました（ID）: ", docRef.id);
+          console.log("Documento escrito no Firestore com ID: ", docRef.id);
         } catch (firestoreError) {
-          console.error("Firestoreにドキュメントを追加中のエラー: ", firestoreError);
+          console.error("Erro ao adicionar documento ao Firestore: ", firestoreError);
         }
         
         try {
@@ -2682,9 +2538,9 @@
             ...userData,
             createdAt: new Date()
           });
-          console.log("特定のコレクションにフラワーコードが追加されました");
+          console.log("Código de flor adicionado à coleção específica");
         } catch (codeError) {
-          console.error("コレクションにフラワーコードを追加中のエラー: ", codeError);
+          console.error("Erro ao adicionar código de flor à coleção: ", codeError);
         }
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -2694,12 +2550,16 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
         return true;
       } catch (error) {
-        console.error("Firebase送信エラー:", error);
+        console.error("Erro de envio para o Firebase:", error);
+        await getUserRankAndEmoji();
+        
         const userData = {
           date: new Date().toISOString(),
           uniqueId: userUniqueId,
@@ -2712,7 +2572,9 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: localStorage.getItem('flowerSubject') || getRandomSubject(),
-          shareCount: 0
+          shareCount: 0,
+          rank: userRank,
+          emoji: userEmoji
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -2722,6 +2584,8 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
@@ -2745,15 +2609,15 @@
         await firestore.collection('flowerCodes').doc(userUniqueId).set({
           shareCount: shareCount,
           lastShared: new Date().toISOString(),
-          country: currentCountry || "不明",
-          city: userCity || "不明",
+          country: currentCountry || "Desconhecido",
+          city: userCity || "Desconhecido",
           uid: userUid,
           uniqueId: userUniqueId
         }, { merge: true });
         
-        console.log("シェア数が更新されました:", shareCount);
+        console.log("Contador de compartilhamentos atualizado:", shareCount);
       } catch (error) {
-        console.error("シェア数の更新エラー:", error);
+        console.error("Erro ao atualizar contador de compartilhamentos:", error);
       }
     }
 
@@ -2764,6 +2628,8 @@
       const cookieDOB = getCookie('userDateOfBirth');
       const cookieProfession = getCookie('userProfession');
       const cookieFullName = getCookie('userFullName');
+      const cookieEmoji = getCookie('userEmoji');
+      const cookieRank = getCookie('userRank');
       
       if (cookieUniqueId && cookieFlowerCode) {
         userUniqueId = cookieUniqueId;
@@ -2771,11 +2637,13 @@
         userDateOfBirth = cookieDOB || null;
         userProfession = cookieProfession || null;
         userFullName = cookieFullName || null;
+        userEmoji = cookieEmoji || "👑";
+        userRank = cookieRank ? parseInt(cookieRank) : 0;
         isInstalled = cookieInstalled === 'true';
         
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
-        console.log("クッキーに保存されたユーザーデータが見つかりました:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName });
+        console.log("Dados do usuário encontrados nos cookies:", { userUniqueId, userFlowerCode, userDateOfBirth, userProfession, userFullName, userEmoji, userRank });
         return true;
       }
       
@@ -2789,6 +2657,8 @@
           userProfession = userData.profession || null;
           userFullName = userData.fullName || null;
           shareCount = userData.shareCount || 0;
+          userEmoji = userData.emoji || "👑";
+          userRank = userData.rank || 0;
           currentMotivation = userData.motivation || generatePersonalizedMotivation(userData.flowerCode, userData.profession, userData.dateOfBirth);
           userUid = userData.uid;
           isInstalled = localStorage.getItem('isInstalled') === 'true';
@@ -2798,12 +2668,14 @@
           setCookie('userDateOfBirth', userDateOfBirth, 365);
           setCookie('userProfession', userProfession, 365);
           setCookie('userFullName', userFullName, 365);
+          setCookie('userEmoji', userEmoji, 365);
+          setCookie('userRank', userRank.toString(), 365);
           setCookie('isInstalled', 'true', 365);
           
-          console.log("localStorageに保存されたユーザーデータが見つかりました:", userData);
+          console.log("Dados do usuário encontrados no localStorage:", userData);
           return true;
         } catch (e) {
-          console.error("保存されたユーザーデータの解析エラー:", e);
+          console.error("Erro ao analisar dados do usuário salvos:", e);
           return false;
         }
       }
@@ -2814,17 +2686,17 @@
       if (!userUniqueId) return false;
       
       try {
-        if (!confirm("すべてのデータを削除してもよろしいですか？この操作は元に戻せません。")) {
+        if (!confirm("Tem certeza de que deseja excluir TODOS os seus dados? Esta ação é irreversível.")) {
           return false;
         }
         
-        console.log("Suppression du compte utilisateur:", userUniqueId);
+        console.log("Excluindo conta de usuário:", userUniqueId);
         
         try {
           await firestore.collection('flowerCodes').doc(userUniqueId).delete();
-          console.log("Données supprimées de la collection flowerCodes");
+          console.log("Dados excluídos da coleção flowerCodes");
         } catch (error) {
-          console.error("Erreur lors de la suppression de flowerCodes:", error);
+          console.error("Erro ao excluir de flowerCodes:", error);
         }
         
         try {
@@ -2840,10 +2712,10 @@
           
           if (count > 0) {
             await batch.commit();
-            console.log(`${count} documents supprimés de la collection flowers`);
+            console.log(`${count} documentos excluídos da coleção flowers`);
           }
         } catch (error) {
-          console.error("Erreur lors de la suppression de flowers:", error);
+          console.error("Erro ao excluir de flowers:", error);
         }
         
         try {
@@ -2856,9 +2728,9 @@
             });
           });
           
-          console.log("Données supprimées de la base de données en temps réel");
+          console.log("Dados excluídos do banco de dados em tempo real");
         } catch (error) {
-          console.error("Erreur lors de la suppression de la base de données en temps réel:", error);
+          console.error("Erro ao excluir do banco de dados em tempo real:", error);
         }
         
         localStorage.removeItem('userFlowerData');
@@ -2872,6 +2744,8 @@
         removeCookie('userDateOfBirth');
         removeCookie('userProfession');
         removeCookie('userFullName');
+        removeCookie('userEmoji');
+        removeCookie('userRank');
         removeCookie('preferredTheme');
         
         userUniqueId = null;
@@ -2880,6 +2754,8 @@
         userDateOfBirth = null;
         userProfession = null;
         userFullName = null;
+        userEmoji = null;
+        userRank = null;
         isInstalled = false;
         seenSubjects = [];
         shareCount = 0;
@@ -2887,100 +2763,21 @@
         try {
           if (auth.currentUser) {
             await auth.currentUser.delete();
-            console.log("Utilisateur Firebase supprimé");
+            console.log("Usuário do Firebase excluído");
           }
         } catch (authError) {
-          console.error("Erreur lors de la suppression de l'authentification:", authError);
+          console.error("Erro ao excluir autenticação:", authError);
         }
         
-        console.log("Compte utilisateur complètement supprimé");
+        console.log("Conta de usuário completamente excluída");
         return true;
       } catch (error) {
-        console.error("Erreur lors de la suppression du compte:", error);
+        console.error("Erro ao excluir conta:", error);
         return false;
       }
     }
-    
-    function createWebAppManifest() {
-      const manifestData = {
-        name: "G-Z フラワー",
-        short_name: "G-Z",
-        description: "あなただけの命の花を発見しよう",
-        start_url: window.location.href,
-        display: "standalone",
-        background_color: "#1A2E4D",
-        theme_color: "#1A2E4D",
-        icons: [
-          {
-            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
-            sizes: "192x192",
-            type: "image/webp"
-          },
-          {
-            src: "https://firebasestorage.googleapis.com/v0/b/genz-abb36.firebasestorage.app/o/IMG_20250723_083736_652.webp?alt=media&token=0919c124-8818-4376-854c-7e95719e6e76",
-            sizes: "512x512",
-            type: "image/webp"
-          }
-        ]
-      };
-      
-      const manifestStr = JSON.stringify(manifestData);
-      const manifestBlob = new Blob([manifestStr], {type: 'application/json'});
-      const manifestURL = URL.createObjectURL(manifestBlob);
-      
-      const manifestLink = document.getElementById('manifest-placeholder');
-      manifestLink.setAttribute('href', manifestURL);
-      manifestLink.setAttribute('rel', 'manifest');
-    }
-    
-    function setupInstallPrompt() {
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        
-        const isInstallPromptShownBefore = localStorage.getItem('installPromptShown');
-        if (!isInstallPromptShownBefore) {
-          setTimeout(() => {
-            document.getElementById('installPrompt').style.display = 'block';
-          }, 3000);
-        }
-      });
-      
-      document.getElementById('installBtn').addEventListener('click', async () => {
-        if (!deferredPrompt) {
-          window.location.href = "https://g-z.online/install.html";
-          return;
-        }
-        
-        deferredPrompt.prompt();
-        const choiceResult = await deferredPrompt.userChoice;
-        
-        if (choiceResult.outcome === 'accepted') {
-          console.log('ユーザーがインストールプロンプトを受け入れました');
-        } else {
-          console.log('ユーザーがインストールプロンプトを却下しました');
-        }
-        
-        deferredPrompt = null;
-        document.getElementById('installPrompt').style.display = 'none';
-        localStorage.setItem('installPromptShown', 'true');
-      });
-      
-      document.getElementById('dismissBtn').addEventListener('click', () => {
-        document.getElementById('installPrompt').style.display = 'none';
-        localStorage.setItem('installPromptShown', 'true');
-      });
-      
-      window.addEventListener('appinstalled', (evt) => {
-        console.log('アプリがインストールされました');
-        document.getElementById('installPrompt').style.display = 'none';
-      });
-    }
 
     window.addEventListener('load', async () => {
-      createWebAppManifest();
-      setupInstallPrompt();
-      
       const today = new Date();
       const twoYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
       document.getElementById('dobInput').max = twoYearsAgo.toISOString().split('T')[0];
@@ -2993,7 +2790,7 @@
       }
       
       if (checkSavedUserData()) {
-        console.log("ユーザーは既にデータを持っています、ウェルカムモーダルを非表示にします");
+        console.log("O usuário já tem dados, ocultando a janela de boas-vindas");
         const welcomeToast = document.getElementById('welcomeToast');
         welcomeToast.style.display = 'block';
         setTimeout(() => {
@@ -3004,17 +2801,17 @@
           setTimeout(() => {
             welcomeToast.style.display = 'none';
           }, 500);
-        }, 6500);
+        }, 2000);
         
         if (!isAuthenticated) {
           try {
             await authenticateAnonymously();
           } catch (error) {
-            console.error("認証中のエラー:", error);
+            console.error("Erro ao autenticar:", error);
           }
         }
       } else {
-        console.log("保存されたユーザーデータが見つかりません、ウェルカムモーダルを表示します");
+        console.log("Nenhum dado de usuário salvo encontrado, exibindo a janela de boas-vindas");
         const welcomeModal = document.getElementById('welcomeModal');
         welcomeModal.style.display = 'block';
         setTimeout(() => {
@@ -3030,7 +2827,7 @@
       const professionDropdown = document.getElementById('professionDropdown');
       
       if (!professionInput || !professionDropdown) {
-        console.error("職業ドロップダウン要素が見つかりません");
+        console.error("Elementos do menu suspenso de profissões não encontrados");
         return;
       }
       
@@ -3049,7 +2846,7 @@
         if (filteredProfessions.length === 0) {
           const option = document.createElement('div');
           option.className = 'profession-option';
-          option.textContent = '一致するものが見つかりません';
+          option.textContent = 'Nenhuma correspondência encontrada';
           professionDropdown.appendChild(option);
         } else {
           filteredProfessions.forEach(profession => {
@@ -3093,7 +2890,7 @@
 
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (!userUniqueId) {
-        alert("最初にフラワーアカウントを作成してください。");
+        alert("Por favor, crie sua conta de flor primeiro.");
         return;
       }
       
@@ -3119,16 +2916,16 @@
           idModal.classList.add('show');
         }, 10);
       } else {
-        alert("ユニークIDを取得するには、まずフラワーアカウントを作成してください。");
+        alert("Por favor, crie sua conta de flor primeiro para obter seu ID único.");
       }
     });
     
     document.getElementById('copyIdButton').addEventListener('click', function() {
       const idText = document.getElementById('userIdDisplay').textContent;
       navigator.clipboard.writeText(idText).then(function() {
-        alert('IDがクリップボードにコピーされました！');
+        alert('ID copiado para a área de transferência!');
       }).catch(function() {
-        alert('IDをコピーできませんでした。手動で選択してコピーしてください。');
+        alert('Não foi possível copiar o ID. Por favor, selecione e copie manualmente.');
       });
     });
     
@@ -3141,9 +2938,10 @@
     });
     
     document.getElementById('deleteAccountButton').addEventListener('click', function() {
+
       deleteUserAccount().then(success => {
         if (success) {
-          alert("アカウントが正常に削除されました。このアプリを使用するには新しいアカウントを作成する必要があります。");
+          alert("Conta excluída com sucesso. Você precisará criar uma nova conta para usar este aplicativo.");
           const idModal = document.getElementById('idModal');
           idModal.classList.remove('show');
           setTimeout(() => {
@@ -3155,7 +2953,7 @@
             }, 100);
           }, 300);
         } else {
-          alert("エラー、後でもう一度お試しください");
+          alert("Erro, tente mais tarde");
         }
       });
     });
@@ -3171,9 +2969,9 @@
       
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       if (formattedName) {
-        flowerCodeElement.innerHTML = `私の花 - ${newSubject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `Minha Flor - ${newSubject} / ${formattedName} ${userEmoji}`;
       } else {
-        flowerCodeElement.textContent = "私の花 - " + newSubject;
+        flowerCodeElement.textContent = "Minha Flor - " + newSubject;
       }
       
       document.getElementById('monthlyMotivation').textContent = newMotivation;
@@ -3183,9 +2981,9 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `私の花 - ${newSubject} / ${formattedName}`;
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName} ${userEmoji}`;
         } else {
-          captureCode.textContent = "私の花 - " + newSubject;
+          captureCode.textContent = "My Flower - " + newSubject;
         }
       }
       
@@ -3206,17 +3004,17 @@
       const fullNameInput = document.getElementById('fullNameInput');
       
       if (!fullNameInput.value) {
-        alert("フルネームを入力してください。");
+        alert("Please enter your full name.");
         return;
       }
       
       if (!dobInput.value) {
-        alert("生年月日を入力してください。");
+        alert("Please enter your date of birth.");
         return;
       }
       
       if (!professionInput.value) {
-        alert("職業を入力してください。");
+        alert("Please enter your profession.");
         return;
       }
       
@@ -3231,9 +3029,11 @@
         userProfession = professionInput.value;
         
         userUniqueId = generateUniqueId();
-        console.log("生成されたユニークID:", userUniqueId);
+        console.log("Generated unique ID:", userUniqueId);
         
         userFlowerCode = generateFlowerCode();
+        
+        userEmoji = await getUserRankAndEmoji();
         
         const subject = getRandomSubject();
         localStorage.setItem('flowerSubject', subject);
@@ -3241,7 +3041,7 @@
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
         const createButton = document.getElementById('createAccountButton');
-        createButton.innerHTML = '<i class="fas fa-check"></i> 完了';
+        createButton.innerHTML = '<i class="fas fa-check"></i> Done';
         createButton.style.backgroundColor = '#4CAF50';
         
         const userData = {
@@ -3257,7 +3057,9 @@
           timestamp: Date.now(),
           theme: currentTheme,
           subject: subject,
-          shareCount: 0
+          shareCount: 0,
+          rank: userRank,
+          emoji: userEmoji
         };
         
         localStorage.setItem('userFlowerData', JSON.stringify(userData));
@@ -3267,6 +3069,8 @@
         setCookie('userDateOfBirth', userDateOfBirth, 365);
         setCookie('userProfession', userProfession, 365);
         setCookie('userFullName', userFullName, 365);
+        setCookie('userEmoji', userEmoji, 365);
+        setCookie('userRank', userRank.toString(), 365);
         setCookie('isInstalled', 'true', 365);
         isInstalled = true;
         
@@ -3277,12 +3081,12 @@
           setTimeout(() => {
             welcomeModal.style.display = 'none';
             document.getElementById('loadingSpinner').style.display = 'none';
-            createButton.innerHTML = 'アカウント作成';
+            createButton.innerHTML = 'Create Account';
             createButton.style.backgroundColor = '';
             createButton.disabled = false;
             
             submitToFirebase().then(submitted => {
-              console.log("Firebase送信結果:", submitted);
+              console.log("Firebase submission result:", submitted);
               
               const welcomeToast = document.getElementById('welcomeToast');
               welcomeToast.style.display = 'block';
@@ -3307,12 +3111,12 @@
           }, 300);
         }, 2000);
         
-        console.log("セットアップ完了、データをローカルとクッキーに保存しました");
+        console.log("Setup complete and data stored locally and in cookies");
       } catch (error) {
-        console.error("セットアップ中のエラー:", error);
+        console.error("Error during setup:", error);
         document.getElementById('loadingSpinner').style.display = 'none';
         document.getElementById('createAccountButton').disabled = false;
-        alert("フラワーのセットアップに問題がありました。もう一度お試しください。");
+        alert("There was a problem setting up your flower. Please try again.");
       }
     });
     
@@ -3323,8 +3127,8 @@
         updateCaptureStyles(currentTheme);
         
         if (typeof html2canvas !== 'function') {
-          console.error("html2canvasが読み込まれていないか、関数として利用できません");
-          alert("花をキャプチャできません。キャプチャライブラリが読み込まれていません。");
+          console.error("html2canvas not loaded or not available as a function");
+          alert("Cannot capture flower. The capture library is not loaded.");
           return;
         }
         
@@ -3352,32 +3156,33 @@
           
           updateShareCount();
         } else {
-          console.error("capturedImage要素が見つかりません");
+          console.error("capturedImage element not found");
         }
       } catch (error) {
-        console.error('フラワーのキャプチャエラー:', error);
-        alert('フラワーをキャプチャできませんでした。もう一度お試しください。');
+        console.error('Error capturing flower:', error);
+        alert('Could not capture your flower. Please try again.');
       }
     }
     
     document.getElementById('shareCapture').addEventListener('click', function() {
       const imageUrl = document.getElementById('capturedImage').src;
-if (navigator.share) {
+      
+      if (navigator.share) {
         fetch(imageUrl)
           .then(res => res.blob())
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: '私のG-Z フラワー',
-              text: 'g-z.onlineであなたの花を見つけよう',
+              title: 'My G-Z Flower',
+              text: 'Discover yours at g-z.online',
               files: [file]
             }).catch(err => {
-              console.log('シェアエラー:', err);
+              console.log('Error sharing:', err);
               fallbackShare();
             });
           })
           .catch(err => {
-            console.log('画像準備エラー:', err);
+            console.log('Error preparing image:', err);
             fallbackShare();
           });
       } else {
@@ -3388,50 +3193,33 @@ if (navigator.share) {
     function fallbackShare() {
       try {
         const shareText = `
-G-Zから私の命の花をチェックしてください: ${userUniqueId}。g-z.onlineであなたの花を見つけよう`;
+Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert('シェアテキストがクリップボードにコピーされました！');
+          alert('Share text copied to clipboard!');
         }).catch(function() {
-          alert('シェアテキストをコピーできませんでした。');
+          alert('Could not copy share text.');
         });
       } catch (error) {
-        console.error('フォールバックシェアエラー:', error);
-        alert('エラーが発生しました。');
+        console.error('Fallback share error:', error);
+        alert('An error occurred.');
       }
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      // 画像を保存する処理
       const imageUrl = document.getElementById('capturedImage').src;
       
-      // 画像をダウンロードするためのリンクを作成
+      // Créer un lien temporaire pour télécharger l'image
       const downloadLink = document.createElement('a');
       downloadLink.href = imageUrl;
-      downloadLink.download = 'my-gz-flower.png';
+      downloadLink.download = 'minha-flor-gz.png';
       
-      // iOSのSafariでは少し異なる処理が必要
-      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        // iOSデバイス向けの処理
-        const img = new Image();
-        img.src = imageUrl;
-        const popup = window.open('');
-        if (popup) {
-          popup.document.write(img.outerHTML);
-          popup.document.title = '長押しして画像を保存してください';
-          popup.document.close();
-          alert('新しいタブで画像が開きました。長押しして保存してください。');
-        } else {
-          alert('ポップアップがブロックされました。画像を保存するには、設定からポップアップを許可してください。');
-        }
-      } else {
-        // 他のデバイス向けの処理
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-      }
+      // Ajouter le lien au document, cliquer dessus, puis le supprimer
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
       
-      // キャプチャ表示を閉じる
+      // Cacher la vue de capture après le téléchargement
       document.getElementById('capturedFlower').style.display = 'none';
     });
     
