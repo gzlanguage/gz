@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>关闭</span>
+        <i class="fas fa-download"></i> <span>保存</span>
       </button>
     </div>
   </div>
@@ -3442,7 +3442,14 @@
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      // 保存图像到设备而不是关闭
+      const imageUrl = document.getElementById('capturedImage').src;
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = 'my-gz-flower.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
