@@ -1633,7 +1633,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>إغلاق</span>
+        <i class="fas fa-download"></i> <span>حفظ</span>
       </button>
     </div>
   </div>
@@ -3401,7 +3401,17 @@ if (navigator.share) {
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      // Create a temporary link element
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageUrl;
+      downloadLink.download = 'my-gz-flower.png';
+      
+      // Add to document, click it, and then remove it
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
