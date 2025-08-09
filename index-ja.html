@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>閉じる</span>
+        <i class="fas fa-download"></i> <span>保存</span>
       </button>
     </div>
   </div>
@@ -3402,6 +3402,36 @@ G-Zから私の命の花をチェックしてください: ${userUniqueId}。g-z
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
+      // 画像を保存する処理
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      // 画像をダウンロードするためのリンクを作成
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageUrl;
+      downloadLink.download = 'my-gz-flower.png';
+      
+      // iOSのSafariでは少し異なる処理が必要
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // iOSデバイス向けの処理
+        const img = new Image();
+        img.src = imageUrl;
+        const popup = window.open('');
+        if (popup) {
+          popup.document.write(img.outerHTML);
+          popup.document.title = '長押しして画像を保存してください';
+          popup.document.close();
+          alert('新しいタブで画像が開きました。長押しして保存してください。');
+        } else {
+          alert('ポップアップがブロックされました。画像を保存するには、設定からポップアップを許可してください。');
+        }
+      } else {
+        // 他のデバイス向けの処理
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+      
+      // キャプチャ表示を閉じる
       document.getElementById('capturedFlower').style.display = 'none';
     });
     
