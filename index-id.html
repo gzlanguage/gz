@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>Tutup</span>
+        <i class="fas fa-download"></i> <span>Simpan</span>
       </button>
     </div>
   </div>
@@ -3402,6 +3402,17 @@ Lihat Bunga Kehidupan saya dari G-Z: ${userUniqueId}. Temukan milikmu di g-z.onl
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
+      const imageUrl = document.getElementById('capturedImage').src;
+      
+      // Create an invisible anchor element to download the image
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageUrl;
+      downloadLink.download = 'bunga-gz.png';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      
+      // Close the captured flower display
       document.getElementById('capturedFlower').style.display = 'none';
     });
     
