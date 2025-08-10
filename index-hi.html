@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>बंद करें</span>
+        <i class="fas fa-download"></i> <span>सहेजें</span>
       </button>
     </div>
   </div>
@@ -2903,9 +2903,9 @@
     
     function createWebAppManifest() {
       const manifestData = {
-        name: "G-Z फूल",
+        name: "G-Z Flower",
         short_name: "G-Z",
-        description: "अपने अनोखे जीवन के फूल की खोज करें",
+        description: "Discover your unique Flower of Life",
         start_url: window.location.href,
         display: "standalone",
         background_color: "#1A2E4D",
@@ -3004,7 +3004,7 @@
           setTimeout(() => {
             welcomeToast.style.display = 'none';
           }, 500);
-        }, 6500);
+        }, 2350);
         
         if (!isAuthenticated) {
           try {
@@ -3049,7 +3049,7 @@
         if (filteredProfessions.length === 0) {
           const option = document.createElement('div');
           option.className = 'profession-option';
-          option.textContent = 'कोई मिलान नहीं मिला';
+          option.textContent = 'No matches found';
           professionDropdown.appendChild(option);
         } else {
           filteredProfessions.forEach(profession => {
@@ -3093,7 +3093,7 @@
 
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (!userUniqueId) {
-        alert("कृपया पहले अपना फूल खाता बनाएं।");
+        alert("Please create your flower account first.");
         return;
       }
       
@@ -3119,16 +3119,16 @@
           idModal.classList.add('show');
         }, 10);
       } else {
-        alert("अपनी अनोखी आईडी प्राप्त करने के लिए कृपया पहले अपना फूल खाता बनाएं।");
+        alert("Please create your flower account first to get your unique ID.");
       }
     });
     
     document.getElementById('copyIdButton').addEventListener('click', function() {
       const idText = document.getElementById('userIdDisplay').textContent;
       navigator.clipboard.writeText(idText).then(function() {
-        alert('आईडी क्लिपबोर्ड पर कॉपी की गई!');
+        alert('ID copied to clipboard!');
       }).catch(function() {
-        alert('आईडी कॉपी नहीं कर सका। कृपया मैन्युअल रूप से चयन करें और कॉपी करें।');
+        alert('Could not copy ID. Please select and copy manually.');
       });
     });
     
@@ -3143,7 +3143,7 @@
     document.getElementById('deleteAccountButton').addEventListener('click', function() {
       deleteUserAccount().then(success => {
         if (success) {
-          alert("खाता सफलतापूर्वक हटा दिया गया है। इस एप्लिकेशन का उपयोग करने के लिए आपको एक नया खाता बनाना होगा।");
+          alert("Compte supprimé avec succès. Vous devrez créer un nouveau compte pour utiliser cette application.");
           const idModal = document.getElementById('idModal');
           idModal.classList.remove('show');
           setTimeout(() => {
@@ -3155,7 +3155,7 @@
             }, 100);
           }, 300);
         } else {
-          alert("त्रुटि, बाद में प्रयास करें");
+          alert("Error,  try later");
         }
       });
     });
@@ -3171,9 +3171,9 @@
       
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       if (formattedName) {
-        flowerCodeElement.innerHTML = `मेरा फूल - ${newSubject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
       } else {
-        flowerCodeElement.textContent = "मेरा फूल - " + newSubject;
+        flowerCodeElement.textContent = "My Flower - " + newSubject;
       }
       
       document.getElementById('monthlyMotivation').textContent = newMotivation;
@@ -3183,9 +3183,9 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `मेरा फूल - ${newSubject} / ${formattedName}`;
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
         } else {
-          captureCode.textContent = "मेरा फूल - " + newSubject;
+          captureCode.textContent = "My Flower - " + newSubject;
         }
       }
       
@@ -3206,17 +3206,17 @@
       const fullNameInput = document.getElementById('fullNameInput');
       
       if (!fullNameInput.value) {
-        alert("कृपया अपना पूरा नाम दर्ज करें।");
+        alert("Please enter your full name.");
         return;
       }
       
       if (!dobInput.value) {
-        alert("कृपया अपनी जन्म तिथि दर्ज करें।");
+        alert("Please enter your date of birth.");
         return;
       }
       
       if (!professionInput.value) {
-        alert("कृपया अपना पेशा दर्ज करें।");
+        alert("Please enter your profession.");
         return;
       }
       
@@ -3241,7 +3241,7 @@
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
         const createButton = document.getElementById('createAccountButton');
-        createButton.innerHTML = '<i class="fas fa-check"></i> हो गया';
+        createButton.innerHTML = '<i class="fas fa-check"></i> Done';
         createButton.style.backgroundColor = '#4CAF50';
         
         const userData = {
@@ -3369,7 +3369,7 @@ if (navigator.share) {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
               title: 'My G-Z Flower',
-              text: 'Discover yours at g-z.online',
+              text: 'Discover  yours at g-z.online',
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -3402,7 +3402,22 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      const imageUrl = document.getElementById('capturedImage').src;
+      try {
+        // Create an invisible link to trigger download
+        const a = document.createElement('a');
+        a.href = imageUrl;
+        a.download = 'my-flower.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        alert('Flower image saved to your device!');
+        document.getElementById('capturedFlower').style.display = 'none';
+      } catch (error) {
+        console.error('Error saving image:', error);
+        alert('Could not save the image. Try long-pressing on the image and select "Save image".');
+      }
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
@@ -3458,4 +3473,5 @@ Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.onl
     });
   </script>
 </body>
+
 </html>
