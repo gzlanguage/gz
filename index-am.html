@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>ዝጋ</span>
+        <i class="fas fa-download"></i> <span>አስቀምጥ</span>
       </button>
     </div>
   </div>
@@ -2904,9 +2904,9 @@ const monthTraits = [
     
     function createWebAppManifest() {
       const manifestData = {
-        name: "ጂ-ዜድ አበባ",
-        short_name: "ጂ-ዜድ",
-        description: "የራስዎን ልዩ የህይወት አበባ ያግኙ",
+        name: "G-Z Flower",
+        short_name: "G-Z",
+        description: "Discover your unique Flower of Life",
         start_url: window.location.href,
         display: "standalone",
         background_color: "#1A2E4D",
@@ -3005,7 +3005,7 @@ const monthTraits = [
           setTimeout(() => {
             welcomeToast.style.display = 'none';
           }, 500);
-        }, 6500);
+        }, 2350);
         
         if (!isAuthenticated) {
           try {
@@ -3050,7 +3050,7 @@ const monthTraits = [
         if (filteredProfessions.length === 0) {
           const option = document.createElement('div');
           option.className = 'profession-option';
-          option.textContent = 'ምንም ውጤት አልተገኘም';
+          option.textContent = 'No matches found';
           professionDropdown.appendChild(option);
         } else {
           filteredProfessions.forEach(profession => {
@@ -3094,7 +3094,7 @@ const monthTraits = [
 
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (!userUniqueId) {
-        alert("እባክዎ መጀመሪያ የአበባ መለያዎን ይፍጠሩ።");
+        alert("Please create your flower account first.");
         return;
       }
       
@@ -3120,16 +3120,16 @@ const monthTraits = [
           idModal.classList.add('show');
         }, 10);
       } else {
-        alert("ልዩ መታወቂያዎን ለማግኘት እባክዎ መጀመሪያ የአበባ መለያዎን ይፍጠሩ።");
+        alert("Please create your flower account first to get your unique ID.");
       }
     });
     
     document.getElementById('copyIdButton').addEventListener('click', function() {
       const idText = document.getElementById('userIdDisplay').textContent;
       navigator.clipboard.writeText(idText).then(function() {
-        alert('መታወቂያ ወደ ክሊፕቦርድ ተቀድቷል!');
+        alert('ID copied to clipboard!');
       }).catch(function() {
-        alert('መታወቂያ መቅዳት አልተቻለም። እባክዎ በእጅዎ ይምረጡ እና ይቅዱ።');
+        alert('Could not copy ID. Please select and copy manually.');
       });
     });
     
@@ -3144,7 +3144,7 @@ const monthTraits = [
     document.getElementById('deleteAccountButton').addEventListener('click', function() {
       deleteUserAccount().then(success => {
         if (success) {
-          alert("አካውንት በተሳካ ሁኔታ ተሰርዟል። ይህን መተግበሪያ ለመጠቀም አዲስ መለያ መፍጠር ይኖርብዎታል።");
+          alert("Compte supprimé avec succès. Vous devrez créer un nouveau compte pour utiliser cette application.");
           const idModal = document.getElementById('idModal');
           idModal.classList.remove('show');
           setTimeout(() => {
@@ -3156,7 +3156,7 @@ const monthTraits = [
             }, 100);
           }, 300);
         } else {
-          alert("ስህተት, ኋላ ላይ ይሞክሩ");
+          alert("Error,  try later");
         }
       });
     });
@@ -3172,9 +3172,9 @@ const monthTraits = [
       
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       if (formattedName) {
-        flowerCodeElement.innerHTML = `የኔ አበባ - ${subjectDictionary[newSubject] || newSubject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
       } else {
-        flowerCodeElement.textContent = "የኔ አበባ - " + (subjectDictionary[newSubject] || newSubject);
+        flowerCodeElement.textContent = "My Flower - " + newSubject;
       }
       
       document.getElementById('monthlyMotivation').textContent = newMotivation;
@@ -3184,9 +3184,9 @@ const monthTraits = [
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `የኔ አበባ - ${subjectDictionary[newSubject] || newSubject} / ${formattedName}`;
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
         } else {
-          captureCode.textContent = "የኔ አበባ - " + (subjectDictionary[newSubject] || newSubject);
+          captureCode.textContent = "My Flower - " + newSubject;
         }
       }
       
@@ -3207,17 +3207,17 @@ const monthTraits = [
       const fullNameInput = document.getElementById('fullNameInput');
       
       if (!fullNameInput.value) {
-        alert("እባክዎ ሙሉ ስምዎን ያስገቡ።");
+        alert("Please enter your full name.");
         return;
       }
       
       if (!dobInput.value) {
-        alert("እባክዎ የልደት ቀንዎን ያስገቡ።");
+        alert("Please enter your date of birth.");
         return;
       }
       
       if (!professionInput.value) {
-        alert("እባክዎ ሙያዎን ያስገቡ።");
+        alert("Please enter your profession.");
         return;
       }
       
@@ -3242,7 +3242,7 @@ const monthTraits = [
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
         const createButton = document.getElementById('createAccountButton');
-        createButton.innerHTML = '<i class="fas fa-check"></i> ተጠናቅቋል';
+        createButton.innerHTML = '<i class="fas fa-check"></i> Done';
         createButton.style.backgroundColor = '#4CAF50';
         
         const userData = {
@@ -3278,7 +3278,7 @@ const monthTraits = [
           setTimeout(() => {
             welcomeModal.style.display = 'none';
             document.getElementById('loadingSpinner').style.display = 'none';
-            createButton.innerHTML = 'አካውንት ይፍጠሩ';
+            createButton.innerHTML = 'Create Account';
             createButton.style.backgroundColor = '';
             createButton.disabled = false;
             
@@ -3313,7 +3313,7 @@ const monthTraits = [
         console.error("Error during setup:", error);
         document.getElementById('loadingSpinner').style.display = 'none';
         document.getElementById('createAccountButton').disabled = false;
-        alert("አበባዎን ለማቀናበር ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።");
+        alert("There was a problem setting up your flower. Please try again.");
       }
     });
     
@@ -3325,7 +3325,7 @@ const monthTraits = [
         
         if (typeof html2canvas !== 'function') {
           console.error("html2canvas not loaded or not available as a function");
-          alert("አበባን መቅዳት አልተቻለም። የቅጂ ላይብረሪ አልተጫነም።");
+          alert("Cannot capture flower. The capture library is not loaded.");
           return;
         }
         
@@ -3357,7 +3357,7 @@ const monthTraits = [
         }
       } catch (error) {
         console.error('Error capturing flower:', error);
-        alert('አበባዎን መቅዳት አልተቻለም። እባክዎ እንደገና ይሞክሩ።');
+        alert('Could not capture your flower. Please try again.');
       }
     }
     
@@ -3369,8 +3369,8 @@ if (navigator.share) {
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: 'የኔ ጂ-ዜድ አበባ',
-              text: 'የራስዎን በ g-z.online ያግኙ',
+              title: 'My G-Z Flower',
+              text: 'Discover  yours at g-z.online',
               files: [file]
             }).catch(err => {
               console.log('Error sharing:', err);
@@ -3389,21 +3389,36 @@ if (navigator.share) {
     function fallbackShare() {
       try {
         const shareText = `
-የኔን የህይወት አበባ ከጂ-ዜድ ይመልከቱ: ${userUniqueId}. የራስዎን በ g-z.online ያግኙ`;
+Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert('የማጋሪያ ጽሑፍ ወደ ክሊፕቦርድ ተቀድቷል!');
+          alert('Share text copied to clipboard!');
         }).catch(function() {
-          alert('የማጋሪያ ጽሑፍን መቅዳት አልተቻለም።');
+          alert('Could not copy share text.');
         });
       } catch (error) {
         console.error('Fallback share error:', error);
-        alert('ስህተት ተፈጥሯል።');
+        alert('An error occurred.');
       }
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      const imageUrl = document.getElementById('capturedImage').src;
+      try {
+        // Create an invisible link to trigger download
+        const a = document.createElement('a');
+        a.href = imageUrl;
+        a.download = 'my-flower.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        alert('Flower image saved to your device!');
+        document.getElementById('capturedFlower').style.display = 'none';
+      } catch (error) {
+        console.error('Error saving image:', error);
+        alert('Could not save the image. Try long-pressing on the image and select "Save image".');
+      }
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
@@ -3459,3 +3474,5 @@ if (navigator.share) {
     });
   </script>
 </body>
+
+</html>
