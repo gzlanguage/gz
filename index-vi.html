@@ -1634,7 +1634,7 @@
       </button>
       
       <button class="capture-button close-capture" id="closeCapture">
-        <i class="fas fa-times"></i> <span>ปิด</span>
+        <i class="fas fa-download"></i> <span>บันทึก</span>
       </button>
     </div>
   </div>
@@ -2905,9 +2905,9 @@
     
     function createWebAppManifest() {
       const manifestData = {
-        name: "G-Z 꽃",
+        name: "G-Z Flower",
         short_name: "G-Z",
-        description: "당신만의 생명의 꽃을 발견하세요",
+        description: "Discover your unique Flower of Life",
         start_url: window.location.href,
         display: "standalone",
         background_color: "#1A2E4D",
@@ -2931,16 +2931,8 @@
       const manifestURL = URL.createObjectURL(manifestBlob);
       
       const manifestLink = document.getElementById('manifest-placeholder');
-      if (manifestLink) {
-        manifestLink.setAttribute('href', manifestURL);
-        manifestLink.setAttribute('rel', 'manifest');
-      } else {
-        const link = document.createElement('link');
-        link.id = 'manifest-placeholder';
-        link.rel = 'manifest';
-        link.href = manifestURL;
-        document.head.appendChild(link);
-      }
+      manifestLink.setAttribute('href', manifestURL);
+      manifestLink.setAttribute('rel', 'manifest');
     }
     
     function setupInstallPrompt() {
@@ -2966,9 +2958,9 @@
         const choiceResult = await deferredPrompt.userChoice;
         
         if (choiceResult.outcome === 'accepted') {
-          console.log('사용자가 설치 프롬프트를 수락함');
+          console.log('User accepted the install prompt');
         } else {
-          console.log('사용자가 설치 프롬프트를 거부함');
+          console.log('User dismissed the install prompt');
         }
         
         deferredPrompt = null;
@@ -2982,7 +2974,7 @@
       });
       
       window.addEventListener('appinstalled', (evt) => {
-        console.log('앱이 설치됨');
+        console.log('App was installed');
         document.getElementById('installPrompt').style.display = 'none';
       });
     }
@@ -3003,7 +2995,7 @@
       }
       
       if (checkSavedUserData()) {
-        console.log("사용자가 이미 데이터를 가지고 있음, 환영 모달 숨김");
+        console.log("User already has data, hiding welcome modal");
         const welcomeToast = document.getElementById('welcomeToast');
         welcomeToast.style.display = 'block';
         setTimeout(() => {
@@ -3014,17 +3006,17 @@
           setTimeout(() => {
             welcomeToast.style.display = 'none';
           }, 500);
-        }, 6500);
+        }, 2350);
         
         if (!isAuthenticated) {
           try {
             await authenticateAnonymously();
           } catch (error) {
-            console.error("인증 중 오류:", error);
+            console.error("Error during authentication:", error);
           }
         }
       } else {
-        console.log("저장된 사용자 데이터를 찾을 수 없음, 환영 모달 표시");
+        console.log("No saved user data found, showing welcome modal");
         const welcomeModal = document.getElementById('welcomeModal');
         welcomeModal.style.display = 'block';
         setTimeout(() => {
@@ -3040,7 +3032,7 @@
       const professionDropdown = document.getElementById('professionDropdown');
       
       if (!professionInput || !professionDropdown) {
-        console.error("직업 드롭다운 요소를 찾을 수 없음");
+        console.error("Profession dropdown elements not found");
         return;
       }
       
@@ -3059,7 +3051,7 @@
         if (filteredProfessions.length === 0) {
           const option = document.createElement('div');
           option.className = 'profession-option';
-          option.textContent = '일치하는 항목 없음';
+          option.textContent = 'No matches found';
           professionDropdown.appendChild(option);
         } else {
           filteredProfessions.forEach(profession => {
@@ -3103,12 +3095,7 @@
 
     document.getElementById('flowerButton').addEventListener('click', function() {
       if (!userUniqueId) {
-        // 이 부분이 중요합니다 - 계정 생성 모달을 표시합니다
-        const welcomeModal = document.getElementById('welcomeModal');
-        welcomeModal.style.display = 'block';
-        setTimeout(() => {
-          welcomeModal.classList.add('show');
-        }, 100);
+        alert("Please create your flower account first.");
         return;
       }
       
@@ -3134,16 +3121,16 @@
           idModal.classList.add('show');
         }, 10);
       } else {
-        alert("고유 ID를 얻으려면 먼저 꽃 계정을 만드세요.");
+        alert("Please create your flower account first to get your unique ID.");
       }
     });
     
     document.getElementById('copyIdButton').addEventListener('click', function() {
       const idText = document.getElementById('userIdDisplay').textContent;
       navigator.clipboard.writeText(idText).then(function() {
-        alert('ID가 클립보드에 복사되었습니다!');
+        alert('ID copied to clipboard!');
       }).catch(function() {
-        alert('ID를 복사할 수 없습니다. 수동으로 선택하여 복사하세요.');
+        alert('Could not copy ID. Please select and copy manually.');
       });
     });
     
@@ -3158,7 +3145,7 @@
     document.getElementById('deleteAccountButton').addEventListener('click', function() {
       deleteUserAccount().then(success => {
         if (success) {
-          alert("계정이 성공적으로 삭제되었습니다. 이 앱을 사용하려면 새 계정을 만들어야 합니다.");
+          alert("Compte supprimé avec succès. Vous devrez créer un nouveau compte pour utiliser cette application.");
           const idModal = document.getElementById('idModal');
           idModal.classList.remove('show');
           setTimeout(() => {
@@ -3170,7 +3157,7 @@
             }, 100);
           }, 300);
         } else {
-          alert("오류가 발생했습니다. 나중에 다시 시도하세요");
+          alert("Error,  try later");
         }
       });
     });
@@ -3186,9 +3173,9 @@
       
       const flowerCodeElement = document.getElementById('flowerCodeDisplay');
       if (formattedName) {
-        flowerCodeElement.innerHTML = `내 꽃 - ${newSubject} / ${formattedName}`;
+        flowerCodeElement.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
       } else {
-        flowerCodeElement.textContent = "내 꽃 - " + newSubject;
+        flowerCodeElement.textContent = "My Flower - " + newSubject;
       }
       
       document.getElementById('monthlyMotivation').textContent = newMotivation;
@@ -3198,9 +3185,9 @@
       
       if (captureCode) {
         if (formattedName) {
-          captureCode.innerHTML = `내 꽃 - ${newSubject} / ${formattedName}`;
+          captureCode.innerHTML = `My Flower - ${newSubject} / ${formattedName}`;
         } else {
-          captureCode.textContent = "내 꽃 - " + newSubject;
+          captureCode.textContent = "My Flower - " + newSubject;
         }
       }
       
@@ -3221,17 +3208,17 @@
       const fullNameInput = document.getElementById('fullNameInput');
       
       if (!fullNameInput.value) {
-        alert("전체 이름을 입력하세요.");
+        alert("Please enter your full name.");
         return;
       }
       
       if (!dobInput.value) {
-        alert("생년월일을 입력하세요.");
+        alert("Please enter your date of birth.");
         return;
       }
       
       if (!professionInput.value) {
-        alert("직업을 입력하세요.");
+        alert("Please enter your profession.");
         return;
       }
       
@@ -3246,7 +3233,7 @@
         userProfession = professionInput.value;
         
         userUniqueId = generateUniqueId();
-        console.log("고유 ID 생성됨:", userUniqueId);
+        console.log("Generated unique ID:", userUniqueId);
         
         userFlowerCode = generateFlowerCode();
         
@@ -3256,7 +3243,7 @@
         currentMotivation = generatePersonalizedMotivation(userFlowerCode, userProfession, userDateOfBirth);
         
         const createButton = document.getElementById('createAccountButton');
-        createButton.innerHTML = '<i class="fas fa-check"></i> 완료';
+        createButton.innerHTML = '<i class="fas fa-check"></i> Done';
         createButton.style.backgroundColor = '#4CAF50';
         
         const userData = {
@@ -3292,12 +3279,12 @@
           setTimeout(() => {
             welcomeModal.style.display = 'none';
             document.getElementById('loadingSpinner').style.display = 'none';
-            createButton.innerHTML = '계정 만들기';
+            createButton.innerHTML = 'Create Account';
             createButton.style.backgroundColor = '';
             createButton.disabled = false;
             
             submitToFirebase().then(submitted => {
-              console.log("Firebase 제출 결과:", submitted);
+              console.log("Firebase submission result:", submitted);
               
               const welcomeToast = document.getElementById('welcomeToast');
               welcomeToast.style.display = 'block';
@@ -3322,12 +3309,12 @@
           }, 300);
         }, 2000);
         
-        console.log("설정 완료, 데이터가 로컬에 저장되고 쿠키에 저장됨");
+        console.log("Setup complete and data stored locally and in cookies");
       } catch (error) {
-        console.error("설정 중 오류:", error);
+        console.error("Error during setup:", error);
         document.getElementById('loadingSpinner').style.display = 'none';
         document.getElementById('createAccountButton').disabled = false;
-        alert("꽃을 설정하는 중 문제가 발생했습니다. 다시 시도하세요.");
+        alert("There was a problem setting up your flower. Please try again.");
       }
     });
     
@@ -3338,8 +3325,8 @@
         updateCaptureStyles(currentTheme);
         
         if (typeof html2canvas !== 'function') {
-          console.error("html2canvas가 로드되지 않았거나 함수로 사용할 수 없습니다");
-          alert("꽃을 캡처할 수 없습니다. 캡처 라이브러리가 로드되지 않았습니다.");
+          console.error("html2canvas not loaded or not available as a function");
+          alert("Cannot capture flower. The capture library is not loaded.");
           return;
         }
         
@@ -3367,32 +3354,32 @@
           
           updateShareCount();
         } else {
-          console.error("capturedImage 요소를 찾을 수 없습니다");
+          console.error("capturedImage element not found");
         }
       } catch (error) {
-        console.error('꽃 캡처 중 오류:', error);
-        alert('꽃을 캡처할 수 없습니다. 다시 시도하세요.');
+        console.error('Error capturing flower:', error);
+        alert('Could not capture your flower. Please try again.');
       }
     }
     
     document.getElementById('shareCapture').addEventListener('click', function() {
       const imageUrl = document.getElementById('capturedImage').src;
-      if (navigator.share) {
+if (navigator.share) {
         fetch(imageUrl)
           .then(res => res.blob())
           .then(blob => {
             const file = new File([blob], 'my-gz-flower.png', { type: 'image/png' });
             navigator.share({
-              title: '내 G-Z 꽃',
-              text: 'g-z.online에서 당신만의 꽃을 발견하세요',
+              title: 'My G-Z Flower',
+              text: 'Discover  yours at g-z.online',
               files: [file]
             }).catch(err => {
-              console.log('공유 오류:', err);
+              console.log('Error sharing:', err);
               fallbackShare();
             });
           })
           .catch(err => {
-            console.log('이미지 준비 중 오류:', err);
+            console.log('Error preparing image:', err);
             fallbackShare();
           });
       } else {
@@ -3403,21 +3390,36 @@
     function fallbackShare() {
       try {
         const shareText = `
-G-Z에서 내 생명의 꽃을 확인하세요: ${userUniqueId}. g-z.online에서 당신만의 꽃을 발견하세요`;
+Check out my Flower of Life from G-Z: ${userUniqueId}. Discover yours at g-z.online`;
         
         navigator.clipboard.writeText(shareText).then(function() {
-          alert('공유 텍스트가 클립보드에 복사되었습니다!');
+          alert('Share text copied to clipboard!');
         }).catch(function() {
-          alert('공유 텍스트를 복사할 수 없습니다.');
+          alert('Could not copy share text.');
         });
       } catch (error) {
-        console.error('폴백 공유 오류:', error);
-        alert('오류가 발생했습니다.');
+        console.error('Fallback share error:', error);
+        alert('An error occurred.');
       }
     }
     
     document.getElementById('closeCapture').addEventListener('click', function() {
-      document.getElementById('capturedFlower').style.display = 'none';
+      const imageUrl = document.getElementById('capturedImage').src;
+      try {
+        // Create an invisible link to trigger download
+        const a = document.createElement('a');
+        a.href = imageUrl;
+        a.download = 'my-flower.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        alert('Flower image saved to your device!');
+        document.getElementById('capturedFlower').style.display = 'none';
+      } catch (error) {
+        console.error('Error saving image:', error);
+        alert('Could not save the image. Try long-pressing on the image and select "Save image".');
+      }
     });
     
     document.getElementById('closeFlowerModal').addEventListener('click', function() {
@@ -3473,3 +3475,5 @@ G-Z에서 내 생명의 꽃을 확인하세요: ${userUniqueId}. g-z.online에�
     });
   </script>
 </body>
+
+</html>
