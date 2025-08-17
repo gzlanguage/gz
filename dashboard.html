@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetizelt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.7em;
+            font-family: 'Billabong', cursive;
+            color: #007BFF;
+            border: 2px solid #007BFF;
+            padding: 3px;
+            border-radius: 13px;
+        }
+        .slogan {
+            text-align: center;
+            margin: 10px 0 5px 0;
+            font-size: 1.2em;
+            color: #007BFF;
+            padding: 10px;
+            border: 1px solid #007BFF;
+            border-radius: 20px;
+            background-color: #e9f5ff;
+        }
+        .icon-container {
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 31px;
+            height: 31px;
+            border: 1px solid #007BFF; 
+            border-radius: 11px;
+            background-color: white;
+            color: #007BFF;
+            margin-left: 5px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .icon:hover {
+            background-color: #e9f5ff; 
+        }
+        .divider {
+            height: 1px;
+            background-color: #007BFF;
+            width: 100%;
+            margin: 0; 
+        }
+        /* Button container - Modify padding and margin to adjust spacing between buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            padding: 4px 0; /* Increase/decrease to add more/less vertical space */
+            overflow-x: auto;
+            white-space: nowrap;
+            margin: 0 0 5px 0; /* Bottom margin can be adjusted to increase/decrease space between buttons and content below */
+            max-width: 100%;
+        }
+        .button-container a {
+            margin: 0 5px; /* Adjust horizontal spacing between buttons */
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .button-container a i {
+            margin-right: 5px;
+        }
+        /* Button sizing - Modify padding, font-size, and min-width to adjust button size */
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 15px; /* Increase/decrease to make buttons larger/smaller */
+            font-size: 0.9em; /* Adjust text size */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            text-align: center;
+            min-width: 70px; /* Adjust minimum width of buttons */
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+   
+        /* Footer button spacing */
+        .footer-button {
+            margin-left: 10px; /* Adjust spacing between footer buttons */
+        }
+        a {
+            text-decoration: none;
+        }
+        .year-select, .month-select {
+            width: 100%;
+            padding: 6px;
+            margin: 3px 0;
+            border: 1px solid #ddd;
+            border-radius: 13px;
+            background: white;
+            border-top: 3px solid #007BFF;
+        }
+        .dashboard { 
+            max-width: 800px; 
+            margin: auto; 
+            padding: 5px 10px;
+        }
+        /* Grid layout - Adjust gap to modify spacing between cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px; /* Increase/decrease to adjust spacing between cards */
+            margin-top: 5px;
+        }
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #007BFF;
+            transition: background 0.3s, transform 0.2s;
+            position: relative;
+        }
+        .small-card { height: 50px; } /* Adjust height to make cards taller/shorter */
+        .card:hover {
+            transform: translateY(-2px);
+            background: #e9f5ff;
+        }
+        .title { color: #666; font-size: 0.7rem; margin-bottom: 5px; }
+        .value { font-size: 1.3rem; font-weight: bold; color: #007BFF; }
+        .value-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .trend-indicator {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        .trend-up {
+            color: #4CAF50;
+        }
+        .trend-down {
+            color: #F44336;
+        }
+        .trend-neutral {
+            color: #FFC107;
+        }
+        /* History section - Adjust max-height to show more/fewer transactions */
+        .history { 
+            border-top: 3px solid #007BFF; 
+            grid-column: 1/-1; 
+            max-height: 200px; /* Increase/decrease to show more/fewer transactions */
+            overflow-y: auto; 
+        }
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0; /* Adjust vertical spacing between transaction items */
+            background-color: #f0f8ff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .transaction-item:hover {
+            background-color: #e6f7ff;
+        }
+        .history-item .details {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+        .date { margin-left: 10px; color: #888; font-size: 0.9rem; }
+        .no-transactions {
+            font-size: 0.8em;
+            color: #888;
+            text-align: center;
+            padding: 5px;
+        }
+        .stripe-status {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.7em;
+            padding: 2px 5px;
+            border-radius: 10px;
+            color: white;
+            z-index: 1;
+        }
+        
+        .stripe-status.not-active {
+            background-color: #F44336;
+        }
+        
+        .stripe-status.active {
+            background-color: #4CAF50;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 220px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .delete-button {
+            background-color: #F44336;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .delete-button:hover {
+            background-color: #ff3333;
+        }
+        
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .confirm-modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 280px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .modal-message {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 0.9em;
+        }
+        
+        .email-input,
+        .password-input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        
+        .confirm-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .confirm-delete {
+            background-color: #F44336;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            flex: 1;
+            font-weight: bold;
+        }
+        
+        .cancel-delete {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1005;
+        }
+        
+        .toast {
+            background-color: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
+            max-width: 300px;
+        }
+        
+        .toast.success {
+            background-color: #4CAF50;
+        }
+        
+        .toast.error {
+            background-color: #F44336;
+        }
+        
+        .toast.info {
+            background-color: #2196F3;
+        }
+        
+        .toast-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        /* Button disabled state */
+        .button.disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        /* Stripe payment setup animation */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        .payment-warning {
+            color: #F44336;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                display: none;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .title { font-size: 0.6rem; }
+            .value { font-size: 1.1rem; }
+            
+            /* Mobile adjustments for buttons */
+            .button-container {
+                justify-content: space-between;
+                padding: 4px 10px;
+            }
+            
+            .button {
+                padding: 6px 10px; /* Smaller padding on mobile */
+                margin: 0 2px; /* Smaller margins on mobile */
+                min-width: 60px; /* Smaller min-width on mobile */
+            }
+            
+            .modal-content {
+                width: 80%;
+                max-width: 250px;
+            }
+            
+            .confirm-modal-content {
+                width: 85%;
+                max-width: 280px;
+                padding: 20px;
+            }
+            
+            .delete-button {
+                font-size: 1em;
+            }
+            
+            .toast {
+                max-width: 250px;
+                left: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 translate="no">Monetizelt</h1>
+    <div class="icon-container">
+        <div class="icon-container">
+            <a class="icon" href="sellerservice-client.html" aria-label="Customer service">
+                <i class="fas fa-headset" style="font-size: 23px;"></i>
+            </a>
+            <a class="icon" id="profileIcon" href="javascript:void(0);" aria-label="User profile">
+                <i class="fas fa-user" style="font-size: 23px;"></i>
+            </a>
+        </div>
+    </div>
+</header>
+<div class="divider"></div>
+<div class="slogan">Your market, your rules! <br> Generate, share, cash in!</div>
+
+<div class="button-container">
+    <a class="button button-explorer disabled" id="generateBtn" href="sellerlinkmanag.html"><i class="fas fa-link"></i> Generate</a>
+    <a class="button" href="sellerfaq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+  
+    <a class="button" href="sellerterms.html"><i class="fas fa-file-contract"></i> Terms</a>
+    <a class="button" href="sellerprivacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
+</div>
+<div id="paymentWarning" class="payment-warning" style="text-align: center;">Update your payment method to start generating links</div>
+
+<div class="dashboard">
+    <select class="year-select" aria-label="Select a year" id="yearSelect">
+        <option value="">All years</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+    </select>
+
+    <select class="month-select" aria-label="Select a month" id="monthSelect">
+        <option value="">All months</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+
+    <div class="grid">
+        <a href="liens.html" class="card liens-generes small-card">
+            <div class="title">Generated Links</div>
+            <div class="value-wrapper">
+                <div class="value" id="linksCount">0</div>
+                <span id="linksIndicator" class="trend-indicator"></span>
+            </div>
+        </a>
+        <div class="card vues small-card">
+            <div class="title">Views</div>
+            <div class="value-wrapper">
+                <div class="value" id="viewsCount">0</div>
+                <span id="viewsIndicator" class="trend-indicator"></span>
+            </div>
+        </div>
+        <div class="card commandes small-card">
+            <div class="title">Orders</div>
+            <div class="value-wrapper">
+                <div class="value" id="ordersCount">0</div>
+                <span id="ordersIndicator" class="trend-indicator"></span>
+            </div>
+        </div>
+        <div class="card traite small-card">
+            <div class="title">Processed</div>
+            <div class="value-wrapper">
+                <div class="value" id="shippedCount">0</div>
+                <span id="shippedIndicator" class="trend-indicator"></span>
+            </div>
+        </div>
+        <div class="card revenus small-card">
+            <div class="title">Revenue</div>
+            <div class="value-wrapper">
+                <div class="value" id="revenueCount">0$</div>
+                <span id="revenueIndicator" class="trend-indicator"></span>
+            </div>
+        </div>
+        <a class="card paiement small-card pulse-animation" id="stripeCard" href="javascript:void(0);" onclick="setupStripeAccount()" aria-label="Stripe Configuration">
+            <span class="stripe-status not-active" id="stripeStatus">Not Active</span>
+            <div class="title">Payments</div>
+            <i class="fas fa-wallet" style="font-size: 1.2em; color: #007BFF;"></i>
+        </a>
+        <div class="card history">
+            <div class="title">Transactions</div>
+            <div id="transactionList">
+                <div class="no-transactions">No transactions</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Account deletion modal -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-title">Account Options</div>
+        <button id="deleteAccountBtn" class="delete-button">Delete Account</button>
+    </div>
+</div>
+
+<!-- Confirmation modal with password and email -->
+<div id="confirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <div class="modal-title">Confirm Account Deletion</div>
+        <div class="modal-message">This action cannot be undone. All your data will be permanently removed.</div>
+        <input type="email" id="emailInput" class="email-input" placeholder="Your email">
+        <input type="password" id="passwordInput" class="password-input" placeholder="Your password">
+        <div class="confirm-buttons">
+            <button id="cancelDeleteBtn" class="cancel-delete">Cancel</button>
+            <button id="confirmDeleteBtn" class="confirm-delete">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast container for notifications -->
+<div id="toastContainer" class="toast-container"></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getFunctions, httpsCallable, connectFunctionsEmulator } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
+        authDomain: "monetizelt-b235d.firebaseapp.com",
+        projectId: "monetizelt-b235d",
+        storageBucket: "monetizelt-b235d.firebasestorage.app",
+        messagingSenderId: "1040211471009",
+        appId: "1:1040211471009:web:321898c7bdca6258ce9ee0",
+        measurementId: "G-5NWKR1E9VY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const functions = getFunctions(app);
+
+    let currentUserData = null;
+    let previousUserData = null;
+    let realTimeListeners = [];
+    let selectedYear = "";
+    let selectedMonth = "";
+    let isInitialLoad = true;
+    let dataLoaded = false;
+    let dataLoadingPromise = null;
+    let userIdToken = null;
+    let stripeAccountComplete = false;
+    
+    // Nouvelle variable pour suivre si l'utilisateur vient de la page de création de compte
+    let hasRedirectedFromAccountCreation = false;
+
+    // Exposer la fonction setupStripeAccount pour le bouton
+    window.setupStripeAccount = async function() {
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                showToast("Please log in to set up Stripe", "error");
+                setTimeout(() => {
+                    window.location.href = "auth.html";
+                }, 1500);
+                return;
+            }
+            
+            showToast("Setting up your payment account...", "info");
+            
+            userIdToken = await getAuthToken();
+            
+            // Vérifier d'abord le statut du compte Stripe existant
+            const checkStripeStatus = httpsCallable(functions, 'checkStripeStatus');
+            const statusResult = await checkStripeStatus();
+            
+            if (statusResult.data && statusResult.data.accountComplete) {
+                // Le compte existe déjà et est actif
+                showToast("Your payment account is already active", "success");
+                
+                // Mettre à jour le statut dans Firestore si nécessaire
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists() && (!userDoc.data().stripe || !userDoc.data().stripe.accountComplete)) {
+                    await updateDoc(doc(db, "users", user.uid), {
+                        "stripe.accountComplete": true,
+                        "stripe.accountId": statusResult.data.accountId,
+                        lastUpdate: serverTimestamp()
+                    });
+                }
+                
+                updateStripeUI(true);
+                return;
+            }
+            
+            // Si un lien d'onboarding existe déjà, rediriger vers ce lien
+            if (statusResult.data && statusResult.data.onboardingUrl) {
+                window.location.href = statusResult.data.onboardingUrl;
+                return;
+            }
+            
+            // Créer un nouveau compte Stripe
+            const createStripeAccount = httpsCallable(functions, 'createStripeAccount');
+            const result = await createStripeAccount();
+            
+            if (!result.data || !result.data.accountId) {
+                throw new Error("Failed to create payment account");
+            }
+            
+            // Enregistrer l'ID du compte dans Firestore
+            await updateDoc(doc(db, "users", user.uid), {
+                "stripe.accountId": result.data.accountId,
+                "stripe.accountComplete": false,
+                lastUpdate: serverTimestamp()
+            });
+            
+            // Rediriger vers le lien d'onboarding
+            if (result.data.onboardingUrl) {
+                window.location.href = result.data.onboardingUrl;
+            } else {
+                throw new Error("No onboarding URL provided");
+            }
+            
+        } catch (error) {
+            console.error("Error during Stripe setup:", error);
+            
+            if (error.code === 'functions/unauthenticated' || error.message.includes('User not logged in')) {
+                showToast("Session expired. Please log in again.", "error");
+                setTimeout(() => {
+                    auth.signOut().then(() => {
+                        window.location.href = "auth.html";
+                    });
+                }, 1500);
+            } else {
+                showToast(`Error setting up payment: ${error.message}`, "error");
+            }
+        }
+    };
+
+    async function getAuthToken() {
+        const user = auth.currentUser;
+        if (!user) {
+            throw new Error("User not logged in");
+        }
+        
+        try {
+            return await user.getIdToken(true);
+        } catch (error) {
+            console.error("Error getting token:", error);
+            throw error;
+        }
+    }
+
+    function showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        let icon = '';
+        if (type === 'success') {
+            icon = '<i class="fas fa-check-circle toast-icon"></i>';
+        } else if (type === 'error') {
+            icon = '<i class="fas fa-exclamation-circle toast-icon"></i>';
+        } else if (type === 'info') {
+            icon = '<i class="fas fa-info-circle toast-icon"></i>';
+        }
+        
+        toast.innerHTML = `${icon}<div>${message}</div>`;
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    function animateUpdate(element) {
+        element.classList.add('pulse');
+        setTimeout(() => {
+            element.classList.remove('pulse');
+        }, 500);
+    }
+
+    async function checkStripeStatus() {
+        try {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            userIdToken = await getAuthToken();
+            
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            const userData = userDoc.data();
+            
+            // Vérifier le statut du compte Stripe via la fonction Cloud
+            const checkStripeStatus = httpsCallable(functions, 'checkStripeStatus');
+            const statusResult = await checkStripeStatus();
+            
+            // Mettre à jour l'UI en fonction du statut
+            const isActive = statusResult.data && statusResult.data.accountComplete;
+            updateStripeUI(isActive);
+            
+            // Si le statut a changé, mettre à jour Firestore
+            if (userData && (!userData.stripe || userData.stripe.accountComplete !== isActive)) {
+                await updateDoc(doc(db, "users", user.uid), {
+                    "stripe.accountComplete": isActive,
+                    "stripe.accountId": statusResult.data ? statusResult.data.accountId : null,
+                    lastUpdate: serverTimestamp()
+                });
+            }
+            
+            // Vérifier les paramètres d'URL pour la redirection de Stripe
+            const urlParams = new URLSearchParams(window.location.search);
+            const setupStatus = urlParams.get('setup');
+            
+            if (setupStatus === 'success') {
+                showToast("Payment account setup successful!", "success");
+                
+                // Nettoyer l'URL
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+                
+                // Rafraîchir le statut
+                const refreshResult = await checkStripeStatus();
+                updateStripeUI(refreshResult.data && refreshResult.data.accountComplete);
+            } 
+            else if (setupStatus === 'canceled') {
+                showToast("Payment account setup was canceled", "info");
+                
+                // Nettoyer l'URL
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+            }
+            
+        } catch (error) {
+            console.error("Error checking Stripe status:", error);
+            
+            if (error.code === 'auth/requires-recent-login') {
+                showToast("Your session has expired. Please log in again.", "error");
+                setTimeout(() => {
+                    auth.signOut().then(() => {
+                        window.location.href = "auth.html";
+                    });
+                }, 1500);
+            }
+        }
+    }
+    
+    function updateStripeUI(isActive) {
+        const stripeStatus = document.getElementById('stripeStatus');
+        const stripeCard = document.getElementById('stripeCard');
+        const generateBtn = document.getElementById('generateBtn');
+        const paymentWarning = document.getElementById('paymentWarning');
+        
+        stripeAccountComplete = isActive;
+        
+        if (isActive) {
+            // Compte Stripe actif
+            stripeStatus.textContent = "Active";
+            stripeStatus.className = "stripe-status active";
+            stripeCard.setAttribute("onclick", "");
+            stripeCard.style.borderColor = "#4CAF50";
+            stripeCard.classList.remove("pulse-animation");
+            
+            // Activer le bouton Generate
+            generateBtn.classList.remove("disabled");
+            generateBtn.setAttribute("href", "sellerlinkmanag.html");
+            
+            // Masquer l'avertissement
+            paymentWarning.style.display = "none";
+        } else {
+            // Compte Stripe inactif
+            stripeStatus.textContent = "Not Active";
+            stripeStatus.className = "stripe-status not-active";
+            stripeCard.setAttribute("onclick", "setupStripeAccount()");
+            stripeCard.style.borderColor = "#007BFF";
+            stripeCard.classList.add("pulse-animation");
+            
+            // Désactiver le bouton Generate
+            generateBtn.classList.add("disabled");
+            generateBtn.setAttribute("href", "javascript:void(0)");
+            generateBtn.onclick = function() {
+                showToast("Please set up your payment method first", "error");
+            };
+            
+            // Afficher l'avertissement
+            paymentWarning.style.display = "block";
+        }
+    }
+
+    // Fonction pour vérifier si l'utilisateur vient de la page de création de compte
+    function checkAccountCreationReferral() {
+        // Vérifier si l'utilisateur vient de s'authentifier depuis la page de création de compte
+        const referrer = document.referrer;
+        const hasCreationReferrer = referrer.includes('auth.html') || referrer.includes('auth.html');
+        
+        // Vérifier si on a déjà redirigé l'utilisateur (via localStorage)
+        const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
+        
+        if (hasCreationReferrer && !hasBeenRedirected) {
+            // Stocker que l'utilisateur a été redirigé
+            localStorage.setItem('redirectedFromAccountCreation', 'true');
+            hasRedirectedFromAccountCreation = true;
+            
+            // Mettre un délai court pour permettre le chargement des données de base
+            setTimeout(() => {
+                showToast("Retour à la page précédente...", "info");
+                history.back();
+            }, 500);
+        }
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            try {
+                userIdToken = await getAuthToken();
+                
+                cleanupListeners();
+                
+                // Vérifier si l'utilisateur vient de la page de création de compte (nouvelle fonction)
+                checkAccountCreationReferral();
+                
+                // Si l'utilisateur a été redirigé, ne pas charger les données pour éviter un travail inutile
+                if (hasRedirectedFromAccountCreation) {
+                    return;
+                }
+                
+                await checkStripeStatus();
+                
+                dataLoadingPromise = loadUserData(user.uid);
+                dataLoadingPromise.then(() => {
+                    setupRealTimeListeners(user.uid);
+                    dataLoaded = true;
+                    
+                    if (isInitialLoad) {
+                        isInitialLoad = false;
+                        showToast("Welcome to your dashboard!", "success");
+                    }
+                }).catch(error => {
+                    console.error("Error loading data:", error);
+                    
+                    if (error.code === 'permission-denied' || error.code === 'auth/requires-recent-login') {
+                        showToast("Session expired. Please log in again.", "error");
+                        setTimeout(() => {
+                            auth.signOut().then(() => {
+                                window.location.href = "auth.html";
+                            });
+                        }, 1500);
+                    } else {
+                        showToast("Error loading data: " + error.message, "error");
+                    }
+                });
+            } catch (error) {
+                console.error("Error during initialization:", error);
+                
+                if (error.code && (error.code.includes('auth/') || error.code === 'permission-denied')) {
+                    showToast("Authentication problem. Please log in again.", "error");
+                    setTimeout(() => {
+                        auth.signOut().then(() => {
+                            window.location.href = "auth.html";
+                        });
+                    }, 1500);
+                } else {
+                    showToast("An error occurred. Please try again.", "error");
+                }
+            }
+        } else {
+            window.location.href = "auth.html";
+        }
+    });
+
+    function cleanupListeners() {
+        realTimeListeners.forEach(unsubscribe => unsubscribe());
+        realTimeListeners = [];
+    }
+
+    async function loadUserData(userId) {
+        try {
+            const userDocRef = doc(db, "users", userId);
+            const userDoc = await getDoc(userDocRef);
+            
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                previousUserData = currentUserData;
+                currentUserData = userData;
+                
+                updateDashboardUI(userData);
+                
+                if (selectedYear || selectedMonth) {
+                    updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
+                }
+                
+                // Mettre à jour l'interface en fonction du statut Stripe
+                if (userData.stripe && userData.stripe.accountComplete) {
+                    updateStripeUI(true);
+                } else {
+                    updateStripeUI(false);
+                }
+                
+                return userData;
+            } else {
+                console.log("No user document found, creating new...");
+                const newUserData = {
+                    linksCount: 0,
+                    viewsCount: 0,
+                    ordersCount: 0,
+                    shippedCount: 0,
+                    revenueCount: 0,
+                    transactions: [],
+                    createdAt: serverTimestamp(),
+                    lastUpdate: serverTimestamp(),
+                    stripe: {
+                        accountComplete: false,
+                        accountId: null
+                    }
+                };
+                
+                await updateDoc(userDocRef, newUserData);
+                currentUserData = newUserData;
+                updateDashboardUI(newUserData);
+                updateStripeUI(false);
+                return newUserData;
+            }
+        } catch (error) {
+            console.error("Error loading user data:", error);
+            
+            if (error.code === 'permission-denied') {
+                try {
+                    userIdToken = await getAuthToken();
+                    return await loadUserData(userId);
+                } catch (refreshError) {
+                    console.error("Error refreshing token:", refreshError);
+                    throw new Error("Session expired. Please log in again.");
+                }
+            }
+            
+            throw error;
+        }
+    }
+
+    function setupRealTimeListeners(userId) {
+        try {
+            const userDocRef = doc(db, "users", userId);
+            const userUnsubscribe = onSnapshot(userDocRef, (doc) => {
+                if (doc.exists()) {
+                    previousUserData = currentUserData;
+                    const newData = doc.data();
+                    currentUserData = newData;
+                    updateDashboardUI(newData);
+                    
+                    // Mettre à jour l'interface en fonction du statut Stripe
+                    if (newData.stripe && newData.stripe.accountComplete) {
+                        updateStripeUI(true);
+                    } else {
+                        updateStripeUI(false);
+                    }
+                }
+            }, (error) => {
+                console.error("Error in real-time listener for user document:", error);
+                
+                if (error.code === 'permission-denied') {
+                    showToast("Session expired. Reconnecting...", "info");
+                    
+                    getAuthToken().then(token => {
+                        userIdToken = token;
+                    }).catch(refreshError => {
+                        console.error("Error refreshing token:", refreshError);
+                        showToast("Authentication problem. Please log in again.", "error");
+                        setTimeout(() => {
+                            auth.signOut().then(() => {
+                                window.location.href = "auth.html";
+                            });
+                        }, 1500);
+                    });
+                } else {
+                    showToast("Data synchronization issue", "error");
+                }
+            });
+            realTimeListeners.push(userUnsubscribe);
+        } catch (error) {
+            console.error("Error setting up listeners:", error);
+        }
+        
+        try {
+            loadLinksData(userId);
+        } catch (error) {
+            console.error("Error loading links:", error);
+        }
+        
+        try {
+            loadOrdersData(userId);
+        } catch (error) {
+            console.error("Error loading orders:", error);
+        }
+    }
+
+    async function loadLinksData(userId) {
+        try {
+            const linksRef = collection(db, "links");
+            const linksQuery = query(linksRef, where("userId", "==", userId));
+            
+            const snapshot = await getDocs(linksQuery);
+            let totalLinks = snapshot.size;
+            let totalViews = 0;
+            
+            snapshot.forEach(doc => {
+                const linkData = doc.data();
+                totalViews += linkData.viewCount || 0;
+            });
+            
+            updateCountWithAnimation("linksCount", "linksIndicator", totalLinks, "", previousUserData?.linksCount);
+            updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
+            
+            if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
+                updateDoc(doc(db, "users", userId), {
+                    linksCount: totalLinks,
+                    viewsCount: totalViews,
+                    lastUpdate: serverTimestamp()
+                }).catch(error => {
+                    console.error("Error updating user data:", error);
+                    
+                    if (error.code === 'permission-denied') {
+                        getAuthToken().then(token => {
+                            userIdToken = token;
+                            updateDoc(doc(db, "users", userId), {
+                                linksCount: totalLinks,
+                                viewsCount: totalViews,
+                                lastUpdate: serverTimestamp()
+                            }).catch(innerError => {
+                                console.error("Error during second update attempt:", innerError);
+                            });
+                        }).catch(refreshError => {
+                            console.error("Error refreshing token:", refreshError);
+                        });
+                    }
+                });
+            }
+            
+            setTimeout(() => loadLinksData(userId), 30000);
+        } catch (error) {
+            console.error("Error loading links:", error);
+            
+            if (error.code === 'permission-denied') {
+                setTimeout(async () => {
+                    try {
+                        userIdToken = await getAuthToken();
+                        loadLinksData(userId);
+                    } catch (refreshError) {
+                        console.error("Error refreshing token:", refreshError);
+                    }
+                }, 5000);
+            } else {
+                showToast("Error syncing links", "error");
+            }
+        }
+    }
+
+    async function loadOrdersData(userId) {
+        try {
+            const ordersRef = collection(db, "orders");
+            const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+            
+            const snapshot = await getDocs(ordersQuery);
+            let totalOrders = snapshot.size;
+            let shippedOrders = 0;
+            let totalRevenue = 0;
+            let transactions = [];
+            
+            snapshot.forEach(doc => {
+                const orderData = doc.data();
+                if (orderData.status === "shipped" || orderData.status === "delivered") {
+                    shippedOrders++;
+                }
+                
+                totalRevenue += orderData.totalAmount || 0;
+                
+                transactions.push({
+                    id: doc.id,
+                    title: orderData.productName || "Order #" + doc.id.substring(0, 8),
+                    amount: orderData.totalAmount || 0,
+                    date: orderData.createdAt || new Date(),
+                    status: orderData.status || "pending"
+                });
+            });
+            
+            updateCountWithAnimation("ordersCount", "ordersIndicator", totalOrders, "", previousUserData?.ordersCount);
+            updateCountWithAnimation("shippedCount", "shippedIndicator", shippedOrders, "", previousUserData?.shippedCount);
+            updateCountWithAnimation("revenueCount", "revenueIndicator", totalRevenue, "$", previousUserData?.revenueCount);
+            
+            updateTransactionList(transactions, selectedYear, selectedMonth);
+            
+            if (currentUserData && (
+                currentUserData.ordersCount !== totalOrders || 
+                currentUserData.shippedCount !== shippedOrders || 
+                currentUserData.revenueCount !== totalRevenue
+            )) {
+                updateDoc(doc(db, "users", userId), {
+                    ordersCount: totalOrders,
+                    shippedCount: shippedOrders,
+                    revenueCount: totalRevenue,
+                    transactions: transactions,
+                    lastUpdate: serverTimestamp()
+                }).catch(error => {
+                    console.error("Error updating order data:", error);
+                    
+                    if (error.code === 'permission-denied') {
+                        getAuthToken().then(token => {
+                            userIdToken = token;
+                            updateDoc(doc(db, "users", userId), {
+                                ordersCount: totalOrders,
+                                shippedCount: shippedOrders,
+                                revenueCount: totalRevenue,
+                                transactions: transactions,
+                                lastUpdate: serverTimestamp()
+                            }).catch(innerError => {
+                                console.error("Error during second update attempt:", innerError);
+                            });
+                        }).catch(refreshError => {
+                            console.error("Error refreshing token:", refreshError);
+                        });
+                    }
+                });
+            }
+            
+            setTimeout(() => loadOrdersData(userId), 30000);
+        } catch (error) {
+            console.error("Error loading orders:", error);
+            
+            if (error.code === 'permission-denied') {
+                setTimeout(async () => {
+                    try {
+                        userIdToken = await getAuthToken();
+                        loadOrdersData(userId);
+                    } catch (refreshError) {
+                        console.error("Error refreshing token:", refreshError);
+                    }
+                }, 5000);
+            } else {
+                showToast("Error syncing orders", "error");
+            }
+        }
+    }
+
+    function updateCountWithAnimation(elementId, indicatorId, value, suffix, previousValue) {
+        const element = document.getElementById(elementId);
+        const indicator = document.getElementById(indicatorId);
+        
+        if (!element || !indicator) return;
+        
+        const currentText = element.textContent;
+        const currentValue = currentText.replace(/[^0-9.-]+/g, "");
+        
+        if (currentValue !== "" && parseInt(currentValue) !== value) {
+            animateUpdate(element);
+            
+            if (previousValue !== undefined) {
+                if (value > previousValue) {
+                    indicator.className = "trend-indicator trend-up";
+                    indicator.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                } else if (value < previousValue) {
+                    indicator.className = "trend-indicator trend-down";
+                    indicator.innerHTML = '<i class="fas fa-arrow-down"></i>';
+                } else {
+                    indicator.className = "trend-indicator trend-neutral";
+                    indicator.innerHTML = '<i class="fas fa-equals"></i>';
+                }
+            } else {
+                indicator.className = "trend-indicator";
+                indicator.innerHTML = '';
+            }
+        }
+        
+        if (elementId === "revenueCount") {
+            element.textContent = value + "$";
+        } else {
+            element.textContent = value + suffix;
+        }
+    }
+
+    function updateDashboardUI(userData) {
+        if (!userData) return;
+        
+        document.querySelectorAll('.skeleton').forEach(skeleton => {
+            skeleton.remove();
+        });
+        
+        updateCountWithAnimation("linksCount", "linksIndicator", userData.linksCount || 0, "", previousUserData?.linksCount);
+        updateCountWithAnimation("viewsCount", "viewsIndicator", userData.viewsCount || 0, "", previousUserData?.viewsCount);
+        updateCountWithAnimation("ordersCount", "ordersIndicator", userData.ordersCount || 0, "", previousUserData?.ordersCount);
+        updateCountWithAnimation("shippedCount", "shippedIndicator", userData.shippedCount || 0, "", previousUserData?.shippedCount);
+        updateCountWithAnimation("revenueCount", "revenueIndicator", userData.revenueCount || 0, "$", previousUserData?.revenueCount);
+        
+        updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
+    }
+
+    function updateTransactionList(transactions = [], year = "", month = "") {
+        const transactionList = document.getElementById("transactionList");
+        if (!transactionList) return;
+        
+        transactionList.innerHTML = "";
+
+        if (!transactions || transactions.length === 0) {
+            const noTransactions = document.createElement("div");
+            noTransactions.className = "no-transactions";
+            noTransactions.textContent = "No transactions";
+            transactionList.appendChild(noTransactions);
+            return;
+        }
+
+        let filteredTransactions = [...transactions]
+            .sort((a, b) => {
+                const dateA = a.date ? (a.date.toDate ? a.date.toDate() : new Date(a.date)) : new Date();
+                const dateB = b.date ? (b.date.toDate ? b.date.toDate() : new Date(b.date)) : new Date();
+                return dateB - dateA;
+            })
+            .filter(transaction => {
+                if (!transaction.date) return false;
+                
+                const date = transaction.date.toDate ? transaction.date.toDate() : new Date(transaction.date);
+                const transactionMonth = date.getMonth() + 1;
+                const transactionYear = date.getFullYear();
+
+                const yearMatch = !year || transactionYear.toString() === year.toString();
+                const monthMatch = !month || transactionMonth.toString() === month.toString();
+                
+                return yearMatch && monthMatch;
+            });
+
+        if (filteredTransactions.length === 0) {
+            const noTransactions = document.createElement("div");
+            noTransactions.className = "no-transactions";
+            noTransactions.textContent = "No transactions for this period";
+            transactionList.appendChild(noTransactions);
+            return;
+        }
+
+        filteredTransactions.forEach(transaction => {
+            const date = transaction.date ? 
+                (transaction.date.toDate ? transaction.date.toDate() : new Date(transaction.date)) : 
+                new Date();
+            
+            const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            
+            const item = document.createElement("div");
+            item.className = "transaction-item";
+            
+            if (transaction.status === "shipped" || transaction.status === "delivered") {
+                item.style.borderLeft = "3px solid #4CAF50";
+            } else if (transaction.status === "pending") {
+                item.style.borderLeft = "3px solid #FFC107";
+            } else if (transaction.status === "cancelled") {
+                item.style.borderLeft = "3px solid #F44336";
+                item.style.opacity = "0.7";
+            }
+            
+            item.innerHTML = `
+                <div class="details">
+                    <span>${transaction.title || "Unspecified order"}</span>
+                    <span class="date">${formattedDate}</span>
+                </div>
+                <span>${transaction.amount || 0}$</span>
+            `;
+            
+            transactionList.appendChild(item);
+        });
+    }
+
+    const profileIcon = document.getElementById("profileIcon");
+    const deleteModal = document.getElementById("deleteModal");
+    const confirmModal = document.getElementById("confirmModal");
+    const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const generateBtn = document.getElementById("generateBtn");
+
+    // Gestionnaire d'événements pour le bouton Generate lorsqu'il est désactivé
+    generateBtn.addEventListener("click", function(e) {
+        if (generateBtn.classList.contains("disabled")) {
+            e.preventDefault();
+            showToast("Please set up your payment method first", "error");
+            
+            // Animer la carte de paiement pour attirer l'attention
+            const stripeCard = document.getElementById("stripeCard");
+            stripeCard.style.animation = "pulse 1s ease 3";
+            setTimeout(() => {
+                stripeCard.style.animation = stripeAccountComplete ? "none" : "pulse 2s infinite";
+            }, 3000);
+        }
+    });
+
+    profileIcon.addEventListener("click", function() {
+        deleteModal.style.display = "flex";
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === deleteModal) {
+            deleteModal.style.display = "none";
+        }
+        if (event.target === confirmModal) {
+            confirmModal.style.display = "none";
+            emailInput.value = "";
+            passwordInput.value = "";
+        }
+    });
+
+    deleteAccountBtn.addEventListener("click", function() {
+        deleteModal.style.display = "none";
+        confirmModal.style.display = "flex";
+        
+        if (auth.currentUser && auth.currentUser.email) {
+            emailInput.value = auth.currentUser.email;
+        }
+    });
+
+    cancelDeleteBtn.addEventListener("click", function() {
+        confirmModal.style.display = "none";
+        emailInput.value = "";
+        passwordInput.value = "";
+    });
+
+    confirmDeleteBtn.addEventListener("click", async function() {
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        if (!email || !password) {
+            showToast("Please enter your email and password", "error");
+            return;
+        }
+
+        try {
+            confirmModal.style.display = "none";
+
+            const user = auth.currentUser;
+            if (!user) {
+                throw new Error("User not logged in");
+            }
+
+            const credential = EmailAuthProvider.credential(email, password);
+            await reauthenticateWithCredential(user, credential);
+
+            const userId = user.uid;
+            
+            // Si un compte Stripe existe, notifier l'utilisateur
+            if (currentUserData && currentUserData.stripe && currentUserData.stripe.accountComplete) {
+                showToast("Deleting account and payment information...", "info");
+            }
+            
+            const linksRef = collection(db, "links");
+            const linksQuery = query(linksRef, where("userId", "==", userId));
+            const linksSnapshot = await getDocs(linksQuery);
+            const linkDeletions = [];
+            
+            linksSnapshot.forEach(linkDoc => {
+                linkDeletions.push(deleteDoc(doc(db, "links", linkDoc.id)));
+            });
+            
+            const ordersRef = collection(db, "orders");
+            const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+            const ordersSnapshot = await getDocs(ordersQuery);
+            const orderDeletions = [];
+            
+            ordersSnapshot.forEach(orderDoc => {
+                orderDeletions.push(deleteDoc(doc(db, "orders", orderDoc.id)));
+            });
+            
+            await Promise.all([
+                ...linkDeletions,
+                ...orderDeletions
+            ]);
+            
+            await deleteDoc(doc(db, "users", userId));
+
+            await deleteUser(user);
+
+            showToast("Account deleted successfully", "success");
+            setTimeout(() => {
+                window.location.href = "auth.html";
+            }, 1500);
+        } catch (error) {
+            console.error("Error deleting account:", error);
+            
+            if (error.code === 'auth/wrong-password') {
+                showToast("Incorrect password", "error");
+            } else if (error.code === 'auth/user-mismatch') {
+                showToast("Email doesn't match current user", "error");
+            } else if (error.code === 'auth/invalid-email') {
+                showToast("Invalid email format", "error");
+            } else if (error.code === 'auth/requires-recent-login') {
+                showToast("For security reasons, please log in again", "error");
+                auth.signOut().then(() => {
+                    window.location.href = "auth.html";
+                });
+            } else {
+                showToast("Error deleting account: " + error.message, "error");
+            }
+        }
+    });
+
+    document.getElementById("yearSelect").addEventListener("change", function() {
+        selectedYear = this.value;
+        if (currentUserData) {
+            updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+        } else if (dataLoaded) {
+            showToast("Filtering error: data not available", "error");
+        } else if (dataLoadingPromise) {
+            dataLoadingPromise.then(() => {
+                updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+            });
+        }
+    });
+
+    document.getElementById("monthSelect").addEventListener("change", function() {
+        selectedMonth = this.value;
+        if (currentUserData) {
+            updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+        } else if (dataLoaded) {
+            showToast("Filtering error: data not available", "error");
+        } else if (dataLoadingPromise) {
+            dataLoadingPromise.then(() => {
+                updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+            });
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const currentYear = new Date().getFullYear().toString();
+        const yearSelect = document.getElementById('yearSelect');
+        if (yearSelect) {
+            for (let i = 0; i < yearSelect.options.length; i++) {
+                if (yearSelect.options[i].value === currentYear) {
+                    yearSelect.selectedIndex = i;
+                    selectedYear = currentYear;
+                    break;
+                }
+            }
+        }
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('setup')) {
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+        
+        // Désactiver le bouton Generate par défaut (sera activé si le compte Stripe est vérifié)
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) {
+            generateBtn.classList.add('disabled');
+            generateBtn.setAttribute("href", "javascript:void(0)");
+        }
+        
+        // Réinitialiser le localStorage lors d'un rechargement direct de la page (F5)
+        // Seulement si l'utilisateur arrive directement sur cette page (pas de référent)
+        if (!document.referrer) {
+            localStorage.removeItem('redirectedFromAccountCreation');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!dataLoaded && dataLoadingPromise) {
+            dataLoadingPromise.then(() => {
+                console.log("Data preloaded successfully");
+            }).catch(error => {
+                console.error("Preloading error:", error);
+            });
+        }
+    });
+    
+    function setupTokenRefresh() {
+        const refreshInterval = 45 * 60 * 1000;
+        
+        setInterval(async () => {
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    userIdToken = await user.getIdToken(true);
+                    console.log("Authentication token refreshed successfully");
+                }
+            } catch (error) {
+                console.error("Error during scheduled token refresh:", error);
+            }
+        }, refreshInterval);
+    }
+    
+    setupTokenRefresh();
+</script>
+</body>
+</html>
