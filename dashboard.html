@@ -861,7 +861,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
@@ -917,6 +917,25 @@
             
             // Obtenir un token d'authentification frais
             userIdToken = await user.getIdToken(true);
+            
+            // Vérifier si le document utilisateur existe et le créer si nécessaire
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+            
+            if (!userSnap.exists()) {
+                // Créer le document utilisateur s'il n'existe pas
+                await setDoc(userRef, {
+                    createdAt: serverTimestamp(),
+                    lastUpdate: serverTimestamp(),
+                    onboardingComplete: false,
+                    linksCount: 0,
+                    viewsCount: 0,
+                    ordersCount: 0,
+                    shippedCount: 0,
+                    revenueCount: 0,
+                    transactions: []
+                });
+            }
             
             // Créer un compte Stripe via Cloud Function
             const createStripeAccount = httpsCallable(functions, 'createStripeAccount');
@@ -986,14 +1005,34 @@
             // Obtenir un token d'authentification frais
             userIdToken = await user.getIdToken(true);
             
-            // Vérifier le statut du compte Stripe via la fonction Cloud
-            const checkStatus = httpsCallable(functions, 'checkStripeStatus');
-            const result = await checkStatus({
-                uid: user.uid
-            });
+            // Vérifier si le document utilisateur existe
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+            
+            if (!userSnap.exists()) {
+                // Créer le document utilisateur s'il n'existe pas
+                await setDoc(userRef, {
+                    createdAt: serverTimestamp(),
+                    lastUpdate: serverTimestamp(),
+                    onboardingComplete: false,
+                    linksCount: 0,
+                    viewsCount: 0,
+                    ordersCount: 0,
+                    shippedCount: 0,
+                    revenueCount: 0,
+                    transactions: []
+                });
+                
+                // Définir onboardingComplete à false
+                updateStripeUI(false);
+                return false;
+            }
+            
+            // Récupérer les données utilisateur actuelles
+            const userData = userSnap.data();
+            const isComplete = userData && userData.onboardingComplete === true;
             
             // Mettre à jour l'interface en fonction du statut
-            const isComplete = result.data && result.data.onboardingComplete === true;
             updateStripeUI(isComplete);
             
             // Vérifier les paramètres d'URL pour voir si on revient de Stripe
@@ -1001,12 +1040,18 @@
             if (urlParams.has('success')) {
                 showToast("Payment setup completed successfully!", "success");
                 
+                // Mettre à jour le document utilisateur
+                await updateDoc(userRef, {
+                    onboardingComplete: true,
+                    lastUpdate: serverTimestamp()
+                });
+                
                 // Nettoyer l'URL
                 const newUrl = window.location.pathname;
                 window.history.replaceState({}, document.title, newUrl);
                 
-                // Rafraîchir le statut pour être sûr
-                setTimeout(checkStripeStatus, 1000);
+                // Mettre à jour l'interface
+                updateStripeUI(true);
             }
             
             return isComplete;
@@ -1021,18 +1066,11 @@
                     });
                 }, 1500);
             } else if (error.message && error.message.includes("documentPath")) {
-                // Problème spécifique avec le chemin de document
+                // Problème spécifique avec le chemin de document - créer le document utilisateur
                 const user = auth.currentUser;
                 if (user) {
-                    // Créer ou mettre à jour le document utilisateur
                     try {
-                        await updateDoc(doc(db, "users", user.uid), {
-                            onboardingComplete: false,
-                            lastUpdate: serverTimestamp()
-                        });
-                    } catch (updateError) {
-                        // Si le document n'existe pas, le créer
-                        await db.collection("users").doc(user.uid).set({
+                        await setDoc(doc(db, "users", user.uid), {
                             createdAt: serverTimestamp(),
                             lastUpdate: serverTimestamp(),
                             onboardingComplete: false,
@@ -1043,12 +1081,17 @@
                             revenueCount: 0,
                             transactions: []
                         });
+                        showToast("Profile created successfully", "success");
+                        updateStripeUI(false);
+                    } catch (createError) {
+                        console.error("Error creating user document:", createError);
+                        showToast("Error creating user profile", "error");
                     }
-                    // Réessayer après avoir créé le document
-                    setTimeout(checkStripeStatus, 1000);
                 }
             }
             
+            // Par défaut, considérer que le compte n'est pas actif
+            updateStripeUI(false);
             return false;
         }
     }
@@ -1098,7 +1141,7 @@
     function checkAccountCreationReferral() {
         // Vérifier si l'utilisateur vient de s'authentifier depuis la page de création de compte
         const referrer = document.referrer;
-        const hasCreationReferrer = referrer.includes('auth.html') || referrer.includes('auth.html');
+        const hasCreationReferrer = referrer.includes('auth.html');
         
         // Vérifier si on a déjà redirigé l'utilisateur (via localStorage)
         const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
@@ -1157,7 +1200,7 @@
                     } else if (error.message && error.message.includes("documentPath")) {
                         // Créer le document utilisateur s'il n'existe pas
                         try {
-                            await db.collection("users").doc(user.uid).set({
+                            setDoc(doc(db, "users", user.uid), {
                                 createdAt: serverTimestamp(),
                                 lastUpdate: serverTimestamp(),
                                 onboardingComplete: false,
@@ -1167,8 +1210,10 @@
                                 shippedCount: 0,
                                 revenueCount: 0,
                                 transactions: []
+                            }).then(() => {
+                                showToast("Profile created successfully", "success");
+                                dataLoadingPromise = loadUserData(user.uid);
                             });
-                            dataLoadingPromise = loadUserData(user.uid);
                         } catch (createError) {
                             console.error("Error creating user document:", createError);
                             showToast("Error creating user profile", "error");
@@ -1239,7 +1284,7 @@
                     onboardingComplete: false
                 };
                 
-                await db.collection("users").doc(userId).set(newUserData);
+                await setDoc(doc(db, "users", userId), newUserData);
                 currentUserData = newUserData;
                 updateDashboardUI(newUserData);
                 updateStripeUI(false);
