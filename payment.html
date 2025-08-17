@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetizelt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #ffffff; /* Couleur de fond de l'en-tête */
+            padding: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.3em;
+            font-family: 'Billabong', cursive;
+            color: #007BFF;
+            border: 2px solid #007BFF;
+            padding: 5px;
+            border-radius: 14px;
+        }
+        .icon-container {
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #007BFF; 
+            border-radius: 8px;
+            background-color: white;
+            color: #007BFF;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        .icon:hover {
+            background-color: #e9f5ff; 
+        }
+        .divider {
+            height: 1px;
+            background-color: #007BFF;
+            width: 100%;
+            margin: 0 0 8px 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0 0 6px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .button-container a {
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .button-container a i {
+            margin-right: 2px; 
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 13px;
+            padding: 8px 15px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .footer-button {
+            margin-left: 10px;
+        }
+        .content-container {
+            width: 330px;
+            height: 220px; /* Hauteur à 220px */
+            margin: 10px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #d3d3d3;
+            border: 1px solid #007BFF;
+        }
+        .slider {
+            display: flex;
+            width: 200%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+        .slide {
+            width: 50%;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .cover-image {
+            width: 100%;
+            height: 100%; /* Ajustement de la hauteur de l'image */
+            object-fit: cover;
+            display: block;
+        }
+        .video-container {
+            width: 100%;
+            height: 100%; /* Ajustement de la hauteur de la vidéo */
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .swipe-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 60%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 4px;
+        }
+        .dot.active {
+            background-color: #007bff;
+        }
+        .swipe-instruction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 5;
+        }
+        .content-container:hover .swipe-instruction {
+            opacity: 1;
+        }
+        .description {
+            width: 310px; /* Réduction de la largeur à 330px */
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #f5f5f5; /* Fond blanc */
+            border-radius: 13px;
+            border: 1px solid #007BFF;
+            text-align: left; /* Aligne le texte à gauche */
+            margin-top: 0; /* Supprime la marge en haut */
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .description p {
+            margin: 0; /* Supprime la marge du paragraphe */
+        }
+        /* Nouveau style pour le bouton de téléchargement */
+        .download-button-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px auto; /* Réduit la marge pour rapprocher des conditions */
+        }
+        .download-button {
+            background-color: white;
+            color: #007BFF;
+            border: 2px solid #007BFF;
+            border-radius: 13px;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .download-button:hover {
+            background-color: #e9f5ff;
+        }
+        .download-button i {
+            margin-right: 8px;
+        }
+        /* Animation des bordures du bouton de téléchargement */
+        @keyframes borderAnimation {
+            0% { border-color: green; }
+            25% { border-color: #007bff; }
+            50% { border-color: green; }
+            75% { border-color: #007bff; }
+            100% { border-color: green; }
+        }
+        .download-button {
+            animation: borderAnimation 2s infinite; /* Animation des bordures */
+        }
+        /* Style pour la notification de copie */
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .copy-notification.show {
+            opacity: 1;
+        }
+        
+        /* Style pour les informations produit */
+        .product-info {
+            width: 305px; /* Réduit la largeur */
+            margin: 10px auto;
+            padding: 7px;
+            background-color: #f0f8ff;
+            border-radius: 13px;
+            border: 1px solid #007BFF;
+            text-align: center;
+        }
+        
+        .product-title {
+            font-weight: bold;
+            color: #007BFF;
+            margin-bottom: 5px;
+        }
+        
+        .product-price {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        
+        /* Style pour les conditions d'achat */
+        .purchase-terms {
+            width: 310px;
+            margin: 10px auto 20px;
+            padding: 12px;
+            background-color: #f0f8ff;
+            border-radius: 13px;
+            border: 1px solid #007bff;
+            text-align: left;
+            font-size: 0.9em;
+            color: #555;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .purchase-terms h3 {
+            color: #007bff;
+            font-size: 1em;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+        
+        .purchase-terms p {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        
+        .vendor-info {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        
+        .product-category {
+            font-style: italic;
+            color: #666;
+        }
+        
+        /* Style pour la case à cocher */
+        .terms-checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #e9f5ff;
+            border-radius: 8px;
+        }
+        
+        .terms-checkbox {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .terms-checkbox-label {
+            font-size: 0.9em;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        /* Style pour le bouton désactivé */
+        .download-button:disabled {
+            animation: none;
+            background-color: #e0e0e0;
+            border-color: #cccccc;
+            color: #999999;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 translate="no">Monetizelt</h1>
+    <div class="icon-container">
+        <a class="icon" id="copyButton">
+            <i class="fas fa-copy" style="font-size: 23px;"></i>
+        </a>
+    </div>
+</header>
+
+<div class="divider"></div>
+
+<div class="button-container">
+    <a class="button" href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+    <a class="button footer-button" href="conditions.html"><i class="fas fa-file-contract"></i> Termes</a>
+    <a class="button footer-button" href="privacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
+</div>
+
+<div class="divider"></div>
+
+<div class="content-container">
+    <div class="swipe-instruction">Glisser pour voir l'extrait</div>
+    <div class="slider" id="contentSlider">
+        <div class="slide" id="coverSlide">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='330' height='220' viewBox='0 0 330 220'%3E%3Crect width='330' height='220' fill='%23d3d3d3'/%3E%3Ctext x='165' y='110' font-family='Arial' font-size='16' text-anchor='middle' fill='%23555555'%3EImage de couverture%3C/text%3E%3C/svg%3E" alt="Couverture" class="cover-image" id="cover-image">
+        </div>
+        <div class="slide" id="excerptSlide">
+            <div class="video-container">
+                <video id="excerptVideo" controls>
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la vidéo.
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="swipe-indicator">
+        <div class="dot active" id="dot1"></div>
+        <div class="dot" id="dot2"></div>
+    </div>
+</div>
+
+<!-- Informations produit -->
+<div class="product-info" id="product-info">
+    <div class="product-title" id="product-title">Chargement du produit...</div>
+    <div class="product-price" id="product-price"></div>
+</div>
+
+<!-- Section pour la description -->
+<div class="description">
+    <p id="product-description">Chargement de la description...</p>
+</div>
+
+<!-- Bouton de téléchargement -->
+<div class="download-button-container">
+    <button class="download-button" id="downloadButton" disabled>
+        <i class="fas fa-download"></i> Télécharger
+    </button>
+</div>
+
+<!-- Conditions d'achat -->
+<div class="purchase-terms">
+    <h3>Conditions d'achat</h3>
+    <p>En téléchargeant ce produit, l'acheteur reconnaît qu'il s'agit de l'œuvre intellectuelle d'une personne et s'engage à :</p>
+    <p>• Ne pas redistribuer ce contenu gratuitement</p>
+    <p>• Ne pas revendre ce produit à des tiers</p>
+    <p>• Ne pas reproduire le contenu sans autorisation</p>
+    <p>• Respecter les droits d'auteur et la propriété intellectuelle</p>
+    <p>Toute violation de ces conditions peut entraîner des poursuites légales.</p>
+    
+    <!-- Case à cocher pour les conditions -->
+    <div class="terms-checkbox-container">
+        <input type="checkbox" id="termsCheckbox" class="terms-checkbox">
+        <label for="termsCheckbox" class="terms-checkbox-label">J'accepte les conditions d'achat ci-dessus</label>
+    </div>
+</div>
+
+<!-- Notification de copie -->
+<div class="copy-notification" id="copyNotification">URL copiée dans le presse-papiers!</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+    // Configuration Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
+        authDomain: "monetizelt-b235d.firebaseapp.com",
+        projectId: "monetizelt-b235d",
+        storageBucket: "monetizelt-b235d.firebasestorage.app",
+        messagingSenderId: "1040211471009",
+        appId: "1:1040211471009:web:321898c7bdca6258ce9ee0",
+        measurementId: "G-5NWKR1E9VY"
+    };
+
+    // Initialiser Firebase
+    firebase.initializeApp(firebaseConfig);
+    const storage = firebase.storage();
+    const db = firebase.firestore();
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.getElementById('contentSlider');
+        const dot1 = document.getElementById('dot1');
+        const dot2 = document.getElementById('dot2');
+        const swipeInstruction = document.querySelector('.swipe-instruction');
+        const video = document.getElementById('excerptVideo');
+        const copyButton = document.getElementById('copyButton');
+        const copyNotification = document.getElementById('copyNotification');
+        const downloadButton = document.getElementById('downloadButton');
+        const coverImage = document.getElementById('cover-image');
+        const productDescription = document.getElementById('product-description');
+        const productTitle = document.getElementById('product-title');
+        const productPrice = document.getElementById('product-price');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        
+        // Activer/désactiver le bouton de téléchargement en fonction de la case à cocher
+        termsCheckbox.addEventListener('change', function() {
+            downloadButton.disabled = !this.checked;
+        });
+        
+        // Récupérer les données du produit 
+        function getProductDataFromURL() {
+            // Obtenir l'ID du produit à partir de l'URL (paramètre 'id')
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (productId) {
+                // Récupérer les données du produit depuis Firestore
+                db.collection('products').doc(productId).get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            const productData = doc.data();
+                            
+                            // Stocker les données localement
+                            localStorage.setItem('monetizelt_product', JSON.stringify(productData));
+                            
+                            // Initialiser la page avec les données
+                            initProductPage(productData);
+                        } else {
+                            console.error("Aucun produit trouvé avec cet ID");
+                            productDescription.textContent = "Produit non trouvé.";
+                            productTitle.textContent = "Erreur";
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Erreur lors de la récupération du produit:", error);
+                        productDescription.textContent = "Erreur lors du chargement du produit.";
+                        productTitle.textContent = "Erreur";
+                    });
+            } else {
+                // Essayer de récupérer les données du localStorage
+                const savedProductData = JSON.parse(localStorage.getItem('monetizelt_product') || '{}');
+                if (savedProductData && Object.keys(savedProductData).length > 0) {
+                    initProductPage(savedProductData);
+                } else {
+                    productDescription.textContent = "Aucun produit spécifié.";
+                    productTitle.textContent = "Erreur";
+                }
+            }
+        }
+        
+        // Récupérer le produit depuis l'URL ou le localStorage
+        getProductDataFromURL();
+        
+        // Initialiser l'interface avec les données du produit
+        function initProductPage(productData) {
+            if (productData && Object.keys(productData).length > 0) {
+                // Mise à jour de l'image de couverture
+                if (productData.coverImage) {
+                    coverImage.src = productData.coverImage;
+                }
+                
+                // Mise à jour de la vidéo d'extrait
+                if (productData.excerptFile) {
+                    video.src = productData.excerptFile;
+                }
+                
+                // Mise à jour de la description
+                if (productData.description) {
+                    productDescription.textContent = productData.description;
+                }
+                
+                // Mise à jour des informations du produit avec vendeur et catégorie
+                let categoryText = '';
+                if (productData.category === 'ebook') {
+                    categoryText = 'E-book';
+                    if (productData.subcategory) {
+                        categoryText += '/' + productData.subcategory;
+                    }
+                } else if (productData.category === 'video') {
+                    categoryText = 'Vidéo';
+                    if (productData.subcategory) {
+                        categoryText += '/' + productData.subcategory;
+                    }
+                }
+                
+                // Ajouter le nom du vendeur
+                const vendorName = productData.vendorName || 'Anonyme';
+                productTitle.innerHTML = `<span class="vendor-info">${vendorName}</span> - Produit : <span class="product-category">${categoryText}</span>`;
+                
+                if (productData.price) {
+                    productPrice.textContent = `${productData.price.toFixed(2)} $`;
+                }
+            } else {
+                // Fallback si aucune donnée n'est trouvée
+                productDescription.textContent = "Aucune information disponible pour ce produit.";
+                productTitle.textContent = "Produit inconnu";
+            }
+        }
+        
+        let startX, currentPosition = 0;
+        let isDragging = false;
+
+        function updateIndicators(position) {
+            if (position === 0) {
+                dot1.classList.add('active');
+                dot2.classList.remove('active');
+                swipeInstruction.textContent = "Glisser pour voir l'extrait";
+                if (video.played.length > 0) {
+                    video.pause();
+                }
+            } else {
+                dot1.classList.remove('active');
+                dot2.classList.add('active');
+                swipeInstruction.textContent = "Glisser pour voir la couverture";
+            }
+        }
+
+        slider.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        slider.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.touches[0].clientX;
+            const diff = startX - x;
+            let newPosition = currentPosition === 0 ? Math.max(0, Math.min(50, diff / 3)) : -50 + Math.max(0, Math.min(50, diff / 3));
+            slider.style.transform = `translateX(-${newPosition}%)`;
+        });
+
+        slider.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            const x = e.changedTouches[0].clientX;
+            const diff = startX - x;
+            if (Math.abs(diff) > 50) { 
+                if (diff > 0 && currentPosition === 0) {
+                    currentPosition = 50;
+                } else if (diff < 0 && currentPosition === 50) {
+                    currentPosition = 0;
+                }
+            }
+            slider.style.transform = `translateX(-${currentPosition}%)`;
+            updateIndicators(currentPosition);
+        });
+
+        slider.addEventListener('mousedown', function(e) {
+            startX = e.clientX;
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        slider.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.clientX;
+            const diff = startX - x;
+            let newPosition = currentPosition === 0 ? Math.max(0, Math.min(50, diff / 3)) : -50 + Math.max(0, Math.min(50, diff / 3));
+            slider.style.transform = `translateX(-${newPosition}%)`;
+        });
+
+        slider.addEventListener('mouseup', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            const diff = startX - e.clientX;
+            if (Math.abs(diff) > 50) { 
+                if (diff > 0 && currentPosition === 0) {
+                    currentPosition = 50;
+                } else if (diff < 0 && currentPosition === 50) {
+                    currentPosition = 0;
+                }
+            }
+            slider.style.transform = `translateX(-${currentPosition}%)`;
+            updateIndicators(currentPosition);
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isDragging) {
+                isDragging = false;
+                slider.style.transform = `translateX(-${currentPosition}%)`;
+            }
+        });
+
+        dot1.addEventListener('click', function() {
+            currentPosition = 0;
+            slider.style.transform = `translateX(-${currentPosition}%)`;
+            updateIndicators(currentPosition);
+        });
+
+        dot2.addEventListener('click', function() {
+            currentPosition = 50;
+            slider.style.transform = `translateX(-${currentPosition}%)`;
+            updateIndicators(currentPosition);
+        });
+
+        // Fonction pour copier l'URL actuelle
+        copyButton.addEventListener('click', function() {
+            const currentUrl = window.location.href;
+            
+            // Copier l'URL dans le presse-papiers
+            navigator.clipboard.writeText(currentUrl).then(function() {
+                // Afficher la notification
+                copyNotification.classList.add('show');
+                
+                // Cacher la notification après 2 secondes
+                setTimeout(function() {
+                    copyNotification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Impossible de copier: ', err);
+                alert('Impossible de copier l\'URL. Erreur: ' + err);
+            });
+        });
+
+        // Fonction pour télécharger le fichier
+        downloadButton.addEventListener('click', function() {
+            // Récupérer les données du produit depuis localStorage
+            const productData = JSON.parse(localStorage.getItem('monetizelt_product') || '{}');
+            
+            if (productData && productData.productFile) {
+                // Créer un lien de téléchargement
+                const link = document.createElement('a');
+                link.href = productData.productFile.data;
+                link.download = productData.productFile.name || 'téléchargement';
+                
+                // Ajouter le lien au DOM et cliquer dessus
+                document.body.appendChild(link);
+                link.click();
+                
+                // Nettoyer
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                }, 100);
+                
+                // Enregistrer l'achat dans la base de données si nécessaire
+                if (productData.id) {
+                    db.collection('purchases').add({
+                        productId: productData.id,
+                        purchaseDate: new Date(),
+                        // Vous pouvez ajouter d'autres informations si nécessaire
+                    }).then(() => {
+                        console.log("Achat enregistré avec succès");
+                    }).catch((error) => {
+                        console.error("Erreur lors de l'enregistrement de l'achat:", error);
+                    });
+                }
+            } else {
+                alert('Désolé, le fichier de produit n\'est pas disponible.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
