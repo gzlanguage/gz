@@ -592,7 +592,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-    import { getFunctions, httpsCallable, connectFunctionsEmulator } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
@@ -637,54 +637,26 @@
             
             showToast("Setting up your payment account...", "info");
             
-            userIdToken = await getAuthToken();
+            // Obtenir un token d'authentification frais
+            userIdToken = await user.getIdToken(true);
             
-            // Vérifier d'abord le statut du compte Stripe existant
-            const checkStripeStatus = httpsCallable(functions, 'checkStripeStatus');
-            const statusResult = await checkStripeStatus();
-            
-            if (statusResult.data && statusResult.data.accountComplete) {
-                // Le compte existe déjà et est actif
-                showToast("Your payment account is already active", "success");
-                
-                // Mettre à jour le statut dans Firestore si nécessaire
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (userDoc.exists() && (!userDoc.data().stripe || !userDoc.data().stripe.accountComplete)) {
-                    await updateDoc(doc(db, "users", user.uid), {
-                        "stripe.accountComplete": true,
-                        "stripe.accountId": statusResult.data.accountId,
-                        lastUpdate: serverTimestamp()
-                    });
-                }
-                
-                updateStripeUI(true);
-                return;
-            }
-            
-            // Si un lien d'onboarding existe déjà, rediriger vers ce lien
-            if (statusResult.data && statusResult.data.onboardingUrl) {
-                window.location.href = statusResult.data.onboardingUrl;
-                return;
-            }
-            
-            // Créer un nouveau compte Stripe
+            // Créer un compte Stripe via Cloud Function
             const createStripeAccount = httpsCallable(functions, 'createStripeAccount');
-            const result = await createStripeAccount();
-            
-            if (!result.data || !result.data.accountId) {
-                throw new Error("Failed to create payment account");
-            }
-            
-            // Enregistrer l'ID du compte dans Firestore
-            await updateDoc(doc(db, "users", user.uid), {
-                "stripe.accountId": result.data.accountId,
-                "stripe.accountComplete": false,
-                lastUpdate: serverTimestamp()
+            const result = await createStripeAccount({
+                uid: user.uid,
+                email: user.email,
+                country: "US" // Vous pouvez le rendre dynamique plus tard
             });
             
-            // Rediriger vers le lien d'onboarding
-            if (result.data.onboardingUrl) {
-                window.location.href = result.data.onboardingUrl;
+            if (result.data && result.data.url) {
+                // Mettre à jour le statut dans Firestore
+                await updateDoc(doc(db, "users", user.uid), {
+                    "onboardingComplete": false,
+                    lastUpdate: serverTimestamp()
+                });
+                
+                // Rediriger vers l'URL d'onboarding de Stripe
+                window.location.href = result.data.url;
             } else {
                 throw new Error("No onboarding URL provided");
             }
@@ -704,20 +676,6 @@
             }
         }
     };
-
-    async function getAuthToken() {
-        const user = auth.currentUser;
-        if (!user) {
-            throw new Error("User not logged in");
-        }
-        
-        try {
-            return await user.getIdToken(true);
-        } catch (error) {
-            console.error("Error getting token:", error);
-            throw error;
-        }
-    }
 
     function showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
@@ -753,51 +711,42 @@
             const user = auth.currentUser;
             if (!user) return;
             
-            userIdToken = await getAuthToken();
-            
-            const userDoc = await getDoc(doc(db, "users", user.uid));
-            const userData = userDoc.data();
+            // Obtenir un token d'authentification frais
+            userIdToken = await user.getIdToken(true);
             
             // Vérifier le statut du compte Stripe via la fonction Cloud
-            const checkStripeStatus = httpsCallable(functions, 'checkStripeStatus');
-            const statusResult = await checkStripeStatus();
+            const checkStatus = httpsCallable(functions, 'checkStripeStatus');
+            const result = await checkStatus({
+                uid: user.uid
+            });
             
-            // Mettre à jour l'UI en fonction du statut
-            const isActive = statusResult.data && statusResult.data.accountComplete;
-            updateStripeUI(isActive);
+            // Mettre à jour l'interface en fonction du statut
+            const isComplete = result.data && result.data.onboardingComplete === true;
+            updateStripeUI(isComplete);
             
-            // Si le statut a changé, mettre à jour Firestore
-            if (userData && (!userData.stripe || userData.stripe.accountComplete !== isActive)) {
+            // Mettre à jour le document utilisateur si nécessaire
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists() && userDoc.data().onboardingComplete !== isComplete) {
                 await updateDoc(doc(db, "users", user.uid), {
-                    "stripe.accountComplete": isActive,
-                    "stripe.accountId": statusResult.data ? statusResult.data.accountId : null,
+                    onboardingComplete: isComplete,
                     lastUpdate: serverTimestamp()
                 });
             }
             
-            // Vérifier les paramètres d'URL pour la redirection de Stripe
+            // Vérifier les paramètres d'URL pour voir si on revient de Stripe
             const urlParams = new URLSearchParams(window.location.search);
-            const setupStatus = urlParams.get('setup');
-            
-            if (setupStatus === 'success') {
-                showToast("Payment account setup successful!", "success");
+            if (urlParams.has('success')) {
+                showToast("Payment setup completed successfully!", "success");
                 
                 // Nettoyer l'URL
                 const newUrl = window.location.pathname;
                 window.history.replaceState({}, document.title, newUrl);
                 
-                // Rafraîchir le statut
-                const refreshResult = await checkStripeStatus();
-                updateStripeUI(refreshResult.data && refreshResult.data.accountComplete);
-            } 
-            else if (setupStatus === 'canceled') {
-                showToast("Payment account setup was canceled", "info");
-                
-                // Nettoyer l'URL
-                const newUrl = window.location.pathname;
-                window.history.replaceState({}, document.title, newUrl);
+                // Rafraîchir le statut pour être sûr
+                setTimeout(checkStripeStatus, 1000);
             }
             
+            return isComplete;
         } catch (error) {
             console.error("Error checking Stripe status:", error);
             
@@ -809,6 +758,8 @@
                     });
                 }, 1500);
             }
+            
+            return false;
         }
     }
     
@@ -879,7 +830,7 @@
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             try {
-                userIdToken = await getAuthToken();
+                userIdToken = await user.getIdToken(true);
                 
                 cleanupListeners();
                 
@@ -957,7 +908,7 @@
                 }
                 
                 // Mettre à jour l'interface en fonction du statut Stripe
-                if (userData.stripe && userData.stripe.accountComplete) {
+                if (userData.onboardingComplete) {
                     updateStripeUI(true);
                 } else {
                     updateStripeUI(false);
@@ -975,10 +926,7 @@
                     transactions: [],
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
-                    stripe: {
-                        accountComplete: false,
-                        accountId: null
-                    }
+                    onboardingComplete: false
                 };
                 
                 await updateDoc(userDocRef, newUserData);
@@ -992,7 +940,7 @@
             
             if (error.code === 'permission-denied') {
                 try {
-                    userIdToken = await getAuthToken();
+                    userIdToken = await user.getIdToken(true);
                     return await loadUserData(userId);
                 } catch (refreshError) {
                     console.error("Error refreshing token:", refreshError);
@@ -1015,7 +963,7 @@
                     updateDashboardUI(newData);
                     
                     // Mettre à jour l'interface en fonction du statut Stripe
-                    if (newData.stripe && newData.stripe.accountComplete) {
+                    if (newData.onboardingComplete) {
                         updateStripeUI(true);
                     } else {
                         updateStripeUI(false);
@@ -1027,7 +975,7 @@
                 if (error.code === 'permission-denied') {
                     showToast("Session expired. Reconnecting...", "info");
                     
-                    getAuthToken().then(token => {
+                    auth.currentUser.getIdToken(true).then(token => {
                         userIdToken = token;
                     }).catch(refreshError => {
                         console.error("Error refreshing token:", refreshError);
@@ -1086,7 +1034,7 @@
                     console.error("Error updating user data:", error);
                     
                     if (error.code === 'permission-denied') {
-                        getAuthToken().then(token => {
+                        auth.currentUser.getIdToken(true).then(token => {
                             userIdToken = token;
                             updateDoc(doc(db, "users", userId), {
                                 linksCount: totalLinks,
@@ -1109,7 +1057,7 @@
             if (error.code === 'permission-denied') {
                 setTimeout(async () => {
                     try {
-                        userIdToken = await getAuthToken();
+                        userIdToken = await auth.currentUser.getIdToken(true);
                         loadLinksData(userId);
                     } catch (refreshError) {
                         console.error("Error refreshing token:", refreshError);
@@ -1170,7 +1118,7 @@
                     console.error("Error updating order data:", error);
                     
                     if (error.code === 'permission-denied') {
-                        getAuthToken().then(token => {
+                        auth.currentUser.getIdToken(true).then(token => {
                             userIdToken = token;
                             updateDoc(doc(db, "users", userId), {
                                 ordersCount: totalOrders,
@@ -1195,7 +1143,7 @@
             if (error.code === 'permission-denied') {
                 setTimeout(async () => {
                     try {
-                        userIdToken = await getAuthToken();
+                        userIdToken = await auth.currentUser.getIdToken(true);
                         loadOrdersData(userId);
                     } catch (refreshError) {
                         console.error("Error refreshing token:", refreshError);
@@ -1409,7 +1357,7 @@
             const userId = user.uid;
             
             // Si un compte Stripe existe, notifier l'utilisateur
-            if (currentUserData && currentUserData.stripe && currentUserData.stripe.accountComplete) {
+            if (currentUserData && currentUserData.onboardingComplete) {
                 showToast("Deleting account and payment information...", "info");
             }
             
