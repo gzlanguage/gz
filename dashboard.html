@@ -904,7 +904,7 @@
             if (!user) {
                 showToast("Please log in to set up Stripe", "error");
                 setTimeout(() => {
-                    window.location.href = "auth.html";
+                    window.location.href = "index.html";
                 }, 1500);
                 return;
             }
@@ -966,7 +966,7 @@
                 showToast("Session expired. Please log in again.", "error");
                 setTimeout(() => {
                     auth.signOut().then(() => {
-                        window.location.href = "auth.html";
+                        window.location.href = "index.html";
                     });
                 }, 1500);
             } else {
@@ -1062,7 +1062,7 @@
                 showToast("Your session has expired. Please log in again.", "error");
                 setTimeout(() => {
                     auth.signOut().then(() => {
-                        window.location.href = "auth.html";
+                        window.location.href = "index.html";
                     });
                 }, 1500);
             } else if (error.message && error.message.includes("documentPath")) {
@@ -1131,7 +1131,7 @@
 
     function checkAccountCreationReferral() {
         const referrer = document.referrer;
-        const hasCreationReferrer = referrer.includes('auth.html');
+        const hasCreationReferrer = referrer.includes('index.html');
         
         const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
         
@@ -1177,7 +1177,7 @@
                         showToast("Session expired. Please log in again.", "error");
                         setTimeout(() => {
                             auth.signOut().then(() => {
-                                window.location.href = "auth.html";
+                                window.location.href = "index.html";
                             });
                         }, 1500);
                     } else if (error.message && error.message.includes("documentPath")) {
@@ -1211,7 +1211,7 @@
                     showToast("Authentication problem. Please log in again.", "error");
                     setTimeout(() => {
                         auth.signOut().then(() => {
-                            window.location.href = "auth.html";
+                            window.location.href = "index.html";
                         });
                     }, 1500);
                 } else {
@@ -1317,7 +1317,7 @@
                         showToast("Authentication problem. Please log in again.", "error");
                         setTimeout(() => {
                             auth.signOut().then(() => {
-                                window.location.href = "auth.html";
+                                window.location.href = "index.html";
                             });
                         }, 1500);
                     });
