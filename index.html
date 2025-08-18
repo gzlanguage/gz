@@ -479,7 +479,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
@@ -511,10 +511,6 @@
         
         let currentAccountType = 'individual';
         let countriesLoaded = false;
-        let userLocation = {
-            country: "",
-            city: ""
-        };
 
         // Function to display messages
         function showMessage(container, message, type = 'error') {
@@ -644,42 +640,6 @@
             currentAccountType = 'business';
         });
 
-        // Detect user's location
-        async function detectLocation() {
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                if (!response.ok) {
-                    throw new Error('Failed to detect location');
-                }
-                
-                const data = await response.json();
-                userLocation = {
-                    country: data.country_name || "",
-                    city: data.city || "",
-                    region: data.region || "",
-                    latitude: data.latitude,
-                    longitude: data.longitude,
-                    ip: data.ip
-                };
-                
-                console.log("User location detected:", userLocation);
-                
-                // If country was detected and select is loaded, set it as selected
-                if (userLocation.country && countriesLoaded) {
-                    const countryOption = Array.from(countrySelect.options).find(
-                        option => option.value === userLocation.country
-                    );
-                    
-                    if (countryOption) {
-                        countrySelect.value = userLocation.country;
-                    }
-                }
-            } catch (error) {
-                console.error("Error detecting location:", error);
-                // Continue without location data
-            }
-        }
-
         // Load countries list on initialization
         async function loadCountries() {
             if (countriesLoaded) return;
@@ -695,17 +655,6 @@
                 const countries = await response.json();
                 populateCountrySelect(countries);
                 countriesLoaded = true;
-                
-                // After countries are loaded, attempt to set user's country if detected
-                if (userLocation.country) {
-                    const countryOption = Array.from(countrySelect.options).find(
-                        option => option.value === userLocation.country
-                    );
-                    
-                    if (countryOption) {
-                        countrySelect.value = userLocation.country;
-                    }
-                }
             } catch (error) {
                 console.error("Error loading countries:", error);
                 // Add some countries manually in case of failure
@@ -746,9 +695,6 @@
             const today = new Date();
             const maxDate = today.toISOString().split('T')[0];
             document.getElementById('birthdate').setAttribute('max', maxDate);
-            
-            // Detect user location
-            detectLocation();
             
             // Load countries immediately
             loadCountries();
@@ -950,44 +896,55 @@
                 simulateProgress(60, 80, 400);
                 showMessage(signupMessages, "Saving your information...", "info");
 
-                // Common user data - ensuring all accounts have the same fields
+                // Assurez-vous que l'UID est bien défini
+                if (!user.uid) {
+                    throw new Error("Failed to get user UID");
+                }
+
+                console.log("User created with UID:", user.uid);
+
+                // Données utilisateur communes avec UID explicite
                 const userData = {
                     uid: user.uid,
                     fullName: fullName,
                     email: user.email,
                     country: country,
-                    location: userLocation, // Ajout des données de localisation complètes
                     birthdate: birthdate.toISOString().split('T')[0],
-                    createdAt: new Date().toISOString(),
+                    createdAt: serverTimestamp(), // Utiliser le timestamp serveur pour plus de précision
+                    lastLogin: serverTimestamp(),
+                    accountType: currentAccountType,
+                    // Dashboard metrics
                     linksCount: 0,
                     viewsCount: 0,
                     ordersCount: 0,
                     shippedCount: 0,
                     revenueCount: "0$",
                     transactions: [],
+                    // Données spécifiques fusionnées dans le document principal
                     ...specificData
                 };
 
-                // Save user data - IMPROVED CODE HERE
+                // Enregistrement avec setDoc explicite et gestion des erreurs détaillée
                 try {
-                    // First attempt with explicit ID
-                    await setDoc(doc(db, "users", user.uid), userData);
-                    console.log("User document successfully written with ID:", user.uid);
+                    console.log("Attempting to save user data with UID:", user.uid);
                     
-                    // For individual accounts, create a separate individual record
+                    // Enregistrement principal dans la collection users avec l'UID comme ID de document
+                    await setDoc(doc(db, "users", user.uid), userData);
+                    console.log("User document successfully written with UID:", user.uid);
+                    
+                    // Collections spécifiques selon le type de compte
                     if (currentAccountType === 'individual') {
                         const individualData = {
-                            uid: user.uid, // Ajout de l'UID ici
+                            uid: user.uid, // Ajout explicite de l'UID
                             ownerId: user.uid,
                             fullName: fullName,
                             email: user.email,
-                            country: country, // Ajout du pays
-                            city: userLocation.city || "", // Ajout de la ville
-                            location: userLocation, // Données complètes de localisation
                             phone: specificData.phone,
                             address: specificData.address,
                             occupation: specificData.occupation,
-                            createdAt: new Date().toISOString(),
+                            country: country,
+                            birthdate: birthdate.toISOString().split('T')[0],
+                            createdAt: serverTimestamp(),
                             linksCount: 0,
                             viewsCount: 0,
                             ordersCount: 0,
@@ -996,25 +953,22 @@
                         };
                         
                         await setDoc(doc(db, "individuals", user.uid), individualData);
-                        console.log("Individual document successfully written with ID:", user.uid);
+                        console.log("Individual document successfully written with UID:", user.uid);
                     }
                     
-                    // For business accounts, create a separate business record
                     if (currentAccountType === 'business') {
                         const businessData = {
-                            uid: user.uid, // Ajout de l'UID ici
+                            uid: user.uid, // Ajout explicite de l'UID
                             ownerId: user.uid,
                             companyName: specificData.companyName,
                             email: user.email,
-                            country: country, // Ajout du pays
-                            city: userLocation.city || "", // Ajout de la ville
-                            location: userLocation, // Données complètes de localisation
                             registrationNumber: specificData.registrationNumber,
                             companySize: specificData.companySize,
                             phone: specificData.businessPhone,
                             address: specificData.businessAddress,
                             website: specificData.website,
-                            createdAt: new Date().toISOString(),
+                            country: country,
+                            createdAt: serverTimestamp(),
                             linksCount: 0,
                             viewsCount: 0,
                             ordersCount: 0,
@@ -1023,8 +977,17 @@
                         };
                         
                         await setDoc(doc(db, "businesses", user.uid), businessData);
-                        console.log("Business document successfully written with ID:", user.uid);
+                        console.log("Business document successfully written with UID:", user.uid);
                     }
+                    
+                    // Ajout dans une collection générale pour les statistiques
+                    await setDoc(doc(db, "userStats", user.uid), {
+                        uid: user.uid,
+                        email: user.email,
+                        accountType: currentAccountType,
+                        createdAt: serverTimestamp(),
+                        lastActive: serverTimestamp()
+                    });
                     
                     simulateProgress(80, 100, 300);
                     showMessage(signupMessages, "Account created successfully!", "success");
@@ -1035,27 +998,37 @@
                         window.location.href = "dashboard.html"; 
                     }, 1500);
                 } catch (firestoreError) {
-                    console.error("Firestore error:", firestoreError);
+                    console.error("Firestore error when using setDoc:", firestoreError);
                     
-                    // Fallback method - try using addDoc instead
+                    // Fallback method - try using addDoc as last resort
                     try {
-                        console.log("Trying alternative method to save user data...");
-                        const userRef = await addDoc(collection(db, "users"), userData);
-                        console.log("User document written with generated ID:", userRef.id);
+                        console.log("Trying alternative method to save user data with addDoc...");
+                        
+                        // Assurer que l'UID est toujours dans les données
+                        userData.uid = user.uid;
+                        
+                        // Utiliser addDoc avec une collection temporaire pour les situations d'urgence
+                        const userRef = await addDoc(collection(db, "usersBackup"), userData);
+                        console.log("User document written with generated ID as fallback:", userRef.id);
+                        
+                        // Essayer de nouveau avec setDoc dans la collection principale
+                        await setDoc(doc(db, "users", user.uid), {
+                            ...userData,
+                            backupDocId: userRef.id // Référence au document de sauvegarde
+                        });
                         
                         if (currentAccountType === 'individual') {
                             const individualData = {
-                                uid: user.uid, // Ajout de l'UID ici
+                                uid: user.uid,
                                 ownerId: user.uid,
                                 fullName: fullName,
                                 email: user.email,
-                                country: country, // Ajout du pays
-                                city: userLocation.city || "", // Ajout de la ville
-                                location: userLocation, // Données complètes de localisation
                                 phone: specificData.phone,
                                 address: specificData.address,
                                 occupation: specificData.occupation,
-                                createdAt: new Date().toISOString(),
+                                country: country,
+                                birthdate: birthdate.toISOString().split('T')[0],
+                                createdAt: serverTimestamp(),
                                 linksCount: 0,
                                 viewsCount: 0,
                                 ordersCount: 0,
@@ -1063,24 +1036,23 @@
                                 revenueCount: "0$"
                             };
                             
-                            await addDoc(collection(db, "individuals"), individualData);
+                            await addDoc(collection(db, "individualsBackup"), individualData);
+                            await setDoc(doc(db, "individuals", user.uid), individualData);
                         }
                         
                         if (currentAccountType === 'business') {
                             const businessData = {
-                                uid: user.uid, // Ajout de l'UID ici
+                                uid: user.uid,
                                 ownerId: user.uid,
                                 companyName: specificData.companyName,
                                 email: user.email,
-                                country: country, // Ajout du pays
-                                city: userLocation.city || "", // Ajout de la ville
-                                location: userLocation, // Données complètes de localisation
                                 registrationNumber: specificData.registrationNumber,
                                 companySize: specificData.companySize,
                                 phone: specificData.businessPhone,
                                 address: specificData.businessAddress,
                                 website: specificData.website,
-                                createdAt: new Date().toISOString(),
+                                country: country,
+                                createdAt: serverTimestamp(),
                                 linksCount: 0,
                                 viewsCount: 0,
                                 ordersCount: 0,
@@ -1088,7 +1060,8 @@
                                 revenueCount: "0$"
                             };
                             
-                            await addDoc(collection(db, "businesses"), businessData);
+                            await addDoc(collection(db, "businessesBackup"), businessData);
+                            await setDoc(doc(db, "businesses", user.uid), businessData);
                         }
                         
                         simulateProgress(80, 100, 300);
@@ -1100,7 +1073,7 @@
                         }, 1500);
                     } catch (secondError) {
                         console.error("Second Firestore error:", secondError);
-                        throw new Error("Failed to save user data after multiple attempts");
+                        throw new Error("Failed to save user data after multiple attempts: " + secondError.message);
                     }
                 }
             } catch (error) {
@@ -1151,7 +1124,18 @@
             try {
                 showMessage(loginMessages, "Logging in...", "info");
                 
-                await signInWithEmailAndPassword(auth, email, password);
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Mettre à jour la date de dernière connexion
+                try {
+                    await setDoc(doc(db, "users", user.uid), {
+                        lastLogin: serverTimestamp()
+                    }, { merge: true });
+                } catch (updateError) {
+                    console.error("Error updating last login:", updateError);
+                    // Continue anyway - non-critical update
+                }
                 
                 simulateProgress(50, 100, 300);
                 showMessage(loginMessages, "Login successful!", "success");
