@@ -511,6 +511,10 @@
         
         let currentAccountType = 'individual';
         let countriesLoaded = false;
+        let userLocation = {
+            country: "",
+            city: ""
+        };
 
         // Function to display messages
         function showMessage(container, message, type = 'error') {
@@ -640,6 +644,42 @@
             currentAccountType = 'business';
         });
 
+        // Detect user's location
+        async function detectLocation() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                if (!response.ok) {
+                    throw new Error('Failed to detect location');
+                }
+                
+                const data = await response.json();
+                userLocation = {
+                    country: data.country_name || "",
+                    city: data.city || "",
+                    region: data.region || "",
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    ip: data.ip
+                };
+                
+                console.log("User location detected:", userLocation);
+                
+                // If country was detected and select is loaded, set it as selected
+                if (userLocation.country && countriesLoaded) {
+                    const countryOption = Array.from(countrySelect.options).find(
+                        option => option.value === userLocation.country
+                    );
+                    
+                    if (countryOption) {
+                        countrySelect.value = userLocation.country;
+                    }
+                }
+            } catch (error) {
+                console.error("Error detecting location:", error);
+                // Continue without location data
+            }
+        }
+
         // Load countries list on initialization
         async function loadCountries() {
             if (countriesLoaded) return;
@@ -655,6 +695,17 @@
                 const countries = await response.json();
                 populateCountrySelect(countries);
                 countriesLoaded = true;
+                
+                // After countries are loaded, attempt to set user's country if detected
+                if (userLocation.country) {
+                    const countryOption = Array.from(countrySelect.options).find(
+                        option => option.value === userLocation.country
+                    );
+                    
+                    if (countryOption) {
+                        countrySelect.value = userLocation.country;
+                    }
+                }
             } catch (error) {
                 console.error("Error loading countries:", error);
                 // Add some countries manually in case of failure
@@ -695,6 +746,9 @@
             const today = new Date();
             const maxDate = today.toISOString().split('T')[0];
             document.getElementById('birthdate').setAttribute('max', maxDate);
+            
+            // Detect user location
+            detectLocation();
             
             // Load countries immediately
             loadCountries();
@@ -902,6 +956,7 @@
                     fullName: fullName,
                     email: user.email,
                     country: country,
+                    location: userLocation, // Ajout des données de localisation complètes
                     birthdate: birthdate.toISOString().split('T')[0],
                     createdAt: new Date().toISOString(),
                     linksCount: 0,
@@ -922,9 +977,13 @@
                     // For individual accounts, create a separate individual record
                     if (currentAccountType === 'individual') {
                         const individualData = {
+                            uid: user.uid, // Ajout de l'UID ici
                             ownerId: user.uid,
                             fullName: fullName,
-                            email: user.email, // Ajout de l'email ici
+                            email: user.email,
+                            country: country, // Ajout du pays
+                            city: userLocation.city || "", // Ajout de la ville
+                            location: userLocation, // Données complètes de localisation
                             phone: specificData.phone,
                             address: specificData.address,
                             occupation: specificData.occupation,
@@ -943,9 +1002,13 @@
                     // For business accounts, create a separate business record
                     if (currentAccountType === 'business') {
                         const businessData = {
+                            uid: user.uid, // Ajout de l'UID ici
                             ownerId: user.uid,
                             companyName: specificData.companyName,
-                            email: user.email, // Ajout de l'email ici
+                            email: user.email,
+                            country: country, // Ajout du pays
+                            city: userLocation.city || "", // Ajout de la ville
+                            location: userLocation, // Données complètes de localisation
                             registrationNumber: specificData.registrationNumber,
                             companySize: specificData.companySize,
                             phone: specificData.businessPhone,
@@ -982,9 +1045,13 @@
                         
                         if (currentAccountType === 'individual') {
                             const individualData = {
+                                uid: user.uid, // Ajout de l'UID ici
                                 ownerId: user.uid,
                                 fullName: fullName,
-                                email: user.email, // Ajout de l'email ici
+                                email: user.email,
+                                country: country, // Ajout du pays
+                                city: userLocation.city || "", // Ajout de la ville
+                                location: userLocation, // Données complètes de localisation
                                 phone: specificData.phone,
                                 address: specificData.address,
                                 occupation: specificData.occupation,
@@ -1001,9 +1068,13 @@
                         
                         if (currentAccountType === 'business') {
                             const businessData = {
+                                uid: user.uid, // Ajout de l'UID ici
                                 ownerId: user.uid,
                                 companyName: specificData.companyName,
-                                email: user.email, // Ajout de l'email ici
+                                email: user.email,
+                                country: country, // Ajout du pays
+                                city: userLocation.city || "", // Ajout de la ville
+                                location: userLocation, // Données complètes de localisation
                                 registrationNumber: specificData.registrationNumber,
                                 companySize: specificData.companySize,
                                 phone: specificData.businessPhone,
