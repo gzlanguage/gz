@@ -770,7 +770,7 @@
     </div>
 </div>
 
-<!-- Account deletion modal -->
+
 <div id="deleteModal" class="modal">
     <div class="modal-content">
         <div class="modal-title">Account Options</div>
@@ -778,7 +778,7 @@
     </div>
 </div>
 
-<!-- Confirmation modal with password and email -->
+
 <div id="confirmModal" class="confirm-modal">
     <div class="confirm-modal-content">
         <div class="modal-title">Confirm Account Deletion</div>
@@ -792,7 +792,6 @@
     </div>
 </div>
 
-<!-- Create Product Modal -->
 <div id="createProductModal" class="create-product-modal">
     <div class="product-modal-content">
         <div class="product-modal-title">Create New Product</div>
@@ -855,7 +854,6 @@
     </div>
 </div>
 
-<!-- Toast container for notifications -->
 <div id="toastContainer" class="toast-container"></div>
 
 <script type="module">
@@ -892,16 +890,16 @@
     let userIdToken = null;
     let stripeAccountComplete = false;
     
-    // Variables pour le stockage des fichiers
+
     let coverFile = null;
     let productFile = null;
     let coverFileUrl = null;
     let productFileUrl = null;
     
-    // Nouvelle variable pour suivre si l'utilisateur vient de la page de création de compte
+   
     let hasRedirectedFromAccountCreation = false;
 
-    // Exposer la fonction setupStripeAccount pour le bouton
+   
     window.setupStripeAccount = async function() {
         try {
             const user = auth.currentUser;
@@ -915,7 +913,6 @@
             
             showToast("Setting up your payment account...", "info");
             
-            // Obtenir un token d'authentification frais
             userIdToken = await user.getIdToken(true);
             
             // Vérifier si le document utilisateur existe et le créer si nécessaire
@@ -923,7 +920,6 @@
             const userSnap = await getDoc(userRef);
             
             if (!userSnap.exists()) {
-                // Créer le document utilisateur s'il n'existe pas
                 await setDoc(userRef, {
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
@@ -937,16 +933,15 @@
                 });
             }
             
-            // Créer un compte Stripe via Cloud Function
+            // Appeler la Cloud Function pour créer le compte Stripe
             const createStripeAccount = httpsCallable(functions, 'createStripeAccount');
             const result = await createStripeAccount({
                 uid: user.uid,
                 email: user.email,
-                country: "US" // Vous pouvez le rendre dynamique plus tard
+                country: "US"
             });
             
             if (result.data && result.data.url) {
-                // Rediriger vers l'URL d'onboarding de Stripe
                 window.location.href = result.data.url;
             } else {
                 throw new Error("No onboarding URL provided");
@@ -1002,15 +997,12 @@
             const user = auth.currentUser;
             if (!user) return false;
             
-            // Obtenir un token d'authentification frais
             userIdToken = await user.getIdToken(true);
             
-            // Vérifier si le document utilisateur existe
             const userRef = doc(db, "users", user.uid);
             const userSnap = await getDoc(userRef);
             
             if (!userSnap.exists()) {
-                // Créer le document utilisateur s'il n'existe pas
                 await setDoc(userRef, {
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
@@ -1023,34 +1015,27 @@
                     transactions: []
                 });
                 
-                // Définir onboardingComplete à false
                 updateStripeUI(false);
                 return false;
             }
             
-            // Récupérer les données utilisateur actuelles
             const userData = userSnap.data();
             const isComplete = userData && userData.onboardingComplete === true;
             
-            // Mettre à jour l'interface en fonction du statut
             updateStripeUI(isComplete);
             
-            // Vérifier les paramètres d'URL pour voir si on revient de Stripe
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('success')) {
                 showToast("Payment setup completed successfully!", "success");
                 
-                // Mettre à jour le document utilisateur
                 await updateDoc(userRef, {
                     onboardingComplete: true,
                     lastUpdate: serverTimestamp()
                 });
                 
-                // Nettoyer l'URL
                 const newUrl = window.location.pathname;
                 window.history.replaceState({}, document.title, newUrl);
                 
-                // Mettre à jour l'interface
                 updateStripeUI(true);
             }
             
@@ -1066,7 +1051,6 @@
                     });
                 }, 1500);
             } else if (error.message && error.message.includes("documentPath")) {
-                // Problème spécifique avec le chemin de document - créer le document utilisateur
                 const user = auth.currentUser;
                 if (user) {
                     try {
@@ -1090,7 +1074,6 @@
                 }
             }
             
-            // Par défaut, considérer que le compte n'est pas actif
             updateStripeUI(false);
             return false;
         }
@@ -1105,53 +1088,42 @@
         stripeAccountComplete = isActive;
         
         if (isActive) {
-            // Compte Stripe actif
             stripeStatus.textContent = "Active";
             stripeStatus.className = "stripe-status active";
             stripeCard.setAttribute("onclick", "");
             stripeCard.style.borderColor = "#4CAF50";
             stripeCard.classList.remove("pulse-animation");
             
-            // Activer le bouton Generate
             generateBtn.classList.remove("disabled");
             generateBtn.onclick = openProductModal;
             
-            // Masquer l'avertissement
             paymentWarning.style.display = "none";
         } else {
-            // Compte Stripe inactif
             stripeStatus.textContent = "Not Active";
             stripeStatus.className = "stripe-status not-active";
             stripeCard.setAttribute("onclick", "setupStripeAccount()");
             stripeCard.style.borderColor = "#007BFF";
             stripeCard.classList.add("pulse-animation");
             
-            // Désactiver le bouton Generate
             generateBtn.classList.add("disabled");
             generateBtn.onclick = function() {
                 showToast("Please set up your payment method first", "error");
             };
             
-            // Afficher l'avertissement
             paymentWarning.style.display = "block";
         }
     }
 
-    // Fonction pour vérifier si l'utilisateur vient de la page de création de compte
     function checkAccountCreationReferral() {
-        // Vérifier si l'utilisateur vient de s'authentifier depuis la page de création de compte
         const referrer = document.referrer;
         const hasCreationReferrer = referrer.includes('auth.html');
         
-        // Vérifier si on a déjà redirigé l'utilisateur (via localStorage)
         const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
         
         if (hasCreationReferrer && !hasBeenRedirected) {
-            // Stocker que l'utilisateur a été redirigé
             localStorage.setItem('redirectedFromAccountCreation', 'true');
             hasRedirectedFromAccountCreation = true;
             
-            // Mettre un délai court pour permettre le chargement des données de base
             setTimeout(() => {
                 showToast("Returning to previous page...", "info");
                 history.back();
@@ -1166,18 +1138,14 @@
                 
                 cleanupListeners();
                 
-                // Vérifier si l'utilisateur vient de la page de création de compte
                 checkAccountCreationReferral();
                 
-                // Si l'utilisateur a été redirigé, ne pas charger les données pour éviter un travail inutile
                 if (hasRedirectedFromAccountCreation) {
                     return;
                 }
                 
-                // Vérifier le statut Stripe
                 await checkStripeStatus();
                 
-                // Charger les données utilisateur
                 dataLoadingPromise = loadUserData(user.uid);
                 dataLoadingPromise.then(() => {
                     setupRealTimeListeners(user.uid);
@@ -1198,7 +1166,6 @@
                             });
                         }, 1500);
                     } else if (error.message && error.message.includes("documentPath")) {
-                        // Créer le document utilisateur s'il n'existe pas
                         try {
                             setDoc(doc(db, "users", user.uid), {
                                 createdAt: serverTimestamp(),
@@ -1262,7 +1229,6 @@
                     updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
                 }
                 
-                // Mettre à jour l'interface en fonction du statut Stripe
                 if (userData.onboardingComplete) {
                     updateStripeUI(true);
                 } else {
@@ -1284,7 +1250,7 @@
                     onboardingComplete: false
                 };
                 
-                await setDoc(doc(db, "users", userId), newUserData);
+                await setDoc(userDocRef, newUserData);
                 currentUserData = newUserData;
                 updateDashboardUI(newUserData);
                 updateStripeUI(false);
@@ -1317,7 +1283,6 @@
                     currentUserData = newData;
                     updateDashboardUI(newData);
                     
-                    // Mettre à jour l'interface en fonction du statut Stripe
                     if (newData.onboardingComplete) {
                         updateStripeUI(true);
                     } else {
@@ -1365,7 +1330,7 @@
 
     async function loadLinksData(userId) {
         try {
-            const linksRef = collection(db, "products"); // Utiliser la collection products au lieu de links
+            const linksRef = collection(db, "products");
             const linksQuery = query(linksRef, where("sellerId", "==", userId));
             
             const snapshot = await getDocs(linksQuery);
@@ -1381,7 +1346,8 @@
             updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
             
             if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
-                updateDoc(doc(db, "users", userId), {
+                const userDocRef = doc(db, "users", userId);
+                await updateDoc(userDocRef, {
                     linksCount: totalLinks,
                     viewsCount: totalViews,
                     lastUpdate: serverTimestamp()
@@ -1391,7 +1357,7 @@
                     if (error.code === 'permission-denied') {
                         auth.currentUser.getIdToken(true).then(token => {
                             userIdToken = token;
-                            updateDoc(doc(db, "users", userId), {
+                            updateDoc(userDocRef, {
                                 linksCount: totalLinks,
                                 viewsCount: totalViews,
                                 lastUpdate: serverTimestamp()
@@ -1463,7 +1429,8 @@
                 currentUserData.shippedCount !== shippedOrders || 
                 currentUserData.revenueCount !== totalRevenue
             )) {
-                updateDoc(doc(db, "users", userId), {
+                const userDocRef = doc(db, "users", userId);
+                await updateDoc(userDocRef, {
                     ordersCount: totalOrders,
                     shippedCount: shippedOrders,
                     revenueCount: totalRevenue,
@@ -1475,7 +1442,7 @@
                     if (error.code === 'permission-denied') {
                         auth.currentUser.getIdToken(true).then(token => {
                             userIdToken = token;
-                            updateDoc(doc(db, "users", userId), {
+                            updateDoc(userDocRef, {
                                 ordersCount: totalOrders,
                                 shippedCount: shippedOrders,
                                 revenueCount: totalRevenue,
@@ -1634,25 +1601,21 @@
         });
     }
 
-    // Fonctions pour le modal de création de produit
     function openProductModal() {
         const createProductModal = document.getElementById("createProductModal");
         createProductModal.style.display = "flex";
         
-        // Réinitialiser le formulaire
         document.getElementById("productTitle").value = "";
         document.getElementById("productCategory").value = "";
         document.getElementById("productDescription").value = "";
         document.getElementById("productPrice").value = "";
         document.getElementById("descriptionCharCount").textContent = "0";
         
-        // Réinitialiser les fichiers
         coverFile = null;
         productFile = null;
         coverFileUrl = null;
         productFileUrl = null;
         
-        // Réinitialiser les indicateurs de fichiers
         document.getElementById("coverFileName").textContent = "";
         document.getElementById("coverFileName").style.display = "none";
         document.getElementById("coverSuccessIcon").style.display = "none";
@@ -1670,13 +1633,11 @@
                 return;
             }
             
-            // Obtenir les valeurs du formulaire
             const title = document.getElementById("productTitle").value.trim();
             const category = document.getElementById("productCategory").value;
             const description = document.getElementById("productDescription").value.trim();
             const price = parseFloat(document.getElementById("productPrice").value);
             
-            // Validation
             if (!category) {
                 showToast("Please select a category", "error");
                 return;
@@ -1702,16 +1663,12 @@
                 return;
             }
             
-            // Afficher un message de chargement
             showToast("Creating your product...", "info");
             
-            // Fermer le modal
             document.getElementById("createProductModal").style.display = "none";
             
-            // Uploader les fichiers vers Firebase Storage
             await uploadFiles();
             
-            // Créer le produit via Cloud Function
             const createProductFn = httpsCallable(functions, 'createProduct');
             const result = await createProductFn({
                 title: title || `Product #${Date.now()}`,
@@ -1725,10 +1682,8 @@
             if (result.data && result.data.shareableLink) {
                 showToast("Product created successfully!", "success");
                 
-                // Afficher le lien généré
                 const shareableLink = result.data.shareableLink;
                 
-                // Créer un modal temporaire pour afficher le lien
                 const linkModal = document.createElement("div");
                 linkModal.className = "modal";
                 linkModal.style.display = "flex";
@@ -1743,7 +1698,6 @@
                 
                 document.body.appendChild(linkModal);
                 
-                // Gérer les événements du modal
                 document.getElementById("copyLinkBtn").addEventListener("click", function() {
                     navigator.clipboard.writeText(shareableLink).then(() => {
                         showToast("Link copied to clipboard!", "success");
@@ -1754,14 +1708,12 @@
                     linkModal.remove();
                 });
                 
-                // Fermer automatiquement après 30 secondes
                 setTimeout(() => {
                     if (document.body.contains(linkModal)) {
                         linkModal.remove();
                     }
                 }, 30000);
                 
-                // Rafraîchir les données
                 await loadLinksData(user.uid);
             } else {
                 throw new Error("No shareable link provided");
@@ -1784,7 +1736,6 @@
     }
     
     async function uploadFiles() {
-        // Vérifier si les fichiers existent
         if (!coverFile || !productFile) {
             throw new Error("Files not selected");
         }
@@ -1794,26 +1745,21 @@
             throw new Error("User not logged in");
         }
         
-        // Générer des noms de fichiers uniques
         const coverFileName = `covers/${user.uid}/${Date.now()}_${coverFile.name}`;
         const productFileName = `products/${user.uid}/${Date.now()}_${productFile.name}`;
         
-        // Créer des références aux emplacements dans Storage
         const coverStorageRef = ref(storage, coverFileName);
         const productStorageRef = ref(storage, productFileName);
         
-        // Uploader les fichiers
         await uploadBytes(coverStorageRef, coverFile);
         await uploadBytes(productStorageRef, productFile);
         
-        // Obtenir les URLs de téléchargement
         coverFileUrl = await getDownloadURL(coverStorageRef);
         productFileUrl = await getDownloadURL(productStorageRef);
         
         return { coverFileUrl, productFileUrl };
     }
 
-    // Éléments du DOM et événements
     const profileIcon = document.getElementById("profileIcon");
     const deleteModal = document.getElementById("deleteModal");
     const confirmModal = document.getElementById("confirmModal");
@@ -1824,44 +1770,37 @@
     const passwordInput = document.getElementById("passwordInput");
     const generateBtn = document.getElementById("generateBtn");
 
-    // Gestionnaires d'événements pour le modal de création de produit
     document.getElementById("cancelProductBtn").addEventListener("click", function() {
         document.getElementById("createProductModal").style.display = "none";
     });
     
     document.getElementById("createProductBtn").addEventListener("click", createProduct);
     
-    // Limiter le nombre de caractères de la description
     document.getElementById("productDescription").addEventListener("input", function() {
         const descLength = this.value.length;
         document.getElementById("descriptionCharCount").textContent = descLength;
     });
     
-    // Gérer les uploads de fichiers
     document.getElementById("coverFile").addEventListener("change", function(e) {
         if (e.target.files.length > 0) {
             coverFile = e.target.files[0];
             
-            // Vérifier si c'est une image
             if (!coverFile.type.startsWith('image/')) {
                 showToast("Please upload an image file for the cover", "error");
                 coverFile = null;
                 return;
             }
             
-            // Limiter la taille à 5MB
             if (coverFile.size > 5 * 1024 * 1024) {
                 showToast("Cover image must be less than 5MB", "error");
                 coverFile = null;
                 return;
             }
             
-            // Afficher le nom du fichier
             const fileName = document.getElementById("coverFileName");
             fileName.textContent = "File added";
             fileName.style.display = "block";
             
-            // Afficher l'icône de succès
             document.getElementById("coverSuccessIcon").style.display = "block";
         }
     });
@@ -1871,7 +1810,6 @@
             productFile = e.target.files[0];
             const category = document.getElementById("productCategory").value;
             
-            // Vérifier les limites de taille selon la catégorie
             if (category === "video" && productFile.size > 500 * 1024 * 1024) {
                 showToast("Video files must be less than 500MB", "error");
                 productFile = null;
@@ -1882,17 +1820,15 @@
                 return;
             }
             
-            // Afficher le nom du fichier
             const fileName = document.getElementById("productFileName");
             fileName.textContent = "File added";
             fileName.style.display = "block";
             
-            // Afficher l'icône de succès
             document.getElementById("productFileSuccessIcon").style.display = "block";
         }
     });
     
-    // Mettre à jour la limite de taille de fichier en fonction de la catégorie
+
     document.getElementById("productCategory").addEventListener("change", function() {
         const category = this.value;
         const fileUploadLimits = document.getElementById("fileUploadLimits");
@@ -1908,16 +1844,14 @@
         }
     });
 
-    // Exposer la fonction openProductModal pour le bouton Generate
+
     window.openProductModal = openProductModal;
 
-    // Gestionnaire d'événements pour le bouton Generate lorsqu'il est désactivé
     generateBtn.addEventListener("click", function(e) {
         if (generateBtn.classList.contains("disabled")) {
             e.preventDefault();
             showToast("Please set up your payment method first", "error");
             
-            // Animer la carte de paiement pour attirer l'attention
             const stripeCard = document.getElementById("stripeCard");
             stripeCard.style.animation = "pulse 1s ease 3";
             setTimeout(() => {
@@ -1981,12 +1915,10 @@
 
             const userId = user.uid;
             
-            // Si un compte Stripe existe, notifier l'utilisateur
             if (currentUserData && currentUserData.onboardingComplete) {
                 showToast("Deleting account and payment information...", "info");
             }
             
-            // Supprimer les produits
             const productsRef = collection(db, "products");
             const productsQuery = query(productsRef, where("sellerId", "==", userId));
             const productsSnapshot = await getDocs(productsQuery);
@@ -1996,7 +1928,6 @@
                 productDeletions.push(deleteDoc(doc(db, "products", productDoc.id)));
             });
             
-            // Supprimer les commandes
             const ordersRef = collection(db, "orders");
             const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
             const ordersSnapshot = await getDocs(ordersQuery);
@@ -2011,10 +1942,8 @@
                 ...orderDeletions
             ]);
             
-            // Supprimer le document utilisateur
             await deleteDoc(doc(db, "users", userId));
 
-            // Supprimer le compte auth
             await deleteUser(user);
 
             showToast("Account deleted successfully", "success");
@@ -2086,13 +2015,11 @@
             window.history.replaceState({}, document.title, newUrl);
         }
         
-        // Désactiver le bouton Generate par défaut (sera activé si le compte Stripe est vérifié)
         const generateBtn = document.getElementById('generateBtn');
         if (generateBtn) {
             generateBtn.classList.add('disabled');
         }
         
-        // Réinitialiser le localStorage lors d'un rechargement direct de la page (F5)
         if (!document.referrer) {
             localStorage.removeItem('redirectedFromAccountCreation');
         }
