@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Billabong&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* General styles */
         :root {
             --primary-color: #007BFF;
             --primary-dark: #0056b3;
@@ -283,7 +282,6 @@
             margin-bottom: 10px;
             color: var(--primary-dark);
         }
-        /* Nouveau style pour les points de chargement */
         .loading-dots {
             display: inline-flex;
             align-items: center;
@@ -375,7 +373,6 @@
     </header>
     <div class="divider"></div>
 
-    <!-- Login Form -->
     <div class="form-container" id="loginForm">
         <h2><b>Welcome Back</b></h2>
         <div id="loginMessages"></div>
@@ -397,7 +394,6 @@
         </div>
     </div>
 
-    <!-- Sign Up Form -->
     <div class="form-container" id="signupForm" style="display: none;">
         <h2><b>Welcome</b></h2>
         <div id="signupMessages"></div>
@@ -407,7 +403,6 @@
             <button class="account-type-btn" id="businessBtn">Business</button>
         </div>
         
-        <!-- Common fields for both account types -->
         <div class="form-section">
             <div class="form-section-title">Account Information</div>
             <input type="text" id="fullName" placeholder="Full name" required>
@@ -424,7 +419,6 @@
             <input type="password" id="confirmPassword" placeholder="Confirm password" required>
         </div>
         
-        <!-- Individual-specific fields -->
         <div class="field-group active" id="individualFields">
             <div class="form-section">
                 <div class="form-section-title">Personal Information</div>
@@ -441,7 +435,6 @@
             </div>
         </div>
         
-        <!-- Business-specific fields -->
         <div class="field-group" id="businessFields">
             <div class="form-section">
                 <div class="form-section-title">Business Information</div>
@@ -496,7 +489,6 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // DOM elements
         const progressBar = document.getElementById('progressBar');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const loginMessages = document.getElementById('loginMessages');
@@ -512,7 +504,6 @@
         let currentAccountType = 'individual';
         let countriesLoaded = false;
 
-        // Function to display messages
         function showMessage(container, message, type = 'error') {
             const iconClass = type === 'error' ? 'fa-circle-exclamation' : 
                             type === 'success' ? 'fa-circle-check' : 
@@ -526,7 +517,6 @@
             `;
         }
 
-        // Function for progress bar
         function simulateProgress(start, end, duration) {
             const startTime = Date.now();
             progressBar.style.width = start + '%';
@@ -550,7 +540,6 @@
             requestAnimationFrame(updateProgress);
         }
 
-        // Function to show/hide global loader
         function toggleLoader(show) {
             if (show) {
                 loadingOverlay.classList.add('active');
@@ -559,7 +548,6 @@
             }
         }
 
-        // Function to manage button state during loading with dots animation
         function setBtnLoading(button, dots, isLoading) {
             if (isLoading) {
                 button.disabled = true;
@@ -570,7 +558,6 @@
             }
         }
 
-        // Password strength evaluation
         document.getElementById('signupPassword').addEventListener('input', function() {
             evaluatePasswordStrength(this.value);
         });
@@ -588,17 +575,14 @@
             let strength = 0;
             let message = '';
 
-            // Check length
             if (password.length > 5) strength += 20;
             if (password.length > 8) strength += 10;
 
-            // Check complexity
             if (/[a-z]/.test(password)) strength += 10;
             if (/[A-Z]/.test(password)) strength += 15;
             if (/[0-9]/.test(password)) strength += 15;
             if (/[^a-zA-Z0-9]/.test(password)) strength += 20;
 
-            // Set color and message
             let color;
             if (strength < 30) {
                 color = '#ff4d4d';
@@ -623,7 +607,6 @@
             feedback.style.color = color;
         }
 
-        // Account type toggle
         individualBtn.addEventListener('click', function() {
             individualBtn.classList.add('active');
             businessBtn.classList.remove('active');
@@ -640,12 +623,10 @@
             currentAccountType = 'business';
         });
 
-        // Load countries list on initialization
         async function loadCountries() {
             if (countriesLoaded) return;
             
             try {
-                // Use a more reliable alternative API
                 const response = await fetch('https://restcountries.com/v3.1/all?fields=name');
                 
                 if (!response.ok) {
@@ -657,7 +638,6 @@
                 countriesLoaded = true;
             } catch (error) {
                 console.error("Error loading countries:", error);
-                // Add some countries manually in case of failure
                 const fallbackCountries = [
                     { name: { common: "United States" } },
                     { name: { common: "United Kingdom" } },
@@ -678,7 +658,6 @@
         function populateCountrySelect(countries) {
             countrySelect.innerHTML = '<option value="" disabled selected>Select your country</option>';
             
-            // Sort countries by name
             countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
             
             countries.forEach(country => {
@@ -689,17 +668,13 @@
             });
         }
 
-        // Initialization
         function init() {
-            // Set max date for birthdate field
             const today = new Date();
             const maxDate = today.toISOString().split('T')[0];
             document.getElementById('birthdate').setAttribute('max', maxDate);
             
-            // Load countries immediately
             loadCountries();
             
-            // Check authentication state
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     window.location.href = "dashboard.html";
@@ -709,13 +684,11 @@
 
         init();
 
-        // Create account
         document.getElementById("createAccount").addEventListener("click", async function() {
             const createAccountBtn = this;
             setBtnLoading(createAccountBtn, signupDots, true);
             simulateProgress(0, 40, 300);
             
-            // Common fields
             const fullName = document.getElementById("fullName").value.trim();
             const email = document.getElementById("signupEmail").value.trim();
             const password = document.getElementById("signupPassword").value;
@@ -724,7 +697,6 @@
             const birthdate = new Date(document.getElementById("birthdate").value);
             const today = new Date();
 
-            // Common field validation
             if (!fullName) {
                 showMessage(signupMessages, "Please enter your full name", "error");
                 setBtnLoading(createAccountBtn, signupDots, false);
@@ -744,7 +716,6 @@
                 return;
             }
 
-            // Age verification (minimum 18 years)
             const age = today.getFullYear() - birthdate.getFullYear();
             const monthDiff = today.getMonth() - birthdate.getMonth();
             const adjustedAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate()) ? age - 1 : age;
@@ -763,7 +734,6 @@
                 return;
             }
             
-            // Basic email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showMessage(signupMessages, "Please enter a valid email address", "error");
@@ -779,7 +749,6 @@
                 return;
             }
             
-            // Check password strength
             if (password.length < 6) {
                 showMessage(signupMessages, "Password must be at least 6 characters", "error");
                 setBtnLoading(createAccountBtn, signupDots, false);
@@ -794,7 +763,6 @@
                 return;
             }
 
-            // Validate specific fields based on account type
             let specificData = {};
             
             if (currentAccountType === 'individual') {
@@ -830,7 +798,6 @@
                     occupation: occupation
                 };
             } else {
-                // Business validation
                 const companyName = document.getElementById("companyName").value.trim();
                 const registrationNumber = document.getElementById("businessRegistrationNumber").value.trim();
                 const companySize = document.getElementById("companySize").value;
@@ -889,53 +856,41 @@
             try {
                 showMessage(signupMessages, "Creating your account...", "info");
                 
-                // Create the user first
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
                 simulateProgress(60, 80, 400);
                 showMessage(signupMessages, "Saving your information...", "info");
 
-                // Assurez-vous que l'UID est bien défini
-                if (!user.uid) {
+                if (!user || !user.uid) {
                     throw new Error("Failed to get user UID");
                 }
 
-                console.log("User created with UID:", user.uid);
-
-                // Données utilisateur communes avec UID explicite
                 const userData = {
                     uid: user.uid,
                     fullName: fullName,
                     email: user.email,
                     country: country,
                     birthdate: birthdate.toISOString().split('T')[0],
-                    createdAt: serverTimestamp(), // Utiliser le timestamp serveur pour plus de précision
+                    createdAt: serverTimestamp(),
                     lastLogin: serverTimestamp(),
                     accountType: currentAccountType,
-                    // Dashboard metrics
                     linksCount: 0,
                     viewsCount: 0,
                     ordersCount: 0,
                     shippedCount: 0,
-                    revenueCount: "0$",
+                    revenueCount: 0,
+                    onboardingComplete: false,
                     transactions: [],
-                    // Données spécifiques fusionnées dans le document principal
                     ...specificData
                 };
 
-                // Enregistrement avec setDoc explicite et gestion des erreurs détaillée
                 try {
-                    console.log("Attempting to save user data with UID:", user.uid);
-                    
-                    // Enregistrement principal dans la collection users avec l'UID comme ID de document
                     await setDoc(doc(db, "users", user.uid), userData);
-                    console.log("User document successfully written with UID:", user.uid);
                     
-                    // Collections spécifiques selon le type de compte
                     if (currentAccountType === 'individual') {
                         const individualData = {
-                            uid: user.uid, // Ajout explicite de l'UID
+                            uid: user.uid,
                             ownerId: user.uid,
                             fullName: fullName,
                             email: user.email,
@@ -953,12 +908,11 @@
                         };
                         
                         await setDoc(doc(db, "individuals", user.uid), individualData);
-                        console.log("Individual document successfully written with UID:", user.uid);
                     }
                     
                     if (currentAccountType === 'business') {
                         const businessData = {
-                            uid: user.uid, // Ajout explicite de l'UID
+                            uid: user.uid,
                             ownerId: user.uid,
                             companyName: specificData.companyName,
                             email: user.email,
@@ -977,10 +931,8 @@
                         };
                         
                         await setDoc(doc(db, "businesses", user.uid), businessData);
-                        console.log("Business document successfully written with UID:", user.uid);
                     }
                     
-                    // Ajout dans une collection générale pour les statistiques
                     await setDoc(doc(db, "userStats", user.uid), {
                         uid: user.uid,
                         email: user.email,
@@ -992,7 +944,6 @@
                     simulateProgress(80, 100, 300);
                     showMessage(signupMessages, "Account created successfully!", "success");
 
-                    // Redirect after successful creation
                     setTimeout(() => {
                         toggleLoader(true);
                         window.location.href = "dashboard.html"; 
@@ -1000,21 +951,14 @@
                 } catch (firestoreError) {
                     console.error("Firestore error when using setDoc:", firestoreError);
                     
-                    // Fallback method - try using addDoc as last resort
                     try {
-                        console.log("Trying alternative method to save user data with addDoc...");
-                        
-                        // Assurer que l'UID est toujours dans les données
                         userData.uid = user.uid;
                         
-                        // Utiliser addDoc avec une collection temporaire pour les situations d'urgence
                         const userRef = await addDoc(collection(db, "usersBackup"), userData);
-                        console.log("User document written with generated ID as fallback:", userRef.id);
                         
-                        // Essayer de nouveau avec setDoc dans la collection principale
                         await setDoc(doc(db, "users", user.uid), {
                             ...userData,
-                            backupDocId: userRef.id // Référence au document de sauvegarde
+                            backupDocId: userRef.id
                         });
                         
                         if (currentAccountType === 'individual') {
@@ -1098,7 +1042,6 @@
             }
         });
 
-        // Login
         document.getElementById("loginUser").addEventListener("click", async function() {
             const loginBtn = this;
             setBtnLoading(loginBtn, loginDots, true);
@@ -1107,7 +1050,6 @@
             const email = document.getElementById("loginEmail").value.trim();
             const password = document.getElementById("loginPassword").value;
 
-            // Field validation
             if (!email) {
                 showMessage(loginMessages, "Please enter your email", "error");
                 setBtnLoading(loginBtn, loginDots, false);
@@ -1127,20 +1069,17 @@
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 
-                // Mettre à jour la date de dernière connexion
                 try {
                     await setDoc(doc(db, "users", user.uid), {
                         lastLogin: serverTimestamp()
                     }, { merge: true });
                 } catch (updateError) {
                     console.error("Error updating last login:", updateError);
-                    // Continue anyway - non-critical update
                 }
                 
                 simulateProgress(50, 100, 300);
                 showMessage(loginMessages, "Login successful!", "success");
                 
-                // Redirect after login
                 setTimeout(() => {
                     toggleLoader(true);
                     window.location.href = "dashboard.html"; 
@@ -1169,7 +1108,6 @@
             }
         });
 
-        // Forgot password
         document.getElementById("forgotPassword").addEventListener("click", async function() {
             const email = document.getElementById("loginEmail").value.trim();
 
@@ -1178,7 +1116,6 @@
                 return;
             }
             
-            // Basic email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showMessage(loginMessages, "Please enter a valid email", "error");
@@ -1214,7 +1151,6 @@
             }
         });
 
-        // Navigation between forms
         document.getElementById("showSignup").addEventListener("click", function() {
             document.getElementById("loginForm").style.display = "none";
             document.getElementById("signupForm").style.display = "block";
@@ -1229,7 +1165,6 @@
             document.getElementById("loginEmail").focus();
         });
         
-        // Add event listeners for form submission with Enter
         document.getElementById("loginEmail").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 document.getElementById("loginPassword").focus();
@@ -1242,7 +1177,6 @@
             }
         });
         
-        // Add navigation between signup form fields with Enter
         document.getElementById("fullName").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 document.getElementById("signupCountry").focus();
