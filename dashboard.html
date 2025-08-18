@@ -68,18 +68,17 @@
             width: 100%;
             margin: 0; 
         }
-        /* Button container - Modify padding and margin to adjust spacing between buttons */
         .button-container {
             display: flex;
             justify-content: center;
-            padding: 4px 0; /* Increase/decrease to add more/less vertical space */
+            padding: 4px 0;
             overflow-x: auto;
             white-space: nowrap;
-            margin: 0 0 5px 0; /* Bottom margin can be adjusted to increase/decrease space between buttons and content below */
+            margin: 0 0 5px 0;
             max-width: 100%;
         }
         .button-container a {
-            margin: 0 5px; /* Adjust horizontal spacing between buttons */
+            margin: 0 5px;
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -88,27 +87,24 @@
         .button-container a i {
             margin-right: 5px;
         }
-        /* Button sizing - Modify padding, font-size, and min-width to adjust button size */
         .button {
             background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 15px;
-            padding: 8px 15px; /* Increase/decrease to make buttons larger/smaller */
-            font-size: 0.9em; /* Adjust text size */
+            padding: 8px 15px;
+            font-size: 0.9em;
             cursor: pointer;
             transition: background-color 0.3s;
             white-space: nowrap;
             text-align: center;
-            min-width: 70px; /* Adjust minimum width of buttons */
+            min-width: 70px;
         }
         .button:hover {
             background-color: #0056b3;
         }
-   
-        /* Footer button spacing */
         .footer-button {
-            margin-left: 10px; /* Adjust spacing between footer buttons */
+            margin-left: 10px;
         }
         a {
             text-decoration: none;
@@ -127,11 +123,10 @@
             margin: auto; 
             padding: 5px 10px;
         }
-        /* Grid layout - Adjust gap to modify spacing between cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px; /* Increase/decrease to adjust spacing between cards */
+            gap: 10px;
             margin-top: 5px;
         }
         .card {
@@ -146,7 +141,7 @@
             transition: background 0.3s, transform 0.2s;
             position: relative;
         }
-        .small-card { height: 50px; } /* Adjust height to make cards taller/shorter */
+        .small-card { height: 50px; }
         .card:hover {
             transform: translateY(-2px);
             background: #e9f5ff;
@@ -171,11 +166,10 @@
         .trend-neutral {
             color: #FFC107;
         }
-        /* History section - Adjust max-height to show more/fewer transactions */
         .history { 
             border-top: 3px solid #007BFF; 
             grid-column: 1/-1; 
-            max-height: 200px; /* Increase/decrease to show more/fewer transactions */
+            max-height: 200px;
             overflow-y: auto; 
         }
         .transaction-item {
@@ -183,7 +177,7 @@
             justify-content: space-between;
             padding: 10px;
             border-radius: 10px;
-            margin: 5px 0; /* Adjust vertical spacing between transaction items */
+            margin: 5px 0;
             background-color: #f0f8ff;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
             transition: background-color 0.3s;
@@ -374,14 +368,12 @@
             font-size: 20px;
         }
         
-        /* Button disabled state */
         .button.disabled {
             background-color: #cccccc;
             cursor: not-allowed;
             opacity: 0.7;
         }
         
-        /* Stripe payment setup animation */
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
@@ -426,7 +418,6 @@
             }
         }
         
-        /* Styles pour le modal de création de produit */
         .create-product-modal {
             display: none;
             position: fixed;
@@ -625,16 +616,15 @@
             .title { font-size: 0.6rem; }
             .value { font-size: 1.1rem; }
             
-            /* Mobile adjustments for buttons */
             .button-container {
                 justify-content: space-between;
                 padding: 4px 10px;
             }
             
             .button {
-                padding: 6px 10px; /* Smaller padding on mobile */
-                margin: 0 2px; /* Smaller margins on mobile */
-                min-width: 60px; /* Smaller min-width on mobile */
+                padding: 6px 10px;
+                margin: 0 2px;
+                min-width: 60px;
             }
             
             .modal-content {
@@ -690,7 +680,6 @@
 <div class="button-container">
     <a class="button button-explorer disabled" id="generateBtn" href="javascript:void(0);"><i class="fas fa-link"></i> Generate</a>
     <a class="button" href="sellerfaq.html"><i class="fas fa-question-circle"></i> FAQ</a>
-  
     <a class="button" href="sellerterms.html"><i class="fas fa-file-contract"></i> Terms</a>
     <a class="button" href="sellerprivacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
 </div>
@@ -756,7 +745,7 @@
                 <span id="revenueIndicator" class="trend-indicator"></span>
             </div>
         </div>
-        <a class="card paiement small-card pulse-animation" id="stripeCard" href="javascript:void(0);" onclick="setupStripeAccount()" aria-label="Stripe Configuration">
+        <a class="card paiement small-card pulse-animation" id="stripeCard" href="javascript:void(0);" aria-label="Stripe Configuration">
             <span class="stripe-status not-active" id="stripeStatus">Not Active</span>
             <div class="title">Payments</div>
             <i class="fas fa-wallet" style="font-size: 1.2em; color: #007BFF;"></i>
@@ -770,14 +759,12 @@
     </div>
 </div>
 
-
 <div id="deleteModal" class="modal">
     <div class="modal-content">
         <div class="modal-title">Account Options</div>
         <button id="deleteAccountBtn" class="delete-button">Delete Account</button>
     </div>
 </div>
-
 
 <div id="confirmModal" class="confirm-modal">
     <div class="confirm-modal-content">
@@ -876,7 +863,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const functions = getFunctions(app);
+    const functions = getFunctions(app, 'us-central1');
     const storage = getStorage(app);
 
     let currentUserData = null;
@@ -897,7 +884,7 @@
     
     let hasRedirectedFromAccountCreation = false;
     
-    // Fix: Use a direct function instead of a window method for better debugging
+    // Stripe account setup function
     async function setupStripeAccount() {
         try {
             const user = auth.currentUser;
@@ -911,15 +898,15 @@
             
             showToast("Setting up your payment account...", "info");
             
-            // Get fresh token
             userIdToken = await user.getIdToken(true);
             
-            // Check if user document exists and create if necessary
             const userRef = doc(db, "users", user.uid);
             const userSnap = await getDoc(userRef);
             
             if (!userSnap.exists()) {
                 await setDoc(userRef, {
+                    uid: user.uid,
+                    email: user.email,
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
                     onboardingComplete: false,
@@ -932,9 +919,7 @@
                 });
             }
             
-            // Fixed: Use region for functions and explicit error handling
-            const functionsRegion = getFunctions(app, 'us-central1');
-            const createStripeAccount = httpsCallable(functionsRegion, 'createStripeAccount');
+            const createStripeAccount = httpsCallable(functions, 'createStripeAccount');
             
             try {
                 const result = await createStripeAccount({
@@ -975,7 +960,6 @@
         }
     }
     
-    // Make the function available globally
     window.setupStripeAccount = setupStripeAccount;
 
     function showToast(message, type = 'info') {
@@ -1019,6 +1003,8 @@
             
             if (!userSnap.exists()) {
                 await setDoc(userRef, {
+                    uid: user.uid,
+                    email: user.email,
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
                     onboardingComplete: false,
@@ -1070,6 +1056,8 @@
                 if (user) {
                     try {
                         await setDoc(doc(db, "users", user.uid), {
+                            uid: user.uid,
+                            email: user.email,
                             createdAt: serverTimestamp(),
                             lastUpdate: serverTimestamp(),
                             onboardingComplete: false,
@@ -1183,6 +1171,8 @@
                     } else if (error.message && error.message.includes("documentPath")) {
                         try {
                             setDoc(doc(db, "users", user.uid), {
+                                uid: user.uid,
+                                email: user.email,
                                 createdAt: serverTimestamp(),
                                 lastUpdate: serverTimestamp(),
                                 onboardingComplete: false,
@@ -1219,7 +1209,7 @@
                 }
             }
         } else {
-            window.location.href = "auth.html";
+            window.location.href = "index.html";
         }
     });
 
@@ -1229,6 +1219,10 @@
     }
 
     async function loadUserData(userId) {
+        if (!userId) {
+            throw new Error("User ID is required");
+        }
+        
         try {
             const userDocRef = doc(db, "users", userId);
             const userDoc = await getDoc(userDocRef);
@@ -1254,6 +1248,8 @@
             } else {
                 console.log("No user document found, creating new...");
                 const newUserData = {
+                    uid: userId,
+                    email: auth.currentUser ? auth.currentUser.email : "",
                     linksCount: 0,
                     viewsCount: 0,
                     ordersCount: 0,
@@ -1289,6 +1285,11 @@
     }
 
     function setupRealTimeListeners(userId) {
+        if (!userId) {
+            console.error("No user ID provided for real-time listeners");
+            return;
+        }
+        
         try {
             const userDocRef = doc(db, "users", userId);
             const userUnsubscribe = onSnapshot(userDocRef, (doc) => {
@@ -1344,6 +1345,11 @@
     }
 
     async function loadLinksData(userId) {
+        if (!userId) {
+            console.error("No user ID provided for loading links");
+            return;
+        }
+        
         try {
             const linksRef = collection(db, "products");
             const linksQuery = query(linksRef, where("sellerId", "==", userId));
@@ -1406,6 +1412,11 @@
     }
 
     async function loadOrdersData(userId) {
+        if (!userId) {
+            console.error("No user ID provided for loading orders");
+            return;
+        }
+        
         try {
             const ordersRef = collection(db, "orders");
             const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
@@ -1684,9 +1695,7 @@
             
             await uploadFiles();
             
-            // Fixed: Use region for functions for better error handling
-            const functionsRegion = getFunctions(app, 'us-central1');
-            const createProductFn = httpsCallable(functionsRegion, 'createProduct');
+            const createProductFn = httpsCallable(functions, 'createProduct');
             
             const result = await createProductFn({
                 title: title || `Product #${Date.now()}`,
@@ -1694,7 +1703,8 @@
                 description: description,
                 price: price,
                 fileUrl: productFileUrl,
-                coverUrl: coverFileUrl
+                coverUrl: coverFileUrl,
+                sellerId: user.uid
             });
             
             if (result.data && result.data.shareableLink) {
@@ -1743,7 +1753,7 @@
             if (error.code === 'functions/unauthenticated' || error.message.includes('User not logged in')) {
                 setTimeout(() => {
                     auth.signOut().then(() => {
-                        window.location.href = "auth.html";
+                        window.location.href = "index.html";
                     });
                 }, 1500);
             } else if (error.code === 'functions/failed-precondition' && error.message.includes('Stripe account')) {
@@ -1787,6 +1797,7 @@
     const emailInput = document.getElementById("emailInput");
     const passwordInput = document.getElementById("passwordInput");
     const generateBtn = document.getElementById("generateBtn");
+    const stripeCard = document.getElementById("stripeCard");
 
     document.getElementById("cancelProductBtn").addEventListener("click", function() {
         document.getElementById("createProductModal").style.display = "none";
@@ -1846,7 +1857,6 @@
         }
     });
     
-
     document.getElementById("productCategory").addEventListener("change", function() {
         const category = this.value;
         const fileUploadLimits = document.getElementById("fileUploadLimits");
@@ -1862,7 +1872,6 @@
         }
     });
 
-
     window.openProductModal = openProductModal;
 
     generateBtn.addEventListener("click", function(e) {
@@ -1870,7 +1879,6 @@
             e.preventDefault();
             showToast("Please set up your payment method first", "error");
             
-            const stripeCard = document.getElementById("stripeCard");
             stripeCard.style.animation = "pulse 1s ease 3";
             setTimeout(() => {
                 stripeCard.style.animation = stripeAccountComplete ? "none" : "pulse 2s infinite";
@@ -1966,7 +1974,7 @@
 
             showToast("Account deleted successfully", "success");
             setTimeout(() => {
-                window.location.href = "auth.html";
+                window.location.href = "index.html";
             }, 1500);
         } catch (error) {
             console.error("Error deleting account:", error);
@@ -1980,7 +1988,7 @@
             } else if (error.code === 'auth/requires-recent-login') {
                 showToast("For security reasons, please log in again", "error");
                 auth.signOut().then(() => {
-                    window.location.href = "auth.html";
+                    window.location.href = "index.html";
                 });
             } else {
                 showToast("Error deleting account: " + error.message, "error");
@@ -2033,7 +2041,6 @@
             window.history.replaceState({}, document.title, newUrl);
         }
         
-        const generateBtn = document.getElementById('generateBtn');
         if (generateBtn) {
             generateBtn.classList.add('disabled');
         }
@@ -2041,18 +2048,13 @@
         if (!document.referrer) {
             localStorage.removeItem('redirectedFromAccountCreation');
         }
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        if (!dataLoaded && dataLoadingPromise) {
-            dataLoadingPromise.then(() => {
-                console.log("Data preloaded successfully");
-            }).catch(error => {
-                console.error("Preloading error:", error);
-            });
+        
+        // Initialize Stripe card click handler
+        if (stripeCard) {
+            stripeCard.onclick = setupStripeAccount;
         }
     });
-    
+
     function setupTokenRefresh() {
         const refreshInterval = 45 * 60 * 1000;
         
