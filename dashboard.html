@@ -653,13 +653,35 @@
             z-index: 10;
         }
         
-        .spinner {
-            width: 20px; /* Réduit de 30px à 20px */
-            height: 20px; /* Réduit de 30px à 20px */
-            border: 2px solid rgba(0, 123, 255, 0.3); /* Réduit de 3px à 2px */
-            border-radius: 50%;
-            border-top-color: #007BFF;
-            animation: spin 1s ease-in-out infinite;
+        .data-loader {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .skeleton-loader {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+            height: 100%;
+            width: 100%;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
         
         @keyframes spin {
@@ -953,8 +975,8 @@
 
     <div class="grid">
         <div class="card liens-generes small-card">
-            <div class="splash-screen" id="linksCountSplash" style="display:none;">
-                <div class="spinner"></div>
+            <div class="data-loader" id="linksCountLoader">
+                <div class="skeleton-loader"></div>
             </div>
             <div class="title">Generated Links</div>
             <div class="value-wrapper">
@@ -963,8 +985,8 @@
             </div>
         </div>
         <div class="card vues small-card">
-            <div class="splash-screen" id="viewsCountSplash" style="display:none;">
-                <div class="spinner"></div>
+            <div class="data-loader" id="viewsCountLoader">
+                <div class="skeleton-loader"></div>
             </div>
             <div class="title">Views</div>
             <div class="value-wrapper">
@@ -973,8 +995,8 @@
             </div>
         </div>
         <div class="card commandes small-card">
-            <div class="splash-screen" id="ordersCountSplash" style="display:none;">
-                <div class="spinner"></div>
+            <div class="data-loader" id="ordersCountLoader">
+                <div class="skeleton-loader"></div>
             </div>
             <div class="title">Orders</div>
             <div class="value-wrapper">
@@ -983,8 +1005,8 @@
             </div>
         </div>
         <div class="card traite small-card">
-            <div class="splash-screen" id="shippedCountSplash" style="display:none;">
-                <div class="spinner"></div>
+            <div class="data-loader" id="shippedCountLoader">
+                <div class="skeleton-loader"></div>
             </div>
             <div class="title">Processed</div>
             <div class="value-wrapper">
@@ -993,8 +1015,8 @@
             </div>
         </div>
         <div class="card revenus small-card">
-            <div class="splash-screen" id="revenueCountSplash" style="display:none;">
-                <div class="spinner"></div>
+            <div class="data-loader" id="revenueCountLoader">
+                <div class="skeleton-loader"></div>
             </div>
             <div class="title">Revenue</div>
             <div class="value-wrapper">
@@ -1008,8 +1030,8 @@
             <i class="fab fa-paypal" style="font-size: 1.2em; color: #007BFF;"></i>
         </a>
         <div class="card history">
-            <div class="splash-screen" id="transactionSplash" style="display:none;">
-                <div class="spinner"></div>
+            <div class="data-loader" id="transactionLoader">
+                <div class="skeleton-loader"></div>
             </div>
             <div class="title">Transactions</div>
             <div id="transactionList">
@@ -1195,22 +1217,22 @@
     let refreshInterval;
     let isSubmitting = false;
 
-    // Function to show splash screen on dashboard elements
-    function showSplashScreen(elementId, show = true) {
-        const splashElement = document.getElementById(elementId);
-        if (splashElement) {
-            splashElement.style.display = show ? 'flex' : 'none';
+    // Function to show data loading state
+    function showDataLoader(elementId, show = true) {
+        const loaderElement = document.getElementById(elementId);
+        if (loaderElement) {
+            loaderElement.style.display = show ? 'flex' : 'none';
         }
     }
     
     // Show loading state for all dashboard elements
-    function showAllSplashScreens(show = true) {
-        showSplashScreen('linksCountSplash', show);
-        showSplashScreen('viewsCountSplash', show);
-        showSplashScreen('ordersCountSplash', show);
-        showSplashScreen('shippedCountSplash', show);
-        showSplashScreen('revenueCountSplash', show);
-        showSplashScreen('transactionSplash', show);
+    function showAllDataLoaders(show = true) {
+        showDataLoader('linksCountLoader', show);
+        showDataLoader('viewsCountLoader', show);
+        showDataLoader('ordersCountLoader', show);
+        showDataLoader('shippedCountLoader', show);
+        showDataLoader('revenueCountLoader', show);
+        showDataLoader('transactionLoader', show);
     }
     
     // Setup regular refresh of dashboard data
@@ -1218,10 +1240,10 @@
         clearInterval(refreshInterval);
         refreshInterval = setInterval(() => {
             if (auth.currentUser) {
-                showAllSplashScreens(true);
+                showAllDataLoaders(true);
                 setTimeout(() => {
                     refreshDashboardData(auth.currentUser.uid);
-                }, 1000); // Reduced from 2000ms to 1000ms
+                }, 700);
             }
         }, 180000); // Refresh every 3 minutes
     }
@@ -1232,10 +1254,10 @@
             await loadUserData(userId);
             await loadLinksData(userId);
             await loadOrdersData(userId);
-            showAllSplashScreens(false);
+            showAllDataLoaders(false);
         } catch (error) {
             console.error("Error refreshing data:", error);
-            showAllSplashScreens(false);
+            showAllDataLoaders(false);
         }
     }
     
@@ -1278,6 +1300,11 @@
     
     // Set up PayPal account
     async function setupPayPalAccount() {
+        // If account is already set up, don't show the modal again
+        if (paypalAccountComplete) {
+            return;
+        }
+        
         const paypalModal = document.getElementById('paypalModal');
         const paypalEmail = document.getElementById('paypalEmail');
         const paypalEmailError = document.getElementById('paypalEmailError');
@@ -1401,18 +1428,23 @@
         if (isActive) {
             paypalStatus.textContent = "Active";
             paypalStatus.className = "payment-status active";
-            paypalCard.setAttribute("onclick", "setupPayPalAccount()");
             paypalCard.style.borderColor = "#4CAF50";
             paypalCard.classList.remove("pulse-animation");
             
-            generateBtn.classList.remove("disabled");
-            generateBtn.onclick = openProductModal;
+            // Remove click handler from paypal card when active
+            paypalCard.onclick = null;
+            
+            // Enable the generate button
+            setTimeout(() => {
+                generateBtn.classList.remove("disabled");
+                generateBtn.onclick = openProductModal;
+            }, 1000);
             
             paymentWarning.style.display = "none";
         } else {
             paypalStatus.textContent = "Not Active";
             paypalStatus.className = "payment-status not-active";
-            paypalCard.setAttribute("onclick", "setupPayPalAccount()");
+            paypalCard.onclick = setupPayPalAccount;
             paypalCard.style.borderColor = "#007BFF";
             paypalCard.classList.add("pulse-animation");
             
@@ -1512,7 +1544,7 @@
         const linksList = document.getElementById("linksList");
         
         // Clear previous links
-        linksList.innerHTML = '<div style="text-align: center;"><div class="spinner"></div></div>';
+        linksList.innerHTML = '<div style="text-align: center;"><div class="skeleton-loader" style="height: 50px; margin-bottom: 10px;"></div><div class="skeleton-loader" style="height: 50px; margin-bottom: 10px;"></div></div>';
         
         linksModal.style.display = "flex";
         
@@ -1668,9 +1700,11 @@
                 return;
             }
             
+            // Use httpsCallable to create product
             const createProductFn = httpsCallable(functions, 'createProduct');
             
             const result = await createProductFn({
+                uid: user.uid,
                 title: title,
                 category: category,
                 description: description,
@@ -1716,7 +1750,7 @@
                 }, 30000);
                 
                 // Refresh dashboard data
-                showAllSplashScreens(true);
+                showAllDataLoaders(true);
                 setTimeout(() => {
                     refreshDashboardData(user.uid);
                 }, 1000);
@@ -1737,7 +1771,7 @@
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             try {
-                showAllSplashScreens(true);
+                showAllDataLoaders(true);
                 
                 userIdToken = await user.getIdToken(true);
                 
@@ -1755,7 +1789,7 @@
                 dataLoadingPromise.then(() => {
                     setupRealTimeListeners(user.uid);
                     dataLoaded = true;
-                    showAllSplashScreens(false);
+                    showAllDataLoaders(false);
                     
                     if (isInitialLoad) {
                         isInitialLoad = false;
@@ -1765,12 +1799,12 @@
                     setupDataRefresh();
                 }).catch(error => {
                     console.error("Error loading data:", error);
-                    showAllSplashScreens(false);
+                    showAllDataLoaders(false);
                     showToast("Error loading data: " + error.message, "error");
                 });
             } catch (error) {
                 console.error("Error during initialization:", error);
-                showAllSplashScreens(false);
+                showAllDataLoaders(false);
                 showToast("An error occurred. Please try again.", "error");
             }
         } else {
@@ -1893,8 +1927,8 @@
         }
         
         try {
-            showSplashScreen('linksCountSplash', true);
-            showSplashScreen('viewsCountSplash', true);
+            showDataLoader('linksCountLoader', true);
+            showDataLoader('viewsCountLoader', true);
             
             const linksRef = collection(db, "products");
             const linksQuery = query(linksRef, where("uid", "==", userId));
@@ -1922,13 +1956,13 @@
                 });
             }
             
-            showSplashScreen('linksCountSplash', false);
-            showSplashScreen('viewsCountSplash', false);
+            showDataLoader('linksCountLoader', false);
+            showDataLoader('viewsCountLoader', false);
             
         } catch (error) {
             console.error("Error loading links:", error);
-            showSplashScreen('linksCountSplash', false);
-            showSplashScreen('viewsCountSplash', false);
+            showDataLoader('linksCountLoader', false);
+            showDataLoader('viewsCountLoader', false);
             showToast("Error syncing products", "error");
         }
     }
@@ -1941,10 +1975,10 @@
         }
         
         try {
-            showSplashScreen('ordersCountSplash', true);
-            showSplashScreen('shippedCountSplash', true);
-            showSplashScreen('revenueCountSplash', true);
-            showSplashScreen('transactionSplash', true);
+            showDataLoader('ordersCountLoader', true);
+            showDataLoader('shippedCountLoader', true);
+            showDataLoader('revenueCountLoader', true);
+            showDataLoader('transactionLoader', true);
             
             const ordersRef = collection(db, "orders");
             const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
@@ -2013,17 +2047,17 @@
                 });
             }
             
-            showSplashScreen('ordersCountSplash', false);
-            showSplashScreen('shippedCountSplash', false);
-            showSplashScreen('revenueCountSplash', false);
-            showSplashScreen('transactionSplash', false);
+            showDataLoader('ordersCountLoader', false);
+            showDataLoader('shippedCountLoader', false);
+            showDataLoader('revenueCountLoader', false);
+            showDataLoader('transactionLoader', false);
             
         } catch (error) {
             console.error("Error loading orders:", error);
-            showSplashScreen('ordersCountSplash', false);
-            showSplashScreen('shippedCountSplash', false);
-            showSplashScreen('revenueCountSplash', false);
-            showSplashScreen('transactionSplash', false);
+            showDataLoader('ordersCountLoader', false);
+            showDataLoader('shippedCountLoader', false);
+            showDataLoader('revenueCountLoader', false);
+            showDataLoader('transactionLoader', false);
             showToast("Error syncing orders", "error");
         }
     }
@@ -2269,20 +2303,27 @@
             document.getElementById("linksModal").style.display = "none";
         });
         
-        linksIcon.addEventListener("click", openLinksModal);
-        
         window.openProductModal = openProductModal;
         window.setupPayPalAccount = setupPayPalAccount;
+        
+        // Setup the PayPal card click handler
+        paypalCard.addEventListener("click", function() {
+            if (!paypalAccountComplete) {
+                setupPayPalAccount();
+            }
+        });
         
         generateBtn.addEventListener("click", function(e) {
             if (generateBtn.classList.contains("disabled")) {
                 e.preventDefault();
                 showToast("Please set up your PayPal account first", "error");
                 
-                paypalCard.style.animation = "pulse 1s ease 3";
-                setTimeout(() => {
-                    paypalCard.style.animation = paypalAccountComplete ? "none" : "pulse 2s infinite";
-                }, 3000);
+                if (!paypalAccountComplete) {
+                    paypalCard.style.animation = "pulse 1s ease 3";
+                    setTimeout(() => {
+                        paypalCard.style.animation = "pulse 2s infinite";
+                    }, 3000);
+                }
             }
         });
         
@@ -2398,24 +2439,24 @@
         });
         
         document.getElementById("yearSelect").addEventListener("change", function() {
-            showSplashScreen('transactionSplash', true);
+            showDataLoader('transactionLoader', true);
             selectedYear = this.value;
             setTimeout(() => {
                 if (currentUserData) {
                     updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
                 }
-                showSplashScreen('transactionSplash', false);
+                showDataLoader('transactionLoader', false);
             }, 500);
         });
         
         document.getElementById("monthSelect").addEventListener("change", function() {
-            showSplashScreen('transactionSplash', true);
+            showDataLoader('transactionLoader', true);
             selectedMonth = this.value;
             setTimeout(() => {
                 if (currentUserData) {
                     updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
                 }
-                showSplashScreen('transactionSplash', false);
+                showDataLoader('transactionLoader', false);
             }, 500);
         });
         
@@ -2431,6 +2472,9 @@
                 }
             }
         }
+        
+        // Add click handler for links icon
+        linksIcon.addEventListener("click", openLinksModal);
     });
 </script>
 </body>
