@@ -1175,7 +1175,6 @@ if your balance reaches a minimum of $10.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
 // Firebase configuration
@@ -1193,8 +1192,10 @@ measurementId: "G-5NWKR1E9VY"
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const functions = getFunctions(app, 'us-central1');
 const storage = getStorage(app);
+
+// API base URL for cloud functions
+const API_BASE_URL = 'https://us-central1-monetizelt-b235d.cloudfunctions.net';
 
 let currentUserData = null;
 let previousUserData = null;
@@ -1347,13 +1348,24 @@ isSubmitting = true;
 savePaypalBtn.disabled = true;
 
 showToast("Saving your PayPal email...", "info");
+userIdToken = await user.getIdToken(true);
 
-const userRef = doc(db, "users", user.uid);
-await updateDoc(userRef, {
-paypalEmail: paypalEmail,
-onboardingComplete: true,
-lastUpdate: serverTimestamp()
+const response = await fetch(`${API_BASE_URL}/savePaypalEmail`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include',
+body: JSON.stringify({
+paypalEmail: paypalEmail
+})
 });
+
+if (!response.ok) {
+const errorData = await response.json();
+throw new Error(errorData.error || 'Failed to save PayPal email');
+}
 
 document.getElementById('paypalModal').style.display = "none";
 showToast("PayPal email saved successfully!", "success");
@@ -1379,38 +1391,26 @@ if (!user) return false;
 
 userIdToken = await user.getIdToken(true);
 
-const userRef = doc(db, "users", user.uid);
-const userSnap = await getDoc(userRef);
-
-if (!userSnap.exists()) {
-await setDoc(userRef, {
-uid: user.uid,
-email: user.email,
-createdAt: serverTimestamp(),
-lastUpdate: serverTimestamp(),
-onboardingComplete: false,
-paypalEmail: null,
-linksCount: 0,
-viewsCount: 0,
-ordersCount: 0,
-shippedCount: 0,
-revenueCount: 0,
-transactions: []
+const response = await fetch(`${API_BASE_URL}/checkPaypalStatus`, {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include'
 });
 
-updatePayPalUI(false);
-return false;
+if (!response.ok) {
+throw new Error('Failed to check PayPal status');
 }
 
-const userData = userSnap.data();
-const isComplete = userData && userData.onboardingComplete === true && userData.paypalEmail;
+const data = await response.json();
+const isComplete = data.isComplete;
 
 updatePayPalUI(isComplete);
 
 return isComplete;
 } catch (error) {
 console.error("Error checking PayPal status:", error);
-
 updatePayPalUI(false);
 return false;
 }
@@ -1554,26 +1554,22 @@ if (!user) {
 throw new Error("User not logged in");
 }
 
-const productsRef = collection(db, "products");
-const productsQuery = query(productsRef, where("uid", "==", user.uid));
-const querySnapshot = await getDocs(productsQuery);
+userIdToken = await user.getIdToken(true);
 
-if (querySnapshot.empty) {
-linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
-return;
+const response = await fetch(`${API_BASE_URL}/getUserLinks`, {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include'
+});
+
+if (!response.ok) {
+throw new Error('Failed to load links');
 }
 
-generatedLinks = [];
-querySnapshot.forEach(doc => {
-const product = doc.data();
-if (product.shareableLink) {
-generatedLinks.push({
-id: doc.id,
-title: product.title || `Product #${generatedLinks.length + 1}`,
-link: product.shareableLink
-});
-}
-});
+const data = await response.json();
+generatedLinks = data.links || [];
 
 if (generatedLinks.length === 0) {
 linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
@@ -1610,7 +1606,7 @@ linksList.innerHTML = '<div style="text-align: center; color: #F44336;">Error lo
 }
 }
 
-// Create a base64 image from file
+// Convert file to base64
 function convertFileToBase64(file) {
 return new Promise((resolve, reject) => {
 const reader = new FileReader();
@@ -1700,24 +1696,37 @@ createProductBtn.disabled = false;
 return;
 }
 
-// Use httpsCallable to create product
-const createProductFn = httpsCallable(functions, 'createProduct');
+userIdToken = await user.getIdToken(true);
 
-const result = await createProductFn({
-uid: user.uid,
+const response = await fetch(`${API_BASE_URL}/createProduct`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include',
+body: JSON.stringify({
 title: title,
 category: category,
 description: description,
-price: priceWithTax.toFixed(2), // Use price with tax
+price: priceWithTax.toFixed(2),
 coverData: coverBase64,
 fileData: productBase64,
 fileName: productFile.name
+})
 });
 
-if (result.data && result.data.shareableLink) {
+if (!response.ok) {
+const errorData = await response.json();
+throw new Error(errorData.error || 'Failed to create product');
+}
+
+const result = await response.json();
+
+if (result && result.shareableLink) {
 showToast("Product created successfully!", "success");
 
-const shareableLink = result.data.shareableLink;
+const shareableLink = result.shareableLink;
 
 const linkModal = document.createElement("div");
 linkModal.className = "modal";
@@ -1825,11 +1834,20 @@ throw new Error("User ID is required");
 }
 
 try {
-const userDocRef = doc(db, "users", userId);
-const userDoc = await getDoc(userDocRef);
+userIdToken = await auth.currentUser.getIdToken(true);
+const response = await fetch(`${API_BASE_URL}/getUserData`, {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include'
+});
 
-if (userDoc.exists()) {
-const userData = userDoc.data();
+if (!response.ok) {
+throw new Error('Failed to load user data');
+}
+
+const userData = await response.json();
 previousUserData = currentUserData;
 currentUserData = userData;
 
@@ -1846,29 +1864,6 @@ updatePayPalUI(false);
 }
 
 return userData;
-} else {
-console.log("No user document found, creating new...");
-const newUserData = {
-uid: userId,
-email: auth.currentUser ? auth.currentUser.email : "",
-linksCount: 0,
-viewsCount: 0,
-ordersCount: 0,
-shippedCount: 0,
-revenueCount: 0,
-transactions: [],
-createdAt: serverTimestamp(),
-lastUpdate: serverTimestamp(),
-onboardingComplete: false,
-paypalEmail: null
-};
-
-await setDoc(userDocRef, newUserData);
-currentUserData = newUserData;
-updateDashboardUI(newUserData);
-updatePayPalUI(false);
-return newUserData;
-}
 } catch (error) {
 console.error("Error loading user data:", error);
 throw error;
@@ -1930,31 +1925,25 @@ try {
 showDataLoader('linksCountLoader', true);
 showDataLoader('viewsCountLoader', true);
 
-const linksRef = collection(db, "products");
-const linksQuery = query(linksRef, where("uid", "==", userId));
-
-const snapshot = await getDocs(linksQuery);
-let totalLinks = snapshot.size;
-let totalViews = 0;
-
-snapshot.forEach(doc => {
-const linkData = doc.data();
-totalViews += linkData.viewCount || 0;
+userIdToken = await auth.currentUser.getIdToken(true);
+const response = await fetch(`${API_BASE_URL}/getLinksData`, {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include'
 });
+
+if (!response.ok) {
+throw new Error('Failed to load links data');
+}
+
+const data = await response.json();
+const totalLinks = data.totalLinks || 0;
+const totalViews = data.totalViews || 0;
 
 updateCountWithAnimation("linksCount", "linksIndicator", totalLinks, "", previousUserData?.linksCount);
 updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
-
-if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
-const userDocRef = doc(db, "users", userId);
-await updateDoc(userDocRef, {
-linksCount: totalLinks,
-viewsCount: totalViews,
-lastUpdate: serverTimestamp()
-}).catch(error => {
-console.error("Error updating user data:", error);
-});
-}
 
 showDataLoader('linksCountLoader', false);
 showDataLoader('viewsCountLoader', false);
@@ -1980,72 +1969,30 @@ showDataLoader('shippedCountLoader', true);
 showDataLoader('revenueCountLoader', true);
 showDataLoader('transactionLoader', true);
 
-const ordersRef = collection(db, "orders");
-const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+userIdToken = await auth.currentUser.getIdToken(true);
+const response = await fetch(`${API_BASE_URL}/getOrdersData`, {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include'
+});
 
-const snapshot = await getDocs(ordersQuery);
-let totalOrders = snapshot.size;
-let shippedOrders = 0;
-let totalRevenue = 0;
-let transactions = [];
-
-snapshot.forEach(doc => {
-const orderData = doc.data();
-if (orderData.status === "shipped" || orderData.status === "delivered") {
-shippedOrders++;
+if (!response.ok) {
+throw new Error('Failed to load orders data');
 }
 
-totalRevenue += orderData.totalAmount || 0;
-
-transactions.push({
-id: doc.id,
-title: orderData.productName || "Order #" + doc.id.substring(0, 8),
-amount: orderData.totalAmount || 0,
-date: orderData.createdAt || new Date(),
-status: orderData.status || "pending",
-type: "sale"
-});
-});
-
-// Add payout transactions
-const payoutsRef = collection(db, "payouts");
-const payoutsQuery = query(payoutsRef, where("sellerId", "==", userId));
-const payoutsSnapshot = await getDocs(payoutsQuery);
-
-payoutsSnapshot.forEach(doc => {
-const payoutData = doc.data();
-transactions.push({
-id: doc.id,
-title: "Weekly Payout",
-amount: payoutData.amount || 0,
-date: payoutData.createdAt || new Date(),
-status: "completed",
-type: "payout"
-});
-});
+const data = await response.json();
+const totalOrders = data.totalOrders || 0;
+const shippedOrders = data.shippedOrders || 0;
+const totalRevenue = data.totalRevenue || 0;
+const transactions = data.transactions || [];
 
 updateCountWithAnimation("ordersCount", "ordersIndicator", totalOrders, "", previousUserData?.ordersCount);
 updateCountWithAnimation("shippedCount", "shippedIndicator", shippedOrders, "", previousUserData?.shippedCount);
 updateCountWithAnimation("revenueCount", "revenueIndicator", totalRevenue, "$", previousUserData?.revenueCount);
 
 updateTransactionList(transactions, selectedYear, selectedMonth);
-
-if (currentUserData && (
-currentUserData.ordersCount !== totalOrders ||
-currentUserData.shippedCount !== shippedOrders ||
-currentUserData.revenueCount !== totalRevenue
-)) {
-const userDocRef = doc(db, "users", userId);
-await updateDoc(userDocRef, {
-ordersCount: totalOrders,
-shippedCount: shippedOrders,
-revenueCount: totalRevenue,
-transactions: transactions,
-lastUpdate: serverTimestamp()
-}).catch(error => {
-console.error("Error updating order data:", error);
-});
-}
 
 showDataLoader('ordersCountLoader', false);
 showDataLoader('shippedCountLoader', false);
@@ -2204,6 +2151,61 @@ item.innerHTML = `
 
 transactionList.appendChild(item);
 });
+}
+
+// Delete user account and data
+async function deleteAccount(email, password) {
+try {
+const user = auth.currentUser;
+if (!user) {
+throw new Error("User not logged in");
+}
+
+userIdToken = await user.getIdToken(true);
+
+// Reauthenticate with email and password
+const credential = EmailAuthProvider.credential(email, password);
+await reauthenticateWithCredential(user, credential);
+
+showToast("Deleting account...", "info");
+
+const response = await fetch(`${API_BASE_URL}/deleteAccount`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'Authorization': `Bearer ${userIdToken}`
+},
+credentials: 'include',
+body: JSON.stringify({
+email: email,
+password: password
+})
+});
+
+if (!response.ok) {
+const errorData = await response.json();
+throw new Error(errorData.error || 'Failed to delete account');
+}
+
+showToast("Account deleted successfully", "success");
+setTimeout(() => {
+window.location.href = "index.html";
+}, 1500);
+} catch (error) {
+console.error("Error deleting account:", error);
+
+if (error.code === 'auth/wrong-password') {
+showToast("Incorrect password", "error");
+} else if (error.code === 'auth/user-mismatch') {
+showToast("Email doesn't match current user", "error");
+} else if (error.code === 'auth/invalid-email') {
+showToast("Invalid email format", "error");
+} else {
+showToast("Error deleting account: " + error.message, "error");
+}
+
+throw error;
+}
 }
 
 // Set up event listeners
@@ -2377,64 +2379,9 @@ return;
 
 try {
 confirmModal.style.display = "none";
-
-const user = auth.currentUser;
-if (!user) {
-throw new Error("User not logged in");
-}
-
-const credential = EmailAuthProvider.credential(email, password);
-await reauthenticateWithCredential(user, credential);
-
-const userId = user.uid;
-
-showToast("Deleting account...", "info");
-
-// Delete user's products
-const productsRef = collection(db, "products");
-const productsQuery = query(productsRef, where("uid", "==", userId));
-const productsSnapshot = await getDocs(productsQuery);
-const productDeletions = [];
-
-productsSnapshot.forEach(productDoc => {
-productDeletions.push(deleteDoc(doc(db, "products", productDoc.id)));
-});
-
-// Delete user's orders
-const ordersRef = collection(db, "orders");
-const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
-const ordersSnapshot = await getDocs(ordersQuery);
-const orderDeletions = [];
-
-ordersSnapshot.forEach(orderDoc => {
-orderDeletions.push(deleteDoc(doc(db, "orders", orderDoc.id)));
-});
-
-await Promise.all([
-...productDeletions,
-...orderDeletions
-]);
-
-await deleteDoc(doc(db, "users", userId));
-
-await deleteUser(user);
-
-showToast("Account deleted successfully", "success");
-setTimeout(() => {
-window.location.href = "index.html";
-}, 1500);
+await deleteAccount(email, password);
 } catch (error) {
-console.error("Error deleting account:", error);
-
-if (error.code === 'auth/wrong-password') {
-showToast("Incorrect password", "error");
-} else if (error.code === 'auth/user-mismatch') {
-showToast("Email doesn't match current user", "error");
-} else if (error.code === 'auth/invalid-email') {
-showToast("Invalid email format", "error");
-} else {
-showToast("Error deleting account: " + error.message, "error");
-}
+console.error("Error during account deletion:", error);
 }
 });
 
