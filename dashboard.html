@@ -1356,7 +1356,6 @@ headers: {
 'Content-Type': 'application/json',
 'Authorization': `Bearer ${userIdToken}`
 },
-credentials: 'include',
 body: JSON.stringify({
 paypalEmail: paypalEmail
 })
@@ -1395,8 +1394,7 @@ const response = await fetch(`${API_BASE_URL}/checkPaypalStatus`, {
 method: 'GET',
 headers: {
 'Authorization': `Bearer ${userIdToken}`
-},
-credentials: 'include'
+}
 });
 
 if (!response.ok) {
@@ -1560,8 +1558,7 @@ const response = await fetch(`${API_BASE_URL}/getUserLinks`, {
 method: 'GET',
 headers: {
 'Authorization': `Bearer ${userIdToken}`
-},
-credentials: 'include'
+}
 });
 
 if (!response.ok) {
@@ -1704,7 +1701,6 @@ headers: {
 'Content-Type': 'application/json',
 'Authorization': `Bearer ${userIdToken}`
 },
-credentials: 'include',
 body: JSON.stringify({
 title: title,
 category: category,
@@ -1839,8 +1835,7 @@ const response = await fetch(`${API_BASE_URL}/getUserData`, {
 method: 'GET',
 headers: {
 'Authorization': `Bearer ${userIdToken}`
-},
-credentials: 'include'
+}
 });
 
 if (!response.ok) {
@@ -1930,8 +1925,7 @@ const response = await fetch(`${API_BASE_URL}/getLinksData`, {
 method: 'GET',
 headers: {
 'Authorization': `Bearer ${userIdToken}`
-},
-credentials: 'include'
+}
 });
 
 if (!response.ok) {
@@ -1974,8 +1968,7 @@ const response = await fetch(`${API_BASE_URL}/getOrdersData`, {
 method: 'GET',
 headers: {
 'Authorization': `Bearer ${userIdToken}`
-},
-credentials: 'include'
+}
 });
 
 if (!response.ok) {
@@ -2175,7 +2168,6 @@ headers: {
 'Content-Type': 'application/json',
 'Authorization': `Bearer ${userIdToken}`
 },
-credentials: 'include',
 body: JSON.stringify({
 email: email,
 password: password
