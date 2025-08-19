@@ -68,17 +68,18 @@
             width: 100%;
             margin: 0; 
         }
+        /* Button container - Modify padding and margin to adjust spacing between buttons */
         .button-container {
             display: flex;
             justify-content: center;
-            padding: 4px 0;
+            padding: 4px 0; /* Increase/decrease to add more/less vertical space */
             overflow-x: auto;
             white-space: nowrap;
-            margin: 0 0 5px 0;
+            margin: 0 0 5px 0; /* Bottom margin can be adjusted to increase/decrease space between buttons and content below */
             max-width: 100%;
         }
         .button-container a {
-            margin: 0 5px;
+            margin: 0 5px; /* Adjust horizontal spacing between buttons */
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -87,24 +88,27 @@
         .button-container a i {
             margin-right: 5px;
         }
+        /* Button sizing - Modify padding, font-size, and min-width to adjust button size */
         .button {
             background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 15px;
-            padding: 8px 15px;
-            font-size: 0.9em;
+            padding: 8px 15px; /* Increase/decrease to make buttons larger/smaller */
+            font-size: 0.9em; /* Adjust text size */
             cursor: pointer;
             transition: background-color 0.3s;
             white-space: nowrap;
             text-align: center;
-            min-width: 70px;
+            min-width: 70px; /* Adjust minimum width of buttons */
         }
         .button:hover {
             background-color: #0056b3;
         }
+   
+        /* Footer button spacing */
         .footer-button {
-            margin-left: 10px;
+            margin-left: 10px; /* Adjust spacing between footer buttons */
         }
         a {
             text-decoration: none;
@@ -123,10 +127,11 @@
             margin: auto; 
             padding: 5px 10px;
         }
+        /* Grid layout - Adjust gap to modify spacing between cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 10px; /* Increase/decrease to adjust spacing between cards */
             margin-top: 5px;
         }
         .card {
@@ -141,7 +146,7 @@
             transition: background 0.3s, transform 0.2s;
             position: relative;
         }
-        .small-card { height: 50px; }
+        .small-card { height: 50px; } /* Adjust height to make cards taller/shorter */
         .card:hover {
             transform: translateY(-2px);
             background: #e9f5ff;
@@ -166,10 +171,11 @@
         .trend-neutral {
             color: #FFC107;
         }
+        /* History section - Adjust max-height to show more/fewer transactions */
         .history { 
             border-top: 3px solid #007BFF; 
             grid-column: 1/-1; 
-            max-height: 200px;
+            max-height: 200px; /* Increase/decrease to show more/fewer transactions */
             overflow-y: auto; 
         }
         .transaction-item {
@@ -177,7 +183,7 @@
             justify-content: space-between;
             padding: 10px;
             border-radius: 10px;
-            margin: 5px 0;
+            margin: 5px 0; /* Adjust vertical spacing between transaction items */
             background-color: #f0f8ff;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
             transition: background-color 0.3s;
@@ -197,7 +203,7 @@
             text-align: center;
             padding: 5px;
         }
-        .payment-status {
+        .stripe-status {
             position: absolute;
             top: 2px;
             right: 2px;
@@ -208,11 +214,11 @@
             z-index: 1;
         }
         
-        .payment-status.not-active {
+        .stripe-status.not-active {
             background-color: #F44336;
         }
         
-        .payment-status.active {
+        .stripe-status.active {
             background-color: #4CAF50;
         }
         
@@ -368,12 +374,14 @@
             font-size: 20px;
         }
         
+        /* Button disabled state */
         .button.disabled {
             background-color: #cccccc;
             cursor: not-allowed;
             opacity: 0.7;
         }
         
+        /* Stripe payment setup animation */
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
@@ -418,6 +426,7 @@
             }
         }
         
+        /* Styles pour le modal de création de produit */
         .create-product-modal {
             display: none;
             position: fixed;
@@ -435,7 +444,7 @@
             background-color: white;
             border-radius: 15px;
             width: 90%;
-            max-width: 450px;
+            max-width: 500px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             max-height: 90vh;
@@ -467,7 +476,7 @@
         .form-control {
             width: 100%;
             padding: 10px;
-            border: 1px solid #007BFF;
+            border: 1px solid #ddd;
             border-radius: 10px;
             font-size: 0.9em;
             box-sizing: border-box;
@@ -482,7 +491,7 @@
         .form-select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #007BFF;
+            border: 1px solid #ddd;
             border-radius: 10px;
             font-size: 0.9em;
             background-color: white;
@@ -611,240 +620,21 @@
             display: none;
         }
         
-        .price-calculation {
-            font-size: 0.8em;
-            margin-top: 5px;
-            padding: 8px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            border: 1px solid #eee;
-            text-align: left;
-        }
-        
-        .price-calculation-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 3px;
-        }
-        
-        .price-calculation-total {
-            font-weight: bold;
-            border-top: 1px solid #ddd;
-            padding-top: 3px;
-            margin-top: 3px;
-        }
-        
-        .splash-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 12px;
-            z-index: 10;
-        }
-        
-        .spinner {
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(0, 123, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #007BFF;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .links-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .links-modal-content {
-            background-color: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 450px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .links-modal-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #007BFF;
-            text-align: center;
-            border-bottom: 1px solid #e9f5ff;
-            padding-bottom: 10px;
-        }
-        
-        .link-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #007BFF;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-        }
-        
-        .link-number {
-            font-weight: bold;
-            color: #007BFF;
-            margin-right: 10px;
-        }
-        
-        .link-url {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: #333;
-            font-size: 0.9em;
-        }
-        
-        .copy-link-btn {
-            background-color: transparent;
-            border: none;
-            color: #007BFF;
-            cursor: pointer;
-            padding: 5px;
-            font-size: 1.1em;
-        }
-        
-        .copy-link-btn:hover {
-            color: #0056b3;
-        }
-        
-        .paypal-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .paypal-modal-content {
-            background-color: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 1px solid #007BFF;
-        }
-        
-        .paypal-modal-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #007BFF;
-            text-align: center;
-        }
-        
-        .paypal-form-group {
-            margin-bottom: 15px;
-        }
-        
-        .paypal-form-label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-            font-size: 0.9em;
-        }
-        
-        .paypal-form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 0.9em;
-            box-sizing: border-box;
-        }
-        
-        .paypal-form-control:focus {
-            border-color: #007BFF;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-        }
-        
-        .paypal-submit-btn {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 20px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-        
-        .paypal-submit-btn:hover {
-            background-color: #0056b3;
-        }
-        
-        .paypal-modal-message {
-            margin-bottom: 20px;
-            color: #555;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-        
-        .paypal-error {
-            color: #F44336;
-            font-size: 0.8em;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .sold-transaction {
-            border-left: 3px solid #4CAF50 !important;
-        }
-        
-        .payout-transaction {
-            border-left: 3px solid #2196F3 !important;
-        }
-        
         @media (max-width: 500px) {
             .grid { grid-template-columns: repeat(2, 1fr); }
             .title { font-size: 0.6rem; }
             .value { font-size: 1.1rem; }
             
+            /* Mobile adjustments for buttons */
             .button-container {
                 justify-content: space-between;
                 padding: 4px 10px;
             }
             
             .button {
-                padding: 6px 10px;
-                margin: 0 2px;
-                min-width: 60px;
+                padding: 6px 10px; /* Smaller padding on mobile */
+                margin: 0 2px; /* Smaller margins on mobile */
+                min-width: 60px; /* Smaller min-width on mobile */
             }
             
             .modal-content {
@@ -877,16 +667,6 @@
             .file-upload-container {
                 grid-template-columns: 1fr;
             }
-            
-            .paypal-modal-content {
-                width: 95%;
-                padding: 15px;
-            }
-            
-            .links-modal-content {
-                width: 95%;
-                padding: 15px;
-            }
         }
     </style>
 </head>
@@ -895,8 +675,8 @@
     <h1 translate="no">Monetizelt</h1>
     <div class="icon-container">
         <div class="icon-container">
-            <a class="icon" id="linksIcon" href="javascript:void(0);" aria-label="View links">
-                <i class="fas fa-link" style="font-size: 23px;"></i>
+            <a class="icon" href="sellerservice-client.html" aria-label="Customer service">
+                <i class="fas fa-headset" style="font-size: 23px;"></i>
             </a>
             <a class="icon" id="profileIcon" href="javascript:void(0);" aria-label="User profile">
                 <i class="fas fa-user" style="font-size: 23px;"></i>
@@ -910,6 +690,7 @@
 <div class="button-container">
     <a class="button button-explorer disabled" id="generateBtn" href="javascript:void(0);"><i class="fas fa-link"></i> Generate</a>
     <a class="button" href="sellerfaq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+  
     <a class="button" href="sellerterms.html"><i class="fas fa-file-contract"></i> Terms</a>
     <a class="button" href="sellerprivacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
 </div>
@@ -940,20 +721,14 @@
     </select>
 
     <div class="grid">
-        <div class="card liens-generes small-card">
-            <div class="splash-screen" id="linksCountSplash" style="display:none;">
-                <div class="spinner"></div>
-            </div>
+        <a href="liens.html" class="card liens-generes small-card">
             <div class="title">Generated Links</div>
             <div class="value-wrapper">
                 <div class="value" id="linksCount">0</div>
                 <span id="linksIndicator" class="trend-indicator"></span>
             </div>
-        </div>
+        </a>
         <div class="card vues small-card">
-            <div class="splash-screen" id="viewsCountSplash" style="display:none;">
-                <div class="spinner"></div>
-            </div>
             <div class="title">Views</div>
             <div class="value-wrapper">
                 <div class="value" id="viewsCount">0</div>
@@ -961,9 +736,6 @@
             </div>
         </div>
         <div class="card commandes small-card">
-            <div class="splash-screen" id="ordersCountSplash" style="display:none;">
-                <div class="spinner"></div>
-            </div>
             <div class="title">Orders</div>
             <div class="value-wrapper">
                 <div class="value" id="ordersCount">0</div>
@@ -971,9 +743,6 @@
             </div>
         </div>
         <div class="card traite small-card">
-            <div class="splash-screen" id="shippedCountSplash" style="display:none;">
-                <div class="spinner"></div>
-            </div>
             <div class="title">Processed</div>
             <div class="value-wrapper">
                 <div class="value" id="shippedCount">0</div>
@@ -981,24 +750,18 @@
             </div>
         </div>
         <div class="card revenus small-card">
-            <div class="splash-screen" id="revenueCountSplash" style="display:none;">
-                <div class="spinner"></div>
-            </div>
             <div class="title">Revenue</div>
             <div class="value-wrapper">
                 <div class="value" id="revenueCount">0$</div>
                 <span id="revenueIndicator" class="trend-indicator"></span>
             </div>
         </div>
-        <a class="card paiement small-card pulse-animation" id="paypalCard" href="javascript:void(0);" aria-label="PayPal Configuration">
-            <span class="payment-status not-active" id="paypalStatus">Not Active</span>
+        <a class="card paiement small-card pulse-animation" id="stripeCard" href="javascript:void(0);" onclick="setupStripeAccount()" aria-label="Stripe Configuration">
+            <span class="stripe-status not-active" id="stripeStatus">Not Active</span>
             <div class="title">Payments</div>
-            <i class="fab fa-paypal" style="font-size: 1.2em; color: #007BFF;"></i>
+            <i class="fas fa-wallet" style="font-size: 1.2em; color: #007BFF;"></i>
         </a>
         <div class="card history">
-            <div class="splash-screen" id="transactionSplash" style="display:none;">
-                <div class="spinner"></div>
-            </div>
             <div class="title">Transactions</div>
             <div id="transactionList">
                 <div class="no-transactions">No transactions</div>
@@ -1007,6 +770,7 @@
     </div>
 </div>
 
+<!-- Account deletion modal -->
 <div id="deleteModal" class="modal">
     <div class="modal-content">
         <div class="modal-title">Account Options</div>
@@ -1014,6 +778,7 @@
     </div>
 </div>
 
+<!-- Confirmation modal with password and email -->
 <div id="confirmModal" class="confirm-modal">
     <div class="confirm-modal-content">
         <div class="modal-title">Confirm Account Deletion</div>
@@ -1027,6 +792,7 @@
     </div>
 </div>
 
+<!-- Create Product Modal -->
 <div id="createProductModal" class="create-product-modal">
     <div class="product-modal-content">
         <div class="product-modal-title">Create New Product</div>
@@ -1040,9 +806,12 @@
             <label for="productCategory" class="form-label">Category</label>
             <select id="productCategory" class="form-select">
                 <option value="">Select a category</option>
-                <option value="video">Video Content</option>
                 <option value="ebook">E-Book</option>
-                <option value="music">Music/Song</option>
+                <option value="video">Video</option>
+                <option value="audio">Audio</option>
+                <option value="software">Software</option>
+                <option value="course">Course</option>
+                <option value="other">Other</option>
             </select>
         </div>
         
@@ -1056,28 +825,6 @@
             <label for="productPrice" class="form-label">Price ($)</label>
             <div class="price-input-container">
                 <input type="number" id="productPrice" class="form-control price-input" placeholder="0.00" min="0.50" step="0.01">
-            </div>
-            <div id="priceCalculation" class="price-calculation" style="display:none;">
-                <div class="price-calculation-item">
-                    <span>Base price:</span>
-                    <span id="basePrice">$0.00</span>
-                </div>
-                <div class="price-calculation-item">
-                    <span>Tax (7%):</span>
-                    <span id="taxAmount">$0.00</span>
-                </div>
-                <div class="price-calculation-item">
-                    <span>PayPal fees:</span>
-                    <span id="paypalFees">$0.00</span>
-                </div>
-                <div class="price-calculation-item">
-                    <span>Your earnings (80%):</span>
-                    <span id="sellerEarnings">$0.00</span>
-                </div>
-                <div class="price-calculation-item price-calculation-total">
-                    <span>Final price:</span>
-                    <span id="finalPrice">$0.00</span>
-                </div>
             </div>
         </div>
         
@@ -1108,43 +855,16 @@
     </div>
 </div>
 
-<div id="linksModal" class="links-modal">
-    <div class="links-modal-content">
-        <div class="links-modal-title">Generated Links</div>
-        <div id="linksList">
-            <div style="text-align: center; color: #888;">No links generated yet</div>
-        </div>
-        <button id="closeLinksModal" class="cancel-button" style="margin-top: 15px;">Close</button>
-    </div>
-</div>
-
-<div id="paypalModal" class="paypal-modal">
-    <div class="paypal-modal-content">
-        <div class="paypal-modal-title">PayPal Account Setup</div>
-        <div class="paypal-modal-message">
-            Please register your PayPal email address to receive your payments every Sunday 
-            if your balance reaches a minimum of $10.
-        </div>
-        <div class="paypal-form-group">
-            <label for="paypalEmail" class="paypal-form-label">PayPal Email</label>
-            <input type="email" id="paypalEmail" class="paypal-form-control" placeholder="your@email.com">
-            <div id="paypalEmailError" class="paypal-error">Please enter a valid email address</div>
-        </div>
-        <button id="savePaypalBtn" class="paypal-submit-btn">Save</button>
-    </div>
-</div>
-
+<!-- Toast container for notifications -->
 <div id="toastContainer" class="toast-container"></div>
 
 <script type="module">
-    // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
-    // Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
         authDomain: "monetizelt-b235d.firebaseapp.com",
@@ -1155,11 +875,10 @@
         measurementId: "G-5NWKR1E9VY"
     };
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const functions = getFunctions(app, 'us-central1');
+    const functions = getFunctions(app);
     const storage = getStorage(app);
 
     let currentUserData = null;
@@ -1171,62 +890,84 @@
     let dataLoaded = false;
     let dataLoadingPromise = null;
     let userIdToken = null;
-    let paypalAccountComplete = false;
-    let generatedLinks = [];
+    let stripeAccountComplete = false;
     
+    // Variables pour le stockage des fichiers
     let coverFile = null;
     let productFile = null;
     let coverFileUrl = null;
     let productFileUrl = null;
     
+    // Nouvelle variable pour suivre si l'utilisateur vient de la page de création de compte
     let hasRedirectedFromAccountCreation = false;
-    let refreshInterval;
 
-    // Function to show splash screen on dashboard elements
-    function showSplashScreen(elementId, show = true) {
-        const splashElement = document.getElementById(elementId);
-        if (splashElement) {
-            splashElement.style.display = show ? 'flex' : 'none';
-        }
-    }
-    
-    // Show loading state for all dashboard elements
-    function showAllSplashScreens(show = true) {
-        showSplashScreen('linksCountSplash', show);
-        showSplashScreen('viewsCountSplash', show);
-        showSplashScreen('ordersCountSplash', show);
-        showSplashScreen('shippedCountSplash', show);
-        showSplashScreen('revenueCountSplash', show);
-        showSplashScreen('transactionSplash', show);
-    }
-    
-    // Setup regular refresh of dashboard data
-    function setupDataRefresh() {
-        clearInterval(refreshInterval);
-        refreshInterval = setInterval(() => {
-            if (auth.currentUser) {
-                showAllSplashScreens(true);
-                setTimeout(() => {
-                    refreshDashboardData(auth.currentUser.uid);
-                }, 2000);
-            }
-        }, 180000); // Refresh every 3 minutes
-    }
-    
-    // Refresh dashboard data
-    async function refreshDashboardData(userId) {
+    // Exposer la fonction setupStripeAccount pour le bouton
+    window.setupStripeAccount = async function() {
         try {
-            await loadUserData(userId);
-            await loadLinksData(userId);
-            await loadOrdersData(userId);
-            showAllSplashScreens(false);
+            const user = auth.currentUser;
+            if (!user) {
+                showToast("Please log in to set up Stripe", "error");
+                setTimeout(() => {
+                    window.location.href = "auth.html";
+                }, 1500);
+                return;
+            }
+            
+            showToast("Setting up your payment account...", "info");
+            
+            // Obtenir un token d'authentification frais
+            userIdToken = await user.getIdToken(true);
+            
+            // Vérifier si le document utilisateur existe et le créer si nécessaire
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+            
+            if (!userSnap.exists()) {
+                // Créer le document utilisateur s'il n'existe pas
+                await setDoc(userRef, {
+                    createdAt: serverTimestamp(),
+                    lastUpdate: serverTimestamp(),
+                    onboardingComplete: false,
+                    linksCount: 0,
+                    viewsCount: 0,
+                    ordersCount: 0,
+                    shippedCount: 0,
+                    revenueCount: 0,
+                    transactions: []
+                });
+            }
+            
+            // Créer un compte Stripe via Cloud Function
+            const createStripeAccount = httpsCallable(functions, 'createStripeAccount');
+            const result = await createStripeAccount({
+                uid: user.uid,
+                email: user.email,
+                country: "US" // Vous pouvez le rendre dynamique plus tard
+            });
+            
+            if (result.data && result.data.url) {
+                // Rediriger vers l'URL d'onboarding de Stripe
+                window.location.href = result.data.url;
+            } else {
+                throw new Error("No onboarding URL provided");
+            }
+            
         } catch (error) {
-            console.error("Error refreshing data:", error);
-            showAllSplashScreens(false);
+            console.error("Error during Stripe setup:", error);
+            
+            if (error.code === 'functions/unauthenticated' || error.message.includes('User not logged in')) {
+                showToast("Session expired. Please log in again.", "error");
+                setTimeout(() => {
+                    auth.signOut().then(() => {
+                        window.location.href = "auth.html";
+                    });
+                }, 1500);
+            } else {
+                showToast(`Error setting up payment: ${error.message}`, "error");
+            }
         }
-    }
-    
-    // Show notification toast
+    };
+
     function showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
@@ -1249,7 +990,6 @@
         }, 3000);
     }
 
-    // Animation for value updates
     function animateUpdate(element) {
         element.classList.add('pulse');
         setTimeout(() => {
@@ -1257,86 +997,24 @@
         }, 500);
     }
 
-    // Function to validate email format
-    function isValidEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-    
-    // Set up PayPal account
-    async function setupPayPalAccount() {
-        const paypalModal = document.getElementById('paypalModal');
-        const paypalEmail = document.getElementById('paypalEmail');
-        const paypalEmailError = document.getElementById('paypalEmailError');
-        
-        // Reset previous input
-        paypalEmail.value = "";
-        paypalEmailError.style.display = "none";
-        
-        // If user already has PayPal set up, prefill the email
-        if (currentUserData && currentUserData.paypalEmail) {
-            paypalEmail.value = currentUserData.paypalEmail;
-        }
-        
-        paypalModal.style.display = "flex";
-    }
-    
-    // Save PayPal email
-    async function savePayPalEmail() {
-        try {
-            const paypalEmail = document.getElementById('paypalEmail').value.trim();
-            const paypalEmailError = document.getElementById('paypalEmailError');
-            
-            if (!isValidEmail(paypalEmail)) {
-                paypalEmailError.style.display = "block";
-                return;
-            }
-            
-            const user = auth.currentUser;
-            if (!user) {
-                showToast("Please log in to set up PayPal", "error");
-                return;
-            }
-            
-            showToast("Saving your PayPal email...", "info");
-            
-            const userRef = doc(db, "users", user.uid);
-            await updateDoc(userRef, {
-                paypalEmail: paypalEmail,
-                onboardingComplete: true,
-                lastUpdate: serverTimestamp()
-            });
-            
-            document.getElementById('paypalModal').style.display = "none";
-            showToast("PayPal email saved successfully!", "success");
-            
-            updatePayPalUI(true);
-            
-        } catch (error) {
-            console.error("Error saving PayPal email:", error);
-            showToast(`Error: ${error.message}`, "error");
-        }
-    }
-
-    // Check PayPal account status
-    async function checkPayPalStatus() {
+    async function checkStripeStatus() {
         try {
             const user = auth.currentUser;
             if (!user) return false;
             
+            // Obtenir un token d'authentification frais
             userIdToken = await user.getIdToken(true);
             
+            // Vérifier si le document utilisateur existe
             const userRef = doc(db, "users", user.uid);
             const userSnap = await getDoc(userRef);
             
             if (!userSnap.exists()) {
+                // Créer le document utilisateur s'il n'existe pas
                 await setDoc(userRef, {
-                    uid: user.uid,
-                    email: user.email,
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
                     onboardingComplete: false,
-                    paypalEmail: null,
                     linksCount: 0,
                     viewsCount: 0,
                     ordersCount: 0,
@@ -1345,71 +1023,135 @@
                     transactions: []
                 });
                 
-                updatePayPalUI(false);
+                // Définir onboardingComplete à false
+                updateStripeUI(false);
                 return false;
             }
             
+            // Récupérer les données utilisateur actuelles
             const userData = userSnap.data();
-            const isComplete = userData && userData.onboardingComplete === true && userData.paypalEmail;
+            const isComplete = userData && userData.onboardingComplete === true;
             
-            updatePayPalUI(isComplete);
+            // Mettre à jour l'interface en fonction du statut
+            updateStripeUI(isComplete);
+            
+            // Vérifier les paramètres d'URL pour voir si on revient de Stripe
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('success')) {
+                showToast("Payment setup completed successfully!", "success");
+                
+                // Mettre à jour le document utilisateur
+                await updateDoc(userRef, {
+                    onboardingComplete: true,
+                    lastUpdate: serverTimestamp()
+                });
+                
+                // Nettoyer l'URL
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+                
+                // Mettre à jour l'interface
+                updateStripeUI(true);
+            }
             
             return isComplete;
         } catch (error) {
-            console.error("Error checking PayPal status:", error);
+            console.error("Error checking Stripe status:", error);
             
-            updatePayPalUI(false);
+            if (error.code === 'auth/requires-recent-login') {
+                showToast("Your session has expired. Please log in again.", "error");
+                setTimeout(() => {
+                    auth.signOut().then(() => {
+                        window.location.href = "auth.html";
+                    });
+                }, 1500);
+            } else if (error.message && error.message.includes("documentPath")) {
+                // Problème spécifique avec le chemin de document - créer le document utilisateur
+                const user = auth.currentUser;
+                if (user) {
+                    try {
+                        await setDoc(doc(db, "users", user.uid), {
+                            createdAt: serverTimestamp(),
+                            lastUpdate: serverTimestamp(),
+                            onboardingComplete: false,
+                            linksCount: 0,
+                            viewsCount: 0,
+                            ordersCount: 0,
+                            shippedCount: 0,
+                            revenueCount: 0,
+                            transactions: []
+                        });
+                        showToast("Profile created successfully", "success");
+                        updateStripeUI(false);
+                    } catch (createError) {
+                        console.error("Error creating user document:", createError);
+                        showToast("Error creating user profile", "error");
+                    }
+                }
+            }
+            
+            // Par défaut, considérer que le compte n'est pas actif
+            updateStripeUI(false);
             return false;
         }
     }
     
-    // Update UI based on PayPal status
-    function updatePayPalUI(isActive) {
-        const paypalStatus = document.getElementById('paypalStatus');
-        const paypalCard = document.getElementById('paypalCard');
+    function updateStripeUI(isActive) {
+        const stripeStatus = document.getElementById('stripeStatus');
+        const stripeCard = document.getElementById('stripeCard');
         const generateBtn = document.getElementById('generateBtn');
         const paymentWarning = document.getElementById('paymentWarning');
         
-        paypalAccountComplete = isActive;
+        stripeAccountComplete = isActive;
         
         if (isActive) {
-            paypalStatus.textContent = "Active";
-            paypalStatus.className = "payment-status active";
-            paypalCard.setAttribute("onclick", "setupPayPalAccount()");
-            paypalCard.style.borderColor = "#4CAF50";
-            paypalCard.classList.remove("pulse-animation");
+            // Compte Stripe actif
+            stripeStatus.textContent = "Active";
+            stripeStatus.className = "stripe-status active";
+            stripeCard.setAttribute("onclick", "");
+            stripeCard.style.borderColor = "#4CAF50";
+            stripeCard.classList.remove("pulse-animation");
             
+            // Activer le bouton Generate
             generateBtn.classList.remove("disabled");
             generateBtn.onclick = openProductModal;
             
+            // Masquer l'avertissement
             paymentWarning.style.display = "none";
         } else {
-            paypalStatus.textContent = "Not Active";
-            paypalStatus.className = "payment-status not-active";
-            paypalCard.setAttribute("onclick", "setupPayPalAccount()");
-            paypalCard.style.borderColor = "#007BFF";
-            paypalCard.classList.add("pulse-animation");
+            // Compte Stripe inactif
+            stripeStatus.textContent = "Not Active";
+            stripeStatus.className = "stripe-status not-active";
+            stripeCard.setAttribute("onclick", "setupStripeAccount()");
+            stripeCard.style.borderColor = "#007BFF";
+            stripeCard.classList.add("pulse-animation");
             
+            // Désactiver le bouton Generate
             generateBtn.classList.add("disabled");
             generateBtn.onclick = function() {
-                showToast("Please set up your PayPal account first", "error");
+                showToast("Please set up your payment method first", "error");
             };
             
+            // Afficher l'avertissement
             paymentWarning.style.display = "block";
         }
     }
 
-    // Check if user was redirected from account creation
+    // Fonction pour vérifier si l'utilisateur vient de la page de création de compte
     function checkAccountCreationReferral() {
+        // Vérifier si l'utilisateur vient de s'authentifier depuis la page de création de compte
         const referrer = document.referrer;
-        const hasCreationReferrer = referrer.includes('index.html');
+        const hasCreationReferrer = referrer.includes('auth.html');
         
+        // Vérifier si on a déjà redirigé l'utilisateur (via localStorage)
         const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
         
         if (hasCreationReferrer && !hasBeenRedirected) {
+            // Stocker que l'utilisateur a été redirigé
             localStorage.setItem('redirectedFromAccountCreation', 'true');
             hasRedirectedFromAccountCreation = true;
             
+            // Mettre un délai court pour permettre le chargement des données de base
             setTimeout(() => {
                 showToast("Returning to previous page...", "info");
                 history.back();
@@ -1417,341 +1159,94 @@
         }
     }
 
-    // Handle price input and calculate final prices
-    function handlePriceCalculation() {
-        const priceInput = document.getElementById('productPrice');
-        const priceCalculation = document.getElementById('priceCalculation');
-        const basePrice = document.getElementById('basePrice');
-        const taxAmount = document.getElementById('taxAmount');
-        const paypalFees = document.getElementById('paypalFees');
-        const sellerEarnings = document.getElementById('sellerEarnings');
-        const finalPrice = document.getElementById('finalPrice');
-        
-        const price = parseFloat(priceInput.value);
-        
-        if (isNaN(price) || price <= 0) {
-            priceCalculation.style.display = 'none';
-            return;
-        }
-        
-        // Calculate tax (7%)
-        const tax = price * 0.07;
-        // Estimate PayPal fees (2.9% + $0.30)
-        const priceWithTax = price + tax;
-        const ppFees = (priceWithTax * 0.029) + 0.30;
-        // Calculate seller's 80% of the price
-        const earnings = price * 0.8;
-        
-        basePrice.textContent = `$${price.toFixed(2)}`;
-        taxAmount.textContent = `$${tax.toFixed(2)}`;
-        paypalFees.textContent = `$${ppFees.toFixed(2)}`;
-        sellerEarnings.textContent = `$${earnings.toFixed(2)}`;
-        finalPrice.textContent = `$${priceWithTax.toFixed(2)}`;
-        
-        priceCalculation.style.display = 'block';
-    }
-
-    // Open product creation modal
-    function openProductModal() {
-        const createProductModal = document.getElementById("createProductModal");
-        createProductModal.style.display = "flex";
-        
-        document.getElementById("productTitle").value = "";
-        document.getElementById("productCategory").value = "";
-        document.getElementById("productDescription").value = "";
-        document.getElementById("productPrice").value = "";
-        document.getElementById("descriptionCharCount").textContent = "0";
-        document.getElementById("priceCalculation").style.display = "none";
-        
-        coverFile = null;
-        productFile = null;
-        coverFileUrl = null;
-        productFileUrl = null;
-        
-        document.getElementById("coverFileName").textContent = "";
-        document.getElementById("coverFileName").style.display = "none";
-        document.getElementById("coverSuccessIcon").style.display = "none";
-        
-        document.getElementById("productFileName").textContent = "";
-        document.getElementById("productFileName").style.display = "none";
-        document.getElementById("productFileSuccessIcon").style.display = "none";
-    }
-    
-    // Open generated links modal
-    async function openLinksModal() {
-        const linksModal = document.getElementById("linksModal");
-        const linksList = document.getElementById("linksList");
-        
-        // Clear previous links
-        linksList.innerHTML = '<div style="text-align: center;"><div class="spinner"></div></div>';
-        
-        linksModal.style.display = "flex";
-        
-        try {
-            const user = auth.currentUser;
-            if (!user) {
-                throw new Error("User not logged in");
-            }
-            
-            const productsRef = collection(db, "products");
-            const productsQuery = query(productsRef, where("uid", "==", user.uid));
-            const querySnapshot = await getDocs(productsQuery);
-            
-            if (querySnapshot.empty) {
-                linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
-                return;
-            }
-            
-            generatedLinks = [];
-            querySnapshot.forEach(doc => {
-                const product = doc.data();
-                if (product.shareableLink) {
-                    generatedLinks.push({
-                        id: doc.id,
-                        title: product.title || `Product #${generatedLinks.length + 1}`,
-                        link: product.shareableLink
-                    });
-                }
-            });
-            
-            if (generatedLinks.length === 0) {
-                linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
-                return;
-            }
-            
-            linksList.innerHTML = '';
-            generatedLinks.forEach((link, index) => {
-                const linkItem = document.createElement('div');
-                linkItem.className = 'link-item';
-                linkItem.innerHTML = `
-                    <span class="link-number">${index + 1})</span>
-                    <span class="link-url" title="${link.link}">${link.link}</span>
-                    <button class="copy-link-btn" data-link="${link.link}">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                `;
-                linksList.appendChild(linkItem);
-            });
-            
-            // Add click handlers for copy buttons
-            document.querySelectorAll('.copy-link-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const link = this.getAttribute('data-link');
-                    navigator.clipboard.writeText(link).then(() => {
-                        showToast("Link copied to clipboard!", "success");
-                    });
-                });
-            });
-            
-        } catch (error) {
-            console.error("Error loading links:", error);
-            linksList.innerHTML = '<div style="text-align: center; color: #F44336;">Error loading links</div>';
-        }
-    }
-    
-    // Create product and generate link
-    async function createProduct() {
-        try {
-            const user = auth.currentUser;
-            if (!user) {
-                showToast("Please log in to create a product", "error");
-                return;
-            }
-            
-            const title = document.getElementById("productTitle").value.trim();
-            const category = document.getElementById("productCategory").value;
-            const description = document.getElementById("productDescription").value.trim();
-            const price = parseFloat(document.getElementById("productPrice").value);
-            
-            // Calculate price with tax
-            const priceWithTax = price * 1.07;
-            
-            if (!title) {
-                showToast("Please enter a product title", "error");
-                return;
-            }
-            
-            if (!category) {
-                showToast("Please select a category", "error");
-                return;
-            }
-            
-            if (!description) {
-                showToast("Please enter a description", "error");
-                return;
-            }
-            
-            if (isNaN(price) || price < 0.5) {
-                showToast("Please enter a valid price (minimum $0.50)", "error");
-                return;
-            }
-            
-            if (!coverFile) {
-                showToast("Please upload a cover image", "error");
-                return;
-            }
-            
-            if (!productFile) {
-                showToast("Please upload your product file", "error");
-                return;
-            }
-            
-            // Check if user has set up PayPal
-            if (!paypalAccountComplete) {
-                showToast("Please set up your PayPal account first", "error");
-                setupPayPalAccount();
-                return;
-            }
-            
-            showToast("Creating your product...", "info");
-            
-            document.getElementById("createProductModal").style.display = "none";
-            
-            await uploadFiles();
-            
-            const createProductFn = httpsCallable(functions, 'createProduct');
-            
-            const result = await createProductFn({
-                title: title,
-                category: category,
-                description: description,
-                price: priceWithTax.toFixed(2), // Use price with tax
-                fileUrl: productFileUrl,
-                coverUrl: coverFileUrl
-            });
-            
-            if (result.data && result.data.shareableLink) {
-                showToast("Product created successfully!", "success");
-                
-                const shareableLink = result.data.shareableLink;
-                
-                const linkModal = document.createElement("div");
-                linkModal.className = "modal";
-                linkModal.style.display = "flex";
-                linkModal.innerHTML = `
-                    <div class="modal-content">
-                        <div class="modal-title">Your Product Link</div>
-                        <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
-                        <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
-                        <button id="closeLinkModalBtn" class="cancel-button">Close</button>
-                    </div>
-                `;
-                
-                document.body.appendChild(linkModal);
-                
-                document.getElementById("copyLinkBtn").addEventListener("click", function() {
-                    navigator.clipboard.writeText(shareableLink).then(() => {
-                        showToast("Link copied to clipboard!", "success");
-                    });
-                });
-                
-                document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
-                    linkModal.remove();
-                });
-                
-                setTimeout(() => {
-                    if (document.body.contains(linkModal)) {
-                        linkModal.remove();
-                    }
-                }, 30000);
-                
-                // Refresh dashboard data
-                showAllSplashScreens(true);
-                setTimeout(() => {
-                    refreshDashboardData(user.uid);
-                }, 1000);
-            } else {
-                throw new Error("No shareable link provided");
-            }
-        } catch (error) {
-            console.error("Error creating product:", error);
-            showToast(`Error: ${error.message}`, "error");
-        }
-    }
-    
-    // Upload files to Firebase Storage
-    async function uploadFiles() {
-        if (!coverFile || !productFile) {
-            throw new Error("Files not selected");
-        }
-        
-        const user = auth.currentUser;
-        if (!user) {
-            throw new Error("User not logged in");
-        }
-        
-        const coverFileName = `covers/${user.uid}/${Date.now()}_${coverFile.name}`;
-        const productFileName = `products/${user.uid}/${Date.now()}_${productFile.name}`;
-        
-        const coverStorageRef = ref(storage, coverFileName);
-        const productStorageRef = ref(storage, productFileName);
-        
-        await uploadBytes(coverStorageRef, coverFile);
-        await uploadBytes(productStorageRef, productFile);
-        
-        coverFileUrl = await getDownloadURL(coverStorageRef);
-        productFileUrl = await getDownloadURL(productStorageRef);
-        
-        return { coverFileUrl, productFileUrl };
-    }
-
-    // Authentication state listener
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             try {
-                showAllSplashScreens(true);
-                
                 userIdToken = await user.getIdToken(true);
                 
                 cleanupListeners();
                 
+                // Vérifier si l'utilisateur vient de la page de création de compte
                 checkAccountCreationReferral();
                 
+                // Si l'utilisateur a été redirigé, ne pas charger les données pour éviter un travail inutile
                 if (hasRedirectedFromAccountCreation) {
                     return;
                 }
                 
-                await checkPayPalStatus();
+                // Vérifier le statut Stripe
+                await checkStripeStatus();
                 
+                // Charger les données utilisateur
                 dataLoadingPromise = loadUserData(user.uid);
                 dataLoadingPromise.then(() => {
                     setupRealTimeListeners(user.uid);
                     dataLoaded = true;
-                    showAllSplashScreens(false);
                     
                     if (isInitialLoad) {
                         isInitialLoad = false;
                         showToast("Welcome to your dashboard!", "success");
                     }
-                    
-                    setupDataRefresh();
                 }).catch(error => {
                     console.error("Error loading data:", error);
-                    showAllSplashScreens(false);
-                    showToast("Error loading data: " + error.message, "error");
+                    
+                    if (error.code === 'permission-denied' || error.code === 'auth/requires-recent-login') {
+                        showToast("Session expired. Please log in again.", "error");
+                        setTimeout(() => {
+                            auth.signOut().then(() => {
+                                window.location.href = "auth.html";
+                            });
+                        }, 1500);
+                    } else if (error.message && error.message.includes("documentPath")) {
+                        // Créer le document utilisateur s'il n'existe pas
+                        try {
+                            setDoc(doc(db, "users", user.uid), {
+                                createdAt: serverTimestamp(),
+                                lastUpdate: serverTimestamp(),
+                                onboardingComplete: false,
+                                linksCount: 0,
+                                viewsCount: 0,
+                                ordersCount: 0,
+                                shippedCount: 0,
+                                revenueCount: 0,
+                                transactions: []
+                            }).then(() => {
+                                showToast("Profile created successfully", "success");
+                                dataLoadingPromise = loadUserData(user.uid);
+                            });
+                        } catch (createError) {
+                            console.error("Error creating user document:", createError);
+                            showToast("Error creating user profile", "error");
+                        }
+                    } else {
+                        showToast("Error loading data: " + error.message, "error");
+                    }
                 });
             } catch (error) {
                 console.error("Error during initialization:", error);
-                showAllSplashScreens(false);
-                showToast("An error occurred. Please try again.", "error");
+                
+                if (error.code && (error.code.includes('auth/') || error.code === 'permission-denied')) {
+                    showToast("Authentication problem. Please log in again.", "error");
+                    setTimeout(() => {
+                        auth.signOut().then(() => {
+                            window.location.href = "auth.html";
+                        });
+                    }, 1500);
+                } else {
+                    showToast("An error occurred. Please try again.", "error");
+                }
             }
         } else {
-            window.location.href = "index.html";
+            window.location.href = "auth.html";
         }
     });
 
-    // Clean up real-time listeners
     function cleanupListeners() {
         realTimeListeners.forEach(unsubscribe => unsubscribe());
         realTimeListeners = [];
     }
 
-    // Load user data
     async function loadUserData(userId) {
-        if (!userId) {
-            throw new Error("User ID is required");
-        }
-        
         try {
             const userDocRef = doc(db, "users", userId);
             const userDoc = await getDoc(userDocRef);
@@ -1767,18 +1262,17 @@
                     updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
                 }
                 
-                if (userData.onboardingComplete && userData.paypalEmail) {
-                    updatePayPalUI(true);
+                // Mettre à jour l'interface en fonction du statut Stripe
+                if (userData.onboardingComplete) {
+                    updateStripeUI(true);
                 } else {
-                    updatePayPalUI(false);
+                    updateStripeUI(false);
                 }
                 
                 return userData;
             } else {
                 console.log("No user document found, creating new...");
                 const newUserData = {
-                    uid: userId,
-                    email: auth.currentUser ? auth.currentUser.email : "",
                     linksCount: 0,
                     viewsCount: 0,
                     ordersCount: 0,
@@ -1787,29 +1281,33 @@
                     transactions: [],
                     createdAt: serverTimestamp(),
                     lastUpdate: serverTimestamp(),
-                    onboardingComplete: false,
-                    paypalEmail: null
+                    onboardingComplete: false
                 };
                 
-                await setDoc(userDocRef, newUserData);
+                await setDoc(doc(db, "users", userId), newUserData);
                 currentUserData = newUserData;
                 updateDashboardUI(newUserData);
-                updatePayPalUI(false);
+                updateStripeUI(false);
                 return newUserData;
             }
         } catch (error) {
             console.error("Error loading user data:", error);
+            
+            if (error.code === 'permission-denied') {
+                try {
+                    userIdToken = await auth.currentUser.getIdToken(true);
+                    return await loadUserData(userId);
+                } catch (refreshError) {
+                    console.error("Error refreshing token:", refreshError);
+                    throw new Error("Session expired. Please log in again.");
+                }
+            }
+            
             throw error;
         }
     }
 
-    // Set up real-time listeners
     function setupRealTimeListeners(userId) {
-        if (!userId) {
-            console.error("No user ID provided for real-time listeners");
-            return;
-        }
-        
         try {
             const userDocRef = doc(db, "users", userId);
             const userUnsubscribe = onSnapshot(userDocRef, (doc) => {
@@ -1819,15 +1317,33 @@
                     currentUserData = newData;
                     updateDashboardUI(newData);
                     
-                    if (newData.onboardingComplete && newData.paypalEmail) {
-                        updatePayPalUI(true);
+                    // Mettre à jour l'interface en fonction du statut Stripe
+                    if (newData.onboardingComplete) {
+                        updateStripeUI(true);
                     } else {
-                        updatePayPalUI(false);
+                        updateStripeUI(false);
                     }
                 }
             }, (error) => {
                 console.error("Error in real-time listener for user document:", error);
-                showToast("Data synchronization issue", "error");
+                
+                if (error.code === 'permission-denied') {
+                    showToast("Session expired. Reconnecting...", "info");
+                    
+                    auth.currentUser.getIdToken(true).then(token => {
+                        userIdToken = token;
+                    }).catch(refreshError => {
+                        console.error("Error refreshing token:", refreshError);
+                        showToast("Authentication problem. Please log in again.", "error");
+                        setTimeout(() => {
+                            auth.signOut().then(() => {
+                                window.location.href = "auth.html";
+                            });
+                        }, 1500);
+                    });
+                } else {
+                    showToast("Data synchronization issue", "error");
+                }
             });
             realTimeListeners.push(userUnsubscribe);
         } catch (error) {
@@ -1847,19 +1363,10 @@
         }
     }
 
-    // Load links data
     async function loadLinksData(userId) {
-        if (!userId) {
-            console.error("No user ID provided for loading links");
-            return;
-        }
-        
         try {
-            showSplashScreen('linksCountSplash', true);
-            showSplashScreen('viewsCountSplash', true);
-            
-            const linksRef = collection(db, "products");
-            const linksQuery = query(linksRef, where("uid", "==", userId));
+            const linksRef = collection(db, "products"); // Utiliser la collection products au lieu de links
+            const linksQuery = query(linksRef, where("sellerId", "==", userId));
             
             const snapshot = await getDocs(linksQuery);
             let totalLinks = snapshot.size;
@@ -1874,40 +1381,51 @@
             updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
             
             if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
-                const userDocRef = doc(db, "users", userId);
-                await updateDoc(userDocRef, {
+                updateDoc(doc(db, "users", userId), {
                     linksCount: totalLinks,
                     viewsCount: totalViews,
                     lastUpdate: serverTimestamp()
                 }).catch(error => {
                     console.error("Error updating user data:", error);
+                    
+                    if (error.code === 'permission-denied') {
+                        auth.currentUser.getIdToken(true).then(token => {
+                            userIdToken = token;
+                            updateDoc(doc(db, "users", userId), {
+                                linksCount: totalLinks,
+                                viewsCount: totalViews,
+                                lastUpdate: serverTimestamp()
+                            }).catch(innerError => {
+                                console.error("Error during second update attempt:", innerError);
+                            });
+                        }).catch(refreshError => {
+                            console.error("Error refreshing token:", refreshError);
+                        });
+                    }
                 });
             }
             
-            showSplashScreen('linksCountSplash', false);
-            showSplashScreen('viewsCountSplash', false);
-            
+            setTimeout(() => loadLinksData(userId), 30000);
         } catch (error) {
             console.error("Error loading links:", error);
-            showSplashScreen('linksCountSplash', false);
-            showSplashScreen('viewsCountSplash', false);
-            showToast("Error syncing products", "error");
+            
+            if (error.code === 'permission-denied') {
+                setTimeout(async () => {
+                    try {
+                        userIdToken = await auth.currentUser.getIdToken(true);
+                        loadLinksData(userId);
+                    } catch (refreshError) {
+                        console.error("Error refreshing token:", refreshError);
+                    }
+                }, 5000);
+            } else {
+                showToast("Error syncing products", "error");
+            }
         }
     }
 
-    // Load orders data
     async function loadOrdersData(userId) {
-        if (!userId) {
-            console.error("No user ID provided for loading orders");
-            return;
-        }
-        
         try {
-            showSplashScreen('ordersCountSplash', true);
-            showSplashScreen('shippedCountSplash', true);
-            showSplashScreen('revenueCountSplash', true);
-            showSplashScreen('transactionSplash', true);
-            
             const ordersRef = collection(db, "orders");
             const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
             
@@ -1930,25 +1448,7 @@
                     title: orderData.productName || "Order #" + doc.id.substring(0, 8),
                     amount: orderData.totalAmount || 0,
                     date: orderData.createdAt || new Date(),
-                    status: orderData.status || "pending",
-                    type: "sale"
-                });
-            });
-            
-            // Add payout transactions
-            const payoutsRef = collection(db, "payouts");
-            const payoutsQuery = query(payoutsRef, where("sellerId", "==", userId));
-            const payoutsSnapshot = await getDocs(payoutsQuery);
-            
-            payoutsSnapshot.forEach(doc => {
-                const payoutData = doc.data();
-                transactions.push({
-                    id: doc.id,
-                    title: "Weekly Payout",
-                    amount: payoutData.amount || 0,
-                    date: payoutData.createdAt || new Date(),
-                    status: "completed",
-                    type: "payout"
+                    status: orderData.status || "pending"
                 });
             });
             
@@ -1963,8 +1463,7 @@
                 currentUserData.shippedCount !== shippedOrders || 
                 currentUserData.revenueCount !== totalRevenue
             )) {
-                const userDocRef = doc(db, "users", userId);
-                await updateDoc(userDocRef, {
+                updateDoc(doc(db, "users", userId), {
                     ordersCount: totalOrders,
                     shippedCount: shippedOrders,
                     revenueCount: totalRevenue,
@@ -1972,25 +1471,45 @@
                     lastUpdate: serverTimestamp()
                 }).catch(error => {
                     console.error("Error updating order data:", error);
+                    
+                    if (error.code === 'permission-denied') {
+                        auth.currentUser.getIdToken(true).then(token => {
+                            userIdToken = token;
+                            updateDoc(doc(db, "users", userId), {
+                                ordersCount: totalOrders,
+                                shippedCount: shippedOrders,
+                                revenueCount: totalRevenue,
+                                transactions: transactions,
+                                lastUpdate: serverTimestamp()
+                            }).catch(innerError => {
+                                console.error("Error during second update attempt:", innerError);
+                            });
+                        }).catch(refreshError => {
+                            console.error("Error refreshing token:", refreshError);
+                        });
+                    }
                 });
             }
             
-            showSplashScreen('ordersCountSplash', false);
-            showSplashScreen('shippedCountSplash', false);
-            showSplashScreen('revenueCountSplash', false);
-            showSplashScreen('transactionSplash', false);
-            
+            setTimeout(() => loadOrdersData(userId), 30000);
         } catch (error) {
             console.error("Error loading orders:", error);
-            showSplashScreen('ordersCountSplash', false);
-            showSplashScreen('shippedCountSplash', false);
-            showSplashScreen('revenueCountSplash', false);
-            showSplashScreen('transactionSplash', false);
-            showToast("Error syncing orders", "error");
+            
+            if (error.code === 'permission-denied') {
+                setTimeout(async () => {
+                    try {
+                        userIdToken = await auth.currentUser.getIdToken(true);
+                        loadOrdersData(userId);
+                    } catch (refreshError) {
+                        console.error("Error refreshing token:", refreshError);
+                    }
+                }, 5000);
+            } else {
+                showToast("Error syncing orders", "error");
+            }
         }
     }
 
-    // Update counter with animation
     function updateCountWithAnimation(elementId, indicatorId, value, suffix, previousValue) {
         const element = document.getElementById(elementId);
         const indicator = document.getElementById(indicatorId);
@@ -2027,9 +1546,12 @@
         }
     }
 
-    // Update dashboard UI
     function updateDashboardUI(userData) {
         if (!userData) return;
+        
+        document.querySelectorAll('.skeleton').forEach(skeleton => {
+            skeleton.remove();
+        });
         
         updateCountWithAnimation("linksCount", "linksIndicator", userData.linksCount || 0, "", previousUserData?.linksCount);
         updateCountWithAnimation("viewsCount", "viewsIndicator", userData.viewsCount || 0, "", previousUserData?.viewsCount);
@@ -2040,7 +1562,6 @@
         updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
     }
 
-    // Update transaction list
     function updateTransactionList(transactions = [], year = "", month = "") {
         const transactionList = document.getElementById("transactionList");
         if (!transactionList) return;
@@ -2092,296 +1613,461 @@
             const item = document.createElement("div");
             item.className = "transaction-item";
             
-            // Style based on transaction type
-            if (transaction.type === "sale") {
-                item.classList.add("sold-transaction");
-                item.innerHTML = `
-                    <div class="details">
-                        <span>Sale</span>
-                        <span class="date">${formattedDate}</span>
-                    </div>
-                    <span>$${transaction.amount || 0}</span>
-                `;
-            } else if (transaction.type === "payout") {
-                item.classList.add("payout-transaction");
-                item.innerHTML = `
-                    <div class="details">
-                        <span>Payout</span>
-                        <span class="date">${formattedDate}</span>
-                    </div>
-                    <span>$${transaction.amount || 0}</span>
-                `;
-            } else {
-                if (transaction.status === "shipped" || transaction.status === "delivered") {
-                    item.style.borderLeft = "3px solid #4CAF50";
-                } else if (transaction.status === "pending") {
-                    item.style.borderLeft = "3px solid #FFC107";
-                } else if (transaction.status === "cancelled") {
-                    item.style.borderLeft = "3px solid #F44336";
-                    item.style.opacity = "0.7";
-                }
-                
-                item.innerHTML = `
-                    <div class="details">
-                        <span>${transaction.title || "Unspecified transaction"}</span>
-                        <span class="date">${formattedDate}</span>
-                    </div>
-                    <span>$${transaction.amount || 0}</span>
-                `;
+            if (transaction.status === "shipped" || transaction.status === "delivered") {
+                item.style.borderLeft = "3px solid #4CAF50";
+            } else if (transaction.status === "pending") {
+                item.style.borderLeft = "3px solid #FFC107";
+            } else if (transaction.status === "cancelled") {
+                item.style.borderLeft = "3px solid #F44336";
+                item.style.opacity = "0.7";
             }
+            
+            item.innerHTML = `
+                <div class="details">
+                    <span>${transaction.title || "Unspecified order"}</span>
+                    <span class="date">${formattedDate}</span>
+                </div>
+                <span>${transaction.amount || 0}$</span>
+            `;
             
             transactionList.appendChild(item);
         });
     }
 
-    // Set up event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-        const profileIcon = document.getElementById("profileIcon");
-        const linksIcon = document.getElementById("linksIcon");
-        const deleteModal = document.getElementById("deleteModal");
-        const confirmModal = document.getElementById("confirmModal");
-        const deleteAccountBtn = document.getElementById("deleteAccountBtn");
-        const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
-        const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
-        const emailInput = document.getElementById("emailInput");
-        const passwordInput = document.getElementById("passwordInput");
-        const generateBtn = document.getElementById("generateBtn");
-        const paypalCard = document.getElementById("paypalCard");
-        const savePaypalBtn = document.getElementById("savePaypalBtn");
-        const closeLinksModal = document.getElementById("closeLinksModal");
+    // Fonctions pour le modal de création de produit
+    function openProductModal() {
+        const createProductModal = document.getElementById("createProductModal");
+        createProductModal.style.display = "flex";
         
-        document.getElementById("cancelProductBtn").addEventListener("click", function() {
-            document.getElementById("createProductModal").style.display = "none";
-        });
+        // Réinitialiser le formulaire
+        document.getElementById("productTitle").value = "";
+        document.getElementById("productCategory").value = "";
+        document.getElementById("productDescription").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("descriptionCharCount").textContent = "0";
         
-        document.getElementById("createProductBtn").addEventListener("click", createProduct);
+        // Réinitialiser les fichiers
+        coverFile = null;
+        productFile = null;
+        coverFileUrl = null;
+        productFileUrl = null;
         
-        document.getElementById("productDescription").addEventListener("input", function() {
-            const descLength = this.value.length;
-            document.getElementById("descriptionCharCount").textContent = descLength;
-        });
+        // Réinitialiser les indicateurs de fichiers
+        document.getElementById("coverFileName").textContent = "";
+        document.getElementById("coverFileName").style.display = "none";
+        document.getElementById("coverSuccessIcon").style.display = "none";
         
-        document.getElementById("productPrice").addEventListener("input", handlePriceCalculation);
-        
-        document.getElementById("coverFile").addEventListener("change", function(e) {
-            if (e.target.files.length > 0) {
-                coverFile = e.target.files[0];
-                
-                if (!coverFile.type.startsWith('image/')) {
-                    showToast("Please upload an image file for the cover", "error");
-                    coverFile = null;
-                    return;
-                }
-                
-                if (coverFile.size > 5 * 1024 * 1024) {
-                    showToast("Cover image must be less than 5MB", "error");
-                    coverFile = null;
-                    return;
-                }
-                
-                const fileName = document.getElementById("coverFileName");
-                fileName.textContent = "File added";
-                fileName.style.display = "block";
-                
-                document.getElementById("coverSuccessIcon").style.display = "block";
-            }
-        });
-        
-        document.getElementById("productFile").addEventListener("change", function(e) {
-            if (e.target.files.length > 0) {
-                productFile = e.target.files[0];
-                const category = document.getElementById("productCategory").value;
-                
-                if (category === "video" && productFile.size > 500 * 1024 * 1024) {
-                    showToast("Video files must be less than 500MB", "error");
-                    productFile = null;
-                    return;
-                } else if (productFile.size > 100 * 1024 * 1024) {
-                    showToast("Files must be less than 100MB", "error");
-                    productFile = null;
-                    return;
-                }
-                
-                const fileName = document.getElementById("productFileName");
-                fileName.textContent = "File added";
-                fileName.style.display = "block";
-                
-                document.getElementById("productFileSuccessIcon").style.display = "block";
-            }
-        });
-        
-        document.getElementById("productCategory").addEventListener("change", function() {
-            const category = this.value;
-            const fileUploadLimits = document.getElementById("fileUploadLimits");
-            
-            if (category === "video") {
-                fileUploadLimits.textContent = "Max: 500MB for video content";
-            } else if (category === "ebook") {
-                fileUploadLimits.textContent = "Max: 100MB for e-books";
-            } else if (category === "music") {
-                fileUploadLimits.textContent = "Max: 100MB for music/songs";
-            } else {
-                fileUploadLimits.textContent = "Max: 100MB for files";
-            }
-        });
-        
-        savePaypalBtn.addEventListener("click", savePayPalEmail);
-        
-        closeLinksModal.addEventListener("click", function() {
-            document.getElementById("linksModal").style.display = "none";
-        });
-        
-        linksIcon.addEventListener("click", openLinksModal);
-        
-        window.openProductModal = openProductModal;
-        window.setupPayPalAccount = setupPayPalAccount;
-        
-        generateBtn.addEventListener("click", function(e) {
-            if (generateBtn.classList.contains("disabled")) {
-                e.preventDefault();
-                showToast("Please set up your PayPal account first", "error");
-                
-                paypalCard.style.animation = "pulse 1s ease 3";
-                setTimeout(() => {
-                    paypalCard.style.animation = paypalAccountComplete ? "none" : "pulse 2s infinite";
-                }, 3000);
-            }
-        });
-        
-        profileIcon.addEventListener("click", function() {
-            deleteModal.style.display = "flex";
-        });
-        
-        window.addEventListener("click", function(event) {
-            if (event.target === deleteModal) {
-                deleteModal.style.display = "none";
-            }
-            if (event.target === confirmModal) {
-                confirmModal.style.display = "none";
-                emailInput.value = "";
-                passwordInput.value = "";
-            }
-            if (event.target === document.getElementById("createProductModal")) {
-                document.getElementById("createProductModal").style.display = "none";
-            }
-            if (event.target === document.getElementById("linksModal")) {
-                document.getElementById("linksModal").style.display = "none";
-            }
-            if (event.target === document.getElementById("paypalModal")) {
-                document.getElementById("paypalModal").style.display = "none";
-            }
-        });
-        
-        deleteAccountBtn.addEventListener("click", function() {
-            deleteModal.style.display = "none";
-            confirmModal.style.display = "flex";
-            
-            if (auth.currentUser && auth.currentUser.email) {
-                emailInput.value = auth.currentUser.email;
-            }
-        });
-        
-        cancelDeleteBtn.addEventListener("click", function() {
-            confirmModal.style.display = "none";
-            emailInput.value = "";
-            passwordInput.value = "";
-        });
-        
-        confirmDeleteBtn.addEventListener("click", async function() {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            if (!email || !password) {
-                showToast("Please enter your email and password", "error");
+        document.getElementById("productFileName").textContent = "";
+        document.getElementById("productFileName").style.display = "none";
+        document.getElementById("productFileSuccessIcon").style.display = "none";
+    }
+    
+    async function createProduct() {
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                showToast("Please log in to create a product", "error");
                 return;
             }
             
-            try {
-                confirmModal.style.display = "none";
-                
-                const user = auth.currentUser;
-                if (!user) {
-                    throw new Error("User not logged in");
-                }
-                
-                const credential = EmailAuthProvider.credential(email, password);
-                await reauthenticateWithCredential(user, credential);
-                
-                const userId = user.uid;
-                
-                showToast("Deleting account...", "info");
-                
-                // Delete user's products
-                const productsRef = collection(db, "products");
-                const productsQuery = query(productsRef, where("uid", "==", userId));
-                const productsSnapshot = await getDocs(productsQuery);
-                const productDeletions = [];
-                
-                productsSnapshot.forEach(productDoc => {
-                    productDeletions.push(deleteDoc(doc(db, "products", productDoc.id)));
-                });
-                
-                // Delete user's orders
-                const ordersRef = collection(db, "orders");
-                const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
-                const ordersSnapshot = await getDocs(ordersQuery);
-                const orderDeletions = [];
-                
-                ordersSnapshot.forEach(orderDoc => {
-                    orderDeletions.push(deleteDoc(doc(db, "orders", orderDoc.id)));
-                });
-                
-                await Promise.all([
-                    ...productDeletions,
-                    ...orderDeletions
-                ]);
-                
-                await deleteDoc(doc(db, "users", userId));
-                
-                await deleteUser(user);
-                
-                showToast("Account deleted successfully", "success");
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 1500);
-            } catch (error) {
-                console.error("Error deleting account:", error);
-                
-                if (error.code === 'auth/wrong-password') {
-                    showToast("Incorrect password", "error");
-                } else if (error.code === 'auth/user-mismatch') {
-                    showToast("Email doesn't match current user", "error");
-                } else if (error.code === 'auth/invalid-email') {
-                    showToast("Invalid email format", "error");
-                } else {
-                    showToast("Error deleting account: " + error.message, "error");
-                }
+            // Obtenir les valeurs du formulaire
+            const title = document.getElementById("productTitle").value.trim();
+            const category = document.getElementById("productCategory").value;
+            const description = document.getElementById("productDescription").value.trim();
+            const price = parseFloat(document.getElementById("productPrice").value);
+            
+            // Validation
+            if (!category) {
+                showToast("Please select a category", "error");
+                return;
             }
-        });
+            
+            if (!description) {
+                showToast("Please enter a description", "error");
+                return;
+            }
+            
+            if (isNaN(price) || price < 0.5) {
+                showToast("Please enter a valid price (minimum $0.50)", "error");
+                return;
+            }
+            
+            if (!coverFile) {
+                showToast("Please upload a cover image", "error");
+                return;
+            }
+            
+            if (!productFile) {
+                showToast("Please upload your product file", "error");
+                return;
+            }
+            
+            // Afficher un message de chargement
+            showToast("Creating your product...", "info");
+            
+            // Fermer le modal
+            document.getElementById("createProductModal").style.display = "none";
+            
+            // Uploader les fichiers vers Firebase Storage
+            await uploadFiles();
+            
+            // Créer le produit via Cloud Function
+            const createProductFn = httpsCallable(functions, 'createProduct');
+            const result = await createProductFn({
+                title: title || `Product #${Date.now()}`,
+                category: category,
+                description: description,
+                price: price,
+                fileUrl: productFileUrl,
+                coverUrl: coverFileUrl
+            });
+            
+            if (result.data && result.data.shareableLink) {
+                showToast("Product created successfully!", "success");
+                
+                // Afficher le lien généré
+                const shareableLink = result.data.shareableLink;
+                
+                // Créer un modal temporaire pour afficher le lien
+                const linkModal = document.createElement("div");
+                linkModal.className = "modal";
+                linkModal.style.display = "flex";
+                linkModal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="modal-title">Your Product Link</div>
+                        <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
+                        <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
+                        <button id="closeLinkModalBtn" class="cancel-button">Close</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(linkModal);
+                
+                // Gérer les événements du modal
+                document.getElementById("copyLinkBtn").addEventListener("click", function() {
+                    navigator.clipboard.writeText(shareableLink).then(() => {
+                        showToast("Link copied to clipboard!", "success");
+                    });
+                });
+                
+                document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
+                    linkModal.remove();
+                });
+                
+                // Fermer automatiquement après 30 secondes
+                setTimeout(() => {
+                    if (document.body.contains(linkModal)) {
+                        linkModal.remove();
+                    }
+                }, 30000);
+                
+                // Rafraîchir les données
+                await loadLinksData(user.uid);
+            } else {
+                throw new Error("No shareable link provided");
+            }
+        } catch (error) {
+            console.error("Error creating product:", error);
+            showToast(`Error: ${error.message}`, "error");
+            
+            if (error.code === 'functions/unauthenticated' || error.message.includes('User not logged in')) {
+                setTimeout(() => {
+                    auth.signOut().then(() => {
+                        window.location.href = "auth.html";
+                    });
+                }, 1500);
+            } else if (error.code === 'functions/failed-precondition' && error.message.includes('Stripe account')) {
+                showToast("Please complete your payment setup first", "error");
+                document.getElementById("stripeCard").click();
+            }
+        }
+    }
+    
+    async function uploadFiles() {
+        // Vérifier si les fichiers existent
+        if (!coverFile || !productFile) {
+            throw new Error("Files not selected");
+        }
         
-        document.getElementById("yearSelect").addEventListener("change", function() {
-            showSplashScreen('transactionSplash', true);
-            selectedYear = this.value;
+        const user = auth.currentUser;
+        if (!user) {
+            throw new Error("User not logged in");
+        }
+        
+        // Générer des noms de fichiers uniques
+        const coverFileName = `covers/${user.uid}/${Date.now()}_${coverFile.name}`;
+        const productFileName = `products/${user.uid}/${Date.now()}_${productFile.name}`;
+        
+        // Créer des références aux emplacements dans Storage
+        const coverStorageRef = ref(storage, coverFileName);
+        const productStorageRef = ref(storage, productFileName);
+        
+        // Uploader les fichiers
+        await uploadBytes(coverStorageRef, coverFile);
+        await uploadBytes(productStorageRef, productFile);
+        
+        // Obtenir les URLs de téléchargement
+        coverFileUrl = await getDownloadURL(coverStorageRef);
+        productFileUrl = await getDownloadURL(productStorageRef);
+        
+        return { coverFileUrl, productFileUrl };
+    }
+
+    // Éléments du DOM et événements
+    const profileIcon = document.getElementById("profileIcon");
+    const deleteModal = document.getElementById("deleteModal");
+    const confirmModal = document.getElementById("confirmModal");
+    const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const generateBtn = document.getElementById("generateBtn");
+
+    // Gestionnaires d'événements pour le modal de création de produit
+    document.getElementById("cancelProductBtn").addEventListener("click", function() {
+        document.getElementById("createProductModal").style.display = "none";
+    });
+    
+    document.getElementById("createProductBtn").addEventListener("click", createProduct);
+    
+    // Limiter le nombre de caractères de la description
+    document.getElementById("productDescription").addEventListener("input", function() {
+        const descLength = this.value.length;
+        document.getElementById("descriptionCharCount").textContent = descLength;
+    });
+    
+    // Gérer les uploads de fichiers
+    document.getElementById("coverFile").addEventListener("change", function(e) {
+        if (e.target.files.length > 0) {
+            coverFile = e.target.files[0];
+            
+            // Vérifier si c'est une image
+            if (!coverFile.type.startsWith('image/')) {
+                showToast("Please upload an image file for the cover", "error");
+                coverFile = null;
+                return;
+            }
+            
+            // Limiter la taille à 5MB
+            if (coverFile.size > 5 * 1024 * 1024) {
+                showToast("Cover image must be less than 5MB", "error");
+                coverFile = null;
+                return;
+            }
+            
+            // Afficher le nom du fichier
+            const fileName = document.getElementById("coverFileName");
+            fileName.textContent = "File added";
+            fileName.style.display = "block";
+            
+            // Afficher l'icône de succès
+            document.getElementById("coverSuccessIcon").style.display = "block";
+        }
+    });
+    
+    document.getElementById("productFile").addEventListener("change", function(e) {
+        if (e.target.files.length > 0) {
+            productFile = e.target.files[0];
+            const category = document.getElementById("productCategory").value;
+            
+            // Vérifier les limites de taille selon la catégorie
+            if (category === "video" && productFile.size > 500 * 1024 * 1024) {
+                showToast("Video files must be less than 500MB", "error");
+                productFile = null;
+                return;
+            } else if (productFile.size > 100 * 1024 * 1024) {
+                showToast("Files must be less than 100MB", "error");
+                productFile = null;
+                return;
+            }
+            
+            // Afficher le nom du fichier
+            const fileName = document.getElementById("productFileName");
+            fileName.textContent = "File added";
+            fileName.style.display = "block";
+            
+            // Afficher l'icône de succès
+            document.getElementById("productFileSuccessIcon").style.display = "block";
+        }
+    });
+    
+    // Mettre à jour la limite de taille de fichier en fonction de la catégorie
+    document.getElementById("productCategory").addEventListener("change", function() {
+        const category = this.value;
+        const fileUploadLimits = document.getElementById("fileUploadLimits");
+        
+        if (category === "video") {
+            fileUploadLimits.textContent = "Max: 500MB for videos";
+        } else if (category === "ebook") {
+            fileUploadLimits.textContent = "Max: 100MB for e-books";
+        } else if (category === "audio") {
+            fileUploadLimits.textContent = "Max: 100MB for audio files";
+        } else {
+            fileUploadLimits.textContent = "Max: 100MB for files";
+        }
+    });
+
+    // Exposer la fonction openProductModal pour le bouton Generate
+    window.openProductModal = openProductModal;
+
+    // Gestionnaire d'événements pour le bouton Generate lorsqu'il est désactivé
+    generateBtn.addEventListener("click", function(e) {
+        if (generateBtn.classList.contains("disabled")) {
+            e.preventDefault();
+            showToast("Please set up your payment method first", "error");
+            
+            // Animer la carte de paiement pour attirer l'attention
+            const stripeCard = document.getElementById("stripeCard");
+            stripeCard.style.animation = "pulse 1s ease 3";
             setTimeout(() => {
-                if (currentUserData) {
-                    updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
-                }
-                showSplashScreen('transactionSplash', false);
-            }, 500);
-        });
+                stripeCard.style.animation = stripeAccountComplete ? "none" : "pulse 2s infinite";
+            }, 3000);
+        }
+    });
+
+    profileIcon.addEventListener("click", function() {
+        deleteModal.style.display = "flex";
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === deleteModal) {
+            deleteModal.style.display = "none";
+        }
+        if (event.target === confirmModal) {
+            confirmModal.style.display = "none";
+            emailInput.value = "";
+            passwordInput.value = "";
+        }
+        if (event.target === document.getElementById("createProductModal")) {
+            document.getElementById("createProductModal").style.display = "none";
+        }
+    });
+
+    deleteAccountBtn.addEventListener("click", function() {
+        deleteModal.style.display = "none";
+        confirmModal.style.display = "flex";
         
-        document.getElementById("monthSelect").addEventListener("change", function() {
-            showSplashScreen('transactionSplash', true);
-            selectedMonth = this.value;
+        if (auth.currentUser && auth.currentUser.email) {
+            emailInput.value = auth.currentUser.email;
+        }
+    });
+
+    cancelDeleteBtn.addEventListener("click", function() {
+        confirmModal.style.display = "none";
+        emailInput.value = "";
+        passwordInput.value = "";
+    });
+
+    confirmDeleteBtn.addEventListener("click", async function() {
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        if (!email || !password) {
+            showToast("Please enter your email and password", "error");
+            return;
+        }
+
+        try {
+            confirmModal.style.display = "none";
+
+            const user = auth.currentUser;
+            if (!user) {
+                throw new Error("User not logged in");
+            }
+
+            const credential = EmailAuthProvider.credential(email, password);
+            await reauthenticateWithCredential(user, credential);
+
+            const userId = user.uid;
+            
+            // Si un compte Stripe existe, notifier l'utilisateur
+            if (currentUserData && currentUserData.onboardingComplete) {
+                showToast("Deleting account and payment information...", "info");
+            }
+            
+            // Supprimer les produits
+            const productsRef = collection(db, "products");
+            const productsQuery = query(productsRef, where("sellerId", "==", userId));
+            const productsSnapshot = await getDocs(productsQuery);
+            const productDeletions = [];
+            
+            productsSnapshot.forEach(productDoc => {
+                productDeletions.push(deleteDoc(doc(db, "products", productDoc.id)));
+            });
+            
+            // Supprimer les commandes
+            const ordersRef = collection(db, "orders");
+            const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+            const ordersSnapshot = await getDocs(ordersQuery);
+            const orderDeletions = [];
+            
+            ordersSnapshot.forEach(orderDoc => {
+                orderDeletions.push(deleteDoc(doc(db, "orders", orderDoc.id)));
+            });
+            
+            await Promise.all([
+                ...productDeletions,
+                ...orderDeletions
+            ]);
+            
+            // Supprimer le document utilisateur
+            await deleteDoc(doc(db, "users", userId));
+
+            // Supprimer le compte auth
+            await deleteUser(user);
+
+            showToast("Account deleted successfully", "success");
             setTimeout(() => {
-                if (currentUserData) {
-                    updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
-                }
-                showSplashScreen('transactionSplash', false);
-            }, 500);
-        });
-        
-        // Set default year to current year
+                window.location.href = "auth.html";
+            }, 1500);
+        } catch (error) {
+            console.error("Error deleting account:", error);
+            
+            if (error.code === 'auth/wrong-password') {
+                showToast("Incorrect password", "error");
+            } else if (error.code === 'auth/user-mismatch') {
+                showToast("Email doesn't match current user", "error");
+            } else if (error.code === 'auth/invalid-email') {
+                showToast("Invalid email format", "error");
+            } else if (error.code === 'auth/requires-recent-login') {
+                showToast("For security reasons, please log in again", "error");
+                auth.signOut().then(() => {
+                    window.location.href = "auth.html";
+                });
+            } else {
+                showToast("Error deleting account: " + error.message, "error");
+            }
+        }
+    });
+
+    document.getElementById("yearSelect").addEventListener("change", function() {
+        selectedYear = this.value;
+        if (currentUserData) {
+            updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+        } else if (dataLoaded) {
+            showToast("Filtering error: data not available", "error");
+        } else if (dataLoadingPromise) {
+            dataLoadingPromise.then(() => {
+                updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+            });
+        }
+    });
+
+    document.getElementById("monthSelect").addEventListener("change", function() {
+        selectedMonth = this.value;
+        if (currentUserData) {
+            updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+        } else if (dataLoaded) {
+            showToast("Filtering error: data not available", "error");
+        } else if (dataLoadingPromise) {
+            dataLoadingPromise.then(() => {
+                updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+            });
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
         const currentYear = new Date().getFullYear().toString();
         const yearSelect = document.getElementById('yearSelect');
         if (yearSelect) {
@@ -2393,7 +2079,52 @@
                 }
             }
         }
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('setup')) {
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+        
+        // Désactiver le bouton Generate par défaut (sera activé si le compte Stripe est vérifié)
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) {
+            generateBtn.classList.add('disabled');
+        }
+        
+        // Réinitialiser le localStorage lors d'un rechargement direct de la page (F5)
+        if (!document.referrer) {
+            localStorage.removeItem('redirectedFromAccountCreation');
+        }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!dataLoaded && dataLoadingPromise) {
+            dataLoadingPromise.then(() => {
+                console.log("Data preloaded successfully");
+            }).catch(error => {
+                console.error("Preloading error:", error);
+            });
+        }
+    });
+    
+    function setupTokenRefresh() {
+        const refreshInterval = 45 * 60 * 1000;
+        
+        setInterval(async () => {
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    userIdToken = await user.getIdToken(true);
+                    console.log("Authentication token refreshed successfully");
+                }
+            } catch (error) {
+                console.error("Error during scheduled token refresh:", error);
+            }
+        }, refreshInterval);
+    }
+    
+    setupTokenRefresh();
 </script>
 </body>
 </html>
