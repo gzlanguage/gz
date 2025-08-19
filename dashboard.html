@@ -1196,6 +1196,11 @@
     const functions = getFunctions(app, 'us-central1');
     const storage = getStorage(app);
 
+    // Initialize Firebase Cloud Functions
+    const createProductFn = httpsCallable(functions, 'createProduct');
+    const processCheckoutFn = httpsCallable(functions, 'processCheckout');
+    const captureOrderFn = httpsCallable(functions, 'captureOrder');
+
     let currentUserData = null;
     let previousUserData = null;
     let realTimeListeners = [];
@@ -1701,69 +1706,106 @@
             }
             
             // Use httpsCallable to create product
-            const createProductFn = httpsCallable(functions, 'createProduct');
-            
-            const result = await createProductFn({
-                uid: user.uid,
-                title: title,
-                category: category,
-                description: description,
-                price: priceWithTax.toFixed(2), // Use price with tax
-                coverData: coverBase64,
-                fileData: productBase64,
-                fileName: productFile.name
-            });
-            
-            if (result.data && result.data.shareableLink) {
-                showToast("Product created successfully!", "success");
+            try {
+                const result = await createProductFn({
+                    uid: user.uid,
+                    title: title,
+                    category: category,
+                    description: description,
+                    price: priceWithTax.toFixed(2), // Use price with tax
+                    coverData: coverBase64,
+                    fileData: productBase64,
+                    fileName: productFile.name
+                });
                 
-                const shareableLink = result.data.shareableLink;
-                
-                const linkModal = document.createElement("div");
-                linkModal.className = "modal";
-                linkModal.style.display = "flex";
-                linkModal.innerHTML = `
-                    <div class="modal-content">
-                        <div class="modal-title">Your Product Link</div>
-                        <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
-                        <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
-                        <button id="closeLinkModalBtn" class="cancel-button">Close</button>
-                    </div>
-                `;
-                
-                document.body.appendChild(linkModal);
-                
-                document.getElementById("copyLinkBtn").addEventListener("click", function() {
-                    navigator.clipboard.writeText(shareableLink).then(() => {
-                        showToast("Link copied to clipboard!", "success");
+                if (result.data && result.data.shareableLink) {
+                    showToast("Product created successfully!", "success");
+                    
+                    const shareableLink = result.data.shareableLink;
+                    
+                    const linkModal = document.createElement("div");
+                    linkModal.className = "modal";
+                    linkModal.style.display = "flex";
+                    linkModal.innerHTML = `
+                        <div class="modal-content">
+                            <div class="modal-title">Your Product Link</div>
+                            <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
+                            <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
+                            <button id="closeLinkModalBtn" class="cancel-button">Close</button>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(linkModal);
+                    
+                    document.getElementById("copyLinkBtn").addEventListener("click", function() {
+                        navigator.clipboard.writeText(shareableLink).then(() => {
+                            showToast("Link copied to clipboard!", "success");
+                        });
                     });
-                });
-                
-                document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
-                    linkModal.remove();
-                });
-                
-                setTimeout(() => {
-                    if (document.body.contains(linkModal)) {
+                    
+                    document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
                         linkModal.remove();
-                    }
-                }, 30000);
-                
-                // Refresh dashboard data
-                showAllDataLoaders(true);
-                setTimeout(() => {
-                    refreshDashboardData(user.uid);
-                }, 1000);
-            } else {
-                throw new Error("No shareable link provided");
+                    });
+                    
+                    setTimeout(() => {
+                        if (document.body.contains(linkModal)) {
+                            linkModal.remove();
+                        }
+                    }, 30000);
+                    
+                    // Refresh dashboard data
+                    showAllDataLoaders(true);
+                    setTimeout(() => {
+                        refreshDashboardData(user.uid);
+                    }, 1000);
+                } else {
+                    throw new Error("No shareable link provided");
+                }
+            } catch (error) {
+                console.error("Error creating product:", error);
+                showToast(`Error creating product: ${error.message || "Unknown error"}`, "error");
             }
         } catch (error) {
-            console.error("Error creating product:", error);
+            console.error("Error in product creation process:", error);
             showToast(`Error: ${error.message || "Unknown error"}`, "error");
         } finally {
             isSubmitting = false;
             const createProductBtn = document.getElementById("createProductBtn");
             if (createProductBtn) createProductBtn.disabled = false;
+        }
+    }
+
+    // Process checkout and payment via Firebase Function
+    async function processCheckout(productId) {
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                throw new Error("User not logged in");
+            }
+            
+            const result = await processCheckoutFn({
+                productId: productId,
+                buyerId: user.uid
+            });
+            
+            return result.data;
+        } catch (error) {
+            console.error("Error processing checkout:", error);
+            throw error;
+        }
+    }
+
+    // Capture order after payment via Firebase Function
+    async function captureOrder(orderId) {
+        try {
+            const result = await captureOrderFn({
+                orderId: orderId
+            });
+            
+            return result.data;
+        } catch (error) {
+            console.error("Error capturing order:", error);
+            throw error;
         }
     }
 
@@ -2478,4 +2520,3 @@
     });
 </script>
 </body>
-</html>
