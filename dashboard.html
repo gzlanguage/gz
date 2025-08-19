@@ -926,1445 +926,1556 @@
 </head>
 <body>
 <header>
-    <h1 translate="no">Monetizelt</h1>
-    <div class="icon-container">
-        <div class="icon-container">
-            <a class="icon" id="linksIcon" href="javascript:void(0);" aria-label="View links">
-                <i class="fas fa-link" style="font-size: 23px;"></i>
-            </a>
-            <a class="icon" id="profileIcon" href="javascript:void(0);" aria-label="User profile">
-                <i class="fas fa-user" style="font-size: 23px;"></i>
-            </a>
-        </div>
-    </div>
+<h1 translate="no">Monetizelt</h1>
+<div class="icon-container">
+<div class="icon-container">
+<a class="icon" id="linksIcon" href="javascript:void(0);" aria-label="View links">
+<i class="fas fa-link" style="font-size: 23px;"></i>
+</a>
+<a class="icon" id="profileIcon" href="javascript:void(0);" aria-label="User profile">
+<i class="fas fa-user" style="font-size: 23px;"></i>
+</a>
+</div>
+</div>
 </header>
 <div class="divider"></div>
 <div class="slogan">Your market, your rules! <br> Generate, share, cash in!</div>
 
 <div class="button-container">
-    <a class="button button-explorer disabled" id="generateBtn" href="javascript:void(0);"><i class="fas fa-link"></i> Generate</a>
-    <a class="button" href="sellerfaq.html"><i class="fas fa-question-circle"></i> FAQ</a>
-    <a class="button" href="sellerterms.html"><i class="fas fa-file-contract"></i> Terms</a>
-    <a class="button" href="sellerprivacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
+<a class="button button-explorer disabled" id="generateBtn" href="javascript:void(0);"><i class="fas fa-link"></i> Generate</a>
+<a class="button" href="sellerfaq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+<a class="button" href="sellerterms.html"><i class="fas fa-file-contract"></i> Terms</a>
+<a class="button" href="sellerprivacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
 </div>
 <div id="paymentWarning" class="payment-warning" style="text-align: center;">Update your payment method to start generating links</div>
 
 <div class="dashboard">
-    <select class="year-select" aria-label="Select a year" id="yearSelect">
-        <option value="">All years</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
-        <option value="2026">2026</option>
-    </select>
+<select class="year-select" aria-label="Select a year" id="yearSelect">
+<option value="">All years</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+</select>
 
-    <select class="month-select" aria-label="Select a month" id="monthSelect">
-        <option value="">All months</option>
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
+<select class="month-select" aria-label="Select a month" id="monthSelect">
+<option value="">All months</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
 
-    <div class="grid">
-        <div class="card liens-generes small-card">
-            <div class="data-loader" id="linksCountLoader">
-                <div class="skeleton-loader"></div>
-            </div>
-            <div class="title">Generated Links</div>
-            <div class="value-wrapper">
-                <div class="value" id="linksCount">0</div>
-                <span id="linksIndicator" class="trend-indicator"></span>
-            </div>
-        </div>
-        <div class="card vues small-card">
-            <div class="data-loader" id="viewsCountLoader">
-                <div class="skeleton-loader"></div>
-            </div>
-            <div class="title">Views</div>
-            <div class="value-wrapper">
-                <div class="value" id="viewsCount">0</div>
-                <span id="viewsIndicator" class="trend-indicator"></span>
-            </div>
-        </div>
-        <div class="card commandes small-card">
-            <div class="data-loader" id="ordersCountLoader">
-                <div class="skeleton-loader"></div>
-            </div>
-            <div class="title">Orders</div>
-            <div class="value-wrapper">
-                <div class="value" id="ordersCount">0</div>
-                <span id="ordersIndicator" class="trend-indicator"></span>
-            </div>
-        </div>
-        <div class="card traite small-card">
-            <div class="data-loader" id="shippedCountLoader">
-                <div class="skeleton-loader"></div>
-            </div>
-            <div class="title">Processed</div>
-            <div class="value-wrapper">
-                <div class="value" id="shippedCount">0</div>
-                <span id="shippedIndicator" class="trend-indicator"></span>
-            </div>
-        </div>
-        <div class="card revenus small-card">
-            <div class="data-loader" id="revenueCountLoader">
-                <div class="skeleton-loader"></div>
-            </div>
-            <div class="title">Revenue</div>
-            <div class="value-wrapper">
-                <div class="value" id="revenueCount">0$</div>
-                <span id="revenueIndicator" class="trend-indicator"></span>
-            </div>
-        </div>
-        <a class="card paiement small-card pulse-animation" id="paypalCard" href="javascript:void(0);" aria-label="PayPal Configuration">
-            <span class="payment-status not-active" id="paypalStatus">Not Active</span>
-            <div class="title">Payments</div>
-            <i class="fab fa-paypal" style="font-size: 1.2em; color: #007BFF;"></i>
-        </a>
-        <div class="card history">
-            <div class="data-loader" id="transactionLoader">
-                <div class="skeleton-loader"></div>
-            </div>
-            <div class="title">Transactions</div>
-            <div id="transactionList">
-                <div class="no-transactions">No transactions</div>
-            </div>
-        </div>
-    </div>
+<div class="grid">
+<div class="card liens-generes small-card">
+<div class="data-loader" id="linksCountLoader">
+<div class="skeleton-loader"></div>
+</div>
+<div class="title">Generated Links</div>
+<div class="value-wrapper">
+<div class="value" id="linksCount">0</div>
+<span id="linksIndicator" class="trend-indicator"></span>
+</div>
+</div>
+<div class="card vues small-card">
+<div class="data-loader" id="viewsCountLoader">
+<div class="skeleton-loader"></div>
+</div>
+<div class="title">Views</div>
+<div class="value-wrapper">
+<div class="value" id="viewsCount">0</div>
+<span id="viewsIndicator" class="trend-indicator"></span>
+</div>
+</div>
+<div class="card commandes small-card">
+<div class="data-loader" id="ordersCountLoader">
+<div class="skeleton-loader"></div>
+</div>
+<div class="title">Orders</div>
+<div class="value-wrapper">
+<div class="value" id="ordersCount">0</div>
+<span id="ordersIndicator" class="trend-indicator"></span>
+</div>
+</div>
+<div class="card traite small-card">
+<div class="data-loader" id="shippedCountLoader">
+<div class="skeleton-loader"></div>
+</div>
+<div class="title">Processed</div>
+<div class="value-wrapper">
+<div class="value" id="shippedCount">0</div>
+<span id="shippedIndicator" class="trend-indicator"></span>
+</div>
+</div>
+<div class="card revenus small-card">
+<div class="data-loader" id="revenueCountLoader">
+<div class="skeleton-loader"></div>
+</div>
+<div class="title">Revenue</div>
+<div class="value-wrapper">
+<div class="value" id="revenueCount">0$</div>
+<span id="revenueIndicator" class="trend-indicator"></span>
+</div>
+</div>
+<a class="card paiement small-card pulse-animation" id="paypalCard" href="javascript:void(0);" aria-label="PayPal Configuration">
+<span class="payment-status not-active" id="paypalStatus">Not Active</span>
+<div class="title">Payments</div>
+<i class="fab fa-paypal" style="font-size: 1.2em; color: #007BFF;"></i>
+</a>
+<div class="card history">
+<div class="data-loader" id="transactionLoader">
+<div class="skeleton-loader"></div>
+</div>
+<div class="title">Transactions</div>
+<div id="transactionList">
+<div class="no-transactions">No transactions</div>
+</div>
+</div>
+</div>
 </div>
 
 <div id="deleteModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-title">Account Options</div>
-        <button id="deleteAccountBtn" class="delete-button">Delete Account</button>
-    </div>
+<div class="modal-content">
+<div class="modal-title">Account Options</div>
+<button id="deleteAccountBtn" class="delete-button">Delete Account</button>
+</div>
 </div>
 
 <div id="confirmModal" class="confirm-modal">
-    <div class="confirm-modal-content">
-        <div class="modal-title">Confirm Account Deletion</div>
-        <div class="modal-message">This action cannot be undone. All your data will be permanently removed.</div>
-        <input type="email" id="emailInput" class="email-input" placeholder="Your email">
-        <input type="password" id="passwordInput" class="password-input" placeholder="Your password">
-        <div class="confirm-buttons">
-            <button id="cancelDeleteBtn" class="cancel-delete">Cancel</button>
-            <button id="confirmDeleteBtn" class="confirm-delete">Delete</button>
-        </div>
-    </div>
+<div class="confirm-modal-content">
+<div class="modal-title">Confirm Account Deletion</div>
+<div class="modal-message">This action cannot be undone. All your data will be permanently removed.</div>
+<input type="email" id="emailInput" class="email-input" placeholder="Your email">
+<input type="password" id="passwordInput" class="password-input" placeholder="Your password">
+<div class="confirm-buttons">
+<button id="cancelDeleteBtn" class="cancel-delete">Cancel</button>
+<button id="confirmDeleteBtn" class="confirm-delete">Delete</button>
+</div>
+</div>
 </div>
 
 <div id="createProductModal" class="create-product-modal">
-    <div class="product-modal-content">
-        <div class="product-modal-title">Create New Product</div>
-        
-        <div class="form-group">
-            <label for="productTitle" class="form-label">Title</label>
-            <input type="text" id="productTitle" class="form-control" placeholder="Enter product title">
-        </div>
-        
-        <div class="form-group">
-            <label for="productCategory" class="form-label">Category</label>
-            <select id="productCategory" class="form-select">
-                <option value="">Select a category</option>
-                <option value="video">Video Content</option>
-                <option value="ebook">E-Book</option>
-                <option value="music">Music/Song</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="productDescription" class="form-label">Description</label>
-            <textarea id="productDescription" class="form-control" rows="3" placeholder="Describe your product" maxlength="500"></textarea>
-            <div class="character-count"><span id="descriptionCharCount">0</span>/500</div>
-        </div>
-        
-        <div class="form-group">
-            <label for="productPrice" class="form-label">Price ($)</label>
-            <div class="price-input-container">
-                <input type="number" id="productPrice" class="form-control price-input" placeholder="0.00" min="0.50" step="0.01">
-            </div>
-            <div id="priceCalculation" class="price-calculation" style="display:none;">
-                <div class="price-calculation-item">
-                    <span>Base price:</span>
-                    <span id="basePrice">$0.00</span>
-                </div>
-                <div class="price-calculation-item">
-                    <span>Tax (7%):</span>
-                    <span id="taxAmount">$0.00</span>
-                </div>
-                <div class="price-calculation-item">
-                    <span>PayPal fees:</span>
-                    <span id="paypalFees">$0.00</span>
-                </div>
-                <div class="price-calculation-item">
-                    <span>Your earnings (80%):</span>
-                    <span id="sellerEarnings">$0.00</span>
-                </div>
-                <div class="price-calculation-item price-calculation-total">
-                    <span>Final price:</span>
-                    <span id="finalPrice">$0.00</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="form-label">Files</label>
-            <div class="file-upload-container">
-                <div class="file-upload-box" id="coverUploadBox">
-                    <i class="fas fa-image file-upload-icon"></i>
-                    <span class="file-upload-text">Cover Image</span>
-                    <input type="file" id="coverFile" class="file-upload-input" accept="image/*">
-                    <i class="fas fa-check-circle upload-success-icon" id="coverSuccessIcon"></i>
-                    <div class="file-name" id="coverFileName"></div>
-                </div>
-                
-                <div class="file-upload-box" id="productFileUploadBox">
-                    <i class="fas fa-file file-upload-icon"></i>
-                    <span class="file-upload-text">Product File</span>
-                    <input type="file" id="productFile" class="file-upload-input">
-                    <i class="fas fa-check-circle upload-success-icon" id="productFileSuccessIcon"></i>
-                    <div class="file-name" id="productFileName"></div>
-                </div>
-            </div>
-            <div class="character-count" id="fileUploadLimits">Max: 500MB for videos, 100MB for other files</div>
-        </div>
-        
-        <button id="createProductBtn" class="create-product-button">Generate Link</button>
-        <button id="cancelProductBtn" class="cancel-button">Cancel</button>
-    </div>
+<div class="product-modal-content">
+<div class="product-modal-title">Create New Product</div>
+
+<div class="form-group">
+<label for="productTitle" class="form-label">Title</label>
+<input type="text" id="productTitle" class="form-control" placeholder="Enter product title">
+</div>
+
+<div class="form-group">
+<label for="productCategory" class="form-label">Category</label>
+<select id="productCategory" class="form-select">
+<option value="">Select a category</option>
+<option value="video">Video Content</option>
+<option value="ebook">E-Book</option>
+<option value="music">Music/Song</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="productDescription" class="form-label">Description</label>
+<textarea id="productDescription" class="form-control" rows="3" placeholder="Describe your product" maxlength="500"></textarea>
+<div class="character-count"><span id="descriptionCharCount">0</span>/500</div>
+</div>
+
+<div class="form-group">
+<label for="productPrice" class="form-label">Price ($)</label>
+<div class="price-input-container">
+<input type="number" id="productPrice" class="form-control price-input" placeholder="0.00" min="0.50" step="0.01">
+</div>
+<div id="priceCalculation" class="price-calculation" style="display:none;">
+<div class="price-calculation-item">
+<span>Base price:</span>
+<span id="basePrice">$0.00</span>
+</div>
+<div class="price-calculation-item">
+<span>Tax (7%):</span>
+<span id="taxAmount">$0.00</span>
+</div>
+<div class="price-calculation-item">
+<span>PayPal fees:</span>
+<span id="paypalFees">$0.00</span>
+</div>
+<div class="price-calculation-item">
+<span>Your earnings (80%):</span>
+<span id="sellerEarnings">$0.00</span>
+</div>
+<div class="price-calculation-item price-calculation-total">
+<span>Final price:</span>
+<span id="finalPrice">$0.00</span>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<label class="form-label">Files</label>
+<div class="file-upload-container">
+<div class="file-upload-box" id="coverUploadBox">
+<i class="fas fa-image file-upload-icon"></i>
+<span class="file-upload-text">Cover Image</span>
+<input type="file" id="coverFile" class="file-upload-input" accept="image/*">
+<i class="fas fa-check-circle upload-success-icon" id="coverSuccessIcon"></i>
+<div class="file-name" id="coverFileName"></div>
+</div>
+
+<div class="file-upload-box" id="productFileUploadBox">
+<i class="fas fa-file file-upload-icon"></i>
+<span class="file-upload-text">Product File</span>
+<input type="file" id="productFile" class="file-upload-input">
+<i class="fas fa-check-circle upload-success-icon" id="productFileSuccessIcon"></i>
+<div class="file-name" id="productFileName"></div>
+</div>
+</div>
+<div class="character-count" id="fileUploadLimits">Max: 500MB for videos, 100MB for other files</div>
+</div>
+
+<button id="createProductBtn" class="create-product-button">Generate Link</button>
+<button id="cancelProductBtn" class="cancel-button">Cancel</button>
+</div>
 </div>
 
 <div id="linksModal" class="links-modal">
-    <div class="links-modal-content">
-        <div class="links-modal-title">Generated Links</div>
-        <div id="linksList">
-            <div style="text-align: center; color: #888;">No links generated yet</div>
-        </div>
-        <button id="closeLinksModal" class="cancel-button" style="margin-top: 15px;">Close</button>
-    </div>
+<div class="links-modal-content">
+<div class="links-modal-title">Generated Links</div>
+<div id="linksList">
+<div style="text-align: center; color: #888;">No links generated yet</div>
+</div>
+<button id="closeLinksModal" class="cancel-button" style="margin-top: 15px;">Close</button>
+</div>
 </div>
 
 <div id="paypalModal" class="paypal-modal">
-    <div class="paypal-modal-content">
-        <div class="paypal-modal-title">PayPal Account Setup</div>
-        <div class="paypal-modal-message">
-            Please register your PayPal email address to receive your payments every Sunday 
-            if your balance reaches a minimum of $10.
-        </div>
-        <div class="paypal-form-group">
-            <label for="paypalEmail" class="paypal-form-label">PayPal Email</label>
-            <input type="email" id="paypalEmail" class="paypal-form-control" placeholder="your@email.com">
-            <div id="paypalEmailError" class="paypal-error">Please enter a valid email address</div>
-        </div>
-        <button id="savePaypalBtn" class="paypal-submit-btn">Save</button>
-    </div>
+<div class="paypal-modal-content">
+<div class="paypal-modal-title">PayPal Account Setup</div>
+<div class="paypal-modal-message">
+Please register your PayPal email address to receive your payments every Sunday
+if your balance reaches a minimum of $10.
+</div>
+<div class="paypal-form-group">
+<label for="paypalEmail" class="paypal-form-label">PayPal Email</label>
+<input type="email" id="paypalEmail" class="paypal-form-control" placeholder="your@email.com">
+<div id="paypalEmailError" class="paypal-error">Please enter a valid email address</div>
+</div>
+<button id="savePaypalBtn" class="paypal-submit-btn">Save</button>
+</div>
 </div>
 
 <div id="toastContainer" class="toast-container"></div>
 
 <script type="module">
-    // Import Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider, onAuthStateChanged, getIdToken } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, onSnapshot, query, where, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
-        authDomain: "monetizelt-b235d.firebaseapp.com",
-        projectId: "monetizelt-b235d",
-        storageBucket: "monetizelt-b235d.appspot.com",
-        messagingSenderId: "1040211471009",
-        appId: "1:1040211471009:web:321898c7bdca6258ce9ee0",
-        measurementId: "G-5NWKR1E9VY"
-    };
+// Firebase configuration
+const firebaseConfig = {
+apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
+authDomain: "monetizelt-b235d.firebaseapp.com",
+projectId: "monetizelt-b235d",
+storageBucket: "monetizelt-b235d.appspot.com",
+messagingSenderId: "1040211471009",
+appId: "1:1040211471009:web:321898c7bdca6258ce9ee0",
+measurementId: "G-5NWKR1E9VY"
+};
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const functions = getFunctions(app, 'us-central1');
-    const storage = getStorage(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const functions = getFunctions(app, 'us-central1');
+const storage = getStorage(app);
 
-    let currentUserData = null;
-    let previousUserData = null;
-    let realTimeListeners = [];
-    let selectedYear = "";
-    let selectedMonth = "";
-    let isInitialLoad = true;
-    let dataLoaded = false;
-    let dataLoadingPromise = null;
-    let userIdToken = null;
-    let paypalAccountComplete = false;
-    let generatedLinks = [];
-    
-    let coverFile = null;
-    let productFile = null;
-    let coverFileUrl = null;
-    let productFileUrl = null;
-    
-    let hasRedirectedFromAccountCreation = false;
-    let refreshInterval;
-    let isSubmitting = false;
+let currentUserData = null;
+let previousUserData = null;
+let realTimeListeners = [];
+let selectedYear = "";
+let selectedMonth = "";
+let isInitialLoad = true;
+let dataLoaded = false;
+let dataLoadingPromise = null;
+let userIdToken = null;
+let paypalAccountComplete = false;
+let generatedLinks = [];
 
-    // Function to show data loading state
-    function showDataLoader(elementId, show = true) {
-        const loaderElement = document.getElementById(elementId);
-        if (loaderElement) {
-            loaderElement.style.display = show ? 'flex' : 'none';
-        }
-    }
-    
-    // Show loading state for all dashboard elements
-    function showAllDataLoaders(show = true) {
-        showDataLoader('linksCountLoader', show);
-        showDataLoader('viewsCountLoader', show);
-        showDataLoader('ordersCountLoader', show);
-        showDataLoader('shippedCountLoader', show);
-        showDataLoader('revenueCountLoader', show);
-        showDataLoader('transactionLoader', show);
-    }
-    
-    // Setup regular refresh of dashboard data
-    function setupDataRefresh() {
-        clearInterval(refreshInterval);
-        refreshInterval = setInterval(() => {
-            if (auth.currentUser) {
-                showAllDataLoaders(true);
-                setTimeout(() => {
-                    refreshDashboardData(auth.currentUser.uid);
-                }, 700);
-            }
-        }, 180000); // Refresh every 3 minutes
-    }
-    
-    // Refresh dashboard data
-    async function refreshDashboardData(userId) {
-        try {
-            await loadUserData(userId);
-            await loadLinksData(userId);
-            await loadOrdersData(userId);
-            showAllDataLoaders(false);
-        } catch (error) {
-            console.error("Error refreshing data:", error);
-            showAllDataLoaders(false);
-        }
-    }
-    
-    // Show notification toast
-    function showToast(message, type = 'info') {
-        const container = document.getElementById('toastContainer');
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        
-        let icon = '';
-        if (type === 'success') {
-            icon = '<i class="fas fa-check-circle toast-icon"></i>';
-        } else if (type === 'error') {
-            icon = '<i class="fas fa-exclamation-circle toast-icon"></i>';
-        } else if (type === 'info') {
-            icon = '<i class="fas fa-info-circle toast-icon"></i>';
-        }
-        
-        toast.innerHTML = `${icon}<div>${message}</div>`;
-        container.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.remove();
-        }, 3000);
-    }
+let coverFile = null;
+let productFile = null;
+let coverFileUrl = null;
+let productFileUrl = null;
 
-    // Animation for value updates
-    function animateUpdate(element) {
-        element.classList.add('pulse');
-        setTimeout(() => {
-            element.classList.remove('pulse');
-        }, 500);
-    }
+let hasRedirectedFromAccountCreation = false;
+let refreshInterval;
+let isSubmitting = false;
 
-    // Function to validate email format
-    function isValidEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-    
-    // Set up PayPal account
-    async function setupPayPalAccount() {
-        // If account is already set up, don't show the modal again
-        if (paypalAccountComplete) {
-            return;
-        }
-        
-        const paypalModal = document.getElementById('paypalModal');
-        const paypalEmail = document.getElementById('paypalEmail');
-        const paypalEmailError = document.getElementById('paypalEmailError');
-        const savePaypalBtn = document.getElementById('savePaypalBtn');
-        
-        // Reset previous input
-        paypalEmail.value = "";
-        paypalEmailError.style.display = "none";
-        savePaypalBtn.disabled = false;
-        
-        // If user already has PayPal set up, prefill the email
-        if (currentUserData && currentUserData.paypalEmail) {
-            paypalEmail.value = currentUserData.paypalEmail;
-        }
-        
-        paypalModal.style.display = "flex";
-    }
-    
-    // Save PayPal email
-    async function savePayPalEmail() {
-        if (isSubmitting) return;
-        
-        try {
-            const paypalEmail = document.getElementById('paypalEmail').value.trim();
-            const paypalEmailError = document.getElementById('paypalEmailError');
-            const savePaypalBtn = document.getElementById('savePaypalBtn');
-            
-            if (!isValidEmail(paypalEmail)) {
-                paypalEmailError.style.display = "block";
-                return;
-            }
-            
-            const user = auth.currentUser;
-            if (!user) {
-                showToast("Please log in to set up PayPal", "error");
-                return;
-            }
-            
-            isSubmitting = true;
-            savePaypalBtn.disabled = true;
-            
-            showToast("Saving your PayPal email...", "info");
-            
-            // Utilisation de httpsCallable au lieu de updateDoc directement
-            const updatePaypalEmail = httpsCallable(functions, 'updatePaypalEmail');
-            await updatePaypalEmail({
-                email: paypalEmail
-            });
-            
-            document.getElementById('paypalModal').style.display = "none";
-            showToast("PayPal email saved successfully!", "success");
-            
-            updatePayPalUI(true);
-            
-        } catch (error) {
-            console.error("Error saving PayPal email:", error);
-            showToast(`Error: ${error.message}`, "error");
-            
-            const savePaypalBtn = document.getElementById('savePaypalBtn');
-            savePaypalBtn.disabled = false;
-        } finally {
-            isSubmitting = false;
-        }
-    }
+// Function to show data loading state
+function showDataLoader(elementId, show = true) {
+const loaderElement = document.getElementById(elementId);
+if (loaderElement) {
+loaderElement.style.display = show ? 'flex' : 'none';
+}
+}
 
-    // Check PayPal account status
-    async function checkPayPalStatus() {
-        try {
-            const user = auth.currentUser;
-            if (!user) return false;
-            
-            userIdToken = await user.getIdToken(true);
-            
-            // Utilisation de httpsCallable au lieu de fetch
-            const getUserPaypalStatus = httpsCallable(functions, 'getUserPaypalStatus');
-            const result = await getUserPaypalStatus();
-            
-            const isComplete = result.data && result.data.onboardingComplete === true && result.data.paypalEmail;
-            
-            updatePayPalUI(isComplete);
-            
-            return isComplete;
-        } catch (error) {
-            console.error("Error checking PayPal status:", error);
-            
-            updatePayPalUI(false);
-            return false;
-        }
-    }
-    
-    // Update UI based on PayPal status
-    function updatePayPalUI(isActive) {
-        const paypalStatus = document.getElementById('paypalStatus');
-        const paypalCard = document.getElementById('paypalCard');
-        const generateBtn = document.getElementById('generateBtn');
-        const paymentWarning = document.getElementById('paymentWarning');
-        
-        paypalAccountComplete = isActive;
-        
-        if (isActive) {
-            paypalStatus.textContent = "Active";
-            paypalStatus.className = "payment-status active";
-            paypalCard.style.borderColor = "#4CAF50";
-            paypalCard.classList.remove("pulse-animation");
-            
-            // Remove click handler from paypal card when active
-            paypalCard.onclick = null;
-            
-            // Enable the generate button
-            setTimeout(() => {
-                generateBtn.classList.remove("disabled");
-                generateBtn.onclick = openProductModal;
-            }, 1000);
-            
-            paymentWarning.style.display = "none";
-        } else {
-            paypalStatus.textContent = "Not Active";
-            paypalStatus.className = "payment-status not-active";
-            paypalCard.onclick = setupPayPalAccount;
-            paypalCard.style.borderColor = "#007BFF";
-            paypalCard.classList.add("pulse-animation");
-            
-            generateBtn.classList.add("disabled");
-            generateBtn.onclick = function() {
-                showToast("Please set up your PayPal account first", "error");
-            };
-            
-            paymentWarning.style.display = "block";
-        }
-    }
+// Show loading state for all dashboard elements
+function showAllDataLoaders(show = true) {
+showDataLoader('linksCountLoader', show);
+showDataLoader('viewsCountLoader', show);
+showDataLoader('ordersCountLoader', show);
+showDataLoader('shippedCountLoader', show);
+showDataLoader('revenueCountLoader', show);
+showDataLoader('transactionLoader', show);
+}
 
-    // Check if user was redirected from account creation
-    function checkAccountCreationReferral() {
-        const referrer = document.referrer;
-        const hasCreationReferrer = referrer.includes('index.html');
-        
-        const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
-        
-        if (hasCreationReferrer && !hasBeenRedirected) {
-            localStorage.setItem('redirectedFromAccountCreation', 'true');
-            hasRedirectedFromAccountCreation = true;
-            
-            setTimeout(() => {
-                showToast("Returning to previous page...", "info");
-                history.back();
-            }, 500);
-        }
-    }
+// Setup regular refresh of dashboard data
+function setupDataRefresh() {
+clearInterval(refreshInterval);
+refreshInterval = setInterval(() => {
+if (auth.currentUser) {
+showAllDataLoaders(true);
+setTimeout(() => {
+refreshDashboardData(auth.currentUser.uid);
+}, 700);
+}
+}, 180000); // Refresh every 3 minutes
+}
 
-    // Handle price input and calculate final prices
-    function handlePriceCalculation() {
-        const priceInput = document.getElementById('productPrice');
-        const priceCalculation = document.getElementById('priceCalculation');
-        const basePrice = document.getElementById('basePrice');
-        const taxAmount = document.getElementById('taxAmount');
-        const paypalFees = document.getElementById('paypalFees');
-        const sellerEarnings = document.getElementById('sellerEarnings');
-        const finalPrice = document.getElementById('finalPrice');
-        
-        const price = parseFloat(priceInput.value);
-        
-        if (isNaN(price) || price <= 0) {
-            priceCalculation.style.display = 'none';
-            return;
-        }
-        
-        // Calculate tax (7%)
-        const tax = price * 0.07;
-        // Estimate PayPal fees (2.9% + $0.30)
-        const priceWithTax = price + tax;
-        const ppFees = (priceWithTax * 0.029) + 0.30;
-        // Calculate seller's 80% of the price
-        const earnings = price * 0.8;
-        
-        basePrice.textContent = `$${price.toFixed(2)}`;
-        taxAmount.textContent = `$${tax.toFixed(2)}`;
-        paypalFees.textContent = `$${ppFees.toFixed(2)}`;
-        sellerEarnings.textContent = `$${earnings.toFixed(2)}`;
-        finalPrice.textContent = `$${priceWithTax.toFixed(2)}`;
-        
-        priceCalculation.style.display = 'block';
-    }
+// Refresh dashboard data
+async function refreshDashboardData(userId) {
+try {
+await loadUserData(userId);
+await loadLinksData(userId);
+await loadOrdersData(userId);
+showAllDataLoaders(false);
+} catch (error) {
+console.error("Error refreshing data:", error);
+showAllDataLoaders(false);
+}
+}
 
-    // Open product creation modal
-    function openProductModal() {
-        const createProductModal = document.getElementById("createProductModal");
-        createProductModal.style.display = "flex";
-        
-        document.getElementById("productTitle").value = "";
-        document.getElementById("productCategory").value = "";
-        document.getElementById("productDescription").value = "";
-        document.getElementById("productPrice").value = "";
-        document.getElementById("descriptionCharCount").textContent = "0";
-        document.getElementById("priceCalculation").style.display = "none";
-        
-        coverFile = null;
-        productFile = null;
-        coverFileUrl = null;
-        productFileUrl = null;
-        
-        document.getElementById("coverFileName").textContent = "";
-        document.getElementById("coverFileName").style.display = "none";
-        document.getElementById("coverSuccessIcon").style.display = "none";
-        
-        document.getElementById("productFileName").textContent = "";
-        document.getElementById("productFileName").style.display = "none";
-        document.getElementById("productFileSuccessIcon").style.display = "none";
-        
-        const createProductBtn = document.getElementById("createProductBtn");
-        createProductBtn.disabled = false;
-    }
-    
-    // Open generated links modal
-    async function openLinksModal() {
-        const linksModal = document.getElementById("linksModal");
-        const linksList = document.getElementById("linksList");
-        
-        // Clear previous links
-        linksList.innerHTML = '<div style="text-align: center;"><div class="skeleton-loader" style="height: 50px; margin-bottom: 10px;"></div><div class="skeleton-loader" style="height: 50px; margin-bottom: 10px;"></div></div>';
-        
-        linksModal.style.display = "flex";
-        
-        try {
-            const user = auth.currentUser;
-            if (!user) {
-                throw new Error("User not logged in");
-            }
-            
-            // Utilisation de httpsCallable au lieu de getDocs
-            const getUserLinks = httpsCallable(functions, 'getUserLinks');
-            const result = await getUserLinks();
-            
-            if (!result.data || !result.data.links || result.data.links.length === 0) {
-                linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
-                return;
-            }
-            
-            generatedLinks = result.data.links;
-            
-            linksList.innerHTML = '';
-            generatedLinks.forEach((link, index) => {
-                const linkItem = document.createElement('div');
-                linkItem.className = 'link-item';
-                linkItem.innerHTML = `
-                    <span class="link-number">${index + 1})</span>
-                    <span class="link-url" title="${link.link}">${link.link}</span>
-                    <button class="copy-link-btn" data-link="${link.link}">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                `;
-                linksList.appendChild(linkItem);
-            });
-            
-            // Add click handlers for copy buttons
-            document.querySelectorAll('.copy-link-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const link = this.getAttribute('data-link');
-                    navigator.clipboard.writeText(link).then(() => {
-                        showToast("Link copied to clipboard!", "success");
-                    });
-                });
-            });
-            
-        } catch (error) {
-            console.error("Error loading links:", error);
-            linksList.innerHTML = '<div style="text-align: center; color: #F44336;">Error loading links</div>';
-        }
-    }
-    
-    // Create a base64 image from file
-    function convertFileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-    }
-    
-    // Create product and generate link
-    async function createProduct() {
-        if (isSubmitting) return;
-        
-        try {
-            const createProductBtn = document.getElementById("createProductBtn");
-            
-            const user = auth.currentUser;
-            if (!user) {
-                showToast("Please log in to create a product", "error");
-                return;
-            }
-            
-            const title = document.getElementById("productTitle").value.trim();
-            const category = document.getElementById("productCategory").value;
-            const description = document.getElementById("productDescription").value.trim();
-            const price = parseFloat(document.getElementById("productPrice").value);
-            
-            // Calculate price with tax
-            const priceWithTax = price * 1.07;
-            
-            if (!title) {
-                showToast("Please enter a product title", "error");
-                return;
-            }
-            
-            if (!category) {
-                showToast("Please select a category", "error");
-                return;
-            }
-            
-            if (!description) {
-                showToast("Please enter a description", "error");
-                return;
-            }
-            
-            if (isNaN(price) || price < 0.5) {
-                showToast("Please enter a valid price (minimum $0.50)", "error");
-                return;
-            }
-            
-            if (!coverFile) {
-                showToast("Please upload a cover image", "error");
-                return;
-            }
-            
-            if (!productFile) {
-                showToast("Please upload your product file", "error");
-                return;
-            }
-            
-            // Check if user has set up PayPal
-            if (!paypalAccountComplete) {
-                showToast("Please set up your PayPal account first", "error");
-                setupPayPalAccount();
-                return;
-            }
-            
-            isSubmitting = true;
-            createProductBtn.disabled = true;
-            
-            showToast("Creating your product...", "info");
-            
-            document.getElementById("createProductModal").style.display = "none";
-            
-            // Convert files to base64
-            let coverBase64;
-            let productBase64;
-            
-            try {
-                coverBase64 = await convertFileToBase64(coverFile);
-                productBase64 = await convertFileToBase64(productFile);
-            } catch (fileError) {
-                console.error("Error converting files:", fileError);
-                showToast("Error processing files. Please try again.", "error");
-                isSubmitting = false;
-                createProductBtn.disabled = false;
-                return;
-            }
-            
-            // Use httpsCallable to create product
-            const createProductFn = httpsCallable(functions, 'createProduct');
-            
-            const result = await createProductFn({
-                uid: user.uid,
-                title: title,
-                category: category,
-                description: description,
-                price: priceWithTax.toFixed(2), // Use price with tax
-                coverData: coverBase64,
-                fileData: productBase64,
-                fileName: productFile.name
-            });
-            
-            if (result.data && result.data.shareableLink) {
-                showToast("Product created successfully!", "success");
-                
-                const shareableLink = result.data.shareableLink;
-                
-                const linkModal = document.createElement("div");
-                linkModal.className = "modal";
-                linkModal.style.display = "flex";
-                linkModal.innerHTML = `
-                    <div class="modal-content">
-                        <div class="modal-title">Your Product Link</div>
-                        <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
-                        <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
-                        <button id="closeLinkModalBtn" class="cancel-button">Close</button>
-                    </div>
-                `;
-                
-                document.body.appendChild(linkModal);
-                
-                document.getElementById("copyLinkBtn").addEventListener("click", function() {
-                    navigator.clipboard.writeText(shareableLink).then(() => {
-                        showToast("Link copied to clipboard!", "success");
-                    });
-                });
-                
-                document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
-                    linkModal.remove();
-                });
-                
-                setTimeout(() => {
-                    if (document.body.contains(linkModal)) {
-                        linkModal.remove();
-                    }
-                }, 30000);
-                
-                // Refresh dashboard data
-                showAllDataLoaders(true);
-                setTimeout(() => {
-                    refreshDashboardData(user.uid);
-                }, 1000);
-            } else {
-                throw new Error("No shareable link provided");
-            }
-        } catch (error) {
-            console.error("Error creating product:", error);
-            showToast(`Error: ${error.message || "Unknown error"}`, "error");
-        } finally {
-            isSubmitting = false;
-            const createProductBtn = document.getElementById("createProductBtn");
-            if (createProductBtn) createProductBtn.disabled = false;
-        }
-    }
+// Show notification toast
+function showToast(message, type = 'info') {
+const container = document.getElementById('toastContainer');
+const toast = document.createElement('div');
+toast.className = `toast ${type}`;
 
-    // Authentication state listener
-    auth.onAuthStateChanged(async (user) => {
-        if (user) {
-            try {
-                showAllDataLoaders(true);
-                
-                userIdToken = await user.getIdToken(true);
-                
-                cleanupListeners();
-                
-                checkAccountCreationReferral();
-                
-                if (hasRedirectedFromAccountCreation) {
-                    return;
-                }
-                
-                await checkPayPalStatus();
-                
-                dataLoadingPromise = loadUserData(user.uid);
-                dataLoadingPromise.then(() => {
-                    setupRealTimeListeners(user.uid);
-                    dataLoaded = true;
-                    showAllDataLoaders(false);
-                    
-                    if (isInitialLoad) {
-                        isInitialLoad = false;
-                        showToast("Welcome to your dashboard!", "success");
-                    }
-                    
-                    setupDataRefresh();
-                }).catch(error => {
-                    console.error("Error loading data:", error);
-                    showAllDataLoaders(false);
-                    showToast("Error loading data: " + error.message, "error");
-                });
-            } catch (error) {
-                console.error("Error during initialization:", error);
-                showAllDataLoaders(false);
-                showToast("An error occurred. Please try again.", "error");
-            }
-        } else {
-            window.location.href = "index.html";
-        }
-    });
+let icon = '';
+if (type === 'success') {
+icon = '<i class="fas fa-check-circle toast-icon"></i>';
+} else if (type === 'error') {
+icon = '<i class="fas fa-exclamation-circle toast-icon"></i>';
+} else if (type === 'info') {
+icon = '<i class="fas fa-info-circle toast-icon"></i>';
+}
 
-    // Clean up real-time listeners
-    function cleanupListeners() {
-        realTimeListeners.forEach(unsubscribe => unsubscribe());
-        realTimeListeners = [];
-    }
+toast.innerHTML = `${icon}<div>${message}</div>`;
+container.appendChild(toast);
 
-    // Load user data
-    async function loadUserData(userId) {
-        if (!userId) {
-            throw new Error("User ID is required");
-        }
-        
-        try {
-            // Utilisation de httpsCallable au lieu de getDoc directement
-            const getUserData = httpsCallable(functions, 'getUserData');
-            const result = await getUserData();
-            
-            if (result.data) {
-                const userData = result.data;
-                previousUserData = currentUserData;
-                currentUserData = userData;
-                
-                updateDashboardUI(userData);
-                
-                if (selectedYear || selectedMonth) {
-                    updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
-                }
-                
-                if (userData.onboardingComplete && userData.paypalEmail) {
-                    updatePayPalUI(true);
-                } else {
-                    updatePayPalUI(false);
-                }
-                
-                return userData;
-            } else {
-                console.log("No user document found, creating new...");
-                
-                // Utilisation de httpsCallable pour créer un nouvel utilisateur
-                const createNewUser = httpsCallable(functions, 'createNewUser');
-                const createResult = await createNewUser();
-                
-                currentUserData = createResult.data;
-                updateDashboardUI(currentUserData);
-                updatePayPalUI(false);
-                return currentUserData;
-            }
-        } catch (error) {
-            console.error("Error loading user data:", error);
-            throw error;
-        }
-    }
+setTimeout(() => {
+toast.remove();
+}, 3000);
+}
 
-    // Set up real-time listeners
-    function setupRealTimeListeners(userId) {
-        if (!userId) {
-            console.error("No user ID provided for real-time listeners");
-            return;
-        }
-        
-        try {
-            const userDocRef = doc(db, "users", userId);
-            const userUnsubscribe = onSnapshot(userDocRef, (doc) => {
-                if (doc.exists()) {
-                    previousUserData = currentUserData;
-                    const newData = doc.data();
-                    currentUserData = newData;
-                    updateDashboardUI(newData);
-                    
-                    if (newData.onboardingComplete && newData.paypalEmail) {
-                        updatePayPalUI(true);
-                    } else {
-                        updatePayPalUI(false);
-                    }
-                }
-            }, (error) => {
-                console.error("Error in real-time listener for user document:", error);
-                showToast("Data synchronization issue", "error");
-            });
-            realTimeListeners.push(userUnsubscribe);
-        } catch (error) {
-            console.error("Error setting up listeners:", error);
-        }
-        
-        try {
-            loadLinksData(userId);
-        } catch (error) {
-            console.error("Error loading links:", error);
-        }
-        
-        try {
-            loadOrdersData(userId);
-        } catch (error) {
-            console.error("Error loading orders:", error);
-        }
-    }
+// Animation for value updates
+function animateUpdate(element) {
+element.classList.add('pulse');
+setTimeout(() => {
+element.classList.remove('pulse');
+}, 500);
+}
 
-    // Load links data
-    async function loadLinksData(userId) {
-        if (!userId) {
-            console.error("No user ID provided for loading links");
-            return;
-        }
-        
-        try {
-            showDataLoader('linksCountLoader', true);
-            showDataLoader('viewsCountLoader', true);
-            
-            // Utilisation de httpsCallable au lieu de getDocs
-            const getLinksData = httpsCallable(functions, 'getLinksData');
-            const result = await getLinksData();
-            
-            if (result.data) {
-                const totalLinks = result.data.totalLinks || 0;
-                const totalViews = result.data.totalViews || 0;
-                
-                updateCountWithAnimation("linksCount", "linksIndicator", totalLinks, "", previousUserData?.linksCount);
-                updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
-                
-                // Mise à jour des compteurs via Cloud Function
-                if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
-                    const updateLinkCounts = httpsCallable(functions, 'updateLinkCounts');
-                    await updateLinkCounts({
-                        linksCount: totalLinks,
-                        viewsCount: totalViews
-                    });
-                }
-            }
-            
-            showDataLoader('linksCountLoader', false);
-            showDataLoader('viewsCountLoader', false);
-            
-        } catch (error) {
-            console.error("Error loading links:", error);
-            showDataLoader('linksCountLoader', false);
-            showDataLoader('viewsCountLoader', false);
-            showToast("Error syncing products", "error");
-        }
-    }
+// Function to validate email format
+function isValidEmail(email) {
+const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+return re.test(String(email).toLowerCase());
+}
 
-    // Load orders data
-    async function loadOrdersData(userId) {
-        if (!userId) {
-            console.error("No user ID provided for loading orders");
-            return;
-        }
-        
-        try {
-            showDataLoader('ordersCountLoader', true);
-            showDataLoader('shippedCountLoader', true);
-            showDataLoader('revenueCountLoader', true);
-            showDataLoader('transactionLoader', true);
-            
-            // Utilisation de httpsCallable au lieu de getDocs
-            const getOrdersData = httpsCallable(functions, 'getOrdersData');
-            const result = await getOrdersData();
-            
-            if (result.data) {
-                const totalOrders = result.data.totalOrders || 0;
-                const shippedOrders = result.data.shippedOrders || 0;
-                const totalRevenue = result.data.totalRevenue || 0;
-                const transactions = result.data.transactions || [];
-                
-                updateCountWithAnimation("ordersCount", "ordersIndicator", totalOrders, "", previousUserData?.ordersCount);
-                updateCountWithAnimation("shippedCount", "shippedIndicator", shippedOrders, "", previousUserData?.shippedCount);
-                updateCountWithAnimation("revenueCount", "revenueIndicator", totalRevenue, "$", previousUserData?.revenueCount);
-                
-                updateTransactionList(transactions, selectedYear, selectedMonth);
-                
-                // Mise à jour des compteurs via Cloud Function
-                if (currentUserData && (
-                    currentUserData.ordersCount !== totalOrders || 
-                    currentUserData.shippedCount !== shippedOrders || 
-                    currentUserData.revenueCount !== totalRevenue
-                )) {
-                    const updateOrderCounts = httpsCallable(functions, 'updateOrderCounts');
-                    await updateOrderCounts({
-                        ordersCount: totalOrders,
-                        shippedCount: shippedOrders,
-                        revenueCount: totalRevenue,
-                        transactions: transactions
-                    });
-                }
-            }
-            
-            showDataLoader('ordersCountLoader', false);
-            showDataLoader('shippedCountLoader', false);
-            showDataLoader('revenueCountLoader', false);
-            showDataLoader('transactionLoader', false);
-            
-        } catch (error) {
-            console.error("Error loading orders:", error);
-            showDataLoader('ordersCountLoader', false);
-            showDataLoader('shippedCountLoader', false);
-            showDataLoader('revenueCountLoader', false);
-            showDataLoader('transactionLoader', false);
-            showToast("Error syncing orders", "error");
-        }
-    }
+// Set up PayPal account
+async function setupPayPalAccount() {
+// If account is already set up, don't show the modal again
+if (paypalAccountComplete) {
+return;
+}
 
-    // Update counter with animation
-    function updateCountWithAnimation(elementId, indicatorId, value, suffix, previousValue) {
-        const element = document.getElementById(elementId);
-        const indicator = document.getElementById(indicatorId);
-        
-        if (!element || !indicator) return;
-        
-        const currentText = element.textContent;
-        const currentValue = currentText.replace(/[^0-9.-]+/g, "");
-        
-        if (currentValue !== "" && parseInt(currentValue) !== value) {
-            animateUpdate(element);
-            
-            if (previousValue !== undefined) {
-                if (value > previousValue) {
-                    indicator.className = "trend-indicator trend-up";
-                    indicator.innerHTML = '<i class="fas fa-arrow-up"></i>';
-                } else if (value < previousValue) {
-                    indicator.className = "trend-indicator trend-down";
-                    indicator.innerHTML = '<i class="fas fa-arrow-down"></i>';
-                } else {
-                    indicator.className = "trend-indicator trend-neutral";
-                    indicator.innerHTML = '<i class="fas fa-equals"></i>';
-                }
-            } else {
-                indicator.className = "trend-indicator";
-                indicator.innerHTML = '';
-            }
-        }
-        
-        if (elementId === "revenueCount") {
-            element.textContent = value + "$";
-        } else {
-            element.textContent = value + suffix;
-        }
-    }
+const paypalModal = document.getElementById('paypalModal');
+const paypalEmail = document.getElementById('paypalEmail');
+const paypalEmailError = document.getElementById('paypalEmailError');
+const savePaypalBtn = document.getElementById('savePaypalBtn');
 
-    // Update dashboard UI
-    function updateDashboardUI(userData) {
-        if (!userData) return;
-        
-        updateCountWithAnimation("linksCount", "linksIndicator", userData.linksCount || 0, "", previousUserData?.linksCount);
-        updateCountWithAnimation("viewsCount", "viewsIndicator", userData.viewsCount || 0, "", previousUserData?.viewsCount);
-        updateCountWithAnimation("ordersCount", "ordersIndicator", userData.ordersCount || 0, "", previousUserData?.ordersCount);
-        updateCountWithAnimation("shippedCount", "shippedIndicator", userData.shippedCount || 0, "", previousUserData?.shippedCount);
-        updateCountWithAnimation("revenueCount", "revenueIndicator", userData.revenueCount || 0, "$", previousUserData?.revenueCount);
-        
-        updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
-    }
+// Reset previous input
+paypalEmail.value = "";
+paypalEmailError.style.display = "none";
+savePaypalBtn.disabled = false;
 
-    // Update transaction list
-    function updateTransactionList(transactions = [], year = "", month = "") {
-        const transactionList = document.getElementById("transactionList");
-        if (!transactionList) return;
-        
-        transactionList.innerHTML = "";
+// If user already has PayPal set up, prefill the email
+if (currentUserData && currentUserData.paypalEmail) {
+paypalEmail.value = currentUserData.paypalEmail;
+}
 
-        if (!transactions || transactions.length === 0) {
-            const noTransactions = document.createElement("div");
-            noTransactions.className = "no-transactions";
-            noTransactions.textContent = "No transactions";
-            transactionList.appendChild(noTransactions);
-            return;
-        }
+paypalModal.style.display = "flex";
+}
 
-        let filteredTransactions = [...transactions]
-            .sort((a, b) => {
-                const dateA = a.date ? (a.date.toDate ? a.date.toDate() : new Date(a.date)) : new Date();
-                const dateB = b.date ? (b.date.toDate ? b.date.toDate() : new Date(b.date)) : new Date();
-                return dateB - dateA;
-            })
-            .filter(transaction => {
-                if (!transaction.date) return false;
-                
-                const date = transaction.date.toDate ? transaction.date.toDate() : new Date(transaction.date);
-                const transactionMonth = date.getMonth() + 1;
-                const transactionYear = date.getFullYear();
+// Save PayPal email
+async function savePayPalEmail() {
+if (isSubmitting) return;
 
-                const yearMatch = !year || transactionYear.toString() === year.toString();
-                const monthMatch = !month || transactionMonth.toString() === month.toString();
-                
-                return yearMatch && monthMatch;
-            });
+try {
+const paypalEmail = document.getElementById('paypalEmail').value.trim();
+const paypalEmailError = document.getElementById('paypalEmailError');
+const savePaypalBtn = document.getElementById('savePaypalBtn');
 
-        if (filteredTransactions.length === 0) {
-            const noTransactions = document.createElement("div");
-            noTransactions.className = "no-transactions";
-            noTransactions.textContent = "No transactions for this period";
-            transactionList.appendChild(noTransactions);
-            return;
-        }
+if (!isValidEmail(paypalEmail)) {
+paypalEmailError.style.display = "block";
+return;
+}
 
-        filteredTransactions.forEach(transaction => {
-            const date = transaction.date ? 
-                (transaction.date.toDate ? transaction.date.toDate() : new Date(transaction.date)) : 
-                new Date();
-            
-            const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-            
-            const item = document.createElement("div");
-            item.className = "transaction-item";
-            
-            // Style based on transaction type
-            if (transaction.type === "sale") {
-                item.classList.add("sold-transaction");
-                item.innerHTML = `
-                    <div class="details">
-                        <span>Sale</span>
-                        <span class="date">${formattedDate}</span>
-                    </div>
-                    <span>$${transaction.amount || 0}</span>
-                `;
-            } else if (transaction.type === "payout") {
-                item.classList.add("payout-transaction");
-                item.innerHTML = `
-                    <div class="details">
-                        <span>Payout</span>
-                        <span class="date">${formattedDate}</span>
-                    </div>
-                    <span>$${transaction.amount || 0}</span>
-                `;
-            } else {
-                if (transaction.status === "shipped" || transaction.status === "delivered") {
-                    item.style.borderLeft = "3px solid #4CAF50";
-                } else if (transaction.status === "pending") {
-                    item.style.borderLeft = "3px solid #FFC107";
-                } else if (transaction.status === "cancelled") {
-                    item.style.borderLeft = "3px solid #F44336";
-                    item.style.opacity = "0.7";
-                }
-                
-                item.innerHTML = `
-                    <div class="details">
-                        <span>${transaction.title || "Unspecified transaction"}</span>
-                        <span class="date">${formattedDate}</span>
-                    </div>
-                    <span>$${transaction.amount || 0}</span>
-                `;
-            }
-            
-            transactionList.appendChild(item);
-        });
-    }
+const user = auth.currentUser;
+if (!user) {
+showToast("Please log in to set up PayPal", "error");
+return;
+}
 
-    // Set up event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-        const profileIcon = document.getElementById("profileIcon");
-        const linksIcon = document.getElementById("linksIcon");
-        const deleteModal = document.getElementById("deleteModal");
-        const confirmModal = document.getElementById("confirmModal");
-        const deleteAccountBtn = document.getElementById("deleteAccountBtn");
-        const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
-        const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
-        const emailInput = document.getElementById("emailInput");
-        const passwordInput = document.getElementById("passwordInput");
-        const generateBtn = document.getElementById("generateBtn");
-        const paypalCard = document.getElementById("paypalCard");
-        const savePaypalBtn = document.getElementById("savePaypalBtn");
-        const closeLinksModal = document.getElementById("closeLinksModal");
-        
-        document.getElementById("cancelProductBtn").addEventListener("click", function() {
-            document.getElementById("createProductModal").style.display = "none";
-        });
-        
-        document.getElementById("createProductBtn").addEventListener("click", createProduct);
-        
-        document.getElementById("productDescription").addEventListener("input", function() {
-            const descLength = this.value.length;
-            document.getElementById("descriptionCharCount").textContent = descLength;
-        });
-        
-        document.getElementById("productPrice").addEventListener("input", handlePriceCalculation);
-        
-        document.getElementById("coverFile").addEventListener("change", function(e) {
-            if (e.target.files.length > 0) {
-                coverFile = e.target.files[0];
-                
-                if (!coverFile.type.startsWith('image/')) {
-                    showToast("Please upload an image file for the cover", "error");
-                    coverFile = null;
-                    return;
-                }
-                
-                if (coverFile.size > 5 * 1024 * 1024) {
-                    showToast("Cover image must be less than 5MB", "error");
-                    coverFile = null;
-                    return;
-                }
-                
-                const fileName = document.getElementById("coverFileName");
-                fileName.textContent = "File added";
-                fileName.style.display = "block";
-                
-                document.getElementById("coverSuccessIcon").style.display = "block";
-            }
-        });
-        
-        document.getElementById("productFile").addEventListener("change", function(e) {
-            if (e.target.files.length > 0) {
-                productFile = e.target.files[0];
-                const category = document.getElementById("productCategory").value;
-                
-                if (category === "video" && productFile.size > 500 * 1024 * 1024) {
-                    showToast("Video files must be less than 500MB", "error");
-                    productFile = null;
-                    return;
-                } else if (productFile.size > 100 * 1024 * 1024) {
-                    showToast("Files must be less than 100MB", "error");
-                    productFile = null;
-                    return;
-                }
-                
-                const fileName = document.getElementById("productFileName");
-                fileName.textContent = "File added";
-                fileName.style.display = "block";
-                
-                document.getElementById("productFileSuccessIcon").style.display = "block";
-            }
-        });
-        
-        document.getElementById("productCategory").addEventListener("change", function() {
-            const category = this.value;
-            const fileUploadLimits = document.getElementById("fileUploadLimits");
-            
-            if (category === "video") {
-                fileUploadLimits.textContent = "Max: 500MB for video content";
-            } else if (category === "ebook") {
-                fileUploadLimits.textContent = "Max: 100MB for e-books";
-            } else if (category === "music") {
-                fileUploadLimits.textContent = "Max: 100MB for music/songs";
-            } else {
-                fileUploadLimits.textContent = "Max: 100MB for files";
-            }
-        });
-        
-        savePaypalBtn.addEventListener("click", savePayPalEmail);
-        
-        closeLinksModal.addEventListener("click", function() {
-            document.getElementById("linksModal").style.display = "none";
-        });
-        
-        window.openProductModal = openProductModal;
-        window.setupPayPalAccount = setupPayPalAccount;
-        
-        // Setup the PayPal card click handler
-        paypalCard.addEventListener("click", function() {
-            if (!paypalAccountComplete) {
-                setupPayPalAccount();
-            }
-        });
-        
-        generateBtn.addEventListener("click", function(e) {
-            if (generateBtn.classList.contains("disabled")) {
-                e.preventDefault();
-                showToast("Please set up your PayPal account first", "error");
-                
-                if (!paypalAccountComplete) {
-                    paypalCard.style.animation = "pulse 1s ease 3";
-                    setTimeout(() => {
-                        paypalCard.style.animation = "pulse 2s infinite";
-                    }, 3000);
-                }
-            }
-        });
-        
-        profileIcon.addEventListener("click", function() {
-            deleteModal.style.display = "flex";
-        });
-        
-        window.addEventListener("click", function(event) {
-            if (event.target === deleteModal) {
-                deleteModal.style.display = "none";
-            }
-            if (event.target === confirmModal) {
-                confirmModal.style.display = "none";
-                emailInput.value = "";
-                passwordInput.value = "";
-            }
-            if (event.target === document.getElementById("createProductModal")) {
-                document.getElementById("createProductModal").style.display = "none";
-            }
-            if (event.target === document.getElementById("linksModal")) {
-                document.getElementById("linksModal").style.display = "none";
-            }
-            if (event.target === document.getElementById("paypalModal")) {
-                document.getElementById("paypalModal").style.display = "none";
-            }
-        });
-        
-        deleteAccountBtn.addEventListener("click", function() {
-            deleteModal.style.display = "none";
-            confirmModal.style.display = "flex";
-            
-            if (auth.currentUser && auth.currentUser.email) {
-                emailInput.value = auth.currentUser.email;
-            }
-        });
-        
-        cancelDeleteBtn.addEventListener("click", function() {
-            confirmModal.style.display = "none";
-            emailInput.value = "";
-            passwordInput.value = "";
-        });
-        
-        confirmDeleteBtn.addEventListener("click", async function() {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            if (!email || !password) {
-                showToast("Please enter your email and password", "error");
-                return;
-            }
-            
-            try {
-                confirmModal.style.display = "none";
-                
-                const user = auth.currentUser;
-                if (!user) {
-                    throw new Error("User not logged in");
-                }
-                
-                const credential = EmailAuthProvider.credential(email, password);
-                await reauthenticateWithCredential(user, credential);
-                
-                showToast("Deleting account...", "info");
-                
-                // Utilisation de httpsCallable pour supprimer le compte
-                const deleteUserAccount = httpsCallable(functions, 'deleteUserAccount');
-                await deleteUserAccount();
-                
-                await deleteUser(user);
-                
-                showToast("Account deleted successfully", "success");
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 1500);
-            } catch (error) {
-                console.error("Error deleting account:", error);
-                
-                if (error.code === 'auth/wrong-password') {
-                    showToast("Incorrect password", "error");
-                } else if (error.code === 'auth/user-mismatch') {
-                    showToast("Email doesn't match current user", "error");
-                } else if (error.code === 'auth/invalid-email') {
-                    showToast("Invalid email format", "error");
-                } else {
-                    showToast("Error deleting account: " + error.message, "error");
-                }
-            }
-        });
-        
-        document.getElementById("yearSelect").addEventListener("change", function() {
-            showDataLoader('transactionLoader', true);
-            selectedYear = this.value;
-            setTimeout(() => {
-                if (currentUserData) {
-                    updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
-                }
-                showDataLoader('transactionLoader', false);
-            }, 500);
-        });
-        
-        document.getElementById("monthSelect").addEventListener("change", function() {
-            showDataLoader('transactionLoader', true);
-            selectedMonth = this.value;
-            setTimeout(() => {
-                if (currentUserData) {
-                    updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
-                }
-                showDataLoader('transactionLoader', false);
-            }, 500);
-        });
-        
-        // Set default year to current year
-        const currentYear = new Date().getFullYear().toString();
-        const yearSelect = document.getElementById('yearSelect');
-        if (yearSelect) {
-            for (let i = 0; i < yearSelect.options.length; i++) {
-                if (yearSelect.options[i].value === currentYear) {
-                    yearSelect.selectedIndex = i;
-                    selectedYear = currentYear;
-                    break;
-                }
-            }
-        }
-        
-        // Add click handler for links icon
-        linksIcon.addEventListener("click", openLinksModal);
-    });
+isSubmitting = true;
+savePaypalBtn.disabled = true;
+
+showToast("Saving your PayPal email...", "info");
+
+const userRef = doc(db, "users", user.uid);
+await updateDoc(userRef, {
+paypalEmail: paypalEmail,
+onboardingComplete: true,
+lastUpdate: serverTimestamp()
+});
+
+document.getElementById('paypalModal').style.display = "none";
+showToast("PayPal email saved successfully!", "success");
+
+updatePayPalUI(true);
+
+} catch (error) {
+console.error("Error saving PayPal email:", error);
+showToast(`Error: ${error.message}`, "error");
+
+const savePaypalBtn = document.getElementById('savePaypalBtn');
+savePaypalBtn.disabled = false;
+} finally {
+isSubmitting = false;
+}
+}
+
+// Check PayPal account status
+async function checkPayPalStatus() {
+try {
+const user = auth.currentUser;
+if (!user) return false;
+
+userIdToken = await user.getIdToken(true);
+
+const userRef = doc(db, "users", user.uid);
+const userSnap = await getDoc(userRef);
+
+if (!userSnap.exists()) {
+await setDoc(userRef, {
+uid: user.uid,
+email: user.email,
+createdAt: serverTimestamp(),
+lastUpdate: serverTimestamp(),
+onboardingComplete: false,
+paypalEmail: null,
+linksCount: 0,
+viewsCount: 0,
+ordersCount: 0,
+shippedCount: 0,
+revenueCount: 0,
+transactions: []
+});
+
+updatePayPalUI(false);
+return false;
+}
+
+const userData = userSnap.data();
+const isComplete = userData && userData.onboardingComplete === true && userData.paypalEmail;
+
+updatePayPalUI(isComplete);
+
+return isComplete;
+} catch (error) {
+console.error("Error checking PayPal status:", error);
+
+updatePayPalUI(false);
+return false;
+}
+}
+
+// Update UI based on PayPal status
+function updatePayPalUI(isActive) {
+const paypalStatus = document.getElementById('paypalStatus');
+const paypalCard = document.getElementById('paypalCard');
+const generateBtn = document.getElementById('generateBtn');
+const paymentWarning = document.getElementById('paymentWarning');
+
+paypalAccountComplete = isActive;
+
+if (isActive) {
+paypalStatus.textContent = "Active";
+paypalStatus.className = "payment-status active";
+paypalCard.style.borderColor = "#4CAF50";
+paypalCard.classList.remove("pulse-animation");
+
+// Remove click handler from paypal card when active
+paypalCard.onclick = null;
+
+// Enable the generate button
+setTimeout(() => {
+generateBtn.classList.remove("disabled");
+generateBtn.onclick = openProductModal;
+}, 1000);
+
+paymentWarning.style.display = "none";
+} else {
+paypalStatus.textContent = "Not Active";
+paypalStatus.className = "payment-status not-active";
+paypalCard.onclick = setupPayPalAccount;
+paypalCard.style.borderColor = "#007BFF";
+paypalCard.classList.add("pulse-animation");
+
+generateBtn.classList.add("disabled");
+generateBtn.onclick = function() {
+showToast("Please set up your PayPal account first", "error");
+};
+
+paymentWarning.style.display = "block";
+}
+}
+
+// Check if user was redirected from account creation
+function checkAccountCreationReferral() {
+const referrer = document.referrer;
+const hasCreationReferrer = referrer.includes('index.html');
+
+const hasBeenRedirected = localStorage.getItem('redirectedFromAccountCreation') === 'true';
+
+if (hasCreationReferrer && !hasBeenRedirected) {
+localStorage.setItem('redirectedFromAccountCreation', 'true');
+hasRedirectedFromAccountCreation = true;
+
+setTimeout(() => {
+showToast("Returning to previous page...", "info");
+history.back();
+}, 500);
+}
+}
+
+// Handle price input and calculate final prices
+function handlePriceCalculation() {
+const priceInput = document.getElementById('productPrice');
+const priceCalculation = document.getElementById('priceCalculation');
+const basePrice = document.getElementById('basePrice');
+const taxAmount = document.getElementById('taxAmount');
+const paypalFees = document.getElementById('paypalFees');
+const sellerEarnings = document.getElementById('sellerEarnings');
+const finalPrice = document.getElementById('finalPrice');
+
+const price = parseFloat(priceInput.value);
+
+if (isNaN(price) || price <= 0) {
+priceCalculation.style.display = 'none';
+return;
+}
+
+// Calculate tax (7%)
+const tax = price * 0.07;
+// Estimate PayPal fees (2.9% + $0.30)
+const priceWithTax = price + tax;
+const ppFees = (priceWithTax * 0.029) + 0.30;
+// Calculate seller's 80% of the price
+const earnings = price * 0.8;
+
+basePrice.textContent = `$${price.toFixed(2)}`;
+taxAmount.textContent = `$${tax.toFixed(2)}`;
+paypalFees.textContent = `$${ppFees.toFixed(2)}`;
+sellerEarnings.textContent = `$${earnings.toFixed(2)}`;
+finalPrice.textContent = `$${priceWithTax.toFixed(2)}`;
+
+priceCalculation.style.display = 'block';
+}
+
+// Open product creation modal
+function openProductModal() {
+const createProductModal = document.getElementById("createProductModal");
+createProductModal.style.display = "flex";
+
+document.getElementById("productTitle").value = "";
+document.getElementById("productCategory").value = "";
+document.getElementById("productDescription").value = "";
+document.getElementById("productPrice").value = "";
+document.getElementById("descriptionCharCount").textContent = "0";
+document.getElementById("priceCalculation").style.display = "none";
+
+coverFile = null;
+productFile = null;
+coverFileUrl = null;
+productFileUrl = null;
+
+document.getElementById("coverFileName").textContent = "";
+document.getElementById("coverFileName").style.display = "none";
+document.getElementById("coverSuccessIcon").style.display = "none";
+
+document.getElementById("productFileName").textContent = "";
+document.getElementById("productFileName").style.display = "none";
+document.getElementById("productFileSuccessIcon").style.display = "none";
+
+const createProductBtn = document.getElementById("createProductBtn");
+createProductBtn.disabled = false;
+}
+
+// Open generated links modal
+async function openLinksModal() {
+const linksModal = document.getElementById("linksModal");
+const linksList = document.getElementById("linksList");
+
+// Clear previous links
+linksList.innerHTML = '<div style="text-align: center;"><div class="skeleton-loader" style="height: 50px; margin-bottom: 10px;"></div><div class="skeleton-loader" style="height: 50px; margin-bottom: 10px;"></div></div>';
+
+linksModal.style.display = "flex";
+
+try {
+const user = auth.currentUser;
+if (!user) {
+throw new Error("User not logged in");
+}
+
+const productsRef = collection(db, "products");
+const productsQuery = query(productsRef, where("uid", "==", user.uid));
+const querySnapshot = await getDocs(productsQuery);
+
+if (querySnapshot.empty) {
+linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
+return;
+}
+
+generatedLinks = [];
+querySnapshot.forEach(doc => {
+const product = doc.data();
+if (product.shareableLink) {
+generatedLinks.push({
+id: doc.id,
+title: product.title || `Product #${generatedLinks.length + 1}`,
+link: product.shareableLink
+});
+}
+});
+
+if (generatedLinks.length === 0) {
+linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
+return;
+}
+
+linksList.innerHTML = '';
+generatedLinks.forEach((link, index) => {
+const linkItem = document.createElement('div');
+linkItem.className = 'link-item';
+linkItem.innerHTML = `
+<span class="link-number">${index + 1})</span>
+<span class="link-url" title="${link.link}">${link.link}</span>
+<button class="copy-link-btn" data-link="${link.link}">
+<i class="fas fa-copy"></i>
+</button>
+`;
+linksList.appendChild(linkItem);
+});
+
+// Add click handlers for copy buttons
+document.querySelectorAll('.copy-link-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+const link = this.getAttribute('data-link');
+navigator.clipboard.writeText(link).then(() => {
+showToast("Link copied to clipboard!", "success");
+});
+});
+});
+
+} catch (error) {
+console.error("Error loading links:", error);
+linksList.innerHTML = '<div style="text-align: center; color: #F44336;">Error loading links</div>';
+}
+}
+
+// Create a base64 image from file
+function convertFileToBase64(file) {
+return new Promise((resolve, reject) => {
+const reader = new FileReader();
+reader.readAsDataURL(file);
+reader.onload = () => resolve(reader.result);
+reader.onerror = error => reject(error);
+});
+}
+
+// Create product and generate link
+async function createProduct() {
+if (isSubmitting) return;
+
+try {
+const createProductBtn = document.getElementById("createProductBtn");
+
+const user = auth.currentUser;
+if (!user) {
+showToast("Please log in to create a product", "error");
+return;
+}
+
+const title = document.getElementById("productTitle").value.trim();
+const category = document.getElementById("productCategory").value;
+const description = document.getElementById("productDescription").value.trim();
+const price = parseFloat(document.getElementById("productPrice").value);
+
+// Calculate price with tax
+const priceWithTax = price * 1.07;
+
+if (!title) {
+showToast("Please enter a product title", "error");
+return;
+}
+
+if (!category) {
+showToast("Please select a category", "error");
+return;
+}
+
+if (!description) {
+showToast("Please enter a description", "error");
+return;
+}
+
+if (isNaN(price) || price < 0.5) {
+showToast("Please enter a valid price (minimum $0.50)", "error");
+return;
+}
+
+if (!coverFile) {
+showToast("Please upload a cover image", "error");
+return;
+}
+
+if (!productFile) {
+showToast("Please upload your product file", "error");
+return;
+}
+
+// Check if user has set up PayPal
+if (!paypalAccountComplete) {
+showToast("Please set up your PayPal account first", "error");
+setupPayPalAccount();
+return;
+}
+
+isSubmitting = true;
+createProductBtn.disabled = true;
+
+showToast("Creating your product...", "info");
+
+document.getElementById("createProductModal").style.display = "none";
+
+// Convert files to base64
+let coverBase64;
+let productBase64;
+
+try {
+coverBase64 = await convertFileToBase64(coverFile);
+productBase64 = await convertFileToBase64(productFile);
+} catch (fileError) {
+console.error("Error converting files:", fileError);
+showToast("Error processing files. Please try again.", "error");
+isSubmitting = false;
+createProductBtn.disabled = false;
+return;
+}
+
+// Use httpsCallable to create product
+const createProductFn = httpsCallable(functions, 'createProduct');
+
+const result = await createProductFn({
+uid: user.uid,
+title: title,
+category: category,
+description: description,
+price: priceWithTax.toFixed(2), // Use price with tax
+coverData: coverBase64,
+fileData: productBase64,
+fileName: productFile.name
+});
+
+if (result.data && result.data.shareableLink) {
+showToast("Product created successfully!", "success");
+
+const shareableLink = result.data.shareableLink;
+
+const linkModal = document.createElement("div");
+linkModal.className = "modal";
+linkModal.style.display = "flex";
+linkModal.innerHTML = `
+<div class="modal-content">
+<div class="modal-title">Your Product Link</div>
+<div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
+<button id="copyLinkBtn" class="create-product-button">Copy Link</button>
+<button id="closeLinkModalBtn" class="cancel-button">Close</button>
+</div>
+`;
+
+document.body.appendChild(linkModal);
+
+document.getElementById("copyLinkBtn").addEventListener("click", function() {
+navigator.clipboard.writeText(shareableLink).then(() => {
+showToast("Link copied to clipboard!", "success");
+});
+});
+
+document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
+linkModal.remove();
+});
+
+setTimeout(() => {
+if (document.body.contains(linkModal)) {
+linkModal.remove();
+}
+}, 30000);
+
+// Refresh dashboard data
+showAllDataLoaders(true);
+setTimeout(() => {
+refreshDashboardData(user.uid);
+}, 1000);
+} else {
+throw new Error("No shareable link provided");
+}
+} catch (error) {
+console.error("Error creating product:", error);
+showToast(`Error: ${error.message || "Unknown error"}`, "error");
+} finally {
+isSubmitting = false;
+const createProductBtn = document.getElementById("createProductBtn");
+if (createProductBtn) createProductBtn.disabled = false;
+}
+}
+
+// Authentication state listener
+auth.onAuthStateChanged(async (user) => {
+if (user) {
+try {
+showAllDataLoaders(true);
+
+userIdToken = await user.getIdToken(true);
+
+cleanupListeners();
+
+checkAccountCreationReferral();
+
+if (hasRedirectedFromAccountCreation) {
+return;
+}
+
+await checkPayPalStatus();
+
+dataLoadingPromise = loadUserData(user.uid);
+dataLoadingPromise.then(() => {
+setupRealTimeListeners(user.uid);
+dataLoaded = true;
+showAllDataLoaders(false);
+
+if (isInitialLoad) {
+isInitialLoad = false;
+showToast("Welcome to your dashboard!", "success");
+}
+
+setupDataRefresh();
+}).catch(error => {
+console.error("Error loading data:", error);
+showAllDataLoaders(false);
+showToast("Error loading data: " + error.message, "error");
+});
+} catch (error) {
+console.error("Error during initialization:", error);
+showAllDataLoaders(false);
+showToast("An error occurred. Please try again.", "error");
+}
+} else {
+window.location.href = "index.html";
+}
+});
+
+// Clean up real-time listeners
+function cleanupListeners() {
+realTimeListeners.forEach(unsubscribe => unsubscribe());
+realTimeListeners = [];
+}
+
+// Load user data
+async function loadUserData(userId) {
+if (!userId) {
+throw new Error("User ID is required");
+}
+
+try {
+const userDocRef = doc(db, "users", userId);
+const userDoc = await getDoc(userDocRef);
+
+if (userDoc.exists()) {
+const userData = userDoc.data();
+previousUserData = currentUserData;
+currentUserData = userData;
+
+updateDashboardUI(userData);
+
+if (selectedYear || selectedMonth) {
+updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
+}
+
+if (userData.onboardingComplete && userData.paypalEmail) {
+updatePayPalUI(true);
+} else {
+updatePayPalUI(false);
+}
+
+return userData;
+} else {
+console.log("No user document found, creating new...");
+const newUserData = {
+uid: userId,
+email: auth.currentUser ? auth.currentUser.email : "",
+linksCount: 0,
+viewsCount: 0,
+ordersCount: 0,
+shippedCount: 0,
+revenueCount: 0,
+transactions: [],
+createdAt: serverTimestamp(),
+lastUpdate: serverTimestamp(),
+onboardingComplete: false,
+paypalEmail: null
+};
+
+await setDoc(userDocRef, newUserData);
+currentUserData = newUserData;
+updateDashboardUI(newUserData);
+updatePayPalUI(false);
+return newUserData;
+}
+} catch (error) {
+console.error("Error loading user data:", error);
+throw error;
+}
+}
+
+// Set up real-time listeners
+function setupRealTimeListeners(userId) {
+if (!userId) {
+console.error("No user ID provided for real-time listeners");
+return;
+}
+
+try {
+const userDocRef = doc(db, "users", userId);
+const userUnsubscribe = onSnapshot(userDocRef, (doc) => {
+if (doc.exists()) {
+previousUserData = currentUserData;
+const newData = doc.data();
+currentUserData = newData;
+updateDashboardUI(newData);
+
+if (newData.onboardingComplete && newData.paypalEmail) {
+updatePayPalUI(true);
+} else {
+updatePayPalUI(false);
+}
+}
+}, (error) => {
+console.error("Error in real-time listener for user document:", error);
+showToast("Data synchronization issue", "error");
+});
+realTimeListeners.push(userUnsubscribe);
+} catch (error) {
+console.error("Error setting up listeners:", error);
+}
+
+try {
+loadLinksData(userId);
+} catch (error) {
+console.error("Error loading links:", error);
+}
+
+try {
+loadOrdersData(userId);
+} catch (error) {
+console.error("Error loading orders:", error);
+}
+}
+
+// Load links data
+async function loadLinksData(userId) {
+if (!userId) {
+console.error("No user ID provided for loading links");
+return;
+}
+
+try {
+showDataLoader('linksCountLoader', true);
+showDataLoader('viewsCountLoader', true);
+
+const linksRef = collection(db, "products");
+const linksQuery = query(linksRef, where("uid", "==", userId));
+
+const snapshot = await getDocs(linksQuery);
+let totalLinks = snapshot.size;
+let totalViews = 0;
+
+snapshot.forEach(doc => {
+const linkData = doc.data();
+totalViews += linkData.viewCount || 0;
+});
+
+updateCountWithAnimation("linksCount", "linksIndicator", totalLinks, "", previousUserData?.linksCount);
+updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
+
+if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
+const userDocRef = doc(db, "users", userId);
+await updateDoc(userDocRef, {
+linksCount: totalLinks,
+viewsCount: totalViews,
+lastUpdate: serverTimestamp()
+}).catch(error => {
+console.error("Error updating user data:", error);
+});
+}
+
+showDataLoader('linksCountLoader', false);
+showDataLoader('viewsCountLoader', false);
+
+} catch (error) {
+console.error("Error loading links:", error);
+showDataLoader('linksCountLoader', false);
+showDataLoader('viewsCountLoader', false);
+showToast("Error syncing products", "error");
+}
+}
+
+// Load orders data
+async function loadOrdersData(userId) {
+if (!userId) {
+console.error("No user ID provided for loading orders");
+return;
+}
+
+try {
+showDataLoader('ordersCountLoader', true);
+showDataLoader('shippedCountLoader', true);
+showDataLoader('revenueCountLoader', true);
+showDataLoader('transactionLoader', true);
+
+const ordersRef = collection(db, "orders");
+const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+
+const snapshot = await getDocs(ordersQuery);
+let totalOrders = snapshot.size;
+let shippedOrders = 0;
+let totalRevenue = 0;
+let transactions = [];
+
+snapshot.forEach(doc => {
+const orderData = doc.data();
+if (orderData.status === "shipped" || orderData.status === "delivered") {
+shippedOrders++;
+}
+
+totalRevenue += orderData.totalAmount || 0;
+
+transactions.push({
+id: doc.id,
+title: orderData.productName || "Order #" + doc.id.substring(0, 8),
+amount: orderData.totalAmount || 0,
+date: orderData.createdAt || new Date(),
+status: orderData.status || "pending",
+type: "sale"
+});
+});
+
+// Add payout transactions
+const payoutsRef = collection(db, "payouts");
+const payoutsQuery = query(payoutsRef, where("sellerId", "==", userId));
+const payoutsSnapshot = await getDocs(payoutsQuery);
+
+payoutsSnapshot.forEach(doc => {
+const payoutData = doc.data();
+transactions.push({
+id: doc.id,
+title: "Weekly Payout",
+amount: payoutData.amount || 0,
+date: payoutData.createdAt || new Date(),
+status: "completed",
+type: "payout"
+});
+});
+
+updateCountWithAnimation("ordersCount", "ordersIndicator", totalOrders, "", previousUserData?.ordersCount);
+updateCountWithAnimation("shippedCount", "shippedIndicator", shippedOrders, "", previousUserData?.shippedCount);
+updateCountWithAnimation("revenueCount", "revenueIndicator", totalRevenue, "$", previousUserData?.revenueCount);
+
+updateTransactionList(transactions, selectedYear, selectedMonth);
+
+if (currentUserData && (
+currentUserData.ordersCount !== totalOrders ||
+currentUserData.shippedCount !== shippedOrders ||
+currentUserData.revenueCount !== totalRevenue
+)) {
+const userDocRef = doc(db, "users", userId);
+await updateDoc(userDocRef, {
+ordersCount: totalOrders,
+shippedCount: shippedOrders,
+revenueCount: totalRevenue,
+transactions: transactions,
+lastUpdate: serverTimestamp()
+}).catch(error => {
+console.error("Error updating order data:", error);
+});
+}
+
+showDataLoader('ordersCountLoader', false);
+showDataLoader('shippedCountLoader', false);
+showDataLoader('revenueCountLoader', false);
+showDataLoader('transactionLoader', false);
+
+} catch (error) {
+console.error("Error loading orders:", error);
+showDataLoader('ordersCountLoader', false);
+showDataLoader('shippedCountLoader', false);
+showDataLoader('revenueCountLoader', false);
+showDataLoader('transactionLoader', false);
+showToast("Error syncing orders", "error");
+}
+}
+
+// Update counter with animation
+function updateCountWithAnimation(elementId, indicatorId, value, suffix, previousValue) {
+const element = document.getElementById(elementId);
+const indicator = document.getElementById(indicatorId);
+
+if (!element || !indicator) return;
+
+const currentText = element.textContent;
+const currentValue = currentText.replace(/[^0-9.-]+/g, "");
+
+if (currentValue !== "" && parseInt(currentValue) !== value) {
+animateUpdate(element);
+
+if (previousValue !== undefined) {
+if (value > previousValue) {
+indicator.className = "trend-indicator trend-up";
+indicator.innerHTML = '<i class="fas fa-arrow-up"></i>';
+} else if (value < previousValue) {
+indicator.className = "trend-indicator trend-down";
+indicator.innerHTML = '<i class="fas fa-arrow-down"></i>';
+} else {
+indicator.className = "trend-indicator trend-neutral";
+indicator.innerHTML = '<i class="fas fa-equals"></i>';
+}
+} else {
+indicator.className = "trend-indicator";
+indicator.innerHTML = '';
+}
+}
+
+if (elementId === "revenueCount") {
+element.textContent = value + "$";
+} else {
+element.textContent = value + suffix;
+}
+}
+
+// Update dashboard UI
+function updateDashboardUI(userData) {
+if (!userData) return;
+
+updateCountWithAnimation("linksCount", "linksIndicator", userData.linksCount || 0, "", previousUserData?.linksCount);
+updateCountWithAnimation("viewsCount", "viewsIndicator", userData.viewsCount || 0, "", previousUserData?.viewsCount);
+updateCountWithAnimation("ordersCount", "ordersIndicator", userData.ordersCount || 0, "", previousUserData?.ordersCount);
+updateCountWithAnimation("shippedCount", "shippedIndicator", userData.shippedCount || 0, "", previousUserData?.shippedCount);
+updateCountWithAnimation("revenueCount", "revenueIndicator", userData.revenueCount || 0, "$", previousUserData?.revenueCount);
+
+updateTransactionList(userData.transactions || [], selectedYear, selectedMonth);
+}
+
+// Update transaction list
+function updateTransactionList(transactions = [], year = "", month = "") {
+const transactionList = document.getElementById("transactionList");
+if (!transactionList) return;
+
+transactionList.innerHTML = "";
+
+if (!transactions || transactions.length === 0) {
+const noTransactions = document.createElement("div");
+noTransactions.className = "no-transactions";
+noTransactions.textContent = "No transactions";
+transactionList.appendChild(noTransactions);
+return;
+}
+
+let filteredTransactions = [...transactions]
+.sort((a, b) => {
+const dateA = a.date ? (a.date.toDate ? a.date.toDate() : new Date(a.date)) : new Date();
+const dateB = b.date ? (b.date.toDate ? b.date.toDate() : new Date(b.date)) : new Date();
+return dateB - dateA;
+})
+.filter(transaction => {
+if (!transaction.date) return false;
+
+const date = transaction.date.toDate ? transaction.date.toDate() : new Date(transaction.date);
+const transactionMonth = date.getMonth() + 1;
+const transactionYear = date.getFullYear();
+
+const yearMatch = !year || transactionYear.toString() === year.toString();
+const monthMatch = !month || transactionMonth.toString() === month.toString();
+
+return yearMatch && monthMatch;
+});
+
+if (filteredTransactions.length === 0) {
+const noTransactions = document.createElement("div");
+noTransactions.className = "no-transactions";
+noTransactions.textContent = "No transactions for this period";
+transactionList.appendChild(noTransactions);
+return;
+}
+
+filteredTransactions.forEach(transaction => {
+const date = transaction.date ?
+(transaction.date.toDate ? transaction.date.toDate() : new Date(transaction.date)) :
+new Date();
+
+const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
+const item = document.createElement("div");
+item.className = "transaction-item";
+
+// Style based on transaction type
+if (transaction.type === "sale") {
+item.classList.add("sold-transaction");
+item.innerHTML = `
+<div class="details">
+<span>Sale</span>
+<span class="date">${formattedDate}</span>
+</div>
+<span>$${transaction.amount || 0}</span>
+`;
+} else if (transaction.type === "payout") {
+item.classList.add("payout-transaction");
+item.innerHTML = `
+<div class="details">
+<span>Payout</span>
+<span class="date">${formattedDate}</span>
+</div>
+<span>$${transaction.amount || 0}</span>
+`;
+} else {
+if (transaction.status === "shipped" || transaction.status === "delivered") {
+item.style.borderLeft = "3px solid #4CAF50";
+} else if (transaction.status === "pending") {
+item.style.borderLeft = "3px solid #FFC107";
+} else if (transaction.status === "cancelled") {
+item.style.borderLeft = "3px solid #F44336";
+item.style.opacity = "0.7";
+}
+
+item.innerHTML = `
+<div class="details">
+<span>${transaction.title || "Unspecified transaction"}</span>
+<span class="date">${formattedDate}</span>
+</div>
+<span>$${transaction.amount || 0}</span>
+`;
+}
+
+transactionList.appendChild(item);
+});
+}
+
+// Set up event listeners
+document.addEventListener('DOMContentLoaded', function() {
+const profileIcon = document.getElementById("profileIcon");
+const linksIcon = document.getElementById("linksIcon");
+const deleteModal = document.getElementById("deleteModal");
+const confirmModal = document.getElementById("confirmModal");
+const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+const generateBtn = document.getElementById("generateBtn");
+const paypalCard = document.getElementById("paypalCard");
+const savePaypalBtn = document.getElementById("savePaypalBtn");
+const closeLinksModal = document.getElementById("closeLinksModal");
+
+document.getElementById("cancelProductBtn").addEventListener("click", function() {
+document.getElementById("createProductModal").style.display = "none";
+});
+
+document.getElementById("createProductBtn").addEventListener("click", createProduct);
+
+document.getElementById("productDescription").addEventListener("input", function() {
+const descLength = this.value.length;
+document.getElementById("descriptionCharCount").textContent = descLength;
+});
+
+document.getElementById("productPrice").addEventListener("input", handlePriceCalculation);
+
+document.getElementById("coverFile").addEventListener("change", function(e) {
+if (e.target.files.length > 0) {
+coverFile = e.target.files[0];
+
+if (!coverFile.type.startsWith('image/')) {
+showToast("Please upload an image file for the cover", "error");
+coverFile = null;
+return;
+}
+
+if (coverFile.size > 5 * 1024 * 1024) {
+showToast("Cover image must be less than 5MB", "error");
+coverFile = null;
+return;
+}
+
+const fileName = document.getElementById("coverFileName");
+fileName.textContent = "File added";
+fileName.style.display = "block";
+
+document.getElementById("coverSuccessIcon").style.display = "block";
+}
+});
+
+document.getElementById("productFile").addEventListener("change", function(e) {
+if (e.target.files.length > 0) {
+productFile = e.target.files[0];
+const category = document.getElementById("productCategory").value;
+
+if (category === "video" && productFile.size > 500 * 1024 * 1024) {
+showToast("Video files must be less than 500MB", "error");
+productFile = null;
+return;
+} else if (productFile.size > 100 * 1024 * 1024) {
+showToast("Files must be less than 100MB", "error");
+productFile = null;
+return;
+}
+
+const fileName = document.getElementById("productFileName");
+fileName.textContent = "File added";
+fileName.style.display = "block";
+
+document.getElementById("productFileSuccessIcon").style.display = "block";
+}
+});
+
+document.getElementById("productCategory").addEventListener("change", function() {
+const category = this.value;
+const fileUploadLimits = document.getElementById("fileUploadLimits");
+
+if (category === "video") {
+fileUploadLimits.textContent = "Max: 500MB for video content";
+} else if (category === "ebook") {
+fileUploadLimits.textContent = "Max: 100MB for e-books";
+} else if (category === "music") {
+fileUploadLimits.textContent = "Max: 100MB for music/songs";
+} else {
+fileUploadLimits.textContent = "Max: 100MB for files";
+}
+});
+
+savePaypalBtn.addEventListener("click", savePayPalEmail);
+
+closeLinksModal.addEventListener("click", function() {
+document.getElementById("linksModal").style.display = "none";
+});
+
+window.openProductModal = openProductModal;
+window.setupPayPalAccount = setupPayPalAccount;
+
+// Setup the PayPal card click handler
+paypalCard.addEventListener("click", function() {
+if (!paypalAccountComplete) {
+setupPayPalAccount();
+}
+});
+
+generateBtn.addEventListener("click", function(e) {
+if (generateBtn.classList.contains("disabled")) {
+e.preventDefault();
+showToast("Please set up your PayPal account first", "error");
+
+if (!paypalAccountComplete) {
+paypalCard.style.animation = "pulse 1s ease 3";
+setTimeout(() => {
+paypalCard.style.animation = "pulse 2s infinite";
+}, 3000);
+}
+}
+});
+
+profileIcon.addEventListener("click", function() {
+deleteModal.style.display = "flex";
+});
+
+window.addEventListener("click", function(event) {
+if (event.target === deleteModal) {
+deleteModal.style.display = "none";
+}
+if (event.target === confirmModal) {
+confirmModal.style.display = "none";
+emailInput.value = "";
+passwordInput.value = "";
+}
+if (event.target === document.getElementById("createProductModal")) {
+document.getElementById("createProductModal").style.display = "none";
+}
+if (event.target === document.getElementById("linksModal")) {
+document.getElementById("linksModal").style.display = "none";
+}
+if (event.target === document.getElementById("paypalModal")) {
+document.getElementById("paypalModal").style.display = "none";
+}
+});
+
+deleteAccountBtn.addEventListener("click", function() {
+deleteModal.style.display = "none";
+confirmModal.style.display = "flex";
+
+if (auth.currentUser && auth.currentUser.email) {
+emailInput.value = auth.currentUser.email;
+}
+});
+
+cancelDeleteBtn.addEventListener("click", function() {
+confirmModal.style.display = "none";
+emailInput.value = "";
+passwordInput.value = "";
+});
+
+confirmDeleteBtn.addEventListener("click", async function() {
+const email = emailInput.value.trim();
+const password = passwordInput.value.trim();
+
+if (!email || !password) {
+showToast("Please enter your email and password", "error");
+return;
+}
+
+try {
+confirmModal.style.display = "none";
+
+const user = auth.currentUser;
+if (!user) {
+throw new Error("User not logged in");
+}
+
+const credential = EmailAuthProvider.credential(email, password);
+await reauthenticateWithCredential(user, credential);
+
+const userId = user.uid;
+
+showToast("Deleting account...", "info");
+
+// Delete user's products
+const productsRef = collection(db, "products");
+const productsQuery = query(productsRef, where("uid", "==", userId));
+const productsSnapshot = await getDocs(productsQuery);
+const productDeletions = [];
+
+productsSnapshot.forEach(productDoc => {
+productDeletions.push(deleteDoc(doc(db, "products", productDoc.id)));
+});
+
+// Delete user's orders
+const ordersRef = collection(db, "orders");
+const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+const ordersSnapshot = await getDocs(ordersQuery);
+const orderDeletions = [];
+
+ordersSnapshot.forEach(orderDoc => {
+orderDeletions.push(deleteDoc(doc(db, "orders", orderDoc.id)));
+});
+
+await Promise.all([
+...productDeletions,
+...orderDeletions
+]);
+
+await deleteDoc(doc(db, "users", userId));
+
+await deleteUser(user);
+
+showToast("Account deleted successfully", "success");
+setTimeout(() => {
+window.location.href = "index.html";
+}, 1500);
+} catch (error) {
+console.error("Error deleting account:", error);
+
+if (error.code === 'auth/wrong-password') {
+showToast("Incorrect password", "error");
+} else if (error.code === 'auth/user-mismatch') {
+showToast("Email doesn't match current user", "error");
+} else if (error.code === 'auth/invalid-email') {
+showToast("Invalid email format", "error");
+} else {
+showToast("Error deleting account: " + error.message, "error");
+}
+}
+});
+
+document.getElementById("yearSelect").addEventListener("change", function() {
+showDataLoader('transactionLoader', true);
+selectedYear = this.value;
+setTimeout(() => {
+if (currentUserData) {
+updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+}
+showDataLoader('transactionLoader', false);
+}, 500);
+});
+
+document.getElementById("monthSelect").addEventListener("change", function() {
+showDataLoader('transactionLoader', true);
+selectedMonth = this.value;
+setTimeout(() => {
+if (currentUserData) {
+updateTransactionList(currentUserData.transactions || [], selectedYear, selectedMonth);
+}
+showDataLoader('transactionLoader', false);
+}, 500);
+});
+
+// Set default year to current year
+const currentYear = new Date().getFullYear().toString();
+const yearSelect = document.getElementById('yearSelect');
+if (yearSelect) {
+for (let i = 0; i < yearSelect.options.length; i++) {
+if (yearSelect.options[i].value === currentYear) {
+yearSelect.selectedIndex = i;
+selectedYear = currentYear;
+break;
+}
+}
+}
+
+// Add click handler for links icon
+linksIcon.addEventListener("click", openLinksModal);
+});
 </script>
 </body>
 </html>
