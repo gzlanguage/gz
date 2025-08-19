@@ -1378,7 +1378,7 @@
             
             userIdToken = await user.getIdToken(true);
             
-            // Utilisation de httpsCallable au lieu de getDoc directement
+            // Utilisation de httpsCallable au lieu de fetch
             const getUserPaypalStatus = httpsCallable(functions, 'getUserPaypalStatus');
             const result = await getUserPaypalStatus();
             
