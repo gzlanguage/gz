@@ -1196,11 +1196,6 @@
     const functions = getFunctions(app, 'us-central1');
     const storage = getStorage(app);
 
-    // Initialize Firebase Cloud Functions
-    const createProductFn = httpsCallable(functions, 'createProduct');
-    const processCheckoutFn = httpsCallable(functions, 'processCheckout');
-    const captureOrderFn = httpsCallable(functions, 'captureOrder');
-
     let currentUserData = null;
     let previousUserData = null;
     let realTimeListeners = [];
@@ -1353,11 +1348,10 @@
             
             showToast("Saving your PayPal email...", "info");
             
-            const userRef = doc(db, "users", user.uid);
-            await updateDoc(userRef, {
-                paypalEmail: paypalEmail,
-                onboardingComplete: true,
-                lastUpdate: serverTimestamp()
+            // Utilisation de httpsCallable au lieu de updateDoc directement
+            const updatePaypalEmail = httpsCallable(functions, 'updatePaypalEmail');
+            await updatePaypalEmail({
+                email: paypalEmail
             });
             
             document.getElementById('paypalModal').style.display = "none";
@@ -1384,31 +1378,11 @@
             
             userIdToken = await user.getIdToken(true);
             
-            const userRef = doc(db, "users", user.uid);
-            const userSnap = await getDoc(userRef);
+            // Utilisation de httpsCallable au lieu de getDoc directement
+            const getUserPaypalStatus = httpsCallable(functions, 'getUserPaypalStatus');
+            const result = await getUserPaypalStatus();
             
-            if (!userSnap.exists()) {
-                await setDoc(userRef, {
-                    uid: user.uid,
-                    email: user.email,
-                    createdAt: serverTimestamp(),
-                    lastUpdate: serverTimestamp(),
-                    onboardingComplete: false,
-                    paypalEmail: null,
-                    linksCount: 0,
-                    viewsCount: 0,
-                    ordersCount: 0,
-                    shippedCount: 0,
-                    revenueCount: 0,
-                    transactions: []
-                });
-                
-                updatePayPalUI(false);
-                return false;
-            }
-            
-            const userData = userSnap.data();
-            const isComplete = userData && userData.onboardingComplete === true && userData.paypalEmail;
+            const isComplete = result.data && result.data.onboardingComplete === true && result.data.paypalEmail;
             
             updatePayPalUI(isComplete);
             
@@ -1559,31 +1533,16 @@
                 throw new Error("User not logged in");
             }
             
-            const productsRef = collection(db, "products");
-            const productsQuery = query(productsRef, where("uid", "==", user.uid));
-            const querySnapshot = await getDocs(productsQuery);
+            // Utilisation de httpsCallable au lieu de getDocs
+            const getUserLinks = httpsCallable(functions, 'getUserLinks');
+            const result = await getUserLinks();
             
-            if (querySnapshot.empty) {
+            if (!result.data || !result.data.links || result.data.links.length === 0) {
                 linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
                 return;
             }
             
-            generatedLinks = [];
-            querySnapshot.forEach(doc => {
-                const product = doc.data();
-                if (product.shareableLink) {
-                    generatedLinks.push({
-                        id: doc.id,
-                        title: product.title || `Product #${generatedLinks.length + 1}`,
-                        link: product.shareableLink
-                    });
-                }
-            });
-            
-            if (generatedLinks.length === 0) {
-                linksList.innerHTML = '<div style="text-align: center; color: #888;">No links generated yet</div>';
-                return;
-            }
+            generatedLinks = result.data.links;
             
             linksList.innerHTML = '';
             generatedLinks.forEach((link, index) => {
@@ -1706,106 +1665,69 @@
             }
             
             // Use httpsCallable to create product
-            try {
-                const result = await createProductFn({
-                    uid: user.uid,
-                    title: title,
-                    category: category,
-                    description: description,
-                    price: priceWithTax.toFixed(2), // Use price with tax
-                    coverData: coverBase64,
-                    fileData: productBase64,
-                    fileName: productFile.name
+            const createProductFn = httpsCallable(functions, 'createProduct');
+            
+            const result = await createProductFn({
+                uid: user.uid,
+                title: title,
+                category: category,
+                description: description,
+                price: priceWithTax.toFixed(2), // Use price with tax
+                coverData: coverBase64,
+                fileData: productBase64,
+                fileName: productFile.name
+            });
+            
+            if (result.data && result.data.shareableLink) {
+                showToast("Product created successfully!", "success");
+                
+                const shareableLink = result.data.shareableLink;
+                
+                const linkModal = document.createElement("div");
+                linkModal.className = "modal";
+                linkModal.style.display = "flex";
+                linkModal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="modal-title">Your Product Link</div>
+                        <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
+                        <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
+                        <button id="closeLinkModalBtn" class="cancel-button">Close</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(linkModal);
+                
+                document.getElementById("copyLinkBtn").addEventListener("click", function() {
+                    navigator.clipboard.writeText(shareableLink).then(() => {
+                        showToast("Link copied to clipboard!", "success");
+                    });
                 });
                 
-                if (result.data && result.data.shareableLink) {
-                    showToast("Product created successfully!", "success");
-                    
-                    const shareableLink = result.data.shareableLink;
-                    
-                    const linkModal = document.createElement("div");
-                    linkModal.className = "modal";
-                    linkModal.style.display = "flex";
-                    linkModal.innerHTML = `
-                        <div class="modal-content">
-                            <div class="modal-title">Your Product Link</div>
-                            <div style="margin-bottom: 15px; word-break: break-all;">${shareableLink}</div>
-                            <button id="copyLinkBtn" class="create-product-button">Copy Link</button>
-                            <button id="closeLinkModalBtn" class="cancel-button">Close</button>
-                        </div>
-                    `;
-                    
-                    document.body.appendChild(linkModal);
-                    
-                    document.getElementById("copyLinkBtn").addEventListener("click", function() {
-                        navigator.clipboard.writeText(shareableLink).then(() => {
-                            showToast("Link copied to clipboard!", "success");
-                        });
-                    });
-                    
-                    document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
+                document.getElementById("closeLinkModalBtn").addEventListener("click", function() {
+                    linkModal.remove();
+                });
+                
+                setTimeout(() => {
+                    if (document.body.contains(linkModal)) {
                         linkModal.remove();
-                    });
-                    
-                    setTimeout(() => {
-                        if (document.body.contains(linkModal)) {
-                            linkModal.remove();
-                        }
-                    }, 30000);
-                    
-                    // Refresh dashboard data
-                    showAllDataLoaders(true);
-                    setTimeout(() => {
-                        refreshDashboardData(user.uid);
-                    }, 1000);
-                } else {
-                    throw new Error("No shareable link provided");
-                }
-            } catch (error) {
-                console.error("Error creating product:", error);
-                showToast(`Error creating product: ${error.message || "Unknown error"}`, "error");
+                    }
+                }, 30000);
+                
+                // Refresh dashboard data
+                showAllDataLoaders(true);
+                setTimeout(() => {
+                    refreshDashboardData(user.uid);
+                }, 1000);
+            } else {
+                throw new Error("No shareable link provided");
             }
         } catch (error) {
-            console.error("Error in product creation process:", error);
+            console.error("Error creating product:", error);
             showToast(`Error: ${error.message || "Unknown error"}`, "error");
         } finally {
             isSubmitting = false;
             const createProductBtn = document.getElementById("createProductBtn");
             if (createProductBtn) createProductBtn.disabled = false;
-        }
-    }
-
-    // Process checkout and payment via Firebase Function
-    async function processCheckout(productId) {
-        try {
-            const user = auth.currentUser;
-            if (!user) {
-                throw new Error("User not logged in");
-            }
-            
-            const result = await processCheckoutFn({
-                productId: productId,
-                buyerId: user.uid
-            });
-            
-            return result.data;
-        } catch (error) {
-            console.error("Error processing checkout:", error);
-            throw error;
-        }
-    }
-
-    // Capture order after payment via Firebase Function
-    async function captureOrder(orderId) {
-        try {
-            const result = await captureOrderFn({
-                orderId: orderId
-            });
-            
-            return result.data;
-        } catch (error) {
-            console.error("Error capturing order:", error);
-            throw error;
         }
     }
 
@@ -1867,11 +1789,12 @@
         }
         
         try {
-            const userDocRef = doc(db, "users", userId);
-            const userDoc = await getDoc(userDocRef);
+            // Utilisation de httpsCallable au lieu de getDoc directement
+            const getUserData = httpsCallable(functions, 'getUserData');
+            const result = await getUserData();
             
-            if (userDoc.exists()) {
-                const userData = userDoc.data();
+            if (result.data) {
+                const userData = result.data;
                 previousUserData = currentUserData;
                 currentUserData = userData;
                 
@@ -1890,26 +1813,15 @@
                 return userData;
             } else {
                 console.log("No user document found, creating new...");
-                const newUserData = {
-                    uid: userId,
-                    email: auth.currentUser ? auth.currentUser.email : "",
-                    linksCount: 0,
-                    viewsCount: 0,
-                    ordersCount: 0,
-                    shippedCount: 0,
-                    revenueCount: 0,
-                    transactions: [],
-                    createdAt: serverTimestamp(),
-                    lastUpdate: serverTimestamp(),
-                    onboardingComplete: false,
-                    paypalEmail: null
-                };
                 
-                await setDoc(userDocRef, newUserData);
-                currentUserData = newUserData;
-                updateDashboardUI(newUserData);
+                // Utilisation de httpsCallable pour créer un nouvel utilisateur
+                const createNewUser = httpsCallable(functions, 'createNewUser');
+                const createResult = await createNewUser();
+                
+                currentUserData = createResult.data;
+                updateDashboardUI(currentUserData);
                 updatePayPalUI(false);
-                return newUserData;
+                return currentUserData;
             }
         } catch (error) {
             console.error("Error loading user data:", error);
@@ -1972,30 +1884,25 @@
             showDataLoader('linksCountLoader', true);
             showDataLoader('viewsCountLoader', true);
             
-            const linksRef = collection(db, "products");
-            const linksQuery = query(linksRef, where("uid", "==", userId));
+            // Utilisation de httpsCallable au lieu de getDocs
+            const getLinksData = httpsCallable(functions, 'getLinksData');
+            const result = await getLinksData();
             
-            const snapshot = await getDocs(linksQuery);
-            let totalLinks = snapshot.size;
-            let totalViews = 0;
-            
-            snapshot.forEach(doc => {
-                const linkData = doc.data();
-                totalViews += linkData.viewCount || 0;
-            });
-            
-            updateCountWithAnimation("linksCount", "linksIndicator", totalLinks, "", previousUserData?.linksCount);
-            updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
-            
-            if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
-                const userDocRef = doc(db, "users", userId);
-                await updateDoc(userDocRef, {
-                    linksCount: totalLinks,
-                    viewsCount: totalViews,
-                    lastUpdate: serverTimestamp()
-                }).catch(error => {
-                    console.error("Error updating user data:", error);
-                });
+            if (result.data) {
+                const totalLinks = result.data.totalLinks || 0;
+                const totalViews = result.data.totalViews || 0;
+                
+                updateCountWithAnimation("linksCount", "linksIndicator", totalLinks, "", previousUserData?.linksCount);
+                updateCountWithAnimation("viewsCount", "viewsIndicator", totalViews, "", previousUserData?.viewsCount);
+                
+                // Mise à jour des compteurs via Cloud Function
+                if (currentUserData && (currentUserData.linksCount !== totalLinks || currentUserData.viewsCount !== totalViews)) {
+                    const updateLinkCounts = httpsCallable(functions, 'updateLinkCounts');
+                    await updateLinkCounts({
+                        linksCount: totalLinks,
+                        viewsCount: totalViews
+                    });
+                }
             }
             
             showDataLoader('linksCountLoader', false);
@@ -2022,71 +1929,36 @@
             showDataLoader('revenueCountLoader', true);
             showDataLoader('transactionLoader', true);
             
-            const ordersRef = collection(db, "orders");
-            const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
+            // Utilisation de httpsCallable au lieu de getDocs
+            const getOrdersData = httpsCallable(functions, 'getOrdersData');
+            const result = await getOrdersData();
             
-            const snapshot = await getDocs(ordersQuery);
-            let totalOrders = snapshot.size;
-            let shippedOrders = 0;
-            let totalRevenue = 0;
-            let transactions = [];
-            
-            snapshot.forEach(doc => {
-                const orderData = doc.data();
-                if (orderData.status === "shipped" || orderData.status === "delivered") {
-                    shippedOrders++;
+            if (result.data) {
+                const totalOrders = result.data.totalOrders || 0;
+                const shippedOrders = result.data.shippedOrders || 0;
+                const totalRevenue = result.data.totalRevenue || 0;
+                const transactions = result.data.transactions || [];
+                
+                updateCountWithAnimation("ordersCount", "ordersIndicator", totalOrders, "", previousUserData?.ordersCount);
+                updateCountWithAnimation("shippedCount", "shippedIndicator", shippedOrders, "", previousUserData?.shippedCount);
+                updateCountWithAnimation("revenueCount", "revenueIndicator", totalRevenue, "$", previousUserData?.revenueCount);
+                
+                updateTransactionList(transactions, selectedYear, selectedMonth);
+                
+                // Mise à jour des compteurs via Cloud Function
+                if (currentUserData && (
+                    currentUserData.ordersCount !== totalOrders || 
+                    currentUserData.shippedCount !== shippedOrders || 
+                    currentUserData.revenueCount !== totalRevenue
+                )) {
+                    const updateOrderCounts = httpsCallable(functions, 'updateOrderCounts');
+                    await updateOrderCounts({
+                        ordersCount: totalOrders,
+                        shippedCount: shippedOrders,
+                        revenueCount: totalRevenue,
+                        transactions: transactions
+                    });
                 }
-                
-                totalRevenue += orderData.totalAmount || 0;
-                
-                transactions.push({
-                    id: doc.id,
-                    title: orderData.productName || "Order #" + doc.id.substring(0, 8),
-                    amount: orderData.totalAmount || 0,
-                    date: orderData.createdAt || new Date(),
-                    status: orderData.status || "pending",
-                    type: "sale"
-                });
-            });
-            
-            // Add payout transactions
-            const payoutsRef = collection(db, "payouts");
-            const payoutsQuery = query(payoutsRef, where("sellerId", "==", userId));
-            const payoutsSnapshot = await getDocs(payoutsQuery);
-            
-            payoutsSnapshot.forEach(doc => {
-                const payoutData = doc.data();
-                transactions.push({
-                    id: doc.id,
-                    title: "Weekly Payout",
-                    amount: payoutData.amount || 0,
-                    date: payoutData.createdAt || new Date(),
-                    status: "completed",
-                    type: "payout"
-                });
-            });
-            
-            updateCountWithAnimation("ordersCount", "ordersIndicator", totalOrders, "", previousUserData?.ordersCount);
-            updateCountWithAnimation("shippedCount", "shippedIndicator", shippedOrders, "", previousUserData?.shippedCount);
-            updateCountWithAnimation("revenueCount", "revenueIndicator", totalRevenue, "$", previousUserData?.revenueCount);
-            
-            updateTransactionList(transactions, selectedYear, selectedMonth);
-            
-            if (currentUserData && (
-                currentUserData.ordersCount !== totalOrders || 
-                currentUserData.shippedCount !== shippedOrders || 
-                currentUserData.revenueCount !== totalRevenue
-            )) {
-                const userDocRef = doc(db, "users", userId);
-                await updateDoc(userDocRef, {
-                    ordersCount: totalOrders,
-                    shippedCount: shippedOrders,
-                    revenueCount: totalRevenue,
-                    transactions: transactions,
-                    lastUpdate: serverTimestamp()
-                }).catch(error => {
-                    console.error("Error updating order data:", error);
-                });
             }
             
             showDataLoader('ordersCountLoader', false);
@@ -2428,36 +2300,11 @@
                 const credential = EmailAuthProvider.credential(email, password);
                 await reauthenticateWithCredential(user, credential);
                 
-                const userId = user.uid;
-                
                 showToast("Deleting account...", "info");
                 
-                // Delete user's products
-                const productsRef = collection(db, "products");
-                const productsQuery = query(productsRef, where("uid", "==", userId));
-                const productsSnapshot = await getDocs(productsQuery);
-                const productDeletions = [];
-                
-                productsSnapshot.forEach(productDoc => {
-                    productDeletions.push(deleteDoc(doc(db, "products", productDoc.id)));
-                });
-                
-                // Delete user's orders
-                const ordersRef = collection(db, "orders");
-                const ordersQuery = query(ordersRef, where("sellerId", "==", userId));
-                const ordersSnapshot = await getDocs(ordersQuery);
-                const orderDeletions = [];
-                
-                ordersSnapshot.forEach(orderDoc => {
-                    orderDeletions.push(deleteDoc(doc(db, "orders", orderDoc.id)));
-                });
-                
-                await Promise.all([
-                    ...productDeletions,
-                    ...orderDeletions
-                ]);
-                
-                await deleteDoc(doc(db, "users", userId));
+                // Utilisation de httpsCallable pour supprimer le compte
+                const deleteUserAccount = httpsCallable(functions, 'deleteUserAccount');
+                await deleteUserAccount();
                 
                 await deleteUser(user);
                 
@@ -2520,3 +2367,4 @@
     });
 </script>
 </body>
+</html>
