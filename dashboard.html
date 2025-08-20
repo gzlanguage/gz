@@ -1350,7 +1350,7 @@ savePaypalBtn.disabled = true;
 showToast("Saving your PayPal email...", "info");
 userIdToken = await user.getIdToken(true);
 
-const response = await fetch(`${API_BASE_URL}/savePaypalEmail`, {
+const response = await fetch(`${API_BASE_URL}/updatePaypalEmail`, {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json',
@@ -1390,7 +1390,7 @@ if (!user) return false;
 
 userIdToken = await user.getIdToken(true);
 
-const response = await fetch(`${API_BASE_URL}/checkPaypalStatus`, {
+const response = await fetch(`${API_BASE_URL}/getUserPaypalStatus`, {
 method: 'GET',
 headers: {
 'Authorization': `Bearer ${userIdToken}`
@@ -2162,7 +2162,7 @@ await reauthenticateWithCredential(user, credential);
 
 showToast("Deleting account...", "info");
 
-const response = await fetch(`${API_BASE_URL}/deleteAccount`, {
+const response = await fetch(`${API_BASE_URL}/deleteUserAccount`, {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json',
