@@ -472,7 +472,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
@@ -504,30 +504,54 @@
         let currentAccountType = 'individual';
         let countriesLoaded = false;
 
-        // Fonction pour générer un ID utilisateur unique
-        function generateUniqueUserId() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const letterPart = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const numberPart = '0123456789';
-            
-            // Génère un ID avec une combinaison de lettres et chiffres
+        // Fonction pour générer un ID utilisateur unique de 6 caractères
+        function generateUserId() {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const digits = "0123456789";
             let result = '';
             
-            // Ajoute d'abord une lettre aléatoire (entre A et Z)
-            result += letterPart.charAt(Math.floor(Math.random() * letterPart.length));
-            
-            // Ajoute un chiffre (entre 0 et 9)
-            result += numberPart.charAt(Math.floor(Math.random() * numberPart.length));
-            
-            // Ajoute 10 caractères supplémentaires aléatoires
-            for (let i = 0; i < 10; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            // Assure-toi d'avoir au moins 2 lettres et 2 chiffres
+            for (let i = 0; i < 2; i++) {
+                result += letters.charAt(Math.floor(Math.random() * letters.length));
             }
             
-            // Ajoute un timestamp pour garantir l'unicité
-            result += Date.now().toString(36);
+            for (let i = 0; i < 2; i++) {
+                result += digits.charAt(Math.floor(Math.random() * digits.length));
+            }
             
-            return result;
+            // Ajoute 2 caractères aléatoires (lettres ou chiffres) pour compléter les 6
+            const allChars = letters + digits;
+            for (let i = 0; i < 2; i++) {
+                result += allChars.charAt(Math.floor(Math.random() * allChars.length));
+            }
+            
+            // Mélange les caractères pour rendre l'ID moins prévisible
+            return result.split('').sort(() => 0.5 - Math.random()).join('');
+        }
+        
+        // Fonction pour vérifier si un userId existe déjà
+        async function isUserIdUnique(userId) {
+            try {
+                const querySnapshot = await getDoc(doc(db, "userIds", userId));
+                return !querySnapshot.exists();
+            } catch (error) {
+                console.error("Error checking userId uniqueness:", error);
+                return false;
+            }
+        }
+        
+        // Fonction pour générer un userId unique
+        async function generateUniqueUserId() {
+            let userId;
+            let isUnique = false;
+            
+            // Essaie jusqu'à trouver un ID unique
+            while (!isUnique) {
+                userId = generateUserId();
+                isUnique = await isUserIdUnique(userId);
+            }
+            
+            return userId;
         }
 
         function showMessage(container, message, type = 'error') {
@@ -789,7 +813,23 @@
                 return;
             }
 
-            // Validation des champs spécifiques selon le type de compte
+            let userData = {
+                fullName: fullName,
+                email: email,
+                country: country,
+                birthdate: birthdate.toISOString().split('T')[0],
+                accountType: currentAccountType,
+                createdAt: serverTimestamp(),
+                lastLogin: serverTimestamp(),
+                linksCount: 0,
+                viewsCount: 0,
+                ordersCount: 0,
+                shippedCount: 0,
+                revenueCount: 0,
+                onboardingComplete: false,
+                transactions: [],
+            };
+            
             if (currentAccountType === 'individual') {
                 const phone = document.getElementById("individualPhone").value.trim();
                 const address = document.getElementById("individualAddress").value.trim();
@@ -815,12 +855,21 @@
                     simulateProgress(40, 100, 100);
                     return;
                 }
-            } else {
+                
+                // Ajout des données individuelles directement dans l'objet userData
+                userData = {
+                    ...userData,
+                    phone: phone,
+                    address: address,
+                    occupation: occupation
+                };
+            } else { // business
                 const companyName = document.getElementById("companyName").value.trim();
                 const registrationNumber = document.getElementById("businessRegistrationNumber").value.trim();
                 const companySize = document.getElementById("companySize").value;
                 const businessPhone = document.getElementById("businessPhone").value.trim();
                 const businessAddress = document.getElementById("businessAddress").value.trim();
+                const website = document.getElementById("businessWebsite").value.trim();
                 
                 if (!companyName) {
                     showMessage(signupMessages, "Please enter your company name", "error");
@@ -856,6 +905,17 @@
                     simulateProgress(40, 100, 100);
                     return;
                 }
+                
+                // Ajout des données business directement dans l'objet userData
+                userData = {
+                    ...userData,
+                    companyName: companyName,
+                    registrationNumber: registrationNumber,
+                    companySize: companySize,
+                    phone: businessPhone,
+                    address: businessAddress,
+                    website: website || null
+                };
             }
 
             simulateProgress(40, 60, 300);
@@ -863,95 +923,55 @@
             try {
                 showMessage(signupMessages, "Creating your account...", "info");
                 
-                // Création de l'utilisateur dans Firebase Auth
+                // Création du compte utilisateur
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
+                simulateProgress(60, 80, 400);
+                showMessage(signupMessages, "Generating your unique ID...", "info");
+
+                // Génération d'un ID utilisateur unique
+                const userId = await generateUniqueUserId();
+                
                 if (!user || !user.uid) {
                     throw new Error("Failed to get user UID");
                 }
 
-                // Générer un ID unique pour l'utilisateur
-                const customUserId = generateUniqueUserId();
-                
-                simulateProgress(60, 80, 400);
-                showMessage(signupMessages, "Saving your information...", "info");
-
-                // Préparer les données de base de l'utilisateur
-                let userData = {
+                // Mise à jour des données utilisateur avec uid et userId
+                userData = {
+                    ...userData,
                     uid: user.uid,
-                    customId: customUserId,
-                    fullName: fullName,
-                    email: user.email,
-                    country: country,
-                    birthdate: birthdate.toISOString().split('T')[0],
-                    createdAt: serverTimestamp(),
-                    lastLogin: serverTimestamp(),
-                    accountType: currentAccountType,
-                    linksCount: 0,
-                    viewsCount: 0,
-                    ordersCount: 0,
-                    shippedCount: 0,
-                    revenueCount: 0,
-                    onboardingComplete: false,
-                    transactions: []
+                    userId: userId
                 };
 
-                // Ajouter les informations spécifiques selon le type de compte
-                if (currentAccountType === 'individual') {
-                    const phone = document.getElementById("individualPhone").value.trim();
-                    const address = document.getElementById("individualAddress").value.trim();
-                    const occupation = document.getElementById("individualOccupation").value;
-                    
-                    userData.individualInfo = {
-                        phone: phone,
-                        address: address,
-                        occupation: occupation
-                    };
-                } else {
-                    const companyName = document.getElementById("companyName").value.trim();
-                    const registrationNumber = document.getElementById("businessRegistrationNumber").value.trim();
-                    const companySize = document.getElementById("companySize").value;
-                    const businessPhone = document.getElementById("businessPhone").value.trim();
-                    const businessAddress = document.getElementById("businessAddress").value.trim();
-                    const website = document.getElementById("businessWebsite").value.trim();
-                    
-                    userData.businessInfo = {
-                        companyName: companyName,
-                        registrationNumber: registrationNumber,
-                        companySize: companySize,
-                        phone: businessPhone,
-                        address: businessAddress,
-                        website: website || null
-                    };
-                }
+                // Enregistrement du userId dans une collection séparée pour vérifier l'unicité
+                await setDoc(doc(db, "userIds", userId), {
+                    uid: user.uid,
+                    createdAt: serverTimestamp()
+                });
 
-                // Sauvegarder les données dans Firestore
-                try {
-                    await setDoc(doc(db, "users", user.uid), userData);
-                    
-                    // Sauvegarder également les statistiques de l'utilisateur
-                    await setDoc(doc(db, "userStats", user.uid), {
-                        uid: user.uid,
-                        customId: customUserId,
-                        email: user.email,
-                        accountType: currentAccountType,
-                        createdAt: serverTimestamp(),
-                        lastActive: serverTimestamp()
-                    });
-                    
-                    simulateProgress(80, 100, 300);
-                    showMessage(signupMessages, "Account created successfully!", "success");
+                // Enregistrement des données utilisateur dans la collection users
+                await setDoc(doc(db, "users", user.uid), userData);
+                
+                // Mise à jour des statistiques utilisateur
+                await setDoc(doc(db, "userStats", user.uid), {
+                    uid: user.uid,
+                    userId: userId,
+                    email: email,
+                    accountType: currentAccountType,
+                    createdAt: serverTimestamp(),
+                    lastActive: serverTimestamp()
+                });
+                
+                simulateProgress(80, 100, 300);
+                showMessage(signupMessages, "Account created successfully! Redirecting...", "success");
 
-                    // Redirection vers le tableau de bord
-                    setTimeout(() => {
-                        toggleLoader(true);
-                        window.location.href = "dashboard.html"; 
-                    }, 1500);
-                } catch (error) {
-                    console.error("Error saving user data:", error);
-                    throw new Error("Failed to save user data: " + error.message);
-                }
+                // Délai de 5 secondes avant la redirection vers le dashboard
+                setTimeout(() => {
+                    toggleLoader(true);
+                    window.location.href = "dashboard.html"; 
+                }, 5000);
+                
             } catch (error) {
                 let errorMessage = "Error creating account";
                 
@@ -1005,17 +1025,22 @@
                     await setDoc(doc(db, "users", user.uid), {
                         lastLogin: serverTimestamp()
                     }, { merge: true });
+                    
+                    await setDoc(doc(db, "userStats", user.uid), {
+                        lastActive: serverTimestamp()
+                    }, { merge: true });
                 } catch (updateError) {
                     console.error("Error updating last login:", updateError);
                 }
                 
                 simulateProgress(50, 100, 300);
-                showMessage(loginMessages, "Login successful!", "success");
+                showMessage(loginMessages, "Login successful! Redirecting...", "success");
                 
+                // Délai de 2 secondes avant la redirection vers le dashboard
                 setTimeout(() => {
                     toggleLoader(true);
                     window.location.href = "dashboard.html"; 
-                }, 1000);
+                }, 2000);
             } catch (error) {
                 let errorMessage;
                 
