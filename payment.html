@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
             color: #333;
         }
         header {
-            background-color: #ffffff; /* Couleur de fond de l'en-tête */
+            background-color: #ffffff;
             padding: 9px;
             display: flex;
             align-items: center;
@@ -26,8 +26,8 @@
             margin: 0;
             font-size: 1.3em;
             font-family: 'Billabong', cursive;
-            color: #007BFF;
-            border: 2px solid #007BFF;
+            color: #007bff;
+            border: 2px solid #007bff;
             padding: 5px;
             border-radius: 14px;
         }
@@ -41,10 +41,10 @@
             justify-content: center;
             width: 30px;
             height: 30px;
-            border: 1px solid #007BFF; 
+            border: 1px solid #007bff; 
             border-radius: 8px;
             background-color: white;
-            color: #007BFF;
+            color: #007bff;
             margin-left: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -55,7 +55,7 @@
         }
         .divider {
             height: 1px;
-            background-color: #007BFF;
+            background-color: #007bff;
             width: 100%;
             margin: 0 0 8px 0;
         }
@@ -77,7 +77,7 @@
             margin-right: 2px; 
         }
         .button {
-            background-color: #007BFF;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 13px;
@@ -87,29 +87,28 @@
             transition: background-color 0.3s;
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: #0055aa;
         }
         .footer-button {
             margin-left: 10px;
         }
         .content-container {
             width: 330px;
-            height: 220px; /* Hauteur à 220px */
+            height: 220px;
             margin: 10px auto;
             position: relative;
             overflow: hidden;
             border-radius: 8px;
             background-color: #d3d3d3;
-            border: 1px solid #007BFF;
+            border: 1px solid #007bff;
         }
         .slider {
             display: flex;
-            width: 200%;
+            width: 100%;
             height: 100%;
-            transition: transform 0.3s ease-in-out;
         }
         .slide {
-            width: 50%;
+            width: 100%;
             height: 100%;
             flex-shrink: 0;
             display: flex;
@@ -119,13 +118,13 @@
         }
         .cover-image {
             width: 100%;
-            height: 100%; /* Ajustement de la hauteur de l'image */
+            height: 100%;
             object-fit: cover;
             display: block;
         }
         .video-container {
             width: 100%;
-            height: 100%; /* Ajustement de la hauteur de la vidéo */
+            height: 100%;
             background-color: #000;
             display: flex;
             align-items: center;
@@ -153,51 +152,32 @@
         .dot.active {
             background-color: #007bff;
         }
-        .swipe-instruction {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 5;
-        }
-        .content-container:hover .swipe-instruction {
-            opacity: 1;
-        }
         .description {
-            width: 310px; /* Réduction de la largeur à 330px */
+            width: 310px;
             margin: 10px auto;
             padding: 10px;
-            background-color: #f5f5f5; /* Fond blanc */
+            background-color: #f5f5f5;
             border-radius: 13px;
-            border: 1px solid #007BFF;
-            text-align: left; /* Aligne le texte à gauche */
-            margin-top: 0; /* Supprime la marge en haut */
+            border: 1px solid #007bff;
+            text-align: left;
+            margin-top: 0;
             max-height: 150px;
             overflow-y: auto;
         }
         .description p {
-            margin: 0; /* Supprime la marge du paragraphe */
+            margin: 0;
         }
-        /* Nouveau style pour le bouton de téléchargement */
         .download-button-container {
             display: flex;
             justify-content: center;
-            margin: 10px auto; /* Réduit la marge pour rapprocher des conditions */
+            margin: 10px auto;
         }
         .download-button {
             background-color: white;
-            color: #007BFF;
-            border: 2px solid #007BFF;
-            border-radius: 13px;
-            padding: 10px 15px;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 30px;
+            padding: 10px 30px;
             font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -208,10 +188,6 @@
         .download-button:hover {
             background-color: #e9f5ff;
         }
-        .download-button i {
-            margin-right: 8px;
-        }
-        /* Animation des bordures du bouton de téléchargement */
         @keyframes borderAnimation {
             0% { border-color: green; }
             25% { border-color: #007bff; }
@@ -220,9 +196,8 @@
             100% { border-color: green; }
         }
         .download-button {
-            animation: borderAnimation 2s infinite; /* Animation des bordures */
+            animation: borderAnimation 2s infinite;
         }
-        /* Style pour la notification de copie */
         .copy-notification {
             position: fixed;
             bottom: 20px;
@@ -241,20 +216,19 @@
             opacity: 1;
         }
         
-        /* Style pour les informations produit */
         .product-info {
-            width: 305px; /* Réduit la largeur */
+            width: 305px;
             margin: 10px auto;
             padding: 7px;
             background-color: #f0f8ff;
             border-radius: 13px;
-            border: 1px solid #007BFF;
+            border: 1px solid #007bff;
             text-align: center;
         }
         
         .product-title {
             font-weight: bold;
-            color: #007BFF;
+            color: #007bff;
             margin-bottom: 5px;
         }
         
@@ -263,7 +237,6 @@
             margin: 5px 0;
         }
         
-        /* Style pour les conditions d'achat */
         .purchase-terms {
             width: 310px;
             margin: 10px auto 20px;
@@ -291,7 +264,7 @@
         
         .vendor-info {
             font-weight: bold;
-            color: #007BFF;
+            color: #007bff;
         }
         
         .product-category {
@@ -299,7 +272,6 @@
             color: #666;
         }
         
-        /* Style pour la case à cocher */
         .terms-checkbox-container {
             display: flex;
             align-items: center;
@@ -322,13 +294,92 @@
             font-weight: 500;
         }
         
-        /* Style pour le bouton désactivé */
         .download-button:disabled {
             animation: none;
             background-color: #e0e0e0;
             border-color: #cccccc;
             color: #999999;
             cursor: not-allowed;
+        }
+        
+        .id-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 15px;
+            border-radius: 30px;
+            border: 2px solid #007bff;
+            z-index: 1000;
+            width: 250px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .id-modal h3 {
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .id-input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #007bff;
+            border-radius: 15px;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        .id-submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .id-submit:hover {
+            background-color: #0055aa;
+        }
+        
+        .id-result {
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .success {
+            color: green;
+        }
+        
+        .error {
+            color: red;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .id-hint {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -347,77 +398,76 @@
 
 <div class="button-container">
     <a class="button" href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
-    <a class="button footer-button" href="conditions.html"><i class="fas fa-file-contract"></i> Termes</a>
+    <a class="button footer-button" href="conditions.html"><i class="fas fa-file-contract"></i> Terms</a>
     <a class="button footer-button" href="privacy.html"><i class="fas fa-file-contract"></i> Privacy</a>
 </div>
 
 <div class="divider"></div>
 
 <div class="content-container">
-    <div class="swipe-instruction">Glisser pour voir l'extrait</div>
     <div class="slider" id="contentSlider">
         <div class="slide" id="coverSlide">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='330' height='220' viewBox='0 0 330 220'%3E%3Crect width='330' height='220' fill='%23d3d3d3'/%3E%3Ctext x='165' y='110' font-family='Arial' font-size='16' text-anchor='middle' fill='%23555555'%3EImage de couverture%3C/text%3E%3C/svg%3E" alt="Couverture" class="cover-image" id="cover-image">
-        </div>
-        <div class="slide" id="excerptSlide">
-            <div class="video-container">
-                <video id="excerptVideo" controls>
-                    <source src="" type="video/mp4">
-                    Votre navigateur ne prend pas en charge la vidéo.
-                </video>
-            </div>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='330' height='220' viewBox='0 0 330 220'%3E%3Crect width='330' height='220' fill='%23d3d3d3'/%3E%3Ctext x='165' y='110' font-family='Arial' font-size='16' text-anchor='middle' fill='%23555555'%3ECover Image%3C/text%3E%3C/svg%3E" alt="Cover" class="cover-image" id="cover-image">
         </div>
     </div>
     <div class="swipe-indicator">
         <div class="dot active" id="dot1"></div>
-        <div class="dot" id="dot2"></div>
     </div>
 </div>
 
-<!-- Informations produit -->
+<!-- Product information -->
 <div class="product-info" id="product-info">
-    <div class="product-title" id="product-title">Chargement du produit...</div>
+    <div class="product-title" id="product-title">Loading product...</div>
     <div class="product-price" id="product-price"></div>
 </div>
 
-<!-- Section pour la description -->
+<!-- Description section -->
 <div class="description">
-    <p id="product-description">Chargement de la description...</p>
+    <p id="product-description">Loading description...</p>
 </div>
 
-<!-- Bouton de téléchargement -->
+<!-- Download button -->
 <div class="download-button-container">
     <button class="download-button" id="downloadButton" disabled>
-        <i class="fas fa-download"></i> Télécharger
+        Get Access
     </button>
 </div>
 
-<!-- Conditions d'achat -->
+<!-- Purchase terms -->
 <div class="purchase-terms">
-    <h3>Conditions d'achat</h3>
-    <p>En téléchargeant ce produit, l'acheteur reconnaît qu'il s'agit de l'œuvre intellectuelle d'une personne et s'engage à :</p>
-    <p>• Ne pas redistribuer ce contenu gratuitement</p>
-    <p>• Ne pas revendre ce produit à des tiers</p>
-    <p>• Ne pas reproduire le contenu sans autorisation</p>
-    <p>• Respecter les droits d'auteur et la propriété intellectuelle</p>
-    <p>Toute violation de ces conditions peut entraîner des poursuites légales.</p>
+    <h3>Purchase Terms</h3>
+    <p>By downloading this product, the buyer acknowledges this is intellectual property and agrees to:</p>
+    <p>• Monetizelt is solely a streaming platform</p>
+    <p>• No refunds are provided as purchase confirms satisfaction with the product</p>
+    <p>• Respect copyright and intellectual property rights</p>
+    <p>Any violation may result in legal proceedings.</p>
     
-    <!-- Case à cocher pour les conditions -->
+    <!-- Terms checkbox -->
     <div class="terms-checkbox-container">
         <input type="checkbox" id="termsCheckbox" class="terms-checkbox">
-        <label for="termsCheckbox" class="terms-checkbox-label">J'accepte les conditions d'achat ci-dessus</label>
+        <label for="termsCheckbox" class="terms-checkbox-label">I accept the purchase terms above</label>
     </div>
 </div>
 
-<!-- Notification de copie -->
-<div class="copy-notification" id="copyNotification">URL copiée dans le presse-papiers!</div>
+<!-- ID Number Modal -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="id-modal" id="idModal">
+    <h3>Link Your ID Number</h3>
+    <p class="id-hint">Enter the ID Number from your account</p>
+    <input type="text" class="id-input" id="idInput" maxlength="6" placeholder="Enter your ID">
+    <div class="id-result" id="idResult"></div>
+    <button class="id-submit" id="idSubmit">Verify</button>
+</div>
+
+<!-- Copy notification -->
+<div class="copy-notification" id="copyNotification">URL copied to clipboard!</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
 <script>
-    // Configuration Firebase
+    // Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAF4I7E6-_z8y_8n8P35zyKbh9WOEtIzMQ",
         authDomain: "monetizelt-b235d.firebaseapp.com",
@@ -428,7 +478,7 @@
         measurementId: "G-5NWKR1E9VY"
     };
 
-    // Initialiser Firebase
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const storage = firebase.storage();
     const db = firebase.firestore();
@@ -436,9 +486,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         const slider = document.getElementById('contentSlider');
         const dot1 = document.getElementById('dot1');
-        const dot2 = document.getElementById('dot2');
-        const swipeInstruction = document.querySelector('.swipe-instruction');
-        const video = document.getElementById('excerptVideo');
         const copyButton = document.getElementById('copyButton');
         const copyNotification = document.getElementById('copyNotification');
         const downloadButton = document.getElementById('downloadButton');
@@ -447,252 +494,216 @@
         const productTitle = document.getElementById('product-title');
         const productPrice = document.getElementById('product-price');
         const termsCheckbox = document.getElementById('termsCheckbox');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const idModal = document.getElementById('idModal');
+        const idInput = document.getElementById('idInput');
+        const idSubmit = document.getElementById('idSubmit');
+        const idResult = document.getElementById('idResult');
         
-        // Activer/désactiver le bouton de téléchargement en fonction de la case à cocher
+        // Enable/disable download button based on checkbox
         termsCheckbox.addEventListener('change', function() {
             downloadButton.disabled = !this.checked;
         });
         
-        // Récupérer les données du produit 
+        // Get product data from URL 
         function getProductDataFromURL() {
-            // Obtenir l'ID du produit à partir de l'URL (paramètre 'id')
+            // Get product ID from URL parameter
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             
             if (productId) {
-                // Récupérer les données du produit depuis Firestore
+                // Retrieve product data from Firestore
                 db.collection('products').doc(productId).get()
                     .then((doc) => {
                         if (doc.exists) {
                             const productData = doc.data();
                             
-                            // Stocker les données localement
+                            // Store data locally
                             localStorage.setItem('monetizelt_product', JSON.stringify(productData));
                             
-                            // Initialiser la page avec les données
+                            // Initialize page with data
                             initProductPage(productData);
                         } else {
-                            console.error("Aucun produit trouvé avec cet ID");
-                            productDescription.textContent = "Produit non trouvé.";
-                            productTitle.textContent = "Erreur";
+                            console.error("No product found with this ID");
+                            productDescription.textContent = "Product not found.";
+                            productTitle.textContent = "Error";
                         }
                     })
                     .catch((error) => {
-                        console.error("Erreur lors de la récupération du produit:", error);
-                        productDescription.textContent = "Erreur lors du chargement du produit.";
-                        productTitle.textContent = "Erreur";
+                        console.error("Error retrieving product:", error);
+                        productDescription.textContent = "Error loading product.";
+                        productTitle.textContent = "Error";
                     });
             } else {
-                // Essayer de récupérer les données du localStorage
+                // Try to get data from localStorage
                 const savedProductData = JSON.parse(localStorage.getItem('monetizelt_product') || '{}');
                 if (savedProductData && Object.keys(savedProductData).length > 0) {
                     initProductPage(savedProductData);
                 } else {
-                    productDescription.textContent = "Aucun produit spécifié.";
-                    productTitle.textContent = "Erreur";
+                    productDescription.textContent = "No product specified.";
+                    productTitle.textContent = "Error";
                 }
             }
         }
         
-        // Récupérer le produit depuis l'URL ou le localStorage
+        // Get product from URL or localStorage
         getProductDataFromURL();
         
-        // Initialiser l'interface avec les données du produit
+        // Initialize interface with product data
         function initProductPage(productData) {
             if (productData && Object.keys(productData).length > 0) {
-                // Mise à jour de l'image de couverture
+                // Update cover image
                 if (productData.coverImage) {
                     coverImage.src = productData.coverImage;
                 }
                 
-                // Mise à jour de la vidéo d'extrait
-                if (productData.excerptFile) {
-                    video.src = productData.excerptFile;
-                }
-                
-                // Mise à jour de la description
+                // Update description
                 if (productData.description) {
                     productDescription.textContent = productData.description;
                 }
                 
-                // Mise à jour des informations du produit avec vendeur et catégorie
+                // Update product info with vendor and category
                 let categoryText = '';
-                if (productData.category === 'ebook') {
-                    categoryText = 'E-book';
-                    if (productData.subcategory) {
-                        categoryText += '/' + productData.subcategory;
-                    }
-                } else if (productData.category === 'video') {
-                    categoryText = 'Vidéo';
-                    if (productData.subcategory) {
-                        categoryText += '/' + productData.subcategory;
-                    }
+                if (productData.category) {
+                    categoryText = productData.category.charAt(0).toUpperCase() + productData.category.slice(1);
                 }
                 
-                // Ajouter le nom du vendeur
-                const vendorName = productData.vendorName || 'Anonyme';
-                productTitle.innerHTML = `<span class="vendor-info">${vendorName}</span> - Produit : <span class="product-category">${categoryText}</span>`;
+                // Add vendor name
+                const vendorName = productData.vendorName || 'Anonymous';
+                productTitle.innerHTML = `<span class="vendor-info">${vendorName}</span> - Product: <span class="product-category">${categoryText}</span>`;
                 
                 if (productData.price) {
-                    productPrice.textContent = `${productData.price.toFixed(2)} $`;
+                    productPrice.textContent = `$${productData.price.toFixed(2)}`;
                 }
             } else {
-                // Fallback si aucune donnée n'est trouvée
-                productDescription.textContent = "Aucune information disponible pour ce produit.";
-                productTitle.textContent = "Produit inconnu";
+                // Fallback if no data found
+                productDescription.textContent = "No information available for this product.";
+                productTitle.textContent = "Unknown product";
             }
         }
         
-        let startX, currentPosition = 0;
-        let isDragging = false;
-
-        function updateIndicators(position) {
-            if (position === 0) {
-                dot1.classList.add('active');
-                dot2.classList.remove('active');
-                swipeInstruction.textContent = "Glisser pour voir l'extrait";
-                if (video.played.length > 0) {
-                    video.pause();
-                }
-            } else {
-                dot1.classList.remove('active');
-                dot2.classList.add('active');
-                swipeInstruction.textContent = "Glisser pour voir la couverture";
-            }
-        }
-
-        slider.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-        });
-
-        slider.addEventListener('touchmove', function(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.touches[0].clientX;
-            const diff = startX - x;
-            let newPosition = currentPosition === 0 ? Math.max(0, Math.min(50, diff / 3)) : -50 + Math.max(0, Math.min(50, diff / 3));
-            slider.style.transform = `translateX(-${newPosition}%)`;
-        });
-
-        slider.addEventListener('touchend', function(e) {
-            if (!isDragging) return;
-            isDragging = false;
-            const x = e.changedTouches[0].clientX;
-            const diff = startX - x;
-            if (Math.abs(diff) > 50) { 
-                if (diff > 0 && currentPosition === 0) {
-                    currentPosition = 50;
-                } else if (diff < 0 && currentPosition === 50) {
-                    currentPosition = 0;
-                }
-            }
-            slider.style.transform = `translateX(-${currentPosition}%)`;
-            updateIndicators(currentPosition);
-        });
-
-        slider.addEventListener('mousedown', function(e) {
-            startX = e.clientX;
-            isDragging = true;
-            e.preventDefault();
-        });
-
-        slider.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.clientX;
-            const diff = startX - x;
-            let newPosition = currentPosition === 0 ? Math.max(0, Math.min(50, diff / 3)) : -50 + Math.max(0, Math.min(50, diff / 3));
-            slider.style.transform = `translateX(-${newPosition}%)`;
-        });
-
-        slider.addEventListener('mouseup', function(e) {
-            if (!isDragging) return;
-            isDragging = false;
-            const diff = startX - e.clientX;
-            if (Math.abs(diff) > 50) { 
-                if (diff > 0 && currentPosition === 0) {
-                    currentPosition = 50;
-                } else if (diff < 0 && currentPosition === 50) {
-                    currentPosition = 0;
-                }
-            }
-            slider.style.transform = `translateX(-${currentPosition}%)`;
-            updateIndicators(currentPosition);
-        });
-
-        document.addEventListener('mouseup', function() {
-            if (isDragging) {
-                isDragging = false;
-                slider.style.transform = `translateX(-${currentPosition}%)`;
-            }
-        });
-
-        dot1.addEventListener('click', function() {
-            currentPosition = 0;
-            slider.style.transform = `translateX(-${currentPosition}%)`;
-            updateIndicators(currentPosition);
-        });
-
-        dot2.addEventListener('click', function() {
-            currentPosition = 50;
-            slider.style.transform = `translateX(-${currentPosition}%)`;
-            updateIndicators(currentPosition);
-        });
-
-        // Fonction pour copier l'URL actuelle
+        // Copy current URL function
         copyButton.addEventListener('click', function() {
             const currentUrl = window.location.href;
             
-            // Copier l'URL dans le presse-papiers
+            // Copy URL to clipboard
             navigator.clipboard.writeText(currentUrl).then(function() {
-                // Afficher la notification
+                // Show notification
                 copyNotification.classList.add('show');
                 
-                // Cacher la notification après 2 secondes
+                // Hide notification after 2 seconds
                 setTimeout(function() {
                     copyNotification.classList.remove('show');
                 }, 2000);
             }).catch(function(err) {
-                console.error('Impossible de copier: ', err);
-                alert('Impossible de copier l\'URL. Erreur: ' + err);
+                console.error('Unable to copy: ', err);
+                alert('Unable to copy URL. Error: ' + err);
             });
         });
 
-        // Fonction pour télécharger le fichier
+        // Show ID Number modal
         downloadButton.addEventListener('click', function() {
-            // Récupérer les données du produit depuis localStorage
-            const productData = JSON.parse(localStorage.getItem('monetizelt_product') || '{}');
+            if (termsCheckbox.checked) {
+                modalOverlay.style.display = 'block';
+                idModal.style.display = 'block';
+                idInput.value = '';
+                idResult.style.display = 'none';
+                idResult.className = 'id-result';
+            }
+        });
+        
+        // Close modal when clicking overlay
+        modalOverlay.addEventListener('click', function() {
+            modalOverlay.style.display = 'none';
+            idModal.style.display = 'none';
+        });
+        
+        // Format input to respect format
+        idInput.addEventListener('input', function() {
+            // Keep only letters and numbers
+            this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
             
-            if (productData && productData.productFile) {
-                // Créer un lien de téléchargement
-                const link = document.createElement('a');
-                link.href = productData.productFile.data;
-                link.download = productData.productFile.name || 'téléchargement';
-                
-                // Ajouter le lien au DOM et cliquer dessus
-                document.body.appendChild(link);
-                link.click();
-                
-                // Nettoyer
-                setTimeout(() => {
-                    document.body.removeChild(link);
-                }, 100);
-                
-                // Enregistrer l'achat dans la base de données si nécessaire
-                if (productData.id) {
-                    db.collection('purchases').add({
-                        productId: productData.id,
-                        purchaseDate: new Date(),
-                        // Vous pouvez ajouter d'autres informations si nécessaire
-                    }).then(() => {
-                        console.log("Achat enregistré avec succès");
-                    }).catch((error) => {
-                        console.error("Erreur lors de l'enregistrement de l'achat:", error);
-                    });
-                }
-            } else {
-                alert('Désolé, le fichier de produit n\'est pas disponible.');
+            // Limit to 6 characters
+            if (this.value.length > 6) {
+                this.value = this.value.substring(0, 6);
+            }
+        });
+        
+        // ID Number verification
+        idSubmit.addEventListener('click', function() {
+            const idValue = idInput.value.trim();
+            
+            if (idValue.length !== 6) {
+                idResult.textContent = "ID must be 6 characters";
+                idResult.className = 'id-result error';
+                idResult.style.display = 'block';
+                return;
+            }
+            
+            // Check ID in Firestore
+            db.collection('userIDs').where('id', '==', idValue).get()
+                .then((querySnapshot) => {
+                    if (!querySnapshot.empty) {
+                        // ID found
+                        idResult.textContent = "Success! Access granted.";
+                        idResult.className = 'id-result success';
+                        idResult.style.display = 'block';
+                        
+                        // Close modal after 2 seconds
+                        setTimeout(() => {
+                            modalOverlay.style.display = 'none';
+                            idModal.style.display = 'none';
+                            
+                            // Processing after successful verification
+                            const productData = JSON.parse(localStorage.getItem('monetizelt_product') || '{}');
+                            if (productData && productData.productFile) {
+                                // Create download link
+                                const link = document.createElement('a');
+                                link.href = productData.productFile.data;
+                                link.download = productData.productFile.name || 'download';
+                                
+                                // Add link to DOM and click it
+                                document.body.appendChild(link);
+                                link.click();
+                                
+                                // Clean up
+                                setTimeout(() => {
+                                    document.body.removeChild(link);
+                                }, 100);
+                                
+                                // Record access in database
+                                if (productData.id) {
+                                    db.collection('accesses').add({
+                                        productId: productData.id,
+                                        userId: idValue,
+                                        accessDate: new Date()
+                                    }).then(() => {
+                                        console.log("Access successfully recorded");
+                                    }).catch((error) => {
+                                        console.error("Error recording access:", error);
+                                    });
+                                }
+                            }
+                        }, 2000);
+                    } else {
+                        // ID not found
+                        idResult.textContent = "ID not found";
+                        idResult.className = 'id-result error';
+                        idResult.style.display = 'block';
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error verifying ID:", error);
+                    idResult.textContent = "Verification error, please try again.";
+                    idResult.className = 'id-result error';
+                    idResult.style.display = 'block';
+                });
+        });
+        
+        // Allow submission by pressing Enter
+        idInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                idSubmit.click();
             }
         });
     });
